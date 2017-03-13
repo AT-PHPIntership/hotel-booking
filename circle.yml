@@ -1,0 +1,15 @@
+machine:
+  php:
+    version: 7.0.4
+dependencies:
+  pre:
+    # - cp .env.example .env
+
+test:
+  override:
+    # phpcs circleci status
+    - ./vendor/bin/phpcs -n --standard=phpcs.xml
+    # phpmd
+    - ./vendor/bin/phpmd app text phpmd.xml
+    # phpunit
+    # - ./vendor/bin/phpunit
