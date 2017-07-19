@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/AT-PHPIntership/hotel-booking.png?label=ready&title=Ready)](https://waffle.io/AT-PHPIntership/hotel-booking?utm_source=badge)
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
