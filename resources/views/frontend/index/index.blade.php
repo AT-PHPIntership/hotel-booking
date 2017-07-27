@@ -1,4 +1,7 @@
 @extends('templates.frontend.master')
+@section('customcss')
+ <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
+@endsection
 @section('content')
 
 <!-- Introduce Slider -->
