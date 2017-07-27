@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend/index/index');
+});
+Route::get('search', function () {
+    return view('index');
+});
+Route::get('/hotel', function () {
+    echo "string";;
 });

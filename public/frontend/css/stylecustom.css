@@ -1,0 +1,30 @@
+.second-place{
+	width: 100%;
+	background: lightgray;
+	height: 200px;
+	box-sizing: border-box;
+	border-left: solid 1px lightgray; 
+	border-right: solid 1px lightgray; 
+	border-bottom: solid 1px lightgray; 
+	position: relative;
+	float: left;
+}
+.second-place-bottom{
+	background: white;
+	height: 40px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+.second-place-bottom h5{
+	font-family: arial;
+	margin-left: 10px;
+}
+.second-place-bottom i{
+	position: absolute;
+	top: 0px;
+}
+
+
+
