@@ -1,4 +1,4 @@
-@extends('frontend.layouts.partials.master')
+@extends('frontend.layouts.master')
 @section('customcss')
 <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 @endsection

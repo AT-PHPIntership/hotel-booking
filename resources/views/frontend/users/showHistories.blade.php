@@ -1,4 +1,4 @@
-@extends('frontend.layouts.partials.master')
+@extends('frontend.layouts.master')
 @section('title','Hitory Booking Room')
 @section('customcss')
   <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/historyBooking.css') }}">
