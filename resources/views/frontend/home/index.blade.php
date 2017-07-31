@@ -16,59 +16,59 @@
           <!-- Layers -->           
           <!-- Layer 1 -->
           <div class="caption sft revolution-starhotel bigtext"  
-          				data-x="505" 
+                  data-x="505" 
                         data-y="30" 
                         data-speed="700" 
                         data-start="1700" 
                         data-easing="easeOutBack"> 
-						<span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span> A Five Star Hotel <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></div>
+            <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span> A Five Star Hotel <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></div>
           <!-- Layer 2 -->
           <div class="caption sft revolution-starhotel smalltext"  
-          				data-x="605" 
+                  data-x="605" 
                         data-y="105" 
                         data-speed="800" 
                         data-start="1700" 
                         data-easing="easeOutBack">
-						<span>And we like to keep it that way!</span></div>
+            <span>And we like to keep it that way!</span></div>
           <!-- Layer 3 -->
                   <div class="caption sft"  
-          				data-x="775" 
+                  data-x="775" 
                         data-y="175" 
                         data-speed="1000" 
                         data-start="1900" 
                         data-easing="easeOutBack">
-						<a href="/detailHotel" class="button btn btn-purple btn-lg">See more</a> 
+            <a href="/detailHotel" class="button btn btn-purple btn-lg">See more</a> 
                   </div>
         </li>
-		<!-- Slide 2 -->
+    <!-- Slide 2 -->
         <li data-transition="boxfade" data-slotamount="7" data-masterspeed="1000" > 
           <!-- Main Image --> 
           <img src="{{ asset('frontend/images/slide1.jpg') }}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat"> 
           <!-- Layers -->           
           <!-- Layer 1 -->
           <div class="caption sft revolution-starhotel bigtext"  
-          				data-x="585" 
+                  data-x="585" 
                         data-y="30" 
                         data-speed="700" 
                         data-start="1700" 
                         data-easing="easeOutBack"> 
-						<span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span> Double room <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></div>
+            <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span> Double room <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></div>
           <!-- Layer 2 -->
           <div class="caption sft revolution-starhotel smalltext"  
-          				data-x="682" 
+                  data-x="682" 
                         data-y="105" 
                         data-speed="800" 
                         data-start="1700" 
                         data-easing="easeOutBack">
-						<span>€ 99,- a night this summer</span></div>
+            <span>€ 99,- a night this summer</span></div>
         <!-- Layer 3 -->
                   <div class="caption sft"  
-          				data-x="785" 
+                  data-x="785" 
                         data-y="175" 
                         data-speed="1000" 
                         data-start="1900" 
                         data-easing="easeOutBack">
-						<a href="room-detail.html" class="button btn btn-purple btn-lg">Book this room</a> 
+            <a href="room-detail.html" class="button btn btn-purple btn-lg">Book this room</a> 
                   </div>
         </li>
       </ul>
@@ -76,51 +76,8 @@
   </div>
 </section>
 
-<!-- search form -->
-<section id="reservation-form">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">           
-        <form class="reservation-horizontal clearfix container-search" action="/search" name="reservationform" >
-        <div id="message"></div><!-- Error message display -->
-          <div class="row">
-           
-            <div class="coltest">
-              <div class="form-group">
-                <label for="room">Place</label>
-                <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                <select class="form-control" name="room" id="room">
-                  <option selected="selected" disabled="disabled">Select a room</option>
-                  <option value="Single">hhhhh</option>
-                  <option value="Double">Double Room</option>
-                  <option value="Deluxe">Deluxe room</option>
-                </select>
-              </div>
-            </div>
-            <div class="coltest">
-              <div class="form-group">
-                <label for="checkin">Check-in</label>
-                <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-In is from 11:00"> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                <input name="checkin" type="text" id="checkin" value="" class="form-control" placeholder="Check-in"/>
-              </div>
-            </div>
-            <div class="coltest">
-              <div class="form-group">
-                <label for="checkout">Check-out</label>
-                <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-out is from 12:00"> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                
-                <input name="checkout" type="text" id="checkout" value="" class="form-control" placeholder="Check-out"/>
-              </div>
-            </div>
-            <div class="btnSubmit">
-              <button type="submit" class="btn btn-primary btn-block">Book Now</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+{{-- search form --}}
+@include('frontend.layouts.partials.search')
 
 <!-- Outstanding Places -->
 <section class="rooms mt50">
@@ -282,7 +239,7 @@
         <div class="content">
           <h3 class="text-center"><i class="fa fa fa-star-o"></i> Snolax N., Inc.</h3>
           <p class="text-center">A product of the Snorlax N. company
-		  <br></p>
+      <br></p>
         </div>
       </div>
     </div>
