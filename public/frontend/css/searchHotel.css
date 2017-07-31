@@ -1,0 +1,74 @@
+.formSearch {
+  margin-top: 8%;
+}
+.filterHotel {
+  margin-top: 10%;
+  width: 100%;
+  margin-left: 0.1%;
+}
+.filter-group {
+  float: left;
+  width: 25%;
+  text-align: left;
+  font-size: 20px;
+
+}
+.filter-group a {
+  color: black;
+  font-family: arial;
+}
+.filter-group ul,li {
+    list-style-type: none;
+}
+
+.listHotel {
+  margin-top: 3%;
+  width: 100%;
+  height: 150px;
+  margin-left: 1.5%;
+  box-shadow: 0 3px 0 0 rgba(103, 183, 202, 0.45);
+}
+.listHotel:hover {
+  border: 1px solid rgba(103, 183, 202, 0.45);
+  box-shadow: 0 5px 15px rgba(103, 183, 202, 0.45) ;
+}
+.listHotel:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+.roomService {
+  width: 100%;
+}
+.hotel-image {
+  width: 25%;
+  height: 100%;
+  float: left;
+  box-sizing: border-box;
+}
+.hotel-image img {
+  height: 100%;
+  width: 100%;
+}
+.hotel-item{ 
+  height: 100%;
+  border: 1px solid transparent;
+  width: 32%;
+  float: left;
+  margin-left: 5%; 
+  box-sizing: border-box;
+
+}
+.main{ 
+  width: 1140px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+.main:after{ 
+  clear: both;
+  content: "";
+  display: block;
+}
+.hotel-item a {
+  color: white;
+}

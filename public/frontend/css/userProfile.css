@@ -1,0 +1,65 @@
+.user-profile:after {
+	clear: both;
+  	content: "";
+  	display: block;
+}
+.user-image {
+	float: left;
+	margin-left: 5%;
+}
+
+.user-head{
+	text-align: center;
+	color: red;
+}
+.user-row {
+    margin-bottom: 14px;
+}
+
+.user-row:last-child {
+    margin-bottom: 0;
+}
+.panel-heading {
+	text-align: center;
+}
+.dropdown-user {
+    margin: 13px 0;
+    padding: 5px;
+    height: 100%;
+}
+
+.dropdown-user:hover {
+    cursor: pointer;
+}
+
+.table-user-information > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+}
+.toppad {
+	margin-top:20px;
+}
+.historyBooking a{
+	font-size: 16px;
+	margin-left: 59.5%;
+	color: black;
+}
+.historyBooking a:hover{
+	color: red;
+}
+.panel-footer:after {
+	clear: both;
+  	content: "";
+  	display: block;
+}
+.center-block {
+	width: 40px;
+}

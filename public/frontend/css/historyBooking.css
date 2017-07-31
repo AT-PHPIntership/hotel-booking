@@ -1,0 +1,55 @@
+.historyBooking:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+}
+.user-row {
+    margin-bottom: 14px;
+}
+.panel-heading {
+	text-align: center;
+    width: 100%;
+}
+.user-row:last-child {
+    margin-bottom: 0;
+}
+.panel-body {
+    width: 100%;
+}
+.dropdown-user {
+    margin: 13px 0;
+    padding: 5px;
+    height: 100%;
+}
+.panel {
+    width: 1000px;
+    margin-top: 2%;
+    margin-left: 10%;
+}
+.dropdown-user:hover {
+    cursor: pointer;
+}
+
+.table-user-information > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+}
+.toppad {
+    margin-top:20px;
+}
+.form-DelHistory {
+    float: left;
+    margin-left: 2%;
+}
+.form-Edit {
+    float: left;    
+}
