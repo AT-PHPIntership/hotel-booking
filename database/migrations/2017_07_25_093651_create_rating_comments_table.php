@@ -42,6 +42,6 @@ class CreateRatingCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rating_comment');
+        Schema::dropIfExists('rating_comments');
     }
 }

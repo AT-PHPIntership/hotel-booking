@@ -19,7 +19,6 @@ class CreateStaticPagesTable extends Migration
             $table->string('slug')->unique();
             $table->text('content');
             $table->timestamp('updated_at');
-            $table->softDeletes();
         });
     }
 
