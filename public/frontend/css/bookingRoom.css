@@ -1,0 +1,79 @@
+
+.body-booking {
+  margin-left: 1%;
+  margin-bottom: 5%; 
+}
+.body-booking:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+.form-booking-body {
+  width: 100%;
+  
+
+}
+.left-booking {
+  float: left;
+  width: 50%;
+  margin-left: 2%;
+}
+.form-group1 {
+  padding-top: 2%;
+}
+.form-group1 input {
+  color: black;
+  width: 500px;
+  
+}
+.form-group1 textarea {
+  color: black;
+  width: 500px;
+}
+.right-booking {
+  background-color: #f7f7f7;
+  float: left;
+  margin-left: 2%;
+  width: 40%;
+}
+
+.head-booking-detail {
+  box-sizing: border-box;
+  max-height: 20%;
+}
+.body-booking-detail {
+ box-sizing: border-box;
+
+}
+
+.image-detail {
+  float: left;
+  box-sizing: border-box;
+
+}
+.content-detail {
+  float: left;
+  box-sizing: border-box;
+  margin-left: 3%;  
+ 
+}
+.service-detail {
+  width: 100%;
+  float: left;
+  padding-top: 2%;
+ 
+}
+.service-detail p {
+  float: left;
+  margin-left: 2%;
+ }
+.room-info {
+ 
+  float: left;
+  margin-top: 10%;
+  margin-left: 2%;
+}
+.btn-submit-booking {
+  margin-left: 25%;
+  padding-top: 2%;
+}
