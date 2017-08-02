@@ -4,10 +4,12 @@ namespace App\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Hotel extends Model
 {
     use Sluggable;
+    use SoftDeletes;
 
     /**
      * Return the sluggable configuration array for this model.

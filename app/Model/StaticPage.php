@@ -9,6 +9,9 @@ class StaticPage extends Model
 {
     use Sluggable;
 
+    /*column created_at won't be set when use timestamp*/
+    const CREATED_AT = null;
+
     /**
      * Return the sluggable configuration array for this model.
      *

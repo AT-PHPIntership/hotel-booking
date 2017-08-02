@@ -30,6 +30,6 @@ class CreateFeedbacksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedbacks');
+        Schema::dropIfExists('feedback');
     }
 }
