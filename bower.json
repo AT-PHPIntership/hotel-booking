@@ -1,0 +1,14 @@
+{
+  "name": "Hotel booking",
+  "description": "My internship project",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "AdminLTE": "admin-lte#^2.3.11"
+  }
+}
