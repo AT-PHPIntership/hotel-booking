@@ -14,13 +14,13 @@ class RatingCommentTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $hotelsId = App\Model\Hotel::all('id')->pluck('id')->toarray();
-        $usersId = App\Model\User::all('id')->pluck('id')->toarray();
+        $hotelIds = App\Model\Hotel::all('id')->pluck('id')->toArray();
+        $userIds = App\Model\User::all('id')->pluck('id')->toArray();
         $faker = Faker::create();
         for ($i = 0; $i < 10; $i++) {
             factory(App\Model\RatingComment::class, 1)->create([
-                'hotel_id' => $faker->randomElement($hotelsId),
-                'user_id' => $faker->randomElement($usersId)
+                'hotel_id' => $faker->randomElement($hotelIds),
+                'user_id' => $faker->randomElement($userIds)
             ]);
         }
         Model::reguard();

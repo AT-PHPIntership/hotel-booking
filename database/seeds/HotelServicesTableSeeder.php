@@ -14,14 +14,14 @@ class HotelServicesTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $hotelsId = App\Model\Hotel::all('id')->pluck('id')->toarray();
-        $servicesId = App\Model\Service::all('id')->pluck('id')->toarray();
+        $hotelIds = App\Model\Hotel::all('id')->pluck('id')->toArray();
+        $serviceIds = App\Model\Service::all('id')->pluck('id')->toArray();
 
         $faker = Faker::create();
         for ($i = 0; $i < 10; $i++) {
             factory(App\Model\HotelService::class, 1)->create([
-                'hotel_id' => $faker->randomElement($hotelsId),
-                'service_id' => $faker->randomElement($servicesId)
+                'hotel_id' => $faker->randomElement($hotelIds),
+                'service_id' => $faker->randomElement($serviceIds)
             ]);
         }
         Model::reguard();

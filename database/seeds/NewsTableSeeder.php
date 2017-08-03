@@ -15,11 +15,11 @@ class NewsTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $categoriesId = App\Model\Category::all('id')->pluck('id')->toarray();
+        $categoryIds = App\Model\Category::all('id')->pluck('id')->toArray();
         $faker = Faker::create();
         for ($i = 0; $i < 10; $i++) {
             factory(App\Model\News::class, 1)->create([
-                'category_id' => $faker->randomElement($categoriesId),
+                'category_id' => $faker->randomElement($categoryIds),
             ]);
         }
         Model::reguard();

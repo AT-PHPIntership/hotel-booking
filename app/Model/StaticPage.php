@@ -9,7 +9,11 @@ class StaticPage extends Model
 {
     use Sluggable;
 
-    /*column created_at won't be set when use timestamp*/
+    /**
+     * The name of the "created at" column.
+     *
+     * @var string
+     */
     const CREATED_AT = null;
 
     /**

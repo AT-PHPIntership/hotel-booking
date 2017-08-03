@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use Sluggable;
-    use SoftDeletes;
+    use Sluggable, SoftDeletes;
 
     /**
      * Return the sluggable configuration array for this model.

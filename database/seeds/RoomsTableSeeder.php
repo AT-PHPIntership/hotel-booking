@@ -14,11 +14,11 @@ class RoomsTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $hotelsId = App\Model\Hotel::all('id')->pluck('id')->toarray();
+        $hotelIds = App\Model\Hotel::all('id')->pluck('id')->toArray();
         $faker = Faker::create();
         for ($i = 0; $i < 10; $i++) {
             factory(App\Model\Room::class, 1)->create([
-                'hotel_id' => $faker->randomElement($hotelsId),
+                'hotel_id' => $faker->randomElement($hotelIds),
             ]);
         }
         Model::reguard();

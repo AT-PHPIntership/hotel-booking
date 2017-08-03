@@ -9,8 +9,17 @@ class Feedback extends Model
 {
     use SoftDeletes;
 
-    /*define name table is feedbacks*/
+    /**
+     * Define name table is feedbacks
+     *
+     * @var string
+     */
     protected $table = 'feedbacks';
-    /*column updated_at won't be set when use timestamp*/
+
+    /**
+     * The name of the "updated at" column.
+     *
+     * @var string
+     */
     const UPDATED_AT = null;
 }
