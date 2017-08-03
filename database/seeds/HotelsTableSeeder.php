@@ -22,7 +22,6 @@ class HotelsTableSeeder extends Seeder
                 'place_id' => $faker->randomElement($placesId)
             ]);
         }
-        SlugService::createSlug(App\Model\Hotel::class, 'slug', 'My First Hotel');
         Model::reguard();
     }
 }

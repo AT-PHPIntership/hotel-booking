@@ -16,7 +16,6 @@ class StaticPagesTableSeeder extends Seeder
 
         Model::unguard();
         factory(App\Model\StaticPage::class, 15)->create();
-        SlugService::createSlug(App\Model\StaticPage::class, 'slug', 'My First StaticPage');
         Model::reguard();
 
     }

@@ -22,7 +22,6 @@ class NewsTableSeeder extends Seeder
                 'category_id' => $faker->randomElement($categoriesId),
             ]);
         }
-        SlugService::createSlug(App\Model\News::class, 'slug', 'My First News');
         Model::reguard();
     }
 }

@@ -40,6 +40,7 @@ $factory->define(App\Model\Place::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->city,
         'descript' => $faker->text,
+        'image' => $faker->text,
     ];
 });
 

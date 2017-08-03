@@ -18,7 +18,7 @@ class CreatePlacesTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('descript')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->softDeletes();
             $table->timestamps();
         });

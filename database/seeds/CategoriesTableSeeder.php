@@ -13,11 +13,8 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-
         Model::unguard();
         factory(App\Model\Category::class, 15)->create();
-        SlugService::createSlug(App\Model\Category::class, 'slug', 'My First Category');
         Model::reguard();
-
     }
 }

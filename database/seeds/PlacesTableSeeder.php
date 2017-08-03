@@ -15,7 +15,6 @@ class PlacesTableSeeder extends Seeder
     {
         Model::unguard();
         factory(App\Model\Place::class, 10)->create();
-        SlugService::createSlug(App\Model\Place::class, 'slug', 'My First Place');
         Model::reguard();
     }
 }
