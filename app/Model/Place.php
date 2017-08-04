@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Place extends Model
 {
     use Sluggable, SoftDeletes;
+    /**
+     * Value paginate of row
+     */
+    const NUM_ROW = 10;
 
     /**
      * Return the sluggable configuration array for this model.
