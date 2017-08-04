@@ -22,4 +22,24 @@ class RatingCommentController extends Controller
         
         return view('backend.comments.index', compact('ratingComments'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id of comment
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $result = RatingComment::findOrFail($id)->delete();
+
+        if ($result) {
+            flash('Deletion successful')->success();
+        } else {
+            flash('Deletion failed')->error();
+        }
+         // Session::flash('success', 'Deletion successful');
+        return redirect()->route('comment.index');
+    }
 }
