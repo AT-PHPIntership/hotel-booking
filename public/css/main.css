@@ -53,3 +53,17 @@
 .inline{
     display: inline;
 }
+.btn-add-news {
+    margin-left: 32%;
+}
+.btn-add-news button{
+    margin-left: 5%;
+    width: 20%;
+}
+.help-block {
+    color: red;
+}
+.news_btn {
+    width: 90px;
+    margin-top: 4px;
+}   
