@@ -1,6 +1,5 @@
 $(function () {
-  $("#example1").DataTable();
-  $('#example2').DataTable({
+  $('#list-table').DataTable({
     "paging": true,
     "lengthChange": false,
     "searching": false,
@@ -15,7 +14,6 @@ $(document).ready(function(){
 });
 
 $('#File').change( function(event) {
-	var imgpath = URL.createObjectURL(event.target.files[0]);
-	$("#showImage").fadeIn("fast").attr('src',imgpath);
+  var imgpath = URL.createObjectURL(event.target.files[0]);
+  $("#showImage").fadeIn("fast").attr('src',imgpath);
 });
-
