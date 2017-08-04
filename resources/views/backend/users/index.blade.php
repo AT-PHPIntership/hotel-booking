@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('backend.layouts.main')
 
 @section('title','User')
 
@@ -8,12 +8,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Thành Viên trong khách sạn
-        <small>User</small>
+        {{ trans('admin_user.list_user') }}
+        <small>advanced tables</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li class="active">Người dùng</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('admin_user.home_page') }}</a></li>
+        <li class="active">{{ trans('admin_user.list_user') }}</li>
       </ol>
     </section>
 
@@ -23,377 +23,70 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Danh sách Người dùng</h3>
+              <h3 class="box-title">{{ trans('admin_user.list_user') }}</h3>
+              @include('flash::message')
             </div>
             <div class="float-left">
-              <a href="">
-              <span>Thêm Người dùng <img src="../../hotel_admin/dist/img/plus-small.gif" alt="ThemTin"></span>
+              <a href="{{ route('user.create')}}">
+              <span class="btn btn-primary">{{ trans('admin_user.add_user') }}
+                <i class="fa fa-plus"></i>
+              </span>
               </a>
             </div>
-            <!-- /.box-header -->
+             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <div class="row">
+                <div class="col-sm-6 form-search">
+                  <div id="example1_filter" class="dataTables_filter">
+                    <form method="GET">
+                      <label>{{ trans('admin_user.search') }}</label>
+                      <input type="search" class="form-control input-sm" 
+                        placeholder="">
+                    </form>    
+                  </div>
+                </div>
+              </div>
+              <table id="list-table" class="table table-bordered table-striped">
                 <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Username</th>
-                  <th>Password</th>
-                  <th>Fullname</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Is_Admin</th>
-                  <th>Is_Active</th>
-                  <th>Function</th>
+                <tr align="center">
+                  <th>{{ trans('admin_user.no') }}</th>
+                  <th>{{ trans('admin_user.user_name') }}</th>
+                  <th>{{ trans('admin_user.full_name') }}</th>
+                  <th>{{ trans('admin_user.email') }}</th>
+                  <th>{{ trans('admin_user.phone') }}</th>
+                  <th>{{ trans('admin_user.is_admin') }}</th>
+                  <th>{{ trans('admin_user.is_active') }}</th>
+                  <th>{{ trans('admin_user.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
+            @php ($index = 1)
+            @foreach ($users as $objUser)
                 <tr>
-                  <td>1</th>
-                  <td>at-annguyen</th>
-                  <td>123</th>
-                  <td>Nguyễn Quốc Ân</th>
-                  <td>an.nguyen@asiantech.vn</th>
-                  <td>0935880743</th>
-                  <td><img src="../hotel_admin/dist/img/notification-tick.gif"></th>
-                  <td><img src="../hotel_admin/dist/img/notification-tick.gif"></th>
+                  <td>{{ $index++ }}</td>
+                  <td>{{ $objUser->username }}
+                  <!-- <td>{{ $objUser->password }}</td> -->
+                  <td>{{ $objUser->full_name }}
+                  <td>{{ $objUser->email }}</td>
+                  <td>{{ $objUser->phone }}
+                  <td>{{ $objUser->is_admin }}</td>
+                  <td>{{ $objUser->is_active }}
+                  </td>
                   <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
+                    <a href="{{ route('user.edit', $objUser->id) }}" >
+                      <i class= "fa fa-pencil-square-o cus_icon"></i>
+                    </a>
+                    <form method="POST" action="{{ route('user.destroy', $objUser->id) }}" class="inline">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <input type="hidden" name="user_id" value="{{ $objUser->id }}">
+                      {!! csrf_field() !!}
+                      <button class="fa fa-trash-o cus_icon" onclick="return confirm('Confirm deletion!');" type="submit" class="btn">
+                      </button>
+                    </form> 
                   </td>
                 </tr>
-                <tr>
-                  <td>1</th>
-                  <td>at-annguyen</th>
-                  <td>123</th>
-                  <td>Nguyễn Quốc Ân</th>
-                  <td>an.nguyen@asiantech.vn</th>
-                  <td>0935880743</th>
-                  <td><img src="../hotel_admin/dist/img/cross-on-white.gif"></th>
-                  <td><img src="../hotel_admin/dist/img/notification-tick.gif"></th>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                   <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                 <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Id</th>
-                  <td>Username</th>
-                  <td>Password</th>
-                  <td>Fullname</th>
-                  <td>Email</th>
-                  <td>Phone</th>
-                  <td>Is_Admin</th>
-                  <td>Is_Active</th>
-                  <td>A</td>
-                </tr>
+                @endforeach
+               </tbody>
               </table>
             </div>
             <!-- /.box-body -->
@@ -419,89 +112,6 @@
     <div class="tab-content">
       <!-- Home tab content -->
       <div class="tab-pane" id="control-sidebar-home-tab">
-        <!-- /.control-sidebar-menu -->
-  @include('backend.layouts.partials.infor'
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
 <!-- ./wrapper -->
 
 @endsection
