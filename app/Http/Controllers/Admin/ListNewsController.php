@@ -9,7 +9,7 @@ use App\Model\News;
 class ListNewsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of news.
      *
      * @return \Illuminate\Http\Response
      */
