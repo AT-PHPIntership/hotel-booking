@@ -1,17 +1,13 @@
 $(function () {
-  $("#example1").DataTable();
-  $('#example2').DataTable({
-    "paging": true,
-    "lengthChange": false,
-    "searching": false,
-    "ordering": true,
-    "info": true,
-    "autoWidth": false
+  $("#list-table").DataTable({
+    "paging": false,
+    "searching": true,
+    "lengthChange": false
   });
 });
 
 $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
+  $('[data-toggle="tooltip"]').tooltip(); 
 });
 
 $('#File').change( function(event) {
