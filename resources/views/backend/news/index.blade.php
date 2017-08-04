@@ -43,10 +43,8 @@
                 </form> 
               </div>
             </div>
-            
-            <!-- /.box-header -->
             <div class="box-body cl">
-              <div class="form-group has-error"> 
+              <div class="form-group news-has-error"> 
                 @foreach (['successCreate', 'failCreate','deleteSuccess','deleteFail','successEdit','failEdit'] as $msg)
                   @if(Session::has($msg))
                   <span class="help-block">{{ Session::get($msg) }}</span>
@@ -73,16 +71,16 @@
                   <td>{{$item->category_id}}</td>
                   <td>{{$item->category->name}}</td>
                   <td align="center">
-                    <a href="" class="btn btn-primary btn-xs">
+                    <a href="" class="btn btn-primary btn-xs news-btn">
                     {{trans('admin_list_news.edit')}}</a>
                     <form action="" method="POST">
                       {{csrf_field()}}
                       {{method_field('DELETE')}}
-                      <button type="submit" class="btn btn-danger btn-xs">
+                      <button type="submit" class="btn btn-danger btn-xs news-btn">
                         {{trans('admin_list_news.delete')}}
                       </button>
                     </form>
-                    <a href="" class="btn btn-success btn-xs">
+                    <a href="" class="btn btn-success btn-xs news-btn">
                     {{trans('admin_list_news.btn-image')}}
                     </a>
                   </td>
@@ -94,7 +92,7 @@
             </div>
           </div>
           <div class="btn-AddNews">
-            <a href="/admin/news/create" class="btn btn-primary">
+            <a href="{{ route('news.create') }}" class="btn btn-primary news-btn">
               {{trans('admin_list_news.add')}}
             </a>
           </div>
