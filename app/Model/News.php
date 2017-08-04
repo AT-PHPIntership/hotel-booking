@@ -25,7 +25,7 @@ class News extends Model
     }
     protected $table = 'news';
     protected $fillable = [
-        'id','title', 'content','slug', 'category_id'
+        'title', 'content', 'category_id'
     ];
     public $timestamps = true;
 
@@ -36,6 +36,6 @@ class News extends Model
      */
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

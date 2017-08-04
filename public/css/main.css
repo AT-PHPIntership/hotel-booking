@@ -1,0 +1,59 @@
+@keyframes spinAround {
+    50% {
+        transform: rotate(25deg)
+    }
+    100% {
+        transform: rotate(-25deg);
+    }
+}
+.margin_center{
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+.title_page{
+	text-align: center;
+}
+
+.chat_room{
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+/* .form-control.bg-info {
+    background-color: #E3F5B8;
+}
+ */
+.form-control.bg-danger {
+    border-color:  #E63D3E;
+}
+
+.form-control.bg-warnming {
+    border-color:  #E38E18;
+}
+.form-control:hover{
+	background-color: #CDDBDF;
+}
+
+.glyphicon-warning-sign{
+	animation: spinAround 0.1s linear infinite;
+}
+
+.user_image{
+    display: inline-block;
+    width: 100px;
+}
+
+.cus_icon{
+    border: none;
+    background: none;
+    color: blue;
+}
+
+.inline{
+    display: inline;
+}
+.news_btn {
+    width: 90px;
+    margin-top: 4px;
+}
