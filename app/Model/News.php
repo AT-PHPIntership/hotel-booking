@@ -4,10 +4,11 @@ namespace App\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class News extends Model
 {
-    use Sluggable;
+    use Sluggable, SoftDeletes;
 
     /**
      * Return the sluggable configuration array for this model.
