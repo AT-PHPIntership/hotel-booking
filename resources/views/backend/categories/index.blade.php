@@ -26,6 +26,9 @@
             <div class="box-header">
               <h3 class="box-title">Danh sách Danh mục tin</h3>
             </div>
+            <div>
+              @include('flash::message')
+            </div>
             <div class="float-left">
               <a href="{{ route('category.create') }}">
               <span>Thêm Danh Mục <img src="{{ asset('bower_components/AdminLTE/dist/img/plus-small.gif') }}" alt="ThemTin"></span>
