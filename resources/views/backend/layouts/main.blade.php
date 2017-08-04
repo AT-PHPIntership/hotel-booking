@@ -10,7 +10,7 @@
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css') }}">
   <!-- private stype css -->
-  <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/dist/css/style.css') }}">
+  <!-- <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/dist/css/style.css') }}"> -->
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -32,6 +32,8 @@
   <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/plugins/daterangepicker/daterangepicker.css') }}">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+  <!-- custom css -->
+  <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">

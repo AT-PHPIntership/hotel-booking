@@ -21,4 +21,11 @@ return [
     'delete' => 'Delete',
     'btn-image' => 'Upload Image',
     'add' => 'Add News',
+    'id' => 'Id',
+    'tb_title' => 'Title',
+    'tb_content' => 'Content',
+    'tb_category_id' => 'Category_id',
+    'tb_category' => 'Category',
+    'option' => 'Option',
+    'choose' => 'Choose',
 ];
