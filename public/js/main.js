@@ -1,6 +1,5 @@
 $(function () {
-  $("#example1").DataTable();
-  $('#example2').DataTable({
+  $('#list-table').DataTable({
     "paging": true,
     "lengthChange": false,
     "searching": false,
