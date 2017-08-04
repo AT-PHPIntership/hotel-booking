@@ -53,3 +53,7 @@
 .inline{
     display: inline;
 }
+
+.form-search{
+    float: right !important;
+}
