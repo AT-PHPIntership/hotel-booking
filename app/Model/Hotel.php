@@ -23,4 +23,25 @@ class Hotel extends Model
             ]
         ];
     }
+
+    /**
+     * Relationship with rooms
+     *
+     * @return array
+    */
+    public function rooms()
+    {
+        return $this->hasMany('App\Model\Room');
+    }
+
+
+    /**
+     * Relationship with place
+     *
+     * @return array
+    */
+    public function place()
+    {
+        return $this->belongsTo('App\Model\Place');
+    }
 }
