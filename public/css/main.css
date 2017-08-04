@@ -63,7 +63,10 @@
 .help-block {
     color: red;
 }
-.news-btn {
+.news_btn {
     width: 90px;
     margin-top: 4px;
-}   
+}
+.edit_news {
+    margin-left: 35%;
+}

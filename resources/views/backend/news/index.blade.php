@@ -5,7 +5,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>{{trans('admin_list_news.title')}}
-        <small>News</small>
+        <small>{{trans('admin_list_news.news')}}</small>
       </h1>
       <ol class="breadcrumb">
         <li>
@@ -27,24 +27,35 @@
                   {{csrf_field()}}
                   <div class="search-select">
                     <select class="form-control" name="select">
-                      <option disabled>Choose:</option>
-                      <option name="title">title</option>
-                      <option name="content">content</option>
-                      <option name="category_id">category_id</option>
-                      <option name="category_name">name</option>
+                      <option disabled>
+                      {{trans('admin_list_news.choose')}}:
+                      </option>
+                      <option name="title">{{trans('admin_list_news.tb_title')}}</option>
+                      <option name="content">
+                        {{trans('admin_list_news.tb_content')}}</option>
+                      <option name="category_id">
+                        {{trans('admin_list_news.tb_category_id')}}
+                      </option>
+                      <option name="category_name">
+                        {{trans('admin_list_news.tb_category')}}
+                      </option>
                     </select>
                   </div>
                   <div class="news-search-input"> 
                     <input type="text" name="search" class="form-control">
                   </div>
                   <div class="news-search-btn">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-primary">
+                    {{trans('admin_list_news.search')}}
+                    </button>
                   </div>
                 </form> 
               </div>
             </div>
+            
+            <!-- /.box-header -->
             <div class="box-body cl">
-              <div class="form-group news-has-error"> 
+              <div class="form-group has-error"> 
                 @foreach (['successCreate', 'failCreate','deleteSuccess','deleteFail','successEdit','failEdit'] as $msg)
                   @if(Session::has($msg))
                   <span class="help-block">{{ Session::get($msg) }}</span>
@@ -54,45 +65,45 @@
               <table class="table table-bordered table-striped clearfix" id="NewsTable">
                 <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Title</th>
-                  <th>Content</th>
-                  <th>Category_id</th>
-                  <th>Category</th>
-                  <th>Option</th>
+                  <th>{{trans('admin_list_news.id')}}</th>
+                  <th>{{trans('admin_list_news.tb_title')}}</th>
+                  <th>{{trans('admin_list_news.tb_content')}}</th>
+                  <th>{{trans('admin_list_news.tb_category_id')}}</th>
+                  <th>{{trans('admin_list_news.tb_category')}}</th>
+                  <th>{{trans('admin_list_news.option')}}</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($news as $item)
-                <tr>
-                  <td>{{$item->id}}</td>
-                  <td>{{$item->title}}</td>
-                  <td>{{$item->content}}</td>
-                  <td>{{$item->category_id}}</td>
-                  <td>{{$item->category->name}}</td>
-                  <td align="center">
-                    <a href="" class="btn btn-primary btn-xs news-btn">
-                    {{trans('admin_list_news.edit')}}</a>
-                    <form action="" method="POST">
-                      {{csrf_field()}}
-                      {{method_field('DELETE')}}
-                      <button type="submit" class="btn btn-danger btn-xs news-btn">
-                        {{trans('admin_list_news.delete')}}
-                      </button>
-                    </form>
-                    <a href="" class="btn btn-success btn-xs news-btn">
-                    {{trans('admin_list_news.btn-image')}}
-                    </a>
-                  </td>
-               </tr>
-                @endforeach
+                  @foreach($news as $item)
+                  <tr>
+                    <td>{{$item->id}}</td>
+                    <td>{{$item->title}}</td>
+                    <td>{{$item->content}}</td>
+                    <td>{{$item->category_id}}</td>
+                    <td>{{$item->category->name}}</td>
+                    <td align="center">
+                      <a href="{{ route('news.edit',$item->slug) }}" class="btn btn-primary btn-xs news_btn">
+                      {{trans('admin_list_news.edit')}}</a>
+                      <form action="" method="POST">
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+                        <button type="submit" class="btn btn-danger btn-xs news_btn">
+                          {{trans('admin_list_news.delete')}}
+                        </button>
+                      </form>
+                      <a href="" class="btn btn-success btn-xs news_btn">
+                      {{trans('admin_list_news.btn-image')}}
+                      </a>
+                    </td>
+                  </tr>
+                  @endforeach
                 </tbody>
               </table>
               {!! $news->render() !!}
             </div>
           </div>
           <div class="btn-AddNews">
-            <a href="{{ route('news.create') }}" class="btn btn-primary news-btn">
+            <a href="/admin/news/create" class="btn btn-primary">
               {{trans('admin_list_news.add')}}
             </a>
           </div>
