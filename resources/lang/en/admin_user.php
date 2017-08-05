@@ -22,4 +22,7 @@
         'entry' => 'entry',
         'search' => 'Search: ',
         'confirm_delete' => 'Confirm Deletion!',
+        'update_user' => 'Update User',
+        'create_user' => 'Create User',
+        'enter_information' => 'Enter Information',
     ];
