@@ -36,15 +36,6 @@
              <!-- /.box-header -->
             <div class="box-body">
               <div class="row">
-                <div class="col-sm-6 form-search">
-                  <div id="example1_filter" class="dataTables_filter">
-                    <form method="GET">
-                      <label>{{ trans('admin_user.search') }}</label>
-                      <input type="search" class="form-control input-sm" 
-                        placeholder="">
-                    </form>    
-                  </div>
-                </div>
               </div>
               <table id="list-table" class="table table-bordered table-striped">
                 <thead>
@@ -88,6 +79,7 @@
                 @endforeach
                </tbody>
               </table>
+              {!! $users->render() !!}
             </div>
             <!-- /.box-body -->
           </div>

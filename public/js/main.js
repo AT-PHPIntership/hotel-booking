@@ -1,8 +1,8 @@
 $(function () {
   $('#list-table').DataTable({
-    "paging": true,
+    "paging": false,
     "lengthChange": false,
-    "searching": false,
+    "searching": true,
     "ordering": true,
     "info": true,
     "autoWidth": false
