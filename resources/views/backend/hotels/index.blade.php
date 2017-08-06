@@ -1,459 +1,82 @@
 @extends('backend.layouts.main')
-
-@section('title','Hotel')
-
+@section('title', 'List hotels')
 @section('content')
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      {{ trans('admin_hotel.title') }}
+      <small>{{ trans('admin_hotel.head_list') }}</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i>{{ trans('admin_hotel.home') }}</a></li>
+      <li class="active">{{ trans('admin_hotel.title') }}</li>
+    </ol>
+  </section>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Khách sạn
-        <small>Hotel</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li class="active">Khách sạn</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Danh sách Khách sạn</h3>
-            </div>
-            <div class="float-left">
-              <a href="">
-              <span>Thêm Khách sạn <img src="../../hotel_admin/dist/img/plus-small.gif" alt="ThemTin"></span>
-              </a>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Address</th>
-                  <th>Star</th>
-                  <th>Introduce</th>
-                  <th>Place</th>
-                  <th>Function</th>
-                  <th>Information</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <<td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                <tr>
-                 <td>1</td>
-                  <td>Khách sạn AsianTech</td>
-                  <td>Đường số 2 KCN An Đồn</td>
-                  <td>5 sao</td>
-                  <td>Thân thiện, lịch sự, sạch sẽ, thoải mái</td>
-                  <td>Đà Nẵng</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                  <td><a href="">Chi tiết <img src="../hotel_admin/dist/img/notification-information.gif" alt="edit" /></a></td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <!-- /.control-sidebar-menu -->
-  @include('backend.layouts.partials.infor')
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
+ <!-- Main content -->
+ <section class="content">
+   <div class="row">
+     <div class="col-xs-12">
+       <div class="box">
+         <div class="box-header">
+           <h3 class="box-title">{{ trans('admin_hotel.title') }}</h3>
+           @include('flash::message')
+         </div>
+         <div class="float-left">
+           <a class="btn btn-primary" href="{{ route('hotel.create') }}">
+           {{ trans('admin_hotel.link_add_hotel') }}
+           </a>
+         </div>
+         <!-- /.box-header -->
+         <div class="box-body">
+           <table id="list-table" class="table table-bordered table-striped">
+             <thead>
+             <tr align="center">
+               <th>{{ trans('admin_hotel.id') }}</th>
+               <th>{{ trans('admin_hotel.col_name') }}</th>
+               <th>{{ trans('admin_hotel.col_address') }}</th>
+               <th>{{ trans('admin_hotel.col_place') }}</th>
+               <th>{{ trans('admin_hotel.col_star') }}</th>
+               <th>{{ trans('admin_hotel.col_total_room') }}</th>
+               <th>{{ trans('admin_hotel.col_create_at') }}</th>
+               <th>{{ trans('admin_hotel.col_update_at') }}</th>
+               <th>{{ trans('admin_hotel.col_options') }}</th>
+             </tr>
+             </thead>
+             <tbody>
+               @foreach ($hotels as $item)
+                   <tr>
+                     <td>{{ $item->id }}</td>
+                     <td>{{ $item->name }}
+                     <td>{{ $item->address }}</td>
+                     <td>{{ $item->place->name }}</td>
+                     <td>{{ $item->star }}</td>
+                     <td>{{ $item->rooms->count()}}
+                     <td>{{ $item->created_at }}</td>
+                     <td>{{ $item->updated_at }}</td>
+                     <td align="center">
+                       <button class="glyphicon glyphicon-edit" class="btn"></button>
+                       <form method="POST" action="{{ route('hotel.destroy', $item->id) }}">
+                         <input type="hidden" name="_method" value="DELETE">
+                         <input type="hidden" name="user_id" value="">
+                         {!! csrf_field() !!}
+                         {!! method_field('DELETE') !!}
+                         <button class="glyphicon glyphicon-trash" onclick="return confirm({{ trans('admin_hotel.message_comfirm_delete') }});" type="submit" class="btn">
+                         </button>
+                       </form> 
+                     </td>
+                   </tr>
+                  @endforeach
+            </tbody>
+           </table>
+            {{-- {!! $hotels->render() !!} --}}
+         </div>
+         <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+     </div>
+     <!-- /.col -->
+   </div>
+   <!-- /.row -->
+ </section>
 @endsection
