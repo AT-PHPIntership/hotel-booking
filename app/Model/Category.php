@@ -31,7 +31,7 @@ class Category extends Model
      *
      * @return array
     */
-    public function new()
+    public function news()
     {
         return $this->hasMany(News::class);
     }

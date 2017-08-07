@@ -23,4 +23,14 @@ class News extends Model
             ]
         ];
     }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+    */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
