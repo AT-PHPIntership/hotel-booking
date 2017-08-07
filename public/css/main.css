@@ -68,7 +68,7 @@
     text-align: center;
 }
 
-.btn-remove {
+.btn-delete-item {
     border: none;
     background: unset;
     color: #e23434;
@@ -92,4 +92,5 @@
 .btn-pencil{
     font-size: 18px;
 }
+
 /*end admin-list-place*/

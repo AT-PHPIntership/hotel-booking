@@ -15,4 +15,8 @@
         'show' => 'Show',
         'entry' => 'entry',
         'search' => 'Search: ',
+        'delete_success' => 'Delete successfully ',
+        'delete_failure' => 'Delete failure',
+        'confirm_delete' => 'Confirm deletion!',
+        'place_not_found' => 'Place not found'
     ];
