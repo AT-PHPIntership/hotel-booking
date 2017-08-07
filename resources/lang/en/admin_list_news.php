@@ -28,4 +28,6 @@ return [
     'tb_category' => 'Category',
     'option' => 'Option',
     'choose' => 'Choose',
+    'deleteSuccess' => 'Delete Successful!',
+    'deleteFail' => 'Delete Fail!',
 ];

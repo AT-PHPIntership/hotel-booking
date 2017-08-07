@@ -82,10 +82,10 @@
                     <td align="center">
                       <a href="" class="btn btn-primary btn-xs news_btn">
                       {{trans('admin_list_news.edit')}}</a>
-                      <form action="" method="POST">
+                      <form action="{{ route('news.destroy',$item->id) }}" method="POST">
                         {{csrf_field()}}
-                        {{method_field('DELETE')}}
-                        <button type="submit" class="btn btn-danger btn-xs news_btn">
+                        {{method_field('delete')}}
+                        <button type="submit" class="btn btn-danger btn-xs news_btn" onclick="return confirm('Delete?')">
                           {{trans('admin_list_news.delete')}}
                         </button>
                       </form>
