@@ -24,7 +24,9 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="InputName">Name of Category News</label>
-                  <input type="text" class="form-control" id="InputName" placeholder="Input Category Name" value="{{ $category->name }}" title="Input Name" name="name">
+                    
+                  <input type="text" class="form-control has-error" id="InputName" placeholder="Input Category Name" value="{{ $category->name }}" title="Input Name" name="name">
+                  <span class="alert-danger">{{ $errors->first('name') }}</span>
                 </div>
               <!-- /.box-body -->
 
