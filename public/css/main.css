@@ -53,3 +53,43 @@
 .inline{
     display: inline;
 }
+
+/*admin-place*/
+.icon-remove{
+    color: #da4141;
+}
+
+.margin-center {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.title-page {
+    text-align: center;
+}
+
+.btn-remove {
+    border: none;
+    background: unset;
+    color: #e23434;
+    font-size: 20px;
+}
+
+.title-header {
+   display: block !important;
+   font-size: 27px !important;
+}
+
+.contain-btn{ 
+    float: right !important;
+}
+
+.form-search{
+    float: right !important;
+    margin-bottom: 10px;    
+}
+
+.btn-pencil{
+    font-size: 18px;
+}
+/*end admin-list-place*/
