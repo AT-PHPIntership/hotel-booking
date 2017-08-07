@@ -18,11 +18,12 @@ return [
     'detail_page' => 'List of Comment and Rating',
     'home' => 'Home',
     'small' => 'advanced tables',
-    'col_id' => 'ID Hotel',
+    'col_id' => 'ID',
     'col_username' => 'Username',
     'col_full_name' => 'Full name',
     'col_comment' => 'Comment content',
     'col_hotel_name' => 'Hotel name',
     'col_created_at' => 'Create At',
-    'col_total_rating' => 'Total rating'
+    'col_total_rating' => 'Total rating',
+    'col_options' => 'Options'
 ];
