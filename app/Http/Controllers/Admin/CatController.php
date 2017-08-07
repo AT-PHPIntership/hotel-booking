@@ -33,10 +33,10 @@ class CatController extends Controller
     {
         if (Category::findOrFail($id)->delete()) {
             if (News::with('category')->delete()) {
-                flash('Delete succeed')->success();
+                flash(trans('messages.delete_succeed'))->success();
             }
         } else {
-            flash('Delete fail')->error();
+            flash(trans('messages.delete_succeed'))->error();
         }
         return redirect()->route('category.index');
     }
@@ -64,13 +64,38 @@ class CatController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|between:2,30'
-            ]);
         if (Category::findOrFail($id)->update($request->all())) {
-            flash('Update succeed')->success();
+            flash(trans('messages.update_succeed'))->success();
         } else {
-            flash('Update fail')->error();
+            flash(trans('messages.update_succeed'))->error();
+        }
+        return redirect()->route('category.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('backend.categories.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request send request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CategoryRequest $request)
+    {
+        $category = new Category($request->all());
+        if ($category->save()) {
+            flash(trans('messages.create_succeed'))->success();
+        } else {
+            flash(trans('messages.create_succeed'))->error();
         }
         return redirect()->route('category.index');
     }
