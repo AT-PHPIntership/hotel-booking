@@ -1,170 +1,105 @@
-@extends('backend.layouts.master')
-
-@section('title','News')
-
+@extends('backend.layouts.main')
+@section('title','Manager News')
 @section('content')
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Tin tức trong khách sạn
+      <h1>{{trans('admin_list_news.title')}}
         <small>News</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li class="active">Tin tức</li>
+        <li>
+          <a href="#"><i class="fa fa-dashboard"></i>{{trans('admin_list_news.home')}}</a>
+        </li>
+        <li class="active">{{trans('admin_list_news.news')}}</li>
       </ol>
     </section>
-
-    <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Danh sách tin tức</h3>
+              <div class="title-news">
+                <h3 class="box-title">{{trans('admin_list_news.list')}}</h3>
+              </div>
+              <div class="form-group search-news">
+                <form method="POST" class="form-group" action="">
+                  {{csrf_field()}}
+                  <div class="search-select">
+                    <select class="form-control" name="select">
+                      <option disabled>Choose:</option>
+                      <option name="title">title</option>
+                      <option name="content">content</option>
+                      <option name="category_id">category_id</option>
+                      <option name="category_name">name</option>
+                    </select>
+                  </div>
+                  <div class="news-search-input"> 
+                    <input type="text" name="search" class="form-control">
+                  </div>
+                  <div class="news-search-btn">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </div>
+                </form> 
+              </div>
             </div>
-            <div class="float-left">
-              <a href="">
-              <span>Thêm Tin tức <img src="../../hotel_admin/dist/img/plus-small.gif" alt="ThemTin"></span>
-              </a>
-            </div>
+            
             <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+            <div class="box-body cl">
+              <div class="form-group has-error"> 
+                @foreach (['successCreate', 'failCreate','deleteSuccess','deleteFail','successEdit','failEdit'] as $msg)
+                  @if(Session::has($msg))
+                  <span class="help-block">{{ Session::get($msg) }}</span>
+                  @endif
+                @endforeach
+              </div>
+              <table class="table table-bordered table-striped clearfix" id="NewsTable">
                 <thead>
                 <tr>
                   <th>Id</th>
                   <th>Title</th>
-                  <th>Category</th>
                   <th>Content</th>
-                  <th>Function</th>
+                  <th>Category_id</th>
+                  <th>Category</th>
+                  <th>Option</th>
                 </tr>
                 </thead>
                 <tbody>
-              @foreach($news as $objNews)
-                  <tr>
-                    <td>{{ $objNews->id }}</td>
-                    <td>{{ $objNews->title }}</td>
-                    <td>{{ $objNews->category->name }}</td>
-                    <td>{{ $objNews->content }}</td>
-                    <td align="center">
-                      <a href="">Sửa <img src="../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                      <a href="">Xóa <img src="../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                    </td>
-                  </tr>
-              @endforeach
+                @foreach($news as $item)
+                <tr>
+                  <td>{{$item->id}}</td>
+                  <td>{{$item->title}}</td>
+                  <td>{{$item->content}}</td>
+                  <td>{{$item->category_id}}</td>
+                  <td>{{$item->category->name}}</td>
+                  <td align="center">
+                    <a href="" class="btn btn-primary btn-xs">
+                    {{trans('admin_list_news.edit')}}</a>
+                    <form action="" method="POST">
+                      {{csrf_field()}}
+                      {{method_field('DELETE')}}
+                      <button type="submit" class="btn btn-danger btn-xs">
+                        {{trans('admin_list_news.delete')}}
+                      </button>
+                    </form>
+                    <a href="" class="btn btn-success btn-xs">
+                    {{trans('admin_list_news.btn-image')}}
+                    </a>
+                  </td>
+               </tr>
+                @endforeach
                 </tbody>
               </table>
+              {!! $news->render() !!}
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
+          <div class="btn-AddNews">
+            <a href="/admin/news/create" class="btn btn-primary">
+              {{trans('admin_list_news.add')}}
+            </a>
+          </div>
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <!-- /.control-sidebar-menu -->
-  @include('backend.layouts.partials.infor'
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
 @endsection
