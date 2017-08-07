@@ -55,5 +55,10 @@
   <!-- start js -->
   @include('backend.layouts.partials.js')
   <!-- end js -->
+<script >
+  $(function () {
+    $("#example1").DataTable();
+  })
+</script>
 </body>
 </html>
