@@ -51,7 +51,7 @@
                   <td>{{ $objCat->name }}
                   </td>
                   <td align="center">
-                    <a href="">Sửa <img src="{{ asset('bower_components/AdminLTE/dist/img/pencil.gif') }}" alt="edit" /></a>
+                    <a href="{{ route('category.edit',$objCat->id) }}">Sửa <img src="{{ asset('bower_components/AdminLTE/dist/img/pencil.gif') }}" alt="edit" /></a>
                      <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del">
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
