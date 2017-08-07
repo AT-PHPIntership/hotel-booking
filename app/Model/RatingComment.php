@@ -16,7 +16,7 @@ class RatingComment extends Model
      */
     public function users()
     {
-        return $this->belongsTo('App\Model\User', 'id');
+        return $this->belongsTo('App\Model\User', 'user_id');
     }
 
     /**
@@ -26,6 +26,6 @@ class RatingComment extends Model
      */
     public function hotels()
     {
-        return $this->belongsTo('App\Model\Hotel', 'id');
+        return $this->belongsTo('App\Model\Hotel', 'hotel_id');
     }
 }

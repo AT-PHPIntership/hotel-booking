@@ -4,11 +4,11 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      {{ trans('admin_comment_list.title') }}
-      <small>{{ trans('admin_comment_list.small') }}</small>
+      {{ trans('admin_comment.title') }}
+      <small>{{ trans('admin_comment.small') }}</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i>{{ trans('admin_comment_list.home') }}</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i>{{ trans('admin_comment.home') }}</a></li>
       <li class="active">{{ trans('admin_comment_list.head') }}</li>
     </ol>
   </section>
@@ -19,23 +19,24 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('admin_comment_list.head') }}</h3>
+            <h3 class="box-title">{{ trans('admin_comment.head') }}</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
           {{-- message notifi --}}
           @include('flash::message')
         
-            <table id="" class="table table-bordered table-striped">
+            <table id="list-table" class="table table-bordered table-striped">
               <thead>
                 <tr align="center">
-                  <th>{{ trans('admin_comment_list.col_id') }}</th>
-                  <th>{{ trans('admin_comment_list.col_username') }}</th>
-                  <th>{{ trans('admin_comment_list.col_full_name') }}</th>
-                  <th>{{ trans('admin_comment_list.col_comment') }}</th>
-                  <th>{{ trans('admin_comment_list.col_hotel_name') }}</th>
-                  <th>{{ trans('admin_comment_list.col_total_rating') }}</th> 
-                  <th>{{ trans('admin_comment_list.col_created_at') }}</th> 
+                  <th>{{ trans('admin_comment.col_id') }}</th>
+                  <th>{{ trans('admin_comment.col_username') }}</th>
+                  <th>{{ trans('admin_comment.col_full_name') }}</th>
+                  <th>{{ trans('admin_comment.col_comment') }}</th>
+                  <th>{{ trans('admin_comment.col_hotel_name') }}</th>
+                  <th>{{ trans('admin_comment.col_total_rating') }}</th> 
+                  <th>{{ trans('admin_comment.col_created_at') }}</th> 
+                  <th>{{ trans('admin_comment.col_options') }}</th> 
                 </tr>
               </thead>
               <tbody>
@@ -54,7 +55,7 @@
                         <input type="hidden" name="user_id" value="{{ $objRatingComment->id }}">
                         {!! csrf_field() !!}
                         {{ method_field('DELETE') }}
-                        <button class="glyphicon glyphicon-trash" onclick="return confirm('Confirm deletion! { 1objRatingComment->id }');" type="submit" class="btn">
+                        <button class="glyphicon glyphicon-trash" onclick="return confirm('Confirm deletion! {{ $objRatingComment->id }}');" type="submit" class="btn">
                         </button>
                       </form>
                     </td>

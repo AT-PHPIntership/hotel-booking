@@ -17,9 +17,17 @@ class RatingCommentController extends Controller
      */
     public function index()
     {
-        $ratingComments = RatingComment::with(['users', 'hotels'])
+        $ratingComments = RatingComment::
+            select('id', 'user_id', 'hotel_id', 'total_rating', 'created_at')
+            ->with(['users' => function ($query) {
+                $query->addSelect('id', 'username', 'full_name');
+            }])
+            ->with(['hotels' => function ($query) {
+                $query->addSelect('id', 'name');
+            }])
             ->orderby('id', 'DESC')->paginate(10);
-        
+
+        // dd($ratingComments);
         return view('backend.comments.index', compact('ratingComments'));
     }
 }
