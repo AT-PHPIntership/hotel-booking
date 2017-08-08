@@ -25,6 +25,7 @@
           <div class="box-body">
           {{-- message notifi --}}
           @include('flash::message')
+        
             <table id="list-table" class="table table-bordered table-striped">
               <thead>
                 <tr align="center">
