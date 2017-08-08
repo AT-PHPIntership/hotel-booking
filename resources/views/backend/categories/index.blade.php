@@ -9,12 +9,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Chuyên mục Danh mục tin
-        <small>Category</small>
+        {{ trans('admin_categories.categories_news') }}
+        <small>{{ trans('admin_categories.categories') }}</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li class="active">Danh mục tin</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>{{ trans('admin_categories.home_page') }}</a></li>
+        <li class="active">{{ trans('admin_categories.categories') }}</li>
       </ol>
     </section>
 
@@ -24,24 +24,24 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Danh sách Danh mục tin</h3>
+              <h3 class="box-title">{{ trans('admin_categories.list_categories') }}</h3>
             </div>
             <div>
             @include('flash::message')
             </div>
-            <div class="float-left">
+            <div class="btn-create">
               <a href="{{ route('category.create') }}">
-              <span>Thêm Danh Mục <img src="{{ asset('bower_components/AdminLTE/dist/img/plus-small.gif') }}" alt="ThemTin"></span>
+              <span>{{ trans('admin_categories.add_category') }} <img src="{{ asset('bower_components/AdminLTE/dist/img/plus-small.gif') }}" alt="ThemTin"></span>
               </a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="list_table" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
-                  <th >Id</th>
-                  <th>Name</th>
-                  <th>Function</th>
+                  <th >{{ trans('admin_categories.id') }}</th>
+                  <th>{{ trans('admin_categories.name') }}</th>
+                  <th colspan="2">{{ trans('admin_categories.function') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -51,11 +51,13 @@
                   <td>{{ $objCat->name }}
                   </td>
                   <td align="center">
-                    <a href="">Sửa <img src="{{ asset('bower_components/AdminLTE/dist/img/pencil.gif') }}" alt="edit" /></a>
+                    <a href="{{ route('category.edit',$objCat->id) }}"> <img src="{{ asset('bower_components/AdminLTE/dist/img/pencil.gif') }}" alt="edit" /></a>
+                  </td>
+                  <td>
                      <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del">
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
-                        <button type="submit" name="" onclick="return confirm('Do you really delete?')"> Xóa <img src="{{ asset('bower_components/AdminLTE/dist/img/bin.gif') }}" width="16" height="16" alt="delete" /></button>
+                        <button type="submit" name="" onclick="return confirm('{{trans('messages.confirm')}}')"><img src="{{ asset('bower_components/AdminLTE/dist/img/bin.gif') }}" width="16" height="16" alt="delete" /></button>
                     </form>
                   </td>
                    

@@ -17,7 +17,7 @@ class CatController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('id', 'DESC')->get();
+        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(10);
         return view('backend.categories.index', compact('categories'));
     }
 
@@ -31,11 +31,10 @@ class CatController extends Controller
     public function destroy($id)
     {
         if (Category::findOrFail($id)->delete()) {
-            if (News::with('category')->delete()) {
-                flash('Delete succeed')->success();
-            }
+            News::with('category')->delete();
+                flash(trans('messages.delete_succeed'))->success();
         } else {
-            flash('Delete fail')->error();
+            flash(trans('messages.delete_fail'))->error();
         }
         return redirect()->route('category.index');
     }

@@ -17,7 +17,7 @@
         <!-- index -->
         <li class="active treeview">
           <a href="../index.html">
-            <i class="fa fa-dashboard"></i> <span>Trang chủ</span>
+            <i class="fa fa-dashboard"></i> <span>{{ trans('admin_left-bar.home_page') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -27,7 +27,7 @@
         <!--  introduction -->
         <li class="treeview">
           <a href="../../pages/static page/indexAboutUs.html">
-            <i class="fa fa-table"></i> <span>Giới thiệu Khách sạn</span>
+            <i class="fa fa-table"></i> <span>{{ trans('admin_left-bar.introduce') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -38,7 +38,7 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Tin tức</span>
+            <span>{{ trans('admin_left-bar.news') }}</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">135</span>
             </span>
@@ -48,7 +48,7 @@
         <!-- user -->
         <li>
           <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Người dùng</span>
+            <i class="fa fa-th"></i> <span>{{ trans('admin_left-bar.users') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">23</small>
             </span>
@@ -57,26 +57,20 @@
 
        <!--  category -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('category.index') }}">
             <i class="fa fa-pie-chart"></i>
-            <span>Danh mục tin</span>
+            <span>{{ trans('admin_left-bar.categories') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Tin mới </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Doanh thu </a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Khuyến mãi</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Tất cả các tin</a></li>
-          </ul>
         </li>
 
         <!-- hotel -->
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
-            <span>Khách sạn</span>
+            <span>{{ trans('admin_left-bar.hotels') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -86,17 +80,17 @@
         <!-- comment and rating -->
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i> <span>Bình luận và Bình chọn</span>
+            <i class="fa fa-edit"></i> <span>{{ trans('admin_left-bar.comment') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
         </li>
 
-        <!-- booking rôm -->
+        <!-- booking room -->
         <li>
           <a href="pages/calendar.html">
-            <i class="fa fa-calendar"></i> <span>Lịch đặt phòng</span>
+            <i class="fa fa-calendar"></i> <span>{{ trans('admin_left-bar.book_room') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-red">17</small>
               <small class="label pull-right bg-blue">4</small>
@@ -107,7 +101,7 @@
         <!-- feedback -->
         <li>
           <a href="pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Feedback</span>
+            <i class="fa fa-envelope"></i> <span>{{ trans('admin_left-bar.feedback') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">102</small>
             </span>
@@ -117,22 +111,11 @@
         <!-- place -->
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-folder"></i> <span>Địa điểm</span>
+            <i class="fa fa-folder"></i> <span>{{ trans('admin_left-bar.places') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-            <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-            <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-            <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-            <li><a href="pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-            <li><a href="pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-            <li><a href="pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-            <li><a href="pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-            <li><a href="pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-          </ul>
         </li>
       </ul>
     </section>
