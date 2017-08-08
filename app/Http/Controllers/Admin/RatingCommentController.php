@@ -27,7 +27,6 @@ class RatingCommentController extends Controller
             }])
             ->orderby('id', 'DESC')->paginate(10);
 
-        // dd($ratingComments);
         return view('backend.comments.index', compact('ratingComments'));
     }
 }
