@@ -37,7 +37,7 @@
             <div class="box-body">
               <div class="row">
               </div>
-              <table id="list-table" class="table table-bordered table-striped">
+              <table id="table-contain" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
                   <th>{{ trans('admin_user.no') }}</th>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
 {
@@ -29,14 +30,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        if ($user == null) {
+        try {
+            $user = User::findOrFail($id);
+            if ($user->delete()) {
+                flash(trans('admin_user.delete_success'))->success();
+            } else {
+                flash(trans('admin_user.delete_failure'))->error();
+            }
+        } catch (ModelNotFoundException $err) {
             flash(trans('admin_user.user_not_found'))->warning();
-        } elseif ($user->delete()) {
-            flash(trans('admin_user.delete_success'))->success();
-        } else {
-            flash(trans('admin_user.delete_failure'))->error();
+        } finally {
+            return redirect()->route('user.index');
         }
-        return redirect()->route('user.index');
     }
 }
