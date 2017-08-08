@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -38,36 +39,26 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $rules = [
-            'UserName' => 'required|max:50|unique:users',
-            'Password' => 'required|min:3',
-            'FullName' => 'required',
-            'Email' => 'required|email|unique:users',
-            'Phone' => 'required|numeric',
-        ];
-
-        $this->validate($request, $rules);
 
         $user = new User();
     
-        $user->username = $request->input('UserName');
-        $user->email = $request->input('Email');
-        $user->full_name = $request->input('FullName');
-        $user->is_admin = $request->input('IsAdmin') != null? 1: 0;
-        $user->is_active = $request->input('IsActive') != null? 1: 0;
-        $user->phone = $request->input('Phone');
-
-        if (!$request->input('Password') == '') {
-            $user->password = bcrypt($request->input('Password'));
-        }
+        $user->setAllAttribute(
+            $request->input('username'),
+            $request->input('password'),
+            $request->input('full_name'),
+            $request->input('email'),
+            $request->input('phone'),
+            $request->input('is_admin'),
+            $request->input('is_active')
+        );
         
         if ($user->save()) {
-            flash('Creation successful')->success();
+            flash(trans('admin_user.create_success'))->success();
             return redirect()->route('user.index');
         } else {
-            flash('Creation failed')->error();
+            flash(trans('admin_user.create_success'))->error();
             return redirect()->back();
         }
     }

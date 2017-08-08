@@ -13,6 +13,7 @@
         'is_admin' => 'Is Admin',
         'is_active' => 'Is_Active',
         'full_name' => 'Full Name',
+        'password_confirmation' => 'Confirm password',
         'phone' => 'Phone',
         'action' => 'Action',
         'add_user' => 'Add User',
@@ -28,4 +29,6 @@
         'delete_success' => 'Deletion successful!',
         'delete_failure' => 'Deletion failed!',
         'user_not_found' => 'User not found!',
+        'create_success' => 'Creation successful!',
+        'create_failure' => 'Creation failed!',
     ];
