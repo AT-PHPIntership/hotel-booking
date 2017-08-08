@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
-use Session;
-use App\Model\News;
 use App\Http\Requests\CategoryRequest;
 
 class CatController extends Controller
@@ -18,27 +16,8 @@ class CatController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('id', 'DESC')->get();
+        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(10);
         return view('backend.categories.index', compact('categories'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id choose category delete
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        if (Category::findOrFail($id)->delete()) {
-            if (News::with('category')->delete()) {
-                flash('Delete succeed')->success();
-            }
-        } else {
-            flash('Delete fail')->error();
-        }
-        return redirect()->route('category.index');
     }
     
     /**
@@ -67,7 +46,7 @@ class CatController extends Controller
         if (Category::findOrFail($id)->update($request->all())) {
             flash(trans('messages.update_succeed'))->success();
         } else {
-            flash(trans('messages.update_succeed'))->error();
+            flash(trans('messages.update_fail'))->error();
         }
         return redirect()->route('category.index');
     }
