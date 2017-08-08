@@ -1,5 +1,4 @@
 $(function () {
-
   $('#table-contain').DataTable({
     "paging": false,
     "lengthChange": false,
@@ -7,12 +6,10 @@ $(function () {
     "ordering": true,
     "info": true,
     "autoWidth": false
-
   });
 });
 
 $(document).ready(function(){
-
     $('[data-toggle="tooltip"]').tooltip(); 
     $(".btn-delete-item").bind('click',function(){ 
          
@@ -23,11 +20,9 @@ $(document).ready(function(){
         return false;
       }
     });
-
 });
 
 $('#File').change( function(event) {
-	var imgpath = URL.createObjectURL(event.target.files[0]);
-	$("#showImage").fadeIn("fast").attr('src',imgpath);
+  var imgpath = URL.createObjectURL(event.target.files[0]);
+  $("#showImage").fadeIn("fast").attr('src',imgpath);
 });
-
