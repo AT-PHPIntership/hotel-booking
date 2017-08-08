@@ -29,19 +29,19 @@
             <div>
             @include('flash::message')
             </div>
-            <div class="float-left">
+            <div class="btn-create">
               <a href="{{ route('category.create') }}">
               <span>{{ trans('admin_categories.add_category') }} <img src="{{ asset('bower_components/AdminLTE/dist/img/plus-small.gif') }}" alt="ThemTin"></span>
               </a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="list_table" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
                   <th >{{ trans('admin_categories.id') }}</th>
                   <th>{{ trans('admin_categories.name') }}</th>
-                  <th>{{ trans('admin_categories.function') }}</th>
+                  <th colspan="2">{{ trans('admin_categories.function') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,6 +52,8 @@
                   </td>
                   <td align="center">
                     <a href="{{ route('category.edit',$objCat->id) }}"> <img src="{{ asset('bower_components/AdminLTE/dist/img/pencil.gif') }}" alt="edit" /></a>
+                  </td>
+                  <td>
                      <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del">
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
