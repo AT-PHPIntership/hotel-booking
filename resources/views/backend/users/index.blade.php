@@ -40,13 +40,13 @@
                   <div id="example1_filter" class="dataTables_filter">
                     <form method="GET">
                       <label>{{ trans('admin_user.search') }}</label>
-                      <input type="search" class="form-control input-sm" 
-                        placeholder="">
+                      <input id="search-input" type="search" class="form-control input-sm" 
+                        placeholder="" name="search_input">
                     </form>    
                   </div>
                 </div>
               </div>
-              <table id="list-table" class="table table-bordered table-striped">
+              <table id="table-contain" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
                   <th>{{ trans('admin_user.no') }}</th>
@@ -88,6 +88,7 @@
                 @endforeach
                </tbody>
               </table>
+              {!! $users->render() !!}
             </div>
             <!-- /.box-body -->
           </div>

@@ -25,4 +25,7 @@
         'update_user' => 'Update User',
         'create_user' => 'Create User',
         'enter_information' => 'Enter Information',
+        'delete_success' => 'Deletion successful!',
+        'delete_failure' => 'Deletion failed!',
+        'user_not_found' => 'User not found!',
     ];

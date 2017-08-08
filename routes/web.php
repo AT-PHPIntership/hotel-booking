@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['namespace'=>'Admin','prefix'=>'admin'], function() {
-	Route::get('/', 'AdminController@index');
+Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
+    Route::get('/', 'AdminController@index');
     Route::resource('/user', 'UserController');
 });
