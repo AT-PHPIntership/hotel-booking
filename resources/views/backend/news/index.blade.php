@@ -46,14 +46,12 @@
                   </div>
                   <div class="news-search-btn">
                     <button type="submit" class="btn btn-primary">
-                    {{trans('admin_list_news.search')}}
+                      {{trans('admin_list_news.search')}}
                     </button>
                   </div>
                 </form> 
               </div>
             </div>
-            
-            <!-- /.box-header -->
             <div class="box-body cl">
               <div class="form-group has-error"> 
                 @foreach (['successCreate', 'failCreate','deleteSuccess','deleteFail','successEdit','failEdit'] as $msg)

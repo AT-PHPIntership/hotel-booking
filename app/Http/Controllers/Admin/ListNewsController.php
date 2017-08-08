@@ -11,13 +11,13 @@ use Session;
 class ListNewsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of news.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $news = News::select('id', 'title', 'content', 'category_id')
+        $news = News::select('id', 'title', 'slug', 'content', 'category_id')
                     ->with(['category' => function ($query) {
                         $query->addSelect('id', 'name');
                     }])
@@ -27,6 +27,7 @@ class ListNewsController extends Controller
 
     /**
      * Create a new News.
+     * Display a listing of news.
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,5 +54,36 @@ class ListNewsController extends Controller
             Session::flash('failSave', trans('admin_list_news.failSave'));
             return redirect()->route('news.index');
         }
+    }
+
+    /**
+     * Display a listing of news.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit()
+    {
+
+    }
+
+    /**
+     * Display a listing of news.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update()
+    {
+
+    }
+
+    /**
+     * Display a listing of news.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy()
+    {
+        
+
     }
 }
