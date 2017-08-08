@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RatingComment extends Model
 {
     use SoftDeletes;
-
+    
     /**
      * Relationship with users model
      *
