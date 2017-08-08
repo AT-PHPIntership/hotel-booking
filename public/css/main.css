@@ -53,3 +53,7 @@
 .inline{
     display: inline;
 }
+.news_btn {
+    width: 90px;
+    margin-top: 4px;
+}

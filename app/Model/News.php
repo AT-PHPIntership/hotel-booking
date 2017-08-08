@@ -23,4 +23,19 @@ class News extends Model
             ]
         ];
     }
+    protected $table = 'news';
+    protected $fillable = [
+        'id','title', 'content','slug', 'category_id'
+    ];
+    public $timestamps = true;
+
+    /**
+     * News belongs to a Category.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
