@@ -3,10 +3,8 @@
 @section('content')
   <div class="content-wrapper">
     <h1 class="title_page">{{trans('admin_list_news.add_news')}}</h1>
-    <!-- Main content -->
     <section class="content">
       <div class="row margin_center">
-        <!-- left column -->
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -31,13 +29,6 @@
                     <span class="help-block">{{$errors->first('content')}}</span>
                   @endif
                 </div>
-                <div class="form-group" {{ $errors->has('slug') ? ' has-error' : '' }}>
-                  <label>{{trans('admin_list_news.add_slug')}}</label>
-                  <input type="text" class="form-control" name="slug">
-                  @if($errors->first('slug'))
-                   <span class="help-block">{{$errors->first('slug')}}</span>
-                  @endif
-                </div>
                 <div class="form-group" {{ $errors->has('category_id') ? ' has-error' : '' }}>
                   <label>{{trans('admin_list_news.add_category_id')}}</label>
                   <input type="text" class="form-control" name="category_id">
@@ -46,8 +37,6 @@
                   @endif
                 </div>
               </div>
-              <!-- /.box-body -->
-
               <div class="box-footer btn-add-news">
                 <button type="reset" class="btn btn-primary">
                   {{trans('admin_list_news.add_btn_rs')}}
@@ -62,5 +51,4 @@
       </div>
     </section>
   </div>
-
 @endsection

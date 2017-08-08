@@ -10,7 +10,7 @@ class Image extends Model
     use SoftDeletes;
     protected $table = 'images';
     protected $fillable = [
-    	'target', 'target_id', 'path'
+            'target', 'target_id', 'path'
     ];
     public $timestamps = false;
 }
