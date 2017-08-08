@@ -36,8 +36,18 @@
              <!-- /.box-header -->
             <div class="box-body">
               <div class="row">
+                <div class="col-sm-6 form-search">
+                  <div id="example1_filter" class="dataTables_filter">
+                    <form method="GET">
+                      <label>{{ trans('admin_user.search') }}</label>
+                      <input id="search-input" type="search" class="form-control input-sm" 
+                        placeholder="" name="search_input">
+                    </form>    
+                  </div>
+                </div>
               </div>
-              <table id="list-table" class="table table-bordered table-striped">
+              </div>
+              <table id="table-contain" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
                   <th>{{ trans('admin_user.no') }}</th>

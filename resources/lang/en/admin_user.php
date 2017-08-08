@@ -16,13 +16,5 @@
         'phone' => 'Phone',
         'action' => 'Action',
         'add_user' => 'Add User',
-        'enter_info' => 'Enter Information',
         'user_management' => 'Management Users',
-        'show' => 'Show',
-        'entry' => 'entry',
-        'search' => 'Search: ',
-        'confirm_delete' => 'Confirm Deletion!',
-        'delete_success' => 'Deletion successful!',
-        'delete_failure' => 'Deletion failed!',
-        'user_not_found' => 'User not found!',
     ];

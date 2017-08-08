@@ -15,8 +15,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::select('id', 'username', 'full_name', 'email', 'phone', 'is_admin', 'is_active')->orderby('id', 'DESC')
-            ->paginate(10);
+        $columns = [
+            'id',
+            'username',
+            'full_name',
+            'email',
+            'phone',
+            'is_admin',
+            'is_active',
+        ];
+        $users = User::select($columns)->orderby('id', 'DESC')
+            ->paginate(User::ROW_LIMIT);
         return view("backend.users.index", compact('users'));
     }
 
@@ -30,12 +39,10 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        if ($user == null) {
-            flash(trans('admin_user.user_not_found'))->warning();
-        } elseif ($user->delete()) {
-            flash(trans('admin_user.delete_success'))->success();
+        if ($user->delete()) {
+            flash(__('Deletion successful!'))->success();
         } else {
-            flash(trans('admin_user.delete_failure'))->error();
+            flash(__('Deletion failed!'))->error();
         }
         return redirect()->route('user.index');
     }

@@ -12,6 +12,11 @@ class User extends Model
     use SoftDeletes;
 
     /**
+     * Value paginate of row
+     */
+    const ROW_LIMIT = 10;
+
+    /**
      * Get all of the user's ratingcomment.
      *
      * @return array
