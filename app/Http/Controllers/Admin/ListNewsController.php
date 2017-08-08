@@ -12,7 +12,7 @@ use Session;
 class ListNewsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of news.
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,27 +33,15 @@ class ListNewsController extends Controller
      */
     public function create()
     {
-        return view('backend.news.create');
     }
 
     /**
      * Store a newly News in storage.
      *
-     * @param \App\Http\Requests\CreateNewsRequest $request of form creat News
-     *
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateNewsRequest $request)
+    public function store()
     {
-        $news = new News($request->all());
-        $result = $news->save();
-        if ($result) {
-            Session::flash('successCreate', trans('admin_list_news.successCreate'));
-            return redirect()->route('news.index');
-        } else {
-            Session::flash('failSave', trans('admin_list_news.failSave'));
-            return redirect()->route('news.index');
-        }
     }
 
      /**
@@ -88,5 +76,14 @@ class ListNewsController extends Controller
             Session::flash('failEdit', trans('admin_list_news.failEdit'));
             return redirect()->route('news.index');
         }
+    }
+
+    /**
+     * Display a listing of news.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy()
+    {
     }
 }

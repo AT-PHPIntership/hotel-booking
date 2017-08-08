@@ -25,7 +25,7 @@ class News extends Model
     }
     protected $table = 'news';
     protected $fillable = [
-        'id', 'title', 'content', 'category_id'
+        'title', 'content', 'category_id'
     ];
     public $timestamps = true;
 

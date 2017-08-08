@@ -46,7 +46,7 @@
                   </div>
                   <div class="news-search-btn">
                     <button type="submit" class="btn btn-primary">
-                    {{trans('admin_list_news.search')}}
+                      {{trans('admin_list_news.search')}}
                     </button>
                   </div>
                 </form> 
@@ -83,7 +83,8 @@
                     <td>{{$item->category->name}}</td>
                     <td align="center">
                       <a href="{{ route('news.edit',$item->slug) }}" class="btn btn-primary btn-xs news_btn">
-                      {{trans('admin_list_news.edit')}}</a>
+                        {{trans('admin_list_news.edit')}}
+                      </a>
                       <form action="" method="POST">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
