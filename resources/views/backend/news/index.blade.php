@@ -101,7 +101,7 @@
             </div>
           </div>
           <div class="btn-AddNews">
-            <a href="/admin/news/create" class="btn btn-primary">
+            <a href="/admin/news/create" class="btn btn-primary" id="btn-add-news">
               {{trans('admin_list_news.add')}}
             </a>
           </div>

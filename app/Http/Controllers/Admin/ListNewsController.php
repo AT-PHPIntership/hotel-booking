@@ -27,7 +27,6 @@ class ListNewsController extends Controller
 
     /**
      * Create a new News.
-     * Display a listing of news.
      *
      * @return \Illuminate\Http\Response
      */
@@ -63,7 +62,6 @@ class ListNewsController extends Controller
      */
     public function edit()
     {
-
     }
 
     /**
@@ -73,7 +71,6 @@ class ListNewsController extends Controller
      */
     public function update()
     {
-
     }
 
     /**
@@ -83,7 +80,5 @@ class ListNewsController extends Controller
      */
     public function destroy()
     {
-        
-
     }
 }

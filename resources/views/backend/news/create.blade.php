@@ -31,13 +31,7 @@
                     <span class="help-block">{{$errors->first('content')}}</span>
                   @endif
                 </div>
-                <div class="form-group" {{ $errors->has('slug') ? ' has-error' : '' }}>
-                  <label>{{trans('admin_list_news.add_slug')}}</label>
-                  <input type="text" class="form-control" name="slug">
-                  @if($errors->first('slug'))
-                   <span class="help-block">{{$errors->first('slug')}}</span>
-                  @endif
-                </div>
+                
                 <div class="form-group" {{ $errors->has('category_id') ? ' has-error' : '' }}>
                   <label>{{trans('admin_list_news.add_category_id')}}</label>
                   <input type="text" class="form-control" name="category_id">
