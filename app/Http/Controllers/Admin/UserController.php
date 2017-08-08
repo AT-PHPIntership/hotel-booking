@@ -15,8 +15,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::select('id', 'username', 'full_name', 'email', 'phone', 'is_admin', 'is_active')->orderby('id', 'DESC')
-            ->paginate(10);
+        $columns = [
+            'id',
+            'username',
+            'full_name',
+            'email',
+            'phone',
+            'is_admin',
+            'is_active',
+        ];
+        $users = User::select($columns)->orderby('id', 'DESC')
+            ->paginate(User::ROW_LIMIT);
         return view("backend.users.index", compact('users'));
     }
 }
