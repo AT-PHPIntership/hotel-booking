@@ -57,19 +57,13 @@
 
        <!--  category -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('category.index') }}">
             <i class="fa fa-pie-chart"></i>
             <span>{{ trans('admin_left-bar.categories') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Tin mới </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Doanh thu </a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Khuyến mãi</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Tất cả các tin</a></li>
-          </ul>
         </li>
 
         <!-- hotel -->

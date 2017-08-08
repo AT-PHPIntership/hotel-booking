@@ -13,10 +13,11 @@
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
+        "laravel/dusk": "^1.1",
         "mockery/mockery": "0.9.*",
+        "phpmd/phpmd": "@stable",
         "phpunit/phpunit": "~5.7",
-        "squizlabs/php_codesniffer": "2.*",
-        "phpmd/phpmd" : "@stable"
+        "squizlabs/php_codesniffer": "2.*"
     },
     "autoload": {
         "classmap": [
