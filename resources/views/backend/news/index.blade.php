@@ -1,7 +1,6 @@
 @extends('backend.layouts.main')
 @section('title','Manager News')
 @section('content')
-
   <div class="content-wrapper">
     <section class="content-header">
       <h1>{{trans('admin_list_news.title')}}
@@ -45,13 +44,13 @@
                     <input type="text" name="search" class="form-control">
                   </div>
                   <div class="news-search-btn">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-primary">
+                      {{trans('admin_list_news.search')}}
+                    </button>
                   </div>
                 </form> 
               </div>
             </div>
-            
-            <!-- /.box-header -->
             <div class="box-body cl">
               <div class="form-group has-error"> 
                 @foreach (['successCreate', 'failCreate','deleteSuccess','deleteFail','successEdit','failEdit'] as $msg)
@@ -85,12 +84,12 @@
                       <form action="{{ route('news.destroy',$item->id) }}" method="POST">
                         {{csrf_field()}}
                         {{method_field('delete')}}
-                        <button type="submit" class="btn btn-danger btn-xs news_btn" onclick="return confirm('Delete?')">
+                        <button type="submit" class="btn btn-danger btn-xs news_btn" onclick="return confirm('{{trans('admin_list_news.msg')}}')">
                           {{trans('admin_list_news.delete')}}
                         </button>
                       </form>
                       <a href="" class="btn btn-success btn-xs news_btn">
-                      {{trans('admin_list_news.btn-image')}}
+                        {{trans('admin_list_news.btn-image')}}
                       </a>
                     </td>
                   </tr>

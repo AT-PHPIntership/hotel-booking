@@ -16,7 +16,11 @@ class ListNewsController extends Controller
      */
     public function index()
     {
-        $news = News::with('category')->paginate(10);
+        $news = News::select('id', 'title', 'slug', 'content', 'category_id')
+                    ->with(['category' => function ($query) {
+                        $query->addSelect('id', 'name');
+                    }])
+                    ->orderby('id', 'ASC')->paginate(10);
         return view('backend.news.index', compact('news'));
     }
 
@@ -29,8 +33,10 @@ class ListNewsController extends Controller
      */
     public function destroy($id)
     {
-        $result = News::findOrFail($id)->delete();
-        if ($result) {
+        $result = News::findOrFail($id);
+            
+        if ($result == null) {
+            //return redirect()->route
             Session::flash('deleteSuccess', trans('admin_list_news.deleteSuccess'));
             return redirect()->route('news.index');
         } else {
