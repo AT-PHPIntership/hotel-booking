@@ -15,7 +15,7 @@ class CatController extends Controller
      */
     public function index()
     {
-        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(10);
+        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(Category::ROW_LIMIT);
         return view('backend.categories.index', compact('categories'));
     }
 }
