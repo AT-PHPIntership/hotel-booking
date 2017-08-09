@@ -14,9 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['namespace'=>'Admin','prefix'=>'admin'], function() {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 	Route::get('/', 'AdminController@index');
-	Route::group(['prefix'=>'news'], function () {
-		Route::get('/',['as' => 'news.index','uses' => 'ListNewsController@index']);
-	});
+	Route::resource('news', 'NewsController');
 });
