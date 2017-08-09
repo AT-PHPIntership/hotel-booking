@@ -47,10 +47,10 @@ class ListNewsController extends Controller
         $news = new News($request->all());
         $result = $news->save();
         if ($result) {
-            Session::flash('successCreate', trans('admin_list_news.successCreate'));
+            flash(__('Create News Success!'))->success();
             return redirect()->route('news.index');
         } else {
-            Session::flash('failSave', trans('admin_list_news.failSave'));
+            flash(__('Create News Fail!'))->error();
             return redirect()->route('news.index');
         }
     }

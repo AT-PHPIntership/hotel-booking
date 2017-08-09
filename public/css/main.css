@@ -54,6 +54,7 @@
     display: inline;
 }
 
+
 .btn-add-news {
     margin-left: 32%;
 }
@@ -68,8 +69,6 @@
     width: 90px;
     margin-top: 4px;
 }   
-
-
 
 /*errors page*/
 .main-page-error {
@@ -86,4 +85,9 @@
 
 }
 
-/*end errors page*/
+.btn-AddNews a{
+    width: 10%;
+}
+
+
+>>>>>>> admin_create_news

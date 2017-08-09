@@ -1,17 +1,16 @@
 @extends('backend.layouts.main')
 @section('title','Manager News')
 @section('content')
-
   <div class="content-wrapper">
     <section class="content-header">
-      <h1>{{trans('admin_list_news.title')}}
-        <small>{{trans('admin_list_news.news')}}</small>
+      <h1>{{__('List News of Hotel')}}
+        <small>{{__('News')}}</small>
       </h1>
       <ol class="breadcrumb">
         <li>
-          <a href="#"><i class="fa fa-dashboard"></i>{{trans('admin_list_news.home')}}</a>
+          <a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a>
         </li>
-        <li class="active">{{trans('admin_list_news.news')}}</li>
+        <li class="active">{{__('News')}}</li>
       </ol>
     </section>
     <section class="content">
@@ -20,7 +19,7 @@
           <div class="box">
             <div class="box-header">
               <div class="title-news">
-                <h3 class="box-title">{{trans('admin_list_news.list')}}</h3>
+                <h3 class="box-title">{{__('List News')}}</h3>
               </div>
               <div class="form-group search-news">
                 <form method="POST" class="form-group" action="">
@@ -28,16 +27,16 @@
                   <div class="search-select">
                     <select class="form-control" name="select">
                       <option disabled>
-                      {{trans('admin_list_news.choose')}}:
+                      {{_('Choose')}}:
                       </option>
-                      <option name="title">{{trans('admin_list_news.tb_title')}}</option>
+                      <option name="title">{{__('Title')}}</option>
                       <option name="content">
-                        {{trans('admin_list_news.tb_content')}}</option>
+                        {{__('Content')}}</option>
                       <option name="category_id">
-                        {{trans('admin_list_news.tb_category_id')}}
+                        {{__('Category_id')}}
                       </option>
                       <option name="category_name">
-                        {{trans('admin_list_news.tb_category')}}
+                        {{__('Category')}}
                       </option>
                     </select>
                   </div>
@@ -46,29 +45,23 @@
                   </div>
                   <div class="news-search-btn">
                     <button type="submit" class="btn btn-primary">
-                      {{trans('admin_list_news.search')}}
+                      {{__('Search')}}
                     </button>
                   </div>
                 </form> 
               </div>
             </div>
             <div class="box-body cl">
-              <div class="form-group has-error"> 
-                @foreach (['successCreate', 'failCreate','deleteSuccess','deleteFail','successEdit','failEdit'] as $msg)
-                  @if(Session::has($msg))
-                  <span class="help-block">{{ Session::get($msg) }}</span>
-                  @endif
-                @endforeach
-              </div>
+              @include('flash::message')
               <table class="table table-bordered table-striped clearfix" id="NewsTable">
                 <thead>
                 <tr>
-                  <th>{{trans('admin_list_news.id')}}</th>
-                  <th>{{trans('admin_list_news.tb_title')}}</th>
-                  <th>{{trans('admin_list_news.tb_content')}}</th>
-                  <th>{{trans('admin_list_news.tb_category_id')}}</th>
-                  <th>{{trans('admin_list_news.tb_category')}}</th>
-                  <th>{{trans('admin_list_news.option')}}</th>
+                  <th>{{__('Id')}}</th>
+                  <th>{{__('Title')}}</th>
+                  <th>{{__('Content')}}</th>
+                  <th>{{__('Category_id')}}</th>
+                  <th>{{__('Category')}}</th>
+                  <th>{{__('Option')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -81,16 +74,16 @@
                     <td>{{$item->category->name}}</td>
                     <td align="center">
                       <a href="" class="btn btn-primary btn-xs news_btn">
-                      {{trans('admin_list_news.edit')}}</a>
+                      {{__('Edit')}}</a>
                       <form action="" method="POST">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
                         <button type="submit" class="btn btn-danger btn-xs news_btn">
-                          {{trans('admin_list_news.delete')}}
+                          {{__('Delete')}}
                         </button>
                       </form>
                       <a href="" class="btn btn-success btn-xs news_btn">
-                      {{trans('admin_list_news.btn-image')}}
+                      {{__('Upload Image')}}
                       </a>
                     </td>
                   </tr>
@@ -102,7 +95,7 @@
           </div>
           <div class="btn-AddNews">
             <a href="/admin/news/create" class="btn btn-primary" id="btn-add-news">
-              {{trans('admin_list_news.add')}}
+              {{__('Add News')}}
             </a>
           </div>
         </div>
