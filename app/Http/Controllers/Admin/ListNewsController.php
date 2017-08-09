@@ -47,14 +47,14 @@ class ListNewsController extends Controller
      /**
      * Display form edit a News.
      *
-     * @param int $id of News
+     * @param string $slug of News
      *
      * @return \Illuminate\Http\Response
      */
     public function edit($slug)
     {
         $news = News::where('slug', $slug)
-                    ->select('id','title','content','category_id')
+                    ->select('id', 'title', 'content', 'category_id')
                     ->get();
         return view('backend.news.edit', compact('news'));
     }
