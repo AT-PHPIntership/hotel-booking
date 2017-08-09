@@ -16,6 +16,5 @@ Route::get('/', function () {
 });
 Route::group(['namespace'=>'Admin','prefix'=>'admin'], function() {
     Route::get('/', 'AdminController@index');
-    Route::resource('/place', 'PlaceController');
-
+    Route::resource('place', 'PlaceController');
 });

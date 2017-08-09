@@ -1,6 +1,6 @@
 @extends('backend.layouts.main')
 
-@section('title','Place')
+@section('title', __('Place'))
 
 @section('content')
 
@@ -9,15 +9,15 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ trans('admin_place.place_management') }}
+         {{ __('Management Place') }}
       </h1>
       <ol class="breadcrumb">
         <li>
           <a href="/admin"><i class="fa fa-dashboard"></i>
-            {{ trans('admin_place.home_page') }}
+             {{ __('Home page') }}
           </a>
         </li>
-        <li class="active">{{ trans('admin_place.place') }}</li>
+        <li class="active">{{ __('Place') }}</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -27,13 +27,13 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title title-header">
-                {{ trans('admin_place.list_place') }}
+ 
+                {{ __('List place') }}
               </h3>
               <div class="contain-btn">
                 <a href="{{ route('place.create') }}" class="btn btn-primary">
                 <span class=" fa fa-plus-circle" aria-hidden="true">
-                  </span>{{ trans('admin_place.add_place') }}
-                
+                  </span>{{ __('Add Place') }}
                 </a> 
               </div>
             </div>
@@ -43,11 +43,10 @@
               <table id="table-contain" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>{{ trans('admin_place.ordinal_number') }}</th>
-                    <th>{{ trans('admin_place.image') }}</th>
-                    <th>{{ trans('admin_place.name') }}</th>
-                    <th>{{ trans('admin_place.descript') }}</th>
-                    <th>{{ trans('admin_place.action') }}</th>
+                    <th>{{ __('Image') }}</th>
+                    <th>{{ __('Name') }}</th>
+                    <th>{{ __('Descript') }}</th>
+                    <th>{{ __('Action') }}</th>
                   </tr>
                 </thead>
                 <tbody>
