@@ -1,6 +1,6 @@
 @extends('backend.layouts.main')
 
-@section('title','User')
+@section('title', __('User'))
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -8,12 +8,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ trans('admin_user.list_user') }}
-        <small>advanced tables</small>
+        {{ __('List Users') }}
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('admin_user.home_page') }}</a></li>
-        <li class="active">{{ trans('admin_user.list_user') }}</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> {{ __('Home Page') }}</a></li>
+        <li class="active">{{ __('List Users') }}</li>
       </ol>
     </section>
 
@@ -23,12 +22,12 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">{{ trans('admin_user.list_user') }}</h3>
+              <h3 class="box-title">{{ __('List Users') }}</h3>
               @include('flash::message')
             </div>
             <div class="float-left">
               <a href="{{ route('user.create')}}">
-              <span class="btn btn-primary">{{ trans('admin_user.add_user') }}
+              <span class="btn btn-primary">{{ __('Add user') }}
                 <i class="fa fa-plus"></i>
               </span>
               </a>
@@ -39,7 +38,7 @@
                 <div class="col-sm-6 form-search">
                   <div id="example1_filter" class="dataTables_filter">
                     <form method="GET">
-                      <label>{{ trans('admin_user.search') }}</label>
+                      <label>{{ __('Search') }}</label>
                       <input id="search-input" type="search" class="form-control input-sm" 
                         placeholder="" name="search_input">
                     </form>    
@@ -50,38 +49,38 @@
               <table id="table-contain" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
-                  <th>{{ trans('admin_user.no') }}</th>
-                  <th>{{ trans('admin_user.user_name') }}</th>
-                  <th>{{ trans('admin_user.full_name') }}</th>
-                  <th>{{ trans('admin_user.email') }}</th>
-                  <th>{{ trans('admin_user.phone') }}</th>
-                  <th>{{ trans('admin_user.is_admin') }}</th>
-                  <th>{{ trans('admin_user.is_active') }}</th>
-                  <th>{{ trans('admin_user.action') }}</th>
+                  <th>{{ __('No') }}</th>
+                  <th>{{ __('Username') }}</th>
+                  <th>{{ __('Full Name') }}</th>
+                  <th>{{ __('Email')}}</th>
+                  <th>{{ __('Phone') }}</th>
+                  <th>{{ __('Is Admin') }}</th>
+                  <th>{{ __('Is Active') }}</th>
+                  <th>{{ __('Action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
             @php ($index = 1)
-            @foreach ($users as $objUser)
+            @foreach ($users as $user)
                 <tr>
                   <td>{{ $index++ }}</td>
-                  <td>{{ $objUser->username }}
-                  <!-- <td>{{ $objUser->password }}</td> -->
-                  <td>{{ $objUser->full_name }}
-                  <td>{{ $objUser->email }}</td>
-                  <td>{{ $objUser->phone }}
-                  <td>{{ $objUser->is_admin }}</td>
-                  <td>{{ $objUser->is_active }}
+                  <td>{{ $user->username }}
+                  <!-- <td>{{ $user->password }}</td> -->
+                  <td>{{ $user->full_name }}
+                  <td>{{ $user->email }}</td>
+                  <td>{{ $user->phone }}
+                  <td>{{ $user->is_admin }}</td>
+                  <td>{{ $user->is_active }}
                   </td>
                   <td align="center">
-                    <a href="{{ route('user.edit', $objUser->id) }}" >
+                    <a href="{{ route('user.edit', $user->id) }}" >
                       <i class= "fa fa-pencil-square-o cus_icon"></i>
                     </a>
-                    <form method="POST" action="{{ route('user.destroy', $objUser->id) }}" class="inline">
+                    <form method="POST" action="{{ route('user.destroy', $user->id) }}" class="inline">
                       <input type="hidden" name="_method" value="DELETE">
-                      <input type="hidden" name="user_id" value="{{ $objUser->id }}">
+                      <input type="hidden" name="user_id" value="{{ $user->id }}">
                       {!! csrf_field() !!}
-                      <button class="fa fa-trash-o cus_icon" onclick="return confirm('{{ trans('admin_user.confirm_delete') }}');" type="submit" class="btn">
+                      <button class="fa fa-trash-o cus_icon" onclick="return confirm('{{ __('Confirm Deletion!') }}');" type="submit" class="btn">
                       </button>
                     </form> 
                   </td>
