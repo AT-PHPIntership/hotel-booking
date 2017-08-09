@@ -9,7 +9,7 @@ use App\Http\Requests\CreateNewsRequest;
 use App\Http\Requests\EditNewsRequest;
 use Session;
 
-class ListNewsController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of news.
@@ -27,24 +27,6 @@ class ListNewsController extends Controller
     }
 
     /**
-     * Create a new News.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
-     * Store a newly News in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store()
-    {
-    }
-
-     /**
      * Display form edit a News.
      *
      * @param string $slug of News
@@ -59,7 +41,7 @@ class ListNewsController extends Controller
         return view('backend.news.edit', compact('news'));
     }
 
-     /**
+    /**
      * Update information of a News
      *
      * @param \App\Http\Requests\EditNewsRequest $request of form Edit News
@@ -78,14 +60,5 @@ class ListNewsController extends Controller
             Session::flash(__('Edit News Fail!'))->error();
             return redirect()->route('news.index');
         }
-    }
-
-    /**
-     * Display a listing of news.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy()
-    {
     }
 }

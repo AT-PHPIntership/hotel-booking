@@ -40,7 +40,7 @@
                   <button type="submit" class="btn btn-primary">
                     {{__('Submit')}} 
                   </button>
-                  <a href="{{ route('news.index') }}" class="btn btn-danger">
+                  <a href="{{ route('news.index') }}" class="btn btn-danger" id="cancer-edit-news">
                   {{__('Cancer')}}
                   </a>
               </div>

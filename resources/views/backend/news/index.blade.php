@@ -74,7 +74,7 @@
                     <td>{{$item->category_id}}</td>
                     <td>{{$item->category->name}}</td>
                     <td align="center">
-                      <a href="{{ route('news.edit',$item->slug) }}" class="btn btn-primary btn-xs news_btn">
+                      <a href="{{ route('news.edit',$item->slug) }}" class="btn btn-primary btn-xs news_btn" id="btn-edit-news">
                         {{__('Edit')}}
                       </a>
                       <form action="" method="POST">
