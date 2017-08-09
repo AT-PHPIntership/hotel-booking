@@ -40,23 +40,20 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($ratingComments as $objRatingComment)
+                @foreach($ratingComments as $ratingComment)
                   <tr align="left">
-                    <td>{{ $objRatingComment->id }}</td>
-                    <td>{{ $objRatingComment->users->username }}</td>
-                    <td>{{ $objRatingComment->users->full_name }}</td>
-                    <td>{{ $objRatingComment->comment }}</td>
-                    <td>{{ $objRatingComment->hotels->name }}</td>
-                    <td>{{ $objRatingComment->total_rating }}</td> 
-                    <td>{{ $objRatingComment->created_at }}</td> 
+                    <td>{{ $ratingComment->id }}</td>
+                    <td>{{ $ratingComment->user->username }}</td>
+                    <td>{{ $ratingComment->user->full_name }}</td>
+                    <td>{{ $ratingComment->comment }}</td>
+                    <td>{{ $ratingComment->hotel->name }}</td>
+                    <td>{{ $ratingComment->total_rating }}</td> 
+                    <td>{{ $ratingComment->created_at }}</td> 
                     <td align="center">
-                      <form method="POST" action="{{ route('comment.destroy', $objRatingComment->id) }}">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="user_id" value="{{ $objRatingComment->id }}">
+                      <form action="{{ route('comment.destroy', $ratingComment->id) }}">
                         {!! csrf_field() !!}
                         {{ method_field('DELETE') }}
-                        <button class="glyphicon glyphicon-trash" onclick="
-                        return confirm('{{ __('Confirm deletion!')}} ID {{ $objRatingComment->id }}');" type="submit" class="btn">
+                        <button class="btn-delete-item btn glyphicon glyphicon-trash" type="submit">
                         </button>
                       </form>
                     </td>
