@@ -1,6 +1,6 @@
 @extends('backend.layouts.main')
 
-@section('title','Category')
+@section('title', __('Category'))
 
 @section('content')
 
@@ -9,7 +9,6 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <!-- {{ trans('admin_categories.categories_news') }} -->
         {{ __('Categories News') }}
         <small>{{ __('Categories') }}</small>
       </h1>
@@ -58,7 +57,7 @@
                      <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del">
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
-                        <button type="submit" name="" onclick="return confirm(trans('messages.confirm'))"><img src="{{ asset('bower_components/AdminLTE/dist/img/bin.gif') }}" width="16" height="16" alt="delete" /></button>
+                        <button type="submit" name="" onclick="return confirm('{{ __('Confirm Delete') }}')"><img src="{{ asset('bower_components/AdminLTE/dist/img/bin.gif') }}" width="16" height="16" alt="delete" /></button>
                     </form>
                   </td>
                    
