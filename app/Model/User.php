@@ -19,6 +19,20 @@ class User extends Model
     protected $hidden = ['password'];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+     protected $fillable = [
+        'username', 'full_name', 'password', 'email', 'phone', 'is_admin', 'is_active'
+     ];
+
+    /**
+     * Value paginate of row
+     */
+    const ROW_LIMIT = 10;
+
+    /**
      * Get all of the user's ratingcomment.
      *
      * @return array
@@ -39,40 +53,6 @@ class User extends Model
     }
 
     /**
-     * Set attribute for user.
-     *
-     *@param string $userName username of user
-     *@param string $password password of user
-     *@param string $fullName full_name of user
-     *@param string $email    email of user
-     *@param string $phone    phone of user
-     *@param string $isAdmin  is_admin of user
-     *@param string $isActive is_active of user
-     *
-     * @return void
-     */
-    public function setAllAttribute(
-        $userName,
-        $password,
-        $fullName,
-        $email,
-        $phone,
-        $isAdmin,
-        $isActive
-    ) {
-        $this->username = $userName;
-        $this->email = $email;
-        $this->full_name = $fullName;
-        $this->is_admin = $isAdmin != null? 1: 0;
-        $this->is_active = $isActive != null? 1: 0;
-        $this->phone = $phone;
-
-        if (!$password == '') {
-            $this->password = bcrypt($password);
-        }
-    }
-
-    /**
      * This is a recommended way to declare event handlers
      *
      * @return void
@@ -84,6 +64,16 @@ class User extends Model
         static::deleting(function ($user) {
              $user->ratingComments()->delete();
              $user->reservations()->delete();
+        });
+
+        static::creating(function ($user) {
+            $user->password = bcrypt($user->password);
+        });
+
+        static::saving(function ($user) {
+            $user->password = bcrypt($user->password);
+            $user->is_admin = isset($user->is_admin)? 1: 0;
+            $user->is_active = isset($user->is_active)? 1: 0;
         });
     }
 }
