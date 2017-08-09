@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\News;
-use App\Http\Requests\CreateNewsRequest;
-use Session;
+use App\Http\Requests\Backend\CreateNewsRequest;
 
 class ListNewsController extends Controller
 {
