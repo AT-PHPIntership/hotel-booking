@@ -1,8 +1,23 @@
 version: 2
 jobs:
-   build:
-     docker:
-       - image: circleci/php:7.0-cli
-     steps:
-       - checkout
-       - run: echo "Hotel booking test circleci 2.0"
+  build:
+    working_directory: ~/hotel-booking
+    docker:
+      - image: circleci/php:7.1-apache
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install -y unzip zlib1g-dev libicu-dev
+      - run: sudo docker-php-ext-install pdo pdo_mysql zip intl
+      - run:
+          name: Install Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer invalid'; unlink('composer-setup.php'); } echo PHP_EOL;"
+            php composer-setup.php
+            php -r "unlink('composer-setup.php');"
+      - run:
+          name: Install project dependencies
+          command: php composer.phar install
+      - run:
+          name: Run CS tests
+          command: vendor/bin/phpcs
