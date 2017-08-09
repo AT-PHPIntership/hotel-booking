@@ -54,6 +54,9 @@
     display: inline;
 }
 
+.form-search{
+    float: right !important;
+}
 /*errors page*/
 .main-page-error {
     text-align: center;
