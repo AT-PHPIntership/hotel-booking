@@ -32,7 +32,7 @@
 
               <div class="box-footer">
                 <button type="reset" class="btn btn-warning">{{ __('Reset') }}</button>
-                <button type="submit" class="btn btn-primary">{{ __(Submit) }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
               </div>
             </form>
           </div>
