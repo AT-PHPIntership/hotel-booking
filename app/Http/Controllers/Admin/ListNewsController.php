@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\News;
-use App\Http\Requests\CreateNewsRequest;
-use App\Http\Requests\EditNewsRequest;
-use Session;
+use App\Http\Requests\Backend\EditNewsRequest;
 
 class ListNewsController extends Controller
 {
@@ -47,14 +45,14 @@ class ListNewsController extends Controller
      /**
      * Display form edit a News.
      *
-     * @param int $id of News
+     * @param string $slug of News
      *
      * @return \Illuminate\Http\Response
      */
     public function edit($slug)
     {
         $news = News::where('slug', $slug)
-                    ->select('id','title','content','category_id')
+                    ->select('id', 'title', 'content', 'category_id')
                     ->get();
         return view('backend.news.edit', compact('news'));
     }
