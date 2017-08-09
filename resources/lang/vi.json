@@ -1,13 +1,4 @@
 {
-    "Place": "Địa điểm",
-    "Home page": "Trang chủ",
-    "List Place": "Danh sách địa điểm",
-    "Add Place": "Thêm địa điểm",
-    "No.": "STT",
-    "Image": "Hình ảnh",
-    "Name": "Tên",
-    "Descript": "Mô tả",
-    "Action": "Hành động",
-    "Enter Information": "Nhập thông tin",
-    "Management Place": "QUản lý địa điểm"
+    "404 - Page Not found": "404 - Không tìm thấy trang",
+    "Sorry...You requested the page that is no longer there": "Xin lỗi, trang bạn yêu cầu không tìm thấy"
 }

@@ -28,4 +28,16 @@ class Place extends Model
             ]
         ];
     }
+
+    /**
+     * Accessor to get path image
+     *
+     * @param string $image value of image
+     *
+     * @return string
+     */
+    public function getImageAttribute($image)
+    {
+        return config("constant.path_upload_places").$image;
+    }
 }
