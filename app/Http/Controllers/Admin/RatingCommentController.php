@@ -27,7 +27,6 @@ class RatingCommentController extends Controller
             }])
             ->orderby('id', 'DESC')->paginate(10);
 
-        // dd($ratingComments);
         return view('backend.comments.index', compact('ratingComments'));
     }
 
@@ -43,9 +42,9 @@ class RatingCommentController extends Controller
         $result = RatingComment::findOrFail($id)->delete();
 
         if ($result) {
-            flash('Deletion successful')->success();
+            flash(__('Deletion successful'))->success();
         } else {
-            flash('Deletion failed')->error();
+            flash(__('Deletion failed'))->error();
         }
         return redirect()->route('comment.index');
     }
