@@ -23,8 +23,44 @@ class ListNewsController extends Controller
                     ->orderby('id', 'ASC')->paginate(10);
         return view('backend.news.index', compact('news'));
     }
+     
+    /**
+     * Display a listing of news.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+    }
 
-     /**
+    /**
+     * Display a listing of news.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store()
+    {
+    }
+
+    /**
+     * Display a listing of news.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit()
+    {
+    }
+
+    /**
+     * Display a listing of news.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update()
+    {
+    }
+
+    /**
      * Delete a News.
      *
      * @param int $id of News
@@ -33,14 +69,12 @@ class ListNewsController extends Controller
      */
     public function destroy($id)
     {
-        $result = News::findOrFail($id);
-            
-        if ($result == null) {
-            //return redirect()->route
-            Session::flash('deleteSuccess', trans('admin_list_news.deleteSuccess'));
+        $result = News::findOrFail($id)->delete();
+        if ($result) {
+            flash(__('Delete News Success!'))->success();
             return redirect()->route('news.index');
         } else {
-            Session::flash('deleteFail', trans('admin_list_news.deleteFail'));
+            flash(__('Delete News Fail!'))->error();
             return redirect()->route('news.index');
         }
     }
