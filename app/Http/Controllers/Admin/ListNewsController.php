@@ -51,9 +51,11 @@ class ListNewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $news = News::where('slug', $id)->first();
+        $news = News::where('slug', $slug)
+                    ->select('id','title','content','category_id')
+                    ->get();
         return view('backend.news.edit', compact('news'));
     }
 
@@ -67,13 +69,13 @@ class ListNewsController extends Controller
      */
     public function update(EditNewsRequest $request, $id)
     {
-        $news = News::find($id);
+        $news = News::findOrFail($id);
         $news->Update($request->all());
         if ($news->update()) {
-            Session::flash('successEdit', trans('admin_list_news.successEdit'));
+            flash(__('Edit News Success!'))->success();
             return redirect()->route('news.index');
         } else {
-            Session::flash('failEdit', trans('admin_list_news.failEdit'));
+            Session::flash(__('Edit News Fail!'))->error();
             return redirect()->route('news.index');
         }
     }

@@ -53,7 +53,7 @@
 .inline{
     display: inline;
 }
-<<<<<<< HEAD
+
 .btn-add-news {
     margin-left: 32%;
 }
@@ -68,6 +68,30 @@
     width: 90px;
     margin-top: 4px;
 }
+
 .edit_news {
     margin-left: 35%;
 }
+
+
+
+/*errors page*/
+.main-page-error {
+    text-align: center;
+    margin: 150px 0 150px 0;
+}
+    
+.content-error-page-admin {
+    text-align: center;
+    padding: 30px 0 150px 0;
+}    
+.title-error{
+    color: #5488c7 !important;
+
+}
+
+.btn-AddNews a{
+    width: 10%;
+}
+
+
