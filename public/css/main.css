@@ -1,4 +1,4 @@
-@keyframes spinAround {
+ @keyframes spinAround {
     50% {
         transform: rotate(25deg)
     }
@@ -54,8 +54,7 @@
     display: inline;
 }
 
-<<<<<<< HEAD
-/*admin-place*/
+ /*admin-place*/
 .icon-remove{
     color: #da4141;
 }
@@ -69,7 +68,7 @@
     text-align: center;
 }
 
-.btn-remove {
+.btn-delete-item {
     border: none;
     background: unset;
     color: #e23434;
@@ -93,6 +92,32 @@
 .btn-pencil{
     font-size: 18px;
 }
+
+.col-no {
+    width: 5%;
+}
+.col-image {
+    width: 15%;
+}
+.col-name {
+    width: 20%;
+}
+.col-descript {
+    width: 50%;
+}
+.col-action {
+    width: 5%;
+}
+ 
+.table-place{
+    table-layout: fixed;
+}
+ 
+.img-place{
+    max-width: 145px;
+    height: 100px;
+}
+ 
 /*end admin-list-place*/
 
 /*errors page*/
@@ -111,3 +136,24 @@
 }
 
 /*end errors page*/
+
+
+.msg {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.msg-warning {
+    color: #8a6d3b !important;
+    background-color: #fcf8e3 !important;
+    border-color: #faebcc !important;
+}
+
+/*create place*/
+
+
+
+/*end create place*/
+

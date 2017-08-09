@@ -11,6 +11,18 @@ class Place extends Model
     use Sluggable, SoftDeletes;
     
     /**
+     * Declare table 
+     * @var string  
+     */
+    protected $table = 'places';
+
+    /**
+     * The attributes that are mass assignable.
+     * @var array
+     */
+    protected $fillable = ['name', 'descript', 'image'];
+
+    /**
      * Value paginate of row
      */
     const ROW_LIMIT = 10;
