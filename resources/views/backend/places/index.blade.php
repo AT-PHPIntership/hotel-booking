@@ -37,6 +37,7 @@
                 </a> 
               </div>
             </div>
+            @include('flash::message')
             <!-- /.box-header -->
             <div class="box-body">
               <table id="table-contain" class="table table-bordered table-striped">
@@ -66,7 +67,7 @@
                           {{ method_field('DELETE') }}
                           <input type="hidden" name="id" value="{{ $place->id }}">
                           <button class=" btn btn-delete-item fa fa-trash-o" 
-                            type="submit" >
+                            type="submit" id="place_{{$place->id}}">
                           </button>
                         </form> 
                       </td>
