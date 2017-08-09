@@ -1,6 +1,6 @@
 @extends('backend.layouts.main')
 
-@section('title','Category')
+@section('title', __('Category'))
 
 @section('content')
 
@@ -9,12 +9,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ trans('admin_categories.categories_news') }}
-        <small>{{ trans('admin_categories.categories') }}</small>
+        {{ __('Categories News') }}
+        <small>{{ __('Categories') }}</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>{{ trans('admin_categories.home_page') }}</a></li>
-        <li class="active">{{ trans('admin_categories.categories') }}</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
+        <li class="active">{{ __('Categories') }}</li>
       </ol>
     </section>
 
@@ -24,14 +24,14 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">{{ trans('admin_categories.list_categories') }}</h3>
+              <h3 class="box-title">{{ __('List Categories') }}</h3>
             </div>
             <div>
             @include('flash::message')
             </div>
             <div class="btn-create">
               <a href="{{ route('category.create') }}">
-              <span>{{ trans('admin_categories.add_category') }} <img src="{{ asset('bower_components/AdminLTE/dist/img/plus-small.gif') }}" alt="ThemTin"></span>
+              <span>{{ __('Add Category') }} <img src="{{ asset('bower_components/AdminLTE/dist/img/plus-small.gif') }}" alt="ThemTin"></span>
               </a>
             </div>
             <!-- /.box-header -->
@@ -39,9 +39,9 @@
               <table id="list_table" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
-                  <th >{{ trans('admin_categories.id') }}</th>
-                  <th>{{ trans('admin_categories.name') }}</th>
-                  <th colspan="2">{{ trans('admin_categories.function') }}</th>
+                  <th >{{ __('ID') }}</th>
+                  <th>{{ __('Name') }}</th>
+                  <th colspan="2">{{ __('Function') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,7 +57,7 @@
                      <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del">
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
-                        <button type="submit" name="" onclick="return confirm('{{trans('messages.confirm')}}')"><img src="{{ asset('bower_components/AdminLTE/dist/img/bin.gif') }}" width="16" height="16" alt="delete" /></button>
+                        <button type="submit" name="" onclick="return confirm('{{ __('Confirm Delete') }}')"><img src="{{ asset('bower_components/AdminLTE/dist/img/bin.gif') }}" width="16" height="16" alt="delete" /></button>
                     </form>
                   </td>
                    

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
-use Session;
 use App\Model\News;
 
-class CatController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +15,7 @@ class CatController extends Controller
      */
     public function index()
     {
-        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(10);
+        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(Category::ROW_LIMIT);
         return view('backend.categories.index', compact('categories'));
     }
 
@@ -31,10 +29,9 @@ class CatController extends Controller
     public function destroy($id)
     {
         if (Category::findOrFail($id)->delete()) {
-            News::with('category')->delete();
-                flash(trans('messages.delete_succeed'))->success();
+                flash(__('Delete Succes'))->success();
         } else {
-            flash(trans('messages.delete_fail'))->error();
+            flash(__('Delete Fail'))->error();
         }
         return redirect()->route('category.index');
     }
