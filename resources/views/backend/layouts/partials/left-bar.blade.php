@@ -85,8 +85,8 @@
 
         <!-- comment and rating -->
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Bình luận và Bình chọn</span>
+          <a href="{{ route('comment.index') }}" id="bt-rating-comment">
+            <i class="fa fa-edit"></i><span>Bình luận và Bình chọn</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -117,7 +117,7 @@
         <!-- place -->
         <li>
           <a href="{{ route('place.index') }}" id="place">
-            <i class="fa fa-folder"></i> <span>{{trans('admin_place.place')}}</span>
+            <i class="fa fa-folder"></i> <span>{{ __('Place') }}</span>
           </a>
         </li>
       </ul>

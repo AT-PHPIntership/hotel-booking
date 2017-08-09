@@ -19,4 +19,23 @@ class PlaceController extends Controller
             ->orderBy('created_at', 'DESC')->paginate(Place::ROW_LIMIT);
         return view("backend.places.index", compact('places'));
     }
+
+    /**
+     * Find place by id and delete place
+     *
+     * @param int $id id place
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $place = Place::findOrFail($id);
+        if ($place->delete()) {
+            flash(__('Delete success'))->success();
+        } else {
+            flash(__('Delete failure'))->error();
+        }
+        
+        return redirect()->route('place.index');
+    }
 }

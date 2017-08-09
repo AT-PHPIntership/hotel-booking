@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -27,5 +26,38 @@ class Place extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    /**
+     * Get hotels for place
+     *
+     * @return array
+     */
+    public function hotels()
+    {
+        return $this->hasMany(Hotel::class);
+    }
+    
+     /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($place) {
+            $place->hotels()->delete();
+        });
+    }
+    
+    /**
+     * Accessor to get path image
+     *
+     * @return string
+     */
+    public function getImagePathAttribute()
+    {
+        return config("constant.path_upload_places").$this->image;
     }
 }
