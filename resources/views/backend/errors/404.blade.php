@@ -1,13 +1,12 @@
 @extends('backend.layouts.main')
 
-@section('title', @trans("admin_home.home_title"))
+@section('title', __("Home page"))
 
 @section('content')
   <div class="content-wrapper">
     <div class="content-error-page-admin">
-      <h1 class="title-error">{{trans('errors.404.backend.title')}}</h1>
-      <!-- end .message -->
-      <div class="content-error">{{trans('errors.404.backend.content')}}</div>
+      <h1 class="title-error">{{__('404 - Page Not found')}}</h1>
+      <div class="content-error">{{__('Sorry...You requested the page that is no longer there')}}</div>
     </div>
    </div>
 @endsection
