@@ -1,18 +1,5 @@
 {
-	"List News of Hotel":"",
-	"Home":,
-	"News":,
-	"List News":,
-	"Id":,
-	"Title":,
-	"Content":,
-	"Category_id":,
-	"Category":,
-	"Option":,
-	"Choose":,
-	"Search":"",
-	"Edit":,
-	"Delete":,
-	"Upload Image":,
-	"Add News":,
+
+    "404 - Page Not found": "404 - Không tìm thấy trang",
+    "Sorry...You requested the page that is no longer there": "Xin lỗi, trang bạn yêu cầu không tìm thấy"
 }
