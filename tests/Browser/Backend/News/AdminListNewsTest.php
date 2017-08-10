@@ -1,30 +1,31 @@
 <?php
 
-namespace Tests\Browser;
+namespace Tests\Browser\Backend\News;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Model\News;
-use App\Model\Category;
 use Illuminate\Database\Eloquent\Model;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
+use App\Model\Category;
+use App\Model\News;
 
 class AdminListNewsTest extends DuskTestCase
 {   
-    use DatabaseTransactions;
-
+    use DatabaseMigrations;
     /**
-     * Test view Admin List News.
+     * Test view Admin List News if databe has record or empty.   
      *
      * @return void
      */
     public function testListNews()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/news')
-                    ->assertSee('List News of Hotel');
+            $browser->visit('/admin')
+                    ->clickLink('Tin tức')
+                    ->assertSee('List News of Hotel')
+                    ->assertPathIs('/admin/news');
         });
     }
 
@@ -38,9 +39,10 @@ class AdminListNewsTest extends DuskTestCase
         DB::table('news')->truncate();
         $this->browse(function (Browser $browser) {
             $elements = $browser->visit('/admin/news')
-                ->elements('#NewsTable tbody tr');
+                ->elements('#newstable tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 0);
+            $browser->assertPathIs('/admin/news');
         });
     }
 
@@ -54,9 +56,10 @@ class AdminListNewsTest extends DuskTestCase
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
             $elements = $browser->visit('/admin/news')
-                 ->elements('#NewsTable tbody tr');
+                 ->elements('#newstable tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 10);
+            $browser->assertPathIs('/admin/news');
         });
     }
 
@@ -66,19 +69,26 @@ class AdminListNewsTest extends DuskTestCase
      * @return void
      */
     public function  testHasMoreRecordListNews()
-    {   
+    {  
         $this->makeData(15);
         $this->browse(function (Browser $browser) {
-            $elements = $browser->visit('/admin/news')
-                 ->elements('#NewsTable tbody tr');
+            $elements = $browser->visit('/admin/news?page=1')
+                        ->elements('#newstable tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 10);
+            $browser->assertPathIs('/admin/news');
+            $browser->assertQueryStringHas('page', '1');
+
             $elements = $browser->visit('/admin/news?page=2')
-                 ->elements('#NewsTable tbody tr');
+                 ->elements('#newstable tbody tr');
             $numAccounts = count($elements);
+            dd($numAccounts);
             $this->assertTrue($numAccounts == 5);
+            $browser->assertPathIs('/admin/news');
+            $browser->assertQueryStringHas('page', '2');
         });
-    }
+     }
+
     /**
      * Make data for test.
      *
@@ -88,13 +98,15 @@ class AdminListNewsTest extends DuskTestCase
     {   
         DB::table('news')->truncate();
         Model::unguard();
-        $categoryIds = App\Model\Category::all('id')->pluck('id')->toArray();
+        factory(Category::class, $row)->create();
+        $categoryIds = Category::all('id')->pluck('id')->toArray();
         $faker = Faker::create();
         for ($i = 0; $i < $row; $i++) {
-            factory(App\Model\News::class, 1)->create([
+            factory(News::class, 1)->create([
                 'category_id' => $faker->randomElement($categoryIds),
             ]);
         }
         Model::reguard();
     }
 }
+
