@@ -57,4 +57,22 @@ class UserController extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id id of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->delete()) {
+            flash(__('Deletion successful!'))->success();
+        } else {
+            flash(__('Deletion failed!'))->error();
+        }
+        return redirect()->route('user.index');
+    }
 }
