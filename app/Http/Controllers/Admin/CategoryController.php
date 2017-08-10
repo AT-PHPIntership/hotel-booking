@@ -29,7 +29,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         if (Category::findOrFail($id)->delete()) {
-                flash(__('Delete Succes'))->success();
+            flash(__('Delete Succes'))->success();
         } else {
             flash(__('Delete Fail'))->error();
         }
