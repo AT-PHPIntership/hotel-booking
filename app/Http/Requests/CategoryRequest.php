@@ -24,7 +24,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|between:2,30'
+            'name'=>'required'
         ];
     }
 }
