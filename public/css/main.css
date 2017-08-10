@@ -11,11 +11,11 @@
 	margin-right: 15%;
 }
 
-.title_page{
+.title-page{
 	text-align: center;
 }
 
-.chat_room{
+.chat-room{
 	margin-left: 25%;
 	margin-right: 25%;
 }
@@ -39,12 +39,12 @@
 	animation: spinAround 0.1s linear infinite;
 }
 
-.user_image{
+.user-image{
     display: inline-block;
     width: 100px;
 }
 
-.cus_icon{
+.cus-icon{
     border: none;
     background: none;
     color: blue;
@@ -52,6 +52,11 @@
 
 .inline{
     display: inline;
+}
+
+
+.news-btn {
+    margin-top: 4px;
 }
 
  /*admin-place*/
@@ -88,7 +93,6 @@
     float: right !important;
     margin-bottom: 10px;    
 }
-
 .btn-pencil{
     font-size: 18px;
 }
@@ -116,9 +120,7 @@
     max-width: 145px;
     height: 100px;
 }
-
 /*end admin-list-place*/
-
 /*errors page*/
 .main-page-error {
     text-align: center;
@@ -133,5 +135,7 @@
     color: #5488c7 !important;
 
 }
+.btn-AddNews a{
+    width: 10%;
+}
 
-/*end errors page*/
