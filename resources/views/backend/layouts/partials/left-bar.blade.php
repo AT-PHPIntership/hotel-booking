@@ -47,8 +47,8 @@
 
         <!-- user -->
         <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Người dùng</span>
+          <a href="{{ route('user.index') }}">
+            <i class="fa fa-th"></i> <span>{{ __('Users') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">23</small>
             </span>
@@ -85,8 +85,8 @@
 
         <!-- comment and rating -->
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Bình luận và Bình chọn</span>
+          <a href="{{ route('comment.index') }}" id="bt-rating-comment">
+            <i class="fa fa-edit"></i><span>Bình luận và Bình chọn</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -117,10 +117,10 @@
         <!-- place -->
         <li>
           <a href="{{ route('place.index') }}" id="place">
-            <i class="fa fa-folder"></i> <span>{{__('Place')}}</span>
+            <i class="fa fa-folder"></i> <span>{{ __('Place') }}</span>
           </a>
         </li>
       </ul>
     </section>
     <!-- /.sidebar -->
-  </aside>
+</aside>

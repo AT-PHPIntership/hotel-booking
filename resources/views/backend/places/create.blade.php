@@ -1,11 +1,11 @@
 @extends('backend.layouts.main')
 
-@section('title','Add place')
+@section('title', __('Add place'))
 
 @section('content')
   <div class="content-wrapper">
     <h1 class="title_page text-success">
-      {{__("Add place")}}
+      {{ __("Add place") }}
     </h1>
     <!-- Main content -->
     <section class="content">
@@ -15,49 +15,46 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title lead">{{__("Enter infomation")}}</h3>
+              <h3 class="box-title lead">{{ __("Enter infomation") }}</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form action="{!!route('place.store')!!}" enctype="multipart/form-data"
+            <form action="{!! route('place.store') !!}" enctype="multipart/form-data"
               method="POST">
-              {!! csrf_field()!!}
+              {!! csrf_field() !!}
               <div class="box-body">
-                <div class="form-group" {{ $errors->has('name') ? ' has-error' : '' }}>  
-                  <label for="input-name">{{__("Name")}}</label>
-                  <input type="text" class="form-control" id="name"
-                    placeholder="{{__('Enter Name')}}" name="name" >
-                  @if($errors->first('name'))
-                    <span class="msg msg-warning help-block">{{__($errors->first('name'))}}</span>
-                  @endif  
+                <div class="form-group has-feedback
+                  {{ $errors->has('descript') ? ' has-error' : '' }}">
+                  <label for="name">{{ __('Name') }}</label>
+                  <input type="text" class="form-control 
+                    {{ $errors->has('name') ? ' has-error' : '' }}" name= "name" id="name"
+                    placeholder="{{ __('Enter username') }}" value="{{ old('name') }}">
+                  <small class="text-danger">{{ $errors->first('name') }}</small>
                 </div>
 
-                <div class="form-group has-feedback" 
-                  {{ $errors->has('descript') ? ' has-error' : '' }}>
-                  <label for="input-descript">{{__("Descript")}}</label>
-                  <input type="text" class="form-control" id="descript" 
-                    placeholder="{{__('Enter Descript')}}" name="descript" >
-                  @if($errors->first('descript'))
-                    <span class="msg msg-warning help-block">{{$errors->first('descript')}}</span>
-                  @endif  
-                  <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <div class="form-group has-feedback
+                  {{ $errors->has('descript') ? ' has-error' : '' }}">
+                  <label for="descript">{{ __('descript') }}</label>
+                  <input type="text" class="form-control" name= "descript" 
+                    id="descript" placeholder="{{ __('Enter descript') }}"
+                    value="{{ old('descript') }}" >
+                  <small class="text-danger">{{ $errors->first('descript') }}</small>
                 </div>
 
-                <div class="form-group col-md-6 center-block" 
-                  {{ $errors->has('name') ? ' has-error' : '' }}>  
-                  <label for="input-file">{{__("Image")}}</label>
-                  <input type="file" class="form-control" value=""
-                    id="input-file" name="image" >
-                  @if($errors->first('image'))
-                    <span class="msg msg-warning help-block">{{$errors->first('image')}}</span>
-                  @endif
+                <div class="form-group col-md-6 center-block
+                  {{ $errors->has('descript') ? ' has-error' : '' }}">  
+                  <label for="input-file">{{ __("Image") }}</label>
+                  <input type="file" value="{{ old('descript') }}" class="form-control"
+                    {{ $errors->has('name') ? ' has-error' : '' }}" name="image" 
+                    id="input-file" >
+                    <span class=" text-danger">{{ $errors->first('image') }}</span>
                 </div>
                 
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="reset" class="btn btn-warning">{{__("Reset")}}</button>
-                <button type="submit" class="btn btn-primary">{{__("Submit")}}</button>
+                <button type="reset" class="btn btn-warning">{{ __("Reset") }}</button>
+                <button type="submit" class="btn btn-primary">{{ __("Submit") }}</button>
               </div>
             </form>
           </div>

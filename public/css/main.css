@@ -1,4 +1,4 @@
- @keyframes spinAround {
+@keyframes spinAround {
     50% {
         transform: rotate(25deg)
     }
@@ -7,17 +7,17 @@
     }
 }
 .margin_center{
-	margin-left: 15%;
-	margin-right: 15%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .title_page{
-	text-align: center;
+    text-align: center;
 }
 
 .chat_room{
-	margin-left: 25%;
-	margin-right: 25%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 /* .form-control.bg-info {
@@ -32,11 +32,11 @@
     border-color:  #E38E18;
 }
 .form-control:hover{
-	background-color: #CDDBDF;
+    background-color: #CDDBDF;
 }
 
 .glyphicon-warning-sign{
-	animation: spinAround 0.1s linear infinite;
+    animation: spinAround 0.1s linear infinite;
 }
 
 .user_image{
@@ -108,7 +108,6 @@
 .col-action {
     width: 5%;
 }
- 
 .table-place{
     table-layout: fixed;
 }
@@ -117,7 +116,7 @@
     max-width: 145px;
     height: 100px;
 }
- 
+
 /*end admin-list-place*/
 
 /*errors page*/
@@ -136,24 +135,3 @@
 }
 
 /*end errors page*/
-
-
-.msg {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
-
-.msg-warning {
-    color: #8a6d3b !important;
-    background-color: #fcf8e3 !important;
-    border-color: #faebcc !important;
-}
-
-/*create place*/
-
-
-
-/*end create place*/
-

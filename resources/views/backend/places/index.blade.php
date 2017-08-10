@@ -31,9 +31,8 @@
               </h3>
               <div class="contain-btn">
                 <a href="{{ route('place.create') }}" class="btn btn-primary">
-                <span class=" fa fa-plus-circle" aria-hidden="true">
-                  </span>{{ __('Add Place') }}
-                
+                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                  {{ __('Add Place') }}
                 </a> 
               </div>
             </div>
@@ -54,21 +53,21 @@
                   @php ($index = 1)
                   @foreach ($places as $place)
                     <tr>
-                      <td class="col-no">{{$index++}}</td>
+                      <td class="col-no">{{ $index++ }}</td>
                       <td class="text-center col-image">
                         <div class="place-image-show">
-                          <img class="img-place" src=" {{ asset('/images/places/'.$place->image) }}" >
+                          <img class="img-place" src="{{ asset($place->image_path) }}" >
                         </div>
                       </td>
-                      <td class="col-name">{{$place->name}}</td>
-                      <td class="col-descript">{{$place->descript}}</td>
+                      <td class="col-name">{{ $place->name }}</td>
+                      <td class="col-descript">{{ $place->descript }}</td>
                       <td class="text-center col-action">
                         <a href="{{ route('place.edit', $place->id) }}">
-                          <i class="fa fa-pencil-square-o btn-pencil" aria-hidden="true"></i></a>
-                        <form method="post" action="{{ route('place.destroy', $place->id )}}">
+                          <i class="fa fa-pencil-square-o btn-pencil" aria-hidden="true"></i>
+                        </a>
+                        <form method="post" action="{{ route('place.destroy', $place->id) }}">
                           {!! csrf_field() !!}
                           {{ method_field('DELETE') }}
-                          <input type="hidden" name="id" value="{{ $place->id }}">
                           <button class=" btn btn-delete-item fa fa-trash-o" 
                             type="submit" >
                           </button>
@@ -78,7 +77,7 @@
                   @endforeach 
                 </tbody> 
               </table>
-              {{ $places->links()}}
+              {{ $places->links() }}
             </div>
             <!-- /.box-body -->
           </div>

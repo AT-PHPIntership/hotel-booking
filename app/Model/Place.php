@@ -11,13 +11,15 @@ class Place extends Model
     use Sluggable, SoftDeletes;
     
     /**
-     * Declare table 
-     * @var string  
+     * Declare table
+     *
+     * @var string
      */
     protected $table = 'places';
 
     /**
      * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = ['name', 'descript', 'image'];
@@ -39,5 +41,15 @@ class Place extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    /**
+     * Accessor to get path image
+     *
+     * @return string
+     */
+    public function getImagePathAttribute()
+    {
+        return config("constant.path_upload_places").$this->image;
     }
 }
