@@ -30,62 +30,62 @@ class ListCommentTest extends DuskTestCase
         });
     }
 
-    /**
-     * A Dusk test content view's page.
-     *
-     * @return void
-     */
-    public function testRoute()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin')
-                    ->click('#bt-rating-comment')
-                    ->assertPathIs('/admin/comment');
-        });
-    }
+    // /**
+    //  * A Dusk test content view's page.
+    //  *
+    //  * @return void
+    //  */
+    // public function testRoute()
+    // {
+    //     $this->browse(function (Browser $browser) {
+    //         $browser->visit('/admin')
+    //                 ->click('#bt-rating-comment')
+    //                 ->assertPathIs('/admin/comment');
+    //     });
+    // }
 
-    /**
-     * A Dusk test when data empty.
-     *
-     * @return void
-     */
-    public function testRecordEmpty()
-    {
-       $this->browse(function (Browser $browser) {
+    // /**
+    //  * A Dusk test when data empty.
+    //  *
+    //  * @return void
+    //  */
+    // public function testRecordEmpty()
+    // {
+    //    $this->browse(function (Browser $browser) {
 
-            // truncate tabe 
-            DB::table('rating_comments')->truncate();
-            // begin test
-            $browser->visit('/admin/comment')
-                ->assertSee('List Rating and Comment');
-            // count record
-            $elements = $browser->elements('#list-table tbody tr');
-            $row = count($elements);
-            // compare
-            $this->assertTrue($row == 0);
-        });
-    }
+    //         // truncate tabe 
+    //         DB::table('rating_comments')->truncate();
+    //         // begin test
+    //         $browser->visit('/admin/comment')
+    //             ->assertSee('List Rating and Comment');
+    //         // count record
+    //         $elements = $browser->elements('#list-table tbody tr');
+    //         $row = count($elements);
+    //         // compare
+    //         $this->assertTrue($row == 0);
+    //     });
+    // }
 
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
-    public function testRecord()
-    {
-        $this->browse(function (Browser $browser) {
-            // call make 10  record
-            $this->makeData(10);
-            // begin test
-            $browser->visit('/admin/comment')
-                ->assertSee('List Rating and Comment');
-            $elements = $browser->elements('#list-table tbody tr');
-            $row = count($elements);
-            // compare
-            $this->assertTrue($row == 10);
+    // /**
+    //  * A Dusk test example.
+    //  *
+    //  * @return void
+    //  */
+    // public function testRecord()
+    // {
+    //     $this->browse(function (Browser $browser) {
+    //         // call make 10  record
+    //         $this->makeData(10);
+    //         // begin test
+    //         $browser->visit('/admin/comment')
+    //             ->assertSee('List Rating and Comment');
+    //         $elements = $browser->elements('#list-table tbody tr');
+    //         $row = count($elements);
+    //         // compare
+    //         $this->assertTrue($row == 10);
 
-        });
-    }
+    //     });
+    // }
 
 
     /**
