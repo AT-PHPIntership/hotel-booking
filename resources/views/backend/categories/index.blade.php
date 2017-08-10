@@ -36,7 +36,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="list_table" class="table table-bordered table-striped">
+              <table id="table-contain" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
                   <th >{{ __('ID') }}</th>
@@ -45,27 +45,27 @@
                 </tr>
                 </thead>
                 <tbody>
+            @php ($index =1)
             @foreach ($categories as $objCat)
                 <tr>
-                  <td>{{ $objCat->id }}</td>
+                  <td>{{ $index++ }}</td>
                   <td>{{ $objCat->name }}
                   </td>
                   <td align="center">
-                    <a href="{{ route('category.edit',$objCat->id) }}"> <img src="{{ asset('bower_components/AdminLTE/dist/img/pencil.gif') }}" alt="edit" /></a>
+                    <a href="{{ route('category.edit',$objCat->id) }}"><i class= "fa fa-pencil-square-o cus_icon"></i></a>
                   </td>
                   <td>
-                     <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del">
+                     <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del" class="inline" name="">
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
-                        <button type="submit" name="" onclick="return confirm('{{ __('Confirm Delete') }}')"><img src="{{ asset('bower_components/AdminLTE/dist/img/bin.gif') }}" width="16" height="16" alt="delete" /></button>
+                        <button type="submit" name="" class="fa fa-trash-o cus_icon btn-delete-item btn" id="btn"></button>
                     </form>
-                  </td>
-                   
                   </td>
                 </tr>
               @endforeach
                </tbody>
               </table>
+              {{ $categories->render() }}
             </div>
             <!-- /.box-body -->
           </div>
