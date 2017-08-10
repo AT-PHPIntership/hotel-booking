@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\News;
 
-class ListNewsController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of news.
