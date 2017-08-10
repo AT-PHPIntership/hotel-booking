@@ -32,8 +32,6 @@ class Place extends Model
     /**
      * Accessor to get path image
      *
-     * @param string $image value of image
-     *
      * @return string
      */
     public function getImagePathAttribute()

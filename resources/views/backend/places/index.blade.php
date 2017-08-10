@@ -31,9 +31,8 @@
               </h3>
               <div class="contain-btn">
                 <a href="{{ route('place.create') }}" class="btn btn-primary">
-                <span class=" fa fa-plus-circle" aria-hidden="true">
-                  </span>{{ __('Add Place') }}
-                
+                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                  {{ __('Add Place') }}
                 </a> 
               </div>
             </div>
@@ -64,11 +63,11 @@
                       <td class="col-descript">{{ $place->descript }}</td>
                       <td class="text-center col-action">
                         <a href="{{ route('place.edit', $place->id) }}">
-                          <i class="fa fa-pencil-square-o btn-pencil" aria-hidden="true"></i></a>
+                          <i class="fa fa-pencil-square-o btn-pencil" aria-hidden="true"></i>
+                        </a>
                         <form method="post" action="{{ route('place.destroy', $place->id) }}">
                           {!! csrf_field() !!}
                           {{ method_field('DELETE') }}
-                          <input type="hidden" name="id" value="{{ $place->id }}">
                           <button class=" btn btn-delete-item fa fa-trash-o" 
                             type="submit" >
                           </button>
