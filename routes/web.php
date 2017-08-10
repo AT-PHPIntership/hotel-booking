@@ -14,9 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
-	Route::get('/', 'AdminController@index');
-	Route::group(['prefix' => 'news'], function () {
-		Route::get('/', ['as' => 'news.index', 'uses' => 'NewsController@index']);
-	});
+Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
+    Route::get('/', 'AdminController@index');
+    Route::resource('/user', 'UserController');
+    Route::resource('place', 'PlaceController');
+    Route::resource('/comment', 'RatingCommentController');
+    Route::resource('news', 'NewsController');
 });
