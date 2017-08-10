@@ -14,30 +14,6 @@ class ListUserTest extends DuskTestCase
 {
     use DatabaseTransactions;
 
-    /**
-     * A Dusk test show content.
-     *
-     * @return void
-     */
-    public function testContent()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/user')
-                    ->assertSee('List User');
-        });
-    }
-
-    /**
-     * A Dusk test status code.
-     *
-     * @return void
-     */
-    public function testApplication()
-    {
-        $response = $this->call('GET', '/admin/user');
-        $this->assertEquals(200, $response->status());
-    }
-
      /**
      * A Dusk test route to page.
      *
@@ -47,8 +23,9 @@ class ListUserTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin')
-                    ->click('#link-user')
+                    ->clickLink(__('Users'))
                     ->assertPathIs('/admin/user')
+                    ->assertSee('List User')
                     ->screenshot(1);
         });
     }
@@ -62,10 +39,12 @@ class ListUserTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
+                    ->assertPathIs('/admin/user')
                     ->assertSee('List User');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
             $this->assertTrue($row == 0);
+            $this->assertNull($browser->element('.pagination'));
         });
     }
 
@@ -76,14 +55,16 @@ class ListUserTest extends DuskTestCase
      */
     public function testShowRecord()
     {
-        factory(User::class, User::ROW_LIMIT - 1)->create();
+        factory(User::class, 9)->create();
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
+                    ->assertPathIs('/admin/user')
                     ->assertSee('List User');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
-            $this->assertTrue($row == User::ROW_LIMIT - 1);
+            $this->assertTrue($row == 9);
+            $this->assertNull($browser->element('.pagination'));
         });
     }
     /**
@@ -91,16 +72,18 @@ class ListUserTest extends DuskTestCase
      *
      * @return void
      */
-    public function testShowRecordPagnate()
+    public function testShowRecordPaginate()
     {
-        factory(User::class, User::ROW_LIMIT + 1)->create();
+        factory(User::class, 11)->create();
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
+                    ->assertPathIs('/admin/user')
                     ->assertSee('List User');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
-            $this->assertTrue($row == User::ROW_LIMIT);
+            $this->assertTrue($row == 10);
+            $this->assertNotNull($browser->element('.pagination'));
         });
     }
 }

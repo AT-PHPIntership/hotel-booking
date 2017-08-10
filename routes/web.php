@@ -17,5 +17,6 @@ Route::get('/', function () {
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::get('/', 'AdminController@index');
     Route::resource('/user', 'UserController');
-	Route::resource('/comment', 'RatingCommentController');
+    Route::resource('place', 'PlaceController');
+    Route::resource('/comment', 'RatingCommentController');
 });
