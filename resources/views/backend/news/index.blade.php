@@ -54,7 +54,7 @@
             </div>
             <div class="box-body cl">
               @include('flash::message')
-              <table class="table table-bordered table-striped clearfix" id="NewsTable">
+              <table class="table table-bordered table-striped clearfix" id="newstable">
                 <thead>
                 <tr>
                   <th>{{__('Id')}}</th>
@@ -74,16 +74,16 @@
                     <td>{{$item->category_id}}</td>
                     <td>{{$item->category->name}}</td>
                     <td align="center">
-                      <a href="" class="btn glyphicon glyphicon-edit news_btn" data-original-title="Edit" data-toggle="tooltip">
+                      <a href="" class="btn glyphicon glyphicon-edit news-btn" data-original-title="Edit" data-toggle="tooltip">
                       </a>
                       <form action="" method="POST">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
-                        <button type="submit" class="news_btn glyphicon glyphicon-trash btn-delete-item" 
+                        <button type="submit" class="news-btn glyphicon glyphicon-trash btn-delete-item" 
                          data-original-title="Delete" data-toggle="tooltip">
                         </button>
                       </form>
-                      <a href="" class="btn btnnews_btn fa fa-upload" data-original-title="Upload Image" data-toggle="tooltip" >
+                      <a href="" class="btn fa fa-upload" data-original-title="Upload Image" data-toggle="tooltip" >
                       </a>
                     </td>
                   </tr>
@@ -93,7 +93,7 @@
               {!! $news->render() !!}
             </div>
           </div>
-          <div class="btn-AddNews">
+          <div class="btn-addnews">
             <a href="{{ route('news.create') }}" class="btn btn-primary">
               {{__('Add News')}}
             </a>

@@ -2,9 +2,9 @@
 @section('title','Creates News')
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title_page">{{__('ADD NEWS')}}</h1>
+    <h1 class="title-page">{{__('ADD NEWS')}}</h1>
     <section class="content">
-      <div class="row margin_center">
+      <div class="row col-md-8 margin-center">
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
