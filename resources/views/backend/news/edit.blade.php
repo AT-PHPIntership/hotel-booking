@@ -2,12 +2,12 @@
 @section('title','Edit News')
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title_page text-success">
+    <h1 class="title-page text-success">
       {{__('EDIT NEWS')}}
     </h1>
   <!-- Main content -->
     <section class="content">
-      <div class="row margin_center">
+      <div class="row margin-center">
         <div class="col-md-12">
           <div class="box box-primary">
             @foreach($news as $new)
@@ -36,7 +36,7 @@
                       <input type="text" class="form-control" name="category_id" readonly="true" value="{{$new->category_id}}">
                   </div>
               </div>
-              <div class="box-footer edit_news">
+              <div class="box-footer edit-news">
                   <button type="submit" class="btn btn-primary">
                     {{__('Submit')}} 
                   </button>

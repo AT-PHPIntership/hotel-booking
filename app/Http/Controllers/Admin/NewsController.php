@@ -62,13 +62,12 @@ class NewsController extends Controller
      */
     public function update(EditNewsRequest $request, $id)
     {
-        $news = News::findOrFail($id);
-        $news->Update($request->all());
-        if ($news->update()) {
+        $newsUpdate = News::findOrFail($id)->Update($request->all());
+        if ($newsUpdate) {
             flash(__('Edit News Success!'))->success();
             return redirect()->route('news.index');
         } else {
-            Session::flash(__('Edit News Fail!'))->error();
+            flash(__('Edit News Fail!'))->error();
             return redirect()->route('news.index');
         }
     }
