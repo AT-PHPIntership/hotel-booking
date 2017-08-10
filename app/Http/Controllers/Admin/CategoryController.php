@@ -9,7 +9,7 @@ use Session;
 use App\Model\News;
 use App\Http\Requests\CategoryRequest;
 
-class CatController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class CatController extends Controller
      */
     public function index()
     {
-        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(10);
+        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(Category::ROW_LIMIT);
         return view('backend.categories.index', compact('categories'));
     }
 
@@ -43,9 +43,9 @@ class CatController extends Controller
     {
         $category = new Category($request->all());
         if ($category->save()) {
-            flash(trans('messages.create_succeed'))->success();
+            flash(__('Create Success'))->success();
         } else {
-            flash(trans('messages.create_succeed'))->error();
+            flash(__('Create Fail'))->error();
         }
         return redirect()->route('category.index');
     }

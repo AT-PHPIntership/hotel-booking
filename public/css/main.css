@@ -53,6 +53,7 @@
 .inline{
     display: inline;
 }
+/*button create*/
 .btn-create span {
     background-color: violet;
     color: #FFF;
@@ -61,3 +62,23 @@
     border-radius: 5px;
     margin-left: 10px; 
 }
+.btn-create a:hover {
+    color: red !important;
+}
+/*end button create*/
+/*errors page*/
+.main-page-error {
+    text-align: center;
+    margin: 150px 0 150px 0;
+}
+    
+.content-error-page-admin {
+    text-align: center;
+    padding: 30px 0 150px 0;
+}    
+.title-error{
+    color: #5488c7 !important;
+
+}
+
+/*end errors page*/

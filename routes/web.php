@@ -16,6 +16,6 @@ Route::get('/', function () {
 });
 Route::group(['namespace'=>'Admin','prefix'=>'admin'], function() {
 	Route::get('/', 'AdminController@index');
-	Route::resource('/category', 'CatController');
+	Route::resource('/category', 'CategoryController');
 
 });
