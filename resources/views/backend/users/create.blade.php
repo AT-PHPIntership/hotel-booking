@@ -57,11 +57,19 @@
                 </div>
                 <div class="form-group col-md-6 pull-center">
                   <label for="is_active">{{ __('Is Active') }}</label>
-                  <input type="checkbox" name="is_active" value="1">
+                  @if (old('is_active') == 1)
+                    <input type="checkbox" name="is_active" value="1" checked>
+                  @else
+                    <input type="checkbox" name="is_active" value="1">
+                  @endif
                 </div>
                 <div class="form-group col-md-6">
                   <label for="is_admin">{{ __('Is Admin') }}</label>
-                  <input type="checkbox" name="is_admin" value="1">
+                  @if (old('is_admin') == 1)
+                    <input type="checkbox" name="is_admin" value="1" checked>
+                  @else
+                    <input type="checkbox" name="is_admin" value="1">
+                  @endif
                 </div>
                 </div>
               </div>
