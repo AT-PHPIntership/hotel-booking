@@ -85,8 +85,8 @@
 
         <!-- comment and rating -->
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Bình luận và Bình chọn</span>
+          <a href="{{ route('comment.index') }}" id="bt-rating-comment">
+            <i class="fa fa-edit"></i><span>Bình luận và Bình chọn</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

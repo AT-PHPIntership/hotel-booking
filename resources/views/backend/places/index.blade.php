@@ -57,7 +57,7 @@
                       <td class="col-no">{{ $index++ }}</td>
                       <td class="text-center col-image">
                         <div class="place-image-show">
-                          <img class="img-place" src="{{ asset($place->image) }}" >
+                          <img class="img-place" src="{{ asset($place->image_path) }}" >
                         </div>
                       </td>
                       <td class="col-name">{{ $place->name }}</td>
