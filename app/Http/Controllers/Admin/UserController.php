@@ -51,10 +51,10 @@ class UserController extends Controller
     {
         if (User::create($request->all())) {
             flash(__('Creation successful!'))->success();
-            return redirect()->route('user.index');
+            return redirect()->route('user.create');
         } else {
             flash(__('Creation failed!'))->error();
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
     }
 }
