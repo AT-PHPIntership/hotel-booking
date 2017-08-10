@@ -47,8 +47,8 @@
 
         <!-- user -->
         <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Người dùng</span>
+          <a href="{{ route('user.index') }}">
+            <i class="fa fa-th"></i> <span>{{ __('Users') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">23</small>
             </span>
