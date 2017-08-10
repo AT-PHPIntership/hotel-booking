@@ -5,13 +5,11 @@ namespace Tests\Browser;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminEditNewsTest extends DuskTestCase
 {   
-    use DatabaseTransactions;
     /**
-     * Test Admin Edit News.
+     * Test Route Admin Edit News.
      *
      * @return void
      */
@@ -35,8 +33,11 @@ class AdminEditNewsTest extends DuskTestCase
             $browser->visit('/admin/news')
                     ->click('#btn-edit-news')
                     ->assertSee('EDIT NEWS')
+                    ->type('title','News20')
                     ->press('Submit')
                     ->assertSee('Edit News Success!')
+                    ->seeInDatabase('news', [
+                        'title' => 'News20'])
                     ->assertPathIs('/admin/news')
                     ->screenShot('edit-success');
         });
@@ -47,7 +48,7 @@ class AdminEditNewsTest extends DuskTestCase
      *
      * @return void
      */
-    public function testEditNewsSuccess()
+    public function testEditNewsFail()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/news')
@@ -76,6 +77,7 @@ class AdminEditNewsTest extends DuskTestCase
                     ->assertPathIs('/admin/news');
         });
     }
+
     /**
      *List case for test validation Edit News
      *
@@ -88,8 +90,6 @@ class AdminEditNewsTest extends DuskTestCase
             ['news title', '', 'The content field is required.'],
         ];
     }
-
-
 
     /**
      * @dataProvider listCaseTestForEditNews
@@ -104,21 +104,6 @@ class AdminEditNewsTest extends DuskTestCase
                     ->type('content',$content)
                     ->press('Submit')
                     ->assertSee($msg);
-        });
-    }
-
-    /**
-     * Test Error 404 - Page Not found.
-     *
-     * @return void
-     */
-    public function testfindOrFailNews()
-    {
-        $this->browser(function (Browser $browser) {
-            $browser->visit('/admin/news')
-                    ->click('#btn-edit-news')
-                    ->press('Submit')
-                    ->assertSee('404 - Page Not found');
         });
     }
 }
