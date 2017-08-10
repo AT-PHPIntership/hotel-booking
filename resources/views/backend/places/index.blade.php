@@ -68,7 +68,6 @@
                         <form method="post" action="{{ route('place.destroy', $place->id) }}">
                           {!! csrf_field() !!}
                           {{ method_field('DELETE') }}
-                          <input type="hidden" name="id" value="{{ $place->id }}">
                           <button class=" btn btn-delete-item fa fa-trash-o" 
                             type="submit" >
                           </button>
