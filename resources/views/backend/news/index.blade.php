@@ -73,17 +73,16 @@
                     <td>{{$item->category_id}}</td>
                     <td>{{$item->category->name}}</td>
                     <td align="center">
-                      <a href="" class="btn btn-primary btn-xs news_btn">
-                      {{__('Edit')}}</a>
+                      <a href="" class="btn glyphicon glyphicon-edit news_btn" data-original-title="Edit" data-toggle="tooltip">
+                      </a>
                       <form action="" method="POST">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
-                        <button type="submit" class="btn btn-danger btn-xs news_btn">
-                          {{__('Delete')}}
+                        <button type="submit" class="news_btn glyphicon glyphicon-trash btn-delete-item" 
+                         data-original-title="Delete" data-toggle="tooltip">
                         </button>
                       </form>
-                      <a href="" class="btn btn-success btn-xs news_btn">
-                      {{__('Upload Image')}}
+                      <a href="" class="btn btnnews_btn fa fa-upload" data-original-title="Upload Image" data-toggle="tooltip" >
                       </a>
                     </td>
                   </tr>
