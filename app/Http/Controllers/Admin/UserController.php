@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\User;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
@@ -31,12 +32,41 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for creating a new resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function create()
+    {
+        return view('backend.users.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\CreateUserRequest $request request to create
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateUserRequest $request)
+    {
+        if (User::create($request->all())) {
+            flash(__('Creation successful!'))->success();
+            return redirect()->route('user.index');
+        } else {
+            flash(__('Creation failed!'))->error();
+            return redirect()->back()->withInput();
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id id of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         $user = User::find($id);
         return view('backend.users.edit', compact('user'));
@@ -45,13 +75,15 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UpdateRequest  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\UpdateRequest $request request to update
+     * @param int                            $id      id of user
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request, $id)
     {
         $user = User::findOrFail($id);
+
         if ($user->update($request->all())) {
             flash(__('Update successful!'))->success();
             return redirect()->route('user.index');
