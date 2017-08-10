@@ -1,18 +1,15 @@
 <?php
 
-namespace Tests\Browser;
-
+namespace Tests\Browser\Backend\News;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminCreateNewsTest extends DuskTestCase
 {
-    use DatabaseTransactions;
 
     /**
-     * Test View Admin Create News.
+     * Test Route View Admin Create News.
      *
      * @return void
      */
@@ -22,6 +19,7 @@ class AdminCreateNewsTest extends DuskTestCase
             $browser->visit('/admin/news')
                     ->click('#btn-add-news')
                     ->assertPathIs('/admin/news/create')
+                    ->assertSee('ADD NEWS')
                     ->screenShot(1);
         });
     }
@@ -58,15 +56,34 @@ class AdminCreateNewsTest extends DuskTestCase
                     ->type('category_id','6')
                     ->press('Submit')
                     ->assertPathIs('/admin/news')
-                    ->assertSee('Create News Success!');
+                    ->assertSee('Create News Success!')
+                    ->seeInDatabase('news', [
+                        'title' => 'News18'])
+                    ->screenShot('success');
         });
     }
     
-    /**
-     * List case for test validate CreateNews
-     * 
-     *@return array
+     /**
+     * Test Admin create News fail.
+     *
+     * @return void
      */
+    public function testCreatesNewsFail()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin/news/create')
+                    ->type('title','News19')
+                    ->type('content','Hello World!')
+                    ->type('category_id','5')
+                    ->press('Submit')
+                    ->assertPathIs('/admin/news')
+                    ->assertSee('Create News Fail!')
+                    ->dontSeeInDatabase('news', [
+                        'title' => 'News19'])
+                    ->screenShot('fail');
+        });
+    }
+
     public function listCaseTestForCreateNews()
     {
         return [
@@ -83,17 +100,16 @@ class AdminCreateNewsTest extends DuskTestCase
     public function testCreateNewsFail($title, $content, $category_id, $expected)
     {   
         
-        $this->browse(function (Browser $browser) use($title, $content, $category_id) {
+        $this->browse(function (Browser $browser) use($title, $content, $category_id, $expected) {
             
             $browser->visit('/admin/news/create')
                 ->type('title', $title)
                 ->type('content', $content)
                 ->type('category_id', $category_id)
-                ->screenShot('20')
                 ->press('Submit')
-                ->screenShot('10')
+                ->screenShot('10');
                 ->assertSee($expected)
-                ->assertPathIs('/admin/news');
+                ->assertPathIs('/admin/news/create');
         });
     }
 
