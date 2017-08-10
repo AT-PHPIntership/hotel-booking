@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\News;
 use App\Http\Requests\Backend\CreateNewsRequest;
 
-class ListNewsController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of news.
@@ -16,11 +16,18 @@ class ListNewsController extends Controller
      */
     public function index()
     {
-        $news = News::select('id', 'title', 'slug', 'content', 'category_id')
+        $columns = [
+            'id',
+            'title',
+            'slug',
+            'content',
+            'category_id'
+        ];
+        $news = News::select($columns)
                     ->with(['category' => function ($query) {
-                        $query->addSelect('id', 'name');
+                        $query->select('id', 'name');
                     }])
-                    ->orderby('id', 'ASC')->paginate(10);
+                    ->orderby('id', 'ASC')->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
 
@@ -52,32 +59,5 @@ class ListNewsController extends Controller
             flash(__('Create News Fail!'))->error();
             return redirect()->route('news.index');
         }
-    }
-
-    /**
-     * Display a listing of news.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-    }
-
-    /**
-     * Display a listing of news.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update()
-    {
-    }
-
-    /**
-     * Display a listing of news.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy()
-    {
     }
 }
