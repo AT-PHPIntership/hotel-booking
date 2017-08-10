@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Browser;
+namespace Tests\Browser\Pages\Backend\Users;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
