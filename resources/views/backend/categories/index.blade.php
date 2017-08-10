@@ -36,7 +36,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="list_table" class="table table-bordered table-striped">
+              <table id="table-contain" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
                   <th >{{ __('ID') }}</th>
@@ -65,6 +65,7 @@
               @endforeach
                </tbody>
               </table>
+              {{ $categories->render() }}
             </div>
             <!-- /.box-body -->
           </div>

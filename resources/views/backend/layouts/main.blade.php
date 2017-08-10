@@ -9,7 +9,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css') }}">
-  <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnqy85GM3ND6RbF0m2V2x4kFCdOR8jub9YSWKk5y69kcSYzDkV" id="favicon">
+  <link rel="shortcut icon" href="{{ asset('/image.jpg') }}" id="favicon">
 
   <!-- private stype css -->
   <!-- <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/dist/css/style.css') }}"> -->
