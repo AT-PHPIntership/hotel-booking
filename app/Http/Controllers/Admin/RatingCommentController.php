@@ -19,15 +19,14 @@ class RatingCommentController extends Controller
     {
         $ratingComments = RatingComment::
             select('id', 'user_id', 'hotel_id', 'total_rating', 'created_at')
-            ->with(['users' => function ($query) {
-                $query->addSelect('id', 'username', 'full_name');
+            ->with(['user' => function ($query) {
+                $query->select('id', 'username', 'full_name');
             }])
-            ->with(['hotels' => function ($query) {
-                $query->addSelect('id', 'name');
+            ->with(['hotel' => function ($query) {
+                $query->select('id', 'name');
             }])
-            ->orderby('id', 'DESC')->paginate(10);
+            ->orderby('id', 'DESC')->paginate(RatingComment::ROW_LIMIT);
 
-        // dd($ratingComments);
         return view('backend.comments.index', compact('ratingComments'));
     }
 }

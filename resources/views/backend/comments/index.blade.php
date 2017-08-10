@@ -4,12 +4,12 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      {{ trans('admin_comment.title') }}
-      <small>{{ trans('admin_comment.small') }}</small>
+      {{ __('List comment & rating') }}
+      <small>{{ __('Admin') }}</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i>{{ trans('admin_comment.home') }}</a></li>
-      <li class="active">{{ trans('admin_comment_list.head') }}</li>
+      <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home') }}</a></li>
+      <li class="active">{{ __('List comment & rating') }}</li>
     </ol>
   </section>
 
@@ -19,7 +19,7 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('admin_comment.head') }}</h3>
+            <h3 class="box-title">{{ __('Table detail') }}</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -29,33 +29,31 @@
             <table id="list-table" class="table table-bordered table-striped">
               <thead>
                 <tr align="center">
-                  <th>{{ trans('admin_comment.col_id') }}</th>
-                  <th>{{ trans('admin_comment.col_username') }}</th>
-                  <th>{{ trans('admin_comment.col_full_name') }}</th>
-                  <th>{{ trans('admin_comment.col_comment') }}</th>
-                  <th>{{ trans('admin_comment.col_hotel_name') }}</th>
-                  <th>{{ trans('admin_comment.col_total_rating') }}</th> 
-                  <th>{{ trans('admin_comment.col_created_at') }}</th> 
-                  <th>{{ trans('admin_comment.col_options') }}</th> 
+                  <th>{{ __('No.') }}</th>
+                  <th>{{ __('Username') }}</th>
+                  <th>{{ __('Full Name') }}</th>
+                  <th>{{ __('Comment') }}</th>
+                  <th>{{ __('Hotel Name') }}</th>
+                  <th>{{ __('Total Rating') }}</th> 
+                  <th>{{ __('Created At') }}</th> 
+                  <th>{{ __('Options') }}</th> 
                 </tr>
               </thead>
               <tbody>
-                @foreach($ratingComments as $objRatingComment)
+                @foreach($ratingComments as $ratingComment)
                   <tr align="left">
-                    <td>{{ $objRatingComment->id }}</td>
-                    <td>{{ $objRatingComment->users->username }}</td>
-                    <td>{{ $objRatingComment->users->full_name }}</td>
-                    <td>{{ $objRatingComment->comment }}</td>
-                    <td>{{ $objRatingComment->hotels->name }}</td>
-                    <td>{{ $objRatingComment->total_rating }}</td> 
-                    <td>{{ $objRatingComment->created_at }}</td> 
+                    <td>{{ $ratingComment->id }}</td>
+                    <td>{{ $ratingComment->user->username }}</td>
+                    <td>{{ $ratingComment->user->full_name }}</td>
+                    <td>{{ $ratingComment->comment }}</td>
+                    <td>{{ $ratingComment->hotel->name }}</td>
+                    <td>{{ $ratingComment->total_rating }}</td> 
+                    <td>{{ $ratingComment->created_at }}</td> 
                     <td align="center">
-                      <form method="POST" action="{{ route('comment.destroy', $objRatingComment->id) }}">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="user_id" value="{{ $objRatingComment->id }}">
+                      <form action="{{ route('comment.destroy', $ratingComment->id) }}">
                         {!! csrf_field() !!}
                         {{ method_field('DELETE') }}
-                        <button class="glyphicon glyphicon-trash" onclick="return confirm('Confirm deletion! {{ $objRatingComment->id }}');" type="submit" class="btn">
+                        <button class="btn-delete-item btn glyphicon glyphicon-trash" type="submit">
                         </button>
                       </form>
                     </td>
