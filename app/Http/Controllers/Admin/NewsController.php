@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\News;
-use Session;
 
-class ListNewsController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of news.
@@ -17,11 +16,11 @@ class ListNewsController extends Controller
     public function index()
     {
         $columns = [
-                    'id',
-                    'title',
-                    'slug',
-                    'content',
-                    'category_id'
+            'id',
+            'title',
+            'slug',
+            'content',
+            'category_id'
         ];
         $news = News::select($columns)
                     ->with(['category' => function ($query) {
@@ -30,18 +29,18 @@ class ListNewsController extends Controller
                     ->orderby('id', 'ASC')->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
-
+    
     /**
-     * Delete a News.
-     *
-     * @param int $id of News
-     *
-     * @return \Illuminate\Http\Response
-     */
+      * Delete a News.
+      *
+      * @param int $id of News
+      *
+      * @return \Illuminate\Http\Response
+      */
     public function destroy($id)
     {
-        $result = News::findOrFail($id)->delete();
-        if ($result) {
+        $newsDelete = News::findOrFail($id)->delete();
+        if ($newsDelete) {
             flash(__('Delete News Success!'))->success();
             return redirect()->route('news.index');
         } else {
