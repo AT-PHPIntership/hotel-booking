@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\Artisan;
 
 trait CreatesApplication
 {
@@ -18,5 +19,23 @@ trait CreatesApplication
         $app->make(Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    /**
+     * This functin is called before testcase
+     */
+     public function setUp()
+    {
+        parent::setUp();
+        Artisan::call('migrate');
+    }
+    
+    /**
+     * This functin is called after testcase
+     */
+    public function tearDown()
+    {
+        Artisan::call('migrate:rollback');
+        parent::tearDown();
     }
 }

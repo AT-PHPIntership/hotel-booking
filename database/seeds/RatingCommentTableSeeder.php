@@ -17,7 +17,7 @@ class RatingCommentTableSeeder extends Seeder
         $hotelIds = App\Model\Hotel::all('id')->pluck('id')->toArray();
         $userIds = App\Model\User::all('id')->pluck('id')->toArray();
         $faker = Faker::create();
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             factory(App\Model\RatingComment::class, 1)->create([
                 'hotel_id' => $faker->randomElement($hotelIds),
                 'user_id' => $faker->randomElement($userIds)
