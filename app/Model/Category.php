@@ -13,6 +13,7 @@ class Category extends Model
     protected $fillable = [
         'name'
     ];
+    const ROW_LIMIT = 10;
     /**
      * Return the sluggable configuration array for this model.
      *

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Http\Requests\CategoryRequest;
 
-class CatController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class CatController extends Controller
      */
     public function index()
     {
-        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(10);
+        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(Category::ROW_LIMIT);
         return view('backend.categories.index', compact('categories'));
     }
     
@@ -29,7 +29,7 @@ class CatController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::select('id', 'name')->findOrFail($id);
         return view('backend.categories.edit', compact('category'));
     }
 
@@ -44,9 +44,9 @@ class CatController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         if (Category::findOrFail($id)->update($request->all())) {
-            flash(trans('messages.update_succeed'))->success();
+            flash(__('Update Success'))->success();
         } else {
-            flash(trans('messages.update_fail'))->error();
+            flash(__('Update Fail'))->error();
         }
         return redirect()->route('category.index');
     }
