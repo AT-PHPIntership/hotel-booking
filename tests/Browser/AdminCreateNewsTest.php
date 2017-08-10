@@ -61,7 +61,12 @@ class AdminCreateNewsTest extends DuskTestCase
                     ->assertSee('Create News Success!');
         });
     }
-  
+    
+    /**
+     * List case for test validate CreateNews
+     * 
+     *@return array
+     */
     public function listCaseTestForCreateNews()
     {
         return [
