@@ -70,7 +70,6 @@ class ListCommentTest extends DuskTestCase
             // compare
             $this->assertTrue($row == 10);
         });
-
     }
 
     /**
@@ -93,7 +92,6 @@ class ListCommentTest extends DuskTestCase
             // compare
             $this->assertTrue($row == 8);
         });
-
     }
 
     /**
@@ -117,6 +115,4 @@ class ListCommentTest extends DuskTestCase
         }
          Model::reguard();
     }
-
-
 }
