@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['namespace'=>'Admin','prefix'=>'admin'], function() {
-	Route::get('/', 'AdminController@index');
+    Route::get('/', 'AdminController@index');
+    Route::resource('place', 'PlaceController');
 	Route::resource('/comment', 'RatingCommentController');
-
 });
