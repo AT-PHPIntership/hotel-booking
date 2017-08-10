@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
     use Sluggable, SoftDeletes;
+
+    /**
+    * Return value of parameter
+    *
+    * @param string $table connect categories table on database
+    * @param array $fillable get value on name's tag
+    */
     protected $table = 'categories';
     protected $fillable = [
         'name'
@@ -28,7 +35,7 @@ class Category extends Model
         ];
     }
     /**
-     * Return the category configuration array for this model.
+     * Return the news configuration array for this model.
      *
      * @return array
     */
