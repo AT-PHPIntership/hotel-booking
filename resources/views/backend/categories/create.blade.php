@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-@section('title','Create Category Page')
+@section('title',__('Create Category'))
 @section('content')
  <div class="content-wrapper">
       <h1 class="title_page text-success">
