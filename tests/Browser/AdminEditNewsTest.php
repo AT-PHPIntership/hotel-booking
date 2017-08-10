@@ -5,9 +5,11 @@ namespace Tests\Browser;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminEditNewsTest extends DuskTestCase
-{
+{   
+    use DatabaseTransactions;
     /**
      * Test Admin Edit News.
      *
@@ -74,7 +76,11 @@ class AdminEditNewsTest extends DuskTestCase
                     ->assertPathIs('/admin/news');
         });
     }
-
+    /**
+     *List case for test validation Edit News
+     *
+     *@return array
+     */
     public function listCaseTestForEditNews()
     {
         return [

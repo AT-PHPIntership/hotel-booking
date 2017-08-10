@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\News;
-use App\Http\Requests\CreateNewsRequest;
-use App\Http\Requests\EditNewsRequest;
-use Session;
+use App\Http\Requests\Backend\EditNewsRequest;
 
 class NewsController extends Controller
 {
@@ -18,11 +16,18 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::select('id', 'title', 'slug', 'content', 'category_id')
+        $columns = [
+                    'id',
+                    'title',
+                    'slug',
+                    'content',
+                    'category_id'
+        ];
+        $news = News::select($columns)
                     ->with(['category' => function ($query) {
-                        $query->addSelect('id', 'name');
+                        $query->select('id', 'name');
                     }])
-                    ->orderby('id', 'ASC')->paginate(10);
+                    ->orderby('id', 'ASC')->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
 
@@ -35,8 +40,14 @@ class NewsController extends Controller
      */
     public function edit($slug)
     {
+        $columns = [
+                    'id',
+                    'title',
+                    'content',
+                    'category_id'
+        ];
         $news = News::where('slug', $slug)
-                    ->select('id', 'title', 'content', 'category_id')
+                    ->select($columns)
                     ->get();
         return view('backend.news.edit', compact('news'));
     }
