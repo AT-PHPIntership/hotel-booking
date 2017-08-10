@@ -80,7 +80,7 @@
                       <input type="hidden" name="_method" value="DELETE">
                       <input type="hidden" name="user_id" value="{{ $user->id }}">
                       {!! csrf_field() !!}
-                      <button class="fa fa-trash-o cus_icon" onclick="return confirm('{{ __('Confirm Deletion!') }}');" type="submit" class="btn">
+                      <button class="fa fa-trash-o cus_icon btn btn-delete-item" type="submit">
                       </button>
                     </form> 
                   </td>
