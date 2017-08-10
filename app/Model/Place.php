@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Place extends Model
 {
-    use Sluggable, SoftDeletes;
+     use Sluggable, SoftDeletes;
     
     /**
      * Value paginate of row
      */
     const ROW_LIMIT = 10;
-
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -26,6 +25,15 @@ class Place extends Model
                 'source' => 'name'
             ]
         ];
+    }
+    /**
+     * Accessor to get path image
+     *
+     * @return string
+     */
+    public function getImagePathAttribute()
+    {
+        return config("constant.path_upload_places").$this->image;
     }
 
     /**
@@ -49,15 +57,5 @@ class Place extends Model
         static::deleting(function ($place) {
             $place->hotels()->delete();
         });
-    }
-    
-    /**
-     * Accessor to get path image
-     *
-     * @return string
-     */
-    public function getImagePathAttribute()
-    {
-        return config("constant.path_upload_places").$this->image;
     }
 }
