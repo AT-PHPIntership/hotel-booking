@@ -1,6 +1,6 @@
 @extends('backend.layouts.main')
 
-@section('title','User')
+@section('title', __('User'))
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -9,7 +9,6 @@
     <section class="content-header">
       <h1>
         {{ __('List Users') }}
-        <small>advanced tables</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> {{ __('Home Page') }}</a></li>
@@ -81,7 +80,7 @@
                       <input type="hidden" name="_method" value="DELETE">
                       <input type="hidden" name="user_id" value="{{ $user->id }}">
                       {!! csrf_field() !!}
-                      <button class="fa fa-trash-o cus_icon" onclick="return confirm('{{ __('Confirm Deletion!') }}');" type="submit" class="btn">
+                      <button class="fa fa-trash-o cus_icon btn btn-delete-item" type="submit">
                       </button>
                     </form> 
                   </td>

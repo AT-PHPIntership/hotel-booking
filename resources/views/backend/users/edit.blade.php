@@ -27,18 +27,13 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="username">{{ __('Username') }}</label>
-                  <input type="text" class="form-control{{ $errors->has('username') ? ' has-error' : '' }}" name= "username" id="username" placeholder="{{ __('Enter username') }}" value="{{ old('username', $user->username) }}">
+                  <input type="text" class="form-control{{ $errors->has('username') ? ' has-error' : '' }}" name= "username" id="username" placeholder="{{ __('Enter username') }}" value="{{ old('username', $user->username) }}" readonly>
                   <small class="text-danger">{{ $errors->first('username') }}</small>
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
                   <label for="password">{{ __('Password') }}</label>
                   <input type="password" class="form-control" name= "password" id="password" placeholder="{{ __('Enter password') }}" value="{{ $user->password }}" >
                   <small class="text-danger">{{ $errors->first('password') }}</small>
-                </div>
-                <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                  <label for="password_confirmation">{{ __('Confirm password!') }}</label>
-                  <input type="password" class="form-control" name= "password_confirmation" id="password" placeholder="{{ __('Enter password') }}">
-                  <small class="text-danger">{{ $errors->first('password_confirmation') }}</small>
                 </div>
                 <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
                 <label for="full_name">{{ __('Full name') }}</label>
@@ -47,7 +42,7 @@
                 </div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                   <label for="email">{{ __('Email') }}</label>
-                  <input type="text" class="form-control" name= "email" id="email" placeholder="{{ __('Enter Your email') }}" data-toggle="tooltip" value="{{ old('email', $user->email) }}">
+                  <input type="text" class="form-control" name= "email" id="email" placeholder="{{ __('Enter Your email') }}" data-toggle="tooltip" value="{{ old('email', $user->email) }}" readonly>
                   <small class="text-danger">{{ $errors->first('email') }}</small>
                 </div>
                 <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
