@@ -57,7 +57,70 @@
 .news-btn {
     margin-top: 4px;
 }
+ /*admin-place*/
+.icon-remove{
+    color: #da4141;
+}
 
+.margin-center {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.title-page {
+    text-align: center;
+}
+
+.btn-delete-item {
+    border: none;
+    background: unset;
+    color: #e23434;
+    font-size: 20px;
+}
+
+.title-header {
+   display: block !important;
+   font-size: 27px !important;
+}
+
+.contain-btn{ 
+    float: right !important;
+}
+
+.form-search{
+    float: right !important;
+    margin-bottom: 10px;    
+}
+
+.btn-pencil{
+    font-size: 18px;
+}
+
+.col-no {
+    width: 5%;
+}
+.col-image {
+    width: 15%;
+}
+.col-name {
+    width: 20%;
+}
+.col-descript {
+    width: 50%;
+}
+.col-action {
+    width: 5%;
+}
+.table-place{
+    table-layout: fixed;
+}
+ 
+.img-place{
+    max-width: 145px;
+    height: 100px;
+}
+
+/*end admin-list-place*/
 /*errors page*/
 .main-page-error {
     text-align: center;
