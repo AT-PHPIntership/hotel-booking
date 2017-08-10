@@ -17,11 +17,11 @@ class NewsController extends Controller
     public function index()
     {
         $columns = [
-                    'id',
-                    'title',
-                    'slug',
-                    'content',
-                    'category_id'
+            'id',
+            'title',
+            'slug',
+            'content',
+            'category_id'
         ];
         $news = News::select($columns)
                     ->with(['category' => function ($query) {
