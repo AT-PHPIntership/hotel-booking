@@ -17,9 +17,9 @@ Route::get('/', function () {
 Route::group(['namespace'=>'Admin','prefix'=>'admin'], function() {
 	Route::get('/', 'AdminController@index');
 	Route::group(['prefix'=>'news'], function () {
-		Route::get('/',['as' => 'news.index','uses' => 'ListNewsController@index']);
-		Route::get('/edit/{id}',['as' => 'news.edit','uses' => 'ListNewsController@edit']);
-		Route::put('/update/{id}',['as' => 'news.update','uses' => 'ListNewsController@update']);
+		Route::get('/',['as' => 'news.index','uses' => 'NewsController@index']);
+		Route::get('/edit/{id}',['as' => 'news.edit','uses' => 'NewsController@edit']);
+		Route::put('/update/{id}',['as' => 'news.update','uses' => 'NewsController@update']);
 	});
 });
 	

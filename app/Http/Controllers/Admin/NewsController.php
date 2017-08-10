@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\News;
 use App\Http\Requests\Backend\EditNewsRequest;
 
-class ListNewsController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of news.
@@ -16,33 +16,22 @@ class ListNewsController extends Controller
      */
     public function index()
     {
-        $news = News::select('id', 'title', 'slug', 'content', 'category_id')
+        $columns = [
+                    'id',
+                    'title',
+                    'slug',
+                    'content',
+                    'category_id'
+        ];
+        $news = News::select($columns)
                     ->with(['category' => function ($query) {
-                        $query->addSelect('id', 'name');
+                        $query->select('id', 'name');
                     }])
-                    ->orderby('id', 'ASC')->paginate(10);
+                    ->orderby('id', 'ASC')->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
 
     /**
-     * Create a new News.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
-     * Store a newly News in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store()
-    {
-    }
-
-     /**
      * Display form edit a News.
      *
      * @param string $slug of News
@@ -51,13 +40,19 @@ class ListNewsController extends Controller
      */
     public function edit($slug)
     {
+        $columns = [
+                    'id',
+                    'title',
+                    'content',
+                    'category_id'
+        ];
         $news = News::where('slug', $slug)
-                    ->select('id', 'title', 'content', 'category_id')
+                    ->select($columns)
                     ->get();
         return view('backend.news.edit', compact('news'));
     }
 
-     /**
+    /**
      * Update information of a News
      *
      * @param \App\Http\Requests\EditNewsRequest $request of form Edit News
@@ -76,14 +71,5 @@ class ListNewsController extends Controller
             Session::flash(__('Edit News Fail!'))->error();
             return redirect()->route('news.index');
         }
-    }
-
-    /**
-     * Display a listing of news.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy()
-    {
     }
 }
