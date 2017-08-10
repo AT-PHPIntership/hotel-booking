@@ -36,8 +36,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\CategoryRequest $request call All of Category
-     * @param int                              $id      call category have id = $id
+     * @param CategoryRequest $request call All of Category
+     * @param int             $id      call category have id = $id
      *
      * @return \Illuminate\Http\Response
      */

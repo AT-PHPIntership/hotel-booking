@@ -50,7 +50,7 @@
                     <td>{{ $ratingComment->total_rating }}</td> 
                     <td>{{ $ratingComment->created_at }}</td> 
                     <td align="center">
-                      <form action="{{ route('comment.destroy', $ratingComment->id) }}">
+                      <form class="delete-item" method="POST" action="{{ route('comment.destroy', $ratingComment->id) }}">
                         {!! csrf_field() !!}
                         {{ method_field('DELETE') }}
                         <button class="btn-delete-item btn glyphicon glyphicon-trash" type="submit">
