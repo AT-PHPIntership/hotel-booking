@@ -36,9 +36,9 @@
                   <small class="text-danger">{{ $errors->first('password') }}</small>
                 </div>
                 <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
-                <label for="full_name">{{ __('Full name') }}</label>
-                <input type="text" class="form-control" name= "full_name" id="full_name" placeholder="{{ __('Enter full_name') }}"" value="{{ old('full_name', $user->full_name) }}"> 
-                <small class="text-danger">{{ $errors->first('full_name') }}</small>
+                  <label for="full_name">{{ __('Full name') }}</label>
+                  <input type="text" class="form-control" name= "full_name" id="full_name" placeholder="{{ __('Enter full_name') }}"" value="{{ old('full_name', $user->full_name) }}"> 
+                  <small class="text-danger">{{ $errors->first('full_name') }}</small>
                 </div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                   <label for="email">{{ __('Email') }}</label>
