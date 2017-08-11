@@ -6,10 +6,6 @@
         transform: rotate(-25deg);
     }
 }
-.margin_center{
-    margin-left: 15%;
-    margin-right: 15%;
-}
 
 .title_page{
     text-align: center;
@@ -54,13 +50,9 @@
     display: inline;
 }
 /*button create*/
-.btn-create span {
-    background-color: violet;
-    color: #FFF;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 5px;
-    margin-left: 10px; 
+.btn-create  {
+    float:left;
+    width: 50%;
 }
 /*end button create*/
 
@@ -95,6 +87,7 @@
 
 .contain-btn{ 
     float: right !important;
+    /*margin: 10px;*/
 }
 
 .form-search{
@@ -151,4 +144,3 @@
 }
 
 /*end errors page*/
-

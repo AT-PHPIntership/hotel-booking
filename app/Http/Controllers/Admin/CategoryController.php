@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\Backend\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -18,7 +18,37 @@ class CategoryController extends Controller
         $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(Category::ROW_LIMIT);
         return view('backend.categories.index', compact('categories'));
     }
+    
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id call category have id = $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $category = Category::select('id', 'name')->findOrFail($id);
+        return view('backend.categories.edit', compact('category'));
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param CategoryRequest $request call All of Category
+     * @param int             $id      call category have id = $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(CategoryRequest $request, $id)
+    {
+        if (Category::findOrFail($id)->update($request->all())) {
+            flash(__('Update Success'))->success();
+        } else {
+            flash(__('Update Fail'))->error();
+        }
+        return redirect()->route('category.index');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -43,6 +73,23 @@ class CategoryController extends Controller
             flash(__('Create Success'))->success();
         } else {
             flash(__('Create Fail'))->error();
+        }
+        return redirect()->route('category.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id choose category delete
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if (Category::findOrFail($id)->delete()) {
+            flash(__('Delete Success'))->success();
+        } else {
+            flash(__('Delete Fail'))->error();
         }
         return redirect()->route('category.index');
     }
