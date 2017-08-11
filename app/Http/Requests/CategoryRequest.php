@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\backend;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HotelCreateRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,7 @@ class HotelCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:8|unique:hotels',
-            'address' => 'required',
-            'place' => 'required',
-            'star' => 'required',
-            'introduce' => 'required',
-            // 'printer_list(enumtype)ace' => 'require ';
+            'name'=>'required'
         ];
     }
 }

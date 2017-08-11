@@ -7,7 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Model\Hotel;
 use App\Model\Place;
 use App\Model\Service;
+use App\Model\HotelService;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Backend\HotelCreateRequest;
+use Illuminate\Http\Response;
+
 
 class HotelController extends Controller
 {
@@ -26,7 +30,7 @@ class HotelController extends Controller
             ->with(['rooms' => function ($query) {
                 $query->select('hotel_id', 'id');
             }])
-            ->paginate(Hotel::ROW_LIMIT);
+            ->orderby('id', 'DESC')->paginate(Hotel::ROW_LIMIT);
 
         return view('backend.hotels.index', compact('hotels'));
     }
@@ -49,14 +53,40 @@ class HotelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HotelCreateRequest $request)
     {
-         
-    // $name = $request->input('name');
-        dd($request->all());
-        //  if($request->ajax()){
-        //     print_r($request->all());
+        $hotel = new Hotel();
+        $hotel->name = $request->name;
+        $hotel->address = $request->address;
+        $hotel->star = $request->star;
+        $hotel->introduce = $request->introduce;
+        $hotel->place_id = $request->place;
+        dd($request->services);
+        $hotelServices = new HotelService();
+
+        dd($hotel);
+
+        if ($result = $hotel->save()) {
+                    flash(__('Create success'))->success();
+                    // dd($hotel->id);
+                    $data = array();
+                } else {
+                    flash(__('Create failure'))->error();
+                }
+        return redirect()->route('hotel.index');
+        // $images=array();
+        //     if($files = $request->file('imgs[]')){
+        //         foreach($files as $file){
+        //             $name=$file->getClientOriginalName();
+        //             $file->move('imgs[]',$name);
+        //             $images[]=$name;
+        //             dd($images);
+        //     }
         // }
-        // return route('hotel.index');
+
+        $result = DB::transaction(function() use ($hotel) {
+            $hotel->save();
+        });
+        dd($result);    
     }
 }

@@ -34,7 +34,7 @@
                     <select class="form-control" name="place">
                       <option value="">Choose Place</option>
                       @foreach($places as $place)
-                        <option value="{{ $place->id }}}">{{ $place->name }}</option>
+                        <option value="{{ $place->id }}">{{ $place->name }}</option>
                       @endforeach
                     </select>
                     @if($errors->first('place'))
@@ -67,19 +67,15 @@
                 <p><b>{{ __('Choose Services') }}</b></p>
                   @foreach($services as $service)
                     <div class="checkbox-inline">
-                      <label><input type="checkbox" onclick="" value="{{ $service->id.'-'.$service->name }}">{{ $service->name }}</label>
+                      <label><input type="checkbox" name="services[]" onclick="" value="{{ $service->id }}">{{ $service->name }}</label>
                     </div>
                   @endforeach
-                </div>
-                {{-- choose --}}
-                <div class="form-group">
-                <p><b>{{ __('Choosed:') }}</b></p>
-                  <input type="text" readonly="readonly" id="services" value="" name="services" class="form-control">
                 </div>
                 {{-- upload image --}}
                 <div class="form-group">
                   <input type="file" class="form-control" name='imgs[]' id="img-upload" multiple placeholder="{{ __('Images') }}" value="{{ old('img') }}">
-                   <div class="preview-img">
+                   <div id="preview-img">
+                     
                    </div>
                 </div>
               </div>

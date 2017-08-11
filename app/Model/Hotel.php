@@ -13,6 +13,23 @@ class Hotel extends Model
     const ROW_LIMIT = 10;
 
     /**
+     * Declare table
+     *
+     * @var string $tabel table name
+     */
+    protected $table = 'hotels';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array $fillable
+     */
+    protected $fillable = [
+        'name', 'address', 'star', 'introduce', 'place_id'
+    ];
+
+
+    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array

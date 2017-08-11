@@ -13,40 +13,20 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
-    var names = '';
-    var ids = ''
-    $(".checkbox-inline input").bind('click',function(){ 
-      var service = this.value.split('-');
-      names = names + service[1] + ', ';
-      ids = ids + service[0] + '/';
-      console.log(names);
-      $("#services").val(names);
-    });
-    $(".btn-delete-item").bind('click',function(){
-            $("#services").val(ids);
-    });
+    // preview images
     $( "#img-upload" ).change(function() {
       if (this.files && this.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('.preview-img').attr('src', e.target.result);
+        for (var i = 0; i < this.files.length; ++i) {
+          var file = this.files[i];
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              var imgs = $('#preview-img').html();
+              $('#preview-img').html(imgs+'<img src="'+e.target.result+'" style="width:30%">');
+          };
+          reader.readAsDataURL(file);
         }
-        reader.readAsDataURL(this.files[0]);
-    }
+       }
     });
 });
 
-
-// document.getElementById("files").onchange = function () {
-//     var reader = new FileReader();
-
-//     reader.onload = function (e) {
-//         // get loaded data and render thumbnail.
-//         document.getElementById("image").src = e.target.result;
-//     };
-
-//     // read the image file as a data URL.
-//     reader.readAsDataURL(this.files[0]);
-// };
 
