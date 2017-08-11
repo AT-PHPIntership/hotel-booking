@@ -64,6 +64,9 @@
 }
 /*end button create*/
 
+.news-btn {
+    margin-top: 4px;
+}
  /*admin-place*/
 .icon-remove{
     color: #da4141;
@@ -128,7 +131,6 @@
 }
 
 /*end admin-list-place*/
-
 /*errors page*/
 .main-page-error {
     text-align: center;
@@ -142,4 +144,11 @@
 .title-error{
     color: #5488c7 !important;
 }
+
+
+.btn-addnews a{
+    width: 10%;
+}
+
 /*end errors page*/
+

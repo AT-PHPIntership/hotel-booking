@@ -36,7 +36,7 @@
 
         <!--  news -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('news.index') }}">
             <i class="fa fa-files-o"></i>
             <span>{{ __('News') }}</span>
             <span class="pull-right-container">

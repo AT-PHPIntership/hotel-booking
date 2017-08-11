@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
-use Session;
-use App\Model\News;
 use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
