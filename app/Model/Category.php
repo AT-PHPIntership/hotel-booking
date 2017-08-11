@@ -25,7 +25,12 @@ class Category extends Model
     protected $fillable = [
         'name'
     ];
+
+    /**
+     * Value paginate of row
+     */
     const ROW_LIMIT = 10;
+    
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -47,5 +52,19 @@ class Category extends Model
     public function news()
     {
         return $this->hasMany(News::class);
+    }
+
+    /**
+     * Return the category configuration array for this model.
+     *
+     * @return array
+    */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($category) {
+            $category->news()->delete();
+        });
     }
 }
