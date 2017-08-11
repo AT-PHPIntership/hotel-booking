@@ -7,17 +7,17 @@
     }
 }
 .margin_center{
-	margin-left: 15%;
-	margin-right: 15%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .title_page{
-	text-align: center;
+    text-align: center;
 }
 
 .chat_room{
-	margin-left: 25%;
-	margin-right: 25%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 /* .form-control.bg-info {
@@ -32,11 +32,11 @@
     border-color:  #E38E18;
 }
 .form-control:hover{
-	background-color: #CDDBDF;
+    background-color: #CDDBDF;
 }
 
 .glyphicon-warning-sign{
-	animation: spinAround 0.1s linear infinite;
+    animation: spinAround 0.1s linear infinite;
 }
 
 .user_image{
@@ -141,7 +141,5 @@
 }    
 .title-error{
     color: #5488c7 !important;
-
 }
-
 /*end errors page*/
