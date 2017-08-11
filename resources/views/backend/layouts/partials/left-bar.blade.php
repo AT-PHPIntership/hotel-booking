@@ -74,9 +74,9 @@
 
         <!-- hotel -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('hotel.index') }}">
             <i class="fa fa-laptop"></i>
-            <span>Khách sạn</span>
+            <span>{{ __('Hotels') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

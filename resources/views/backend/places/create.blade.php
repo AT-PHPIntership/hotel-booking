@@ -26,9 +26,8 @@
                 <div class="form-group has-feedback
                   {{ $errors->has('descript') ? ' has-error' : '' }}">
                   <label for="name">{{ __('Name') }}</label>
-                  <input type="text" class="form-control 
-                    {{ $errors->has('name') ? ' has-error' : '' }}" name= "name" id="name"
-                    placeholder="{{ __('Enter username') }}" value="{{ old('name') }}">
+                  <input type="text" class="form-control" name= "name" id="name"
+                    placeholder="{{ __('Enter place name') }}" value="{{ old('name') }}">
                   <small class="text-danger">{{ $errors->first('name') }}</small>
                 </div>
 
@@ -45,9 +44,8 @@
                   {{ $errors->has('descript') ? ' has-error' : '' }}">  
                   <label for="input-file">{{ __("Image") }}</label>
                   <input type="file" value="{{ old('descript') }}" class="form-control"
-                    {{ $errors->has('name') ? ' has-error' : '' }}" name="image" 
-                    id="input-file" >
-                    <span class=" text-danger">{{ $errors->first('image') }}</span>
+                    name="image" id="input-file" >
+                    <small class=" text-danger">{{ $errors->first('image') }}</small>
                 </div>
                 
               </div>

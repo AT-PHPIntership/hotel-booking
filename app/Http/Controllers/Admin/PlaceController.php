@@ -51,6 +51,26 @@ class PlaceController extends Controller
         } else {
             flash(__('Create failure'))->error();
         }
+        
+        return redirect()->route('place.index');
+    }
+    
+    /**
+     * Find place by id and delete place
+     *
+     * @param int $id id place
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $place = Place::findOrFail($id);
+        if ($place->delete()) {
+            flash(__('Delete success'))->success();
+        } else {
+            flash(__('Delete failure'))->error();
+        }
+        
         return redirect()->route('place.index');
     }
 }

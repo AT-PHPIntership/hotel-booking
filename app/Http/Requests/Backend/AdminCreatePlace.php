@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class AdminCreatePlace extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the Place is authorized to make this request.
      *
      * @return bool
      */
@@ -24,7 +24,7 @@ class AdminCreatePlace extends FormRequest
     public function rules()
     {
         return [
-           'name' => 'required',
+            'name' => 'required',
             'descript' => 'required',
             'image' => 'required',
         ];
