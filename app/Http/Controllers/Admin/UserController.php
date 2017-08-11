@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\User;
+use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
@@ -27,5 +28,51 @@ class UserController extends Controller
         $users = User::select($columns)->orderby('id', 'DESC')
             ->paginate(User::ROW_LIMIT);
         return view("backend.users.index", compact('users'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('backend.users.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\CreateUserRequest $request request to create
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateUserRequest $request)
+    {
+        if (User::create($request->all())) {
+            flash(__('Creation successful!'))->success();
+            return redirect()->route('user.index');
+        } else {
+            flash(__('Creation failed!'))->error();
+            return redirect()->back()->withInput();
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id id of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->delete()) {
+            flash(__('Deletion successful!'))->success();
+        } else {
+            flash(__('Deletion failed!'))->error();
+        }
+        return redirect()->route('user.index');
     }
 }

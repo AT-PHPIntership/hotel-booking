@@ -21,5 +21,5 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::resource('place', 'PlaceController');
     Route::resource('/comment', 'RatingCommentController');
     Route::resource('news', 'NewsController');
-
+    Route::resource('/hotel', 'HotelController');
 });
