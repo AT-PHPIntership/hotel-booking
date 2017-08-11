@@ -1,7 +1,5 @@
 @extends('backend.layouts.main')
-
 @section('title', __('Update Category'))
-
 @section('content')
  <div class="content-wrapper">
       <h1 class="title_page text-success">
@@ -26,6 +24,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="InputName">{{ __('Name of Category') }}</label>
+                    
                   <input type="text" class="form-control has-error" id="InputName" placeholder="Input Category Name" value="{{ $category->name }}" title="Input Name" name="name">
                   <span class="alert-danger">{{ $errors->first('name') }}</span>
                 </div>
