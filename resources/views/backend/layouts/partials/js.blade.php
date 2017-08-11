@@ -24,6 +24,6 @@
 <script src="{{ asset('bower_components/AdminLTE/plugins/fastclick/fastclick.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('bower_components/AdminLTE/dist/js/app.min.js') }}"></script>
-<!-- custom script -->
+<!-- custom script-->
 <script src="{{ asset('js/main.js') }}"></script>
 
