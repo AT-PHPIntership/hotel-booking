@@ -46,9 +46,9 @@ class NewsController extends Controller
                     'content',
                     'category_id'
         ];
-        $news = News::where('slug', $slug)
-                    ->select($columns)
-                    ->get();
+        $news = News::select($columns)
+                    ->where('slug', $slug)
+                    ->first();
         return view('backend.news.edit', compact('news'));
     }
 
@@ -62,7 +62,7 @@ class NewsController extends Controller
      */
     public function update(EditNewsRequest $request, $id)
     {
-        $newsUpdate = News::findOrFail($id)->Update($request->all());
+        $newsUpdate = News::findOrFail($id)->update($request->all());
         if ($newsUpdate) {
             flash(__('Edit News Success!'))->success();
             return redirect()->route('news.index');

@@ -64,9 +64,7 @@
 .help-block {
     color: red;
 }
-.news_btn {
-    margin-top: 4px;
-}
+
 
 .edit-news {
     margin-left: 35%;
@@ -74,7 +72,6 @@
 
 .news-btn {
     margin-top: 4px;
-}
 
 /*errors page*/
 .main-page-error {

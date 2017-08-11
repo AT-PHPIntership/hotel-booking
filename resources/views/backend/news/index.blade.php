@@ -74,7 +74,6 @@
                     <td>{{$item->category->name}}</td>
                     <td align="center">
                       <a href="{{ route('news.edit',$item->slug) }}" class="btn glyphicon glyphicon-edit news-btn" data-original-title="Edit" data-toggle="tooltip">
-                      </a>
                       <form action="" method="POST">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
