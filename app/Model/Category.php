@@ -45,7 +45,7 @@ class Category extends Model
         ];
     }
     /**
-     * Return the category configuration array for this model.
+     * Return the news configuration array for this model.
      *
      * @return array
     */
