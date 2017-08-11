@@ -53,4 +53,18 @@ class Category extends Model
     {
         return $this->hasMany(News::class);
     }
+
+    /**
+     * Return the category configuration array for this model.
+     *
+     * @return array
+    */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($category) {
+            $category->news()->delete();
+        });
+    }
 }
