@@ -55,7 +55,7 @@
                     <a href="{{ route('category.edit',$objCat->id) }}"><i class= "fa fa-pencil-square-o cus_icon"></i></a>
                   </td>
                   <td>
-                     <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del" class="inline" name="">
+                     <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del" class="inline">
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
                         <button type="submit" name="" class="fa fa-trash-o cus_icon btn btn-delete-item"></button>
