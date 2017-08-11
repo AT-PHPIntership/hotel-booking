@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -19,18 +20,29 @@ class CategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id choose category delete id = $id
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function create()
     {
-        if (Category::findOrFail($id)->delete()) {
-            flash(__('Delete Succes'))->success();
+        return view('backend.categories.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param CategoryRequest $request send request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CategoryRequest $request)
+    {
+        $category = new Category($request->all());
+        if ($category->save()) {
+            flash(__('Create Success'))->success();
         } else {
-            flash(__('Delete Fail'))->error();
+            flash(__('Create Fail'))->error();
         }
         return redirect()->route('category.index');
     }
