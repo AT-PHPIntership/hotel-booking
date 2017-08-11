@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
-use App\Model\News;
 
 class CategoryController extends Controller
 {

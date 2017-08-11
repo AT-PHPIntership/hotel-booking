@@ -15,10 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['namespace'=>'Admin','prefix'=>'admin'], function() {
-	Route::get('/', 'AdminController@index');
-	Route::resource('/category', 'CategoryController');
-	Route::resource('/comment', 'RatingCommentController');
+Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
+    Route::get('/', 'AdminController@index');
     Route::resource('/user', 'UserController');
     Route::resource('place', 'PlaceController');
+    Route::resource('/comment', 'RatingCommentController');
+    Route::resource('news', 'NewsController');
+    Route::resource('/hotel', 'HotelController');
+    Route::resource('/category', 'CategoryController');
 });

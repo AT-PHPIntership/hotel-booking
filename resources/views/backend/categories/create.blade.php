@@ -24,8 +24,8 @@
             {{ csrf_field() }}
               <div class="box-body">
                 <div class="form-group">
-                  <label for="InputName">{{ __('Name of Category') }}</label>
-                  <input type="text" class="form-control has-error" id="InputName" placeholder="Input Category Name" value="" title="Input Name" name="name">
+                  <label for="input-name">{{ __('Name of Category') }}</label>
+                  <input type="text" class="form-control{{ $errors->has('name') ? ' has-error' : '' }}" id="input-name" placeholder="{{ __('Input Category Name')}}" value="" title="Input Name" name="name">
                   <span class="alert-danger">{{ $errors->first('name') }}</span>
                 </div>
               <!-- /.box-body -->
