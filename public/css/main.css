@@ -128,6 +128,17 @@
 .img-place{
     max-width: 145px;
     height: 100px;
+    margin-bottom: 10px;
+}
+.place-descript{
+    max-height: 300px;
+    max-width: 713px;
+}
+.btn-custom {
+    margin-right: 10px;
+}
+.btn-submit{
+    float: right;
 }
 
 /*end admin-list-place*/
