@@ -21,13 +21,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="../../hotel_admin/dist/img/an.jpg" class="user-image" alt="User Image">
+              <img src="{{ asset('bower_components/AdminLTE/dist/img/user3-128x128.jpg') }}" class="user-image" alt="User Image">
               <span class="hidden-xs">Nguyễn Quốc Ân</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="../../hotel_admin/dist/img/an.jpg" class="img-circle" alt="User Image">
+                <img src="{{ asset('bower_components/AdminLTE/dist/img/user3-128x128.jpg') }}" class="img-circle" alt="User Image">
 
                 <p>
                   Nguyễn Quốc Ân - Web Developer

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Model\User;
 
-class DeleteUserTest extends DuskTestCase
+class AdminDeleteUserTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -41,34 +41,31 @@ class DeleteUserTest extends DuskTestCase
             $page = $browser->visit('/admin/user');
             $elements = $page->elements('#table-contain tbody tr');
             $this->assertCount(5, $elements);
-            $user = User::find(2);
-            $page->press('#user_'.$user->id)
+            $page->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) button')
                  ->acceptDialog()
                  ->assertSee("Deletion successful!");
-            $user = User::withTrashed()->find(2);
-            $this->assertNotNull($user->deleted_at);    
+            $this->assertSoftDeleted('users', ['id' => '4']);    
             $elements = $page->elements('#table-contain tbody tr');    
             $this->assertCount(4, $elements);  
         });
     }
 
     /**
-     * Test fail because object not exist.
+     * Test 404 Page Not found when delete user.
      *
      * @return void
      */
-    public function testDeleteObjectNotExist()
-    {
-
-    }
-
-    /**
-     * Test fail because can't delete.
-     *
-     * @return void
-     */
-    public function testCanNotDelete()
-    {
-
+    public function test404Page()
+    {   
+        factory(User::class, 5)->create();
+        $user = User::find(4);
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->visit('/admin/user')
+                    ->assertSee('List User')
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) button');
+            $user->delete();
+            $browser->acceptDialog()
+                    ->assertSee('404 - Page Not found');
+        });
     }
 }

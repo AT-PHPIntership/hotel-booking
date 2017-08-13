@@ -1,6 +1,6 @@
 @extends('backend.layouts.main')
 
-@section('title','Category')
+@section('title', __('Category'))
 
 @section('content')
 
@@ -9,12 +9,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Chuyên mục Danh mục tin
-        <small>Category</small>
+        {{ __('Categories News') }}
+        <small>{{ __('Categories') }}</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li class="active">Danh mục tin</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
+        <li class="active">{{ __('Categories') }}</li>
       </ol>
     </section>
 
@@ -24,43 +24,48 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Danh sách Danh mục tin</h3>
+              <h3 class="box-title">{{ __('List Categories') }}</h3>
             </div>
-            <div class="float-left">
+            <div>
+            @include('flash::message')
+            </div>
+            <div class="btn-create">
               <a href="{{ route('category.create') }}">
-              <span>Thêm Danh Mục <img src="{{ asset('bower_components/AdminLTE/dist/img/plus-small.gif') }}" alt="ThemTin"></span>
+              <span>{{ __('Add Category') }} <img src="{{ asset('bower_components/AdminLTE/dist/img/plus-small.gif') }}" alt="ThemTin"></span>
               </a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="table-contain" class="table table-bordered table-striped">
                 <thead>
                 <tr align="center">
-                  <th >Id</th>
-                  <th>Name</th>
-                  <th>Function</th>
+                  <th >{{ __('ID') }}</th>
+                  <th>{{ __('Name') }}</th>
+                  <th colspan="2">{{ __('Function') }}</th>
                 </tr>
                 </thead>
                 <tbody>
+            @php ($index =1)
             @foreach ($categories as $objCat)
                 <tr>
-                  <td>{{ $objCat->id }}</td>
+                  <td>{{ $index++ }}</td>
                   <td>{{ $objCat->name }}
                   </td>
                   <td align="center">
-                    <a href="">Sửa <img src="{{ asset('bower_components/AdminLTE/dist/img/pencil.gif') }}" alt="edit" /></a>
-                     <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del">
+                    <a href="{{ route('category.edit',$objCat->id) }}"><i class= "fa fa-pencil-square-o cus_icon"></i></a>
+                  </td>
+                  <td>
+                     <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del" class="inline">
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
-                        <button type="submit" name="" onclick="return confirm('Do you really delete?')"> Xóa <img src="{{ asset('bower_components/AdminLTE/dist/img/bin.gif') }}" width="16" height="16" alt="delete" /></button>
+                        <button type="submit" name="" class="fa fa-trash-o cus_icon btn btn-delete-item"></button>
                     </form>
-                  </td>
-                   
                   </td>
                 </tr>
               @endforeach
                </tbody>
               </table>
+              {{ $categories->render() }}
             </div>
             <!-- /.box-body -->
           </div>
