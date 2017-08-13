@@ -6,13 +6,29 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Model\User;
 
 class DeleteUserTest extends DuskTestCase
 {
+    use DatabaseMigrations;
+
+    /**
+     * A Dusk test route to user page.
+     *
+     * @return void
+     */
+    public function testVisitAdminUser()
+   {
+        $this->browse(function (Browser $browser) {
+        $browser->visit('/admin')
+                ->clickLink('Users')
+                ->assertPathIs('/admin/user')
+                ->assertTitleContains('User')
+                ->assertSee('List User');
+        });
+    }
+
     /**
      * Test success when click delete button.
      *
@@ -20,17 +36,19 @@ class DeleteUserTest extends DuskTestCase
      */
     public function testDeleteSuccess()
     {
-        $this->browse(function (Browser $browser) {
-            factory(User::class, 1)->create();
-            $browser->visit('/admin/user')
-                    ->click('.btn-delete-item')
-                    ->acceptDialog()
-                    ->assertPathIs('/admin/user')
-                    ->assertSee(__('Detetion successful!'))
-                    ->screenshot(1);
-            $elements = $browser->elements('#table-contain tbody tr');
-            $row = count($elements);
-            $this->assertTrue($row == 0);
+        factory(User::class, 5)->create();
+        $this->browse(function (Browser $browser) {           
+            $page = $browser->visit('/admin/user');
+            $elements = $page->elements('#table-contain tbody tr');
+            $this->assertCount(5, $elements);
+            $user = User::find(2);
+            $page->press('#user_'.$user->id)
+                 ->acceptDialog()
+                 ->assertSee("Deletion successful!");
+            $user = User::withTrashed()->find(2);
+            $this->assertNotNull($user->deleted_at);    
+            $elements = $page->elements('#table-contain tbody tr');    
+            $this->assertCount(4, $elements);  
         });
     }
 
@@ -41,18 +59,7 @@ class DeleteUserTest extends DuskTestCase
      */
     public function testDeleteObjectNotExist()
     {
-        $this->browse(function (Browser $browser) {
-            factory(User::class, 1)->create();
-            $browser->visit('/admin/user')
-                    ->click('.btn-delete-item')
-                    ->acceptDialog()
-                    ->assertPathIs('/admin/user/id')
-                    ->assertSee(__('Detetion successful!'))
-                    ->screenshot(1);
-            $elements = $browser->elements('#table-contain tbody tr');
-            $row = count($elements);
-            $this->assertTrue($row == 0);
-        });
+
     }
 
     /**
@@ -62,17 +69,6 @@ class DeleteUserTest extends DuskTestCase
      */
     public function testCanNotDelete()
     {
-        $this->browse(function (Browser $browser) {
-            factory(User::class, 1)->create();
-            $browser->visit('/admin/user')
-                    ->click('.btn-delete-item')
-                    ->acceptDialog()
-                    ->assertPathIs('/admin/user')
-                    ->assertSee(__('Detetion failed!'))
-                    ->screenshot(1);
-            $elements = $browser->elements('#table-contain tbody tr');
-            $row = count($elements);
-            $this->assertTrue($row == 0);
-        });
+
     }
 }
