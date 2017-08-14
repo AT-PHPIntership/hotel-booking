@@ -26,7 +26,7 @@ class NewsController extends Controller
                     ->with(['category' => function ($query) {
                         $query->select('id', 'name');
                     }])
-                    ->orderby('id', 'ASC')->paginate(News::ROW_LIMIT);
+                    ->orderby('id', 'DESC')->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
 }

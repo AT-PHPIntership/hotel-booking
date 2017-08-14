@@ -55,7 +55,21 @@
 }
 
 .news-btn {
-    margin-top: 4px;
+    font-size: 16px;
+    float: left;
+}
+
+.btn-delete-item {
+    border: none;
+    background: unset;
+    color: #e23434;
+    margin-top:5px; 
+
+}
+.news-option:after {
+    display: block;
+    content: "";
+    clear: both;
 }
 
 /*errors page*/
@@ -73,7 +87,31 @@
 
 }
 
+.col-id {
+    width: 3%;
+}
+.col-title {
+    width: 30%;
+}
+.col-content {
+    width: 35%;
+}
+.col-cate-id {
+    width: 3%;
+}
+.col-category {
+    width:10%;
+}
 .btn-addnews a{
     width: 10%;
+    float: right;
+}
+.news-search-input {
+    float: left;
+    width: 40%;
+}
+.news-search-btn {
+    float: left;
+    margin-left: 3%;
 }
 

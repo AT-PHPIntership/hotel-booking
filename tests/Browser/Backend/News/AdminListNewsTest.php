@@ -14,6 +14,7 @@ use App\Model\News;
 class AdminListNewsTest extends DuskTestCase
 {   
     use DatabaseMigrations;
+
     /**
      * Test view Admin List News if databe has record or empty.   
      *
@@ -82,7 +83,6 @@ class AdminListNewsTest extends DuskTestCase
             $elements = $browser->visit('/admin/news?page=2')
                  ->elements('#newstable tbody tr');
             $numAccounts = count($elements);
-            dd($numAccounts);
             $this->assertTrue($numAccounts == 5);
             $browser->assertPathIs('/admin/news');
             $browser->assertQueryStringHas('page', '2');
