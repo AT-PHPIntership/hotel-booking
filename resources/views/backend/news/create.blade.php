@@ -35,13 +35,20 @@
                   @endif
                 </div>
               </div>
-              <div class="box-footer btn-add-news">
-                <button type="reset" class="btn btn-primary">
-                  {{__('Reset')}}
-                </button>
-                <button type="submit" class="btn btn-primary">
+              <div class="box-footer">
+                <div class="add-news-button">
+                  <a href="{{ route('news.index') }}" class="btn btn-default">
+                    {{__('Back')}} 
+                  </a>
+                  <button type="reset" class="btn btn-warning">
+                    {{__('Reset')}}
+                  </button>
+                </div>
+                <div class="add-news-submit">
+                  <button type="submit" class="btn btn-primary">
                   {{__('Submit')}}
-                </button>
+                  </button>
+                </div>
               </div>
             </form>
           </div>
