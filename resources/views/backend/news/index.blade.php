@@ -46,11 +46,11 @@
               <table class="table table-bordered table-striped clearfix" id="newstable">
                 <thead>
                 <tr>
-                  <th class="col-id">{{__('Id')}}</th>
-                  <th class="col-title">{{__('Title')}}</th>
-                  <th class="col-content">{{__('Content')}}</th>
-                  <th class="col-cate-id">{{__('Category_id')}}</th>
-                  <th class="col-category">{{__('Category')}}</th>
+                  <th class="col-news-id">{{__('Id')}}</th>
+                  <th class="col-news-title">{{__('Title')}}</th>
+                  <th class="col-news-content">{{__('Content')}}</th>
+                  <th class="col-news-categoryid">{{__('Category_id')}}</th>
+                  <th class="col-news-category">{{__('Category')}}</th>
                   <th class="col-option">{{__('Option')}}</th>
                 </tr>
                 </thead>

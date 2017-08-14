@@ -90,19 +90,20 @@
     color: #5488c7 !important;
 
 }
-.col-id {
+
+.col-news-id {
     width: 3%;
 }
-.col-title {
+.col-news-title {
     width: 30%;
 }
-.col-content {
+.col-news-content {
     width: 35%;
 }
-.col-cate-id {
+.col-news-categoryid {
     width: 3%;
 }
-.col-category {
+.col-news-category {
     width:10%;
 }
 .btn-addnews a{
@@ -126,4 +127,3 @@
 .add-news-submit {
     float: right;
 }
-
