@@ -70,7 +70,7 @@
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
                         <button type="submit" class="news-btn glyphicon glyphicon-trash btn-delete-item" 
-                         data-original-title="Delete" data-toggle="tooltip">
+                         data-original-title="Delete" data-toggle="tooltip" id="btn-delete-{{$item->id}}">
                         </button>
                         </form>
                         <a href="" class="btn fa fa-upload news-btn" data-original-title="Upload Image" data-toggle="tooltip" >
