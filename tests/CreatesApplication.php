@@ -19,22 +19,4 @@ trait CreatesApplication
 
         return $app;
     }
-
-    /**
-     * This functin is called before testcase
-     */
-    public function setUp()
-    {
-         parent::setUp();
-         Artisan::call('migrate');
-    }
- 
-    /**
-     * This functin is called after testcase
-     */
-     public function tearDown()
-     {
-         Artisan::call('migrate:rollback');
-         parent::tearDown();
-     }
 }
