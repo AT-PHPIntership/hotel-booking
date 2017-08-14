@@ -22,9 +22,10 @@ class AdminCreateUserTest extends DuskTestCase
             $browser->visit('/admin/user')
                     ->click('#btn-add-user')
                     ->assertPathIs('/admin/user/create')
-                    ->assertSee('ADD User');
+                    ->assertSee('Create user');
         });
     }
+
     /**
      * Test Validation Admin Create User.
      *
@@ -44,6 +45,7 @@ class AdminCreateUserTest extends DuskTestCase
                     ->assertSee('The phone field is required.');
         });
     }
+
     /**
      * Test Admin create User success.
      *
@@ -63,45 +65,27 @@ class AdminCreateUserTest extends DuskTestCase
                     ->press('Submit')
                     ->assertPathIs('/admin/user')
                     ->assertSee('Creation successful!')
-                    ->seeInDatabase('users', [
-                        'username' => 'HTY'])
                     ->screenShot('success');
         });
+        $this->assertDatabaseHas('users', ['username' => 'HTY']);
     }
     
-     /**
-     * Test Admin create User fail.
-     *
-     * @return void
-     */
-    public function testCreatesUserFail()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/user/create')
-                    ->type('username','HTY')
-                    ->type('password','123')
-                    ->type('password_confirmation','123')
-                    ->type('full_name','HTYen')
-                    ->type('email','hty@gmail.com')
-                    ->type('phone','12345678000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
-                    ->press('Submit')
-                    ->assertPathIs('/admin/user')
-                    ->assertSee('Creation successful!')
-                    ->dontseeInDatabase('users', [
-                        'username' => 'HTY'])
-                    ->screenShot('fail');
-        });
-    }
-    public function listCaseTestForCreateUser()
+    public function listCaseTestValidationForCreateUser()
     {
         return [
-            ['', 'Hello World!', '4', 'The title field is required.'],
-            ['User55', '', '4', 'The content field is required.'],
-            ['User55', 'Hello World!', '', 'The password_confirmation field is required.'],
+            ['', '123', '123', 'HTYen' ,'hty@gmail.com', '12345678', 'The username field is required.'],
+            ['HTY', '', '123', 'HTYen' ,'hty@gmail.com', '12345678', 'The password field is required.'],
+            ['HTY', '123', '', 'HTYen' ,'hty@gmail.com', '12345678', 'The password confirmation field is required.'],
+            ['HTY', '123', '123', '' ,'hty@gmail.com', '12345678', 'The full name field is required.'],
+            ['HTY', '123', '123', 'HTYen' ,'', '12345678', 'The email field is required.'],
+            ['HTY', '123', '123', 'HTYen' ,'hty@', '12345678', 'The email must be a valid email address.'],
+            ['HTY', '123', '123', 'HTYen' ,'hty@gmail.com', '', 'The phone field is required.'],
+            ['HTY', '123', '123', 'HTYen' ,'hty@gmail.com', '12fff', 'The phone must be a number.'],
         ];
     }
+
     /**
-     * @dataProvider listCaseTestForCreateUser
+     * @dataProvider listCaseTestValidationForCreateUser
      *
      */
     public function testCreateUserFailValidation(
@@ -144,17 +128,16 @@ class AdminCreateUserTest extends DuskTestCase
     public function testBtnReset()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/User/create')
+            $browser->visit('/admin/user/create')
                     ->type('username','HTY')
                     ->type('password','123')
                     ->type('password_confirmation','123')
                     ->check('is_admin')
                     ->press('Reset')
-                    ->assertPathIs('/admin/User/create')
-                    ->assertDontSee('HTY')
-                    ->assertDontSee('123');
-            dd($browser->value('#username'));
+                    ->assertPathIs('/admin/user/create')
+                    ->assertInputValueIsNot('username', 'HTY')
+                    ->assertInputValueIsNot('password', '123')
+                    ->assertNotChecked('is_admin');
         });
     }
-}
 }
