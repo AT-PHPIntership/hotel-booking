@@ -19,39 +19,39 @@
           <div class="box">
             <div class="box-header">
               <div class="title-news">
-                <h3 class="box-title">{{__('List News')}}</h3>
+                <h3 class="box-title">{{__('Search News')}}</h3>
               </div>
               <div class="form-group search-news">
                 <form method="POST" class="form-group" action="">
                   {{csrf_field()}}
                   <div class="news-search-input"> 
-                    <input type="text" name="search" class="form-control">
+                    <input type="text" name="search" class="form-control pull-left">
                   </div>
                   <div class="news-search-btn">
-                    <button type="submit" class="btn btn-primary">
-                      {{__('Search')}}
+                    <button type="submit" class="btn btn-primary" data-original-title="Search" data-toggle="tooltip">
+                      <i class="fa fa-search"></i>
                     </button>
                   </div>
                 </form> 
               </div>
-              <div class="btn-addnews">
-                <a href="{{ route('news.create') }}" class="btn btn-primary">
+              <div class="">
+                <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
                   <i class="fa fa-plus-circle"></i>
                   {{__('Add News')}}
                 </a>
               </div>
             </div>
-            <div class="box-body cl">
+            <div class="box-body">
               @include('flash::message')
-              <table class="table table-bordered table-striped clearfix" id="newstable">
+              <table class="table table-bordered table-responsive" id="newstable">
                 <thead>
                 <tr>
-                  <th class="col-id">{{__('Id')}}</th>
-                  <th class="col-title">{{__('Title')}}</th>
-                  <th class="col-content">{{__('Content')}}</th>
-                  <th class="col-cate-id">{{__('Category_id')}}</th>
-                  <th class="col-category">{{__('Category')}}</th>
-                  <th class="col-option">{{__('Option')}}</th>
+                  <th>{{__('Id')}}</th>
+                  <th>{{__('Title')}}</th>
+                  <th>{{__('Content')}}</th>
+                  <th>{{__('Category_id')}}</th>
+                  <th>{{__('Category')}}</th>
+                  <th class="text-center">{{__('Option')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,16 +64,16 @@
                     <td>{{$item->category->name}}</td>
                     <td align="center">
                       <div class="news-option">
-                        <a href="" class="btn fa fa-pencil-square-o  news-btn" data-original-title="Edit" data-toggle="tooltip">
+                        <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                         </a>
                         <form action="" method="POST" >
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
-                          <button type="submit" class="news-btn fa fa-trash-o btn-delete-item"  
+                          <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
                            data-original-title="Delete" data-toggle="tooltip">
                           </button>
                         </form>
-                        <a href="" class="btn fa fa-upload news-btn" data-original-title="Upload Image" data-toggle="tooltip" >
+                        <a href="" class="btn fa fa-upload news-btn pull-right" data-original-title="Upload Image" data-toggle="tooltip" >
                         </a>
                       </div>
                     </td>
@@ -84,8 +84,8 @@
               {!! $news->render() !!}
             </div>
           </div>
-          <div class="btn-addnews">
-            <a href="{{ route('news.create') }}" class="btn btn-primary">
+          <div>
+            <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
               <i class="fa fa-plus-circle"></i>
               {{__('Add News')}}
             </a>
