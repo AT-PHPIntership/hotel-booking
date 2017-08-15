@@ -19,7 +19,6 @@
 	margin-left: 25%;
 	margin-right: 25%;
 }
-
 /* .form-control.bg-info {
     background-color: #E3F5B8;
 }
@@ -32,11 +31,11 @@
     border-color:  #E38E18;
 }
 .form-control:hover{
-	background-color: #CDDBDF;
+    background-color: #CDDBDF;
 }
 
 .glyphicon-warning-sign{
-	animation: spinAround 0.1s linear infinite;
+    animation: spinAround 0.1s linear infinite;
 }
 
 .user-image{
@@ -54,13 +53,34 @@
     display: inline;
 }
 
+
 .help-block {
     color: red;
 }
+/*button create*/
+.btn-create span {
+    background-color: violet;
+    color: #FFF;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px; 
+}
+/*end button create*/
 
 .news-btn {
+
+    /*margin-top: 2px;*/
     font-size: 16px;
-    float: left;
+}
+ /*admin-place*/
+.icon-remove{
+    color: #da4141;
+}
+
+.margin-center {
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .btn-delete-item {
@@ -70,12 +90,64 @@
     margin-top:5px; 
 
 }
+.news-option {
+    width: 122px;
+}
 .news-option:after {
     display: block;
     content: "";
     clear: both;
 }
+.title-page {
+    text-align: center;
+}
 
+.title-header {
+   display: block !important;
+   font-size: 27px !important;
+}
+
+.contain-btn{ 
+    float: right !important;
+}
+
+.form-search{
+    float: right !important;
+    margin-bottom: 10px;    
+}
+.search-news {
+    float: left;
+    width: 60%;
+}
+.btn-pencil{
+    font-size: 18px;
+}
+
+.col-no {
+    width: 5%;
+}
+.col-image {
+    width: 15%;
+}
+.col-name {
+    width: 20%;
+}
+.col-descript {
+    width: 50%;
+}
+.col-action {
+    width: 5%;
+}
+.table-place{
+    table-layout: fixed;
+}
+ 
+.img-place{
+    max-width: 145px;
+    height: 100px;
+}
+
+/*end admin-list-place*/
 /*errors page*/
 .main-page-error {
     text-align: center;
@@ -90,40 +162,18 @@
     color: #5488c7 !important;
 
 }
-
-.col-news-id {
-    width: 3%;
-}
-.col-news-title {
-    width: 30%;
-}
-.col-news-content {
-    width: 35%;
-}
-.col-news-categoryid {
-    width: 3%;
-}
-.col-news-category {
-    width:10%;
-}
-.btn-addnews a{
-    width: 10%;
-    float: right;
-}
 .news-search-input {
-    float: left;
-    width: 40%;
+    width: 60%;
 }
 .news-search-btn {
-    float: left;
-    margin-left: 3%;
+   margin-left: 5%;
 }
+
 .add-news-button {
     float: left;
-}
-.add-news-button button {
-    margin-left: 6px;   
 }
 .add-news-submit {
     float: right;
 }
+/*end errors page*/
+
