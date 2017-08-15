@@ -5,7 +5,6 @@
     <h1 class="title-page text-success">
       {{__('EDIT NEWS')}}
     </h1>
-  <!-- Main content -->
     <section class="content">
       <div class="row margin-center">
         <div class="col-md-12">
@@ -24,8 +23,7 @@
                   </div>
                   <div class="form-group" {{ $errors->has('content') ? ' has-error' : '' }}>
                       <label>{{__('Content')}}</label>
-                      <input type="text" class="form-control" name="content"
-                      value="{{$news->content}}">
+                      <textarea class="form-control" name="content">{{$news->content}}</textarea>
                       @if($errors->first('content'))
                           <span class="help-block">{{$errors->first('content')}}</span>
                       @endif
@@ -35,13 +33,20 @@
                       <input type="text" class="form-control" name="category_id" readonly="true" value="{{$news->category_id}}">
                   </div>
               </div>
-              <div class="box-footer edit-news">
+              <div class="box-footer">
+                <div class="btn-edit-news">
+                  <a href="{{ route('news.index') }}" class="btn btn-default">
+                    {{__('Back')}}
+                  </a>                
+                  <button type="reset" class="btn btn-warning">
+                    {{__('Reset')}}
+                  </button> 
+                </div>
+                <div class="edit-news-submit">
                   <button type="submit" class="btn btn-primary">
                     {{__('Submit')}} 
                   </button>
-                  <a href="{{ route('news.index') }}" class="btn btn-danger">
-                  {{__('Cancer')}}
-                  </a>
+                </div>  
               </div>
             </form>
           </div>
