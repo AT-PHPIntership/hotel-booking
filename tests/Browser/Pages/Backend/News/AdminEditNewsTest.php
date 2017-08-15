@@ -22,10 +22,11 @@ class AdminEditNewsTest extends DuskTestCase
     public function testAdminEditNews()
     {
         $this->makeData(10);
-        $news = News::find(2);
+        $news = News::find(10);
+        //dd($news);
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit('/admin/news')
-                    ->click('#btn-edit_'.$news->id)
+                    ->click('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option:first-child a')
                     ->assertSee('EDIT NEWS')
                     ->assertPathIs('/admin/news/'.$news->slug.'/edit');
         });
@@ -39,10 +40,9 @@ class AdminEditNewsTest extends DuskTestCase
     public function testEditNewsSuccess()
     {
         $this->makeData(10);
-        $news = News::find(1);
-        $this->browse(function (Browser $browser) use ($news) {
+        $this->browse(function (Browser $browser) {
             $browser->visit('/admin/news')
-                    ->click('#btn-edit_'.$news->id)
+                    ->click('#newstable tbody tr:nth-child(2) td:nth-child(6)  .news-option:first-child a')
                     ->type('title','News20')
                     ->press('Submit')
                     ->assertSee('Edit News Success!')
@@ -53,19 +53,18 @@ class AdminEditNewsTest extends DuskTestCase
     }
 
     /**
-     * Test Buton Cancer in page Edit News.
+     * Test Buton Back in page Edit News.
      *
      * @return void
      */
     public function testBtnCancer()
     {
         $this->makeData(10);
-        $news = News::find(1);
-        $this->browse(function (Browser $browser) use ($news) {
+        $this->browse(function (Browser $browser) {
             $browser->visit('/admin/news')
-                    ->click('#btn-edit_'.$news->id)
+                    ->click('#newstable tbody tr:nth-child(2) td:nth-child(6)  .news-option:first-child a')
                     ->assertSee('EDIT NEWS')
-                    ->clickLink('Cancer')
+                    ->clickLink('Back')
                     ->assertSee('List News of Hotel')
                     ->assertPathIs('/admin/news');
         });
@@ -91,10 +90,10 @@ class AdminEditNewsTest extends DuskTestCase
     public function testValidateEditNews($title, $content, $msg)
     {
         $this->makeData(10);
-        $news = News::find(1);
+        $news = News::find(10);
         $this->browse(function (Browser $browser) use ($news, $title, $content, $msg) {
             $browser->visit('/admin/news')
-                    ->click('#btn-edit_'.$news->id)
+                    ->click('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option:first-child a')
                     ->type('title', $title)
                     ->type('content', $content)
                     ->press('Submit')
@@ -111,10 +110,10 @@ class AdminEditNewsTest extends DuskTestCase
     public function test404Page()
     {
         $this->makeData(10);
-        $news = News::find(1);
+        $news = News::find(10);
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit('/admin/news')
-                    ->click('#btn-edit_'.$news->id)
+                    ->click('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option:first-child a')
                     ->assertSee('EDIT NEWS');
             $news->delete();
             $browser->press('Submit')
