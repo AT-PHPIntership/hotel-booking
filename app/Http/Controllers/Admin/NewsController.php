@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\News;
+use App\Model\Category;
 use App\Http\Requests\Backend\CreateNewsRequest;
 
 class NewsController extends Controller
@@ -38,7 +39,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('backend.news.create');
+        $categories = Category::select('id')->get();
+        return view('backend.news.create', compact('categories'));
     }
 
     /**

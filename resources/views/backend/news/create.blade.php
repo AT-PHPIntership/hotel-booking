@@ -7,8 +7,8 @@
       <div class="row col-md-8 margin-center">
         <div class="col-md-12">
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">{{__('Enter information')}}</h3>
+            <div class="box-header with-border text-center">
+              <h3 class="box-title ">{{__('Enter information')}}</h3>
             </div>
             <form role="form" method="POST" action="{{ route('news.store') }}" >
               {{csrf_field()}}
@@ -29,7 +29,12 @@
                 </div>
                 <div class="form-group" {{ $errors->has('category_id') ? ' has-error' : '' }}>
                   <label>{{__('Category_id')}}</label>
-                  <input type="text" class="form-control" name="category_id">
+                  <select name = "category_id" class="form-control">
+                    <option></option>
+                    @foreach($categories as $category)
+                      <option>{{$category->id}}</option>
+                    @endforeach
+                  </select>
                   @if($errors->first('category_id'))
                    <span class="help-block">{{$errors->first('category_id')}}</span>
                   @endif
