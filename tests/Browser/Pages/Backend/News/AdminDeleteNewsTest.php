@@ -21,16 +21,16 @@ class AdminDeleteNewsTest extends DuskTestCase
     public function testDeleteNewsSuccess()
     {   
         $this->makeData(10);
-        $news = News::find(2);
+        $news = News::find(10);
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit('/admin/news')
                     ->assertSee('List News of Hotel')
-                    ->press('#btn-delete-'.$news->id)
+                    ->press('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option button')
                     ->acceptDialog()
                     ->assertSee('Delete News Success!');
         });
         $this->assertSoftDeleted('news',[
-            'id' => '2']);
+            'id' => '10']);
     }
 
     /**
@@ -41,11 +41,11 @@ class AdminDeleteNewsTest extends DuskTestCase
     public function test404Page()
     {   
         $this->makeData(10);
-        $news = News::find(2);
+        $news = News::find(10);
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit('/admin/news')
                     ->assertSee('List News of Hotel')
-                    ->press('#btn-delete-'.$news->id);
+                    ->press('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option button');
             $news->delete();
             $browser->acceptDialog()
                     ->assertSee('404 - Page Not found');
