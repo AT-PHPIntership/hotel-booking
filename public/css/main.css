@@ -93,13 +93,15 @@
    font-size: 27px !important;
 }
 
-.contain-btn{ 
+.contain-btn { 
     float: right !important;
+    margin-right: 1.5%;
+    margin-bottom: 10px;
 }
 
-.form-search{
-    float: right !important;
-    margin-bottom: 10px;    
+.contain-btn.second {
+    margin-right: 0;
+    margin-top: 20px;
 }
 
 .btn-pencil{
@@ -131,6 +133,7 @@
 }
 
 /*end admin-list-place*/
+
 /*errors page*/
 .main-page-error {
     text-align: center;
@@ -152,3 +155,47 @@
 
 /*end errors page*/
 
+/*search*/
+.input-search {
+    display: inline-block;
+    width: 30%;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    background-color: white;
+    background-repeat: no-repeat;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.input-search:focus {
+    width: 60%;
+}
+
+.container-search {
+    position: relative;
+    margin-right: 10px;
+}
+
+.btn-search {
+    position: absolute;
+    top: 0px;
+}
+/*end search*/
+
+.btn-on {
+    background: #EF9D47;
+    color: #010101;
+}
+
+.btn-off {
+    background: #D0DFDF;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.cus-icon-sm {
+    font-size: 20px;
+    transform: translateY(20%);
+}
