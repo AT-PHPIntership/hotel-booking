@@ -23,7 +23,6 @@ class AdminEditNewsTest extends DuskTestCase
     {
         $this->makeData(10);
         $news = News::find(10);
-        //dd($news);
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit('/admin/news')
                     ->click('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option:first-child a')
