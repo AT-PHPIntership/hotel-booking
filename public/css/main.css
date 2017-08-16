@@ -52,6 +52,11 @@
 .inline{
     display: inline;
 }
+
+
+.help-block {
+    color: red;
+}
 /*button create*/
 .btn-create span {
     background-color: violet;
@@ -77,6 +82,8 @@
     margin-right: 15%;
 }
 
+/*fix template index, create*/
+
 .btn-delete-item {
     border: none;
     background: unset;
@@ -95,22 +102,27 @@
 .title-page {
     text-align: center;
 }
-
-.title-header {
-   display: block !important;
-   font-size: 27px !important;
+.btn-custom-option {
+    font-size: 22px;
 }
 
-.contain-btn{ 
+.contain-btn { 
     float: right !important;
+    margin-right: 1.5%;
+    margin-bottom: 10px;
 }
 
-.form-search{
-    float: right !important;
-    margin-bottom: 10px;    
+.contain-btn.second {
+    margin-right: 0;
+    margin-top: 20px;
 }
-.btn-addnews {
-    float: right;
+.btn-option:after {
+    content: "";
+    clear:both;
+}
+
+.btn-option{
+    width: 95px;
 }
 .search-news {
     float: left;
@@ -119,32 +131,47 @@
 .btn-pencil{
     font-size: 18px;
 }
+.btn-option .btn-edit {
+    margin-top: 7px;
+    margin-left: 21px;
 
-.col-no {
-    width: 5%;
 }
-.col-image {
-    width: 15%;
+
+.form-delete{
+    margin-top: 3px;
 }
-.col-name {
-    width: 20%;
+
+
+/*end fix template*/
+.title-header {
+    display: block !important;
+    font-size: 27px !important;
 }
-.col-descript {
-    width: 50%;
+
+.contain-btn{ 
+     
+    margin-right: 1.5%;
 }
-.col-action {
-    width: 5%;
-}
-.table-place{
-    table-layout: fixed;
+.contain-btn.second { 
+    margin-right: 0;
+    margin-top: 20px;
 }
  
 .img-place{
     max-width: 145px;
     height: 100px;
+    margin-top: 10px;
+}
+.place-descript{
+    max-height: 300px;
+    max-width: 713px;
+}
+.btn-custom {
+    margin-right: 10px;
 }
 
 /*end admin-list-place*/
+
 /*errors page*/
 .main-page-error {
     text-align: center;
@@ -163,7 +190,69 @@
 }
 .news-search-btn {
    margin-left: 5%;
+
+}
+.news-search-btn {
+   margin-left: 5%;
 }
 
+.add-news-button {
+    float: left;
+}
+.add-news-submit {
+    float: right;
+}
 /*end errors page*/
 
+/*search*/
+.form-search{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.input-search {
+    display: inline-block;
+    width: 30%;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    background-color: white;
+    background-repeat: no-repeat;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.input-search:focus {
+    width: 60%;
+}
+
+.container-search {
+    position: relative;
+}
+
+.btn-search {
+    position: absolute;
+    top: 0px;
+}
+/*end search*/
+
+.btn-on {
+    background: #EF9D47;
+    color: #010101;
+}
+
+.btn-off {
+    background: #D0DFDF;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.fz-20 {
+    font-size: 20px;
+}
+
+.cus-icon-sm {
+    font-size: 20px;
+    transform: translateY(20%);
+}
