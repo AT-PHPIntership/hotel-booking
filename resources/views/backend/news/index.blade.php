@@ -61,7 +61,7 @@
                     <td>{{$item->title}}</td>
                     <td>{{$item->content}}</td>
                     <td>{{$item->category_id}}</td>
-                    <td>{{$item->category->name}}</td>
+                    <td>{{$item->name}}</td>
                     <td align="center">
                       <div class="news-option">
                         <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">

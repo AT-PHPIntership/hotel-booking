@@ -17,17 +17,16 @@ class NewsController extends Controller
     public function index()
     {
         $columns = [
-            'id',
+            'news.id',
             'title',
-            'slug',
+            'news.slug',
             'content',
-            'category_id'
+            'category_id',
+            'name'
         ];
         $news = News::select($columns)
-                    ->with(['category' => function ($query) {
-                        $query->select('id', 'name');
-                    }])
-                    ->orderby('id', 'DESC')->paginate(News::ROW_LIMIT);
+                    ->join('categories', 'news.category_id', '=', 'categories.id')
+                    ->orderby('news.id', 'DESC')->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
 
@@ -62,13 +61,14 @@ class NewsController extends Controller
      */
     public function update(EditNewsRequest $request, $id)
     {
+
         $newsUpdate = News::findOrFail($id)->update($request->all());
         if ($newsUpdate) {
             flash(__('Edit News Success!'))->success();
             return redirect()->route('news.index');
         } else {
             flash(__('Edit News Fail!'))->error();
-            return redirect()->route('news.index');
+            return redirect()->route('news.edit');
         }
     }
 }
