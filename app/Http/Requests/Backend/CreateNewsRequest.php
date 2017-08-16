@@ -26,7 +26,7 @@ class CreateNewsRequest extends FormRequest
         return [
             'title' => 'required',
             'content' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required|integer'
         ];
     }
 }

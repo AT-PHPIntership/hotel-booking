@@ -55,7 +55,7 @@ class AdminCreateNewsTest extends DuskTestCase
             $browser->visit('/admin/news/create')
                     ->type('title','News18')
                     ->type('content','Hello World!')
-                    ->type('category_id','6')
+                    ->select('category_id')
                     ->press('Submit')
                     ->assertPathIs('/admin/news')
                     ->assertSee('Create News Success!');
@@ -72,16 +72,18 @@ class AdminCreateNewsTest extends DuskTestCase
     public function listCaseTestForCreateNews()
     {
         return [
-            ['', 'Hello World!', '4', 'The title field is required.'],
-            ['News55', '', '4', 'The content field is required.'],
+            ['', 'Hello World!', '5', 'The title field is required.'],
+            ['News55', '', '5', 'The content field is required.'],
             ['News55', 'Hello World!', '', 'The category id field is required.'],
         ];
     }
 
     /**
+     *
      * @dataProvider listCaseTestForCreateNews
      *
      */
+     
     public function testCreateNewsFail($title, $content, $category_id, $expected)
     {   
         
@@ -89,7 +91,7 @@ class AdminCreateNewsTest extends DuskTestCase
             $browser->visit('/admin/news/create')
                 ->type('title', $title)
                 ->type('content', $content)
-                ->type('category_id', $category_id)
+                ->select('category_id', $category_id)
                 ->press('Submit')
                 ->assertSee($expected)
                 ->assertPathIs('/admin/news/create');
@@ -107,10 +109,25 @@ class AdminCreateNewsTest extends DuskTestCase
             $browser->visit('/admin/news/create')
                     ->type('title', 'News10')
                     ->type('content', 'Hello')
-                    ->type('category_id', '6')
+                    ->select('category_id')
                     ->press('Reset')
                     ->assertPathIs('/admin/news/create')
                     ->assertInputValueIsNot('', '');
         });
     }
+
+    /**
+     * Test Button Back
+     *
+     * @return void
+     */
+    public function testBtnBack()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin/news/create')
+                    ->clickLink('Back')
+                    ->assertPathIs('/admin/news');
+        });
+    }
+
 }

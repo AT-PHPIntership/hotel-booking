@@ -22,7 +22,7 @@
                 <h3 class="box-title">{{__('Search News')}}</h3>
               </div>
               <div class="form-group search-news">
-                <form method="POST" class="form-group" action="">
+                <form method="POST" class="form-group inline" action="">
                   {{csrf_field()}}
                   <div class="news-search-input"> 
                     <input type="text" name="search" class="form-control pull-left">
@@ -61,12 +61,12 @@
                     <td>{{$item->title}}</td>
                     <td>{{$item->content}}</td>
                     <td>{{$item->category_id}}</td>
-                    <td>{{$item->category->name}}</td>
+                    <td>{{$item->name}}</td>
                     <td align="center">
                       <div class="news-option">
                         <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                         </a>
-                        <form action="" method="POST" >
+                        <form action="" method="POST" class="inline" >
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
                           <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  

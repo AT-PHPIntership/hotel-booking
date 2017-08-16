@@ -18,17 +18,16 @@ class NewsController extends Controller
     public function index()
     {
         $columns = [
-            'id',
+            'news.id',
             'title',
-            'slug',
+            'news.slug',
             'content',
-            'category_id'
+            'category_id',
+            'name'
         ];
         $news = News::select($columns)
-                    ->with(['category' => function ($query) {
-                        $query->select('id', 'name');
-                    }])
-                    ->orderby('id', 'DESC')->paginate(News::ROW_LIMIT);
+                    ->join('categories', 'news.category_id', '=', 'categories.id')
+                    ->orderby('news.id', 'DESC')->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
 
@@ -39,7 +38,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('id')->get();
+        $categories = Category::select('id', 'name')->get();
         return view('backend.news.create', compact('categories'));
     }
 
@@ -59,7 +58,7 @@ class NewsController extends Controller
             return redirect()->route('news.index');
         } else {
             flash(__('Create News Fail!'))->error();
-            return redirect()->route('news.index');
+            return redirect()->route('news.create');
         }
     }
 }
