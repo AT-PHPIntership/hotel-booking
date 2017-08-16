@@ -1,8 +1,13 @@
 <?php
+
 namespace Tests\Browser\Pages\Backend;
+
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Http\UploadedFile;
+use Faker\Factory as Faker;
+
 class AdminCreatePlaceTest extends DuskTestCase
 {
     use DatabaseMigrations;
@@ -23,7 +28,7 @@ class AdminCreatePlaceTest extends DuskTestCase
     }
 
     /**
-     * Test Validation Admin Create News.
+     * Test validation admin create place.
      *
      * @return void
      */
@@ -47,27 +52,29 @@ class AdminCreatePlaceTest extends DuskTestCase
     public function testCreateSuccess()
     {   
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/place/create')
-                    ->type('name','Ha Noi')
-                    ->type('descript','City of Viet Nam')
-                    ->attach('image', __DIR__.'/images/hanoi.jpg')
-                    ->press('Submit')
-                    ->assertPathIs('/admin/place')
-                    ->assertSee('Create success');
+            $image = $this->fakeImage();
+            $page = $browser->visit('/admin/place/create')
+                ->type('name','Ha Noi')
+                ->type('descript','City of Viet Nam')
+                ->attach('image', $image) 
+                ->press('Submit')
+                ->assertPathIs('/admin/place')
+                ->assertSee('Create success');
         });
         $this->assertDatabaseHas('places', ['name' => 'Ha Noi']); 
     }
     
     /**
-     * List case for Test Validation Create News
+     * List case for test validation create place
      *
      */
     public function listCaseTestForCreatePlace()
-    {
+    {   
+        $image = $this->fakeImage();
         return [
-            ['', 'City of Viet Nam', '/images/hanoi.jpg', 'The name field is required.'],
-            ['Ha Noi', '', '/images/hanoi.jpg', 'The descript field is required.'],
-            ['Ha Noi', 'City of Viet Nam', '', 'The image field is required.'],
+            ['', 'City of Viet Nam', $image, 'The name field is required.'],
+            ['Ha Noi', '', $image, 'The descript field is required.'],
+            ['Ha Noi', 'City of Viet Nam', '', 'The image field is required.']
         ];
     }
 
@@ -75,15 +82,21 @@ class AdminCreatePlaceTest extends DuskTestCase
      * Test create place fail
      *
      * @dataProvider listCaseTestForCreatePlace
+     * 
+     * @param string $name place name
+     * @param string $descript place descript
+     * @param string $image place image
+     * @param string $expected message warning
+     * 
      */
      public function testCreatePlaceFail($name, $descript, $image, $expected)
     {   
         
-        $this->browse(function (Browser $browser) use($name, $descript, $image, $expected) {
+        $this->browse(function (Browser $browser) use ($name, $descript, $image, $expected) {
             $browser->visit('/admin/place/create')
                 ->type('name', $name)
-                ->type('descript',$descript)
-                ->attach('image',  $image ? __DIR__.$image : null)
+                ->type('descript', $descript)
+                ->attach('image',  $image )
                 ->press('Submit')
                 ->assertSee($expected)
                 ->assertPathIs('/admin/place/create');
@@ -101,12 +114,37 @@ class AdminCreatePlaceTest extends DuskTestCase
             $browser->visit('/admin/place/create')
                 ->type('name', 'Ha Noi')
                 ->type('descript', 'Viet Nam')
-                ->attach('image', __DIR__.'/images/hanoi.jpg')
+                ->attach('image', '/test.png')
                 ->press('Reset')
                 ->assertPathIs('/admin/place/create')
                 ->assertInputValue('name', '')
                 ->assertInputValue('descript', '')
                 ->assertInputValue('image', '');
         });
+    }
+
+    /**
+     * Test Button Back
+     *
+     * @return void
+     */
+    public function testBtnBack()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin/place/create')
+                ->click('.box-footer .btn-default')
+                ->assertPathIs('/admin/place');
+        });
+    }
+    
+    /**
+     * Fake image place
+     * 
+     * @return string
+     */
+    public function fakeImage()
+    {    
+        $image = UploadedFile::fake()->image('avartar.jpg');
+        return $image;
     }
 }
