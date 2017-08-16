@@ -79,8 +79,7 @@ class AdminEditUserTest extends DuskTestCase
                     ->check('is_admin')
                     ->press('Submit')
                     ->assertPathIs('/admin/user')
-                    ->assertSee('Update successful!')
-                    ->screenShot('success');
+                    ->assertSee('Update successful!');
         });
         $this->assertDatabaseHas('users', ['full_name' => 'HTYen']);
     }
