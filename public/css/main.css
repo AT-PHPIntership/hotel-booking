@@ -69,7 +69,6 @@
 /*end button create*/
 
 .news-btn {
-
     /*margin-top: 2px;*/
     font-size: 16px;
 }
@@ -82,11 +81,6 @@
     margin-left: 15%;
     margin-right: 15%;
 }
-
-.title-page {
-    text-align: center;
-}
- 
 /*fix template index, create*/
 .btn-delete-item {
     border: none;
@@ -102,6 +96,9 @@
     display: block;
     content: "";
     clear: both;
+}
+.title-page {
+    text-align: center;
 }
 .btn-custom-option {
     font-size: 22px;
@@ -174,7 +171,6 @@
 }    
 .title-error{
     color: #5488c7 !important;
-
 }
 .news-search-input {
     width: 60%;
