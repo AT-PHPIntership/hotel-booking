@@ -68,7 +68,7 @@ class AdminEditUserTest extends DuskTestCase
     {
         factory(User::class, 5)->create();
         $user = User::find(4);
-        $this->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
                     ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a')
                     ->assertPathIs('/admin/user/'.$user->id.'/edit')
@@ -88,10 +88,10 @@ class AdminEditUserTest extends DuskTestCase
     public function listCaseTestValidationForUpdateUser()
     {
         return [
-            ['HTY', '1', '123', 'HTYen' ,'hty@gmail.com', '12345678', 'The password must be at least 3 characters.'],
-            ['HTY', '', '' ,'hty@gmail.com', '12345678', 'The full name field is required.'],
-            ['HTY', '', 'HTYen' ,'hty@gmail.com', '', 'The phone field is required.'],
-            ['HTY', '', 'HTYen' ,'hty@gmail.com', '12fff', 'The phone must be a number.'],
+            ['1', 'HTYen', '12345678', 'The password must be at least 3 characters.'],
+            ['', '', '12345678', 'The full name field is required.'],
+            ['', 'HTYen', '', 'The phone field is required.'],
+            ['', 'HTYen', '12fff', 'The phone must be a number.'],
         ];
     }
     /**
@@ -158,6 +158,49 @@ class AdminEditUserTest extends DuskTestCase
             } else {
                 $browser->assertNotChecked('is_active');
             }
+        });
+    }
+
+    /**
+     * Test 404 Page Not found when click edit user.
+     *
+     * @return void
+     */
+    public function test404PageForClickEdit()
+    {   
+        factory(User::class, 5)->create();
+        $user = User::find(4);
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->visit('/admin/user')
+                    ->assertSee('List User');
+            $user->delete();
+            $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a');
+            $browser->assertSee('404 - Page Not found');
+        });
+    }
+
+    /**
+     * Test 404 Page Not found when click submit edit user.
+     *
+     * @return void
+     */
+    public function test404PageForClickSubmit()
+    {   
+        factory(User::class, 5)->create();
+        $user = User::find(4);
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->visit('/admin/user')
+                    ->assertSee('List User')
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a')
+                    ->assertPathIs('/admin/user/'.$user->id.'/edit')
+                    ->assertSee('Update user')
+                    ->type('password','123')
+                    ->type('full_name','HTYen')
+                    ->type('phone','12345678')
+                    ->check('is_admin');
+            $user->delete();
+            $browser->press('Submit')
+                    ->assertSee('404 - Page Not found');
         });
     }
 }

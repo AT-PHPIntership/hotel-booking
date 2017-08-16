@@ -4,7 +4,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../../hotel_admin/dist/img/an.jpg" class="img-circle" alt="User Image">
+         <img src="{{ asset('bower_components/AdminLTE/dist/img/user3-128x128.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Nguyễn Quốc Ân</p>
@@ -17,7 +17,7 @@
         <!-- index -->
         <li class="active treeview">
           <a href="../index.html">
-            <i class="fa fa-dashboard"></i> <span>Trang chủ</span>
+            <i class="fa fa-dashboard"></i> <span>{{ __('Home Page') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -27,7 +27,7 @@
         <!--  introduction -->
         <li class="treeview">
           <a href="../../pages/static page/indexAboutUs.html">
-            <i class="fa fa-table"></i> <span>Giới thiệu Khách sạn</span>
+            <i class="fa fa-table"></i> <span>{{ __('Introduction') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -36,9 +36,9 @@
 
         <!--  news -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('news.index') }}">
             <i class="fa fa-files-o"></i>
-            <span>Tin tức</span>
+            <span>{{ __('News') }}</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">135</span>
             </span>
@@ -57,19 +57,13 @@
 
        <!--  category -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('category.index') }}">
             <i class="fa fa-pie-chart"></i>
-            <span>Danh mục tin</span>
+            <span>{{ __('Categories') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Tin mới </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Doanh thu </a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Khuyến mãi</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Tất cả các tin</a></li>
-          </ul>
         </li>
 
         <!-- hotel -->
@@ -85,18 +79,18 @@
 
         <!-- comment and rating -->
         <li class="treeview">
-          <a href="{{ route('comment.index') }}" id="bt-rating-comment">
-            <i class="fa fa-edit"></i><span>Bình luận và Bình chọn</span>
+          <a href="#">
+            <i class="fa fa-edit"></i> <span>{{ __('Comment and Rating') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
         </li>
 
-        <!-- booking rôm -->
+        <!-- booking room -->
         <li>
           <a href="pages/calendar.html">
-            <i class="fa fa-calendar"></i> <span>Lịch đặt phòng</span>
+            <i class="fa fa-calendar"></i> <span>{{ __('Booking Room') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-red">17</small>
               <small class="label pull-right bg-blue">4</small>
@@ -107,7 +101,7 @@
         <!-- feedback -->
         <li>
           <a href="pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Feedback</span>
+            <i class="fa fa-envelope"></i> <span>{{ __('Feedback') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">102</small>
             </span>
@@ -117,10 +111,10 @@
         <!-- place -->
         <li>
           <a href="{{ route('place.index') }}" id="place">
-            <i class="fa fa-folder"></i> <span>{{ __('Place') }}</span>
+            <i class="fa fa-university"></i> <span>{{ __('Place') }}</span>
           </a>
         </li>
       </ul>
     </section>
     <!-- /.sidebar -->
-  </aside>
+</aside>

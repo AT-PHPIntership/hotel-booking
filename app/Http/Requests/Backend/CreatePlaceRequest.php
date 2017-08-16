@@ -1,12 +1,13 @@
 <?php
-namespace App\Http\Requests;
+
+namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class CreatePlaceRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the Place is authorized to make this request.
      *
      * @return bool
      */
@@ -23,9 +24,9 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|min:3',
-            'full_name' => 'required',
-            'phone' => 'required|numeric',
+            'name' => 'required|unique:places',
+            'descript' => 'required',
+            'image' => 'required',
         ];
     }
 }
