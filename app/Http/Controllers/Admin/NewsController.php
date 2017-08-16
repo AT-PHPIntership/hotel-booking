@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\News;
 use App\Http\Requests\Backend\EditNewsRequest;
+use App\Model\Category;
+use App\Http\Requests\Backend\CreateNewsRequest;
 
 class NewsController extends Controller
 {
@@ -31,6 +33,37 @@ class NewsController extends Controller
     }
 
     /**
+     * Create a new News.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $categories = Category::select('id', 'name')->get();
+        return view('backend.news.create', compact('categories'));
+    }
+
+    /**
+     * Store a newly News in storage.
+     *
+     * @param \Illuminate\Http\CreateNewsRequest $request of form creat News
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateNewsRequest $request)
+    {
+        $news = new News($request->all());
+        $result = $news->save();
+        if ($result) {
+            flash(__('Create News Success!'))->success();
+            return redirect()->route('news.index');
+        } else {
+            flash(__('Create News Fail!'))->error();
+            return redirect()->route('news.create');
+        }
+    }
+
+    /**
      * Display form edit a News.
      *
      * @param string $slug of News
@@ -47,7 +80,7 @@ class NewsController extends Controller
         ];
         $news = News::select($columns)
                     ->where('slug', $slug)
-                    ->first();
+                    ->firstOrFail();
         return view('backend.news.edit', compact('news'));
     }
 
@@ -61,7 +94,6 @@ class NewsController extends Controller
      */
     public function update(EditNewsRequest $request, $id)
     {
-
         $newsUpdate = News::findOrFail($id)->update($request->all());
         if ($newsUpdate) {
             flash(__('Edit News Success!'))->success();

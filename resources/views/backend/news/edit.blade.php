@@ -5,12 +5,12 @@
     <h1 class="title-page text-success">
       {{__('EDIT NEWS')}}
     </h1>
-    <div class="cls-news-error-msg"> 
-      @include('flash::message')
-    </div>
     <section class="content">
       <div class="row margin-center">
         <div class="col-md-12">
+          <div class="cls-editnews-msg">
+            @include('flash::message')
+          </div>
           <div class="box box-primary">
             <form method="POST" action="{{ route('news.update',$news->id) }}" >
               {{csrf_field()}}
