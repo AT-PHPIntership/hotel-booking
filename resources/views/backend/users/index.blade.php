@@ -66,22 +66,24 @@
                       <td>{{ $user->phone }}
                       <td>
                         @if ($user->is_admin == App\Model\User::ROLE_ADMIN)
-                          <form >
+                          <form>
                             <button type="submit" class="btn btn-default btn-on btn-sm">{{ __('Admin') }}</button>
                           </form>
                         @else
                           <form >
                             <button type="submit" class="btn btn-default btn-off btn-sm">{{ __('User') }}</button>
+                          </form>
                         @endif
                       </td>
                       <td>
                         @if ($user->is_active == App\Model\User::STATUS_ACTIVED)
-                          <form >
+                          <form>
                             <button type="submit" class="btn btn-default btn-on btn-sm">{{ __('Active') }}</button>
                           </form>
                         @else
-                          <form >
+                          <form>
                             <button type="submit" class="btn btn-default btn-off btn-sm">{{ __('Disabled') }}</button>
+                          </form>
                         @endif
                       </td>
                       <td align="center">
@@ -89,14 +91,12 @@
                           <a href="{{ route('user.edit', $user->id) }}"  class="btn-edit fa fa-pencil-square-o btn-pencil cus-icon-sm" >
                           </a>
                           <form method="POST" action="{{ route('user.destroy', $user->id) }}" class="inline">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="user_id" value="{{ $user->id }}">
                             {!! csrf_field() !!}
-                            <button 
-                              class="fa fa-trash-o cus_icon btn btn-delete-item" type="submit" 
+                            {{ method_field('DELETE') }}
+                            <button type="submit" 
+                              class="fa fa-trash-o cus_icon btn btn-delete-item fz-20"
                               data-title="{{ __('Confirm deletion!') }}"
- +                            data-confirm="{{ __('Are you sure you want to delete?') }}"
- +                            title="{{ __('Delete User') }}">
+                              data-confirm="{{ __('Are you sure you want to delete?') }}">
                             </button>
                           </form> 
                         </div>
@@ -124,18 +124,5 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-<!-- ./wrapper -->
 
 @endsection

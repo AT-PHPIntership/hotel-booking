@@ -65,7 +65,6 @@
                     <input type="checkbox" name="is_admin" value="{{ App\Model\User::ROLE_ADMIN }}">
                   @endif
                 </div>
-                </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
@@ -80,4 +79,5 @@
         </div>
       </div>
     </section>
+  </div>
 @endsection
