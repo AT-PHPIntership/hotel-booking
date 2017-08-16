@@ -26,7 +26,7 @@
               @include('flash::message')
             </div>
             <div class="float-left">
-              <a href="{{ route('user.create')}}">
+              <a href="{{ route('user.create')}}" id="btn-add-user">
               <span class="btn btn-primary">{{ __('Add user') }}
                 <i class="fa fa-plus"></i>
               </span>

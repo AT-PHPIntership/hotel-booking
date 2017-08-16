@@ -66,7 +66,7 @@
                       <div class="news-option">
                         <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                         </a>
-                        <form action="" method="POST" >
+                        <form action="" method="POST" class="inline" >
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
                           <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
