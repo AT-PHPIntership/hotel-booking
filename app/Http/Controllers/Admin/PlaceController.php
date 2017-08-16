@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\AdminCreatePlace;
+use App\Http\Requests\Backend\CreatePlaceRequest;
 use App\Model\Place;
 
 class PlaceController extends Controller
@@ -38,11 +38,11 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(AdminCreatePlace $request)
+    public function store(CreatePlaceRequest $request)
     {
         $place = new Place($request->all());
         if ($request->hasFile('image')) {
-            $place ->image= $request->image->hashName();
+            $place->image = $request->image->hashName();
             $request->file('image')
                 ->move(config('constant.path_upload_places'), $place->image);
         }

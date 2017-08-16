@@ -9,5 +9,14 @@ $(document).ready(function(){
         return false;
       }
     });
-});
 
+    $('#preview-image').change( function(event) {
+        var select_input_file = $(this).val();
+        if (select_input_file) {
+            var imgpath = URL.createObjectURL(event.target.files[0]);
+            $("#showImage").fadeIn("fast").attr('src',imgpath);
+        } else {
+            $("#showImage").fadeIn("fast").attr('src','/images/default/no_image.png');
+        }
+    });
+});
