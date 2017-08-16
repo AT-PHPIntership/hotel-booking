@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,7 +24,7 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|min:3',
+            'password' => 'nullable|min:3',
             'full_name' => 'required',
             'phone' => 'required|numeric',
         ];

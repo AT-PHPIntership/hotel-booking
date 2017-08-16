@@ -25,69 +25,92 @@
               <h3 class="box-title">{{ __('List Users') }}</h3>
               @include('flash::message')
             </div>
-            <div class="float-left">
-              <a href="{{ route('user.create')}}" id="btn-add-user">
-              <span class="btn btn-primary">{{ __('Add user') }}
-                <i class="fa fa-plus"></i>
-              </span>
-              </a>
-            </div>
              <!-- /.box-header -->
             <div class="box-body">
               <div class="row">
-                <div class="col-sm-6 form-search">
-                  <div id="example1_filter" class="dataTables_filter">
-                    <form method="GET">
-                      <label>{{ __('Search') }}</label>
-                      <input id="search-input" type="search" class="form-control input-sm" 
-                        placeholder="" name="search_input">
-                    </form>    
-                  </div>
+                <div class="col-md-6">
+                  <form method="GET" action="{{ route('user.index') }}" class="container-search">
+                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  </form>
+                </div>
+                <div class="contain-btn">
+                  <a class="btn btn-primary" href="{{ route('user.create')}}">
+                  <span class="fa fa-plus-circle"></span>
+                  {{ __('Add user') }}
+                  </a>
                 </div>
               </div>
-              </div>
-              <table id="table-contain" class="table table-bordered table-striped">
+              @include('backend.layouts.partials.modal')
+              <table id="table-contain" class="table table-bordered table-responsive table-striped">
                 <thead>
-                <tr align="center">
-                  <th>{{ __('No') }}</th>
-                  <th>{{ __('Username') }}</th>
-                  <th>{{ __('Full Name') }}</th>
-                  <th>{{ __('Email')}}</th>
-                  <th>{{ __('Phone') }}</th>
-                  <th>{{ __('Is Admin') }}</th>
-                  <th>{{ __('Is Active') }}</th>
-                  <th>{{ __('Action') }}</th>
-                </tr>
+                  <tr align="center">
+                    <th>{{ __('ID') }}</th>
+                    <th>{{ __('Username') }}</th>
+                    <th>{{ __('Full Name') }}</th>
+                    <th>{{ __('Email')}}</th>
+                    <th>{{ __('Phone') }}</th>
+                    <th>{{ __('Role') }}</th>
+                    <th>{{ __('Status') }}</th>
+                    <th>{{ __('Option') }}</th>
+                  </tr>
                 </thead>
                 <tbody>
-            @php ($index = 1)
-            @foreach ($users as $user)
-                <tr>
-                  <td>{{ $index++ }}</td>
-                  <td>{{ $user->username }}
-                  <!-- <td>{{ $user->password }}</td> -->
-                  <td>{{ $user->full_name }}
-                  <td>{{ $user->email }}</td>
-                  <td>{{ $user->phone }}
-                  <td>{{ $user->is_admin }}</td>
-                  <td>{{ $user->is_active }}
-                  </td>
-                  <td align="center">
-                    <a href="{{ route('user.edit', $user->id) }}" >
-                      <i class= "fa fa-pencil-square-o cus_icon"></i>
-                    </a>
-                    <form method="POST" action="{{ route('user.destroy', $user->id) }}" class="inline">
-                      <input type="hidden" name="_method" value="DELETE">
-                      <input type="hidden" name="user_id" value="{{ $user->id }}">
-                      {!! csrf_field() !!}
-                      <button class="fa fa-trash-o cus_icon btn btn-delete-item" type="submit">
-                      </button>
-                    </form> 
-                  </td>
-                </tr>
-                @endforeach
-               </tbody>
+                  @foreach ($users as $user)
+                    <tr>
+                      <td>{{ $user->id }}</td>
+                      <td>{{ $user->username }}
+                      <!-- <td>{{ $user->password }}</td> -->
+                      <td>{{ $user->full_name }}
+                      <td>{{ $user->email }}</td>
+                      <td>{{ $user->phone }}
+                      <td>
+                        @if ($user->is_admin == App\Model\User::ROLE_ADMIN)
+                          <form>
+                            <button type="submit" class="btn btn-default btn-on btn-sm">{{ __('Admin') }}</button>
+                          </form>
+                        @else
+                          <form >
+                            <button type="submit" class="btn btn-default btn-off btn-sm">{{ __('User') }}</button>
+                          </form>
+                        @endif
+                      </td>
+                      <td>
+                        @if ($user->is_active == App\Model\User::STATUS_ACTIVED)
+                          <form>
+                            <button type="submit" class="btn btn-default btn-on btn-sm">{{ __('Active') }}</button>
+                          </form>
+                        @else
+                          <form>
+                            <button type="submit" class="btn btn-default btn-off btn-sm">{{ __('Disabled') }}</button>
+                          </form>
+                        @endif
+                      </td>
+                      <td align="center">
+                        <div class="option-btn">
+                          <a href="{{ route('user.edit', $user->id) }}"  class="btn-edit fa fa-pencil-square-o btn-pencil cus-icon-sm" >
+                          </a>
+                          <form method="POST" action="{{ route('user.destroy', $user->id) }}" class="inline">
+                            {!! csrf_field() !!}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" 
+                              class="fa fa-trash-o cus_icon btn btn-delete-item fz-20"
+                              data-title="{{ __('Confirm deletion!') }}"
+                              data-confirm="{{ __('Are you sure you want to delete?') }}">
+                            </button>
+                          </form> 
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach
+                </tbody>
               </table>
+              <div class="contain-btn second">
+                <a class="btn btn-primary" href="{{ route('user.create')}}">
+                  <span class="fa fa-plus-circle"></span>
+                  {{ __('Add user') }}
+                </a>
+              </div>
               {!! $users->render() !!}
             </div>
             <!-- /.box-body -->
@@ -101,18 +124,5 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-<!-- ./wrapper -->
 
 @endsection
