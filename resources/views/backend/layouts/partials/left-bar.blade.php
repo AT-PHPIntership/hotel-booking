@@ -111,7 +111,7 @@
         <!-- place -->
         <li>
           <a href="{{ route('place.index') }}" id="place">
-            <i class="fa fa-folder"></i> <span>{{ __('Place') }}</span>
+            <i class="fa fa-university"></i> <span>{{ __('Place') }}</span>
           </a>
         </li>
       </ul>

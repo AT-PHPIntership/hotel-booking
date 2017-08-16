@@ -24,7 +24,7 @@
               {!! csrf_field() !!}
               <div class="box-body">
                 <div class="form-group has-feedback
-                  {{ $errors->has('descript') ? ' has-error' : '' }}">
+                  {{ $errors->has('name') ? ' has-error' : '' }}">
                   <label for="name">{{ __('Name') }}</label>
                   <input type="text" class="form-control" name= "name" id="name"
                     placeholder="{{ __('Enter place name') }}" value="{{ old('name') }}">
@@ -40,19 +40,28 @@
                   <small class="text-danger">{{ $errors->first('descript') }}</small>
                 </div>
 
-                <div class="form-group col-md-6 center-block
-                  {{ $errors->has('descript') ? ' has-error' : '' }}">  
+               
+                <div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}"> 
                   <label for="input-file">{{ __("Image") }}</label>
-                  <input type="file" value="{{ old('descript') }}" class="form-control"
-                    name="image" id="input-file" >
-                    <small class=" text-danger">{{ $errors->first('image') }}</small>
+                  <input type="file" class="form-control" name="image" id="preview-image">
+                  <small class=" text-danger">{{ $errors->first('image') }}</small>
+                  <div >
+                    <img class="img-place" id="showImage" src="{{ asset('/images/default/no_image.png') }}">
+                  </div>
                 </div>
                 
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="reset" class="btn btn-warning">{{ __("Reset") }}</button>
-                <button type="submit" class="btn btn-primary">{{ __("Submit") }}</button>
+                <a class="btn btn-default btn-custom" href="{{route('place.index')}}">
+                  {{ __('Back') }}
+                </a>
+                <button type="reset" class="btn btn-warning btn-custom">
+                  {{ __('Reset') }}
+                </button>
+                <button type="submit" class="btn btn-primary btn-custom pull-right">
+                  {{ __('Submit') }}
+                </button>
               </div>
             </form>
           </div>
