@@ -65,26 +65,26 @@
                       <td>{{ $user->email }}</td>
                       <td>{{ $user->phone }}
                       <td>
-                        @if ($user->is_admin == App\Model\User::ROLE_ADMIN)
-                          <form>
+                        <form method="POST" action="{{ route('user.updateRole', $user->id) }}">
+                          {!! csrf_field() !!}
+                          {{ method_field('PUT') }}
+                          @if ($user->is_admin == App\Model\User::ROLE_ADMIN)
                             <button type="submit" class="btn btn-default btn-on btn-sm">{{ __('Admin') }}</button>
-                          </form>
-                        @else
-                          <form >
+                          @else
                             <button type="submit" class="btn btn-default btn-off btn-sm">{{ __('User') }}</button>
-                          </form>
-                        @endif
+                          @endif
+                        </form>
                       </td>
                       <td>
-                        @if ($user->is_active == App\Model\User::STATUS_ACTIVED)
-                          <form>
+                        <form method="POST" action="{{ route('user.updateStatus', $user->id) }}">
+                          {!! csrf_field() !!}
+                          {{ method_field('PUT') }}
+                          @if ($user->is_active == App\Model\User::STATUS_ACTIVED)
                             <button type="submit" class="btn btn-default btn-on btn-sm">{{ __('Active') }}</button>
-                          </form>
-                        @else
-                          <form>
+                          @else
                             <button type="submit" class="btn btn-default btn-off btn-sm">{{ __('Disabled') }}</button>
-                          </form>
-                        @endif
+                          @endif
+                        </form>
                       </td>
                       <td align="center">
                         <div class="option-btn">
