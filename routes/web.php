@@ -23,4 +23,7 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::resource('news', 'NewsController');
     Route::resource('/hotel', 'HotelController');
     Route::resource('/category', 'CategoryController');
+    Route::group(['prefix' => 'search'], function() {
+    	Route::get('/', ['as' => 'news.search', 'uses' => 'NewsController@search']);
+    });
 });

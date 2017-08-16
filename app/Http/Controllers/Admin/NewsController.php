@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\News;
+use App\Libraries\Traits\SearchTrait;
 
 class NewsController extends Controller
 {
@@ -16,17 +17,33 @@ class NewsController extends Controller
     public function index()
     {
         $columns = [
-            'id',
+            'news.id',
             'title',
-            'slug',
+            'news.slug',
             'content',
             'category_id'
         ];
-        $news = News::select($columns)
+        $news = News::search(request('search'), true)
+                    ->select($columns)
                     ->with(['category' => function ($query) {
                         $query->select('id', 'name');
                     }])
-                    ->orderby('id', 'ASC')->paginate(News::ROW_LIMIT);
+                    ->join('categories', 'news.category_id', '=', 'categories.id')
+                    ->orderby('id', 'DESC')
+                    ->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
+
+    /**
+     * Search using trait.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $keyword = $request->get('search');
+        $news = News::search($keyword, true)->paginate(News::ROW_LIMIT);
+        return view('backend.news.index', compact('news'));
+    }
+
 }
