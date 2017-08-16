@@ -5,6 +5,9 @@
     <h1 class="title-page text-success">
       {{__('EDIT NEWS')}}
     </h1>
+    <div class="cls-news-error-msg"> 
+      @include('flash::message')
+    </div>
     <section class="content">
       <div class="row margin-center">
         <div class="col-md-12">
@@ -13,25 +16,25 @@
               {{csrf_field()}}
               {{method_field('PUT')}}
               <div class="box-body">
-                  <div class="form-group" {{ $errors->has('title') ? ' has-error' : '' }}>
-                      <label>{{__('Title')}}</label>
-                      <input type="text" class="form-control" name="title"
-                      value="{{$news->title}}">
-                      @if($errors->first('title'))
-                          <span class="help-block">{{$errors->first('title')}}</span>
-                      @endif
-                  </div>
-                  <div class="form-group" {{ $errors->has('content') ? ' has-error' : '' }}>
-                      <label>{{__('Content')}}</label>
-                      <textarea class="form-control" name="content">{{$news->content}}</textarea>
-                      @if($errors->first('content'))
-                          <span class="help-block">{{$errors->first('content')}}</span>
-                      @endif
-                  </div>
-                  <div class="form-group">
-                      <label>{{__('Category_id')}}</label>
-                      <input type="text" class="form-control" name="category_id" readonly="true" value="{{$news->category_id}}">
-                  </div>
+                <div class="form-group" {{ $errors->has('title') ? ' has-error' : '' }}>
+                  <label>{{__('Title')}}</label>
+                  <input type="text" class="form-control" name="title"
+                  value="{{$news->title}}">
+                  @if($errors->first('title'))
+                      <span class="help-block">{{$errors->first('title')}}</span>
+                  @endif
+                </div>
+                <div class="form-group" {{ $errors->has('content') ? ' has-error' : '' }}>
+                  <label>{{__('Content')}}</label>
+                  <textarea class="form-control" name="content">{{$news->content}}</textarea>
+                  @if($errors->first('content'))
+                      <span class="help-block">{{$errors->first('content')}}</span>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label>{{__('Category')}}</label>
+                  <input type="text" class="form-control" readonly="true" value="{{$news->category->name}}">
+                </div>
               </div>
               <div class="box-footer">
                 <div class="btn-edit-news">
@@ -51,7 +54,7 @@
             </form>
           </div>
         </div>
-    </div>
-  </section>
-</div>      
+      </div>
+    </section>
+  </div>      
 @endsection
