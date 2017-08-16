@@ -38,7 +38,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('id')->get();
+        $categories = Category::select('id', 'name')->get();
         return view('backend.news.create', compact('categories'));
     }
 
@@ -58,7 +58,7 @@ class NewsController extends Controller
             return redirect()->route('news.index');
         } else {
             flash(__('Create News Fail!'))->error();
-            return redirect()->route('news.index');
+            return redirect()->route('news.create');
         }
     }
 }

@@ -3,6 +3,9 @@
 @section('content')
   <div class="content-wrapper">
     <h1 class="title-page">{{__('ADD NEWS')}}</h1>
+    <div class="cls-news-error-message">
+      @include('flash::message')
+    </div>
     <section class="content">
       <div class="row col-md-8 margin-center">
         <div class="col-md-12">
@@ -28,11 +31,11 @@
                     @endif
                   </div>
                   <div class="form-group" {{ $errors->has('category_id') ? ' has-error' : '' }}>
-                    <label>{{__('Category_id')}}</label>
+                    <label>{{__('Category id')}}</label>
                     <select name = "category_id" class="form-control">
                       <option></option>
                       @foreach($categories as $category)
-                        <option>{{$category->id}}</option>
+                        <option value="{{$category->id}}">{{$category->name}}</option>
                       @endforeach
                     </select>
                     @if($errors->first('category_id'))
