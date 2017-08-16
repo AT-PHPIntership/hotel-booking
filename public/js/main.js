@@ -1,5 +1,9 @@
 $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
+    $('[data-toggle="tooltip"]').tooltip();
+    
+    /**
+     * Show delete confimation when click button delete
+     */
     $('.btn-delete-item').bind('click',function(e){
         e.preventDefault();
         var form = $(this.form);
@@ -14,6 +18,9 @@ $(document).ready(function(){
         })
     });
 
+    /**
+     * Show image when choose image
+     */
     $('#preview-image').change( function(event) {
         var select_input_file = $(this).val();
         if (select_input_file) {
