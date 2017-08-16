@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\AdminCreatePlace;
 use App\Http\Requests\Backend\UpdatePlaceRequest;
+use App\Http\Requests\Backend\CreatePlaceRequest;
 use App\Model\Place;
-use App\Helpers\AdminPlaceHelper;
 
 class PlaceController extends Controller
 {
@@ -19,7 +18,7 @@ class PlaceController extends Controller
     public function index()
     {
         $places = Place::select('id', 'name', 'descript', 'image', 'created_at')
-            ->orderBy('created_at', 'DESC')->paginate(Place::ROW_LIMIT);
+            ->orderBy('id', 'DESC')->paginate(Place::ROW_LIMIT);
         return view("backend.places.index", compact('places'));
     }
 
@@ -40,13 +39,13 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(AdminCreatePlace $request)
+    public function store(CreatePlaceRequest $request)
     {
         $place = new Place($request->all());
         if ($request->hasFile('image')) {
-            $place ->image= $request->image->hashName();
+            $place->image = $request->image->hashName();
             $request->file('image')
-                ->move(config('constant.path_upload_places'), $place->image);
+                ->move(config('image.places.path_upload'), $place->image);
         }
         if ($place->save()) {
             flash(__('Create success'))->success();
@@ -66,7 +65,7 @@ class PlaceController extends Controller
      */
     public function edit($id)
     {
-        $place = Place::find($id);
+        $place = Place::findOrFail($id);
         return view('backend.places.edit', compact('place'));
     }
 
@@ -84,8 +83,8 @@ class PlaceController extends Controller
         $input = $request->all();
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $fileName = config('constant.current_day') . "-" . $file->hashName();
-            $file->move(config('constant.path_upload_places'), $fileName);
+            $fileName = config('image.places.name_prefix') . "-" . $file->hashName();
+            $file->move(config('image.places.path_upload'), $fileName);
             $input['image'] = $fileName;
         }
         if ($place->update($input)) {
@@ -95,7 +94,6 @@ class PlaceController extends Controller
             flash(__('Update failure'))->error();
             return redirect()->back()->withInput();
         }
-        
     }
 
     /**

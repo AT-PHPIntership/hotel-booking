@@ -6,20 +6,19 @@
         transform: rotate(-25deg);
     }
 }
-.margin_center{
-    margin-left: 15%;
-    margin-right: 15%;
+.margin-center{
+	margin-left: 15%;
+	margin-right: 15%;
 }
 
-.title_page{
-    text-align: center;
+.title-page{
+	text-align: center;
 }
 
-.chat_room{
-    margin-left: 25%;
-    margin-right: 25%;
+.chat-room{
+	margin-left: 25%;
+	margin-right: 25%;
 }
-
 /* .form-control.bg-info {
     background-color: #E3F5B8;
 }
@@ -39,12 +38,12 @@
     animation: spinAround 0.1s linear infinite;
 }
 
-.user_image{
+.user-image{
     display: inline-block;
     width: 100px;
 }
 
-.cus_icon{
+.cus-icon{
     border: none;
     background: none;
     color: blue;
@@ -52,6 +51,11 @@
 
 .inline{
     display: inline;
+}
+
+
+.help-block {
+    color: red;
 }
 /*button create*/
 .btn-create span {
@@ -65,7 +69,8 @@
 /*end button create*/
 
 .news-btn {
-    margin-top: 4px;
+    /*margin-top: 2px;*/
+    font-size: 16px;
 }
  /*admin-place*/
 .icon-remove{
@@ -76,72 +81,96 @@
     margin-left: 15%;
     margin-right: 15%;
 }
-
-.title-page {
-    text-align: center;
-}
-
+/*fix template index, create*/
 .btn-delete-item {
     border: none;
     background: unset;
     color: #e23434;
-    font-size: 20px;
+    margin-top:5px; 
+
+}
+.news-option {
+    width: 122px;
+}
+.news-option:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.title-page {
+    text-align: center;
+}
+.btn-custom-option {
+    font-size: 22px;
 }
 
-.title-header {
-   display: block !important;
-   font-size: 27px !important;
-}
-
-.contain-btn{ 
+.contain-btn { 
     float: right !important;
+    margin-right: 1.5%;
+    margin-bottom: 10px;
 }
 
-.form-search{
-    float: right !important;
-    margin-bottom: 10px;    
+.contain-btn.second {
+    margin-right: 0;
+    margin-top: 20px;
 }
 
+.btn-option:after {
+    content: "";
+    clear:both;
+}
+
+.btn-option{
+    width: 95px;
+}
+.search-news {
+    float: left;
+    width: 60%;
+}
 .btn-pencil{
     font-size: 18px;
 }
+.btn-option .btn-edit {
+    margin-top: 12px;
+    margin-left: 21px;
 
-.col-no {
-    width: 5%;
 }
-.col-image {
-    width: 15%;
+
+.form-delete{
+    margin-top: 3px;
 }
-.col-name {
-    width: 20%;
+
+
+/*end fix template*/
+.title-header {
+    display: block !important;
+    font-size: 27px !important;
 }
-.col-descript {
-    width: 50%;
+
+.contain-btn{ 
+     
+    margin-right: 1.5%;
 }
-.col-action {
-    width: 5%;
-}
-.table-place{
-    table-layout: fixed;
+.contain-btn.second { 
+    margin-right: 0;
+    margin-top: 20px;
 }
  
 .img-place{
     max-width: 145px;
     height: 100px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 .place-descript{
     max-height: 300px;
-    max-width: 713px;
+    max-width: 690px;
 }
 .btn-custom {
     margin-right: 10px;
 }
-.btn-submit{
-    float: right;
-}
 
 /*end admin-list-place*/
+
 /*errors page*/
 .main-page-error {
     text-align: center;
@@ -155,11 +184,70 @@
 .title-error{
     color: #5488c7 !important;
 }
-
-
-.btn-addnews a{
-    width: 10%;
+.news-search-input {
+    width: 60%;
+}
+.news-search-btn {
+   margin-left: 5%;
 }
 
+.add-news-button {
+    float: left;
+}
+.add-news-submit {
+    float: right;
+}
 /*end errors page*/
 
+/*search*/
+.form-search{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.input-search {
+    display: inline-block;
+    width: 30%;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    background-color: white;
+    background-repeat: no-repeat;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.input-search:focus {
+    width: 60%;
+}
+
+.container-search {
+    position: relative;
+}
+
+.btn-search {
+    position: absolute;
+    top: 0px;
+}
+/*end search*/
+
+.btn-on {
+    background: #EF9D47;
+    color: #010101;
+}
+
+.btn-off {
+    background: #D0DFDF;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.fz-20 {
+    font-size: 20px;
+}
+
+.cus-icon-sm {
+    font-size: 20px;
+    transform: translateY(20%);
+}

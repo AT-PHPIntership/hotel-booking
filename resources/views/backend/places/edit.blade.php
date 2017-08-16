@@ -4,11 +4,11 @@
 
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title_page text-success">
+    <h1 class="title-page text-success">
       {{ __('Update place') }}
     </h1>
     <section class="content">
-      <div class="row margin_center">
+      <div class="row margin-center">
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -55,7 +55,7 @@
                   {{ __('Reset') }}
                 </button>
                 <button type="submit" id="btn-submit" class="btn btn-primary 
-                  btn-custom btn-submit">
+                  btn-custom btn-submit pull-right">
                   {{ __('Submit') }}
                 </button>
               </div>
