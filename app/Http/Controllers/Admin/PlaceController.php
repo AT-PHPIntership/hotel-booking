@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\AdminCreatePlace;
+use App\Http\Requests\Backend\CreatePlaceRequest;
 use App\Model\Place;
 
 class PlaceController extends Controller
@@ -17,7 +17,7 @@ class PlaceController extends Controller
     public function index()
     {
         $places = Place::select('id', 'name', 'descript', 'image', 'created_at')
-            ->orderBy('created_at', 'DESC')->paginate(Place::ROW_LIMIT);
+            ->orderBy('id', 'DESC')->paginate(Place::ROW_LIMIT);
         return view("backend.places.index", compact('places'));
     }
 
@@ -38,11 +38,11 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(AdminCreatePlace $request)
+    public function store(CreatePlaceRequest $request)
     {
         $place = new Place($request->all());
         if ($request->hasFile('image')) {
-            $place ->image= $request->image->hashName();
+            $place->image = $request->image->hashName();
             $request->file('image')
                 ->move(config('constant.path_upload_places'), $place->image);
         }
