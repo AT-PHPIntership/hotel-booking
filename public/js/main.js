@@ -1,13 +1,17 @@
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
-    $(".btn-delete-item").bind('click',function(){ 
-         
-      var result = confirm("Are you sure you want to delete?");
-      if(result){
-        $('form.delete-item').submit();
-      } else {
-        return false;
-      }
+    $('.btn-delete-item').bind('click',function(e){
+        e.preventDefault();
+        var form = $(this.form);
+        var title = $(this).attr('data-title');
+        var body = '<i>' + $(this).attr('data-confirm') + '</i>';
+        $('#title-content').html(title);
+        $('#body-content').html(body);
+        $('#confirm').modal('show');
+        $('#delete-btn').one('click', function(){
+            form.submit();
+            $('#confirm').modal('hide');
+        })
     });
 
     $('#preview-image').change( function(event) {
