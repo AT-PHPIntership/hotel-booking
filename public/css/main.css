@@ -128,7 +128,6 @@
     margin-right: 0;
     margin-top: 20px;
 }
-
 .btn-option:after {
     content: "";
     clear:both;
@@ -146,7 +145,7 @@
     font-size: 18px;
 }
 .btn-option .btn-edit {
-    margin-top: 7px;
+    margin-top: 12px;
     margin-left: 21px;
 }
 
@@ -199,12 +198,10 @@
     color: #5488c7 !important;
 }
 
-.news-search-btn {
-   margin-left: 5%;
-}
 .news-search-input {
     width: 60%;
 }
+
 .news-search-btn {
    margin-left: 5%;
 }
@@ -252,12 +249,12 @@
     margin-left: -14px;
     margin-top: 3px;
 }
-.cls-search-not-found {
-    color: red;
-}
 .btn-search {
     position: absolute;
     top: 0px;
+}
+.cls-search-not-found {
+    color: #ed8910;
 }
 /*end search*/
 .btn-on {

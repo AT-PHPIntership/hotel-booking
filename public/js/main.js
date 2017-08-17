@@ -32,11 +32,11 @@ $(document).ready(function(){
     });
 
     /**
-     * Show msg if not data in database or search not found
+     * Show message if database has not data or search not found
      *
      */
-    var rowCount = $('#newstable tbody tr').length;
-    if (rowCount == 0) {
+    var countNews = $('#newstable tbody tr').length;
+    if (countNews == 0) {
         $('.cls-search-not-found').show();
     }
 });
