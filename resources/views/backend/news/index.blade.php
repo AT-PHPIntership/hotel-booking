@@ -22,11 +22,11 @@
                 <h3 class="box-title">{{__('Search News')}}</h3>
               </div>
               <div class="col-md-6">
-                  <form method="GET" class="container-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text">
-                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
-                  </form>
-                </div>
+                <form  class="container-search">
+                  <input class="input-search form-control" placeholder="Search" name="search" type="text">
+                  <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                </form>
+              </div>
               <div class="">
                 <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
                   <i class="fa fa-plus-circle"></i>
