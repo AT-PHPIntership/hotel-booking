@@ -30,6 +30,7 @@ class UserController extends Controller
                      ->select($columns)
                      ->orderby('id', 'DESC')
                      ->paginate(User::ROW_LIMIT);
+        $users->appends(['search' => request('search')]);
         return view("backend.users.index", compact('users'));
     }
 
@@ -70,7 +71,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return view('backend.users.edit', compact('user'));
     }
 

@@ -35,7 +35,7 @@
                   </form>
                 </div>
                 <div class="contain-btn">
-                  <a class="btn btn-primary" href="{{ route('user.create')}}">
+                  <a class="btn btn-primary" href="{{ route('user.create')}}" id="btn-add-user">
                   <span class="fa fa-plus-circle"></span>
                   {{ __('Add user') }}
                   </a>
@@ -105,6 +105,9 @@
                   @endforeach
                 </tbody>
               </table>
+              <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
               <div class="contain-btn second">
                 <a class="btn btn-primary" href="{{ route('user.create')}}">
                   <span class="fa fa-plus-circle"></span>
