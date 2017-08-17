@@ -29,7 +29,7 @@
 
                 <div class="form-group has-feedback 
                   {{ $errors->has('descript') ? ' has-error' : '' }}">
-                  <label for="descript">{{ __('Descript') }}</label>
+                  <label for="descript">{{ __('Description') }}</label>
                   <textarea class="form-control place-descript" name= "descript" 
                     id="place-descript">{{ old('descript', $place->descript) }}
                   </textarea>
@@ -39,7 +39,7 @@
                 <div class="form-group"> 
                   <label for="input-file">{{ __("Image") }}</label>
                   <div >
-                    <img class="img-place" id="showImage" src="{{ asset($place->image_path) }}" >
+                    <img class="img-place" id="showImage" src="{{ $place->image_url }}" >
                   </div>
                   <input type="file" class="form-control" name="image" id="preview-image">
                   <small class=" text-danger">{{ $errors->first('image') }}</small>
@@ -48,7 +48,7 @@
               
               <div class="box-footer">
                 <a class="btn btn-default btn-custom" id="btn-go-back" 
-                  href="{{route('place.index')}}">
+                  href="javascript:history.back()">
                   {{ __('Back') }}
                 </a>
                 <button type="reset" id="btn-reset" class="btn btn-warning btn-custom">

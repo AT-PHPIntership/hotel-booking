@@ -43,7 +43,7 @@ class PlaceController extends Controller
     {
         $place = new Place($request->all());
         if ($request->hasFile('image')) {
-            $place->image = $request->image->hashName();
+            $place->image = config('image.name_prefix') . "-" . $request->image->hashName();
             $request->file('image')
                 ->move(config('image.places.path_upload'), $place->image);
         }
@@ -83,7 +83,7 @@ class PlaceController extends Controller
         $input = $request->all();
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $fileName = config('image.places.name_prefix') . "-" . $file->hashName();
+            $fileName = config('image.name_prefix') . "-" . $file->hashName();
             $file->move(config('image.places.path_upload'), $fileName);
             $input['image'] = $fileName;
         }

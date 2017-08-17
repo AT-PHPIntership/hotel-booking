@@ -26,7 +26,7 @@ class CreatePlaceRequest extends FormRequest
         return [
             'name' => 'required|unique:places',
             'descript' => 'required',
-            'image' => 'required|image|max:' . config('image.places.max_size')
+            'image' => 'required|image|max:' . config('image.max_upload_size')
         ];
     }
 }
