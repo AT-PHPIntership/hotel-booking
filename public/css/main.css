@@ -128,7 +128,6 @@
     margin-right: 0;
     margin-top: 20px;
 }
-
 .btn-option:after {
     content: "";
     clear:both;
@@ -201,12 +200,10 @@
     color: #5488c7 !important;
 }
 
-.news-search-btn {
-   margin-left: 5%;
-}
 .news-search-input {
     width: 60%;
 }
+
 .news-search-btn {
    margin-left: 5%;
 }
