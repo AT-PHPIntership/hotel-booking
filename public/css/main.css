@@ -72,58 +72,77 @@
 .title-page {
     text-align: center;
 }
-
+ 
+/*fix template index, create*/
 .btn-delete-item {
     border: none;
     background: unset;
     color: #e23434;
-    font-size: 20px;
+}
+.btn-custom-option {
+    font-size: 22px;
 }
 
+.contain-btn { 
+    float: right !important;
+    margin-right: 1.5%;
+    margin-bottom: 10px;
+}
+
+.contain-btn.second {
+    margin-right: 0;
+    margin-top: 20px;
+}
+
+.btn-option:after {
+    content: "";
+    clear:both;
+}
+
+.btn-option{
+    width: 95px;
+}
+
+.btn-option .btn-edit {
+    margin-top: 7px;
+    margin-left: 21px;
+}
+
+.form-delete{
+    margin-top: 3px;
+}
+
+
+/*end fix template*/
 .title-header {
-   display: block !important;
-   font-size: 27px !important;
+    display: block !important;
+    font-size: 27px !important;
 }
 
 .contain-btn{ 
-    float: right !important;
-    /*margin: 10px;*/
+     
+    margin-right: 1.5%;
 }
-
-.form-search{
-    float: right !important;
-    margin-bottom: 10px;    
-}
-
-.btn-pencil{
-    font-size: 18px;
-}
-
-.col-no {
-    width: 5%;
-}
-.col-image {
-    width: 15%;
-}
-.col-name {
-    width: 20%;
-}
-.col-descript {
-    width: 50%;
-}
-.col-action {
-    width: 5%;
-}
-.table-place{
-    table-layout: fixed;
+.contain-btn.second { 
+    margin-right: 0;
+    margin-top: 20px;
 }
  
 .img-place{
     max-width: 145px;
     height: 100px;
+    margin-top: 10px;
+}
+.place-descript{
+    max-height: 300px;
+    max-width: 713px;
+}
+.btn-custom {
+    margin-right: 10px;
 }
 
 /*end admin-list-place*/
+
 /*errors page*/
 .main-page-error {
     text-align: center;
@@ -144,3 +163,56 @@
 }
 
 /*end errors page*/
+
+/*search*/
+.form-search{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.input-search {
+    display: inline-block;
+    width: 30%;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    background-color: white;
+    background-repeat: no-repeat;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.input-search:focus {
+    width: 60%;
+}
+
+.container-search {
+    position: relative;
+}
+
+.btn-search {
+    position: absolute;
+    top: 0px;
+}
+/*end search*/
+
+.btn-on {
+    background: #EF9D47;
+    color: #010101;
+}
+
+.btn-off {
+    background: #D0DFDF;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.fz-20 {
+    font-size: 20px;
+}
+
+.cus-icon-sm {
+    font-size: 20px;
+    transform: translateY(20%);
+}

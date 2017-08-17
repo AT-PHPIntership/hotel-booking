@@ -4,7 +4,7 @@ namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminCreatePlace extends FormRequest
+class CreatePlaceRequest extends FormRequest
 {
     /**
      * Determine if the Place is authorized to make this request.
@@ -24,7 +24,7 @@ class AdminCreatePlace extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:places',
             'descript' => 'required',
             'image' => 'required',
         ];

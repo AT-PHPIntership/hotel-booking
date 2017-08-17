@@ -24,25 +24,31 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">{{ __('List Categories') }}</h3>
-              <div class="contain-btn">
-                <a href="{{ route('category.create') }}" class="btn btn-primary">
-                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
-                  {{ __('Add Category') }}
-                </a> 
+              <h3 class="box-title title-header">{{ __('List Categories') }}</h3>
             </div>
-            </div>
-            <div>
-            @include('flash::message')
-            </div>
-            <!-- add button -->
-            
-            <!-- end button -->
-          <!-- search -->
-          <!-- end search -->
            
             <!-- /.box-header -->
             <div class="box-body">
+            <!-- messages -->
+              @include('flash::message')
+            <!-- end msg -->
+              <div class="row">
+              <!-- search -->
+                <div class="col-md-6 container-search ">
+                  <form method="GET" action="{{ route('category.index') }}" class="form-search">
+                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  </form>
+                </div>
+                <!-- end search -->
+                <div class="contain-btn pull-right">
+                  <a href="{{ route('category.create') }}" class="btn btn-primary">
+                    <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                    {{ __('Add Cagegory') }}
+                  </a> 
+                </div>
+              </div>
+               @include('backend.layouts.partials.modal')
               <table id="table-contain" class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
@@ -69,15 +75,13 @@
               @endforeach
                </tbody>
               </table>
-              {{ $categories->render() }}
-             <div class="box-header">
-              <div class="contain-btn">
-                <a href="{{ route('category.create') }}" class="btn btn-primary">
-                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
-                  {{ __('Add Category') }}
-                </a> 
-            </div>
-            </div>
+                <div class="contain-btn second pull-right">
+                  <a href="{{ route('category.create') }}" class="btn btn-primary">
+                    <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                    {{ __('Add Category') }}
+                  </a> 
+                </div>
+            {{ $categories->render() }}
             </div>
             <!-- /.box-body -->
           </div>
