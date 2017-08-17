@@ -80,7 +80,7 @@ class NewsController extends Controller
         ];
         $news = News::select($columns)
                     ->where('slug', $slug)
-                    ->first();
+                    ->firstOrFail();
         return view('backend.news.edit', compact('news'));
     }
 
