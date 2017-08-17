@@ -6,16 +6,19 @@
         transform: rotate(-25deg);
     }
 }
-
-.title_page{
-    text-align: center;
+.margin-center{
+	margin-left: 15%;
+	margin-right: 15%;
 }
 
-.chat_room{
-    margin-left: 25%;
-    margin-right: 25%;
+.title-page{
+	text-align: center;
 }
 
+.chat-room{
+	margin-left: 25%;
+	margin-right: 25%;
+}
 /* .form-control.bg-info {
     background-color: #E3F5B8;
 }
@@ -35,12 +38,12 @@
     animation: spinAround 0.1s linear infinite;
 }
 
-.user_image{
+.user-image{
     display: inline-block;
     width: 100px;
 }
 
-.cus_icon{
+.cus-icon{
     border: none;
     background: none;
     color: blue;
@@ -48,6 +51,11 @@
 
 .inline{
     display: inline;
+}
+
+
+.help-block {
+    color: red;
 }
 /*button create*/
 .btn-create  {
@@ -57,7 +65,8 @@
 /*end button create*/
 
 .news-btn {
-    margin-top: 4px;
+    /*margin-top: 2px;*/
+    font-size: 16px;
 }
  /*admin-place*/
 .icon-remove{
@@ -68,16 +77,24 @@
     margin-left: 15%;
     margin-right: 15%;
 }
-
-.title-page {
-    text-align: center;
-}
- 
 /*fix template index, create*/
 .btn-delete-item {
     border: none;
     background: unset;
     color: #e23434;
+    margin-top:5px; 
+
+}
+.news-option {
+    width: 122px;
+}
+.news-option:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.title-page {
+    text-align: center;
 }
 .btn-custom-option {
     font-size: 22px;
@@ -102,10 +119,17 @@
 .btn-option{
     width: 95px;
 }
-
+.search-news {
+    float: left;
+    width: 60%;
+}
+.btn-pencil{
+    font-size: 18px;
+}
 .btn-option .btn-edit {
     margin-top: 7px;
     margin-left: 21px;
+
 }
 
 .form-delete{
@@ -156,15 +180,20 @@
 .title-error{
     color: #5488c7 !important;
 }
-
-
-.btn-addnews a{
-    width: 10%;
+.news-search-input {
+    width: 60%;
+}
+.news-search-btn {
+   margin-left: 5%;
 }
 
-<<<<<<< HEAD
 /*end errors page*/
-=======
+.add-news-button {
+    float: left;
+}
+.add-news-submit {
+    float: right;
+}
 /*end errors page*/
 
 /*search*/
@@ -219,4 +248,3 @@
     font-size: 20px;
     transform: translateY(20%);
 }
->>>>>>> master

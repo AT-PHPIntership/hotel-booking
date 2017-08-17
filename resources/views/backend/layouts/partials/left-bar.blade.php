@@ -16,7 +16,7 @@
         
         <!-- index -->
         <li class="active treeview">
-          <a href="../index.html">
+          <a href="{{ route('home.index')}}">
             <i class="fa fa-home" aria-hidden="true"></i> <span>{{ __('Home Page') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -26,7 +26,7 @@
 
         <!--  introduction -->
         <li class="treeview">
-          <a href="../../pages/static page/indexAboutUs.html">
+          <a href="#">
             <i class="fa fa-table"></i> <span>{{ __('Introduction') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -90,7 +90,7 @@
 
         <!-- booking room -->
         <li>
-          <a href="pages/calendar.html">
+          <a href="#">
             <i class="fa fa-calendar"></i> <span>{{ __('Booking Room') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-red">17</small>
@@ -101,7 +101,7 @@
 
         <!-- feedback -->
         <li>
-          <a href="pages/mailbox/mailbox.html">
+          <a href="#">
             <i class="fa fa-envelope"></i> <span>{{ __('Feedbacks') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">102</small>
