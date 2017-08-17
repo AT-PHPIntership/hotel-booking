@@ -31,8 +31,7 @@
                   {{ $errors->has('descript') ? ' has-error' : '' }}">
                   <label for="descript">{{ __('Description') }}</label>
                   <textarea class="form-control place-descript" name= "descript" 
-                    id="place-descript">{{ old('descript', $place->descript) }}
-                  </textarea>
+                    id="place-descript">{{ old('descript', $place->descript) }}</textarea>
                   <small class="text-danger">{{ $errors->first('descript') }}</small>
                 </div>
 
