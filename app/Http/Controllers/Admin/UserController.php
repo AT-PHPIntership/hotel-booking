@@ -68,7 +68,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return view('backend.users.edit', compact('user'));
     }
 
@@ -107,6 +107,42 @@ class UserController extends Controller
             flash(__('Deletion successful!'))->success();
         } else {
             flash(__('Deletion failed!'))->error();
+        }
+        return redirect()->route('user.index');
+    }
+
+    /**
+     * Update status of user.
+     *
+     * @param int $id id of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->is_active == User::STATUS_ACTIVED) {
+            $user->update(['is_active' => User::STATUS_DISABLED]);
+        } else {
+            $user->update(['is_active' => User::STATUS_ACTIVED]);
+        }
+        return redirect()->route('user.index');
+    }
+
+    /**
+     * Update role of user.
+     *
+     * @param int $id id of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateRole($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->is_admin == User::ROLE_ADMIN) {
+            $user->update(['is_admin' => User::ROLE_USER]);
+        } else {
+            $user->update(['is_admin' => User::ROLE_ADMIN]);
         }
         return redirect()->route('user.index');
     }

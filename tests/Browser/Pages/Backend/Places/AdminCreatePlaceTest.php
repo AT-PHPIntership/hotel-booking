@@ -6,7 +6,6 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Http\UploadedFile;
-use Faker\Factory as Faker;
 
 class AdminCreatePlaceTest extends DuskTestCase
 {
@@ -111,10 +110,11 @@ class AdminCreatePlaceTest extends DuskTestCase
     public function testBtnReset()
     {
         $this->browse(function (Browser $browser) {
+            $image = $this->fakeImage();
             $browser->visit('/admin/place/create')
                 ->type('name', 'Ha Noi')
                 ->type('descript', 'Viet Nam')
-                ->attach('image', '/test.png')
+                ->attach('image', $image)
                 ->press('Reset')
                 ->assertPathIs('/admin/place/create')
                 ->assertInputValue('name', '')
@@ -144,7 +144,7 @@ class AdminCreatePlaceTest extends DuskTestCase
      */
     public function fakeImage()
     {    
-        $image = UploadedFile::fake()->image('avartar.jpg');
+        $image = UploadedFile::fake()->image('image.jpg');
         return $image;
     }
 }

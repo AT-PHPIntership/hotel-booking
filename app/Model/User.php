@@ -34,6 +34,26 @@ class User extends Model
     const ROW_LIMIT = 10;
 
     /**
+     * Value of admin
+     */
+    const ROLE_ADMIN = 1;
+
+    /**
+     * Value of user
+     */
+    const ROLE_USER = 0;
+
+    /**
+     * Value of actived user
+     */
+    const STATUS_ACTIVED = 1;
+
+    /**
+     * Value of disabled user
+     */
+    const STATUS_DISABLED = 0;
+
+    /**
      * Get all of the user's ratingcomment.
      *
      * @return array
