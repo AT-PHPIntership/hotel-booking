@@ -53,19 +53,19 @@
                 <thead>
                 <tr>
                   <th class="col-md-1">{{ __('ID') }}</th>
-                  <th >{{ __('Name') }}</th>
+                  <th>{{ __('Name') }}</th>
                   <th class="col-md-2">{{ __('Action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
-            @foreach ($categories as $objCat)
+            @foreach ($categories as $category)
                 <tr>
-                  <td>{{ $objCat->id }}</td>
-                  <td>{{ $objCat->name }}
+                  <td>{{ $category->id }}</td>
+                  <td>{{ $category->name }}
                   </td>
                   <td align="center">
-                    <a href="{{ route('category.edit',$objCat->id) }}"><i class= "fa fa-pencil-square-o cus_icon"></i></a>
-                     <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del inline" >
+                    <a href="{{ route('category.edit',$category->id) }}"><i class= "fa fa-pencil-square-o cus_icon"></i></a>
+                     <form method="POST" action="{{ route('category.destroy', $category->id) }}" class="form-del inline" >
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
                         <button type="submit" name="" class="fa fa-trash-o cus_icon btn btn-delete-item"></button>

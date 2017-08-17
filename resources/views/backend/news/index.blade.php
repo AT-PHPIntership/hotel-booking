@@ -21,6 +21,7 @@
               <div class="title-news">
                 <h3 class="box-title">{{__('Search News')}}</h3>
               </div>
+<<<<<<< HEAD
               <!-- search -->
                 <div class="col-md-6 container-search ">
                   <form method="GET" action="{{ route('category.index') }}" class="form-search">
@@ -31,6 +32,16 @@
                 <!-- end search -->
               <div class="">
                 <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
+=======
+                <div class="col-md-6">
+                  <form method="GET" class="container-search">
+                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  </form>
+                </div>
+              <div >
+                <a href="{{ route('') }}" class="btn btn-primary pull-right">
+>>>>>>> admin_categories_list
                   <i class="fa fa-plus-circle"></i>
                   {{__('Add News')}}
                 </a>
@@ -38,7 +49,7 @@
             </div>
             <div class="box-body">
               @include('flash::message')
-              <table class="table table-bordered table-responsive" id="newstable">
+              <table class="table table-bordered table-responsive table-striped" id="newstable">
                 <thead>
                 <tr>
                   <th>{{__('Id')}}</th>
@@ -59,7 +70,7 @@
                     <td>{{$item->name}}</td>
                     <td align="center">
                       <div class="news-option">
-                        <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
+                        <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                         </a>
                         <form action="" method="POST" class="inline" >
                           {{csrf_field()}}
