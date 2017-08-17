@@ -4,12 +4,12 @@
 
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title_page text-success">
+    <h1 class="text-center text-success">
       {{ __("Add place") }}
     </h1>
     <!-- Main content -->
     <section class="content">
-      <div class="row margin_center">
+      <div class="row margin-center">
         <!-- left column -->
         <div class="col-md-12">
           <!-- general form elements -->
