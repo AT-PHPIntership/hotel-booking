@@ -21,20 +21,13 @@
               <div class="title-news">
                 <h3 class="box-title">{{__('Search News')}}</h3>
               </div>
-              <div class="form-group search-news">
-                <form method="POST" class="form-group inline" action="">
-                  {{csrf_field()}}
-                  <div class="news-search-input"> 
-                    <input type="text" name="search" class="form-control pull-left">
-                  </div>
-                  <div class="news-search-btn">
-                    <button type="submit" class="btn btn-primary" data-original-title="Search" data-toggle="tooltip">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </div>
-                </form> 
-              </div>
-              <div class="">
+                <div class="col-md-6">
+                  <form method="GET" class="container-search">
+                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  </form>
+                </div>
+              <div >
                 <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
                   <i class="fa fa-plus-circle"></i>
                   {{__('Add News')}}
@@ -43,7 +36,7 @@
             </div>
             <div class="box-body">
               @include('flash::message')
-              <table class="table table-bordered table-responsive" id="newstable">
+              <table class="table table-bordered table-responsive table-striped" id="newstable">
                 <thead>
                 <tr>
                   <th>{{__('Id')}}</th>
@@ -64,7 +57,7 @@
                     <td>{{$item->name}}</td>
                     <td align="center">
                       <div class="news-option">
-                        <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
+                        <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                         </a>
                         <form action="" method="POST" class="inline" >
                           {{csrf_field()}}
