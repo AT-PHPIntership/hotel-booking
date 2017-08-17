@@ -75,7 +75,9 @@
 .help-block {
     color: red;
 }
-
+.title-news {
+    margin-left: 3px;
+}
 .news-btn {
     /*margin-top: 2px;*/
     font-size: 16px;
@@ -243,6 +245,9 @@
 
 .container-search {
     position: relative;
+    margin-left: -14px;
+    margin-top: 3px;
+}
 
 }
 .cls-search-news {
