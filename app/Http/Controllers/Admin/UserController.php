@@ -70,7 +70,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return view('backend.users.edit', compact('user'));
     }
 
