@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\News;
+use App\Http\Requests\Backend\EditNewsRequest;
 use App\Model\Category;
 use App\Http\Requests\Backend\CreateNewsRequest;
 
@@ -29,9 +30,9 @@ class NewsController extends Controller
                     ->select($columns)
                     ->join('categories', 'news.category_id', '=', 'categories.id')
                     ->orderby('news.id', 'DESC')->paginate(News::ROW_LIMIT);
-        return view('backend.news.index', compact('news'));
+            return view('backend.news.index', compact('news'));
     }
-
+    
     /**
      * Create a new News.
      *
@@ -60,6 +61,66 @@ class NewsController extends Controller
         } else {
             flash(__('Create News Fail!'))->error();
             return redirect()->route('news.create');
+        }
+    }
+
+    /**
+     * Display form edit a News.
+     *
+     * @param string $slug of News
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($slug)
+    {
+        $columns = [
+                    'id',
+                    'title',
+                    'content',
+                    'category_id'
+        ];
+        $news = News::select($columns)
+                    ->where('slug', $slug)
+                    ->firstOrFail();
+        return view('backend.news.edit', compact('news'));
+    }
+
+    /**
+     * Update information of a News
+     *
+     * @param \App\Http\Requests\EditNewsRequest $request of form Edit News
+     * @param int                                $id      of News
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(EditNewsRequest $request, $id)
+    {
+        $newsUpdate = News::findOrFail($id)->update($request->all());
+        if ($newsUpdate) {
+            flash(__('Edit News Success!'))->success();
+            return redirect()->route('news.index');
+        } else {
+            flash(__('Edit News Fail!'))->error();
+            return redirect()->route('news.edit');
+        }
+    }
+
+    /**
+     * Delete a News.
+     *
+     * @param int $id of News
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $newsDelete = News::findOrFail($id)->delete();
+        if ($newsDelete) {
+            flash(__('Delete News Success!'))->success();
+            return redirect()->route('news.index');
+        } else {
+            flash(__('Delete News Fail!'))->error();
+            return redirect()->route('news.index');
         }
     }
 }

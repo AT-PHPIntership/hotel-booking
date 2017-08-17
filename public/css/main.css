@@ -68,6 +68,14 @@
 }
 /*end button create*/
 
+.btn-add-news button{
+    margin-left: 5%;
+    width: 20%;
+}
+.help-block {
+    color: red;
+}
+
 .news-btn {
     /*margin-top: 2px;*/
     font-size: 16px;
@@ -81,6 +89,7 @@
     margin-left: 15%;
     margin-right: 15%;
 }
+
 /*fix template index, create*/
 .btn-delete-item {
     border: none;
@@ -96,6 +105,11 @@
     display: block;
     content: "";
     clear: both;
+}
+.clear-fix:after {
+   display: block;
+    content: "";
+    clear: both; 
 }
 .title-page {
     text-align: center;
@@ -123,6 +137,7 @@
 .btn-option{
     width: 95px;
 }
+
 .search-news {
     float: left;
     width: 60%;
@@ -183,6 +198,10 @@
 .title-error{
     color: #5488c7 !important;
 }
+
+.news-search-btn {
+   margin-left: 5%;
+}
 .news-search-input {
     width: 60%;
 }
@@ -190,6 +209,12 @@
    margin-left: 5%;
 }
 
+.btn-edit-news {
+    float: left;
+}
+.edit-news-submit {
+    float: right;
+}
 .add-news-button {
     float: left;
 }
@@ -221,14 +246,20 @@
 
 .container-search {
     position: relative;
-}
 
+}
+.cls-search-news {
+    margin-left: -14px;
+    margin-top: 3px;
+}
+.cls-search-not-found {
+    color: red;
+}
 .btn-search {
     position: absolute;
     top: 0px;
 }
 /*end search*/
-
 .btn-on {
     background: #EF9D47;
     color: #010101;
@@ -250,3 +281,7 @@
     font-size: 20px;
     transform: translateY(20%);
 }
+.cls-editnews-msg {
+    width: 718px;
+}
+

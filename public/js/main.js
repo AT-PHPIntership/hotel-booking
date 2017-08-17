@@ -30,4 +30,13 @@ $(document).ready(function(){
             $("#showImage").fadeIn("fast").attr('src','/images/default/no_image.png');
         }
     });
+
+    /**
+     * Show msg if not data in database or search not found
+     *
+     */
+    var rowCount = $('#newstable tbody tr').length;
+    if (rowCount == 0) {
+        $('.cls-search-not-found').show();
+    }
 });
