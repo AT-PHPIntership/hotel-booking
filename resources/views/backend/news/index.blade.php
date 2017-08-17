@@ -23,7 +23,7 @@
               </div>
               <div class="col-md-6">
                 <form  class="container-search">
-                  <input class="input-search form-control" placeholder="Search" name="search" type="text">
+                  <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}" required>
                   <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                 </form>
               </div>
@@ -36,7 +36,8 @@
             </div>
             <div class="box-body">
               @include('flash::message')
-              <table class="table table-bordered table-responsive" id="newstable">
+              @include('backend.layouts.partials.modal')
+              <table class="table table-bordered table-responsive table-striped" id="newstable">
                 <thead>
                 <tr>
                   <th>{{__('Id')}}</th>
@@ -57,13 +58,14 @@
                     <td>{{$item->name}}</td>
                     <td align="center">
                       <div class="news-option">
-                        <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
+                        <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                         </a>
-                        <form action="" method="POST" class="inline" >
+                        <form action="{{ route('news.destroy',$item->id) }}" method="POST" class="inline">
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
                           <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
-                           data-original-title="Delete" data-toggle="tooltip">
+                           data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
+                              data-confirm="{{ __('Are you sure you want to delete?') }}">
                           </button>
                         </form>
                         <a href="" class="btn fa fa-upload news-btn pull-left" data-original-title="Upload Image" data-toggle="tooltip" >
@@ -74,7 +76,10 @@
                   @endforeach
                 </tbody>
               </table>
-              {!! $news->render() !!}
+              {!! $news->appends(['search' => request('search')])->render() !!}
+            </div>
+            <div class="cls-search-not-found" hidden="">
+              <h1 class="text-center">{{__('Data Not Found')}}</h1>
             </div>
           </div>
           <div>
