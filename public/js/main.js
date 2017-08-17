@@ -30,4 +30,25 @@ $(document).ready(function(){
             $("#showImage").fadeIn("fast").attr('src','/images/default/no_image.png');
         }
     });
+
+    /**
+     * Show message if database has not data or search not found
+     *
+     */
+    var countNews = $('#newstable tbody tr').length;
+    if (countNews == 0) {
+        $('.cls-search-not-found').show();
+    }
+
+    /**
+     * Check if not input value in field search news.
+     *
+     */
+    $('#btn-search-news').on('click', function( event ) {
+        $input = $(this).prev().val();
+            if ($input.length != 0) {
+                $(this).parent().submit();      
+            }        
+            event.preventDefault();
+    });
 });
