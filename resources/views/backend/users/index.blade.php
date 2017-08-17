@@ -35,7 +35,7 @@
                   </form>
                 </div>
                 <div class="contain-btn">
-                  <a class="btn btn-primary" href="{{ route('user.create')}}">
+                  <a class="btn btn-primary" href="{{ route('user.create')}}" id="btn-add-user">
                   <span class="fa fa-plus-circle"></span>
                   {{ __('Add user') }}
                   </a>
@@ -64,7 +64,6 @@
                           {{ $user->username }}
                         </a>
                       </td>
-                      <td>{{ $user->password }}</td>
                       <td>{{ $user->full_name }}
                       <td>{{ $user->email }}</td>
                       <td>{{ $user->phone }}
