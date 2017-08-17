@@ -21,19 +21,12 @@
               <div class="title-news">
                 <h3 class="box-title">{{__('Search News')}}</h3>
               </div>
-              <div class="form-group search-news">
-                <form method="POST" class="form-group inline" action="">
-                  {{csrf_field()}}
-                  <div class="news-search-input"> 
-                    <input type="text" name="search" class="form-control pull-left">
-                  </div>
-                  <div class="news-search-btn">
-                    <button type="submit" class="btn btn-primary" data-original-title="Search" data-toggle="tooltip">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </div>
-                </form> 
-              </div>
+              <div class="col-md-6">
+                  <form method="GET" class="container-search">
+                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  </form>
+                </div>
               <div class="">
                 <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
                   <i class="fa fa-plus-circle"></i>
@@ -66,7 +59,7 @@
                       <div class="news-option">
                         <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                         </a>
-                        <form action="" method="POST" >
+                        <form action="" method="POST" class="inline" >
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
                           <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  

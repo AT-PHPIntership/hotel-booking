@@ -52,6 +52,11 @@
 .inline{
     display: inline;
 }
+
+
+.help-block {
+    color: red;
+}
 /*button create*/
 .btn-create span {
     background-color: violet;
@@ -97,6 +102,17 @@
 }
 .btn-custom-option {
     font-size: 22px;
+}
+
+.contain-btn { 
+    float: right !important;
+    margin-right: 1.5%;
+    margin-bottom: 10px;
+}
+
+.contain-btn.second {
+    margin-right: 0;
+    margin-top: 20px;
 }
 
 .btn-option:after {
@@ -153,6 +169,7 @@
 }
 
 /*end admin-list-place*/
+
 /*errors page*/
 .main-page-error {
     text-align: center;
@@ -173,6 +190,12 @@
    margin-left: 5%;
 }
 
+.add-news-button {
+    float: left;
+}
+.add-news-submit {
+    float: right;
+}
 /*end errors page*/
 
 /*search*/
@@ -205,3 +228,25 @@
     top: 0px;
 }
 /*end search*/
+
+.btn-on {
+    background: #EF9D47;
+    color: #010101;
+}
+
+.btn-off {
+    background: #D0DFDF;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.fz-20 {
+    font-size: 20px;
+}
+
+.cus-icon-sm {
+    font-size: 20px;
+    transform: translateY(20%);
+}
