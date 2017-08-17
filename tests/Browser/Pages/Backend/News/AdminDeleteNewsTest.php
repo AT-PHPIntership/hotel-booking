@@ -26,7 +26,8 @@ class AdminDeleteNewsTest extends DuskTestCase
             $browser->visit('/admin/news')
                     ->assertSee('List News of Hotel')
                     ->press('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option button')
-                    ->acceptDialog()
+                    ->waitForText('Confirm deletion!')
+                    ->press('Delete')
                     ->assertSee('Delete News Success!');
         });
         $this->assertSoftDeleted('news',[
@@ -47,7 +48,8 @@ class AdminDeleteNewsTest extends DuskTestCase
                     ->assertSee('List News of Hotel')
                     ->press('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option button');
             $news->delete();
-            $browser->acceptDialog()
+            $browser->waitForText('Confirm deletion!')
+                    ->press('Delete')
                     ->assertSee('404 - Page Not found');
         });
     }
