@@ -16,7 +16,7 @@
         
         <!-- index -->
         <li class="active treeview">
-          <a href="{{ route('home.index')}}">
+          <a href="/admin">
             <i class="fa fa-home" aria-hidden="true"></i> <span>{{ __('Home Page') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
