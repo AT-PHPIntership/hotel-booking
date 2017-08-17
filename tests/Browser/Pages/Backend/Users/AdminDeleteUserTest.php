@@ -42,7 +42,9 @@ class AdminDeleteUserTest extends DuskTestCase
             $elements = $page->elements('#table-contain tbody tr');
             $this->assertCount(5, $elements);
             $page->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) button')
-                 ->acceptDialog()
+                 ->waitFor(null, '1')
+                 ->assertSee('Are you sure you want to delete?')
+                 ->click('#delete-btn')
                  ->assertSee("Deletion successful!");
             $this->assertSoftDeleted('users', ['id' => '4']);    
             $elements = $page->elements('#table-contain tbody tr');    
@@ -64,7 +66,9 @@ class AdminDeleteUserTest extends DuskTestCase
                     ->assertSee('List User')
                     ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) button');
             $user->delete();
-            $browser->acceptDialog()
+            $browser->waitFor(null, '1')
+                    ->assertSee('Are you sure you want to delete?')
+                    ->click('#delete-btn')
                     ->assertSee('404 - Page Not found');
         });
     }

@@ -68,6 +68,14 @@
 }
 /*end button create*/
 
+.btn-add-news button{
+    margin-left: 5%;
+    width: 20%;
+}
+.help-block {
+    color: red;
+}
+
 .news-btn {
     /*margin-top: 2px;*/
     font-size: 16px;
@@ -81,6 +89,7 @@
     margin-left: 15%;
     margin-right: 15%;
 }
+
 /*fix template index, create*/
 .btn-delete-item {
     border: none;
@@ -96,6 +105,11 @@
     display: block;
     content: "";
     clear: both;
+}
+.clear-fix:after {
+   display: block;
+    content: "";
+    clear: both; 
 }
 .title-page {
     text-align: center;
@@ -114,7 +128,6 @@
     margin-right: 0;
     margin-top: 20px;
 }
-
 .btn-option:after {
     content: "";
     clear:both;
@@ -123,6 +136,7 @@
 .btn-option{
     width: 95px;
 }
+
 .search-news {
     float: left;
     width: 60%;
@@ -131,7 +145,7 @@
     font-size: 18px;
 }
 .btn-option .btn-edit {
-    margin-top: 7px;
+    margin-top: 12px;
     margin-left: 21px;
 }
 
@@ -183,13 +197,21 @@
 .title-error{
     color: #5488c7 !important;
 }
+
 .news-search-input {
     width: 60%;
 }
+
 .news-search-btn {
    margin-left: 5%;
 }
 
+.btn-edit-news {
+    float: left;
+}
+.edit-news-submit {
+    float: right;
+}
 .add-news-button {
     float: left;
 }
@@ -227,8 +249,10 @@
     position: absolute;
     top: 0px;
 }
+.cls-search-not-found {
+    color: #ed8910;
+}
 /*end search*/
-
 .btn-on {
     background: #EF9D47;
     color: #010101;
@@ -250,3 +274,7 @@
     font-size: 20px;
     transform: translateY(20%);
 }
+.cls-editnews-msg {
+    width: 718px;
+}
+

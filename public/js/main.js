@@ -30,4 +30,13 @@ $(document).ready(function(){
             $("#showImage").fadeIn("fast").attr('src','/images/default/no_image.png');
         }
     });
+
+    /**
+     * Show message if database has not data or search not found
+     *
+     */
+    var countNews = $('#newstable tbody tr').length;
+    if (countNews == 0) {
+        $('.cls-search-not-found').show();
+    }
 });
