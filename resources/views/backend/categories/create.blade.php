@@ -34,7 +34,7 @@
               <div class="box-footer">
                 <a href="{{ route('category.index') }}" id="cancel" name="cancel" class="btn btn-default">Back</a>
                 <button type="reset" class="btn btn-warning">{{ __('Reset') }}</button>
-                <button type="submit" class="btn btn-primary btn-submit">{{ __('Submit') }}</button>
+                <button type="submit" class="btn btn-primary btn-submit pull-right">{{ __('Submit') }}</button>
                 
               </div>
             </form>

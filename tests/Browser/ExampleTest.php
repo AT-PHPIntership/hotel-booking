@@ -17,8 +17,7 @@ class ExampleTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                    ->assertSee('Laravel')
-                    ->screenShot('demo');
+                    ->assertSee('Laravel');
         });
     }
 }

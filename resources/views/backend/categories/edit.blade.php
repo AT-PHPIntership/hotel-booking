@@ -29,10 +29,10 @@
                   <span class="alert-danger">{{ $errors->first('name') }}</span>
                 </div>
               <!-- /.box-body -->
-              <div class="box-footer" align="center">
+              <div class="box-footer">
+                <a href="{{ route('category.index') }}" id="cancel" name="cancel" class="btn btn-default">Back</a>
                 <button type="reset" class="btn btn-warning">{{ __('Reset') }}</button>
-                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-                 <a href="{{ route('category.index') }}" id="cancel" name="cancel" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-primary pull-right">{{ __('Submit') }}</button>
               </div>
             </form>
           </div>

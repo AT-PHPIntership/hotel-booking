@@ -17,6 +17,7 @@ $(document).ready(function(){
             $('#confirm').modal('hide');
         })
     });
+
     /**
      * Show image when choose image
      */
