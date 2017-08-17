@@ -48,6 +48,7 @@
                   </a> 
                 </div>
               </div>
+              @include('backend.layouts.partials.modal')
               <table id="table-contain" class="table table-bordered table-striped
                 table-responsive">
                 <thead>
@@ -72,13 +73,15 @@
                       <td class="col-descript">{{ $place->descript }}</td>
                       <td class="text-center col-action">
                         <div class="btn-option text-center">
-                          <a href="{{ route('place.edit', $place->id) }}" class="btn-edit fa fa-pencil-square-o btn-pencil btn-custom-option pull-left">
+                          <a href="{{ route('place.edit', $place->id) }}" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
                             <i class="" aria-hidden="true"></i>
                           </a>
                           <form  class="form-delete" method="post" action="{{ route('place.destroy', $place->id) }}">
                             {!! csrf_field() !!}
                             {{ method_field('DELETE') }}
-                            <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o" 
+                            <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
+                              data-title="{{ __('Confirm deletion!') }}"
+                              data-confirm="{{ __('Are you sure you want to delete?') }}" 
                               type="submit" >
                             </button>
                           </form> 
