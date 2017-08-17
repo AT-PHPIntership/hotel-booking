@@ -31,8 +31,8 @@ class NewsController extends Controller
                     ->orderby('news.id', 'DESC')->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
-
-     /**
+    
+    /**
      * Create a new News.
      *
      * @return \Illuminate\Http\Response
@@ -101,6 +101,25 @@ class NewsController extends Controller
         } else {
             flash(__('Edit News Fail!'))->error();
             return redirect()->route('news.edit');
+        }
+    }
+
+    /**
+     * Delete a News.
+     *
+     * @param int $id of News
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $newsDelete = News::findOrFail($id)->delete();
+        if ($newsDelete) {
+            flash(__('Delete News Success!'))->success();
+            return redirect()->route('news.index');
+        } else {
+            flash(__('Delete News Fail!'))->error();
+            return redirect()->route('news.index');
         }
     }
 }

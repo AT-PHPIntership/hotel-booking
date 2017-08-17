@@ -201,6 +201,9 @@
     color: #5488c7 !important;
 }
 
+.news-search-btn {
+   margin-left: 5%;
+}
 .news-search-input {
     width: 60%;
 }
