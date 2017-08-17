@@ -61,7 +61,7 @@ class AdminDeleteNewsTest extends DuskTestCase
      */
     public function makeData($row)
     {   
-        factory(Category::class, 1)->create();
+        factory(Category::class, 10)->create();
         $categoryIds = Category::all('id')->pluck('id')->toArray();
         $faker = Faker::create();
         for ($i = 0; $i < $row; $i++) {
