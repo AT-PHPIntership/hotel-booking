@@ -52,8 +52,8 @@
               <table id="table-contain" class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                  <th>{{ __('ID') }}</th>
-                  <th class="col-md-10">{{ __('Name') }}</th>
+                  <th class="col-md-1">{{ __('ID') }}</th>
+                  <th >{{ __('Name') }}</th>
                   <th class="col-md-2">{{ __('Action') }}</th>
                 </tr>
                 </thead>
