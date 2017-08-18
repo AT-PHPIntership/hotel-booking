@@ -8,4 +8,36 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Reservation extends Model
 {
     use SoftDeletes;
+    
+    /**
+     * Declare table
+     *
+     * @var string $tabel table name
+     */
+    protected $table = 'reservations';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array $fillable
+     */
+    protected $fillable = [
+        'status', 'room_id', 'target', 'target_id', 'request',
+        'quantity', 'checkin_date', 'checkout_date'
+    ];
+
+    /**
+     * Define a value paginate rows
+     */
+    const ROW_LIMIT = 10;
+    
+    /**
+     * Booking room belongs to a Room.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bookingroom()
+    {
+        return $this->belongsTo(Room::class, 'room_id');
+    }
 }

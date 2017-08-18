@@ -8,4 +8,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Room extends Model
 {
     use SoftDeletes;
+
+     /**
+     * Declare table
+     *
+     * @var string $tabel table name
+     */
+    protected $table = 'rooms';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array $fillable
+     */
+    protected $fillable = [
+    	'name', 'hotel-id', 'descript', 'price', 'size', 'totel',
+    	'bed', 'direction', 'max_guest'
+    ];
+
+    /**
+     * Define a value paginate rows
+     */
+    const ROW_LIMIT = 10;
 }
