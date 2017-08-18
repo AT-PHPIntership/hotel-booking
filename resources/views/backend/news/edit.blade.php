@@ -49,7 +49,7 @@
                   <button type="submit" class="btn btn-primary">
                     {{__('Submit')}} 
                   </button>
-                </div>  
+                </div>
               </div>
             </form>
           </div>
