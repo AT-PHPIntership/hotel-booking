@@ -10,7 +10,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row margin_center">
+      <div class="row margin_center col-md-12">
         <!-- left column -->
         <div class="col-md-12">
           <!-- general form elements -->
@@ -20,20 +20,27 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form method="POST" action="{{ route('category.store') }}">
+            <form method="POST" action="{{ route('category.store') }}" class="">
             {{ csrf_field() }}
               <div class="box-body">
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                   <label for="input-name">{{ __('Name of Category') }}</label>
-                  <input type="text" class="form-control{{ $errors->has('name') ? ' has-error' : '' }}" id="input-name" placeholder="{{ __('Input Category Name')}}" value="" title="Input Name" name="name">
-                  <span class="alert-danger">{{ $errors->first('name') }}</span>
+                  <input type="text" class="form-control" id="input-name" placeholder="{{ __('Input Category Name')}}" value="" title="Input Name" name="name" class="col-md-6">
+                  <br/>
+                  <small class="text-danger">{{ $errors->first('name') }}</small>
                 </div>
+              </div>
               <!-- /.box-body -->
               <div class="box-footer">
+                <a href="{{ route('category.index') }}" id="cancel" name="cancel" class="btn btn-default">Back</a>
                 <button type="reset" class="btn btn-warning">{{ __('Reset') }}</button>
-                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                <button type="submit" class="btn btn-primary btn-submit pull-right">{{ __('Submit') }}</button>
+                
               </div>
             </form>
           </div>
+        </div>
+      </div>
+    </section>    
 </div>
 @endsection
