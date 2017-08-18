@@ -41,7 +41,8 @@ class AdminDeletePlaceTest extends DuskTestCase
             $elements = $page->elements('#table-contain tbody tr');
             $this->assertCount(5, $elements);
             $page->press('#table-contain tbody tr:nth-child(4) td:nth-child(5) button')
-            ->acceptDialog()
+            ->waitForText("Confirm deletion!")
+            ->press('Delete')
             ->assertSee("Delete success");
             $this->assertSoftDeleted('places', ['id' => '2']);
             $elements = $page->elements('#table-contain tbody tr');    
@@ -62,12 +63,14 @@ class AdminDeletePlaceTest extends DuskTestCase
             $place = Place::find(2);
             $place->delete();
             $page->press('#table-contain tbody tr:nth-child(4) td:nth-child(5) button')
-                ->acceptDialog()
+                ->waitForText("Confirm deletion!")
+                ->press('Delete')
                 ->assertSee("404 - Page Not found");
         });  
     }
 
     /**
+     * 
      * Test delete hotel belong to place
      * 
      * @return void
@@ -88,7 +91,8 @@ class AdminDeletePlaceTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $page = $browser->visit('/admin/place');
             $page->press('#table-contain tbody tr:nth-child(1) td:nth-child(5) button')
-            ->acceptDialog()
+            ->waitForText("Confirm deletion!")
+            ->press('Delete')
             ->assertSee("Delete success");
         });
         $hotels = $place ->hotels()->get(); 

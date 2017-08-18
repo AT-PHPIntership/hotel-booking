@@ -49,6 +49,7 @@
             </div>
             <div class="box-body">
               @include('flash::message')
+              @include('backend.layouts.partials.modal')
               <table class="table table-bordered table-responsive table-striped" id="newstable">
                 <thead>
                 <tr>
@@ -72,11 +73,12 @@
                       <div class="news-option">
                         <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                         </a>
-                        <form action="" method="POST" class="inline" >
+                        <form action="{{ route('news.destroy',$item->id) }}" method="POST" class="inline">
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
                           <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
-                           data-original-title="Delete" data-toggle="tooltip">
+                           data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
+                              data-confirm="{{ __('Are you sure you want to delete?') }}">
                           </button>
                         </form>
                         <a href="" class="btn fa fa-upload news-btn pull-left" data-original-title="Upload Image" data-toggle="tooltip" >
