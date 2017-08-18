@@ -7,16 +7,16 @@
     }
 }
 .margin-center{
-	margin: 0 15%;
+    margin: 0 15%;
 }
 
 .title-page{
-	text-align: center;
+    text-align: center;
 }
 
 .chat-room{
-	margin-left: 25%;
-	margin-right: 25%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 /* .form-control.bg-info {
     background-color: #E3F5B8;
@@ -57,13 +57,9 @@
     color: red;
 }
 /*button create*/
-.btn-create span {
-    background-color: violet;
-    color: #FFF;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 5px;
-    margin-left: 10px; 
+.btn-create  {
+    float:left;
+    width: 50%;
 }
 /*end button create*/
 
@@ -177,7 +173,7 @@
 }
 .place-descript{
     max-height: 300px;
-    max-width: 713px;
+    max-width: 690px;
 }
 .btn-custom {
     margin-right: 10px;
@@ -207,6 +203,7 @@
    margin-left: 5%;
 }
 
+/*end errors page*/
 .btn-edit-news {
     float: left;
 }
@@ -229,17 +226,11 @@
 
 .input-search {
     display: inline-block;
-    width: 30%;
+    width: 50%;
     border: 2px solid #ccc;
     font-size: 16px;
     background-color: white;
     background-repeat: no-repeat;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-.input-search:focus {
-    width: 60%;
 }
 
 .container-search {
@@ -292,7 +283,6 @@
 
 .profile {
     margin-top: 80px;
-    font-family: cursive;
     color: #000000;
 }
 
