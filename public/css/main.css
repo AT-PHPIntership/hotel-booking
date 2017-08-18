@@ -58,13 +58,9 @@
     color: red;
 }
 /*button create*/
-.btn-create span {
-    background-color: violet;
-    color: #FFF;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 5px;
-    margin-left: 10px; 
+.btn-create  {
+    float:left;
+    width: 50%;
 }
 /*end button create*/
 
@@ -208,6 +204,7 @@
    margin-left: 5%;
 }
 
+/*end errors page*/
 .btn-edit-news {
     float: left;
 }
