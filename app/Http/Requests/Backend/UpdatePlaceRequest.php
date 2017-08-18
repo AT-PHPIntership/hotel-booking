@@ -4,10 +4,10 @@ namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePlaceRequest extends FormRequest
+class UpdatePlaceRequest extends FormRequest
 {
     /**
-     * Determine if the Place is authorized to make this request.
+     * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
@@ -24,9 +24,9 @@ class CreatePlaceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:places',
+            'name' => 'required',
             'descript' => 'required',
-            'image' => 'required|image|max:' . config('image.max_upload_size')
+            'image' => 'nullable|image|max:' . config('image.max_upload_size')
         ];
     }
 }
