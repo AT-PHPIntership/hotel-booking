@@ -21,18 +21,6 @@
               <div class="title-news">
                 <h3 class="box-title">{{__('Search News')}}</h3>
               </div>
-<<<<<<< HEAD
-              <!-- search -->
-                <div class="col-md-6 container-search ">
-                  <form method="GET" action="{{ route('category.index') }}" class="form-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
-                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
-                  </form>
-                </div>
-                <!-- end search -->
-              <div class="">
-                <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
-=======
                 <div class="col-md-6">
                   <form method="GET" class="container-search">
                     <input class="input-search form-control" placeholder="Search" name="keyword" type="text">
@@ -40,8 +28,7 @@
                   </form>
                 </div>
               <div >
-                <a href="{{ route('') }}" class="btn btn-primary pull-right">
->>>>>>> admin_categories_list
+                <a href="{{ route('news.index') }}" class="btn btn-primary pull-right">
                   <i class="fa fa-plus-circle"></i>
                   {{__('Add News')}}
                 </a>

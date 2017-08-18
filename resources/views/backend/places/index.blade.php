@@ -56,7 +56,7 @@
                     <th class="text-center">{{ __('ID') }}</th>
                     <th class="text-center">{{ __('Image') }}</th>
                     <th class="text-center">{{ __('Name') }}</th>
-                    <th class="text-center">{{ __('Descript') }}</th>
+                    <th class="text-center">{{ __('Description') }}</th>
                     <th class="text-center">{{ __('Option') }}</th>
                   </tr>
                 </thead>
@@ -66,7 +66,7 @@
                       <td class="col-no text-center">{{ $place->id }}</td>
                       <td class="text-center col-image">
                         <div class="place-image-show">
-                          <img class="img-place" src="{{ asset($place->image_path) }}" >
+                          <img class="img-place" src="{{ $place->image_url }}" >
                         </div>
                       </td>
                       <td class="col-name">{{ $place->name }}</td>

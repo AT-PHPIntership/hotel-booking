@@ -13,53 +13,56 @@ class AdminListCategories extends DuskTestCase
 {   
     use DatabaseMigrations;
 
-    // /**
-    //  * A Dusk test test Route.
-    //  *
-    //  * @return void
-    //  */
-    // public function testRoute()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/admin')
-    //                 ->clickLink('Categories')
-    //                 ->assertPathIs('/admin/category')
-    //                 ->assertSee('List Categories');
-    //     });
-    // }
+    /**
+     * A Dusk test test Route.
+     *
+     * @return void
+     */
+    public function testRoute()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin')
+                    ->clickLink('Categories')
+                    ->assertPathIs('/admin/category')
+                    ->assertSee('List Categories');
+        });
+    }
 
-    // /**
-    //  * A Dusk test empty data.
-    //  *
-    //  * @return void
-    //  */
-    // public function testEmptyData()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $element = $browser->visit('/admin/category')->element('#table-contain tbody tr');
-    //         $count = count($element);
-    //         $this->assertTrue($count == 0);
-    //         $browser->assertPathIs('/admin/category');
-    //     });
-    // }
+    /**
+     * A Dusk test empty data.
+     *
+     * @return void
+     */
+    public function testEmptyData()
+    {
+        $this->browse(function (Browser $browser) {
+            $element = $browser->visit('/admin/category')->element('#table-contain tbody tr');
+            $count = count($element);
+            $this->assertTrue($count == 0);
+            $browser->assertPathIs('/admin/category')
+                    ->assertSee('List Categories');
+            $this->assertNull($browser->element('.pagination'));
+        });
+    }
 
-    //  /**
-    //  * A Dusk test show record with table has data.
-    //  *
-    //  * @return void
-    //  */
-    // public function testShowRecord()
-    // {   
-    //     factory(Category::class, 9)->create();
-    //     $this->browse(function (Browser $browser) {
-    //         $element = $browser->visit('/admin/category')->elements('#table-contain tbody tr');
-    //         $count = count($element);
-    //         $this->assertTrue($count == 9);
-    //         $browser->assertPathIs('/admin/category');
-    //         $this->assertNull($browser->element('.pagination'));
-    //         $browser->screenShot('a');
-    //     });
-    // }
+     /**
+     * A Dusk test show record with table has data.
+     *
+     * @return void
+     */
+    public function testShowRecord()
+    {   
+        factory(Category::class, 9)->create();
+        $this->browse(function (Browser $browser) {
+            $element = $browser->visit('/admin/category')->elements('#table-contain tbody tr');
+            $count = count($element);
+            $this->assertTrue($count == 9);
+            $browser->assertPathIs('/admin/category')
+                    ->assertSee('List Categories');
+            $this->assertNull($browser->element('.pagination'));
+
+        });
+    }
 
     /**
     * A Dusk test show record with table has data and ensure pagnate.
@@ -91,15 +94,15 @@ class AdminListCategories extends DuskTestCase
      *
      * @return void
      */
-    // public function testPathPagination()
-    // {   
-    //     factory(Category::class, 12)->create();
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/admin/category?page=2');
-    //         $elements = $browser->elements('#table-contain tbody tr');
-    //         $this->assertCount(2, $elements);
-    //         $browser->assertPathIs('/admin/category');
-    //         $browser->assertQueryStringHas('page', 2);
-    //     });
-    // }
+    public function testPathPagination()
+    {   
+        factory(Category::class, 12)->create();
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin/category?page=2');
+            $elements = $browser->elements('#table-contain tbody tr');
+            $this->assertCount(2, $elements);
+            $browser->assertPathIs('/admin/category');
+            $browser->assertQueryStringHas('page', 2);
+        });
+    }
 }
