@@ -53,7 +53,6 @@
     display: inline;
 }
 
-
 .help-block {
     color: red;
 }
@@ -143,14 +142,11 @@
 .btn-option .btn-edit {
     margin-top: 12px;
     margin-left: 21px;
-
-
 }
 
 .form-delete{
     margin-top: 3px;
 }
-
 
 /*end fix template*/
 .title-header {
@@ -227,17 +223,11 @@
 
 .input-search {
     display: inline-block;
-    width: 30%;
+    width: 50%;
     border: 2px solid #ccc;
     font-size: 16px;
     background-color: white;
     background-repeat: no-repeat;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-.input-search:focus {
-    width: 60%;
 }
 
 .container-search {
@@ -270,7 +260,7 @@
     font-size: 20px;
     transform: translateY(20%);
 }
+
 .cls-editnews-msg {
     width: 718px;
 }
-

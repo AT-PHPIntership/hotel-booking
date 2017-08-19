@@ -30,4 +30,13 @@ $(document).ready(function(){
             $("#showImage").fadeIn("fast").attr('src','/images/default/no_image.png');
         }
     });
+
+    /*check value input search*/
+    $("#btn-search").click( function(event) {
+    $input = $(this).prev().val();
+    if ($input.length != 0) {
+        $(this).parent().submit();
+    }
+    event.preventDefault();
+});
 });
