@@ -226,17 +226,11 @@
 
 .input-search {
     display: inline-block;
-    width: 30%;
+    width: 50%;
     border: 2px solid #ccc;
     font-size: 16px;
     background-color: white;
     background-repeat: no-repeat;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-.input-search:focus {
-    width: 60%;
 }
 
 .container-search {
