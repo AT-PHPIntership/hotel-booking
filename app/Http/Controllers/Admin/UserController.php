@@ -30,6 +30,7 @@ class UserController extends Controller
                      ->select($columns)
                      ->orderby('id', 'DESC')
                      ->paginate(User::ROW_LIMIT);
+        $users->appends(['search' => request('search')]);
         return view("backend.users.index", compact('users'));
     }
 

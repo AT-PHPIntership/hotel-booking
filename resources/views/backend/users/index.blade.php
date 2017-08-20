@@ -114,7 +114,7 @@
                   {{ __('Add user') }}
                 </a>
               </div>
-              {!! $users->appends(['search' => request('search')])->render() !!}
+              {!! $users->render() !!}
             </div>
             <!-- /.box-body -->
           </div>
