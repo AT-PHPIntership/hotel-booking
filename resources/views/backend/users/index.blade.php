@@ -59,12 +59,15 @@
                   @foreach ($users as $user)
                     <tr>
                       <td>{{ $user->id }}</td>
-                      <td>{{ $user->username }}
-                      <!-- <td>{{ $user->password }}</td> -->
+                      <td>
+                        <a href="{{ route('user.show', $user->id) }}">
+                          {{ $user->username }}
+                        </a>
+                      </td>
                       <td>{{ $user->full_name }}
                       <td>{{ $user->email }}</td>
                       <td>{{ $user->phone }}
-                      <td>
+                      <td class="text-center">
                         <form method="POST" action="{{ route('user.updateRole', $user->id) }}">
                           {!! csrf_field() !!}
                           {{ method_field('PUT') }}
@@ -75,7 +78,7 @@
                           @endif
                         </form>
                       </td>
-                      <td>
+                      <td class="text-center">
                         <form method="POST" action="{{ route('user.updateStatus', $user->id) }}">
                           {!! csrf_field() !!}
                           {{ method_field('PUT') }}

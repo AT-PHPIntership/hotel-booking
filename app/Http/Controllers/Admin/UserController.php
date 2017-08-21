@@ -129,6 +129,7 @@ class UserController extends Controller
         } else {
             $user->update(['is_active' => User::STATUS_ACTIVED]);
         }
+        flash(__('Change status successful!'))->success();
         return redirect()->route('user.index');
     }
 
@@ -147,6 +148,20 @@ class UserController extends Controller
         } else {
             $user->update(['is_admin' => User::ROLE_ADMIN]);
         }
+        flash(__('Change role successful!'))->success();
         return redirect()->route('user.index');
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param int $id id of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('backend.users.show', compact('user'));
     }
 }

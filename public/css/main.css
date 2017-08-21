@@ -7,17 +7,16 @@
     }
 }
 .margin-center{
-	margin-left: 15%;
-	margin-right: 15%;
+    margin: 0 15%;
 }
 
 .title-page{
-	text-align: center;
+    text-align: center;
 }
 
 .chat-room{
-	margin-left: 25%;
-	margin-right: 25%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 /* .form-control.bg-info {
     background-color: #E3F5B8;
@@ -58,13 +57,9 @@
     color: red;
 }
 /*button create*/
-.btn-create span {
-    background-color: violet;
-    color: #FFF;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 5px;
-    margin-left: 10px; 
+.btn-create  {
+    float:left;
+    width: 50%;
 }
 /*end button create*/
 
@@ -178,7 +173,7 @@
 }
 .place-descript{
     max-height: 300px;
-    max-width: 713px;
+    max-width: 690px;
 }
 .btn-custom {
     margin-right: 10px;
@@ -208,6 +203,7 @@
    margin-left: 5%;
 }
 
+/*end errors page*/
 .btn-edit-news {
     float: left;
 }
@@ -263,10 +259,33 @@
     font-size: 20px;
 }
 
+.fz-16 {
+    font-size: 16px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mlr-0 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.ml-5per {
+    margin-left: 5%;
+}
+
 .cus-icon-sm {
     font-size: 20px;
     transform: translateY(20%);
 }
+
+.profile {
+    margin-top: 80px;
+    color: #000000;
+}
+
 .cls-editnews-msg {
     width: 718px;
 }
@@ -276,4 +295,3 @@
     color: red;
     font-family: cursive;
 }
-
