@@ -115,6 +115,13 @@
             <i class="fa fa-map-marker" aria-hidden="true"></i> <span>{{ __('Places') }}</span>
           </a>
         </li>
+
+        <!-- service -->
+        <li>
+          <a href="{{ route('service.index') }}" >
+            <i class="fa fa-empire" aria-hidden="true"></i><span>{{ __('Services') }}</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
