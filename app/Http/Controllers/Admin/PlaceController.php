@@ -125,7 +125,7 @@ class PlaceController extends Controller
     public function show($id)
     {
         $place = Place::findOrFail($id);
-        $totalHotels = $place->hotels()->count() ;
+        $totalHotels = $place->hotels()->count();
         return view('backend.places.show', compact('place', 'totalHotels'));
     }
 }
