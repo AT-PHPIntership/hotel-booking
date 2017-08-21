@@ -23,12 +23,12 @@
               </div>
                 <div class="col-md-6">
                   <form method="GET" class="container-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text">
+                    <input class="input-search form-control" placeholder="Search" name="search" type="text">
                     <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                   </form>
                 </div>
               <div >
-                <a href="{{ route('') }}" class="btn btn-primary pull-right">
+                <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
                   <i class="fa fa-plus-circle"></i>
                   {{__('Add News')}}
                 </a>
@@ -55,7 +55,7 @@
                     <td>{{$item->title}}</td>
                     <td>{{$item->content}}</td>
                     <td>{{$item->category_id}}</td>
-                    <td>{{$item->name}}</td>
+                    <td>{{$item->category->name}}</td>
                     <td align="center">
                       <div class="news-option">
                         <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
