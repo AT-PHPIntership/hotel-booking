@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-@section('title','Manager BookingRooms')
+@section('title',__('Manager BookingRooms'))
 @section('content')
   <div class="content-wrapper">
     <section class="content-header">
@@ -37,10 +37,8 @@
                   <th>{{__('Id')}}</th>
                   <th>{{__('Rooms Name')}}</th>
                   <th>{{__('Target')}}</th>
-                  <th>{{__('Quantity')}}</th>
                   <th>{{__('Check in')}}</th>
                   <th>{{__('Check out')}}</th>
-                  <th>{{__('Request')}}</th>
                   <th>{{__('Status')}}</th>
                   <th class="text-center">{{__('Option')}}</th>
                 </tr>
@@ -49,19 +47,13 @@
                   @foreach($reservations as $reservation)
                   <tr>
                     <td>{{$reservation->id}}</td>
-                    <td>
-                      <a href="">
-                        {{$reservation->bookingroom->name}}
-                      </a>
-                      </td>
+                    <td>{{$reservation->bookingroom->name}}</td>
                     <td>{{$reservation->target}}</td>
-                    <td>{{$reservation->quantity}}</td>
                     <td>{{$reservation->checkin_date}}</td>
                     <td>{{$reservation->checkout_date}}</td>
-                    <td>{{$reservation->request}}</td>
                     <td>{{$reservation->status}}</td>
                     <td align="center">
-                      <a href="{{ route('bookingroom.show') }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
+                      <a href="{{ route('bookingroom.show',$reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
                       <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                       </a>
