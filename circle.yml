@@ -13,6 +13,7 @@ dependencies:
 
 test:
   pre:
+    - "bower install"
     - "./vendor/laravel/dusk/bin/chromedriver-linux":
         background: true
     - "php artisan serve":
