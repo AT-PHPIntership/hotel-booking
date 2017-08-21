@@ -61,7 +61,7 @@
                     <td>{{$reservation->request}}</td>
                     <td>{{$reservation->status}}</td>
                     <td align="center">
-                      <a href="" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
+                      <a href="{{ route('bookingroom.show') }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
                       <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
                       </a>

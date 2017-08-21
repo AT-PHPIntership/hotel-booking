@@ -32,4 +32,13 @@ class BookingRoomController extends Controller
                     ->paginate(Reservation::ROW_LIMIT);
         return view('backend.bookings.index', compact('reservations'));
     }
+
+    /**
+     * Display a page show detail a booking rooms.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show() {
+        return view('backend.bookings.show');
+    }
 }
