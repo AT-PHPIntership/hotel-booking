@@ -62,6 +62,7 @@
           </div>
         </div>
       </section>
+      <section id="extra-information" hidden></section>
     @else
         <h1 class="text-center title-page">{{ __('Nothing to show!') }}</h1>
     @endif

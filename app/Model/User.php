@@ -101,7 +101,7 @@ class User extends Model
      */
     public function getRoleAttribute()
     {
-        return $this->is_admin == $this->ROLE_ADMIN? __('Admin'): __('User');
+        return $this->is_admin == self::ROLE_ADMIN? __('Admin'): __('User');
     }
 
     /**
@@ -111,6 +111,6 @@ class User extends Model
      */
     public function getStatusAttribute()
     {
-        return $this->is_active == $this->STATUS_ACTIVED? __('Actived'): __('Disabled');
+        return $this->is_active == self::STATUS_ACTIVED? __('Actived'): __('Disabled');
     }
 }
