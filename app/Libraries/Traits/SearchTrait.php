@@ -17,7 +17,7 @@ trait SearchTrait
     {
         $keyword = request('search');
         foreach ($this->searchableFields as $value) {
-            $query->orWhere($value, "LIKE", "%$keyword%");
+            $query->orWhere($value, "LIKE", "%$keyword%");      
         }
     }
 }

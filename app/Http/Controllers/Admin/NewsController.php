@@ -19,16 +19,18 @@ class NewsController extends Controller
     public function index()
     {
         $columns = [
-            'news.id',
+            'id',
             'title',
-            'news.slug',
+            'slug',
             'content',
             'category_id',
-            'name'
         ];
         $news = News::select($columns)
-                    ->join('categories', 'news.category_id', '=', 'categories.id')
-                    ->orderby('news.id', 'DESC')->paginate(News::ROW_LIMIT);
+                    ->with(['category' => function ($query) {
+                        $query->select('id', 'name');
+                    }])
+                    ->search()
+                    ->paginate(News::ROW_LIMIT);
         return view('backend.news.index', compact('news'));
     }
     

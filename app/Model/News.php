@@ -5,10 +5,11 @@ namespace App\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Libraries\Traits\SearchTrait;
 
 class News extends Model
 {
-    use Sluggable, SoftDeletes;
+    use Sluggable, SoftDeletes, SearchTrait;
 
     /**
      * Declare table
@@ -24,6 +25,18 @@ class News extends Model
      */
     protected $fillable = [
         'title', 'content', 'category_id'
+    ];
+
+    protected $searchableFields = [
+    'columns' => [
+            'news.title',
+            'news.content',
+            'news.category_id',
+            'categories.name'
+        ],
+        'joins' => [
+            'categories' => ['news.category_id', 'categories.id']
+        ]
     ];
 
     /**
