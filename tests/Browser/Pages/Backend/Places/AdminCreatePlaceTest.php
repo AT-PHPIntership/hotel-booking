@@ -131,7 +131,8 @@ class AdminCreatePlaceTest extends DuskTestCase
     public function testBtnBack()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/place/create')
+            $browser->visit('/admin/place')
+                ->clickLink('Add Place')
                 ->click('.box-footer .btn-default')
                 ->assertPathIs('/admin/place');
         });

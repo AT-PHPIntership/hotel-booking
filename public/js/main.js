@@ -32,7 +32,7 @@ $(document).ready(function(){
     });
 
     /*check value input search*/
-    $("#btn-search").click( function(event) {
+    $(".btn-search").click( function(event) {
     $input = $(this).prev().val();
     if ($input.length != 0) {
         $(this).parent().submit();
