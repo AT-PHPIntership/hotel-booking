@@ -33,7 +33,7 @@
 
                 <div class="form-group has-feedback
                   {{ $errors->has('descript') ? ' has-error' : '' }}">
-                  <label for="descript">{{ __('descript') }}</label>
+                  <label for="descript">{{ __('Description') }}</label>
                   <input type="text" class="form-control" name= "descript" 
                     id="descript" placeholder="{{ __('Enter descript') }}"
                     value="{{ old('descript') }}" >
@@ -53,7 +53,7 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <a class="btn btn-default btn-custom" href="{{route('place.index')}}">
+                <a class="btn btn-default btn-custom" href="javascript:history.back()">
                   {{ __('Back') }}
                 </a>
                 <button type="reset" class="btn btn-warning btn-custom">

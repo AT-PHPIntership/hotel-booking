@@ -21,9 +21,9 @@ class AdminCreateCategory extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/category')
-                    ->click('#btn-create-category')
-                    ->assertPathIs('/admin/category/create')
-                    ->assertSee('Create Category');
+                ->clickLink('Add Cagegory')
+                ->assertPathIs('/admin/category/create')
+                ->assertSee('Create Category');
         });
     }
 
@@ -32,13 +32,13 @@ class AdminCreateCategory extends DuskTestCase
      *
      * @return void
      */
-    public function testValidationCreatesUser()
+    public function testValidationCreateCategory()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/category/create')
-                    ->press('Submit')
-                    ->assertPathIs('/admin/category/create')
-                    ->assertSee('The name field is required.');
+                ->press('Submit')
+                ->assertPathIs('/admin/category/create')
+                ->assertSee('The name field is required.');
         });
     }
 
@@ -51,38 +51,26 @@ class AdminCreateCategory extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/category/create')
-                    ->type('name','Category News')
-                    ->press('Submit')
-                    ->assertPathIs('/admin/category')
-                    ->assertSee('Create Success');
+                ->type('name','Category News')
+                ->press('Submit')
+                ->assertPathIs('/admin/category')
+                ->assertSee('Create Success');
         });
         $this->assertDatabaseHas('categories', ['name' => 'Category News']);
     }
 
     /**
-     * List case for Test Validation Create Category
+     *
+     * Test Create category fail
      *
      */
-    public function listCaseTestForCreateCategory()
-    {
-        return [
-            ['', 'The name field is required.'],
-        ];
-    }
-
-    /**
-     *
-     * @dataProvider listCaseTestForCreateCategory
-     *
-     */
-    public function testCreateNewsFail($name, $expected)
+    public function testCreateCategoryFail()
     {   
-        
-        $this->browse(function (Browser $browser) use($name, $expected) {
+        $this->browse(function (Browser $browser) {
             $browser->visit('/admin/category/create')
-                ->type('name', $name)
+                ->type('name', '')
                 ->press('Submit')
-                ->assertSee($expected)
+                ->assertSee('The name field is required.')
                 ->assertPathIs('/admin/category/create');
         });
     }
@@ -96,10 +84,10 @@ class AdminCreateCategory extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/category/create')
-                    ->type('name', 'Category')
-                    ->press('Reset')
-                    ->assertPathIs('/admin/category/create')
-                    ->assertInputValueIsNot('', '');
+                ->type('name', 'Category test')
+                ->press('Reset')
+                ->assertPathIs('/admin/category/create')
+                ->assertInputValue('name', '');
         });
     }
 
@@ -112,9 +100,8 @@ class AdminCreateCategory extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/category/create')
-                    ->clickLink('Back')
-                    ->assertPathIs('/admin/category');
+                ->clickLink('Back')
+                ->assertPathIs('/admin/category');
         });
     }
-
 }
