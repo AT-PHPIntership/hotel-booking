@@ -39,4 +39,17 @@ $(document).ready(function(){
     if (countNews == 0) {
         $('.cls-search-not-found').show();
     }
+    
+    /**
+     * Check if not input value in field search.
+     *
+     */
+    $('.btn-search').on('click', function( event ) {
+        $input = $(this).prev().val();
+            if ($input.length != 0) {
+                $(this).parent().submit();      
+            }        
+            event.preventDefault();
+    });
+
 });

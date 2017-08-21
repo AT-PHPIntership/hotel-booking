@@ -23,11 +23,13 @@
               </div>
               <div class="col-md-6">
                 <form  class="container-search">
-                  <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}" required>
-                  <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
+                  <button type="submit" class="btn btn-primary btn-search">
+                  <i class="glyphicon glyphicon-search"></i>
+                  </button>
                 </form>
               </div>
-              <div class="">
+              <div >
                 <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
                   <i class="fa fa-plus-circle"></i>
                   {{__('Add News')}}
@@ -79,7 +81,7 @@
               {!! $news->appends(['search' => request('search')])->render() !!}
             </div>
             <div class="cls-search-not-found" hidden="">
-              <h1 class="text-center">{{__('Data Not Found')}}</h1>
+              <h1 class="text-center">{{__('Data Not Found!')}}</h1>
             </div>
           </div>
           <div>
