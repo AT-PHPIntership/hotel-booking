@@ -29,8 +29,10 @@ class NewsController extends Controller
         $news = News::search()
                     ->select($columns)
                     ->join('categories', 'news.category_id', '=', 'categories.id')
-                    ->orderby('news.id', 'DESC')->paginate(News::ROW_LIMIT);
-            return view('backend.news.index', compact('news'));
+                    ->orderby('news.id', 'DESC')
+                    ->paginate(News::ROW_LIMIT);
+        $news->appends(['search' => request('search')]);
+        return view('backend.news.index', compact('news'));
     }
     
     /**

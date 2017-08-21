@@ -78,7 +78,7 @@
                   @endforeach
                 </tbody>
               </table>
-              {!! $news->appends(['search' => request('search')])->render() !!}
+              {{$news->render()}}
             </div>
             <div class="cls-search-not-found" hidden="">
               <h1 class="text-center">{{__('Data Not Found!')}}</h1>
