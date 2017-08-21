@@ -45,9 +45,9 @@ class Place extends Model
      *
      * @return string
      */
-    public function getImagePathAttribute()
+    public function getImageUrlAttribute()
     {
-        return config("constant.path_upload_places").$this->image;
+        return asset(config("image.places.path_upload") . $this->image);
     }
 
     /**
