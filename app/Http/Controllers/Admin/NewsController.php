@@ -25,12 +25,9 @@ class NewsController extends Controller
             'content',
             'category_id',
         ];
-        $news = News::select($columns)
-                    ->with(['category' => function ($query) {
-                        $query->select('id', 'name');
-                    }])
-                    ->search()
+        $news = News::search()
                     ->paginate(News::ROW_LIMIT);
+        $news->appends(['search' => request('search')]);      
         return view('backend.news.index', compact('news'));
     }
     
