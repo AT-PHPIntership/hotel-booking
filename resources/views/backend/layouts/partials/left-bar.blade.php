@@ -16,8 +16,8 @@
         
         <!-- index -->
         <li class="active treeview">
-          <a href="../index.html">
-            <i class="fa fa-dashboard"></i> <span>{{ __('Home Page') }}</span>
+          <a href="/admin">
+            <i class="fa fa-home" aria-hidden="true"></i> <span>{{ __('Home Page') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -26,7 +26,7 @@
 
         <!--  introduction -->
         <li class="treeview">
-          <a href="../../pages/static page/indexAboutUs.html">
+          <a href="#">
             <i class="fa fa-table"></i> <span>{{ __('Introduction') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -48,7 +48,8 @@
         <!-- user -->
         <li>
           <a href="{{ route('user.index') }}">
-            <i class="fa fa-th"></i> <span>{{ __('Users') }}</span>
+            <i class="fa fa-male" aria-hidden="true"></i>
+            <span>{{ __('Users') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">23</small>
             </span>
@@ -57,7 +58,7 @@
 
        <!--  category -->
         <li class="treeview">
-          <a href="{{ route('category.index') }}">
+          <a href="{{ route('category.index') }}" id="bt-category">
             <i class="fa fa-pie-chart"></i>
             <span>{{ __('Categories') }}</span>
             <span class="pull-right-container">
@@ -69,7 +70,7 @@
         <!-- hotel -->
         <li class="treeview">
           <a href="{{ route('hotel.index') }}">
-            <i class="fa fa-laptop"></i>
+            <i class="fa fa-bed" aria-hidden="true"></i></i>
             <span>{{ __('Hotels') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -80,7 +81,7 @@
         <!-- comment and rating -->
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i> <span>{{ __('Comment and Rating') }}</span>
+            <i class="fa fa-commenting-o" aria-hidden="true"></i> <span>{{ __('Comment and Rating') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -89,7 +90,7 @@
 
         <!-- booking room -->
         <li>
-          <a href="pages/calendar.html">
+          <a href="#">
             <i class="fa fa-calendar"></i> <span>{{ __('Booking Room') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-red">17</small>
@@ -100,8 +101,8 @@
 
         <!-- feedback -->
         <li>
-          <a href="pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>{{ __('Feedback') }}</span>
+          <a href="#">
+            <i class="fa fa-envelope"></i> <span>{{ __('Feedbacks') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">102</small>
             </span>
@@ -111,7 +112,7 @@
         <!-- place -->
         <li>
           <a href="{{ route('place.index') }}" id="place">
-            <i class="fa fa-university"></i> <span>{{ __('Place') }}</span>
+            <i class="fa fa-map-marker" aria-hidden="true"></i> <span>{{ __('Places') }}</span>
           </a>
         </li>
       </ul>
