@@ -41,6 +41,7 @@
                   <th>{{__('Check in')}}</th>
                   <th>{{__('Check out')}}</th>
                   <th>{{__('Request')}}</th>
+                  <th>{{__('Status')}}</th>
                   <th class="text-center">{{__('Option')}}</th>
                 </tr>
                 </thead>
@@ -48,37 +49,40 @@
                   @foreach($reservations as $reservation)
                   <tr>
                     <td>{{$reservation->id}}</td>
-                    <td>{{$reservation->rooms->name}}</td>
+                    <td>
+                      <a href="">
+                        {{$reservation->bookingroom->name}}
+                      </a>
+                      </td>
                     <td>{{$reservation->target}}</td>
                     <td>{{$reservation->quantity}}</td>
-                    <td>{{$$reservation->checkin_date}}</td>
-                    <td>{{$$reservation->checkout_date}}</td>
-                    <td>{{$$reservation->request}}</td>
+                    <td>{{$reservation->checkin_date}}</td>
+                    <td>{{$reservation->checkout_date}}</td>
+                    <td>{{$reservation->request}}</td>
+                    <td>{{$reservation->status}}</td>
                     <td align="center">
-                      {{-- <div class="news-option">
-                        <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
-                        </a>
-                        <form action="{{ route('news.destroy',$item->id) }}" method="POST" class="inline">
-                          {{csrf_field()}}
-                          {{method_field('DELETE')}}
-                          <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
-                           data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
-                              data-confirm="{{ __('Are you sure you want to delete?') }}">
-                          </button>
-                        </form>
-                        <a href="" class="btn fa fa-upload news-btn pull-left" data-original-title="Upload Image" data-toggle="tooltip" >
-                        </a>
-                      </div> --}}
+                      <a href="" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
+                      </a>
+                      <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
+                      </a>
+                      <form action="" method="POST" class="inline">
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+                        <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
+                         data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
+                            data-confirm="{{ __('Are you sure you want to delete?') }}">
+                        </button>
+                      </form>
                     </td>
                   </tr>
                   @endforeach
                 </tbody>
               </table>
-              {!! $news->render() !!}
+              {!! $reservations->render() !!}
             </div>
           </div>
           <div>
-            <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
+            <a href="" class="btn btn-primary pull-right">
               <i class="fa fa-plus-circle"></i>
               {{__('Add News')}}
             </a>

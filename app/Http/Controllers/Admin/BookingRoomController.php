@@ -23,6 +23,7 @@ class BookingRoomController extends Controller
             'quantity',
             'checkin_date',
             'checkout_date',
+            'request'
         ];
         $reservations = Reservation::select($columns)
                     ->with(['bookingroom' => function($query){
