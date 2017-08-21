@@ -23,7 +23,7 @@
               </div>
               <div class="col-md-6">
                 <form  class="container-search">
-                  <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}" required>
+                  <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
                   <button type="submit" class="btn btn-primary btn-search">
                   <i class="glyphicon glyphicon-search"></i>
                   </button>

@@ -1,15 +1,31 @@
 machine:
   php:
     version: 7.0.4
+  environment:
+    APP_ENV: testing
+  pre:
+    - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    - sudo apt-get update
+    - sudo apt-get install google-chrome-stable
 dependencies:
   pre:
     # - cp .env.example .env
 
 test:
+  pre:
+    - "bower install"
+    - "./vendor/laravel/dusk/bin/chromedriver-linux":
+        background: true
+    - "php artisan serve":
+        background: true
   override:
     # phpcs circleci status
     - ./vendor/bin/phpcs -n --standard=phpcs.xml
     # phpmd
     - ./vendor/bin/phpmd app text phpmd.xml
     # phpunit
-    # - ./vendor/bin/phpunit
+    - ./vendor/bin/phpunit
+    # laravel dusk
+    - php artisan dusk
+    # Copy screenshots
+    - cp -R tests/Browser/screenshots $CIRCLE_ARTIFACTS/screenshots
