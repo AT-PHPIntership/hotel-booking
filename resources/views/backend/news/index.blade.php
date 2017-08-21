@@ -24,7 +24,7 @@
               <div class="col-md-6">
                 <form  class="container-search">
                   <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}" required>
-                  <button type="submit" class="btn btn-primary btn-search" id="btn-search-news">
+                  <button type="submit" class="btn btn-primary btn-search">
                   <i class="glyphicon glyphicon-search"></i>
                   </button>
                 </form>
@@ -78,7 +78,7 @@
                   @endforeach
                 </tbody>
               </table>
-              {!! $news->appends(['search' => request('search')])->render() !!}
+              {{$news->render()}}
             </div>
             <div class="cls-search-not-found" hidden="">
               <h1 class="text-center">{{__('Data Not Found')}}</h1>

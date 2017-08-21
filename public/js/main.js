@@ -41,10 +41,10 @@ $(document).ready(function(){
     }
 
     /**
-     * Check if not input value in field search news.
+     * Check if not input value in field search.
      *
      */
-    $('#btn-search-news').on('click', function( event ) {
+    $('.btn-search').on('click', function( event ) {
         $input = $(this).prev().val();
             if ($input.length != 0) {
                 $(this).parent().submit();      
