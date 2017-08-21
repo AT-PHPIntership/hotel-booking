@@ -10,7 +10,7 @@
         <div class="col-md-12 profile">
           <div class="col-md-4 text-center">
             <img alt="user-profile" class="img-circle"
-               src="{{ asset('images/users/profile.png') }}">
+               src="{{ asset('images/default/profile.png') }}">
             <input type="text" class="form-control text-center fz-20 mt-20" name="username" value="{{ $user->username }}" readonly>
             <div class="mt-20">
               <a href="{{ URL::previous() }}">
@@ -46,13 +46,13 @@
             <div class="col-md-5">
               <div class="col-md-2 fz-16 mt-20">{{ __('Role') }}</div>
               <div class="col-md-8">
-                <div class="form-control text-center fz-16 mt-20 col-md-offset-2">{{ ($user->is_admin == App\Model\User::ROLE_ADMIN)? __('Admin'): __('User') }}</div>
+                <div class="form-control text-center fz-16 mt-20 col-md-offset-2">{{  $user->role }}</div>
               </div>
             </div>
             <div class="col-md-5 col-md-offset-1">
               <div class="col-md-2 fz-16 mt-20">{{ __('Status') }}</div>
               <div class="col-md-8">
-                <div class="form-control text-center fz-16 mt-20 col-md-offset-2">{{ ($user->is_active == App\Model\User::STATUS_ACTIVED)? __('Actived'): __('Disabled') }}</div>
+                <div class="form-control text-center fz-16 mt-20 col-md-offset-2">{{ $user->status }}</div>
               </div>
             </div>
             <div class="mt-20 text-center">

@@ -9,23 +9,7 @@ use App\Model\User;
 
 class AdminShowUserTest extends DuskTestCase
 {
-        use DatabaseMigrations;
-    /**
-     * Test Route View Admin Show User Page.
-     *
-     * @return void
-     */
-    public function testShowUser()
-    {
-        factory(User::class, 5)->create();
-        $user = User::find(4);
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit('/admin/user')
-                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a')
-                    ->assertPathIs('/admin/user/'.$user->id)
-                    ->assertSee('User Information');
-        });
-    }
+    use DatabaseMigrations;
 
     /**
      * Test Value For Each Input In Show Page.

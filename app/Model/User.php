@@ -93,4 +93,24 @@ class User extends Model
             }
         });
     }
+
+    /**
+     * Get role from user
+     *
+     * @return string of role
+     */
+    public function getRoleAttribute()
+    {
+        return $this->is_admin == $this->ROLE_ADMIN? __('Admin'): __('User');
+    }
+
+    /**
+     * Get status from user
+     *
+     * @return string of status
+     */
+    public function getStatusAttribute()
+    {
+        return $this->is_active == $this->STATUS_ACTIVED? __('Actived'): __('Disabled');
+    }
 }
