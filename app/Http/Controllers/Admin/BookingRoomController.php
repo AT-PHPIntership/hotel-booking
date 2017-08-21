@@ -26,8 +26,8 @@ class BookingRoomController extends Controller
             'checkout_date'
         ];
         $reservations = Reservation::select($columns)
-                    ->with(['bookingroom' => function($query){
-                    	$query->select('id','name');
+                    ->with(['bookingroom' => function ($query) {
+                        $query->select('id', 'name');
                     }])
                     ->orderby('id', 'DESC')
                     ->paginate(Reservation::ROW_LIMIT);
@@ -36,6 +36,8 @@ class BookingRoomController extends Controller
 
     /**
      * Display a page show detail a booking rooms.
+     *
+     * @param int $id of reservation
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,11 +55,11 @@ class BookingRoomController extends Controller
             'request'
         ];
         $reservation = Reservation::select($columns)
-                    ->with(['bookingroom' => function($query){
+                    ->with(['bookingroom' => function ($query) {
                         $query->select('id', 'name');
                     }])
                     ->findOrFail($id);
-        if($reservation->target == 'user') {
+        if ($reservation->target == 'user') {
             $user = User::select('full_name', 'email', 'phone')
                         ->where('id', $reservation->target_id)
                         ->firstOrFail();

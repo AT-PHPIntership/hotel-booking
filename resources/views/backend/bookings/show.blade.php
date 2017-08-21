@@ -112,6 +112,10 @@
               </tbody>
             </table>
           </div>
+          <div class="box-footer">
+              <a href="{{ URL::previous() }}" class="pull-left btn btn-default">Back</a>
+              <a href="" class="pull-right btn btn-primary">Edit</a>
+            </div>
         </div>
       </div>
     </div>
