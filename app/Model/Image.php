@@ -24,4 +24,12 @@ class Image extends Model
     protected $fillable = [
             'target', 'target_id', 'path'
     ];
+
+     /**
+     * Get all of the owning imageable models.
+     */
+    public function imageable()
+    {
+        return $this->morphTo();
+    }
 }

@@ -56,16 +56,6 @@ class Room extends Model
      */
     public function images()
     {
-        $this->morphMany('App\Model\Image', 'imageable', 'target', 'target_id');
-    }
-
-    /**
-     * Get all of the room's image.
-     *
-     * @return array
-     */
-    public function representativeImage()
-    {
-        dd($this->morphMany('App\Model\Image', 'imageable', 'target', 'target_id'));
+        return $this->morphMany('App\Model\Image', 'imageable', 'target', 'target_id');
     }
 }

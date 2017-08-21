@@ -34,14 +34,14 @@
               <div class="row">
               <!-- search -->
                 <div class="col-md-6 container-search ">
-                  <form method="GET" action="{{ route('room.index') }}" class="form-search">
+                  <form method="GET" action="#" class="form-search">
                     <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
                     <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                   </form>
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('room.create') }}" class="btn btn-primary">
+                  <a href="#" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -53,14 +53,12 @@
                 <thead>
                 <tr>
                   <th class="col-md-1">{{ __('ID') }}</th>
+                  <th>{{ __('Image') }}</th>
                   <th>{{ __('Name') }}</th>
-                  <th>{{ __('Hotel') }}</th>
                   <th>{{ __('Descript') }}</th>
                   <th>{{ __('Price') }}</th>
                   <th>{{ __('Size') }}</th>
                   <th>{{ __('Total') }}</th>
-                  <th>{{ __('Bed') }}</th>
-                  <th>{{ __('Direction') }}</th>
                   <th>{{ __('Max_Gest') }}</th>
                   <th >{{ __('Action') }}</th>
                 </tr>
@@ -71,11 +69,11 @@
                   <td>{{ $room->id }}</td>
                   <td class="text-center col-image">
                     <div class="place-image-show">
-                      <img class="img-place" src="{{ $room->image->path }}" >
+                      <img class="img-place" 
+                        src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset('images/default/room.jpg') }}" >
                     </div>
                   </td>
                   <td>{{ $room->name }}</td>
-                  <td>{{ $room->hotel->name }}</td>
                   <td>{{ $room->descript }}</td>
                   <td>{{ $room->price }}</td>
                   <td>{{ $room->size }}</td>
@@ -83,10 +81,10 @@
                   <td>{{ $room->max_guest }}</td>
                   <td class="text-center col-action">
                         <div class="btn-option text-center">
-                          <a href="{{ route('room.edit', $room->id) }}" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
+                          <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
                             <i class="" aria-hidden="true"></i>
                           </a>
-                          <form  class="form-delete" method="post" action="{{ route('room.destroy', $room->id) }}">
+                          <form  class="form-delete" method="post" action="#">
                             {!! csrf_field() !!}
                             {{ method_field('DELETE') }}
                             <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
@@ -102,7 +100,7 @@
                </tbody>
               </table>
                 <div class="contain-btn second pull-right">
-                  <a href="{{ route('room.create') }}" class="btn btn-primary">
+                  <a href="#" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
