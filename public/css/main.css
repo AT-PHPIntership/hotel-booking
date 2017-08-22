@@ -235,6 +235,7 @@
 
 .container-search {
     position: relative;
+    margin-left: -14px;
 }
 
 .btn-search {
