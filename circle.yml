@@ -1,8 +1,6 @@
 machine:
   php:
     version: 7.0.4
-  environment:
-    APP_ENV: testing
   pre:
     - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
     - sudo apt-get update
@@ -24,7 +22,7 @@ test:
     # phpmd
     - ./vendor/bin/phpmd app text phpmd.xml
     # phpunit
-    - ./vendor/bin/phpunit
+    # - ./vendor/bin/phpunit
     # laravel dusk
     - php artisan dusk
     # Copy screenshots
