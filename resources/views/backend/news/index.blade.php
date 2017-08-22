@@ -28,7 +28,7 @@
                   </form>
                 </div>
               <div >
-                <a href="{{ route('') }}" class="btn btn-primary pull-right">
+                <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
                   <i class="fa fa-plus-circle"></i>
                   {{__('Add News')}}
                 </a>

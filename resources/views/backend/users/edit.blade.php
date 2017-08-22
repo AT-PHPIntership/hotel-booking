@@ -4,14 +4,14 @@
 
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title_page text-success">
+    <h1 class="title-page text-success">
       @include('flash::message')
       {{ __('Update user') }}
     </h1>
 
     <!-- Main content -->
     <section class="content">
-      <div class="row margin_center">
+      <div class="row margin-center">
         <div class="col-md-12">
           <!-- general form elements -->
           <div class="box box-primary">
