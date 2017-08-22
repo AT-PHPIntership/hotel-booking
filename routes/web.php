@@ -18,9 +18,9 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('/user', 'UserController');
-    Route::resource('place', 'PlaceController');
+    Route::resource('/place', 'PlaceController');
     Route::resource('/comment', 'RatingCommentController');
-    Route::resource('news', 'NewsController');
+    Route::resource('/news', 'NewsController');
     Route::resource('/hotel', 'HotelController');
     Route::resource('/category', 'CategoryController');
     Route::resource('/service', 'ServiceController', ['except' => ['show']]);
