@@ -41,7 +41,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="#" class="btn btn-primary">
+                  <a href="{{ route('room.create', $hotel_id) }}" class="btn btn-primary" id="btn-add-room">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -60,7 +60,7 @@
                   <th>{{ __('Size') }}</th>
                   <th>{{ __('Total') }}</th>
                   <th>{{ __('Max_Gest') }}</th>
-                  <th >{{ __('Action') }}</th>
+                  <th >{{ __('Option') }}</th>
                 </tr>
                 </thead>
                 <tbody>
