@@ -45,7 +45,6 @@
                   <th>{{__('Id')}}</th>
                   <th>{{__('Title')}}</th>
                   <th>{{__('Content')}}</th>
-                  <th>{{__('Category_id')}}</th>
                   <th>{{__('Category')}}</th>
                   <th class="text-center">{{__('Option')}}</th>
                 </tr>
@@ -56,8 +55,7 @@
                     <td>{{$item->id}}</td>
                     <td>{{$item->title}}</td>
                     <td>{{$item->content}}</td>
-                    <td>{{$item->category_id}}</td>
-                    <td>{{$item->category->name}}</td>
+                    <td>{{$item->name}}</td>
                     <td align="center">
                       <div class="news-option">
                         <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
@@ -80,7 +78,7 @@
               </table>
               {{$news->render()}}
             </div>
-            <div class="cls-search-not-found" hidden="">
+            <div class="cls-searchnews-not-found" hidden="">
               <h1 class="text-center">{{__('Data Not Found')}}</h1>
             </div>
           </div>

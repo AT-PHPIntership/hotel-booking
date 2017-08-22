@@ -37,7 +37,7 @@ $(document).ready(function(){
      */
     var countNews = $('#newstable tbody tr').length;
     if (countNews == 0) {
-        $('.cls-search-not-found').show();
+        $('.cls-searchnews-not-found').show();
     }
 
     /**
@@ -51,6 +51,11 @@ $(document).ready(function(){
             }        
             event.preventDefault();
     });
+
+    /**
+     * Show message if database has not data or search
+     *
+     */
     var count_records = $('#table-contain tbody tr').length;
     if (count_records == 0) {
         $('.cls-search-not-found').show();
