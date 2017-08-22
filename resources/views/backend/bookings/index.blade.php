@@ -40,7 +40,7 @@
                   <th>{{__('Check in')}}</th>
                   <th>{{__('Check out')}}</th>
                   <th>{{__('Status')}}</th>
-                  <th class="text-center">{{__('Option')}}</th>
+                  <th class="text-center col-md-2">{{__('Option')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,14 +55,16 @@
                     <td>{{$reservation->checkout_date}}</td>
                     <td>{{$reservation->status}}</td>
                     <td align="center">
-                      <a href="{{ route('bookingroom.show',$reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
+                      <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
-                      <a href="" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
-                      </a>
+                      @if($reservation->status != __('Cancel'))
+                        <a href="" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
+                        </a>
+                      @endif
                       <form action="" method="POST" class="inline">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
-                        <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
+                        <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-right"  
                          data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
                             data-confirm="{{ __('Are you sure you want to delete?') }}">
                         </button>

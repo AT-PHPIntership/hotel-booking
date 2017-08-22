@@ -41,4 +41,25 @@ class Reservation extends Model
         return $this->belongsTo(Room::class, 'room_id');
     }
 
+    /**
+     * Get status of a reservation.
+     *
+     * @return string
+     */
+    public function getStatusAttribute()
+    {
+        switch ($this->attributes['status']) {
+            case '1':
+                return __('Accept');
+                break;
+            case '2':
+                return __('Reject');
+                break;
+            case '3':
+                return __('Cancel');
+            default:
+                return __('Pending');
+                break;
+        }
+    }
 }
