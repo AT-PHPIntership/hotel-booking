@@ -21,7 +21,7 @@ class PlaceController extends Controller
             'id',
             'name',
             'descript',
-            'image',
+            'image'
         ];
         $places = Place::search()->select($columns)->orderby('id', 'DESC')
             ->paginate(Place::ROW_LIMIT);

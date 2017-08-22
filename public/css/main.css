@@ -285,3 +285,9 @@
 .cls-editnews-msg {
     width: 718px;
 }
+
+.cls-search-not-found {
+    font-size: 20px;
+    color: red;
+    font-family: cursive;
+}

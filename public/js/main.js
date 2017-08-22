@@ -39,4 +39,13 @@ $(document).ready(function(){
     }
     event.preventDefault();
 });
+ 
+    /**
+     * Show message if database has not data or search not found
+     *
+     */
+    var count_records = $('#table-contain tbody tr').length;
+    if (count_records == 0) {
+        $('.cls-search-not-found').show();
+    }
 });

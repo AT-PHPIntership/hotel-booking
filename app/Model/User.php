@@ -7,10 +7,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
+use App\Libraries\Traits\SearchTrait;
 
 class User extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -27,6 +28,15 @@ class User extends Model
     protected $fillable = [
         'username', 'full_name', 'password', 'email', 'phone', 'is_admin', 'is_active'
      ];
+
+    /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'username', 'full_name', 'email', 'phone'
+    ];
 
     /**
      * Value paginate of row

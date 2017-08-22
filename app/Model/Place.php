@@ -30,7 +30,11 @@ class Place extends Model
      * @var array $searchableFields
      */
     protected $searchableFields = [
-        'name', 'descript', 'id'
+        'columns' => [
+            'name',
+            'descript',
+            'id'
+        ]
     ];
 
     /**

@@ -91,6 +91,9 @@
                   @endforeach 
                 </tbody> 
               </table>
+              <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
               <div class="contain-btn second pull-right">
                 <a href="{{ route('place.create') }}" class="btn btn-primary">
                   <span class="fa fa-plus-circle" aria-hidden="true"></span>
