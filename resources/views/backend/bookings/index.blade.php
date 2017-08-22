@@ -31,7 +31,7 @@
             <div class="box-body">
               @include('flash::message')
               {{-- @include('backend.layouts.partials.modal') --}}
-              <table class="table table-bordered table-responsive table-striped" id="bookingrooms-table">
+              <table class="table table-bordered table-responsive table-striped" id="table-content">
                 <thead>
                 <tr>
                   <th>{{__('Id')}}</th>
@@ -47,7 +47,9 @@
                   @foreach($reservations as $reservation)
                   <tr>
                     <td>{{$reservation->id}}</td>
-                    <td>{{$reservation->bookingroom->name}}</td>
+                    <td>
+                      <a href="">{{$reservation->bookingroom->name}}</a>
+                    </td>
                     <td>{{$reservation->target}}</td>
                     <td>{{$reservation->checkin_date}}</td>
                     <td>{{$reservation->checkout_date}}</td>
