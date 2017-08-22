@@ -22,7 +22,8 @@ class Room extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'name', 'hotel_id', 'descript', 'price', 'size', 'totel',
+        'name', 'hotel_id', 'descript',
+        'price', 'size', 'totel',
         'bed', 'direction', 'max_guest'
     ];
 
@@ -30,4 +31,14 @@ class Room extends Model
      * Define a value paginate rows
      */
     const ROW_LIMIT = 10;
+
+    /**
+     * Room belongs to a Hotel.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class, 'hotel_id');
+    }
 }

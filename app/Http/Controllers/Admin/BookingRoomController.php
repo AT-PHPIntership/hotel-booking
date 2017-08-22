@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Model\Reservation;
 use App\Model\User;
 use App\Model\Guest;
+use App\Model\Room;
+use App\Model\Hotel;
+
 
 class BookingRoomController extends Controller
 {
@@ -18,7 +21,7 @@ class BookingRoomController extends Controller
     public function index()
     {
         $columns = [
-            'id',
+            'reservations.id',
             'status',
             'room_id',
             'target',
@@ -27,9 +30,9 @@ class BookingRoomController extends Controller
         ];
         $reservations = Reservation::select($columns)
                     ->with(['bookingroom' => function ($query) {
-                        $query->select('id', 'name');
+                        $query->select('rooms.id', 'name');
                     }])
-                    ->orderby('id', 'DESC')
+                    ->orderby('reservations.id', 'DESC')
                     ->paginate(Reservation::ROW_LIMIT);
         return view('backend.bookings.index', compact('reservations'));
     }
@@ -43,22 +46,14 @@ class BookingRoomController extends Controller
      */
     public function show($id)
     {
-        $columns = [
-            'id',
-            'status',
-            'room_id',
-            'target',
-            'target_id',
-            'quantity',
-            'checkin_date',
-            'checkout_date',
-            'request'
-        ];
-        $reservation = Reservation::select($columns)
-                    ->with(['bookingroom' => function ($query) {
-                        $query->select('id', 'name');
-                    }])
-                    ->findOrFail($id);
+        $reservation = Reservation::with(['bookingroom' => function ($query) {
+                        $query->select('rooms.id', 'name', 'rooms.hotel_id');
+                        }])
+                        ->findOrFail($id);
+        $hotel_id = $reservation->bookingroom->hotel_id;
+        $hotel = Hotel::select('hotels.name')
+                    ->where('hotels.id', $hotel_id)
+                    ->firstOrFail(); 
         if ($reservation->target == 'user') {
             $user = User::select('full_name', 'email', 'phone')
                         ->where('id', $reservation->target_id)
@@ -68,6 +63,6 @@ class BookingRoomController extends Controller
                         ->where('id', $reservation->target_id)
                         ->firstOrFail();
         }
-        return view('backend.bookings.show', compact('reservation', 'user'));
+        return view('backend.bookings.show', compact('reservation', 'user', 'hotel'));
     }
 }

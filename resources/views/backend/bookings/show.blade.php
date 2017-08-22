@@ -13,6 +13,17 @@
                 <tr>
                   <td>
                     <strong>
+                      <i class="glyphicon glyphicon-home text-primary"></i>
+                      {{ __('Hotel Name') }}
+                    </strong>
+                  </td>
+                    <td>
+                      {{$hotel->name}}
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
                       <i class="glyphicon glyphicon-asterisk text-primary"></i>
                       {{ __('Room Name') }}
                     </strong>
