@@ -4,13 +4,13 @@
   <div class="content-wrapper">
     <h1 class="title-page">{{__('Add hotel')}}</h1>
     <section class="content">
-      <div class="row margin_center">
+      <div class="row margin-center">
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">{{__('Fill in form, please!')}}</h3>
             </div>
-            <form role="form" method="POST" action="{{ route('hotel.store') }}" >
+            <form role="form" method="POST" action="{{ route('hotel.store') }}" enctype="multipart/form-data" >
               {{csrf_field()}}
               <div class="box-body"> 
                 {{-- input hotel name --}}
@@ -73,18 +73,21 @@
                 </div>
                 {{-- upload image --}}
                 <div class="form-group">
-                  <input type="file" class="form-control" name='images[]' id="img-upload" multiple placeholder="{{ __('Images') }}" value="{{ old('img') }}">
+                  <input type="file" class="form-control" name='images[]' id="img-upload" multiple="true" placeholder="{{ __('Images') }}">
                    <div id="preview-img">
                      
                    </div>
                 </div>
               </div>
-              <div class="box-footer btn-add-news">
-                <button type="reset" class="btn btn-primary">
-                  {{__('Reset')}}
+              <div class="box-footer">
+                <a class="btn btn-default btn-custom" href="javascript:history.back()">
+                  {{ __('Back') }}
+                </a>
+                <button type="reset" class="btn btn-warning btn-custom">
+                  {{ __('Reset') }}
                 </button>
-                <button type="submit" class="btn btn-primary" id="js-bt-submit">
-                  {{__('Submit')}}
+                <button type="submit" class="btn btn-primary btn-custom pull-right" id="js-bt-submit">
+                  {{ __('Submit') }}
                 </button>
               </div>
             </form>

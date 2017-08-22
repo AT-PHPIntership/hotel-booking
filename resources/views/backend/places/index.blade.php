@@ -29,54 +29,74 @@
               <h3 class="box-title title-header">
                 {{ __('List place') }}
               </h3>
-              <div class="contain-btn">
-                <a href="{{ route('place.create') }}" class="btn btn-primary">
-                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
-                  {{ __('Add Place') }}
-                </a> 
-              </div>
             </div>
-            @include('flash::message')
+            
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="table-contain" class="table table-bordered table-striped table-place">
+              @include('flash::message')
+              <div class="row">
+                <div class="col-md-6 container-search ">
+                  <form method="GET" action="{{ route('user.index') }}" class="form-search">
+                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  </form>
+                </div>
+                <div class="contain-btn pull-right">
+                  <a href="{{ route('place.create') }}" class="btn btn-primary">
+                    <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                    {{ __('Add Place') }}
+                  </a> 
+                </div>
+              </div>
+              @include('backend.layouts.partials.modal')
+              <table id="table-contain" class="table table-bordered table-striped
+                table-responsive">
                 <thead>
                   <tr>
-                    <th class="text-center col-no">{{ __('No.') }}</th>
-                    <th class="text-center col-image">{{ __('Image') }}</th>
-                    <th class="text-center col-name">{{ __('Name') }}</th>
-                    <th class="text-center col-descript">{{ __('Descript') }}</th>
-                    <th class="text-center col-action">{{ __('Action') }}</th>
+                    <th class="text-center">{{ __('ID') }}</th>
+                    <th class="text-center">{{ __('Image') }}</th>
+                    <th class="text-center">{{ __('Name') }}</th>
+                    <th class="text-center">{{ __('Description') }}</th>
+                    <th class="text-center">{{ __('Option') }}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @php ($index = 1)
                   @foreach ($places as $place)
                     <tr>
-                      <td class="col-no">{{ $index++ }}</td>
+                      <td class="col-no text-center">{{ $place->id }}</td>
                       <td class="text-center col-image">
                         <div class="place-image-show">
-                          <img class="img-place" src="{{ asset($place->image_path) }}" >
+                          <img class="img-place" src="{{ $place->image_url }}" >
                         </div>
                       </td>
                       <td class="col-name">{{ $place->name }}</td>
                       <td class="col-descript">{{ $place->descript }}</td>
                       <td class="text-center col-action">
-                        <a href="{{ route('place.edit', $place->id) }}">
-                          <i class="fa fa-pencil-square-o btn-pencil" aria-hidden="true"></i>
-                        </a>
-                        <form method="post" action="{{ route('place.destroy', $place->id) }}">
-                          {!! csrf_field() !!}
-                          {{ method_field('DELETE') }}
-                          <button class=" btn btn-delete-item fa fa-trash-o" 
-                            type="submit" >
-                          </button>
-                        </form> 
+                        <div class="btn-option text-center">
+                          <a href="{{ route('place.edit', $place->id) }}" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
+                            <i class="" aria-hidden="true"></i>
+                          </a>
+                          <form  class="form-delete" method="post" action="{{ route('place.destroy', $place->id) }}">
+                            {!! csrf_field() !!}
+                            {{ method_field('DELETE') }}
+                            <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
+                              data-title="{{ __('Confirm deletion!') }}"
+                              data-confirm="{{ __('Are you sure you want to delete?') }}" 
+                              type="submit" >
+                            </button>
+                          </form> 
+                        </div>
                       </td>
                     </tr>
                   @endforeach 
                 </tbody> 
               </table>
+              <div class="contain-btn second pull-right">
+                <a href="{{ route('place.create') }}" class="btn btn-primary">
+                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                  {{ __('Add Place') }}
+                </a> 
+              </div>
               {{ $places->links() }}
             </div>
             <!-- /.box-body -->

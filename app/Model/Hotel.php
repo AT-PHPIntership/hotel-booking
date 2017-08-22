@@ -72,5 +72,4 @@ class Hotel extends Model
     {
         return $this->hasMany('App\Model\HotelService', 'hotel_id');
     }
-
 }

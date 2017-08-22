@@ -6,20 +6,18 @@
         transform: rotate(-25deg);
     }
 }
-.margin_center{
-    margin-left: 15%;
-    margin-right: 15%;
+.margin-center{
+    margin: 0 15%;
 }
 
-.title_page{
+.title-page{
     text-align: center;
 }
 
-.chat_room{
+.chat-room{
     margin-left: 25%;
     margin-right: 25%;
 }
-
 /* .form-control.bg-info {
     background-color: #E3F5B8;
 }
@@ -39,12 +37,12 @@
     animation: spinAround 0.1s linear infinite;
 }
 
-.user_image{
+.user-image{
     display: inline-block;
     width: 100px;
 }
 
-.cus_icon{
+.cus-icon{
     border: none;
     background: none;
     color: blue;
@@ -53,19 +51,29 @@
 .inline{
     display: inline;
 }
+
+
+.help-block {
+    color: red;
+}
 /*button create*/
-.btn-create span {
-    background-color: violet;
-    color: #FFF;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 5px;
-    margin-left: 10px; 
+.btn-create  {
+    float:left;
+    width: 50%;
 }
 /*end button create*/
 
+.btn-add-news button{
+    margin-left: 5%;
+    width: 20%;
+}
+.help-block {
+    color: red;
+}
+
 .news-btn {
-    margin-top: 4px;
+    /*margin-top: 2px;*/
+    font-size: 16px;
 }
  /*admin-place*/
 .icon-remove{
@@ -77,60 +85,102 @@
     margin-right: 15%;
 }
 
-.title-page {
-    text-align: center;
-}
-
+/*fix template index, create*/
 .btn-delete-item {
     border: none;
     background: unset;
     color: #e23434;
-    font-size: 20px;
+    margin-top:5px; 
+
+}
+.news-option {
+    width: 122px;
+}
+.news-option:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.clear-fix:after {
+   display: block;
+    content: "";
+    clear: both; 
+}
+.title-page {
+    text-align: center;
+}
+.btn-custom-option {
+    font-size: 22px;
 }
 
-.title-header {
-   display: block !important;
-   font-size: 27px !important;
-}
-
-.contain-btn{ 
+.contain-btn { 
     float: right !important;
+    margin-right: 1.5%;
+    margin-bottom: 10px;
 }
 
-.form-search{
-    float: right !important;
-    margin-bottom: 10px;    
+.contain-btn.second {
+    margin-right: 0;
+    margin-top: 20px;
+}
+.btn-option:after {
+    content: "";
+    clear:both;
 }
 
+.btn-option{
+    width: 95px;
+}
+
+.search-news {
+    float: left;
+    width: 60%;
+}
 .btn-pencil{
     font-size: 18px;
 }
+.btn-option .btn-edit {
+    margin-top: 12px;
+    margin-left: 21px;
 
-.col-no {
-    width: 5%;
+
 }
-.col-image {
-    width: 15%;
+
+.form-delete{
+    margin-top: 3px;
 }
-.col-name {
-    width: 20%;
+
+
+/*end fix template*/
+.title-header {
+    display: block !important;
+    font-size: 27px !important;
 }
-.col-descript {
-    width: 50%;
+
+.contain-btn{ 
+     
+    margin-right: 1.5%;
 }
-.col-action {
-    width: 5%;
-}
-.table-place{
-    table-layout: fixed;
+.contain-btn.second { 
+    margin-right: 0;
+    margin-top: 20px;
 }
  
 .img-place{
     max-width: 145px;
     height: 100px;
+    margin-top: 10px;
+}
+.place-descript{
+    max-height: 300px;
+    max-width: 690px;
+}
+.btn-custom {
+    margin-right: 10px;
 }
 
 /*end admin-list-place*/
+
 /*errors page*/
 .main-page-error {
     text-align: center;
@@ -145,10 +195,103 @@
     color: #5488c7 !important;
 }
 
+.news-search-input {
+    width: 60%;
+}
 
-.btn-addnews a{
-    width: 10%;
+.news-search-btn {
+   margin-left: 5%;
 }
 
 /*end errors page*/
+.btn-edit-news {
+    float: left;
+}
+.edit-news-submit {
+    float: right;
+}
+.add-news-button {
+    float: left;
+}
+.add-news-submit {
+    float: right;
+}
+/*end errors page*/
 
+/*search*/
+.form-search{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.input-search {
+    display: inline-block;
+    width: 50%;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    background-color: white;
+    background-repeat: no-repeat;
+}
+
+.container-search {
+    position: relative;
+}
+
+.btn-search {
+    position: absolute;
+    top: 0px;
+}
+/*end search*/
+.btn-on {
+    background: #EF9D47;
+    color: #010101;
+}
+
+.btn-off {
+    background: #D0DFDF;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.fz-20 {
+    font-size: 20px;
+}
+
+.fz-16 {
+    font-size: 16px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mlr-0 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.ml-5per {
+    margin-left: 5%;
+}
+
+.cus-icon-sm {
+    font-size: 20px;
+    transform: translateY(20%);
+}
+
+.profile {
+    margin-top: 80px;
+    color: #000000;
+}
+
+.cls-editnews-msg {
+    width: 718px;
+}
+
+.cls-search-not-found {
+    font-size: 20px;
+    color: red;
+    font-family: cursive;
+}

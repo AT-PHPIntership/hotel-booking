@@ -3,16 +3,15 @@
 @section('title', __('CREATE USER'))
 
 @section('content')
- <div class="content-wrapper">
-      <h1 class="title_page text-success">
-        @include('flash::message')
-        {{ __('Create user') }}
-      </h1>
+  <div class="content-wrapper">
+    <h1 class="title-page text-success">
+      @include('flash::message')
+      {{ __('Create user') }}
+    </h1>
 
     <!-- Main content -->
     <section class="content">
-      <div class="row margin_center">
-        <!-- left column -->
+      <div class="row margin-center">
         <div class="col-md-12">
           <!-- general form elements -->
           <div class="box box-primary">
@@ -57,29 +56,35 @@
                 </div>
                 <div class="form-group col-md-6 pull-center">
                   <label for="is_active">{{ __('Is Active') }}</label>
-                  @if (old('is_active') == 1)
-                    <input type="checkbox" name="is_active" value="1" checked>
+                  @if (old('is_active') == App\Model\User::STATUS_ACTIVED)
+                    <input type="checkbox" name="is_active" value="{{ App\Model\User::STATUS_ACTIVED }}" checked>
                   @else
-                    <input type="checkbox" name="is_active" value="1">
+                    <input type="checkbox" name="is_active" value="{{ App\Model\User::STATUS_ACTIVED }}">
                   @endif
                 </div>
                 <div class="form-group col-md-6">
                   <label for="is_admin">{{ __('Is Admin') }}</label>
-                  @if (old('is_admin') == 1)
-                    <input type="checkbox" name="is_admin" value="1" checked>
+                  @if (old('is_admin') == App\Model\User::ROLE_ADMIN)
+                    <input type="checkbox" name="is_admin" value="{{ App\Model\User::ROLE_ADMIN }}" checked>
                   @else
-                    <input type="checkbox" name="is_admin" value="1">
+                    <input type="checkbox" name="is_admin" value="{{ App\Model\User::ROLE_ADMIN }}">
                   @endif
-                </div>
                 </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="reset" class="btn btn-warning">{{ __('Reset') }}</button>
-                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                <a href="{{ route('user.index') }}">
+                  <button type="button" class="btn btn-default mr-10">{{ __('Back') }}</button>
+                </a>
+                <button type="reset" class="btn btn-warning mr-10">{{ __('Reset') }}</button>
+                <button type="submit" class="btn btn-primary mr-10 pull-right">{{ __('Submit') }}</button>
               </div>
             </form>
           </div>
-</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
 @endsection

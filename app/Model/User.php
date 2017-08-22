@@ -7,10 +7,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
+use App\Libraries\Traits\SearchTrait;
 
 class User extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -29,9 +30,38 @@ class User extends Model
      ];
 
     /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'username', 'full_name', 'email', 'phone'
+    ];
+
+    /**
      * Value paginate of row
      */
     const ROW_LIMIT = 10;
+
+    /**
+     * Value of admin
+     */
+    const ROLE_ADMIN = 1;
+
+    /**
+     * Value of user
+     */
+    const ROLE_USER = 0;
+
+    /**
+     * Value of actived user
+     */
+    const STATUS_ACTIVED = 1;
+
+    /**
+     * Value of disabled user
+     */
+    const STATUS_DISABLED = 0;
 
     /**
      * Get all of the user's ratingcomment.
@@ -72,5 +102,25 @@ class User extends Model
                 $user->password = bcrypt($user->password);
             }
         });
+    }
+
+    /**
+     * Get role from user
+     *
+     * @return string of role
+     */
+    public function getRoleAttribute()
+    {
+        return $this->is_admin == self::ROLE_ADMIN? __('Admin'): __('User');
+    }
+
+    /**
+     * Get status from user
+     *
+     * @return string of status
+     */
+    public function getStatusAttribute()
+    {
+        return $this->is_active == self::STATUS_ACTIVED? __('Actived'): __('Disabled');
     }
 }

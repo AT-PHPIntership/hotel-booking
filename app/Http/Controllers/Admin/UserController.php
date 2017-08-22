@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\User;
-use App\Http\Requests\UpdateUserRequest;
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\Backend\UpdateUserRequest;
+use App\Http\Requests\Backend\CreateUserRequest;
 
 class UserController extends Controller
 {
@@ -26,8 +26,11 @@ class UserController extends Controller
             'is_admin',
             'is_active',
         ];
-        $users = User::select($columns)->orderby('id', 'DESC')
-            ->paginate(User::ROW_LIMIT);
+        $users = User::search()
+                     ->select($columns)
+                     ->orderby('id', 'DESC')
+                     ->paginate(User::ROW_LIMIT);
+        $users->appends(['search' => request('search')]);
         return view("backend.users.index", compact('users'));
     }
 
@@ -68,7 +71,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return view('backend.users.edit', compact('user'));
     }
 
@@ -109,5 +112,56 @@ class UserController extends Controller
             flash(__('Deletion failed!'))->error();
         }
         return redirect()->route('user.index');
+    }
+
+    /**
+     * Update status of user.
+     *
+     * @param int $id id of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->is_active == User::STATUS_ACTIVED) {
+            $user->update(['is_active' => User::STATUS_DISABLED]);
+        } else {
+            $user->update(['is_active' => User::STATUS_ACTIVED]);
+        }
+        flash(__('Change status successful!'))->success();
+        return redirect()->route('user.index');
+    }
+
+    /**
+     * Update role of user.
+     *
+     * @param int $id id of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateRole($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->is_admin == User::ROLE_ADMIN) {
+            $user->update(['is_admin' => User::ROLE_USER]);
+        } else {
+            $user->update(['is_admin' => User::ROLE_ADMIN]);
+        }
+        flash(__('Change role successful!'))->success();
+        return redirect()->route('user.index');
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param int $id id of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('backend.users.show', compact('user'));
     }
 }
