@@ -41,7 +41,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('room.create', $hotelId) }}"" class="btn btn-primary" id="btn-add-room">
+                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary" id="btn-add-room">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -54,12 +54,12 @@
                 <tr>
                   <th class="col-md-1">{{ __('ID') }}</th>
                   <th class="text-center">{{ __('Image') }}</th>
-                  <th>{{ __('Name') }}</th>
+                  <th class="text-center">{{ __('Name') }}</th>
                   <th class="text-center">{{ __('Descript') }}</th>
-                  <th>{{ __('Price') }}</th>
-                  <th>{{ __('Total') }}</th>
-                  <th>{{ __('Max_Gest') }}</th>
-                  <th >{{ __('Option') }}</th>
+                  <th class="text-center">{{ __('Price') }}</th>
+                  <th class="text-center">{{ __('Total') }}</th>
+                  <th class="text-center">{{ __('Max_Gest') }}</th>
+                  <th class="text-center">{{ __('Option') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -72,33 +72,33 @@
                         src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset('images/default/room.jpg') }}" >
                     </div>
                   </td>
-                  <td>{{ $room->name }}</td>
-                  <td>{{ $room->descript }}</td>
-                  <td>{{ $room->price }}</td>
-                  <td>{{ $room->total }}</td>
-                  <td>{{ $room->max_guest }}</td>
+                  <td class="text-center">{{ $room->name }}</td>
+                  <td class="text-center">{{ $room->descript }}</td>
+                  <td class="text-center">{{ $room->price }}</td>
+                  <td class="text-center">{{ $room->total }}</td>
+                  <td class="text-center">{{ $room->max_guest }}</td>
                   <td class="text-center col-action">
-                        <div class="btn-option text-center">
-                          <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
-                            <i class="" aria-hidden="true"></i>
-                          </a>
-                          <form  class="form-delete" method="post" action="#">
-                            {!! csrf_field() !!}
-                            {{ method_field('DELETE') }}
-                            <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
-                              data-title="{{ __('Confirm deletion!') }}"
-                              data-confirm="{{ __('Are you sure you want to delete?') }}" 
-                              type="submit" >
-                            </button>
-                          </form> 
-                        </div>
-                      </td>
+                    <div class="btn-option text-center">
+                      <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
+                        <i class="" aria-hidden="true"></i>
+                      </a>
+                      <form  class="form-delete" method="post" action="#">
+                        {!! csrf_field() !!}
+                        {{ method_field('DELETE') }}
+                        <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
+                          data-title="{{ __('Confirm deletion!') }}"
+                          data-confirm="{{ __('Are you sure you want to delete?') }}" 
+                          type="submit" >
+                        </button>
+                      </form> 
+                    </div>
+                  </td>
                 </tr>
               @endforeach
                </tbody>
               </table>
                 <div class="contain-btn second pull-right">
-                  <a href="#" class="btn btn-primary">
+                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 

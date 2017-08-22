@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Room;
+use App\Model\Hotel;
 use App\Model\Image;
-use App\Http\Requests\Backend\CreateRoomRequest;
+use App\Http\Requests\Backend\RoomRequest;
 
 class RoomController extends Controller
 {
@@ -19,6 +20,7 @@ class RoomController extends Controller
      */
     public function index($hotelId)
     {
+        Hotel::findOrFail($hotelId);
         $columns = [
             'id',
             'name',
@@ -46,19 +48,21 @@ class RoomController extends Controller
      */
     public function create($hotelId)
     {
+        Hotel::findOrFail($hotelId);
         return view('backend.rooms.create', compact('hotelId'));
     }
 
     /**
      * Store a newly created room in storage.
      *
-     * @param AdminCreateroom $request request from view
-     * @param int             $hotelId id of hotel
+     * @param Admin\RoomRequest $request request from view
+     * @param int               $hotelId id of hotel
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateRoomRequest $request, $hotelId)
+    public function store(RoomRequest $request, $hotelId)
     {
+        Hotel::findOrFail($hotelId);
         $room = new room($request->all());
         $room->hotel_id = $hotelId;
         if ($room->save()) {
@@ -66,17 +70,17 @@ class RoomController extends Controller
         } else {
             //If fail, back to create page and dont save image
             flash(__('Creation failure!'))->error();
-            return redirect()->route('room.create');
+            return redirect()->back()->withInput();
         }
         if (isset($request->image)) {
             foreach ($request->image as $img) {
                 $nameImage = config('image.name_prefix') . "-" . $img->hashName();
                 $path = config('image.rooms.path_upload').$nameImage;
-                $image = new Image();
-                $image->target = 'room';
-                $image->target_id = $room->id;
-                $image->path = $path;
-                $image->save();
+                Image::create([
+                    'target' => 'room',
+                    'target_id' => $room->id,
+                    'path' => $path
+                ]);
                 $img->move(config('image.rooms.path_upload'), $nameImage);
             }
         }

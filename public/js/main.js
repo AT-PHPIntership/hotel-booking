@@ -41,7 +41,7 @@ $(document).ready(function(){
         result.empty();  
         $.each(files, function(i, file) {
             var imgpath = URL.createObjectURL(file);    
-            result.add("<img class='img-place' src='" + imgpath + "'>").appendTo('#showImage');
+            result.add("<img class='img-place  mr-10' src='" + imgpath + "'>").appendTo('#showImage');
         });
     });
 

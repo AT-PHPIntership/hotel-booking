@@ -5,7 +5,8 @@
 @section('content')
   <div class="content-wrapper">
     <h1 class="text-center text-success">
-      {{ __("Add room") }}
+      @include('flash::message')
+      {{ __("Create room") }}
     </h1>
     <!-- Main content -->
     <section class="content">
@@ -38,7 +39,7 @@
                     id="place-descript" placeholder="Enter description">{{ old('descript') }}</textarea>
                   <small class="text-danger">{{ $errors->first('descript') }}</small>
                 </div>
-                <div class="form-group has-feedback
+                <div class="form-group col-md-4 has-feedback
                   {{ $errors->has('price') ? ' has-error' : '' }}">
                   <label for="price">{{ __('Price(Vnd)') }}</label>
                   <input type="text" class="form-control" name= "price" 
@@ -46,13 +47,13 @@
                     value="{{ old('price') }}" >
                   <small class="text-danger">{{ $errors->first('price') }}</small>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-4 ">
                   <label for="size">{{ __('Size(m2)') }}</label>
                   <input type="text" class="form-control" name= "size" 
                     id="size" placeholder="{{ __('Enter size') }}"
                     value="{{ old('size') }}" >
                 </div>
-                <div class="form-group has-feedback
+                <div class="form-group col-md-4 has-feedback
                   {{ $errors->has('total') ? ' has-error' : '' }}">
                   <label for="total">{{ __('Total') }}</label>
                   <input type="text" class="form-control" name= "total" 
@@ -60,23 +61,23 @@
                     value="{{ old('total') }}" >
                   <small class="text-danger">{{ $errors->first('total') }}</small>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-4 ">
                   <label for="bed">{{ __('Bed') }}</label>
                   <input type="text" class="form-control" name= "bed" 
                     id="bed" placeholder="{{ __('Enter description of bed') }}"
                     value="{{ old('bed') }}" >
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-4 ">
                   <label for="direction">{{ __('Direction') }}</label>
                   <input type="text" class="form-control" name= "direction" 
                     id="direction" placeholder="{{ __('Enter direction') }}"
                     value="{{ old('direction') }}" >
                 </div>
-                <div class="form-group has-feedback
+                <div class="form-group col-md-4 has-feedback
                   {{ $errors->has('max_guest') ? ' has-error' : '' }}">
                   <label for="max_guest">{{ __('Max guest') }}</label>
                   <input type="text" class="form-control" name= "max_guest" 
-                    id="max_guest" placeholder="{{ __('Enter max_guest') }}"
+                    id="max_guest" placeholder="{{ __('Enter max guest') }}"
                     value="{{ old('max_guest') }}" >
                   <small class="text-danger">{{ $errors->first('max_guest') }}</small>
                 </div>
