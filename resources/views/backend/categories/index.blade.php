@@ -42,7 +42,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('category.create') }}" class="btn btn-primary">
+                   <a href="{{ route('category.create') }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Cagegory') }}
                   </a> 
