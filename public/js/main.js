@@ -32,15 +32,14 @@ $(document).ready(function(){
     });
 
     /**
-     * Show message if database has not data or search not found
+     * Show message if database has not data or search not found in page News
      *
      */
-<<<<<<< HEAD
     var countNews = $('#newstable tbody tr').length;
     if (countNews == 0) {
         $('.cls-search-not-found').show();
     }
-    
+
     /**
      * Check if not input value in field search.
      *
@@ -53,6 +52,10 @@ $(document).ready(function(){
             event.preventDefault();
     });
 
+    /**
+     * Show message if database has not data or search
+     *
+     */
     var count_records = $('#table-contain tbody tr').length;
     if (count_records == 0) {
         $('.cls-search-not-found').show();
