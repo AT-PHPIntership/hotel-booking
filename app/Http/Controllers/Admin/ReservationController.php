@@ -10,8 +10,7 @@ use App\Model\Guest;
 use App\Model\Room;
 use App\Model\Hotel;
 
-
-class BookingRoomController extends Controller
+class ReservationController extends Controller
 {
     /**
      * Display a listing of booking room
@@ -47,13 +46,12 @@ class BookingRoomController extends Controller
     public function show($id)
     {
         $reservation = Reservation::with(['bookingroom' => function ($query) {
-                        $query->select('rooms.id', 'name', 'rooms.hotel_id');
-                        }])
-                        ->findOrFail($id);
-        $hotel_id = $reservation->bookingroom->hotel_id;
-        $hotel = Hotel::select('hotels.name')
-                    ->where('hotels.id', $hotel_id)
-                    ->firstOrFail(); 
+            $query->select('rooms.id', 'name', 'rooms.hotel_id');
+        }])->findOrFail($id);
+        $hotelId = $reservation->bookingroom->hotel_id;
+        $hotel = Hotel::select('name')
+                    ->where('id', $hotelId)
+                    ->firstOrFail();
         if ($reservation->target == 'user') {
             $user = User::select('full_name', 'email', 'phone')
                         ->where('id', $reservation->target_id)

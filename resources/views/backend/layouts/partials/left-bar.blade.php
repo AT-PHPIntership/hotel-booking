@@ -90,7 +90,7 @@
 
         <!-- booking room -->
         <li>
-          <a href="{{ route('bookingroom.index') }}">
+          <a href="{{ route('reservation.index') }}">
             <i class="fa fa-calendar"></i> <span>{{ __('Booking Room') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-red">17</small>
