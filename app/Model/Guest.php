@@ -23,5 +23,5 @@ class Guest extends Model
      */
     protected $fillable = [
         'full_name', 'email', 'phone'
-     ];
+    ];
 }

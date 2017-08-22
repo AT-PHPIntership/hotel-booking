@@ -8,7 +8,7 @@ use App\Model\Reservation;
 use App\Model\User;
 use App\Model\Guest;
 
-class BookingRoomController extends Controller
+class ReservationController extends Controller
 {
     /**
      * Display a listing of booking room
@@ -18,7 +18,7 @@ class BookingRoomController extends Controller
     public function index()
     {
         $columns = [
-            'id',
+            'reservations.id',
             'status',
             'room_id',
             'target',
@@ -27,9 +27,9 @@ class BookingRoomController extends Controller
         ];
         $reservations = Reservation::select($columns)
                     ->with(['bookingroom' => function ($query) {
-                        $query->select('id', 'name');
+                        $query->select('rooms.id', 'name');
                     }])
-                    ->orderby('id', 'DESC')
+                    ->orderby('reservations.id', 'DESC')
                     ->paginate(Reservation::ROW_LIMIT);
         return view('backend.bookings.index', compact('reservations'));
     }
