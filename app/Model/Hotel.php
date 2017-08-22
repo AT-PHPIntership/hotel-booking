@@ -62,4 +62,15 @@ class Hotel extends Model
     {
         return $this->hasMany('App\Model\Room', 'hotel_id');
     }
+
+    /**
+     * Relationship hasMany with rooms
+     *
+     * @return array
+    */
+    public function hotelServices()
+    {
+        return $this->hasMany('App\Model\HotelService', 'hotel_id');
+    }
+
 }

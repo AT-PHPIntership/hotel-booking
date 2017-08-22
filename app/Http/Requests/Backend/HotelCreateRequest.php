@@ -26,7 +26,7 @@ class HotelCreateRequest extends FormRequest
         return [
             'name' => 'required|min:8|unique:hotels',
             'address' => 'required',
-            'place' => 'required',
+            'place_id' => 'required',
             'star' => 'required',
             'introduce' => 'required',
             // 'printer_list(enumtype)ace' => 'require ';

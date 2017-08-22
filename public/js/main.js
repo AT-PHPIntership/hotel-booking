@@ -15,6 +15,7 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
     // preview images
     $( "#img-upload" ).change(function() {
+      console.log('test');
       if (this.files && this.files[0]) {
         for (var i = 0; i < this.files.length; ++i) {
           var file = this.files[i];

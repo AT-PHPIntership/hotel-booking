@@ -55,38 +55,54 @@ class HotelController extends Controller
      */
     public function store(HotelCreateRequest $request)
     {
-        $hotel = new Hotel();
-        $hotel->name = $request->name;
-        $hotel->address = $request->address;
-        $hotel->star = $request->star;
-        $hotel->introduce = $request->introduce;
-        $hotel->place_id = $request->place;
-        dd($request->services);
-        $hotelServices = new HotelService();
+       
+        $hotels = $request->except(['services', 'images']);
+        // dd($hotels);
+         $hotel = new Hotel($hotels);
+         // dd($hotel);
+        // $result = $hotel->save();
+        // dd($hotel->id);
 
-        dd($hotel);
+        // $HotelServices = $request->services;
+        // $array = [];
+        
+        // $hotel->hotelServices()->saveMany([
+        //     new HotelService(['service_id' => 1]),
+        //     new HotelService(['service_id' => 1]),
+        //     new HotelService(['service_id' => 1]),
 
-        if ($result = $hotel->save()) {
-                    flash(__('Create success'))->success();
-                    // dd($hotel->id);
-                    $data = array();
-                } else {
-                    flash(__('Create failure'))->error();
-                }
-        return redirect()->route('hotel.index');
-        // $images=array();
-        //     if($files = $request->file('imgs[]')){
-        //         foreach($files as $file){
-        //             $name=$file->getClientOriginalName();
-        //             $file->move('imgs[]',$name);
-        //             $images[]=$name;
-        //             dd($images);
-        //     }
-        // }
+        //     ]);
 
-        $result = DB::transaction(function() use ($hotel) {
-            $hotel->save();
-        });
-        dd($result);    
+        // dd($HotelServices);
+        // $resultssss = new HotelService($HotelServices);
+        // $rs = $resultssss->save();
+        if ($images = $request->images){
+            // $place ->image= $request->image->hashName();
+            // $request->file('image')
+            //     ->move(config('constant.path_upload_places'), $place->image);
+            dd($images);
+        }
+        // if ($result) {
+        //             flash(__('Create success'))->success();
+        //             // dd($hotel->id);
+        //             $data = array();
+        //         } else {
+        //             flash(__('Create failure'))->error();
+        //         }
+        // return redirect()->route('hotel.index');
+        // // $images=array();
+        // //     if($files = $request->file('imgs[]')){
+        // //         foreach($files as $file){
+        // //             $name=$file->getClientOriginalName();
+        // //             $file->move('imgs[]',$name);
+        // //             $images[]=$name;
+        // //             dd($images);
+        // //     }
+        // // }
+
+        // $result = DB::transaction(function() use ($hotel) {
+        //     $hotel->save();
+        // });
+        // dd($result);    
     }
 }

@@ -2,7 +2,7 @@
 @section('title', __('Create Hotel'))
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title_page">{{__('Add hotel')}}</h1>
+    <h1 class="title-page">{{__('Add hotel')}}</h1>
     <section class="content">
       <div class="row margin_center">
         <div class="col-md-12">
@@ -31,14 +31,14 @@
                 <div class="form-inline">
                   {{-- place select --}}
                   <div class="form-group" {{ $errors->has('place') ? ' has-error' : '' }}>
-                    <select class="form-control" name="place">
+                    <select class="form-control" name="place_id">
                       <option value="">Choose Place</option>
                       @foreach($places as $place)
                         <option value="{{ $place->id }}">{{ $place->name }}</option>
                       @endforeach
                     </select>
-                    @if($errors->first('place'))
-                      <span class="text-danger">{{ $errors->first('place') }}</span>
+                    @if($errors->first('place_id'))
+                      <span class="text-danger">{{ $errors->first('place_id') }}</span>
                     @endif
                   </div>
                    {{-- select star --}}
@@ -73,7 +73,7 @@
                 </div>
                 {{-- upload image --}}
                 <div class="form-group">
-                  <input type="file" class="form-control" name='imgs[]' id="img-upload" multiple placeholder="{{ __('Images') }}" value="{{ old('img') }}">
+                  <input type="file" class="form-control" name='images[]' id="img-upload" multiple placeholder="{{ __('Images') }}" value="{{ old('img') }}">
                    <div id="preview-img">
                      
                    </div>
