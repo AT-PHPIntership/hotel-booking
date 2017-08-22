@@ -26,10 +26,11 @@ class CreateRoomRequest extends FormRequest
         return [
             'name' => 'required|max:50',
             'descript' => 'required',
-            'price' => 'required|numberic',
+            'price' => 'required|numeric',
             'max_guest' => 'required|integer',
             'total' => 'required|integer',
-            'image' => 'nullable|image|max:' . config('image.max_upload_size')',
+            'image' => 'nullable|max:' . config('image.max_upload_size'),
+            'image.*' => 'image'
         ];
     }
 }

@@ -41,7 +41,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('room.create', $hotel_id) }}" class="btn btn-primary" id="btn-add-room">
+                  <a href="{{ route('room.create', $hotelId) }}"" class="btn btn-primary" id="btn-add-room">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -53,11 +53,10 @@
                 <thead>
                 <tr>
                   <th class="col-md-1">{{ __('ID') }}</th>
-                  <th>{{ __('Image') }}</th>
+                  <th class="text-center">{{ __('Image') }}</th>
                   <th>{{ __('Name') }}</th>
-                  <th>{{ __('Descript') }}</th>
+                  <th class="text-center">{{ __('Descript') }}</th>
                   <th>{{ __('Price') }}</th>
-                  <th>{{ __('Size') }}</th>
                   <th>{{ __('Total') }}</th>
                   <th>{{ __('Max_Gest') }}</th>
                   <th >{{ __('Option') }}</th>
@@ -76,7 +75,6 @@
                   <td>{{ $room->name }}</td>
                   <td>{{ $room->descript }}</td>
                   <td>{{ $room->price }}</td>
-                  <td>{{ $room->size }}</td>
                   <td>{{ $room->total }}</td>
                   <td>{{ $room->max_guest }}</td>
                   <td class="text-center col-action">

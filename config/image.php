@@ -6,4 +6,7 @@ return [
     'places' => [
         'path_upload' => 'images/places/',
     ],
+    'rooms' => [
+        'path_upload' => 'images/rooms/',
+    ],
 ];
