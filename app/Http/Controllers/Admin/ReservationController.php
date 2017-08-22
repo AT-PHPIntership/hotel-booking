@@ -11,7 +11,7 @@ use App\Model\Room;
 use App\Model\Hotel;
 
 
-class BookingRoomController extends Controller
+class ReservationController extends Controller
 {
     /**
      * Display a listing of booking room
