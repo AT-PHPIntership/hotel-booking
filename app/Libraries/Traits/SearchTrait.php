@@ -14,12 +14,12 @@ trait SearchTrait
      * @return void.
      */
     public function scopeSearch($query)
-    {   
+    {
         $query->select($this->getTable() . '.*');
         $this->makeJoins($query);
         $keyword = request('search');
         foreach ($this->getColumns() as $value) {
-            $query->orWhere($value, "LIKE", "%$keyword%");      
+            $query->orWhere($value, "LIKE", "%$keyword%");
         }
     }
 
@@ -51,7 +51,7 @@ trait SearchTrait
      * @return void
      */
     protected function makeJoins($query)
-    {   
+    {
         foreach ($this->getJoins() as $table => $keys) {
             $query->leftJoin($table, function ($join) use ($keys) {
                 $join->on($keys[0], '=', $keys[1]);
