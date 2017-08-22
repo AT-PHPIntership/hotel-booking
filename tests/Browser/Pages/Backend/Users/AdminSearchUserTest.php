@@ -30,7 +30,7 @@ class AdminSearchUserTest extends DuskTestCase
     }
 
     /**
-     *Test search if has input value.
+     *Test search if has input value and not paginate.
      *
      * @return void
      */
