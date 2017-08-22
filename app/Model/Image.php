@@ -27,6 +27,8 @@ class Image extends Model
 
      /**
      * Get all of the owning imageable models.
+     *
+     * @return object
      */
     public function imageable()
     {

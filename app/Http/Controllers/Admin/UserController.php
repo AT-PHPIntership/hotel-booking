@@ -26,8 +26,11 @@ class UserController extends Controller
             'is_admin',
             'is_active',
         ];
-        $users = User::select($columns)->orderby('id', 'DESC')
-            ->paginate(User::ROW_LIMIT);
+        $users = User::search()
+                     ->select($columns)
+                     ->orderby('id', 'DESC')
+                     ->paginate(User::ROW_LIMIT);
+        $users->appends(['search' => request('search')]);
         return view("backend.users.index", compact('users'));
     }
 

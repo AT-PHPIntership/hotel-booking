@@ -11,6 +11,8 @@ class Reservation extends Model
 
     /**
      * Get all of the owning reservable models.
+     *
+     * @return object
      */
     public function reservable()
     {
