@@ -33,7 +33,15 @@ class News extends Model
      * @var array $searchableFields
      */
     protected $searchableFields = [
-        'title', 'content', 'category_id', 'categories.name'
+        'columns' => [
+            'news.title',
+            'news.content',
+            'news.category_id',
+            'categories.name'
+        ],
+        'joins' => [
+            'categories' => ['news.category_id', 'categories.id']
+        ]
     ];
 
     /**
