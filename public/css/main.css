@@ -7,17 +7,16 @@
     }
 }
 .margin-center{
-	margin-left: 15%;
-	margin-right: 15%;
+    margin: 0 15%;
 }
 
 .title-page{
-	text-align: center;
+    text-align: center;
 }
 
 .chat-room{
-	margin-left: 25%;
-	margin-right: 25%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 /* .form-control.bg-info {
     background-color: #E3F5B8;
@@ -92,7 +91,6 @@
     background: unset;
     color: #e23434;
     margin-top:5px; 
-
 }
 .news-option {
     width: 122px;
@@ -144,14 +142,11 @@
 .btn-option .btn-edit {
     margin-top: 12px;
     margin-left: 21px;
-
-
 }
 
 .form-delete{
     margin-top: 3px;
 }
-
 
 /*end fix template*/
 .title-header {
@@ -228,17 +223,11 @@
 
 .input-search {
     display: inline-block;
-    width: 30%;
+    width: 50%;
     border: 2px solid #ccc;
     font-size: 16px;
     background-color: white;
     background-repeat: no-repeat;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-.input-search:focus {
-    width: 60%;
 }
 
 .container-search {
@@ -267,11 +256,39 @@
     font-size: 20px;
 }
 
+.fz-16 {
+    font-size: 16px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mlr-0 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.ml-5per {
+    margin-left: 5%;
+}
+
 .cus-icon-sm {
     font-size: 20px;
     transform: translateY(20%);
 }
+
+.profile {
+    margin-top: 80px;
+    color: #000000;
+}
+
 .cls-editnews-msg {
     width: 718px;
 }
 
+.cls-search-not-found {
+    font-size: 20px;
+    color: red;
+    font-family: cursive;
+}
