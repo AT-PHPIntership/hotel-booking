@@ -36,7 +36,7 @@
               </h2>
 
               
-              <a class="btn btn-primary btn-custom  pull-right" id="btn-go-back" 
+              <a class="btn btn-primary btn-custom  pull-right" id="btn-edit" 
                 href="{{ route('place.edit', $place->id) }}">
                 {{ __('Edit') }}
               </a>
@@ -74,7 +74,7 @@
                 <div class="col-sm-12">
                   <div class="box box-solid">
                     <h2 class="page-header">{{ __("Hotel") }} 
-                      <span class="text-info small">
+                      <span class="text-info small" id="count-hotels">
                         (<a href="{{ route('hotel.index', ['place_id' => $place->id]) }}">
                           {{ $totalHotels .  __(" hotel in ") . $place->name }}</a>)
                       </span>

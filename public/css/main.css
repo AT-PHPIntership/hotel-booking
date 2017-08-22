@@ -299,4 +299,10 @@
     max-height: 262px;
     overflow: auto;
 }
+
 /*-- ./Show detail place --*/
+.cls-search-not-found {
+    font-size: 20px;
+    color: red;
+    font-family: cursive;
+}

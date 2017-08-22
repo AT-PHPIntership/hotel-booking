@@ -30,7 +30,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <form method="GET" action="{{ route('user.index') }}" class="container-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
+                    <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{ app('request')->input('search') }}">
                     <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                   </form>
                 </div>
@@ -108,6 +108,9 @@
                   @endforeach
                 </tbody>
               </table>
+              <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
               <div class="contain-btn second">
                 <a class="btn btn-primary" href="{{ route('user.create')}}">
                   <span class="fa fa-plus-circle"></span>
