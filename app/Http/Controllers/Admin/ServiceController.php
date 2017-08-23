@@ -19,4 +19,23 @@ class ServiceController extends Controller
             ->orderBy('id', 'DESC')->paginate(Service::ROW_LIMIT);
         return view("backend.services.index", compact('services'));
     }
+
+    /**
+     * Find service by id and delete service
+     *
+     * @param int $id id service
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $service = Service::findOrFail($id);
+        if ($service->delete()) {
+            flash(__('Delete success'))->success();
+        } else {
+            flash(__('Delete failure'))->error();
+        }
+        
+        return redirect()->route('service.index');
+    }
 }

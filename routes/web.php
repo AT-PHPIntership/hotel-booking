@@ -16,7 +16,6 @@ Route::get('/', function () {
 });
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
-
     Route::resource('/user', 'UserController');
     Route::resource('/place', 'PlaceController');
     Route::resource('/comment', 'RatingCommentController');
@@ -27,6 +26,5 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
 
     Route::put('/user/{id}/status', 'UserController@updateStatus')->name('user.updateStatus');
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
-
 });
 	
