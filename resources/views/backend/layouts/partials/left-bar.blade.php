@@ -80,7 +80,7 @@
 
         <!-- comment and rating -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('comment.index') }}">
             <i class="fa fa-commenting-o" aria-hidden="true"></i> <span>{{ __('Comment and Rating') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
