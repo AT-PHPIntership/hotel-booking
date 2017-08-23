@@ -34,6 +34,6 @@ class RoomController extends Controller
             ->where('hotel_id', $hotel->id)
             ->orderBy('id', 'DESC')
             ->paginate(Room::ROW_LIMIT);
-        return view('backend.rooms.index', compact('rooms'));
+        return view('backend.rooms.index', compact('rooms', 'hotel'));
     }
 }
