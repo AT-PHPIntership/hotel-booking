@@ -102,7 +102,7 @@
     clear: both;
 }
 .clear-fix:after {
-    display: block;
+   display: block;
     content: "";
     clear: both; 
 }
