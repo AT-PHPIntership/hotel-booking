@@ -20,7 +20,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form action="{!! route('room.store', $hotelId) !!}" enctype="multipart/form-data"
+            <form action="{!! route('room.store') !!}" enctype="multipart/form-data"
               method="POST">
               {!! csrf_field() !!}
               <div class="box-body">

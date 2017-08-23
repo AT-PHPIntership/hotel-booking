@@ -41,7 +41,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary" id="btn-add-room">
+                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary" id="btn-add-room">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -98,7 +98,7 @@
                </tbody>
               </table>
                 <div class="contain-btn second pull-right">
-                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary">
+                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 

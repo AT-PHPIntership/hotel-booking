@@ -14,13 +14,13 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param int $hotelId id of hotel
+     * @param Request $request request to display
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($hotelId)
+    public function index(Request $request)
     {
-        Hotel::findOrFail($hotelId);
+        Hotel::findOrFail($request->id);
         $columns = [
             'id',
             'name',
@@ -33,38 +33,37 @@ class RoomController extends Controller
         ];
         $rooms = Room::select($columns)
             ->with(['images'])
-            ->where('hotel_id', '=', $hotelId)
+            ->where('hotel_id', $request->id)
             ->orderBy('id', 'DESC')
             ->paginate(Room::ROW_LIMIT);
-        return view('backend.rooms.index', compact('rooms', 'hotelId'));
+        return view('backend.rooms.index', compact('rooms'));
     }
 
         /**
      * Show the form for creating a new room.
      *
-     * @param int $hotelId id of hotel
+     * @param Request $request request to create
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($hotelId)
+    public function create(Request $request)
     {
-        Hotel::findOrFail($hotelId);
-        return view('backend.rooms.create', compact('hotelId'));
+        Hotel::findOrFail($request->id);
+        return view('backend.rooms.create');
     }
 
     /**
      * Store a newly created room in storage.
      *
      * @param Admin\RoomRequest $request request from view
-     * @param int               $hotelId id of hotel
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(RoomRequest $request, $hotelId)
+    public function store(RoomRequest $request)
     {
-        Hotel::findOrFail($hotelId);
+        Hotel::findOrFail($request->id);
         $room = new room($request->all());
-        $room->hotel_id = $hotelId;
+        $room->hotel_id = $request->id;
         if ($room->save()) {
             flash(__('Creation successful!'))->success();
         } else {
@@ -84,6 +83,6 @@ class RoomController extends Controller
                 $img->move(config('image.rooms.path_upload'), $nameImage);
             }
         }
-        return redirect()->route('room.index', $hotelId);
+        return redirect()->route('room.index');
     }
 }
