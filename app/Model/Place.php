@@ -41,6 +41,7 @@ class Place extends Model
      * Value paginate of row
      */
     const ROW_LIMIT = 10;
+
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -54,6 +55,7 @@ class Place extends Model
             ]
         ];
     }
+
     /**
      * Accessor to get path image
      *
@@ -73,7 +75,7 @@ class Place extends Model
     {
         return $this->hasMany(Hotel::class);
     }
-    
+
      /**
      * The "booting" method of the model.
      *
