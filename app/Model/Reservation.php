@@ -42,7 +42,7 @@ class Reservation extends Model
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function bookingroom()
+    public function room()
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
@@ -72,8 +72,8 @@ class Reservation extends Model
     /**
      * Get all of the owning reservable models.
      */
-    public function reservabl()
+    public function reservable()
     {
-        return $this->morphTo();
+        return $this->morphTo('reservable', 'target', 'target_id');
     }
 }
