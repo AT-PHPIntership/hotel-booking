@@ -58,7 +58,7 @@
                   <th class="text-center">{{ __('Descript') }}</th>
                   <th class="text-center">{{ __('Price') }}</th>
                   <th class="text-center">{{ __('Total') }}</th>
-                  <th class="text-center">{{ __('Max_Gest') }}</th>
+                  <th class="text-center">{{ __('Max Gest') }}</th>
                   <th class="text-center">{{ __('Option') }}</th>
                 </tr>
                 </thead>
