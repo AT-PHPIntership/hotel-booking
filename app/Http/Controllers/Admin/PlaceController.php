@@ -17,8 +17,15 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = Place::select('id', 'name', 'descript', 'image', 'created_at')
-            ->orderBy('id', 'DESC')->paginate(Place::ROW_LIMIT);
+        $columns = [
+            'id',
+            'name',
+            'descript',
+            'image'
+        ];
+        $places = Place::search()->select($columns)->orderby('id', 'DESC')
+            ->paginate(Place::ROW_LIMIT);
+        $places->appends(['search' => request('search')]);
         return view("backend.places.index", compact('places'));
     }
 

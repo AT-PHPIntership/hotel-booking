@@ -31,6 +31,15 @@ $(document).ready(function(){
         }
     });
 
+    /*check value input search*/
+    $(".btn-search").click( function(event) {
+    $input = $(this).prev().val();
+    if ($input.length != 0) {
+        $(this).parent().submit();
+    }
+    event.preventDefault();
+});
+ 
     /**
      * Show message if database has not data or search not found in page News
      *
