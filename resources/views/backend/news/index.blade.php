@@ -21,12 +21,14 @@
               <div class="title-news">
                 <h3 class="box-title">{{__('Search News')}}</h3>
               </div>
-                <div class="col-md-6">
-                  <form method="GET" class="container-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text">
-                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
-                  </form>
-                </div>
+              <div class="col-md-6">
+                <form  class="container-search">
+                  <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
+                  <button type="submit" class="btn btn-primary btn-search">
+                  <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </form>
+              </div>
               <div >
                 <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
                   <i class="fa fa-plus-circle"></i>
@@ -43,7 +45,6 @@
                   <th>{{__('Id')}}</th>
                   <th>{{__('Title')}}</th>
                   <th>{{__('Content')}}</th>
-                  <th>{{__('Category_id')}}</th>
                   <th>{{__('Category')}}</th>
                   <th class="text-center">{{__('Option')}}</th>
                 </tr>
@@ -54,7 +55,6 @@
                     <td>{{$item->id}}</td>
                     <td>{{$item->title}}</td>
                     <td>{{$item->content}}</td>
-                    <td>{{$item->category_id}}</td>
                     <td>{{$item->name}}</td>
                     <td align="center">
                       <div class="news-option">
@@ -76,7 +76,10 @@
                   @endforeach
                 </tbody>
               </table>
-              {!! $news->render() !!}
+              {{$news->render()}}
+            </div>
+            <div class="cls-searchnews-not-found" hidden="">
+              <h1 class="text-center">{{__('Data Not Found!')}}</h1>
             </div>
           </div>
           <div>
