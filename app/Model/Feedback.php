@@ -17,6 +17,11 @@ class Feedback extends Model
     protected $table = 'feedbacks';
 
     /**
+     * Value paginate of row
+     */
+    const ROW_LIMIT = 10;
+    
+    /**
      * The name of the "updated at" column.
      *
      * @var string
