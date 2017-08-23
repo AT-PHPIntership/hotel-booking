@@ -24,4 +24,15 @@ class Guest extends Model
     protected $fillable = [
         'full_name', 'email', 'phone'
     ];
+
+    /**
+     * Get all of the guest's reservation.
+     *
+     * @return array
+     */
+    public function reservations()
+    {
+        return $this->morphMany('App\Model\Reservation', 'reservable', 'target', 'target_id');
+    }
+
 }

@@ -37,6 +37,7 @@
                   <th>{{__('Id')}}</th>
                   <th>{{__('Rooms Name')}}</th>
                   <th>{{__('Target')}}</th>
+                  <th>{{__('Full Name')}}</th>
                   <th>{{__('Check in')}}</th>
                   <th>{{__('Check out')}}</th>
                   <th>{{__('Status')}}</th>
@@ -48,9 +49,18 @@
                   <tr>
                     <td>{{$reservation->id}}</td>
                     <td>
-                      <a href="">{{$reservation->bookingroom->name}}</a>
+                      <a href="">{{$reservation->room->name}}</a>
                     </td>
                     <td>{{$reservation->target}}</td>
+                    <td>
+                      @if($reservation->target == __('user'))
+                        <a href="{{ route('user.show', $reservation->target_id) }}">
+                          {{$reservation->reservable->full_name}}
+                        </a>
+                      @else()
+                        {{$reservation->reservable->full_name}}
+                      @endif
+                    </td>
                     <td>{{$reservation->checkin_date}}</td>
                     <td>{{$reservation->checkout_date}}</td>
                     <td>{{$reservation->status_label}}</td>
@@ -75,6 +85,9 @@
                 </tbody>
               </table>
               {!! $reservations->render() !!}
+            </div>
+            <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
             </div>
           </div>
         </div>
