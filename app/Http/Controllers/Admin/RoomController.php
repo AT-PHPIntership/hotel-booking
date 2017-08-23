@@ -36,34 +36,33 @@ class RoomController extends Controller
             ->where('hotel_id', $hotel->id)
             ->orderBy('id', 'DESC')
             ->paginate(Room::ROW_LIMIT);
-        return view('backend.rooms.index', compact('rooms'));
+        return view('backend.rooms.index', compact('rooms', 'hotel'));
     }
 
-        /**
+    /**
      * Show the form for creating a new room.
      *
-     * @param Request $request request to create
+     * @param Hotel $hotel hotel of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Hotel $hotel)
     {
-        Hotel::findOrFail($request->id);
-        return view('backend.rooms.create');
+        return view('backend.rooms.create', compact('hotel'));
     }
 
     /**
      * Store a newly created room in storage.
      *
      * @param Admin\RoomRequest $request request from view
+     * @param Hotel             $hotel   hotel of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(RoomRequest $request)
+    public function store(RoomRequest $request, Hotel $hotel)
     {
-        Hotel::findOrFail($request->id);
         $room = new room($request->all());
-        $room->hotel_id = $request->id;
+        $room->hotel_id = $hotel->id;
         if ($room->save()) {
             flash(__('Creation successful!'))->success();
         } else {
@@ -83,6 +82,6 @@ class RoomController extends Controller
                 $img->move(config('image.rooms.path_upload'), $nameImage);
             }
         }
-        return redirect()->route('room.index');
+        return redirect()->route('room.index', $hotel->id);
     }
 }

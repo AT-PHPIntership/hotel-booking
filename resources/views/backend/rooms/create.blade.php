@@ -5,6 +5,9 @@
 @section('content')
   <div class="content-wrapper">
     <h1 class="text-center text-success">
+      {{ $hotel->name.__(' HOTEL') }}
+    </h1>
+    <h1 class="text-center text-success">
       @include('flash::message')
       {{ __("Create room") }}
     </h1>
@@ -20,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form action="{!! route('room.store') !!}" enctype="multipart/form-data"
+            <form action="{!! route('room.store', $hotel->id) !!}" enctype="multipart/form-data"
               method="POST">
               {!! csrf_field() !!}
               <div class="box-body">

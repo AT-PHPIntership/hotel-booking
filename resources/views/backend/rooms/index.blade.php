@@ -9,7 +9,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ __('Rooms') }}
+        {{ $hotel->name.__(' HOTEL') }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
@@ -41,7 +41,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary" id="btn-add-room">
+                  <a href="{{ route('room.create', $hotel->id) }}" class="btn btn-primary" id="btn-add-room">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -98,7 +98,7 @@
                </tbody>
               </table>
                 <div class="contain-btn second pull-right">
-                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary">
+                  <a href="{{ route('room.create', $hotel->id) }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
