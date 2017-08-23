@@ -46,7 +46,7 @@ class Reservation extends Model
      *
      * @return string
      */
-    public function getStatusAttribute()
+    public function getStatusLabelAttribute()
     {
         switch ($this->attributes['status']) {
             case '1':

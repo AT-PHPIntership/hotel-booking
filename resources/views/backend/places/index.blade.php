@@ -66,10 +66,16 @@
                       <td class="col-no text-center">{{ $place->id }}</td>
                       <td class="text-center col-image">
                         <div class="place-image-show">
-                          <img class="img-place" src="{{ $place->image_url }}" >
+                          <a class="url-place" href="{{ route('place.show', $place->id) }}">
+                            <img class="img-place" src="{{ $place->image_url }}" >
+                          </a>  
                         </div>
                       </td>
-                      <td class="col-name">{{ $place->name }}</td>
+                      <td class="col-name">
+                        <a class="url-place" href="{{ route('place.show', $place->id) }}">
+                          {{ $place->name }}
+                        </a>
+                      </td>
                       <td class="col-descript">{{ $place->descript }}</td>
                       <td class="text-center col-action">
                         <div class="btn-option text-center">
