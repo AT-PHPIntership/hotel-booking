@@ -40,7 +40,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$user->full_name}}
+                      {{-- {{$user->full_name}} --}}
                     </td>
                   </tr>
                   <tr>
@@ -51,7 +51,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$user->email}}
+                     {{--  {{$user->email}} --}}
                     </td>
                   </tr>
                   <tr>
@@ -62,7 +62,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$user->phone}}
+                      {{-- {{$user->phone}} --}}
                     </td>
                   </tr>
                   <tr>
@@ -117,7 +117,7 @@
                       </strong> 
                     </td>
                     <td>
-                      {{$reservation->status}}
+                      {{$reservation->status_label}}
                     </td>
                   </tr>
                 </tbody>

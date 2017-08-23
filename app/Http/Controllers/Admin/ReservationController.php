@@ -44,32 +44,36 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   $columns = [
+    {
+        $columns = [
             'reservations.id',
             'status',
             'room_id',
             'target',
+            'target_id',
             'checkin_date',
             'checkout_date'
         ];
         $reservation = Reservation::select($columns)
             ->with(['bookingroom' => function ($query) {
                 $query->select('rooms.id', 'name', 'rooms.hotel_id');
-                }])
-            ->findOrFail($id);
+            }])
+        ->findOrFail($id);
+        dd($reservation);
         $hotelId = $reservation->bookingroom->hotel_id;
         $hotel = Hotel::select('name')
                     ->where('id', $hotelId)
                     ->firstOrFail();
-        if ($reservation->target == 'user') {
-            $user = User::select('full_name', 'email', 'phone')
-                        ->where('id', $reservation->target_id)
-                        ->firstOrFail();
-        } else {
-            $user = Guest::select('full_name', 'email', 'phone')
-                        ->where('id', $reservation->target_id)
-                        ->firstOrFail();
-        }
-        return view('backend.bookings.show', compact('reservation', 'user', 'hotel'));
+        // if ($reservation->target == 'user') {
+            // $user = User::select('full_name', 'email', 'phone')
+            //             ->where('id', $reservation->target_id)
+            //             ->firstOrFail();
+            // dd($user);
+        // } else {
+        //     $user = Guest::select('full_name', 'email', 'phone')
+        //                 ->where('id', $reservation->target_id)
+        //                 ->firstOrFail();
+        // }
+        return view('backend.bookings.show', compact('reservation', 'hotel'));
     }
 }

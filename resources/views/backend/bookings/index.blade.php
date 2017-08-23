@@ -31,7 +31,7 @@
             <div class="box-body">
               @include('flash::message')
               {{-- @include('backend.layouts.partials.modal') --}}
-              <table class="table table-bordered table-responsive table-striped" id="table-content">
+              <table class="table table-bordered table-responsive table-striped" id="table-contain">
                 <thead>
                 <tr>
                   <th>{{__('Id')}}</th>
