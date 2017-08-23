@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Room;
+use App\Model\Hotel;
 
 class RoomController extends Controller
 {
@@ -17,6 +18,7 @@ class RoomController extends Controller
      */
     public function index($hotelId)
     {
+        Hotel::findOrFail($hotelId);
         $columns = [
             'id',
             'name',
