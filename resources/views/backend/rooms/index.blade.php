@@ -41,7 +41,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('room.create', $hotelId) }}"" class="btn btn-primary" id="btn-add-room">
+                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary" id="btn-add-room">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -78,27 +78,27 @@
                   <td class="text-center">{{ $room->total }}</td>
                   <td class="text-center">{{ $room->max_guest }}</td>
                   <td class="text-center col-action">
-                        <div class="btn-option text-center">
-                          <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
-                            <i class="" aria-hidden="true"></i>
-                          </a>
-                          <form  class="form-delete" method="post" action="#">
-                            {!! csrf_field() !!}
-                            {{ method_field('DELETE') }}
-                            <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
-                              data-title="{{ __('Confirm deletion!') }}"
-                              data-confirm="{{ __('Are you sure you want to delete?') }}" 
-                              type="submit" >
-                            </button>
-                          </form> 
-                        </div>
-                      </td>
+                    <div class="btn-option text-center">
+                      <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
+                        <i class="" aria-hidden="true"></i>
+                      </a>
+                      <form  class="form-delete" method="post" action="{{ route('room.destroy', [$hotelId, $room->id]) }}">
+                        {!! csrf_field() !!}
+                        {{ method_field('DELETE') }}
+                        <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
+                          data-title="{{ __('Confirm deletion!') }}"
+                          data-confirm="{{ __('Are you sure you want to delete?') }}" 
+                          type="submit" >
+                        </button>
+                      </form> 
+                    </div>
+                  </td>
                 </tr>
               @endforeach
                </tbody>
               </table>
                 <div class="contain-btn second pull-right">
-                  <a href="#" class="btn btn-primary">
+                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
