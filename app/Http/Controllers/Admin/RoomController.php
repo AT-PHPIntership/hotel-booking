@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Backend\HotelIdRequest;
 use App\Http\Controllers\Controller;
 use App\Model\Room;
 use App\Model\Hotel;
@@ -12,13 +13,12 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request request to display
+     * @param Hotel $hotel hotel of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Hotel $hotel)
     {
-        Hotel::findOrFail($request->id);
         $columns = [
             'id',
             'name',
@@ -31,7 +31,7 @@ class RoomController extends Controller
         ];
         $rooms = Room::select($columns)
             ->with(['images'])
-            ->where('hotel_id', $request->id)
+            ->where('hotel_id', $hotel->id)
             ->orderBy('id', 'DESC')
             ->paginate(Room::ROW_LIMIT);
         return view('backend.rooms.index', compact('rooms'));

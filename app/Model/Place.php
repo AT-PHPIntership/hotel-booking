@@ -4,10 +4,11 @@ namespace App\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Libraries\Traits\SearchTrait;
 
 class Place extends Model
 {
-     use Sluggable, SoftDeletes;
+     use Sluggable, SoftDeletes, SearchTrait;
     
     /**
      * Declare table
@@ -22,6 +23,19 @@ class Place extends Model
      * @var array
      */
     protected $fillable = ['name', 'descript', 'image'];
+
+    /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'columns' => [
+            'name',
+            'descript',
+            'id'
+        ]
+    ];
 
     /**
      * Value paginate of row
