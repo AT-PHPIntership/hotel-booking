@@ -37,18 +37,21 @@ class AdminDeleteCommentTest extends DuskTestCase
      */
     public function testDeleteSuccess() 
     {
-        $this->makeData(5);
+        $this->makeData(10);
+        $comment = RatingComment::find(5);
         $this->browse(function (Browser $browser) {
             $page = $browser->visit('/admin/comment');
             $elements = $page->elements('#list-table tbody tr');
-            $this->assertCount(5, $elements);
-            $page->press('#list-table tbody tr:nth-child(4) td:nth-child(8) button')
+            $this->assertCount(10, $elements);
+            $page->press('#list-table tbody tr:nth-child(6) td:nth-child(8) button')
             ->waitForText("Confirm deletion!")
             ->press('Delete')
             ->assertSee("Deletion successful");
-            $this->assertSoftDeleted('rating_comments', ['id' => '2']);
+            // check softdeleted
+            $this->assertSoftDeleted('rating_comments', ['id' => '5']);
+            // check show
             $elements = $page->elements('#list-table tbody tr');    
-            $this->assertCount(4, $elements);    
+            $this->assertCount(9, $elements);    
         });
     } 
 
