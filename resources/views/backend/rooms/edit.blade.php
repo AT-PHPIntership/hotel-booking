@@ -5,6 +5,9 @@
 @section('content')
   <div class="content-wrapper">
     <h1 class="text-center text-success">
+      {{ $hotel->name.__(' HOTEL') }}
+    </h1>
+    <h1 class="text-center text-success">
       @include('flash::message')
       {{ __("Update room") }}
     </h1>
@@ -20,9 +23,9 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form action="{!! route('room.update', [$hotelId, $room->id]) !!}" enctype="multipart/form-data"
-              method="POST">
+            <form action="{!! route('room.update', [$hotel->id, $room->id]) !!}" enctype="multipart/form-data" method="POST">
               {!! csrf_field() !!}
+              {{ method_field('PUT') }}
               <div class="box-body">
                 <div class="form-group has-feedback
                   {{ $errors->has('name') ? ' has-error' : '' }}">

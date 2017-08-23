@@ -31,6 +31,36 @@ $(document).ready(function(){
             $("#showImage").fadeIn("fast").attr('src','/images/default/no_image.png');
         }
     });
+ 
+    /**
+     * Show message if database has not data or search not found in page News
+     *
+     */
+    var countNews = $('#newstable tbody tr').length;
+    if (countNews == 0) {
+        $('.cls-searchnews-not-found').show();
+    }
+
+    /**
+     * Check if not input value in field search.
+     *
+     */
+    $('.btn-search').on('click', function(event) {
+        $input = $(this).prev().val();
+            if ($input.length != 0) {
+                $(this).parent().submit();      
+            }        
+        event.preventDefault();
+    });
+
+    /**
+     * Show message if database has not data or search
+     *
+     */
+    var count_records = $('#table-contain tbody tr').length;
+    if (count_records == 0) {
+        $('.cls-search-not-found').show();
+    }
 
     /**
      * Show multiple image when choose image
@@ -44,15 +74,6 @@ $(document).ready(function(){
             result.add("<img class='img-place  mr-10' src='" + imgpath + "'>").appendTo('#showImage');
         });
     });
-
-    /**
-     * Show message if database has not data or search not found
-     *
-     */
-    var count_records = $('#table-contain tbody tr').length;
-    if (count_records == 0) {
-        $('.cls-search-not-found').show();
-    }
 
     $('.btn-remove-img').bind('click',function(e){
         e.preventDefault();

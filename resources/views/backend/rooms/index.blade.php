@@ -9,14 +9,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ __('Rooms') }}
+        {{ $hotel->name.__(' HOTEL') }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
         <li class="active">{{ __('Rooms') }}</li>
       </ol>
     </section>
-    {{dd(request()->id)}}
 
     <!-- Main content -->
     <section class="content">
@@ -42,7 +41,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary" id="btn-add-room">
+                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary" id="btn-add-room">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -59,7 +58,7 @@
                   <th class="text-center">{{ __('Descript') }}</th>
                   <th class="text-center">{{ __('Price') }}</th>
                   <th class="text-center">{{ __('Total') }}</th>
-                  <th class="text-center">{{ __('Max_Gest') }}</th>
+                  <th class="text-center">{{ __('Max Gest') }}</th>
                   <th class="text-center">{{ __('Option') }}</th>
                 </tr>
                 </thead>
@@ -70,7 +69,7 @@
                   <td class="text-center col-image">
                     <div class="place-image-show">
                       <img class="img-place" 
-                        src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset('images/default/room.jpg') }}" >
+                        src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset('images/default/no_image.png') }}" >
                     </div>
                   </td>
                   <td class="text-center">{{ $room->name }}</td>
@@ -80,7 +79,7 @@
                   <td class="text-center">{{ $room->max_guest }}</td>
                   <td class="text-center col-action">
                     <div class="btn-option text-center">
-                      <a href="{{ route('room.edit', [$hotelId, $room->id]) }}" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
+                      <a href="{{ route('room.edit', [$hotel->id, $room->id]) }}" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
                         <i class="" aria-hidden="true"></i>
                       </a>
                       <form  class="form-delete" method="post" action="#">
@@ -99,7 +98,7 @@
                </tbody>
               </table>
                 <div class="contain-btn second pull-right">
-                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary">
+                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 

@@ -21,7 +21,7 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::resource('/comment', 'RatingCommentController');
     Route::resource('/news', 'NewsController');
     Route::resource('/hotel', 'HotelController');
-    Route::group(['prefix'=>'hotel/{id}'], function($id) {
+    Route::group(['prefix'=>'hotel/{hotel}'], function($hotel) {
         Route::resource('/room', 'RoomController');
     });
     Route::get('/image/{id}/removeImage', 'RoomController@removeImage')->name('image.removeImage');

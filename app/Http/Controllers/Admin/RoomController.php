@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Backend\HotelIdRequest;
 use App\Http\Controllers\Controller;
 use App\Model\Room;
 use App\Model\Hotel;
@@ -14,13 +15,12 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param int $hotelId id of hotel
+     * @param Hotel $hotel hotel of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($hotelId)
+    public function index(Hotel $hotel)
     {
-        Hotel::findOrFail($hotelId);
         $columns = [
             'id',
             'name',
@@ -33,45 +33,58 @@ class RoomController extends Controller
         ];
         $rooms = Room::select($columns)
             ->with(['images'])
-            ->where('hotel_id', '=', $hotelId)
+            ->where('hotel_id', $hotel->id)
             ->orderBy('id', 'DESC')
             ->paginate(Room::ROW_LIMIT);
-        return view('backend.rooms.index', compact('rooms', 'hotelId'));
+        return view('backend.rooms.index', compact('rooms', 'hotel'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id id of room
+     * @param Hotel $hotel hotel of room
+     * @param int   $id    id of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($hotelId, $id)
+    public function edit(Hotel $hotel, $id)
     {
-        Hotel::findOrFail($hotelId);
         $room = Room::findOrFail($id);
-        return view('backend.rooms.edit', compact('room', 'hotelId'));
+        return view('backend.rooms.edit', compact('room', 'hotel'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\UpdateRequest $request request to update
-     * @param int                            $id      id of room
+     * @param RoomRequest $request request to update
+     * @param Hotel       $hotel   hotel of room
+     * @param int         $id      id of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(RoomRequest $request, $hotelId, $id)
+    public function update(RoomRequest $request, Hotel $hotel, $id)
     {
         $room = Room::findOrFail($id);
-
         if ($room->update($request->all())) {
             flash(__('Update successful!'))->success();
-            return redirect()->route('room.index');
         } else {
-            flash(__('Update failed!'))->error();
+            //If fail, back to edit page and dont save image
+            flash(__('Update failure!'))->error();
             return redirect()->back()->withInput();
         }
+        if (isset($request->image)) {
+            foreach ($request->image as $img) {
+                $nameImage = config('image.name_prefix') . "-" . $img->hashName();
+                $path = config('image.rooms.path_upload').$nameImage;
+                Image::create([
+                    'target' => 'room',
+                    'target_id' => $room->id,
+                    'path' => $path
+                ]);
+                $img->move(config('image.rooms.path_upload'), $nameImage);
+            }
+        }
+        return redirect()->route('room.index', $hotel->id);
     }
 
     /**
@@ -89,5 +102,4 @@ class RoomController extends Controller
         }
         return 0;
     }
-
 }
