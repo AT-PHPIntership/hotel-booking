@@ -25,7 +25,7 @@
           <div class="box-body">
           {{-- message notifi --}}
           @include('flash::message')
-        
+          @include('backend.layouts.partials.modal')
             <table id="list-table" class="table table-bordered table-striped">
               <thead>
                 <tr align="center">
@@ -43,17 +43,19 @@
                 @foreach($ratingComments as $ratingComment)
                   <tr align="left">
                     <td>{{ $ratingComment->id }}</td>
-                    <td>{{ $ratingComment->user->username }}</td>
+                    <td><a href="{{ route('user.show', $ratingComment->user->id) }}">{{ $ratingComment->user->username }}</a></td>
                     <td>{{ $ratingComment->user->full_name }}</td>
                     <td>{{ $ratingComment->comment }}</td>
-                    <td>{{ $ratingComment->hotel->name }}</td>
+                    <td><a href="{{ route('hotel.show', $ratingComment->hotel->id) }}">{{ $ratingComment->hotel->name }}</a></td>
                     <td>{{ $ratingComment->total_rating }}</td> 
                     <td>{{ $ratingComment->created_at }}</td> 
                     <td align="center">
                       <form class="delete-item" method="POST" action="{{ route('comment.destroy', $ratingComment->id) }}">
                         {!! csrf_field() !!}
                         {{ method_field('DELETE') }}
-                        <button class="btn-delete-item btn glyphicon glyphicon-trash" type="submit">
+                        <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
+                        data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
+                        data-confirm="{{ __('Are you sure you want to delete?') }}">
                         </button>
                       </form>
                     </td>
