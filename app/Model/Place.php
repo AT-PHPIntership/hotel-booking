@@ -4,10 +4,11 @@ namespace App\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Libraries\Traits\SearchTrait;
 
 class Place extends Model
 {
-     use Sluggable, SoftDeletes;
+     use Sluggable, SoftDeletes, SearchTrait;
     
     /**
      * Declare table
