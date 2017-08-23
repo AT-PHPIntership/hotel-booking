@@ -58,8 +58,8 @@ class AdminShowDetailPlaceTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($place) {
             $page = $this->visitUrlPlaceShow($browser, $place);
 
-            $name = $page->text("#place-detail-name"  );
-            $descript = $page->text("#place-detail-descript"  );
+            $name = $page->text("#place-detail-name");
+            $descript = $page->text("#place-detail-descript");
             $this->assertTrue($name === $place->name);
             $this->assertTrue($descript === $place->descript);
 
@@ -69,7 +69,7 @@ class AdminShowDetailPlaceTest extends DuskTestCase
             $this->assertTrue($imageName[5] === $place->image);
 
             $totalHotels = $place->hotels()->count();
-            $page->assertSee($totalHotels .  " hotel in " . $place->name );
+            $page->assertSee($totalHotels .  " hotel in " . $place->name);
         });
     }
 
