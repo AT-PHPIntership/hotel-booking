@@ -9,7 +9,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ __('Rooms') }}
+        {{ $hotel->name.__(' HOTEL') }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
@@ -41,7 +41,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary" id="btn-add-room">
+                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary" id="btn-add-room">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -58,7 +58,7 @@
                   <th class="text-center">{{ __('Descript') }}</th>
                   <th class="text-center">{{ __('Price') }}</th>
                   <th class="text-center">{{ __('Total') }}</th>
-                  <th class="text-center">{{ __('Max_Gest') }}</th>
+                  <th class="text-center">{{ __('Max Gest') }}</th>
                   <th class="text-center">{{ __('Option') }}</th>
                 </tr>
                 </thead>
@@ -82,7 +82,7 @@
                       <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
                         <i class="" aria-hidden="true"></i>
                       </a>
-                      <form  class="form-delete" method="post" action="{{ route('room.destroy', [$hotelId, $room->id]) }}">
+                      <form  class="form-delete" method="post" action="{{ route('room.destroy', [$hotel->id, $room->id]) }}">
                         {!! csrf_field() !!}
                         {{ method_field('DELETE') }}
                         <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
@@ -98,7 +98,7 @@
                </tbody>
               </table>
                 <div class="contain-btn second pull-right">
-                  <a href="{{ route('room.create', $hotelId) }}" class="btn btn-primary">
+                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 

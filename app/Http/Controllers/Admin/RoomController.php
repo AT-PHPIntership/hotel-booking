@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Backend\HotelIdRequest;
 use App\Http\Controllers\Controller;
 use App\Model\Room;
 use App\Model\Hotel;
@@ -12,13 +13,12 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param int $hotelId id of hotel
+     * @param Hotel $hotel hotel of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($hotelId)
+    public function index(Hotel $hotel)
     {
-        Hotel::findOrFail($hotelId);
         $columns = [
             'id',
             'name',
@@ -31,29 +31,28 @@ class RoomController extends Controller
         ];
         $rooms = Room::select($columns)
             ->with(['images'])
-            ->where('hotel_id', '=', $hotelId)
+            ->where('hotel_id', $hotel->id)
             ->orderBy('id', 'DESC')
             ->paginate(Room::ROW_LIMIT);
-        return view('backend.rooms.index', compact('rooms', 'hotelId'));
+        return view('backend.rooms.index', compact('rooms', 'hotel'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $hotelId id of hotel
-     * @param int $id      id of room
+     * @param Hotel $hotel hotel of room
+     * @param int   $id    id of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($hotelId, $id)
+    public function destroy(Hotel $hotel, $id)
     {
-        Hotel::findOrFail($hotelId);
         $room = Room::findOrFail($id);
         if ($room->delete()) {
             flash(__('Deletion successful!'))->success();
         } else {
             flash(__('Deletion failed!'))->error();
         }
-        return redirect()->route('room.index', $hotelId);
+        return redirect()->route('room.index', $hotel->id);
     }
 }

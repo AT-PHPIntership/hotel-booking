@@ -25,7 +25,7 @@ class AdminEditNewsTest extends DuskTestCase
         $news = News::find(10);
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit('/admin/news')
-                    ->click('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option:first-child a')
+                    ->click('#newstable tbody tr:nth-child(1) td:nth-child(5)  .news-option:first-child a')
                     ->assertSee('EDIT NEWS')
                     ->assertPathIs('/admin/news/'.$news->slug.'/edit');
         });
@@ -41,7 +41,7 @@ class AdminEditNewsTest extends DuskTestCase
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/news')
-                    ->click('#newstable tbody tr:nth-child(2) td:nth-child(6)  .news-option:first-child a')
+                    ->click('#newstable tbody tr:nth-child(2) td:nth-child(5)  .news-option:first-child a')
                     ->type('title','News20')
                     ->press('Submit')
                     ->assertSee('Edit News Success!')
@@ -61,7 +61,7 @@ class AdminEditNewsTest extends DuskTestCase
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/news')
-                    ->click('#newstable tbody tr:nth-child(2) td:nth-child(6)  .news-option:first-child a')
+                    ->click('#newstable tbody tr:nth-child(2) td:nth-child(5)  .news-option:first-child a')
                     ->assertSee('EDIT NEWS')
                     ->clickLink('Back')
                     ->assertSee('List News of Hotel')
@@ -92,7 +92,7 @@ class AdminEditNewsTest extends DuskTestCase
         $news = News::find(10);
         $this->browse(function (Browser $browser) use ($news, $title, $content, $msg) {
             $browser->visit('/admin/news')
-                    ->click('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option:first-child a')
+                    ->click('#newstable tbody tr:nth-child(1) td:nth-child(5)  .news-option:first-child a')
                     ->type('title', $title)
                     ->type('content', $content)
                     ->press('Submit')
@@ -112,7 +112,7 @@ class AdminEditNewsTest extends DuskTestCase
         $news = News::find(10);
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit('/admin/news')
-                    ->click('#newstable tbody tr:nth-child(1) td:nth-child(6)  .news-option:first-child a')
+                    ->click('#newstable tbody tr:nth-child(1) td:nth-child(5)  .news-option:first-child a')
                     ->assertSee('EDIT NEWS');
             $news->delete();
             $browser->press('Submit')

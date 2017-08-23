@@ -64,8 +64,7 @@ class AdminCreateUserTest extends DuskTestCase
                     ->check('is_admin')
                     ->press('Submit')
                     ->assertPathIs('/admin/user')
-                    ->assertSee('Creation successful!')
-                    ->screenShot('success');
+                    ->assertSee('Creation successful!');
         });
         $this->assertDatabaseHas('users', ['username' => 'HTY']);
     }
