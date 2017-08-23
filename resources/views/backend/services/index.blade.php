@@ -36,10 +36,12 @@
               @include('flash::message')
               <div class="row">
                 <div class="col-md-6 container-search ">
-                  <form method="GET" action="{{ route('service.index') }}" class="form-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
-                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
-                  </form>
+                  <form  class="container-search">
+                    <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
+                    <button type="submit" class="btn btn-primary btn-search">
+                    <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </form>
                 </div>
                 <div class="contain-btn pull-right">
                   <a href="{{ route('service.create') }}" class="btn btn-primary">
@@ -83,6 +85,9 @@
                   @endforeach 
                 </tbody> 
               </table>
+              <div class="cls-search-not-found" hidden="">
+                <h1 class="text-center">{{__('Data Not Found!')}}</h1>
+              </div>
               <div class="contain-btn second pull-right">
                 <a href="{{ route('service.create') }}" class="btn btn-primary">
                   <span class="fa fa-plus-circle" aria-hidden="true"></span>
