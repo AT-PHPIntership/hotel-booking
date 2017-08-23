@@ -58,7 +58,7 @@
                       <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
                       @if($reservation->status != __('Cancel'))
-                        <a href="" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
+                        <a href="{{ route('reservation.edit', $reservation->id) }}" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip">
                         </a>
                       @endif
                       <form action="" method="POST" class="inline">

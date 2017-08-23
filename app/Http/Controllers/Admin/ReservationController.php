@@ -63,4 +63,32 @@ class ReservationController extends Controller
         }
         return view('backend.bookings.show', compact('reservation', 'user', 'hotel'));
     }
+
+    /**
+     * Display a page update status booking room.
+     *
+     * @param int $id of reservation
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {   
+        $columns = [
+            'id',
+            'status',
+            'room_id',
+            'checkin_date',
+            'checkout_date'
+        ];
+        $reservation = Reservation::select($columns)
+                    ->with(['bookingroom' => function ($query) {
+                        $query->select('rooms.id', 'name');
+                    }])
+                    ->findOrFail($id);
+        $status = Reservation::select('status')
+            ->groupby('status')
+            ->having('status', '<>', $reservation->status)
+            ->get();
+        return view('backend.bookings.edit', compact('reservation', 'status'));
+    }
 }
