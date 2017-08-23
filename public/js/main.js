@@ -37,7 +37,7 @@ $(document).ready(function(){
      */
     var countNews = $('#newstable tbody tr').length;
     if (countNews == 0) {
-        $('.cls-search-not-found').show();
+        $('.cls-searchnews-not-found').show();
     }
 
     /**

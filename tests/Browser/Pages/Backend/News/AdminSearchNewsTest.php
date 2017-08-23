@@ -22,18 +22,7 @@ class AdminSearchNewsTest extends DuskTestCase
      */
     public function testSearchNotInputValue()
     {
-        for ($i=1; $i <= 10 ; $i++) { 
-            Category::create([
-                'name' => 'News'.$i
-                ]);
-        }
-        for ($i=1; $i < 11 ; $i++) { 
-            News::create([
-                'title' => 'Title '.$i,
-                'content' => 'Content '.$i,
-                'category_id' => $i
-                ]);
-        }
+        $this->makeData(10);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/news')
                     ->press('.btn-search')
@@ -49,18 +38,7 @@ class AdminSearchNewsTest extends DuskTestCase
      */
     public function testSearchHasInputValue()
     {
-        for ($i=1; $i <= 10 ; $i++) { 
-            Category::create([
-                'name' => 'News'.$i
-                ]);
-        }
-        for ($i=1; $i <= 10 ; $i++) { 
-            News::create([
-                'title' => 'Title '.$i,
-                'content' => 'Content '.$i,
-                'category_id' => $i
-                ]);
-        }
+        $this->makeData(10);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/news')
                     ->type('search', 'News2')
@@ -78,18 +56,7 @@ class AdminSearchNewsTest extends DuskTestCase
      */
     public function testSearchNotResult()
     {
-        for ($i=1; $i <= 10 ; $i++) { 
-            Category::create([
-                'name' => 'News'.$i
-                ]);
-        }
-        for ($i=1; $i <= 10 ; $i++) { 
-            News::create([
-                'title' => 'Title '.$i,
-                'content' => 'Content '.$i,
-                'category_id' => $i
-                ]);
-        }
+        $this->makeData(10);
         $this->browse(function (Browser $browser) {     
             $browser->visit('/admin/news')
                     ->type('search', 'Nsdsad')
@@ -108,18 +75,7 @@ class AdminSearchNewsTest extends DuskTestCase
      */
     public function testHasManyRecord()
     {
-        for ($i=1; $i <= 15 ; $i++) { 
-            Category::create([
-                'name' => 'News'.$i
-                ]);
-        }
-        for ($i=1; $i <= 15 ; $i++) { 
-            News::create([
-                'title' => 'Title '.$i,
-                'content' => 'Content '.$i,
-                'category_id' => $i
-                ]);
-        }
+        $this->makeData(15);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/news')
                     ->type('search', 'News')
@@ -140,4 +96,26 @@ class AdminSearchNewsTest extends DuskTestCase
                     ->assertQueryStringHas('page', '2');
         }); 
     }
-}
+
+    /**
+     * Make data for test
+     *
+     * @return void
+     */
+    public function makeData($row)
+    {
+        for ($i=1; $i <= $row ; $i++) { 
+            Category::create([
+                'name' => 'News'.$i
+                ]);
+        }
+        for ($i=1; $i <= $row ; $i++) { 
+            News::create([
+                'title' => 'Title '.$i,
+                'content' => 'Content '.$i,
+                'category_id' => $i
+                ]);
+        }
+    }
+}   
+
