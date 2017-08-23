@@ -36,13 +36,20 @@ class Reservation extends Model
      * Define a value paginate rows
      */
     const ROW_LIMIT = 10;
-    
+
+    /**
+     * Define  value status of reservation
+     */
+    const STATUS_ACCEPT = 1;
+    const STATUS_REJECT = 2;
+    const STATUS_CANCEL = 3;
+
     /**
      * Booking room belongs to a Room.
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function bookingroom()
+    public function room()
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
@@ -55,13 +62,13 @@ class Reservation extends Model
     public function getStatusLabelAttribute()
     {
         switch ($this->attributes['status']) {
-            case '1':
+            case self::STATUS_ACCEPT:
                 return __('Accept');
                 break;
-            case '2':
+            case self::STATUS_REJECT:
                 return __('Reject');
                 break;
-            case '3':
+            case self::STATUS_CANCEL:
                 return __('Cancel');
             default:
                 return __('Pending');
