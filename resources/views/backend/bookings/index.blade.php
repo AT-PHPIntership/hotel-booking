@@ -77,12 +77,6 @@
               {!! $reservations->render() !!}
             </div>
           </div>
-          <div>
-            <a href="" class="btn btn-primary pull-right">
-              <i class="fa fa-plus-circle"></i>
-              {{__('Add News')}}
-            </a>
-          </div>
         </div>
       </div>
     </section>
