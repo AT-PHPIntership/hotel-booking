@@ -42,7 +42,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('category.create') }}" class="btn btn-primary">
+                   <a href="{{ route('category.create') }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Cagegory') }}
                   </a> 
@@ -68,7 +68,11 @@
                      <form method="POST" action="{{ route('category.destroy', $category->id) }}" class="form-del inline" >
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
-                        <button type="submit" name="" class="fa fa-trash-o cus_icon btn btn-delete-item"></button>
+                        <button type="submit" 
+                              class="fa fa-trash-o cus_icon btn btn-delete-item fz-20"
+                              data-title="{{ __('Confirm deletion!') }}"
+                              data-confirm="{{ __('Are you sure you want to delete?') }}">
+                        </button>
                     </form>
                   </td>
                 </tr>
