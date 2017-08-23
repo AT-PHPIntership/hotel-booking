@@ -24,6 +24,7 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::group(['prefix'=>'hotel/{id}'], function($id) {
         Route::resource('/room', 'RoomController');
     });
+    Route::get('/image/{id}/removeImage', 'RoomController@removeImage')->name('image.removeImage');
     Route::resource('/category', 'CategoryController');
     Route::put('/user/{id}/status', 'UserController@updateStatus')->name('user.updateStatus');
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');

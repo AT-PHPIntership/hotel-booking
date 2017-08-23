@@ -16,6 +16,7 @@
         <li class="active">{{ __('Rooms') }}</li>
       </ol>
     </section>
+    {{dd(request()->id)}}
 
     <!-- Main content -->
     <section class="content">
@@ -79,7 +80,7 @@
                   <td class="text-center">{{ $room->max_guest }}</td>
                   <td class="text-center col-action">
                     <div class="btn-option text-center">
-                      <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
+                      <a href="{{ route('room.edit', [$hotelId, $room->id]) }}" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
                         <i class="" aria-hidden="true"></i>
                       </a>
                       <form  class="form-delete" method="post" action="#">
