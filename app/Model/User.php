@@ -35,7 +35,12 @@ class User extends Model
      * @var array $searchableFields
      */
     protected $searchableFields = [
-        'username', 'full_name', 'email', 'phone'
+        'columns' => [
+            'users.username',
+            'users.full_name',
+            'users.email',
+            'users.phone'
+        ]
     ];
 
     /**

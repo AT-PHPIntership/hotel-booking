@@ -169,11 +169,11 @@
 .img-place{
     max-width: 145px;
     height: 100px;
-    margin-top: 10px;
 }
 .place-descript{
     max-height: 300px;
-    max-width: 690px;
+    max-width: 715px;
+    min-height: 160px;
 }
 .btn-custom {
     margin-right: 10px;
@@ -300,6 +300,17 @@
     width: 718px;
 }
 
+.borderless {
+    border: none;
+}
+
+/*-- Show detail place --*/
+.cls-descript-text{
+    max-height: 262px;
+    overflow: auto;
+}
+
+/*-- ./Show detail place --*/
 .cls-search-not-found {
     font-size: 20px;
     color: red;
