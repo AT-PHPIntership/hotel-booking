@@ -21,7 +21,7 @@ class ServiceController extends Controller
         return view("backend.services.index", compact('services'));
     }
 
-     /**
+    /**
      * Show the form for creating a new service.
      *
      * @return \Illuminate\Http\Response
@@ -48,7 +48,6 @@ class ServiceController extends Controller
             flash(__('Create failure'))->error();
             return redirect()->back()->withInput();
         }
-        
         return redirect()->route('service.index');
     }
 }
