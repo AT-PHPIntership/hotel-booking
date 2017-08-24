@@ -18,7 +18,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$hotel->name}}
+                      {{$reservation->room->hotel->name}}
                     </td>
                   </tr>
                   <tr>
@@ -29,7 +29,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->bookingroom->name}}
+                      {{$reservation->room->name}}
                     </td>
                   </tr>
                   <tr>
@@ -40,7 +40,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$user->full_name}}
+                      {{$reservation->reservable->full_name}}
                     </td>
                   </tr>
                   <tr>
@@ -51,7 +51,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$user->email}}
+                      {{$reservation->reservable->email}}
                     </td>
                   </tr>
                   <tr>
@@ -62,7 +62,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$user->phone}}
+                      {{$reservation->reservable->phone}}
                     </td>
                   </tr>
                   <tr>
@@ -117,16 +117,20 @@
                       </strong> 
                     </td>
                     <td>
-                      {{$reservation->status}}
+                      {{$reservation->status_label}}
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div class="box-footer">
-              <a href="{{ URL::previous() }}" class="pull-left btn btn-default">Back</a>
-              @if($reservation->status != __('Cancel'))
-              <a href=" {{ route('reservation.edit', $reservation->id) }}" class="pull-right btn btn-primary">Edit</a>
+              <a href="{{ URL::previous() }}" class="pull-left btn btn-default">
+                {{__('Back')}}
+              </a>
+              @if($reservation->status_label != __('Cancel'))
+                <a href="" class="pull-right btn btn-primary">
+                  {{__('Edit')}}
+                </a>
               @endif
             </div>
           </div>

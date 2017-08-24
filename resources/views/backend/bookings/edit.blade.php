@@ -12,7 +12,7 @@
             @include('flash::message')
           </div>
           <div class="box box-primary">
-            <form method="POST" action="" >
+            <form method="POST" action="{{ route('reservation.update', $reservation->id) }}" >
               {{csrf_field()}}
               {{method_field('PUT')}}
               <div class="box-body">
@@ -24,7 +24,7 @@
                   </div>
                   <div class="col-md-6">
                     <h3>
-                      <label>{{$reservation->bookingroom->name}}</label>
+                      <label>{{$reservation->room->name}}</label>
                     </h3>
                   </div>
                 </div>
@@ -60,23 +60,33 @@
                   </div>
                   <div class="col-md-6">
                     <h3>
-                      <select>
-                        <option>{{$reservation->status}}</option>
+                    @foreach($status as $key => $value)
+                          {{$key}}
+                         {{--  <option value="$key">{{$value->status_label}}</option> --}}
+                          
+                        @endforeach
+                      <select name="status">
+                        <option value="">{{$reservation->status_label}}</option>
+                        @foreach($status as $key => $value)
+                          {{$key}}
+                         {{--  <option value="$key">{{$value->status_label}}</option> --}}
+                          
+                        @endforeach
                       </select>
                     </h3>
                   </div>
                 </div>
               <div class="box-footer">  
-                <div class="btn-edit-news">
-                  <a href="" class="btn btn-default">
+                <div class="cls-update-booking">
+                  <a href="{{ URL::previous() }}" class="btn btn-default pull-left">
                     {{__('Back')}}
                   </a>                
-                  <button type="reset" class="btn btn-warning">
+                  <button type="reset" class="btn btn-warning pull-left">
                     {{__('Reset')}}
                   </button> 
                 </div>
-                <div class="edit-news-submit">
-                  <button type="submit" class="btn btn-primary">
+                <div>
+                  <button type="submit" class="btn btn-primary pull-right">
                     {{__('Submit')}} 
                   </button>
                 </div>

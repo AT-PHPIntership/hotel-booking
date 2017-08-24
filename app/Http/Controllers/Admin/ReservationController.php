@@ -24,13 +24,14 @@ class ReservationController extends Controller
             'status',
             'room_id',
             'target',
+            'target_id',
             'checkin_date',
             'checkout_date'
         ];
         $reservations = Reservation::select($columns)
-                    ->with(['bookingroom' => function ($query) {
+                    ->with(['room' => function ($query) {
                         $query->select('rooms.id', 'name');
-                    }])
+                    }, 'reservable'])
                     ->orderby('reservations.id', 'DESC')
                     ->paginate(Reservation::ROW_LIMIT);
         return view('backend.bookings.index', compact('reservations'));
@@ -45,23 +46,23 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-        $reservation = Reservation::with(['bookingroom' => function ($query) {
-            $query->select('rooms.id', 'name', 'rooms.hotel_id');
-        }])->findOrFail($id);
-        $hotelId = $reservation->bookingroom->hotel_id;
-        $hotel = Hotel::select('name')
-                    ->where('id', $hotelId)
-                    ->firstOrFail();
-        if ($reservation->target == 'user') {
-            $user = User::select('full_name', 'email', 'phone')
-                        ->where('id', $reservation->target_id)
-                        ->firstOrFail();
-        } else {
-            $user = Guest::select('full_name', 'email', 'phone')
-                        ->where('id', $reservation->target_id)
-                        ->firstOrFail();
-        }
-        return view('backend.bookings.show', compact('reservation', 'user', 'hotel'));
+        $columns = [
+            'reservations.id',
+            'status',
+            'room_id',
+            'target',
+            'target_id',
+            'checkin_date',
+            'checkout_date',
+            'quantity',
+            'request'
+        ];
+        $reservation = Reservation::select($columns)
+            ->with(['room' => function ($query) {
+                $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
+            }, 'reservable', 'room.hotel'])
+            ->findOrFail($id);
+        return view('backend.bookings.show', compact('reservation'));
     }
 
     /**
@@ -81,14 +82,38 @@ class ReservationController extends Controller
             'checkout_date'
         ];
         $reservation = Reservation::select($columns)
-                    ->with(['bookingroom' => function ($query) {
+                    ->with(['room' => function ($query) {
                         $query->select('rooms.id', 'name');
                     }])
                     ->findOrFail($id);
+        dd($reservation);        
         $status = Reservation::select('status')
             ->groupby('status')
             ->having('status', '<>', $reservation->status)
+            ->having('status', '<>', Reservation::STATUS_CANCEL)
             ->get();
         return view('backend.bookings.edit', compact('reservation', 'status'));
+    }
+
+    /**
+     * Update information of a News
+     *
+     * @param \App\Http\Requests\ $request of form Edit Booking
+     * @param int                                $id      of News
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {   
+        dd($request);
+        $reservationUpdate = Reservation::findOrFail($id);
+        $status = $reservationUpdate->status;
+        if ($reservationUpdate) {
+            flash(__('Edit Booking Room Success!'))->success();
+            return redirect()->route('reservation.index');
+        } else {
+            flash(__('Edit Booking Room Fail!'))->error();
+            return redirect()->route('reservation.edit');
+        }
     }
 }

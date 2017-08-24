@@ -52,7 +52,6 @@
     display: inline;
 }
 
-
 .help-block {
     color: red;
 }
@@ -134,9 +133,9 @@
     width: 95px;
 }
 
-.search-news {
-    float: left;
-    width: 60%;
+.cls-search {
+    margin-left: -14px;
+    margin-top: 2px;
 }
 .btn-pencil{
     font-size: 18px;
@@ -149,7 +148,6 @@
 .form-delete{
     margin-top: 3px;
 }
-
 
 /*end fix template*/
 .title-header {
@@ -235,12 +233,10 @@
 
 .container-search {
     position: relative;
-    margin-left: -14px;
-    margin-top: 3px;
 }
 
 }
-.cls-search-news {
+.cls-search{
     margin-left: -14px;
     margin-top: 3px;
 }
@@ -315,4 +311,7 @@
     font-size: 20px;
     color: red;
     font-family: cursive;
+}
+.cls-update-booking button{
+    margin-left: 2%;
 }
