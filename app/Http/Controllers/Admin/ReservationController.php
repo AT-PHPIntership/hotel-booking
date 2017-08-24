@@ -28,8 +28,8 @@ class ReservationController extends Controller
             'checkout_date'
         ];
         $reservations = Reservation::select($columns)
-                    ->with(['bookingroom' => function ($query) {
-                        $query->select('rooms.id', 'name');
+                    ->with(['room' => function ($query) {
+                        $query->select('rooms.id', 'name','hotel_id');
                     }])
                     ->orderby('reservations.id', 'DESC')
                     ->paginate(Reservation::ROW_LIMIT);
@@ -45,22 +45,22 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-        $reservation = Reservation::with(['bookingroom' => function ($query) {
-            $query->select('rooms.id', 'name', 'rooms.hotel_id');
-        }])->findOrFail($id);
-        $hotelId = $reservation->bookingroom->hotel_id;
-        $hotel = Hotel::select('name')
-                    ->where('id', $hotelId)
-                    ->firstOrFail();
-        if ($reservation->target == 'user') {
-            $user = User::select('full_name', 'email', 'phone')
-                        ->where('id', $reservation->target_id)
-                        ->firstOrFail();
-        } else {
-            $user = Guest::select('full_name', 'email', 'phone')
-                        ->where('id', $reservation->target_id)
-                        ->firstOrFail();
-        }
-        return view('backend.bookings.show', compact('reservation', 'user', 'hotel'));
+        $columns = [
+            'reservations.id',
+            'status',
+            'room_id',
+            'target',
+            'target_id',
+            'checkin_date',
+            'checkout_date',
+            'quantity',
+            'request'
+        ];
+        $reservation = Reservation::select($columns)
+            ->with(['room' => function ($query) {
+                $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
+            }, 'reservable', 'room.hotel'])
+            ->findOrFail($id);
+        return view('backend.bookings.show', compact('reservation'));
     }
 }

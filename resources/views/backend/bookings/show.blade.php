@@ -5,11 +5,11 @@
     <section class="content">
       <h1 class="title-page">{{__('DETAIL BOOKING ROOM')}}</h1>
       <div class="row margin-center">
-          <div class="col-md-12">
-            <div class="box">
-              <div class="box-body">
-                <table class="table table-condensed table-responsive">
-                  <tbody>
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-body">
+              <table class="table table-condensed table-responsive">
+                <tbody>
                   <tr>
                     <td>
                       <strong>
@@ -17,9 +17,9 @@
                         {{ __('Hotel Name') }}
                       </strong>
                     </td>
-                      <td>
-                        {{$hotel->name}}
-                      </td>
+                    <td>
+                      {{$reservation->room->hotel->name}}
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -28,9 +28,9 @@
                         {{ __('Room Name') }}
                       </strong>
                     </td>
-                      <td>
-                        {{$reservation->bookingroom->name}}
-                      </td>
+                    <td>
+                      {{$reservation->room->name}}
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -39,9 +39,9 @@
                         {{ __('Target') }}
                       </strong>
                     </td>
-                      <td>
-                        {{$user->full_name}}
-                      </td>
+                    <td>
+                      {{$reservation->reservable->full_name}}
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -50,9 +50,9 @@
                         {{ __('Email') }}
                       </strong>
                     </td>
-                      <td>
-                        {{$user->email}}
-                      </td>
+                    <td>
+                      {{$reservation->reservable->email}}
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -61,9 +61,9 @@
                         {{ __('Phone') }}
                       </strong>
                     </td>
-                      <td>
-                        {{$user->phone}}
-                      </td>
+                    <td>
+                      {{$reservation->reservable->phone}}
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -125,7 +125,7 @@
             </div>
             <div class="box-footer">
                 <a href="{{ URL::previous() }}" class="pull-left btn btn-default">Back</a>
-                @if($reservation->status != __('Cancel'))
+                @if($reservation->status_label != __('Cancel'))
                   <a href="" class="pull-right btn btn-primary">Edit</a>
                 @endif
             </div>

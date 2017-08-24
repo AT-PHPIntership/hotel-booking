@@ -48,16 +48,16 @@
                   <tr>
                     <td>{{$reservation->id}}</td>
                     <td>
-                      <a href="">{{$reservation->bookingroom->name}}</a>
+                      <a href="">{{$reservation->room->name}}</a>
                     </td>
                     <td>{{$reservation->target}}</td>
                     <td>{{$reservation->checkin_date}}</td>
                     <td>{{$reservation->checkout_date}}</td>
-                    <td>{{$reservation->status}}</td>
+                    <td>{{$reservation->status_label}}</td>
                     <td align="center">
                       <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
-                      @if($reservation->status != __('Cancel'))
+                      @if($reservation->status_label != __('Cancel'))
                         <a href="" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
                         </a>
                       @endif
@@ -75,6 +75,9 @@
                 </tbody>
               </table>
               {!! $reservations->render() !!}
+            </div>
+            <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
             </div>
           </div>
         </div>
