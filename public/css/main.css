@@ -52,7 +52,6 @@
     display: inline;
 }
 
-
 .help-block {
     color: red;
 }
@@ -70,7 +69,9 @@
 .help-block {
     color: red;
 }
-
+.title-news {
+    margin-left: 3px;
+}
 .news-btn {
     /*margin-top: 2px;*/
     font-size: 16px;
@@ -101,7 +102,7 @@
     clear: both;
 }
 .clear-fix:after {
-   display: block;
+    display: block;
     content: "";
     clear: both; 
 }
@@ -234,9 +235,16 @@
     position: relative;
 }
 
+.cls-search-news {
+    margin-left: -14px;
+    margin-top: 3px;
+}
 .btn-search {
     position: absolute;
     top: 0px;
+}
+.cls-searchnews-not-found {
+    color: #ed8910;
 }
 /*end search*/
 .btn-on {
