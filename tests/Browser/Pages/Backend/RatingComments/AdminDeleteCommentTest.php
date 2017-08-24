@@ -25,7 +25,6 @@ class AdminDeleteCommentTest extends DuskTestCase
         $this->makeData(10);
         $comment = RatingComment::find(5);
         $this->browse(function (Browser $browser) use ($comment){
-            // dd($comment);
             $page = $browser->visit('/admin/comment');
             $elements = $page->elements('#list-table tbody tr');
             $this->assertCount(10, $elements);
@@ -36,31 +35,30 @@ class AdminDeleteCommentTest extends DuskTestCase
             // check softdeleted
             $this->assertSoftDeleted('rating_comments', ['id' => '5']);
             // check show
-            // dd($comment->comment);
             $elements = $page->elements('#list-table tbody tr');   
             $this->assertCount(9, $elements);
             $page->assertDontSee($comment->comment); 
         });
     } 
 
-    // /**
-    //  * Test not found when delete
-    //  *
-    //  * @return void
-    //  */
-    // public function testNotFound()
-    // {   
-    //     $this->makeData(5);
-    //     $this->browse(function (Browser $browser) {
-    //         $page = $browser->visit('/admin/comment');
-    //         $rating_comments = RatingComment::find(2);
-    //         $rating_comments->delete();
-    //         $page->press('#list-table tbody tr:nth-child(4) td:nth-child(8) button')
-    //             ->waitForText("Confirm deletion!")
-    //             ->press('Delete')
-    //             ->assertSee("404 - Page Not found");
-    //     });  
-    // }
+    /**
+     * Test not found when delete
+     *
+     * @return void
+     */
+    public function testNotFound()
+    {   
+        $this->makeData(5);
+        $this->browse(function (Browser $browser) {
+            $page = $browser->visit('/admin/comment');
+            $rating_comments = RatingComment::find(2);
+            $rating_comments->delete();
+            $page->press('#list-table tbody tr:nth-child(4) td:nth-child(8) button')
+                ->waitForText("Confirm deletion!")
+                ->press('Delete')
+                ->assertSee("404 - Page Not found");
+        });  
+    }
 
     /**
      * Make data for test.
