@@ -78,7 +78,7 @@
             </div>
             <div class="cls-search-not-found text-center" hidden="">
                 {{__('Data Not Found')}}
-              </div>
+            </div>
           </div>
         </div>
       </div>
