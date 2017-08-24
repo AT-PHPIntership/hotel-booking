@@ -41,19 +41,19 @@
                 </tr>
               </thead>
               <tbody>
-            @foreach ($static_pages as $static_page)
+            @foreach ($staticPages as $staticPage)
                 <tr>
-                  <td>{{ $static_page->id }}</td>
-                  <td>{{ $static_page->title }}
-                   <td>{{ $static_page->name }}
+                  <td>{{ $staticPage->id }}</td>
+                  <td>{{ $staticPage->title }}
                   </td>
                   <td align="center">
-                    <a href="{{ route('static-page.edit',$static_page->id) }}"><i class= "fa fa-pencil-square-o cus_icon"></i></a>
+                    <a href="{{ route('static-page.edit', $staticPage->id) }}"><i class= "fa fa-pencil-square-o cus_icon"></i></a>
                   </td>
                 </tr>
               @endforeach
                </tbody>
               </table>
+             {{ $categories->render() }}
             </div>
             <!-- /.box-body -->
           </div>
