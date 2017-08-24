@@ -15,4 +15,14 @@ class HotelService extends Model
      * @var string
      */
     const UPDATED_AT = null;
+
+    /**
+     * Relationship with service model
+     *
+     * @return \App\Model
+     */
+    public function service()
+    {
+        return $this->belongsTo('App\Model\Service', 'service_id');
+    }
 }
