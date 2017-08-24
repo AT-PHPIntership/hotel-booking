@@ -26,7 +26,7 @@
 
         <!--  introduction -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('static-page.index') }}">
             <i class="fa fa-table"></i> <span>{{ __('Introduction') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
