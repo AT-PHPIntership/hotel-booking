@@ -28,7 +28,7 @@ class ReservationController extends Controller
             'checkout_date'
         ];
         $reservations = Reservation::select($columns)
-                    ->with(['bookingroom' => function ($query) {
+                    ->with(['room' => function ($query) {
                         $query->select('rooms.id', 'name');
                     }])
                     ->orderby('reservations.id', 'DESC')
@@ -48,17 +48,17 @@ class ReservationController extends Controller
         $columns = [
             'reservations.id',
             'status',
-            'room_id',  
+            'room_id',
             'target',
             'target_id',
             'checkin_date',
             'checkout_date',
         ];
         $reservation = Reservation::select($columns)
-        ->with(['room' => function($query) {
-            $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
-        }, 'reservable', 'room.hotel'])
-        ->findOrFail($id);
-        return view('backend.bookings.show', compact('reservation', 'hotel'));
+            ->with(['room' => function ($query) {
+                $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
+            }, 'reservable', 'room.hotel'])
+            ->findOrFail($id);
+        return view('backend.bookings.show', compact('reservation'));
     }
 }
