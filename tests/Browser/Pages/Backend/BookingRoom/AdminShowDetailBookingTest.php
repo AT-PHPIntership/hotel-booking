@@ -30,7 +30,7 @@ class AdminShowDetailBookingTest extends DuskTestCase
         $reservation = Reservation::find(10);
         $this->browse(function (Browser $browser) use ($reservation) {
             $browser->visit('/admin/reservation')
-                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(7) .fa-search-plus')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-search-plus')
                     ->assertSee('DETAIL BOOKING ROOM')
                     ->assertPathIs('/admin/reservation/' . $reservation->id);
         });
@@ -44,36 +44,36 @@ class AdminShowDetailBookingTest extends DuskTestCase
     public function testShowDetailBooking()
     {
         $this->makeData(15);
-        $reservation = Reservation::with(['bookingroom' => function ($query) {
-                        $query->select('rooms.id', 'name', 'rooms.hotel_id');
-                        }])
-                        ->findOrFail(15);
-        $hotelId = $reservation->bookingroom->hotel_id;
-        $hotel = Hotel::select('name')
-                    ->where('id', $hotelId)
-                    ->firstOrFail(); 
-        if ($reservation->target == 'user') {
-            $user = User::select('full_name', 'email', 'phone')
-                        ->where('id', $reservation->target_id)
-                        ->firstOrFail();
-        } else {
-            $user = Guest::select('full_name', 'email', 'phone')
-                        ->where('id', $reservation->target_id)
-                        ->firstOrFail();
-        }
-        $this->browse(function (Browser $browser) use ($reservation, $hotel, $user) {
+        $columns = [
+            'reservations.id',
+            'status',
+            'room_id',
+            'target',
+            'target_id',
+            'checkin_date',
+            'checkout_date',
+            'quantity',
+            'request'
+        ];
+        $reservation = Reservation::select($columns)
+            ->with(['room' => function ($query) {
+                $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
+            }, 'reservable', 'room.hotel'])
+            ->findOrFail(15);
+        $this->browse(function (Browser $browser) use ($reservation) {
             $browser->visit('/admin/reservation')
-                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(7) .fa-search-plus');
-            $this->assertTrue($browser->text('.table tbody tr:nth-child(1) td:nth-child(2)') === $hotel->name);
-            $this->assertTrue($browser->text('.table tbody tr:nth-child(2) td:nth-child(2)') === $reservation->bookingroom->name);
-            $this->assertTrue($browser->text('.table tbody tr:nth-child(3) td:nth-child(2)') === $user->full_name);
-            $this->assertTrue($browser->text('.table tbody tr:nth-child(4) td:nth-child(2)') === $user->email);
-            $this->assertTrue($browser->text('.table tbody tr:nth-child(5) td:nth-child(2)') === $user->phone);
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-search-plus')
+                    ->assertPathIs('/admin/reservation/' . $reservation->id);
+            $this->assertTrue($browser->text('.table tbody tr:nth-child(1) td:nth-child(2)') === $reservation->room->hotel->name);
+            $this->assertTrue($browser->text('.table tbody tr:nth-child(2) td:nth-child(2)') === $reservation->room->name);
+            $this->assertTrue($browser->text('.table tbody tr:nth-child(3) td:nth-child(2)') === $reservation->reservable->full_name);
+            $this->assertTrue($browser->text('.table tbody tr:nth-child(4) td:nth-child(2)') === $reservation->reservable->email);
+            $this->assertTrue($browser->text('.table tbody tr:nth-child(5) td:nth-child(2)') === $reservation->reservable->phone);
             $this->assertTrue($browser->text('.table tbody tr:nth-child(6) td:nth-child(2)') === (string)$reservation->quantity);
             $this->assertTrue($browser->text('.table tbody tr:nth-child(7) td:nth-child(2)') === $reservation->checkin_date);
             $this->assertTrue($browser->text('.table tbody tr:nth-child(8) td:nth-child(2)') === $reservation->checkout_date);
-            $this->assertTrue($browser->text('.table tbody tr:nth-child(9) td:nth-child(2)') === $reservation->request);
-            $this->assertTrue($browser->text('.table tbody tr:nth-child(10) td:nth-child(2)') === $reservation->status);
+            $this->assertTrue($browser->text('.table tbody tr:nth-child(9) td:nth-child(2)') === (string)$reservation->request);
+            $this->assertTrue($browser->text('.table tbody tr:nth-child(10) td:nth-child(2)') === $reservation->status_label);
         });
     }
 
@@ -85,17 +85,14 @@ class AdminShowDetailBookingTest extends DuskTestCase
     public function testShowButtonEdit()
     {
         $this->makeData(15);
-        $reservation = Reservation::with(['bookingroom' => function ($query) {
-                        $query->select('rooms.id', 'name', 'rooms.hotel_id');
-                        }])
-                        ->findOrFail(15);
+        $reservation = Reservation::select('status')->find(15);
         $this->browse(function (Browser $browser) use ($reservation) {
             $browser->visit('/admin/reservation')
-                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(7) .fa-search-plus');
-            if($reservation->status != 'Cancel') {
-                $browser->assertSee('btn-primary');
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-search-plus');
+            if($reservation->status_label != 'Cancel') {
+                $browser->assertVisible('.btn-primary');
             } else {
-                $browser->assertDontSee('btn-primary');
+                $browser->assertMissing('.btn-primary');
             }         
         });
     }
@@ -110,7 +107,7 @@ class AdminShowDetailBookingTest extends DuskTestCase
         $this->makeData(15);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/reservation')
-                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(7) .fa-search-plus')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-search-plus')
                     ->clickLink('Back')
                     ->assertPathIs('/admin/reservation'); 
         });

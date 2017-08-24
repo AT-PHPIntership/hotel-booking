@@ -117,17 +117,17 @@
                       </strong> 
                     </td>
                     <td>
-                      {{$reservation->status}}
+                      {{$reservation->status_label}}
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div class="box-footer">
-                <a href="{{ URL::previous() }}" class="pull-left btn btn-default">Back</a>
-                @if($reservation->status_label != __('Cancel'))
-                  <a href="" class="pull-right btn btn-primary">Edit</a>
-                @endif
+              <a href="{{ URL::previous() }}" class="pull-left btn btn-default">Back</a>
+              @if($reservation->status_label != __('Cancel'))
+                <a href="" class="pull-right btn btn-primary">Edit</a>
+              @endif
             </div>
           </div>
         </div>
