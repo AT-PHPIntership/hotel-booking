@@ -15,9 +15,9 @@ class StaticPageController extends Controller
      */
     public function index()
     {
-        $static_pages = StaticPage::select('id', 'title', 'content')
+        $staticPages = StaticPage::select('id', 'title')
                                  ->orderby('id', 'DESC')
-                                 ->paginate();
-        return view('backend.static_pages.index', compact('static_pages'));
+                                 ->paginate(StaticPage::ROW_LIMIT);
+        return view('backend.static_pages.index', compact('staticPages'));
     }
 }
