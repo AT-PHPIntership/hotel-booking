@@ -4,10 +4,11 @@ namespace App\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Libraries\Traits\SearchTrait;
 
 class Place extends Model
 {
-     use Sluggable, SoftDeletes;
+     use Sluggable, SoftDeletes, SearchTrait;
     
     /**
      * Declare table
@@ -24,9 +25,23 @@ class Place extends Model
     protected $fillable = ['name', 'descript', 'image'];
 
     /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'columns' => [
+            'name',
+            'descript',
+            'id'
+        ]
+    ];
+
+    /**
      * Value paginate of row
      */
     const ROW_LIMIT = 10;
+
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -40,6 +55,7 @@ class Place extends Model
             ]
         ];
     }
+
     /**
      * Accessor to get path image
      *
@@ -59,7 +75,7 @@ class Place extends Model
     {
         return $this->hasMany(Hotel::class);
     }
-    
+
      /**
      * The "booting" method of the model.
      *

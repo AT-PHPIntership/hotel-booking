@@ -52,7 +52,6 @@
     display: inline;
 }
 
-
 .help-block {
     color: red;
 }
@@ -70,7 +69,9 @@
 .help-block {
     color: red;
 }
-
+.title-news {
+    margin-left: 3px;
+}
 .news-btn {
     /*margin-top: 2px;*/
     font-size: 16px;
@@ -102,7 +103,7 @@
     clear: both;
 }
 .clear-fix:after {
-   display: block;
+    display: block;
     content: "";
     clear: both; 
 }
@@ -130,6 +131,7 @@
 
 .btn-option{
     width: 95px;
+    margin: 0 auto;
 }
 
 .search-news {
@@ -142,14 +144,11 @@
 .btn-option .btn-edit {
     margin-top: 12px;
     margin-left: 21px;
-
-
 }
 
 .form-delete{
     margin-top: 3px;
 }
-
 
 /*end fix template*/
 .title-header {
@@ -169,11 +168,11 @@
 .img-place{
     max-width: 145px;
     height: 100px;
-    margin-top: 10px;
 }
 .place-descript{
     max-height: 300px;
-    max-width: 690px;
+    max-width: 715px;
+    min-height: 160px;
 }
 .btn-custom {
     margin-right: 10px;
@@ -235,11 +234,21 @@
 
 .container-search {
     position: relative;
+    margin-left: -14px;
+    margin-top: 3px;
 }
 
+}
+.cls-search-news {
+    margin-left: -14px;
+    margin-top: 3px;
+}
 .btn-search {
     position: absolute;
     top: 0px;
+}
+.cls-searchnews-not-found {
+    color: #ed8910;
 }
 /*end search*/
 .btn-on {
@@ -290,6 +299,17 @@
     width: 718px;
 }
 
+.borderless {
+    border: none;
+}
+
+/*-- Show detail place --*/
+.cls-descript-text{
+    max-height: 262px;
+    overflow: auto;
+}
+
+/*-- ./Show detail place --*/
 .cls-search-not-found {
     font-size: 20px;
     color: red;

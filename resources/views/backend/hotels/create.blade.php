@@ -72,12 +72,26 @@
                   @endforeach
                 </div>
                 {{-- upload image --}}
-                <div class="form-group">
+
+                <div class="form-group {{ $errors->has('image.*') ? ' has-error' : '' }}"> 
+                  <label for="input-file">{{ __("Image") }}</label>
+                  <input type="file" class="form-control" name="image[]" id="multiple-image" multiple>
+                  <small class=" text-danger">{{ $errors->first('image.*') }}</small>
+                  <div id="showImage">
+                    <img class="img-place" id="default-image" src="{{ asset('/images/default/no_image.png') }}">
+                  </div>
+                </div>
+
+
+
+                {{-- <div class="form-group">
                   <input type="file" class="form-control" name='images[]' id="img-upload" multiple="true" placeholder="{{ __('Images') }}">
                    <div id="preview-img">
-                     
                    </div>
-                </div>
+                   @if($errors->first('images'))
+                      <span class="text-danger">{{$errors->first('images')}}</span>
+                    @endif
+                </div> --}}
               </div>
               <div class="box-footer">
                 <a class="btn btn-default btn-custom" href="javascript:history.back()">

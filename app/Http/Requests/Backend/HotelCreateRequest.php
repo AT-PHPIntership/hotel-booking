@@ -29,7 +29,8 @@ class HotelCreateRequest extends FormRequest
             'place_id' => 'required',
             'star' => 'required',
             'introduce' => 'required',
-            // 'printer_list(enumtype)ace' => 'require ';
+            'images' => 'nullable|max:' . config('image.max_upload_size'),
+            'images.*' => 'image'
         ];
     }
 }

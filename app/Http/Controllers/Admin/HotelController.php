@@ -9,10 +9,8 @@ use App\Model\Place;
 use App\Model\Service;
 use App\Model\Image;
 use App\Model\HotelService;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Backend\HotelCreateRequest;
 use Illuminate\Http\Response;
-
 
 class HotelController extends Controller
 {
@@ -52,21 +50,23 @@ class HotelController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param HotelCreateRequest $request Request create
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(HotelCreateRequest $request)
     {
         // create hotel.
         $hotel = new Hotel($request->except(['services', 'images']));
-        $saveStatus = $hotel->save();
+        $result = $hotel->save();
         // add hotel services
         $hotelServices = $request->services;
-        foreach ($hotelServices as $service) {
-            $saveService = new HotelService(['service_id' => $service]);
-            $hotel->hotelServices()->save($saveService);
+        foreach ($hotelServices as $serviceId) {
+            $hotelService = new HotelService(['service_id' => $serviceId]);
+            $hotel->hotelServices()->save($hotelService);
         }
-        // add hotel image
-        if ($request->hasFile('images')){
+        // add hotel images
+        if ($request->hasFile('images')) {
             $images = $request->file('images');
             foreach ($images as $image) {
                 $imageName = config('image.name_prefix') . "-" . $image->hashName();
@@ -81,7 +81,7 @@ class HotelController extends Controller
             }
         }
 
-        if ($saveStatus) {
+        if ($result) {
             flash(__('Create success'))->success();
             return redirect()->route('hotel.index');
         } else {

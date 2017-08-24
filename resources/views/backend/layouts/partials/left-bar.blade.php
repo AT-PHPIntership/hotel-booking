@@ -81,7 +81,7 @@
         <!-- comment and rating -->
         <li class="treeview">
           <a href="{{ route('comment.index') }}">
-            <i class="fa fa-edit"></i> <span>{{ __('Comment and Rating') }}</span>
+            <i class="fa fa-commenting-o" aria-hidden="true"></i> <span>{{ __('Comment and Rating') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -113,6 +113,13 @@
         <li>
           <a href="{{ route('place.index') }}" id="place">
             <i class="fa fa-map-marker" aria-hidden="true"></i> <span>{{ __('Places') }}</span>
+          </a>
+        </li>
+
+        <!-- service -->
+        <li>
+          <a href="{{ route('service.index') }}" >
+            <i class="fa fa-empire" aria-hidden="true"></i><span>{{ __('Services') }}</span>
           </a>
         </li>
       </ul>

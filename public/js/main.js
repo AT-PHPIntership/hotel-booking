@@ -30,27 +30,30 @@ $(document).ready(function(){
             $("#showImage").fadeIn("fast").attr('src','/images/default/no_image.png');
         }
     });
+ 
+    /**
+     * Show message if database has not data or search not found in page News
+     *
+     */
+    var countNews = $('#newstable tbody tr').length;
+    if (countNews == 0) {
+        $('.cls-searchnews-not-found').show();
+    }
 
     /**
-     * Show images when choose images
+     * Check if not input value in field search.
+     *
      */
-    $( "#img-upload" ).change(function() {
-      console.log('test');
-      if (this.files && this.files[0]) {
-        for (var i = 0; i < this.files.length; ++i) {
-          var file = this.files[i];
-          var reader = new FileReader();
-          reader.onload = function (e) {
-              var imgs = $('#preview-img').html();
-              $('#preview-img').html(imgs+'<img src="'+e.target.result+'" style="width:30%">');
-          };
-          reader.readAsDataURL(file);
-        }
-       }
+    $('.btn-search').on('click', function(event) {
+        $input = $(this).prev().val();
+            if ($input.length != 0) {
+                $(this).parent().submit();      
+            }        
+        event.preventDefault();
     });
 
     /**
-     * Show message if database has not data or search not found
+     * Show message if database has not data or search
      *
      */
     var count_records = $('#table-contain tbody tr').length;
