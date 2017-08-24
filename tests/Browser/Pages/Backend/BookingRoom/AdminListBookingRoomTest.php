@@ -27,12 +27,13 @@ class AdminListBookingRoomTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin')
                     ->clickLink('Booking Room')
+                    ->assertSee('List Booking Rooms')
                     ->assertPathIs('/admin/reservation');
         });
     }
 
     /**
-     * Test if DataBase has 0 record .
+     * Test if DataBase has 0 record.
      *
      * @return void
      */
@@ -43,7 +44,9 @@ class AdminListBookingRoomTest extends DuskTestCase
                 ->elements('#table-contain tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 0);
-            $browser->assertPathIs('/admin/reservation');
+            $browser->assertPathIs('/admin/reservation')
+                    ->assertSee('Data Not Found')
+                    ->assertMissing('.pagination');
         });
     }
 
@@ -52,7 +55,7 @@ class AdminListBookingRoomTest extends DuskTestCase
      *
      * @return void
      */
-    public function  testHasDataListBooking()
+    public function testHasDataListBooking()
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
@@ -69,7 +72,7 @@ class AdminListBookingRoomTest extends DuskTestCase
      *
      * @return void
      */
-    public function  testHasMoreDataListBooking()
+    public function testHasMoreDataListBooking()
     {  
         $this->makeData(15);
         $this->browse(function (Browser $browser) {
