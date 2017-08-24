@@ -63,7 +63,10 @@ class AdminListBookingRoomTest extends DuskTestCase
                  ->elements('#table-contain tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 10);
-            $browser->assertPathIs('/admin/reservation');
+            $browser->assertPathIs('/admin/reservation')
+                    ->assertMissing('.pagination');
+            $browser->visit('/admin/reservation?page=2')
+                    ->assertSee('Data Not Found');
         });
     }
 
@@ -110,7 +113,7 @@ class AdminListBookingRoomTest extends DuskTestCase
     }
 
     /**
-     * Make data for test.
+     * Make data for test.  
      *
      * @return void
      */
