@@ -16,21 +16,6 @@ class AdminDeleteCommentTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * A Dusk test link & content.
-     *
-     * @return void
-     */
-    public function testListRatingComment()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin')
-                    ->clickLink('Comment and Rating')
-                    ->assertSee('List comment & rating')
-                    ->assertPathIs('/admin/comment');
-        });
-    }
-
-    /**
      * Test delete comment success
      *
      * @return void
@@ -39,7 +24,8 @@ class AdminDeleteCommentTest extends DuskTestCase
     {
         $this->makeData(10);
         $comment = RatingComment::find(5);
-        $this->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser) use ($comment){
+            // dd($comment);
             $page = $browser->visit('/admin/comment');
             $elements = $page->elements('#list-table tbody tr');
             $this->assertCount(10, $elements);
@@ -50,29 +36,31 @@ class AdminDeleteCommentTest extends DuskTestCase
             // check softdeleted
             $this->assertSoftDeleted('rating_comments', ['id' => '5']);
             // check show
-            $elements = $page->elements('#list-table tbody tr');    
-            $this->assertCount(9, $elements);    
+            // dd($comment->comment);
+            $elements = $page->elements('#list-table tbody tr');   
+            $this->assertCount(9, $elements);
+            $page->assertDontSee($comment->comment); 
         });
     } 
 
-    /**
-     * Test not found when delete
-     *
-     * @return void
-     */
-    public function testNotFound()
-    {   
-        $this->makeData(5);
-        $this->browse(function (Browser $browser) {
-            $page = $browser->visit('/admin/comment');
-            $rating_comments = RatingComment::find(2);
-            $rating_comments->delete();
-            $page->press('#list-table tbody tr:nth-child(4) td:nth-child(8) button')
-                ->waitForText("Confirm deletion!")
-                ->press('Delete')
-                ->assertSee("404 - Page Not found");
-        });  
-    }
+    // /**
+    //  * Test not found when delete
+    //  *
+    //  * @return void
+    //  */
+    // public function testNotFound()
+    // {   
+    //     $this->makeData(5);
+    //     $this->browse(function (Browser $browser) {
+    //         $page = $browser->visit('/admin/comment');
+    //         $rating_comments = RatingComment::find(2);
+    //         $rating_comments->delete();
+    //         $page->press('#list-table tbody tr:nth-child(4) td:nth-child(8) button')
+    //             ->waitForText("Confirm deletion!")
+    //             ->press('Delete')
+    //             ->assertSee("404 - Page Not found");
+    //     });  
+    // }
 
     /**
      * Make data for test.
@@ -98,7 +86,8 @@ class AdminDeleteCommentTest extends DuskTestCase
         for ($i = 0; $i < $row; $i++) {
             factory(RatingComment::class, 1)->create([
                 'hotel_id' => $faker->randomElement($hotelIds),
-                'user_id' => $faker->randomElement($userIds)
+                'user_id' => $faker->randomElement($userIds),
+                'comment' => 'this is comment '.$i
             ]);
         }
     }
