@@ -34,12 +34,14 @@
             <!-- end msg -->
               <div class="row">
               <!-- search -->
-                <div class="col-md-6 container-search ">
-                  <form method="GET" action="{{ route('category.index') }}" class="form-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
-                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
-                  </form>
-                </div>
+                <div class="col-md-6">
+                <form  class="container-search">
+                  <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
+                  <button type="submit" class="btn btn-primary btn-search">
+                  <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </form>
+              </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
                    <a href="{{ route('category.create') }}" class="btn btn-primary">
@@ -86,6 +88,9 @@
                   </a> 
                 </div>
             {{ $categories->render() }}
+            </div>
+           <div class="cls-search-not-found" hidden="">
+              <h1 class="text-center">{{__('Data Not Found!')}}</h1>
             </div>
             <!-- /.box-body -->
           </div>
