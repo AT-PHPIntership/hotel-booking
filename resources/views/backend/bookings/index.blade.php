@@ -49,12 +49,14 @@
                   <tr>
                     <td>{{$reservation->id}}</td>
                     <td>
-                      <a href="">{{$reservation->room->name}}</a>
+                      <a href="" id="id-room-detail">
+                        {{$reservation->room->name}}
+                      </a>
                     </td>
                     <td>{{$reservation->target}}</td>
                     <td>
                       @if($reservation->target == __('user'))
-                        <a href="{{ route('user.show', $reservation->target_id) }}">
+                        <a href="{{ route('user.show', $reservation->target_id) }}" id="id-user-detail">
                           {{$reservation->reservable->full_name}}
                         </a>
                       @else()

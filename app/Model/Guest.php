@@ -34,5 +34,4 @@ class Guest extends Model
     {
         return $this->morphMany('App\Model\Reservation', 'reservable', 'target', 'target_id');
     }
-
 }

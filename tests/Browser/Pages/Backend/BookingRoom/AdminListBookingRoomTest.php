@@ -19,100 +19,100 @@ class AdminListBookingRoomTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    // /**
-    //  * Test view Admin List Booking Room.   
-    //  *
-    //  * @return void
-    //  */
-    // public function testListBooking()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/admin')
-    //                 ->clickLink('Booking Room')
-    //                 ->assertSee('List Booking Rooms')
-    //                 ->assertPathIs('/admin/reservation');
-    //     });
-    // }
+    /**
+     * Test view Admin List Booking Room.   
+     *
+     * @return void
+     */
+    public function testListBooking()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin')
+                    ->clickLink('Booking Room')
+                    ->assertSee('List Booking Rooms')
+                    ->assertPathIs('/admin/reservation');
+        });
+    }
 
-    // /**
-    //  * Test if DataBase has 0 record.
-    //  *
-    //  * @return void
-    //  */
-    // public function testHasZeroRecordListBooking()
-    // {   
-    //     $this->browse(function (Browser $browser) {
-    //         $elements = $browser->visit('/admin/reservation')
-    //             ->elements('#table-contain tbody tr');
-    //         $numAccounts = count($elements);
-    //         $this->assertTrue($numAccounts == 0);
-    //         $browser->assertPathIs('/admin/reservation')
-    //                 ->assertSee('Data Not Found')
-    //                 ->assertMissing('.pagination');
-    //     });
-    // }
+    /**
+     * Test if DataBase has 0 record.
+     *
+     * @return void
+     */
+    public function testHasZeroRecordListBooking()
+    {   
+        $this->browse(function (Browser $browser) {
+            $elements = $browser->visit('/admin/reservation')
+                ->elements('#table-contain tbody tr');
+            $numAccounts = count($elements);
+            $this->assertTrue($numAccounts == 0);
+            $browser->assertPathIs('/admin/reservation')
+                    ->assertSee('Data Not Found')
+                    ->assertMissing('.pagination');
+        });
+    }
 
-    // /**
-    //  * Test if DataBase has data.
-    //  *
-    //  * @return void
-    //  */
-    // public function testHasDataListBooking()
-    // {   
-    //     $this->makeData(10);
-    //     $this->browse(function (Browser $browser) {
-    //         $elements = $browser->visit('/admin/reservation')
-    //              ->elements('#table-contain tbody tr');
-    //         $numAccounts = count($elements);
-    //         $this->assertTrue($numAccounts == 10);
-    //         $browser->assertPathIs('/admin/reservation')
-    //                 ->assertMissing('.pagination');
-    //         $browser->visit('/admin/reservation?page=2')
-    //                 ->assertSee('Data Not Found');
-    //     });
-    // }
+    /**
+     * Test if DataBase has data.
+     *
+     * @return void
+     */
+    public function testHasDataListBooking()
+    {   
+        $this->makeData(10);
+        $this->browse(function (Browser $browser) {
+            $elements = $browser->visit('/admin/reservation')
+                 ->elements('#table-contain tbody tr');
+            $numAccounts = count($elements);
+            $this->assertTrue($numAccounts == 10);
+            $browser->assertPathIs('/admin/reservation')
+                    ->assertMissing('.pagination');
+            $browser->visit('/admin/reservation?page=2')
+                    ->assertSee('Data Not Found');
+        });
+    }
 
-    // /**
-    //  * Test if DataBase has  > 10 record.
-    //  *
-    //  * @return void
-    //  */
-    // public function testHasMoreDataListBooking()
-    // {  
-    //     $this->makeData(15);
-    //     $this->browse(function (Browser $browser) {
-    //         $elements = $browser->visit('/admin/reservation?page=1')
-    //                     ->elements('#table-contain tbody tr');
-    //         $numAccounts = count($elements);
-    //         $this->assertTrue($numAccounts == 10);
-    //         $browser->assertPathIs('/admin/reservation');
-    //         $browser->assertQueryStringHas('page', '1');
+    /**
+     * Test if DataBase has  > 10 record.
+     *
+     * @return void
+     */
+    public function testHasMoreDataListBooking()
+    {  
+        $this->makeData(15);
+        $this->browse(function (Browser $browser) {
+            $elements = $browser->visit('/admin/reservation?page=1')
+                        ->elements('#table-contain tbody tr');
+            $numAccounts = count($elements);
+            $this->assertTrue($numAccounts == 10);
+            $browser->assertPathIs('/admin/reservation');
+            $browser->assertQueryStringHas('page', '1');
             
-    //         $elements = $browser->visit('/admin/reservation?page=2')
-    //              ->elements('#table-contain tbody tr');
-    //         $numAccounts = count($elements);
-    //         $this->assertTrue($numAccounts == 5);
-    //         $browser->assertPathIs('/admin/reservation');
-    //         $browser->assertQueryStringHas('page', '2');
-    //     });
-    // }
+            $elements = $browser->visit('/admin/reservation?page=2')
+                 ->elements('#table-contain tbody tr');
+            $numAccounts = count($elements);
+            $this->assertTrue($numAccounts == 5);
+            $browser->assertPathIs('/admin/reservation');
+            $browser->assertQueryStringHas('page', '2');
+        });
+    }
 
-    // /**
-    //  * Test button Pagination.
-    //  *
-    //  * @return void
-    //  */
-    // public function testButtonPaginate()
-    // {
-    //     $this->makeData(25);
-    //     $this->browse(function (Browser $browser) {
-    //     $paginate_element = $browser->visit('/admin/reservation')
-    //                                 ->resize(1920, 2000)           
-    //                                 ->elements('.pagination li');
-    //     $number_page = count($paginate_element) - 2;
-    //     $this->assertTrue($number_page == 3);
-    //     });
-    // }
+    /**
+     * Test button Pagination.
+     *
+     * @return void
+     */
+    public function testButtonPaginate()
+    {
+        $this->makeData(25);
+        $this->browse(function (Browser $browser) {
+        $paginate_element = $browser->visit('/admin/reservation')
+                                    ->resize(1920, 2000)           
+                                    ->elements('.pagination li');
+        $number_page = count($paginate_element) - 2;
+        $this->assertTrue($number_page == 3);
+        });
+    }
 
     /**
      * Test link show detail user.
@@ -121,14 +121,12 @@ class AdminListBookingRoomTest extends DuskTestCase
      */
     public function testLinkDetailUser()
     {
-        $this->makeData(25);
-        $user = User::find(1);
-        $this->browse(function (Browser $browser) use ($user) {
-        $paginate_element = $browser->visit('/admin/reservation')
-                                    ->clickLink($user->full_name)
-                                    ->assertSee('User Information')
-                                    ->assertPathIs('/admin/user/'. $user->id);
-        });
+        $this->makeData(10);
+        $this->browse(function (Browser $browser) {
+                $browser->visit('/admin/reservation')
+                    ->click('#id-user-detail')
+                    ->assertPathIsNot('/admin/reservation');
+        });     
     }
 
     /**
