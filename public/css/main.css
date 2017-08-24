@@ -92,7 +92,6 @@
     background: unset;
     color: #e23434;
     margin-top:5px; 
-
 }
 .news-option {
     width: 122px;
@@ -103,7 +102,7 @@
     clear: both;
 }
 .clear-fix:after {
-   display: block;
+    display: block;
     content: "";
     clear: both; 
 }
@@ -131,6 +130,7 @@
 
 .btn-option{
     width: 95px;
+    margin: 0 auto;
 }
 
 .search-news {
@@ -307,6 +307,7 @@
 }
 
 /*-- ./Show detail place --*/
+
 .cls-search-not-found {
     font-size: 20px;
     color: red;

@@ -25,6 +25,8 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
         Route::resource('/room', 'RoomController');
     });
     Route::resource('/category', 'CategoryController');
+    Route::resource('/service', 'ServiceController', ['except' => ['show']]);
+
     Route::put('/user/{id}/status', 'UserController@updateStatus')->name('user.updateStatus');
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
 });
