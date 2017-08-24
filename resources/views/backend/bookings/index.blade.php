@@ -22,7 +22,7 @@
                 <h3 class="box-title">{{__('Search Booking Rooms')}}</h3>
               </div>
               <div class="col-md-6">
-                <form method="GET" class="container-search">
+                <form method="GET" class="container-search cls-search">
                   <input class="input-search form-control" placeholder="Search" name="search" type="text">
                   <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                 </form>
@@ -37,6 +37,7 @@
                   <th>{{__('Id')}}</th>
                   <th>{{__('Rooms Name')}}</th>
                   <th>{{__('Target')}}</th>
+                  <th>{{__('Full Name')}}</th>
                   <th>{{__('Check in')}}</th>
                   <th>{{__('Check out')}}</th>
                   <th>{{__('Status')}}</th>
@@ -48,9 +49,20 @@
                   <tr>
                     <td>{{$reservation->id}}</td>
                     <td>
-                      <a href="">{{$reservation->room->name}}</a>
+                      <a href="" id="id-room-detail">
+                        {{$reservation->room->name}}
+                      </a>
                     </td>
                     <td>{{$reservation->target}}</td>
+                    <td>
+                      @if($reservation->target == __('user'))
+                        <a href="{{ route('user.show', $reservation->target_id) }}" id="id-user-detail">
+                          {{$reservation->reservable->full_name}}
+                        </a>
+                      @else()
+                        {{$reservation->reservable->full_name}}
+                      @endif
+                    </td>
                     <td>{{$reservation->checkin_date}}</td>
                     <td>{{$reservation->checkout_date}}</td>
                     <td>{{$reservation->status_label}}</td>
