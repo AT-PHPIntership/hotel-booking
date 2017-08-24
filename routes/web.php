@@ -21,6 +21,9 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::resource('/comment', 'RatingCommentController');
     Route::resource('/news', 'NewsController');
     Route::resource('/hotel', 'HotelController');
+    Route::group(['prefix'=>'hotel/{hotel}'], function($hotel) {
+        Route::resource('/room', 'RoomController');
+    });
     Route::resource('/category', 'CategoryController');
     Route::resource('/service', 'ServiceController', ['except' => ['show']]);
 

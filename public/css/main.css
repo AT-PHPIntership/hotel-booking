@@ -233,6 +233,7 @@
 
 .container-search {
     position: relative;
+    margin-top: 3px;
 }
 
 .cls-search-news {
