@@ -75,4 +75,14 @@ class Reservation extends Model
                 break;
         }
     }
+
+    /**
+     * Get all of the owning reservable models.
+     *
+     * @return array
+     */
+    public function reservable()
+    {
+        return $this->morphTo('reservable', 'target', 'target_id');
+    }
 }

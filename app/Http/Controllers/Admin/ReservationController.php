@@ -20,13 +20,14 @@ class ReservationController extends Controller
             'status',
             'room_id',
             'target',
+            'target_id',
             'checkin_date',
             'checkout_date'
         ];
         $reservations = Reservation::select($columns)
                     ->with(['room' => function ($query) {
                         $query->select('rooms.id', 'name');
-                    }])
+                    }, 'reservable'])
                     ->orderby('reservations.id', 'DESC')
                     ->paginate(Reservation::ROW_LIMIT);
         return view('backend.bookings.index', compact('reservations'));
