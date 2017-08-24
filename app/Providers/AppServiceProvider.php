@@ -15,6 +15,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+       $this->configRelation();
+    }
+
+    /**
+     * Config morphmap Relation.
+     *
+     * @return void
+     */
+    public function configRelation() {
         Relation::morphMap([
         'user' => 'App\Model\User',
         'guest' => 'App\Model\Guest',

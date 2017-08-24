@@ -26,14 +26,6 @@ class Guest extends Model
     ];
 
     /**
-     * Get all of the owning reservable models.
-     */
-    public function guestable()
-    {
-        return $this->morphTo();
-    }
-
-    /**
      * Get all of the guest's reservation.
      *
      * @return array

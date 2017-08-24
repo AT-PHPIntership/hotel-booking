@@ -48,7 +48,7 @@
                   <tr>
                     <td>{{$reservation->id}}</td>
                     <td>
-                      <a href="">{{$reservation->bookingroom->name}}</a>
+                      <a href="">{{$reservation->room->name}}</a>
                     </td>
                     <td>{{$reservation->target}}</td>
                     <td>{{$reservation->checkin_date}}</td>
@@ -75,6 +75,9 @@
                 </tbody>
               </table>
               {!! $reservations->render() !!}
+            </div>
+            <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
             </div>
           </div>
         </div>
