@@ -36,7 +36,7 @@ class Room extends Model
         'total',
         'bed',
         'direction',
-        'max_guest',
+        'max_guest'
     ];
 
     /**

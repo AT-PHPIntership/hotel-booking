@@ -29,5 +29,6 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
 
     Route::put('/user/{id}/status', 'UserController@updateStatus')->name('user.updateStatus');
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
+    Route::resource('reservation', 'ReservationController', ['except' => ['create','store']]);
 });
 	
