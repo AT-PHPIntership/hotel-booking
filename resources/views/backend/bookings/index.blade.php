@@ -22,7 +22,7 @@
                 <h3 class="box-title">{{__('Search Booking Rooms')}}</h3>
               </div>
               <div class="col-md-6">
-                <form method="GET" class="container-search">
+                <form method="GET" class="container-search cls-search">
                   <input class="input-search form-control" placeholder="Search" name="search" type="text">
                   <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                 </form>
@@ -67,7 +67,7 @@
                     <td>{{$reservation->checkout_date}}</td>
                     <td>{{$reservation->status_label}}</td>
                     <td align="center">
-                      <a href="" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
+                      <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
                       @if($reservation->status_label != __('Canceled'))
                         <a href="" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
