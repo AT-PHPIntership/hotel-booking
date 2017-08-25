@@ -41,41 +41,33 @@ class HotelController extends Controller
      */
     public function show($id)
     {
-        // get hotel infomation
-        $hotel = Hotel::
-            select('id', 'name', 'address', 'star', 'introduce', 'place_id')
-            ->with(['place' => function ($query) {
-                $query->select('id', 'name');
-            }])
-            ->with(['rooms' => function ($query) {
-                $query->select('hotel_id', 'id', 'name');
-            }])
-            ->findOrFail($id);
+        $columns = [
+            'id',
+            'name',
+            'address',
+            'star',
+            'introduce',
+            'place_id'
+        ];
 
-        // get hotel Service
-        $hotelServices = HotelService::select('id', 'hotel_id', 'service_id')->where('hotel_id', $id)
-            ->with(['service' => function ($query) {
-                $query->select('id', 'name');
-            }])
-            ->get();
+        $with['place'] = function ($query) {
+            $query->select('id', 'name');
+        };
+        $with['rooms'] = function ($query) {
+            $query->select('hotel_id', 'id', 'name');
+        };
+        $with['images'] = function ($query) {
+            $query->select();
+        };
+        $with['hotelServices'] = function ($query) {
+            $query->select('id', 'hotel_id', 'service_id');
+        };
+        $with['hotelServices.service'] = function ($query) {
+            $query->select('id', 'name');
+        };
 
-            // get hotel images
-        $hotelImages = Image::select('path')->where([
-            ['target', 'hotel'],
-            ['target_id', $id],
-            ])->get();
+        $hotel = Hotel::select($columns)->with($with)->findOrFail($id);
 
-        $countImages = count($hotelImages);
-        $countServices = count($hotelServices);
-        $countRooms = count($hotel->rooms);
-
-        return view('backend.hotels.show', compact(
-            'hotel',
-            'hotelServices',
-            'hotelImages',
-            'countImages',
-            'countServices',
-            'countRooms'
-        ));
+        return view('backend.hotels.show', compact('hotel'));
     }
 }

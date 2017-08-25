@@ -33,7 +33,17 @@ class Hotel extends Model
     */
     public function place()
     {
-        return $this->belongsTo('App\Model\Place', 'place_id');
+        return $this->belongsTo(Place::class, 'place_id');
+    }
+
+    /**
+     * Relationship hasMany with services hotel
+     *
+     * @return array
+    */
+    public function hotelServices()
+    {
+        return $this->hasMany(HotelService::class, 'hotel_id');
     }
 
     /**
@@ -43,6 +53,16 @@ class Hotel extends Model
     */
     public function rooms()
     {
-        return $this->hasMany('App\Model\Room', 'hotel_id');
+        return $this->hasMany(Room::class, 'hotel_id');
+    }
+
+    /**
+     * Get all of the hotel's image.
+     *
+     * @return array
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable', 'target', 'target_id');
     }
 }

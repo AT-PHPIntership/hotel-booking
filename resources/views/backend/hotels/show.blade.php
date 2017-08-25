@@ -22,17 +22,17 @@
           <!-- slides images hotel-->
           <div class="carousel-inner">
           {{-- show default image when has no image --}}
-            @if ($countImages == 0)
+            @if ($hotel->images->count() == 0)
                 <div class="item active">
-                  <img src="{{ asset('/images/default/default-thumbnail.jpg') }}">
+                  <img src="{{ asset(config('image.default_thumbnail')) }}">
                   <div class="carousel-caption">
                     <h3>{{ __("Hotel's images") }}</h3>
                   </div>
                 </div>
             @endif
             {{-- show image --}}
-            @foreach ($hotelImages as $hotelImage)
-              <div class="item {{ ($hotelImage == $hotelImages[0])? 'active' : ''}}">
+            @foreach ($hotel->images as $hotelImage)
+              <div class="item {{ ($hotelImage == $hotel->images[0])? 'active' : ''}}">
                 <img src="{{ asset($hotelImage->path) }}">
               </div>
             @endforeach
@@ -57,19 +57,19 @@
           <div class="glyphicon glyphicon-star inline"></div>
         @endfor
         {{-- show hotel infomation --}}
-        <h4><a class="bg-faded" href="{{ route('place.show' , $hotel->place->id) }}">{{ __('Place: ').$hotel->place->name}}</a></h4>
-        <h5>{{ __('Adress: ').$hotel->address}}</h5>
-        <p>{{ __('Introduce: '.$hotel->introduce) }}</p>
-        <h3>{{ __('Service').' ('.$countServices.')' }}</h3>
+        <h4><a class="bg-faded" href="{{ route('place.show' , $hotel->place->id) }}">{{ __('Place: ') . $hotel->place->name }}</a></h4>
+        <h5>{{ __('Adress: ') . $hotel->address }}</h5>
+        <p>{{ __('Introduce: ' . $hotel->introduce) }}</p>
+        <h3>{{ __('Service') . ' (' . $hotel->hotelServices->count() . ')' }}</h3>
         <ul>
-          @foreach ($hotelServices as $hotelService)
+          @foreach ($hotel->hotelServices as $hotelService)
             <div class="col-md-3 pull-left">
               <li>{{ $hotelService->service->name }}</li>
             </div>
           @endforeach
         </ul>
         <div class="clearfix"></div>
-        <h3>{{ __('Rooms').' ('.$countRooms.')' }}</h3>
+        <h3>{{ __('Rooms') . ' (' . $hotel->rooms->count() . ')' }}</h3>
         <ul>
           @foreach ($hotel->rooms as $room)
             <div class="col-md-3 pull-left">
