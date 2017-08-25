@@ -36,4 +36,11 @@ class Service extends Model
             $service->hotelServices()->delete();
         });
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
 }

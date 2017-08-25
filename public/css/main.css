@@ -52,7 +52,6 @@
     display: inline;
 }
 
-
 .help-block {
     color: red;
 }
@@ -70,7 +69,9 @@
 .help-block {
     color: red;
 }
-
+.title-news {
+    margin-left: 3px;
+}
 .news-btn {
     /*margin-top: 2px;*/
     font-size: 16px;
@@ -91,7 +92,6 @@
     background: unset;
     color: #e23434;
     margin-top:5px; 
-
 }
 .news-option {
     width: 122px;
@@ -143,14 +143,11 @@
 .btn-option .btn-edit {
     margin-top: 12px;
     margin-left: 21px;
-
-
 }
 
 .form-delete{
     margin-top: 3px;
 }
-
 
 /*end fix template*/
 .title-header {
@@ -236,11 +233,19 @@
 
 .container-search {
     position: relative;
+    margin-top: 3px;
 }
 
+.cls-search-news {
+    margin-left: -14px;
+    margin-top: 3px;
+}
 .btn-search {
     position: absolute;
     top: 0px;
+}
+.cls-searchnews-not-found {
+    color: #ed8910;
 }
 /*end search*/
 .btn-on {
@@ -302,6 +307,7 @@
 }
 
 /*-- ./Show detail place --*/
+
 .cls-search-not-found {
     font-size: 20px;
     color: red;

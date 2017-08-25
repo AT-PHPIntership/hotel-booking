@@ -51,11 +51,12 @@ class AdminCreateNewsTest extends DuskTestCase
     public function testCreatesNewsSuccess()
     {   
         factory(Category::class,10)->create();
-        $this->browse(function (Browser $browser) {
+        $category = Category::find(1);
+        $this->browse(function (Browser $browser) use ($category) {
             $browser->visit('/admin/news/create')
                     ->type('title','News18')
                     ->type('content','Hello World!')
-                    ->select('category_id')
+                    ->select('category_id', $category->id)
                     ->press('Submit')
                     ->assertPathIs('/admin/news')
                     ->assertSee('Create News Success!');

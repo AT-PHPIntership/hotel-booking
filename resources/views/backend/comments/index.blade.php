@@ -29,7 +29,7 @@
             <table id="list-table" class="table table-bordered table-striped">
               <thead>
                 <tr align="center">
-                  <th>{{ __('No.') }}</th>
+                  <th>{{ __('ID') }}</th>
                   <th>{{ __('Username') }}</th>
                   <th>{{ __('Full Name') }}</th>
                   <th>{{ __('Comment') }}</th>
