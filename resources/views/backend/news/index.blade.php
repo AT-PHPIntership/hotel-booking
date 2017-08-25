@@ -22,7 +22,7 @@
                 <h3 class="box-title">{{__('Search News')}}</h3>
               </div>
               <div class="col-md-6">
-                <form  class="container-search">
+                <form  class="container-search cls-search">
                   <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
                   <button type="submit" class="btn btn-primary btn-search">
                   <i class="glyphicon glyphicon-search"></i>

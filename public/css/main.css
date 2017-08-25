@@ -92,7 +92,6 @@
     background: unset;
     color: #e23434;
     margin-top:5px; 
-
 }
 .news-option {
     width: 122px;
@@ -234,11 +233,9 @@
 
 .container-search {
     position: relative;
-    margin-left: -14px;
     margin-top: 3px;
 }
 
-}
 .cls-search-news {
     margin-left: -14px;
     margin-top: 3px;
@@ -310,6 +307,7 @@
 }
 
 /*-- ./Show detail place --*/
+
 .cls-search-not-found {
     font-size: 20px;
     color: red;

@@ -5,10 +5,11 @@ namespace App\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Libraries\Traits\SearchTrait;
 
 class Category extends Model
 {
-    use Sluggable, SoftDeletes;
+    use Sluggable, SoftDeletes, SearchTrait;
 
     /**
     * The table associated with the model.
@@ -24,6 +25,18 @@ class Category extends Model
     */
     protected $fillable = [
         'name'
+    ];
+
+    /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'columns' => [
+            'categories.name',
+        ],
+        
     ];
 
     /**

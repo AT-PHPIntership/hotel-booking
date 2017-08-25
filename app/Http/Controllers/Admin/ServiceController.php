@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Model\Service;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\UpdateServiceRequest;
+use App\Http\Requests\Backend\CreateServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -42,7 +42,7 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateServiceRequest $request, $id)
+    public function update(CreateServiceRequest $request, $id)
     {
         $service = Service::findOrFail($id);
         
@@ -53,5 +53,36 @@ class ServiceController extends Controller
             flash(__('Update failure'))->error();
             return redirect()->back()->withInput();
         }
+    }
+
+    /**
+     * Show the form for creating a new service.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('backend.services.create');
+    }
+
+    /**
+     * Store a newly created service in storage.
+     *
+     * @param CreateServiceRequest $request request from view
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateServiceRequest $request)
+    {
+        $service = new Service($request->all());
+        if ($service->save()) {
+            flash(__('Create success'))->success();
+            return redirect()->route('service.index');
+        } else {
+            flash(__('Create failure'))->error();
+            return redirect()->back()->withInput();
+        }
+
+        return redirect()->route('service.index');
     }
 }
