@@ -18,7 +18,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->room->hotel->name}}
+                      {{$reservation->room->hotel->name or '' }}
                     </td>
                   </tr>
                   <tr>
@@ -29,7 +29,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->room->name}}
+                      {{$reservation->room->name or ''}}
                     </td>
                   </tr>
                   <tr>
@@ -40,7 +40,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->reservable->full_name}}
+                      {{$reservation->reservable->full_name or ''}}
                     </td>
                   </tr>
                   <tr>
@@ -51,7 +51,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->reservable->email}}
+                      {{$reservation->reservable->email or ''}}
                     </td>
                   </tr>
                   <tr>
@@ -62,7 +62,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->reservable->phone}}
+                      {{$reservation->reservable->phone or ''}}
                     </td>
                   </tr>
                   <tr>
