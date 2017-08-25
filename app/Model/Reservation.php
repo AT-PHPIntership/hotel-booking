@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Reservation extends Model
 {
     use SoftDeletes;
-    
+
     /**
      * Declare table
      *
@@ -40,9 +40,9 @@ class Reservation extends Model
     /**
      * Define  value status of reservation
      */
-    const STATUS_ACCEPT = 1;
-    const STATUS_REJECT = 2;
-    const STATUS_CANCEL = 3;
+    const STATUS_ACCEPTED = 1;
+    const STATUS_REJECTED = 2;
+    const STATUS_CANCELED = 3;
 
     /**
      * Booking room belongs to a Room.
@@ -62,14 +62,15 @@ class Reservation extends Model
     public function getStatusLabelAttribute()
     {
         switch ($this->attributes['status']) {
-            case self::STATUS_ACCEPT:
-                return __('Accept');
+            case self::STATUS_ACCEPTED:
+                return __('Accepted');
                 break;
-            case self::STATUS_REJECT:
-                return __('Reject');
+            case self::STATUS_REJECTED:
+                return __('Rejected');
                 break;
-            case self::STATUS_CANCEL:
-                return __('Cancel');
+            case self::STATUS_CANCELED:
+                return __('Canceled');
+                break;
             default:
                 return __('Pending');
                 break;

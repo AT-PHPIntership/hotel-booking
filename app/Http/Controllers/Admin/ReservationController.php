@@ -85,12 +85,10 @@ class ReservationController extends Controller
                     ->with(['room' => function ($query) {
                         $query->select('rooms.id', 'name');
                     }])
-                    ->findOrFail($id);
-        dd($reservation);        
+                    ->findOrFail($id);        
         $status = Reservation::select('status')
             ->groupby('status')
-            ->having('status', '<>', $reservation->status)
-            ->having('status', '<>', Reservation::STATUS_CANCEL)
+            ->having('status', '<>', Reservation::STATUS_CANCELED)
             ->get();
         return view('backend.bookings.edit', compact('reservation', 'status'));
     }
@@ -105,9 +103,7 @@ class ReservationController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        dd($request);
-        $reservationUpdate = Reservation::findOrFail($id);
-        $status = $reservationUpdate->status;
+        $reservationUpdate = Reservation::findOrFail($id)->update($request->all());
         if ($reservationUpdate) {
             flash(__('Edit Booking Room Success!'))->success();
             return redirect()->route('reservation.index');

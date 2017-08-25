@@ -60,19 +60,14 @@
                   </div>
                   <div class="col-md-6">
                     <h3>
-                    @foreach($status as $key => $value)
-                          {{$key}}
-                         {{--  <option value="$key">{{$value->status_label}}</option> --}}
-                          
-                        @endforeach
                       <select name="status">
-                        <option value="">{{$reservation->status_label}}</option>
-                        @foreach($status as $key => $value)
-                          {{$key}}
-                         {{--  <option value="$key">{{$value->status_label}}</option> --}}
-                          
-                        @endforeach
-                      </select>
+                      @foreach($status as $value)
+                        <option value="{{$value->status}}" {{$reservation->status_label == $value->status_label ? 'selected' :''}}
+                        >
+                          {{$value->status_label}}
+                        </option>
+                      @endforeach
+                     </select> 
                     </h3>
                   </div>
                 </div>
