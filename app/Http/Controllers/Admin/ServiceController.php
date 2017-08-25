@@ -16,8 +16,11 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::select('id', 'name')
-            ->orderBy('id', 'DESC')->paginate(Service::ROW_LIMIT);
+        $services = Service::search()
+            ->select('id', 'name')
+            ->orderBy('id', 'DESC')
+            ->paginate(Service::ROW_LIMIT);
+        $services->appends(['search' => request('search')]);
         return view("backend.services.index", compact('services'));
     }
 
