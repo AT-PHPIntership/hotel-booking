@@ -33,7 +33,7 @@ class Hotel extends Model
     */
     public function place()
     {
-        return $this->belongsTo('App\Model\Place', 'place_id');
+        return $this->belongsTo(Place::class, 'place_id');
     }
 
     /**
@@ -43,6 +43,31 @@ class Hotel extends Model
     */
     public function rooms()
     {
-        return $this->hasMany('App\Model\Room', 'hotel_id');
+        return $this->hasMany(Room::class, 'hotel_id');
+    }
+
+    /**
+     * Relationship hasMany with rooms
+     *
+     * @return array
+    */
+    public function ratingComments()
+    {
+        return $this->hasMany(RatingComment::class, 'hotel_id');
+    }
+
+    /**
+     * This is a recommended way to declare event handlers
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($hotel) {
+             $hotel->ratingComments()->delete();
+             $hotel->rooms()->delete();
+        });
     }
 }
