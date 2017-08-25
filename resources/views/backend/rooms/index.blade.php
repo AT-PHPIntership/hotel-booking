@@ -9,8 +9,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ __('Rooms') }}
-        <small>{{ __('Rooms') }}</small>
+        {{ $hotel->name.__(' HOTEL') }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
@@ -24,60 +23,87 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">{{ __('List Rooms') }}</h3>
-              <div class="contain-btn">
-                <a href="{{ route('category.create') }}" class="btn btn-primary">
-                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
-                  {{ __('Add Room') }}
-                </a> 
+              <h3 class="box-title title-header">{{ __('List Rooms') }}</h3>
             </div>
-            </div>
-            <div>
-            @include('flash::message')
-            </div>
-            <!-- add button -->
-            
-            <!-- end button -->
-          <!-- search -->
-          <!-- end search -->
            
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="table-contain" class="table table-bordered table-striped table-hover">
+            <!-- messages -->
+              @include('flash::message')
+            <!-- end msg -->
+              <div class="row">
+              <!-- search -->
+                <div class="col-md-6 container-search ">
+                  <form method="GET" action="#" class="form-search">
+                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
+                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  </form>
+                </div>
+                <!-- end search -->
+                <div class="contain-btn pull-right">
+                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary" id="btn-add-room">
+                    <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                    {{ __('Add Room') }}
+                  </a> 
+                </div>
+              </div>
+               @include('backend.layouts.partials.modal')
+               <table id="table-contain" class="table table-bordered table-striped
+                table-responsive table-hover">
                 <thead>
                 <tr>
-                  <th>{{ __('ID') }}</th>
-                  <th class="col-md-10">{{ __('Name') }}</th>
-                  <th class="col-md-2">{{ __('Action') }}</th>
+                  <th class="col-md-1">{{ __('ID') }}</th>
+                  <th class="text-center">{{ __('Image') }}</th>
+                  <th class="text-center">{{ __('Name') }}</th>
+                  <th class="text-center">{{ __('Descript') }}</th>
+                  <th class="text-center">{{ __('Price') }}</th>
+                  <th class="text-center">{{ __('Total') }}</th>
+                  <th class="text-center">{{ __('Max Gest') }}</th>
+                  <th class="text-center">{{ __('Option') }}</th>
                 </tr>
                 </thead>
                 <tbody>
-            @foreach ($categories as $objCat)
+            @foreach ($rooms as $room)
                 <tr>
-                  <td>{{ $objCat->id }}</td>
-                  <td>{{ $objCat->name }}
+                  <td>{{ $room->id }}</td>
+                  <td class="text-center col-image">
+                    <div class="place-image-show">
+                      <img class="img-place" 
+                        src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset('images/default/room.jpg') }}" >
+                    </div>
                   </td>
-                  <td align="center">
-                    <a href="{{ route('category.edit',$objCat->id) }}"><i class= "fa fa-pencil-square-o cus_icon"></i></a>
-                     <form method="POST" action="{{ route('category.destroy', $objCat->id) }}" class="form-del inline" >
-                       <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
-                      {{ method_field('DELETE') }}
-                        <button type="submit" name="" class="fa fa-trash-o cus_icon btn btn-delete-item"></button>
-                    </form>
+                  <td class="text-center">{{ $room->name }}</td>
+                  <td class="text-center">{{ $room->descript }}</td>
+                  <td class="text-center">{{ $room->price }}</td>
+                  <td class="text-center">{{ $room->total }}</td>
+                  <td class="text-center">{{ $room->max_guest }}</td>
+                  <td class="text-center col-action">
+                    <div class="btn-option text-center">
+                      <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
+                        <i class="" aria-hidden="true"></i>
+                      </a>
+                      <form  class="form-delete" method="post" action="{{ route('room.destroy', [$hotel->id, $room->id]) }}">
+                        {!! csrf_field() !!}
+                        {{ method_field('DELETE') }}
+                        <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
+                          data-title="{{ __('Confirm deletion!') }}"
+                          data-confirm="{{ __('Are you sure you want to delete?') }}" 
+                          type="submit" >
+                        </button>
+                      </form> 
+                    </div>
                   </td>
                 </tr>
               @endforeach
                </tbody>
               </table>
-              {{ $categories->render() }}
-             <div class="box-header">
-              <div class="contain-btn">
-                <a href="{{ route('category.create') }}" class="btn btn-primary">
-                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
-                  {{ __('Add Room') }}
-                </a> 
-            </div>
-            </div>
+                <div class="contain-btn second pull-right">
+                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary">
+                    <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                    {{ __('Add Room') }}
+                  </a> 
+                </div>
+            {{ $rooms->render() }}
             </div>
             <!-- /.box-body -->
           </div>

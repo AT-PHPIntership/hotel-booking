@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Service extends Model
 {
     use SoftDeletes;
+
+    /**
+     * Value paginate of row
+     */
+    const ROW_LIMIT = 10;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
 }
