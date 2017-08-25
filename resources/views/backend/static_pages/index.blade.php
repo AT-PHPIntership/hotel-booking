@@ -52,6 +52,7 @@
               @endforeach
                </tbody>
               </table>
+               {{ $categories->render() }}
             </div>
             <!-- /.box-body -->
           </div>
