@@ -23,7 +23,14 @@ class Service extends Model
     protected $searchableFields = [
         'columns' => [
             'id',
-            'name',
+            'name'
         ]
     ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
 }

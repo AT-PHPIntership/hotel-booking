@@ -25,6 +25,19 @@ class Place extends Model
     protected $fillable = ['name', 'descript', 'image'];
 
     /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'columns' => [
+            'name',
+            'descript',
+            'id'
+        ]
+    ];
+
+    /**
      * Value paginate of row
      */
     const ROW_LIMIT = 10;

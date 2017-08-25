@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Reservation extends Model
 {
     use SoftDeletes;
+
+    /**
+     * Get all of the owning reservable models.
+     *
+     * @return object
+     */
+    public function reservable()
+    {
+        return $this->morphTo();
+    }
 }
