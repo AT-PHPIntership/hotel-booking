@@ -33,7 +33,7 @@ class Room extends Model
         'descript',
         'price',
         'size',
-        'totel',
+        'total',
         'bed',
         'direction',
         'max_guest'
