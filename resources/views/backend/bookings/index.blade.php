@@ -22,7 +22,7 @@
                 <h3 class="box-title">{{__('Search Booking Rooms')}}</h3>
               </div>
               <div class="col-md-6">
-                <form method="GET" class="container-search">
+                <form method="GET" class="container-search cls-search">
                   <input class="input-search form-control" placeholder="Search" name="search" type="text">
                   <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                 </form>

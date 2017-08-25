@@ -44,7 +44,7 @@ class AdminShowDetailBookingTest extends DuskTestCase
     public function testShowDetailBooking()
     {
         $this->makeData(15);
-        $columns = [
+       $columns = [
             'reservations.id',
             'status',
             'room_id',
@@ -55,11 +55,16 @@ class AdminShowDetailBookingTest extends DuskTestCase
             'quantity',
             'request'
         ];
-        $reservation = Reservation::select($columns)
-            ->with(['room' => function ($query) {
-                $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
-            }, 'reservable', 'room.hotel'])
-            ->findOrFail(15);
+        $with['room'] = function ($query) {
+            $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
+        };
+        $with['reservable'] = function ($query) {
+            $query->select('full_name', 'phone', 'email');
+        };
+        $with['room.hotel'] = function ($query) {
+            $query->select('hotels.id', 'hotels.name');
+        };
+        $reservation = Reservation::select($columns)->with($with) ->findOrFail(15);
         $this->browse(function (Browser $browser) use ($reservation) {
             $browser->visit('/admin/reservation')
                     ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-search-plus')
@@ -123,22 +128,20 @@ class AdminShowDetailBookingTest extends DuskTestCase
         factory(Place::class, $row)->create();
         factory(Guest::class, $row)->create();
         factory(User::class, $row)->create();
-        $placeIds = Place::all('id')->pluck('id')->toArray();
         $faker = Faker::create();
+        $placeIds = Place::all('id')->pluck('id')->toArray();
         for ($i = 0; $i < $row; $i++) {
             factory(Hotel::class, 1)->create([
                 'place_id' => $faker->randomElement($placeIds)
             ]);
         }
         $hotelIds = Hotel::all('id')->pluck('id')->toArray();
-        $faker = Faker::create();
         for ($i = 0; $i < $row; $i++) {
             factory(Room::class, 1)->create([
                 'hotel_id' => $faker->randomElement($hotelIds),
             ]);
         }
         $roomIds = Room::all('id')->pluck('id')->toArray();
-        $faker = Faker::create();
         for ($i = 0; $i < $row; $i++) {
             factory(Reservation::class, 1)->create([
                 'room_id' => $faker->randomElement($roomIds),

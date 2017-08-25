@@ -57,11 +57,16 @@ class ReservationController extends Controller
             'quantity',
             'request'
         ];
-        $reservation = Reservation::select($columns)
-            ->with(['room' => function ($query) {
-                $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
-            }, 'reservable', 'room.hotel'])
-            ->findOrFail($id);
+        $with['room'] = function ($query) {
+            $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
+        };
+        $with['reservable'] = function ($query) {
+            $query->select('full_name', 'phone', 'email');
+        };
+        $with['room.hotel'] = function ($query) {
+            $query->select('hotels.id', 'hotels.name');
+        };
+        $reservation = Reservation::select($columns)->with($with) ->findOrFail($id);
         return view('backend.bookings.show', compact('reservation'));
     }
 }
