@@ -67,7 +67,7 @@
                     <td>{{$reservation->checkout_date}}</td>
                     <td>{{$reservation->status_label}}</td>
                     <td align="center">
-                      <a href="" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
+                      <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
                       @if($reservation->status_label != __('Canceled'))
                         <a href="" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >

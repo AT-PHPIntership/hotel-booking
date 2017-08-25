@@ -5,7 +5,6 @@ namespace Tests\Browser\Pages\Backend\StaticPages;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase;
 use App\Model\StaticPage;
 
 class AdminListStaticPageTest extends DuskTestCase
@@ -17,13 +16,13 @@ class AdminListStaticPageTest extends DuskTestCase
      *
      * @return void
      */
-    public function testRoute()
+    public function testClickStaticPageURL()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin')
-                    ->clickLink('Introduction')
-                    ->assertPathIs('/admin/static-page')
-                    ->assertSee('Static Page');
+                ->clickLink('Introduction')
+                ->assertPathIs('/admin/static-page')
+                ->assertSee('Static Page');
         });
     }
 
@@ -35,10 +34,11 @@ class AdminListStaticPageTest extends DuskTestCase
     public function testEmptyData()
     {
         $this->browse(function (Browser $browser) {
-            $element = $browser->visit('/admin/static-page')->elements('#table-contain tbody tr');
+            $element = $browser->visit('/admin/static-page')
+                ->elements('#table-contain tbody tr');
             $this->assertCount(0, $element);
             $browser->assertPathIs('/admin/static-page')
-                    ->assertSee('Static Page');
+                ->assertSee('Static Page');
             $this->assertNull($browser->element('.pagination'));
         });
     }
@@ -50,14 +50,14 @@ class AdminListStaticPageTest extends DuskTestCase
      */
     public function testShowRecord()
     {   
-        factory(StaticPage::class, 9)->create();
+        $this->makeData(9);
         $this->browse(function (Browser $browser) {
-            $element = $browser->visit('/admin/static-page')->elements('#table-contain tbody tr');
+            $element = $browser->visit('/admin/static-page')
+                ->elements('#table-contain tbody tr');
             $this->assertCount(9, $element);
             $browser->assertPathIs('/admin/static-page')
-                    ->assertSee('Static Page');
+                ->assertSee('Static Page');
             $this->assertNull($browser->element('.pagination'));
-
         });
     }
 
@@ -68,26 +68,24 @@ class AdminListStaticPageTest extends DuskTestCase
     */
     public function testShowRecordPaginate()
     {
-        factory(StaticPage::class, 21)->create();
+        $this->makeData(21);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/static-page')
                 ->resize(1920, 2000)
                 ->assertSee('Static Page');
-
             //Count row number in one page    
             $elements = $browser->elements('#table-contain tbody tr');
-            echo count($elements);
             $this->assertCount(10, $elements);
             $this->assertNotNull($browser->element('.pagination'));
             // test paginate button
             $browser->press('.pagination li:nth-child(3) a')
-                    ->assertPathIs('/admin/static-page')
-                    ->assertQueryStringHas('page', '2');
+                ->assertPathIs('/admin/static-page')
+                ->assertQueryStringHas('page', '2');
             $elements = $browser->elements('#table-contain tbody tr');
             $this->assertCount(10, $elements);
             //Count page number of pagination
             $paginate_element = $browser->elements('.pagination li');
-            $number_page = count($paginate_element)- 2;
+            $number_page = count($paginate_element) - 2;
 
             $this->assertTrue($number_page == 3);
         });
@@ -100,7 +98,7 @@ class AdminListStaticPageTest extends DuskTestCase
      */
     public function testPathPagination()
     {   
-        factory(StaticPage::class, 12)->create();
+        $this->makeData(12);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/static-page?page=2');
             $elements = $browser->elements('#table-contain tbody tr');
@@ -108,5 +106,15 @@ class AdminListStaticPageTest extends DuskTestCase
             $browser->assertPathIs('/admin/static-page');
             $browser->assertQueryStringHas('page', 2);
         });
+    }
+
+    /**
+     * Make data to test
+     * @param  int $row number row of staticpage will be create
+     * @return void
+     */
+    public function makeData($row)
+    {
+        factory(StaticPage::class, $row)->create();
     }
 }
