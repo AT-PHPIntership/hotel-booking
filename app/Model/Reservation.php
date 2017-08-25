@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Reservation extends Model
 {
     use SoftDeletes;
-    
+
     /**
      * Declare table
      *
@@ -63,13 +63,13 @@ class Reservation extends Model
     {
         switch ($this->attributes['status']) {
             case self::STATUS_ACCEPTED:
-                return __('Accept');
+                return __('Accepted');
                 break;
             case self::STATUS_REJECTED:
-                return __('Reject');
+                return __('Rejected');
                 break;
             case self::STATUS_CANCELED:
-                return __('Cancel');
+                return __('Canceled');
             default:
                 return __('Pending');
                 break;
