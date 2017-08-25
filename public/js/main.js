@@ -25,7 +25,6 @@ $(document).ready(function(){
         var select_input_file = $(this).val();
         if (select_input_file) {
             var imgpath = URL.createObjectURL(event.target.files[0]);
-            console.log(imgpath);
             $("#showImage").fadeIn("fast").attr('src',imgpath);
         } else {
             $("#showImage").fadeIn("fast").attr('src','/images/default/no_image.png');
@@ -34,7 +33,6 @@ $(document).ready(function(){
  
     /**
      * Show message if database has not data or search not found in page News
-     *
      */
     var countNews = $('#newstable tbody tr').length;
     if (countNews == 0) {
@@ -43,7 +41,6 @@ $(document).ready(function(){
 
     /**
      * Check if not input value in field search.
-     *
      */
     $('.btn-search').on('click', function(event) {
         $input = $(this).prev().val();
@@ -55,7 +52,6 @@ $(document).ready(function(){
 
     /**
      * Show message if database has not data or search
-     *
      */
     var count_records = $('#table-contain tbody tr').length;
     if (count_records == 0) {
@@ -75,24 +71,31 @@ $(document).ready(function(){
         });
     });
 
+    /**
+     * remove image when click button remove image
+     */
     $('.btn-remove-img').bind('click',function(e){
         e.preventDefault();
-        var id_image = $(this).attr('value');
-        var title = $(this).attr('data-title');
-        var body = '<i>' + $(this).attr('data-confirm') + '</i>';
+        var img_container = $('#old-images');
+        var img_item = $(this).parent();
+        var title = img_container.data('title');
+        var token = img_container.data('token');
+        var url = $(this).data('url');
+        var body = '<i>' + img_container.data('confirm') + '</i>';
         $('#title-content').html(title);
         $('#body-content').html(body);
         $('#confirm').modal('show');
         $('#delete-btn').one('click', function(){
             $.ajax({
-                type: "GET",
-                url: '/admin/image/'+id_image+'/removeImage',
+                url: url,
+                type: 'POST',
+                data: {_method: 'delete', _token :token},
                 success: function( msg ) {
-                    if (msg == 1) {
-                        $('#old-img-'+id_image).remove();
+                    if (msg.result) {
+                        img_item.remove()
                     }
-                    if (isEmpty($('#old-images'))){
-                        $('old-images').add('<div id="old-images" class="text-info">No old image</div>');
+                    if (img_container.children().length == 0) {
+                        img_container.add('<div id="old-images" class="text-info">No old image</div>').appendTo('#old-images');
                     }
                 }
             });

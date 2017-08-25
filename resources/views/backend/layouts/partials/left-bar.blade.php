@@ -90,7 +90,7 @@
 
         <!-- booking room -->
         <li>
-          <a href="#">
+          <a href="{{ route('reservation.index') }}">
             <i class="fa fa-calendar"></i> <span>{{ __('Booking Room') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-red">17</small>
@@ -113,6 +113,13 @@
         <li>
           <a href="{{ route('place.index') }}" id="place">
             <i class="fa fa-map-marker" aria-hidden="true"></i> <span>{{ __('Places') }}</span>
+          </a>
+        </li>
+
+        <!-- service -->
+        <li>
+          <a href="{{ route('service.index') }}" >
+            <i class="fa fa-empire" aria-hidden="true"></i><span>{{ __('Services') }}</span>
           </a>
         </li>
       </ul>

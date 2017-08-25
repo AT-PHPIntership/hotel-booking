@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Room;
 use App\Model\Hotel;
 use App\Model\Image;
-use App\Http\Requests\Backend\RoomRequest;
+use App\Http\Requests\Backend\UpdateRoomRequest;
 
 class RoomController extends Controller
 {
@@ -56,13 +56,13 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param RoomRequest $request request to update
-     * @param Hotel       $hotel   hotel of room
-     * @param int         $id      id of room
+     * @param UpdateRoomRequest $request request to update
+     * @param Hotel             $hotel   hotel of room
+     * @param int               $id      id of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(RoomRequest $request, Hotel $hotel, $id)
+    public function update(UpdateRoomRequest $request, Hotel $hotel, $id)
     {
         $room = Room::findOrFail($id);
         if ($room->update($request->all())) {
@@ -72,34 +72,28 @@ class RoomController extends Controller
             flash(__('Update failure!'))->error();
             return redirect()->back()->withInput();
         }
-        if (isset($request->image)) {
-            foreach ($request->image as $img) {
-                $nameImage = config('image.name_prefix') . "-" . $img->hashName();
-                $path = config('image.rooms.path_upload').$nameImage;
-                Image::create([
-                    'target' => 'room',
-                    'target_id' => $room->id,
-                    'path' => $path
-                ]);
-                $img->move(config('image.rooms.path_upload'), $nameImage);
-            }
+        if (isset($request->images)) {
+            Image::storeImages($request->images, 'room', $room->id, config('image.rooms.path_upload'));
         }
         return redirect()->route('room.index', $hotel->id);
     }
 
     /**
-     * Remove image.
+     * Remove the specified resource from storage.
      *
-     * @param int $id id of image
+     * @param Hotel $hotel hotel of room
+     * @param int   $id    id of room
      *
-     * @return int
+     * @return \Illuminate\Http\Response
      */
-    public function removeImage($id)
+    public function destroy(Hotel $hotel, $id)
     {
-        $image = Image::findOrFail($id);
-        if ($image->delete()) {
-            return 1;
+        $room = Room::findOrFail($id);
+        if ($room->delete()) {
+            flash(__('Deletion successful!'))->success();
+        } else {
+            flash(__('Deletion failed!'))->error();
         }
-        return 0;
+        return redirect()->route('room.index', $hotel->id);
     }
 }

@@ -87,15 +87,18 @@
                  @include('backend.layouts.partials.modal')
                 <div class="form-group">
                   <label for="old-images">{{ __('Old Images') }}</label>
-                  <div id="old-images" class="col-md-12">
+                  <div
+                    id="old-images"
+                    class="col-md-12"
+                    data-token="{{ csrf_token() }}"
+                    data-title="{{ __('Confirm deletion!') }}"
+                    data-confirm="{{ __('Are you sure you want to delete?') }}">
                     @if (isset($room->images[0]))
                       @foreach ($room->images as $img)
                         <div id="old-img-{{$img->id}}" class="col-md-3 text-center">
-                          <button 
-                            value="{{$img->id}}"
-                            class="btn-remove-img btn-primary fa fa-minus-circle fz-20"
-                            data-title="{{ __('Confirm deletion!') }}"
-                            data-confirm="{{ __('Are you sure you want to delete?') }}">
+                          <button
+                            data-url="{{ route('image.destroy', $img->id) }}"
+                            class="btn-remove-img btn-primary fa fa-minus-circle fz-20">
                           </button>
                           <img class="img-place" src="{{ asset($img->path) }}">
                         </div>
@@ -106,12 +109,12 @@
                   </div>
                 </div>
 
-                <div class="form-group {{ $errors->has('image.*') ? ' has-error' : '' }}"> 
-                  <label for="input-file">{{ __("Image") }}</label>
-                  <input type="file" class="form-control" name="image[]" id="multiple-image" multiple>
-                  <small class=" text-danger">{{ $errors->first('image.*') }}</small>
+                <div class="form-group {{ $errors->has('images') || $errors->has('images.*') ? ' has-error' : '' }}"> 
+                  <label for="input-file">{{ __("Images") }}</label>
+                  <input type="file" class="form-control" name="images[]" id="multiple-image" multiple>
+                  <small class=" text-danger">{{ $errors->first('images.*') . $errors->first('images') }}</small>
                   <div id="showImage">
-                    <img class="img-place" id="default-image" src="{{ asset('/images/default/no_image.png') }}">
+                    <img class="img-place" id="default-image" src="{{ asset(config('image.no_image')) }}">
                   </div>
                 </div>
                 
