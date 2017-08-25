@@ -33,7 +33,6 @@ $(document).ready(function(){
  
     /**
      * Show message if database has not data or search not found in page News
-     *
      */
     var countNews = $('#newstable tbody tr').length;
     if (countNews == 0) {
@@ -42,7 +41,6 @@ $(document).ready(function(){
 
     /**
      * Check if not input value in field search.
-     *
      */
     $('.btn-search').on('click', function(event) {
         $input = $(this).prev().val();
@@ -54,10 +52,22 @@ $(document).ready(function(){
 
     /**
      * Show message if database has not data or search
-     *
      */
     var count_records = $('#table-contain tbody tr').length;
     if (count_records == 0) {
         $('.cls-search-not-found').show();
     }
+
+    /**
+     * Show multiple image when choose image
+     */
+    $('#multiple-image').change( function(event) {
+        var files = event.target.files;
+        var result = $("#showImage");
+        result.empty();  
+        $.each(files, function(i, file) {
+            var imgpath = URL.createObjectURL(file);    
+            result.add("<img class='img-place  mr-10' src='" + imgpath + "'>").appendTo('#showImage');
+        });
+    });
 });
