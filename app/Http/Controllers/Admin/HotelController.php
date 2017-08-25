@@ -31,7 +31,7 @@ class HotelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id id of user
+     * @param int $id id of hotel
      *
      * @return \Illuminate\Http\Response
      */

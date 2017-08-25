@@ -47,13 +47,33 @@ class Hotel extends Model
     }
 
     /**
-     * Relationship hasMany with rooms
+     * Relationship hasMany with rating comment
      *
      * @return array
     */
     public function ratingComments()
     {
         return $this->hasMany(RatingComment::class, 'hotel_id');
+    }
+
+    /**
+     * Relationship hasMany with services
+     *
+     * @return array
+    */
+    public function hotelServices()
+    {
+        return $this->hasMany(HotelService::class, 'hotel_id');
+    }
+
+    /**
+     * Relationship with hotel's image.
+     *
+     * @return array
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable', 'target', 'target_id');
     }
 
     /**
@@ -67,7 +87,9 @@ class Hotel extends Model
 
         static::deleting(function ($hotel) {
              $hotel->ratingComments()->delete();
+             $hotel->hotelServices()->delete();
              $hotel->rooms()->delete();
+             $hotel->images()->delete();
         });
     }
 }
