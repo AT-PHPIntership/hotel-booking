@@ -32,6 +32,6 @@ class Guest extends Model
      */
     public function reservations()
     {
-        return $this->morphMany('Reservation::class', 'reservable', 'target', 'target_id');
+        return $this->morphMany(Reservation::class, 'reservable', 'target', 'target_id');
     }
 }
