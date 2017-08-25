@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Backend\HotelIdRequest;
 use App\Http\Controllers\Controller;
 use App\Model\Room;
 use App\Model\Hotel;
@@ -61,7 +60,7 @@ class RoomController extends Controller
      */
     public function store(RoomRequest $request, Hotel $hotel)
     {
-        $room = new room($request->all());
+        $room = new Room($request->all());
         $room->hotel_id = $hotel->id;
         if ($room->save()) {
             flash(__('Creation successful!'))->success();
@@ -71,16 +70,26 @@ class RoomController extends Controller
             return redirect()->back()->withInput();
         }
         if (isset($request->image)) {
-            foreach ($request->image as $img) {
-                $nameImage = config('image.name_prefix') . "-" . $img->hashName();
-                $path = config('image.rooms.path_upload').$nameImage;
-                Image::create([
-                    'target' => 'room',
-                    'target_id' => $room->id,
-                    'path' => $path
-                ]);
-                $img->move(config('image.rooms.path_upload'), $nameImage);
-            }
+            Image::storeImages($request->image, 'room', $room->id, config('image.rooms.path_upload'));
+        }
+        return redirect()->route('room.index', $hotel->id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Hotel $hotel hotel of room
+     * @param int   $id    id of room
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Hotel $hotel, $id)
+    {
+        $room = Room::findOrFail($id);
+        if ($room->delete()) {
+            flash(__('Deletion successful!'))->success();
+        } else {
+            flash(__('Deletion failed!'))->error();
         }
         return redirect()->route('room.index', $hotel->id);
     }

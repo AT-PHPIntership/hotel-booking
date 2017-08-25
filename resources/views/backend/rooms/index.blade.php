@@ -82,7 +82,7 @@
                       <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
                         <i class="" aria-hidden="true"></i>
                       </a>
-                      <form  class="form-delete" method="post" action="#">
+                      <form  class="form-delete" method="post" action="{{ route('room.destroy', [$hotel->id, $room->id]) }}">
                         {!! csrf_field() !!}
                         {{ method_field('DELETE') }}
                         <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
