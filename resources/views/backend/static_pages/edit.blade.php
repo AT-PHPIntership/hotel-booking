@@ -1,10 +1,10 @@
 @extends('backend.layouts.main')
 @section('title', __('Update Static Page'))
 @section('content')
- <div class="content-wrapper">
-      <h1 class="title_page text-success">
-        {{ __('Update Static Page') }}
-      </h1>
+  <div class="content-wrapper">
+    <h1 class="title_page text-success">
+      {{ __('Update Static Page') }}
+    </h1>
 
     <!-- Main content -->
     <section class="content">
@@ -24,19 +24,24 @@
               <div class="box-body">
               	<div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
                   <label for="content">{{ __('Title of Static Page') }}</label>
-                  <input type="text" class="form-control" id="title" placeholder="Input Static Page Title" value="{{ $staticPage->title }}" title="Input Title" name="title">
+                  <input type="text" class="form-control" id="title" 
+                    placeholder="{{ __('Input Static Page Title') }}"
+                    value="{{ $staticPage->title }}" title="{{ __('Input Title')}}" name="title">
                   <span class="alert-danger">{{ $errors->first('title') }}</span>
                 </div>
                 <div class="form-group {{ $errors->has('content') ? ' has-error' : '' }}">
                   <label for="content">{{ __('Content of Static Page') }}</label>
-                  <textarea class="form-control ckeditor" id="content" placeholder="Input Static Page Content" title="Input Content" name="content">{{ $staticPage->content }}</textarea>
+                  <textarea class="form-control ckeditor" id="content" 
+                    placeholder="{{ __('Input Static Page Content') }}"
+                    title="{{ __('Input Content') }}" 
+                    name="content">{{ $staticPage->content }}
+                  </textarea>
                   <span class="alert-danger">{{ $errors->first('content') }}</span>
                 </div>
                
-                      
               <!-- /.box-body -->
               <div class="box-footer">
-                <a href="{{ route('static-page.index') }}" id="cancel" name="cancel" class="btn btn-default">Back</a>
+                <a href="{{ route('static-page.index') }}" id="cancel" name="cancel" class="btn btn-default">{{ __('Back') }}</a>
                 <button type="reset" class="btn btn-warning">{{ __('Reset') }}</button>
                 <button type="submit" class="btn btn-primary pull-right">{{ __('Submit') }}</button>
               </div>

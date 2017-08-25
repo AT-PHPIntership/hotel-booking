@@ -16,8 +16,8 @@ class StaticPageController extends Controller
     public function index()
     {
         $staticPages = StaticPage::select('id', 'title', 'content')
-                                 ->orderby('id', 'DESC')
-                                 ->paginate();
+            ->orderby('id', 'DESC')
+            ->paginate();
         return view('backend.static_pages.index', compact('staticPages'));
     }
 
@@ -31,7 +31,7 @@ class StaticPageController extends Controller
     public function edit($id)
     {
         $staticPage = StaticPage::select('id', 'title', 'content')
-                                ->findOrFail($id);
+            ->findOrFail($id);
          return view('backend.static_pages.edit', compact('staticPage'));
     }
 
@@ -45,11 +45,14 @@ class StaticPageController extends Controller
      */
     public function update(StaticPageRequest $request, $id)
     {
-        if (StaticPage::findOrFail($id)->update($request->all())) {
+        $staticPage = StaticPage::findOrFail($id);
+        $requests = $request->all();
+        if ($staticPage->update($requests)) {
             flash(__('Update Success'))->success();
+            return redirect()->route('static-page.index');
         } else {
             flash(__('Update Fail'))->error();
+            return redirect()->back()->withInput();
         }
-        return redirect()->route('static-page.index');
     }
 }
