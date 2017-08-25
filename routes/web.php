@@ -21,10 +21,14 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::resource('/comment', 'RatingCommentController');
     Route::resource('/news', 'NewsController');
     Route::resource('/hotel', 'HotelController');
+    Route::group(['prefix'=>'hotel/{hotel}'], function($hotel) {
+        Route::resource('/room', 'RoomController');
+    });
     Route::resource('/category', 'CategoryController');
     Route::resource('/static-page', 'StaticPageController');
     Route::resource('/service', 'ServiceController', ['except' => ['show']]);
     Route::put('/user/{id}/status', 'UserController@updateStatus')->name('user.updateStatus');
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
+    Route::resource('reservation', 'ReservationController', ['except' => ['create','store']]);
 });
 	

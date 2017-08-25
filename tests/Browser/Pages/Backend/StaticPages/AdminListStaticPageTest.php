@@ -12,20 +12,20 @@ class AdminListStaticPageTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    // /**
-    //  * A Dusk test route.
-    //  *
-    //  * @return void
-    //  */
-    // public function testRoute()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/admin')
-    //                 ->clickLink('Introduction')
-    //                 ->assertPathIs('/admin/static-page')
-    //                 ->assertSee('Static Page');
-    //     });
-    // }
+    /**
+     * A Dusk test route.
+     *
+     * @return void
+     */
+    public function testRoute()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin')
+                    ->clickLink('Introduction')
+                    ->assertPathIs('/admin/static-page')
+                    ->assertSee('Static Page');
+        });
+    }
 
     /**
      * A Dusk test empty data.
@@ -43,23 +43,23 @@ class AdminListStaticPageTest extends DuskTestCase
         });
     }
 
-    // /**
-    //  * A Dusk test show record with table has data.
-    //  *
-    //  * @return void
-    //  */
-    // public function testShowRecord()
-    // {   
-    //     factory(StaticPage::class, 9)->create();
-    //     $this->browse(function (Browser $browser) {
-    //         $element = $browser->visit('/admin/static-page')->elements('#table-contain tbody tr');
-    //         $this->assertCount(9, $element);
-    //         $browser->assertPathIs('/admin/static-page')
-    //                 ->assertSee('Static Page');
-    //         $this->assertNull($browser->element('.pagination'));
+    /**
+     * A Dusk test show record with table has data.
+     *
+     * @return void
+     */
+    public function testShowRecord()
+    {   
+        factory(StaticPage::class, 9)->create();
+        $this->browse(function (Browser $browser) {
+            $element = $browser->visit('/admin/static-page')->elements('#table-contain tbody tr');
+            $this->assertCount(9, $element);
+            $browser->assertPathIs('/admin/static-page')
+                    ->assertSee('Static Page');
+            $this->assertNull($browser->element('.pagination'));
 
-    //     });
-    // }
+        });
+    }
 
     /**
     * A Dusk test show record with table has data and ensure pagnate.
@@ -90,6 +90,23 @@ class AdminListStaticPageTest extends DuskTestCase
             $number_page = count($paginate_element)- 2;
 
             $this->assertTrue($number_page == 3);
+        });
+    }
+
+    /**
+     * Test click page 2 in pagination link
+     *
+     * @return void
+     */
+    public function testPathPagination()
+    {   
+        factory(StaticPage::class, 12)->create();
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin/static-page?page=2');
+            $elements = $browser->elements('#table-contain tbody tr');
+            $this->assertCount(2, $elements);
+            $browser->assertPathIs('/admin/static-page');
+            $browser->assertQueryStringHas('page', 2);
         });
     }
 }
