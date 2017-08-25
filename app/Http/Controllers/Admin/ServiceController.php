@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Service;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateServiceRequest;
+use App\Http\Requests\Backend\UpdateServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -42,7 +43,7 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateServiceRequest $request, $id)
+    public function update(UpdateServiceRequest $request, $id)
     {
         $service = Service::findOrFail($id);
         
