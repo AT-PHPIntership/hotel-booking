@@ -70,6 +70,7 @@ class Reservation extends Model
                 break;
             case self::STATUS_CANCELED:
                 return __('Canceled');
+                break;
             default:
                 return __('Pending');
                 break;
