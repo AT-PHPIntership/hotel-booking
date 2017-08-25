@@ -57,29 +57,19 @@ class HotelController extends Controller
     public function store(HotelCreateRequest $request)
     {
         // create hotel.
-        $hotel = new Hotel($request->except(['services', 'images']));
-        $result = $hotel->save();
+        // $hotel = new Hotel($request->except(['services', 'images']));
+        $hotel = new Hotel($request->services);
+        // $result = $hotel->save();
+        $hotel->hotelServices = new HotelService( 11 ,$request->services);
+        dd($hotel);
         // add hotel services
-        $hotelServices = $request->services;
-        foreach ($hotelServices as $serviceId) {
-            $hotelService = new HotelService(['service_id' => $serviceId]);
-            $hotel->hotelServices()->save($hotelService);
-        }
+        // $hotelServices = $request->services;
+        // foreach ($hotelServices as $serviceId) {
+        //     $hotelService = new HotelService(['service_id' => $serviceId]);
+        //     $hotel->hotelServices()->save($hotelService);
+        // }
         // add hotel images
-        if ($request->hasFile('images')) {
-            $images = $request->file('images');
-            foreach ($images as $image) {
-                $imageName = config('image.name_prefix') . "-" . $image->hashName();
-                $imagePath = config('image.hotels.path_upload') . $imageName;
-                $image->move(config('image.hotels.path_upload'), $imageName);
-                $image = new Image([
-                    'target'=>'hotel',
-                    'target_id' => $hotel->id,
-                    'path' => $imagePath
-                    ]);
-                $image->save();
-            }
-        }
+        Image::storeImages($request->images, 'hotel', $hotel->id, config('image.hotels.path_upload'));
 
         if ($result) {
             flash(__('Create success'))->success();

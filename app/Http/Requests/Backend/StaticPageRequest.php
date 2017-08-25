@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\backend;
+namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HotelCreateRequest extends FormRequest
+class StaticPageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,8 @@ class HotelCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:8|unique:hotels',
-            'address' => 'required',
-            'place_id' => 'required',
-            'star' => 'required',
-            'introduce' => 'required',
-            'images' => 'required|array',
-            'images.*' => 'image|max:' . config('image.max_upload_size')
+            'title'=>'required',
+            'content'=>'required'
         ];
     }
 }
