@@ -35,8 +35,7 @@
               <thead>
                 <tr>
                   <th class="col-md-1">{{ __('ID') }}</th>
-                  <th class="col-md-4">{{ __('Title') }}</th>
-                  <th>{{ __('Content') }}</th>
+                  <th >{{ __('Title') }}</th>
                   <th class="col-md-1">{{ __('Action') }}</th>
                 </tr>
               </thead>
@@ -53,7 +52,7 @@
               @endforeach
                </tbody>
               </table>
-             {{ $categories->render() }}
+             {{ $staticPages->render() }}
             </div>
             <!-- /.box-body -->
           </div>

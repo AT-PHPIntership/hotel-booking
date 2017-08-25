@@ -16,7 +16,11 @@ class StaticPage extends Model
      */
     const CREATED_AT = null;
 
-
+     /**
+     * Value paginate of row
+     */
+    const ROW_LIMIT = 10;
+    
     /**
     * The table associated with the model.
     *
