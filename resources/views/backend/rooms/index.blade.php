@@ -69,7 +69,7 @@
                   <td class="text-center col-image">
                     <div class="place-image-show">
                       <img class="img-place" 
-                        src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset('images/default/room.jpg') }}" >
+                        src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset(config('image.no_image')) }}" >
                     </div>
                   </td>
                   <td class="text-center">{{ $room->name }}</td>

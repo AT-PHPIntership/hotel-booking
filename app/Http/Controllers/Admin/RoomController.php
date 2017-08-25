@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Room;
 use App\Model\Hotel;
 use App\Model\Image;
-use App\Http\Requests\Backend\RoomRequest;
+use App\Http\Requests\Backend\CreateRoomRequest;
 
 class RoomController extends Controller
 {
@@ -53,12 +53,12 @@ class RoomController extends Controller
     /**
      * Store a newly created room in storage.
      *
-     * @param Admin\RoomRequest $request request from view
-     * @param Hotel             $hotel   hotel of room
+     * @param Admin\CreateRoomRequest $request request from view
+     * @param Hotel                   $hotel   hotel of room
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(RoomRequest $request, Hotel $hotel)
+    public function store(CreateRoomRequest $request, Hotel $hotel)
     {
         $room = new Room($request->all());
         $room->hotel_id = $hotel->id;
@@ -69,9 +69,7 @@ class RoomController extends Controller
             flash(__('Creation failure!'))->error();
             return redirect()->back()->withInput();
         }
-        if (isset($request->image)) {
-            Image::storeImages($request->image, 'room', $room->id, config('image.rooms.path_upload'));
-        }
+        Image::storeImages($request->images, 'room', $room->id, config('image.rooms.path_upload'));
         return redirect()->route('room.index', $hotel->id);
     }
 

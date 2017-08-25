@@ -9,4 +9,5 @@ return [
     'rooms' => [
         'path_upload' => 'images/rooms/',
     ],
+    'no_image' => 'images/default/no_image.png',
 ];

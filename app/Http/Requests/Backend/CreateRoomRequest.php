@@ -4,7 +4,7 @@ namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoomRequest extends FormRequest
+class CreateRoomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,8 +29,8 @@ class RoomRequest extends FormRequest
             'price' => 'required|numeric',
             'max_guest' => 'required|integer',
             'total' => 'required|integer',
-            'image' => 'nullable|max:' . config('image.max_upload_size'),
-            'image.*' => 'image'
+            'images' => 'required|array',
+            'images.*' => 'image|max:' . config('image.max_upload_size')
         ];
     }
 }
