@@ -13,4 +13,11 @@ class Service extends Model
      * Value paginate of row
      */
     const ROW_LIMIT = 10;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
 }
