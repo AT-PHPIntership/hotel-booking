@@ -57,12 +57,39 @@ class Hotel extends Model
     }
 
     /**
-     * Get all of the hotel's image.
+     * Relationship hasMany with rating comment
+     *
+     * @return array
+    */
+    public function ratingComments()
+    {
+        return $this->hasMany(RatingComment::class, 'hotel_id');
+    }
+
+    /**
+     * Relationship with hotel's image.
      *
      * @return array
      */
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable', 'target', 'target_id');
+    }
+
+    /**
+     * This is a recommended way to declare event handlers
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($hotel) {
+             $hotel->ratingComments()->delete();
+             $hotel->hotelServices()->delete();
+             $hotel->rooms()->delete();
+             $hotel->images()->delete();
+        });
     }
 }

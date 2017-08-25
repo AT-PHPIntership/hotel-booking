@@ -33,7 +33,7 @@ class HotelController extends Controller
     }
 
     /**
-     * Show a detail of the hotel.
+     * Show hotel
      *
      * @param int $id id of hotel
      *
@@ -69,5 +69,23 @@ class HotelController extends Controller
         $hotel = Hotel::select($columns)->with($with)->findOrFail($id);
 
         return view('backend.hotels.show', compact('hotel'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id id of hotel
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $hotel = Hotel::findOrFail($id);
+        if ($hotel->delete()) {
+            flash(__('Deletion successful!'))->success();
+        } else {
+            flash(__('Deletion failed!'))->error();
+        }
+        return redirect()->route('hotel.index');
     }
 }

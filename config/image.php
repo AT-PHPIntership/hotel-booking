@@ -7,7 +7,4 @@ return [
     'places' => [
         'path_upload' => 'images/places/',
     ],
-    'default' => [
-        'path_upload' => 'images/places/',
-    ],
 ];
