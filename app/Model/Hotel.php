@@ -37,6 +37,16 @@ class Hotel extends Model
     }
 
     /**
+     * Relationship hasMany with services hotel
+     *
+     * @return array
+    */
+    public function hotelServices()
+    {
+        return $this->hasMany(HotelService::class, 'hotel_id');
+    }
+
+    /**
      * Relationship hasMany with rooms
      *
      * @return array
@@ -54,16 +64,6 @@ class Hotel extends Model
     public function ratingComments()
     {
         return $this->hasMany(RatingComment::class, 'hotel_id');
-    }
-
-    /**
-     * Relationship hasMany with services
-     *
-     * @return array
-    */
-    public function hotelServices()
-    {
-        return $this->hasMany(HotelService::class, 'hotel_id');
     }
 
     /**
