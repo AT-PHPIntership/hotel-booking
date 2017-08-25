@@ -89,7 +89,7 @@ class AdminShowDetailBookingTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($reservation) {
             $browser->visit('/admin/reservation')
                     ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-search-plus');
-            if($reservation->status_label != 'Cancel') {
+            if($reservation->status_label != 'Canceled') {
                 $browser->assertVisible('.btn-primary');
             } else {
                 $browser->assertMissing('.btn-primary');
