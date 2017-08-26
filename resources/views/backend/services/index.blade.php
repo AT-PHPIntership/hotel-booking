@@ -1,6 +1,6 @@
-@extends('backend.layouts.master')
+@extends('backend.layouts.main')
 
-@section('title','Home Page')
+@section('title', __('Service'))
 
 @section('content')
 
@@ -9,184 +9,92 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Chuyên mục Dịch vụ
-        <small>Service</small>
+        {{ __('Management Service') }}
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li class="active">Dịch vụ</li>
+        <li>
+          <a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i>
+            {{ __('Home page') }}
+          </a>
+        </li>
+        <li class="active">{{ __('Service') }}</li>
       </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              <h3 class="box-title title-header">
+                {{ __('List service') }}
+              </h3>
             </div>
-            <div class="float-left">
-              <a href="">
-              <span>Thêm Dịch vụ <img src="../../hotel_admin/dist/img/plus-small.gif" alt="ThemTin"></span>
-              </a>
-            </div>
+            
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              @include('flash::message')
+              <div class="row">
+                <div class="col-md-6 container-search ">
+                  <form  class="container-search">
+                    <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
+                    <button type="submit" class="btn btn-primary btn-search">
+                    <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </form>
+                </div>
+                <div class="contain-btn pull-right">
+                  <a href="{{ route('service.create') }}" class="btn btn-primary">
+                    <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                    {{ __('Add Service') }}
+                  </a> 
+                </div>
+              </div>
+              @include('backend.layouts.partials.modal')
+              <table id="table-contain" class="table table-bordered table-striped
+                table-responsive">
                 <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Function</th>
-                </tr>
+                  <tr>
+                    <th class="text-center">{{ __('ID') }}</th>
+                    <th class="text-center">{{ __('Name') }}</th>
+                    <th class="text-center">{{ __('Option') }}</th>
+                  </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Tắm trắng
-                  </td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Spa</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td> Rửa bát</td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 6
-                  </td>
-                  <td align="center">
-                    <a href="">Sửa <img src="../../hotel_admin/dist/img/pencil.gif" alt="edit" /></a>
-                    <a href="">Xóa <img src="../../hotel_admin/dist/img/bin.gif" width="16" height="16" alt="delete" /></a>
-                  </td> 
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet Explorer 7</td>
-                  <td>Win XP SP2+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Trident</td>
-                  <td>AOL browser (AOL desktop)</td>
-                  <td>Win XP</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 1.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 1.5</td>
-                  <td>Win 98+ / OSX.2+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 2.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 3.0</td>
-                  <td>Win 2k+ / OSX.3+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Camino 1.0</td>
-                  <td>OSX.2+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Camino 1.5</td>
-                  <td>OSX.3+</td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Netscape 7.2</td>
-                  <td>Win 95+ / Mac OS 8.6-9.2</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Netscape Browser 8</td>
-                  <td>Win 98SE+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Netscape Navigator 9</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.0</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.1</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.2</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.3</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.4</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.5</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.6</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.7</td>
-                  <td>Win 98+ / OSX.1+</td>
-                  
-                </tr>
-               </tbody>
+                  @foreach ($services as $service)
+                    <tr>
+                      <td class="col-md-2 text-center">{{ $service->id }}</td>
+                      <td class="col-md-8">{{ $service->name }}</td>
+                      <td class="col-md-2 text-center col-action">
+                        <div class="btn-option text-center">
+                          <a href="{{ route('service.edit', $service->id) }}" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
+                            <i class="" aria-hidden="true"></i>
+                          </a>
+                          <form  class="form-delete" method="post" action="{{ route('service.destroy', $service->id) }}">
+                            {!! csrf_field() !!}
+                            {{ method_field('DELETE') }}
+                            <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
+                              data-title="{{ __('Confirm deletion!') }}"
+                              data-confirm="{{ __('Are you sure you want to delete?') }}" 
+                              type="submit" >
+                            </button>
+                          </form> 
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach 
+                </tbody> 
               </table>
+              <div class="cls-search-not-found" hidden="">
+                <h1 class="text-center">{{__('Data Not Found!')}}</h1>
+              </div>
+              <div class="contain-btn second pull-right">
+                <a href="{{ route('service.create') }}" class="btn btn-primary">
+                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                  {{ __('Add service') }}
+                </a> 
+              </div>
+              {{ $services->links() }}
             </div>
             <!-- /.box-body -->
           </div>
@@ -199,100 +107,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-  @include('backend.layouts.partials.infor'
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
 @endsection
