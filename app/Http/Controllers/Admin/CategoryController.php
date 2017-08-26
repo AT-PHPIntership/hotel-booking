@@ -15,7 +15,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::select('id', 'name')->orderBy('id', 'DESC')->paginate(Category::ROW_LIMIT);
+        $categories = Category::search()
+                                ->select('id', 'name')
+                                ->orderBy('id', 'DESC')
+                                ->paginate(Category::ROW_LIMIT);
+        $categories->appends(['search'=>request('search')]);
         return view('backend.categories.index', compact('categories'));
     }
     

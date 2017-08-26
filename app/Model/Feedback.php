@@ -20,11 +20,24 @@ class Feedback extends Model
      * Value paginate of row
      */
     const ROW_LIMIT = 10;
-    
+
     /**
      * The name of the "updated at" column.
      *
      * @var string
      */
     const UPDATED_AT = null;
+
+    /**
+     * This is a recommended way to declare event handlers
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($feedback) {
+            $feedback->timestamps = false;
+        });
+    }
 }

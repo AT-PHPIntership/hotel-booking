@@ -26,7 +26,7 @@
 
         <!--  introduction -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('static-page.index') }}">
             <i class="fa fa-table"></i> <span>{{ __('Introduction') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -80,7 +80,7 @@
 
         <!-- comment and rating -->
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('comment.index') }}">
             <i class="fa fa-commenting-o" aria-hidden="true"></i> <span>{{ __('Comment and Rating') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -90,7 +90,7 @@
 
         <!-- booking room -->
         <li>
-          <a href="#">
+          <a href="{{ route('reservation.index') }}">
             <i class="fa fa-calendar"></i> <span>{{ __('Booking Room') }}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-red">17</small>
@@ -101,11 +101,8 @@
 
         <!-- feedback -->
         <li>
-          <a href="#">
+          <a href="{{ route('feedback.index') }}"">
             <i class="fa fa-envelope"></i> <span>{{ __('Feedbacks') }}</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">102</small>
-            </span>
           </a>
         </li>
 
@@ -113,6 +110,13 @@
         <li>
           <a href="{{ route('place.index') }}" id="place">
             <i class="fa fa-map-marker" aria-hidden="true"></i> <span>{{ __('Places') }}</span>
+          </a>
+        </li>
+
+        <!-- service -->
+        <li>
+          <a href="{{ route('service.index') }}" >
+            <i class="fa fa-empire" aria-hidden="true"></i><span>{{ __('Services') }}</span>
           </a>
         </li>
       </ul>

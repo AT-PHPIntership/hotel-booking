@@ -17,8 +17,15 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = Place::select('id', 'name', 'descript', 'image', 'created_at')
-            ->orderBy('id', 'DESC')->paginate(Place::ROW_LIMIT);
+        $columns = [
+            'id',
+            'name',
+            'descript',
+            'image'
+        ];
+        $places = Place::search()->select($columns)->orderby('id', 'DESC')
+            ->paginate(Place::ROW_LIMIT);
+        $places->appends(['search' => request('search')]);
         return view("backend.places.index", compact('places'));
     }
 
@@ -55,7 +62,7 @@ class PlaceController extends Controller
         
         return redirect()->route('place.index');
     }
-    
+
      /**
      * Show the form for editing the specified resource.
      *
@@ -113,5 +120,19 @@ class PlaceController extends Controller
         }
         
         return redirect()->route('place.index');
+    }
+
+    /**
+     * Show a detail of the place.
+     *
+     * @param int $id id of place
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $place = Place::findOrFail($id);
+        $totalHotels = $place->hotels()->count();
+        return view('backend.places.show', compact('place', 'totalHotels'));
     }
 }
