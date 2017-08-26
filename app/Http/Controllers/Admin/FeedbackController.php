@@ -26,4 +26,23 @@ class FeedbackController extends Controller
             ->paginate(Feedback::ROW_LIMIT);
         return view("backend.feedbacks.index", compact('feedbacks'));
     }
+
+    /**
+     * Find feedback by id and delete feedback
+     *
+     * @param int $id id feedback
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $feedback = Feedback::findOrFail($id);
+        if ($feedback->delete()) {
+            flash(__('Delete success'))->success();
+        } else {
+            flash(__('Delete failure'))->error();
+        }
+
+        return redirect()->route('feedback.index');
+    }
 }
