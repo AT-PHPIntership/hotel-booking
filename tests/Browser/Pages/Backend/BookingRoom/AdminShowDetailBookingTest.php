@@ -37,6 +37,24 @@ class AdminShowDetailBookingTest extends DuskTestCase
     }
 
     /**
+     * Test 404 Page not found.
+     *
+     * @return void
+     */
+    public function testPageNotFound()
+    {   
+        $this->makeData(10);
+        $reservation = Reservation::find(10);
+        $this->browse(function (Browser $browser) use ($reservation) {
+            $browser->visit('/admin/reservation');
+            $reservation->delete();
+            $browser->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-search-plus')
+                    ->assertSee('404 - Page Not found')
+                    ->assertPathIs('/admin/reservation/' . $reservation->id);
+        });
+    }
+
+    /**
      * Test show detail booking.
      *
      * @return void

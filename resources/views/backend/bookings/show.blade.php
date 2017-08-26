@@ -83,9 +83,9 @@
                         {{ __('Check in') }}
                       </strong>
                     </td>
-                      <td>
-                        {{$reservation->checkin_date}}
-                      </td>
+                    <td>
+                      {{$reservation->checkin_date}}
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -94,9 +94,9 @@
                         {{ __('Check out') }}
                       </strong>
                     </td>
-                      <td>
-                        {{$reservation->checkout_date}}
-                      </td>
+                    <td>
+                      {{$reservation->checkout_date}}
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -105,9 +105,9 @@
                         {{ __('Request') }}
                       </strong>
                     </td>
-                      <td>
-                        {{$reservation->request}}
-                      </td>
+                    <td>
+                      {{$reservation->request}}
+                    </td>
                   </tr>
                   <tr>
                     <td>
