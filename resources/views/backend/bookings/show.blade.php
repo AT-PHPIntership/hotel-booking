@@ -72,9 +72,9 @@
                         {{ __('Quantity') }}
                       </strong>
                     </td>
-                      <td>
-                        {{$reservation->quantity}}
-                      </td>
+                    <td>
+                      {{$reservation->quantity}}
+                    </td>
                   </tr>
                   <tr>
                     <td>
