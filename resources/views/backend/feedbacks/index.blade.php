@@ -18,7 +18,7 @@
           </a>
         </li>
         <li class="active">
-          <a href="{{ route('feedback.index') }}"><i class="fa fa-dashboard"></i>
+          <a href="{{ route('feedback.index') }}">
             {{ __('Feedback') }}
           </a>
         </li>
@@ -72,7 +72,8 @@
                       <td class="col-descript">{{ $feedback->content }}</td>
                       <td class="text-center col-action">
                         <div class="btn-option text-center">
-                          <form  class="form-delete" method="post" action="{{ route('feedback.destroy', $feedback->id) }}">
+                          <form  class="form-delete" method="post" 
+                            action="{{ route('feedback.destroy', $feedback->id) }}">
                             {!! csrf_field() !!}
                             {{ method_field('DELETE') }}
                             <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"

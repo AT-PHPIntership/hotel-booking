@@ -34,15 +34,17 @@
             <!-- end msg -->
               <div class="row">
               <!-- search -->
-                <div class="col-md-6 container-search ">
-                  <form method="GET" action="{{ route('category.index') }}" class="form-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
-                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
-                  </form>
-                </div>
+                <div class="col-md-6">
+                <form  class="container-search">
+                  <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
+                  <button type="submit" class="btn btn-primary btn-search">
+                  <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </form>
+              </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('category.create') }}" class="btn btn-primary">
+                   <a href="{{ route('category.create') }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Cagegory') }}
                   </a> 
@@ -68,7 +70,11 @@
                      <form method="POST" action="{{ route('category.destroy', $category->id) }}" class="form-del inline" >
                        <input type="hidden" name="_token"  value="{!! csrf_token()!!}">
                       {{ method_field('DELETE') }}
-                        <button type="submit" name="" class="fa fa-trash-o cus_icon btn btn-delete-item"></button>
+                        <button type="submit" 
+                              class="fa fa-trash-o cus_icon btn btn-delete-item fz-20"
+                              data-title="{{ __('Confirm deletion!') }}"
+                              data-confirm="{{ __('Are you sure you want to delete?') }}">
+                        </button>
                     </form>
                   </td>
                 </tr>
@@ -82,6 +88,9 @@
                   </a> 
                 </div>
             {{ $categories->render() }}
+            </div>
+           <div class="cls-search-not-found" hidden="">
+              <h1 class="text-center">{{__('Data Not Found!')}}</h1>
             </div>
             <!-- /.box-body -->
           </div>

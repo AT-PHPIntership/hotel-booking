@@ -36,9 +36,9 @@
               @include('flash::message')
               <div class="row">
                 <div class="col-md-6 container-search ">
-                  <form method="GET" action="{{ route('user.index') }}" class="form-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
-                    <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  <form class="container-search" method="GET" action="{{ route('place.index') }}">
+                    <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{ app('request')->input('search') }}">
+                    <button type="submit" id="btn-search" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                   </form>
                 </div>
                 <div class="contain-btn pull-right">
@@ -66,10 +66,16 @@
                       <td class="col-no text-center">{{ $place->id }}</td>
                       <td class="text-center col-image">
                         <div class="place-image-show">
-                          <img class="img-place" src="{{ $place->image_url }}" >
+                          <a class="url-place" href="{{ route('place.show', $place->id) }}">
+                            <img class="img-place" src="{{ $place->image_url }}" >
+                          </a>  
                         </div>
                       </td>
-                      <td class="col-name">{{ $place->name }}</td>
+                      <td class="col-name">
+                        <a class="url-place" href="{{ route('place.show', $place->id) }}">
+                          {{ $place->name }}
+                        </a>
+                      </td>
                       <td class="col-descript">{{ $place->descript }}</td>
                       <td class="text-center col-action">
                         <div class="btn-option text-center">
@@ -91,6 +97,9 @@
                   @endforeach 
                 </tbody> 
               </table>
+              <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
               <div class="contain-btn second pull-right">
                 <a href="{{ route('place.create') }}" class="btn btn-primary">
                   <span class="fa fa-plus-circle" aria-hidden="true"></span>

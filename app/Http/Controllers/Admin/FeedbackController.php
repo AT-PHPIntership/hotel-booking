@@ -15,8 +15,15 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        $feedbacks = Feedback::select('id', 'full_name', 'email', 'content')
-            ->orderBy('id', 'DESC')->paginate(Feedback::ROW_LIMIT);
+        $colum = [
+            'id',
+            'full_name',
+            'email',
+            'content'
+        ];
+        $feedbacks = Feedback::select($colum)
+            ->orderBy('id', 'DESC')
+            ->paginate(Feedback::ROW_LIMIT);
         return view("backend.feedbacks.index", compact('feedbacks'));
     }
 }
