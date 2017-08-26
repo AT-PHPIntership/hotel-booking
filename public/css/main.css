@@ -133,9 +133,9 @@
     margin: 0 auto;
 }
 
-.search-news {
-    float: left;
-    width: 60%;
+.cls-search {
+    margin-left: -14px;
+    margin-top: 2px;
 }
 .btn-pencil{
     font-size: 18px;
@@ -233,6 +233,7 @@
 
 .container-search {
     position: relative;
+
     margin-top: 3px;
 }
 

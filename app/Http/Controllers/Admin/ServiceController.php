@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Service;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateServiceRequest;
+use App\Http\Requests\Backend\UpdateServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -16,9 +17,31 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::select('id', 'name')
-            ->orderBy('id', 'DESC')->paginate(Service::ROW_LIMIT);
+        $services = Service::search()
+            ->select('id', 'name')
+            ->orderBy('id', 'DESC')
+            ->paginate(Service::ROW_LIMIT);
+        $services->appends(['search' => request('search')]);
         return view("backend.services.index", compact('services'));
+    }
+
+    /**
+     * Find service by id and delete service
+     *
+     * @param int $id id service
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $service = Service::findOrFail($id);
+        if ($service->delete()) {
+            flash(__('Delete success'))->success();
+        } else {
+            flash(__('Delete failure'))->error();
+        }
+
+        return redirect()->route('service.index');
     }
 
     /**
@@ -42,7 +65,7 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateServiceRequest $request, $id)
+    public function update(UpdateServiceRequest $request, $id)
     {
         $service = Service::findOrFail($id);
         
