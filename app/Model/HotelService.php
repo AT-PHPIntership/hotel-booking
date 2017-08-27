@@ -31,4 +31,14 @@ class HotelService extends Model
     protected $fillable = [
         'hotel_id', 'service_id'
     ];
+
+    /**
+     * Relationship with service model
+     *
+     * @return \App\Model
+     */
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
 }

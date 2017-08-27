@@ -41,14 +41,18 @@ class HotelController extends Controller
      */
     public function create()
     {
-        $places = Place::select('id', 'name')->get();
-        $services = Service::select('id', 'name')->get();
+        $columns = [
+            'id',
+            'name'
+        ];
+        $places = Place::select($columns)->get();
+        $services = Service::select($columns)->get();
 
         return view('backend.hotels.create', compact('places', 'services'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Save creating hotel
      *
      * @param HotelCreateRequest $request Request create
      *
@@ -57,18 +61,17 @@ class HotelController extends Controller
     public function store(HotelCreateRequest $request)
     {
         // create hotel.
-        // $hotel = new Hotel($request->except(['services', 'images']));
-        $hotel = new Hotel($request->services);
-        // $result = $hotel->save();
-        $hotel->hotelServices = new HotelService( 11 ,$request->services);
-        dd($hotel);
-        // add hotel services
-        // $hotelServices = $request->services;
-        // foreach ($hotelServices as $serviceId) {
-        //     $hotelService = new HotelService(['service_id' => $serviceId]);
-        //     $hotel->hotelServices()->save($hotelService);
-        // }
-        // add hotel images
+        $hotel = new Hotel($request->except(['services', 'images']));
+        $result = $hotel->save();
+
+        //make data hotel services
+        $hotelServices = array();
+        foreach ($request->services as $serviceId) {
+            array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+        }
+        //save hotel services
+        $hotel->hotelServices()->saveMany($hotelServices);
+
         Image::storeImages($request->images, 'hotel', $hotel->id, config('image.hotels.path_upload'));
 
         if ($result) {
@@ -78,5 +81,62 @@ class HotelController extends Controller
             flash(__('Create failure'))->error();
             return redirect()->back()->withInput();
         }
+    }
+
+    /**
+     * Show hotel
+     *
+     * @param int $id id of hotel
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $columns = [
+            'id',
+            'name',
+            'address',
+            'star',
+            'introduce',
+            'place_id'
+        ];
+
+        $with['place'] = function ($query) {
+            $query->select('id', 'name');
+        };
+        $with['rooms'] = function ($query) {
+            $query->select('hotel_id', 'id', 'name');
+        };
+        $with['images'] = function ($query) {
+            $query->select();
+        };
+        $with['hotelServices'] = function ($query) {
+            $query->select('id', 'hotel_id', 'service_id');
+        };
+        $with['hotelServices.service'] = function ($query) {
+            $query->select('id', 'name');
+        };
+
+        $hotel = Hotel::select($columns)->with($with)->findOrFail($id);
+
+        return view('backend.hotels.show', compact('hotel'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id id of hotel
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $hotel = Hotel::findOrFail($id);
+        if ($hotel->delete()) {
+            flash(__('Deletion successful!'))->success();
+        } else {
+            flash(__('Deletion failed!'))->error();
+        }
+        return redirect()->route('hotel.index');
     }
 }

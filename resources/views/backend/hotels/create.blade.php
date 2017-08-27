@@ -45,7 +45,7 @@
                   <div class="form-group" {{ $errors->has('star') ? ' has-error' : '' }}>
                     <select class="form-control" name="star">
                       <option value="">Star</option>
-                      @for($i = 1; $i <= 5; $i++ )
+                      @for($i = App\Model\Hotel::STAR_MIN; $i <= App\Model\Hotel::STAR_MAX; $i++ )
                         <option value="{{ $i }}">{{ $i }}</option>
                       @endfor
                     </select>
@@ -76,19 +76,9 @@
                   <input type="file" class="form-control" name="images[]" id="multiple-image" multiple>
                   <small class=" text-danger">{{ $errors->first('images.*') . $errors->first('images') }}</small>
                   <div id="showImage">
-                    <img class="img-place" id="default-image" src="{{ asset('/images/default/no_image.png') }}">
+                    <img class="img-place" id="default-image" src="{{ asset(config('image.default_thumbnail')) }}">
                   </div>
                 </div>
-                {{-- upload image --}}
-
-                {{-- <div class="form-group">
-                  <input type="file" class="form-control" name='images[]' id="img-upload" multiple="true" placeholder="{{ __('Images') }}">
-                   <div id="preview-img">
-                   </div>
-                   @if($errors->first('images'))
-                      <span class="text-danger">{{$errors->first('images')}}</span>
-                    @endif
-                </div> --}}
               </div>
               <div class="box-footer">
                 <a class="btn btn-default btn-custom" href="javascript:history.back()">

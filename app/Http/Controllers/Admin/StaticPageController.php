@@ -17,7 +17,7 @@ class StaticPageController extends Controller
     {
         $staticPages = StaticPage::select('id', 'title', 'content')
             ->orderby('id', 'DESC')
-            ->paginate();
+            ->paginate(StaticPage::ROW_LIMIT);
         return view('backend.static_pages.index', compact('staticPages'));
     }
 
