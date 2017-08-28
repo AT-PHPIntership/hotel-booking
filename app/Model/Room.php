@@ -5,10 +5,11 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Model\Image;
+use App\Libraries\Traits\SearchTrait;
 
 class Room extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     /**
      * Value paginate of row
@@ -37,6 +38,24 @@ class Room extends Model
         'bed',
         'direction',
         'max_guest',
+    ];
+
+    /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'columns' => [
+            'rooms.name',
+            'rooms.descript',
+            'rooms.direction',
+            'rooms.bed',
+            'rooms.price',
+            'rooms.max_guest',
+            'rooms.size',
+            'rooms.total',
+        ]
     ];
 
     /**
