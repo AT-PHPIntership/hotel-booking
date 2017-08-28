@@ -67,7 +67,7 @@ class ReservationController extends Controller
         $with['room.hotel'] = function ($query) {
             $query->select('hotels.id', 'hotels.name');
         };
-        $reservation = Reservation::select($columns)->with($with) ->findOrFail($id);
+        $reservation = Reservation::select($columns)->with($with)->findOrFail($id);
         return view('backend.bookings.show', compact('reservation'));
     }
 
@@ -100,7 +100,10 @@ class ReservationController extends Controller
         $with['room.hotel'] = function ($query) {
             $query->select('hotels.id', 'hotels.name');
         };
-        $reservation = Reservation::select($columns)->with($with) ->findOrFail($id);
+        $reservation = Reservation::select($columns)->with($with)->findOrFail($id);
+        if ($reservation->status == Reservation::STATUS_CANCELED) {
+            return redirect()->route('reservation.index');
+        }
         $status = Reservation::select('status')
             ->groupby('status')
             ->having('status', '<>', Reservation::STATUS_CANCELED)

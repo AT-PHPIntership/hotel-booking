@@ -128,7 +128,7 @@
                 {{__('Back')}}
               </a>
               @if($reservation->status_label != __('Canceled'))
-                <a href="" class="pull-right btn btn-primary">
+                <a href="{{ route('reservation.edit', $reservation->id) }}" class="pull-right btn btn-primary">
                   {{__('Edit')}}
                 </a>
               @endif
