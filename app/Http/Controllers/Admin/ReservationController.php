@@ -69,4 +69,23 @@ class ReservationController extends Controller
         $reservation = Reservation::select($columns)->with($with) ->findOrFail($id);
         return view('backend.bookings.show', compact('reservation'));
     }
+
+    /**
+     * Delete a booking rooms.
+     *
+     * @param int $id of reservation
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $reservationDelete = Reservation::findOrFail($id)->delete();
+        if ($reservationDelete) {
+            flash(__('Delete Booking Room Success!'))->success();
+            return redirect()->route('reservation.index');
+        } else {
+            flash(__('Delete Booking Room Fail!'))->error();
+            return redirect()->route('reservation.index');
+        }
+    }
 }
