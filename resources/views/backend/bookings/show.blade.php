@@ -3,7 +3,7 @@
 @section('content')
   <div class="content-wrapper">
     <section class="content">
-      <h1 class="title-page">{{__('DETAIL BOOKING ROOM')}}</h1>
+      <h1 class="title-page text-success">{{__('DETAIL BOOKING ROOM')}}</h1>
       <div class="row margin-center">
         <div class="col-md-12">
           <div class="box">
@@ -18,7 +18,9 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->room->hotel->name or '' }}
+                      <a href="{{ route('hotel.show', $reservation->room->hotel_id) }}">
+                        {{$reservation->room->hotel->name or '' }}
+                      </a>
                     </td>
                   </tr>
                   <tr>
@@ -29,7 +31,9 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->room->name or ''}}
+                      <a href="">
+                        {{$reservation->room->name or ''}}
+                      </a>
                     </td>
                   </tr>
                   <tr>
@@ -125,9 +129,7 @@
             </div>
             <div class="box-footer">
               <a href="{{ URL::previous() }}" class="pull-left btn btn-default">Back</a>
-              @if($reservation->status_label != __('Cancel'))
               <a href="" class="pull-right btn btn-primary">Edit</a>
-              @endif
             </div>
           </div>
         </div>

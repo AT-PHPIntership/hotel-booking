@@ -4,10 +4,11 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Libraries\Traits\SearchTrait;
 
 class Reservation extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     /**
      * Declare table
@@ -33,6 +34,23 @@ class Reservation extends Model
     ];
 
     /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'columns' => [
+            'reservations.checkin_date',
+            'reservations.checkout_date',
+            'reservations.status',
+            'rooms.name'
+        ],
+        'joins' => [
+            'rooms' => ['reservations.room_id', 'rooms.id'],
+        ]
+    ];
+
+    /**
      * Define a value paginate rows
      */
     const ROW_LIMIT = 10;
@@ -40,6 +58,7 @@ class Reservation extends Model
     /**
      * Define  value status of reservation
      */
+    const STATUS_PENDING = 0;
     const STATUS_ACCEPTED = 1;
     const STATUS_REJECTED = 2;
     const STATUS_CANCELED = 3;
