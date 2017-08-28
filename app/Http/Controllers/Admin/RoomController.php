@@ -38,6 +38,31 @@ class RoomController extends Controller
     }
 
     /**
+     * Show room of hotel
+     *
+     * @param Hotel $hotel hotel of room
+     * @param int   $id    id of room
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Hotel $hotel, $id)
+    {
+        $columns = [
+            'id',
+            'name',
+            'descript',
+            'price',
+            'size',
+            'total',
+            'max_guest',
+            'hotel_id'
+        ];
+        $room = Room::select($columns)->with(['images'])->findOrFail($id);
+
+        return view('backend.rooms.show', compact('room', 'hotel'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Hotel $hotel hotel of room
