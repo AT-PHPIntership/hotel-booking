@@ -33,7 +33,17 @@ class Hotel extends Model
     */
     public function place()
     {
-        return $this->belongsTo('App\Model\Place', 'place_id');
+        return $this->belongsTo(Place::class, 'place_id');
+    }
+
+    /**
+     * Relationship hasMany with services hotel
+     *
+     * @return array
+    */
+    public function hotelServices()
+    {
+        return $this->hasMany(HotelService::class, 'hotel_id');
     }
 
     /**
@@ -43,6 +53,43 @@ class Hotel extends Model
     */
     public function rooms()
     {
-        return $this->hasMany('App\Model\Room', 'hotel_id');
+        return $this->hasMany(Room::class, 'hotel_id');
+    }
+
+    /**
+     * Relationship hasMany with rating comment
+     *
+     * @return array
+    */
+    public function ratingComments()
+    {
+        return $this->hasMany(RatingComment::class, 'hotel_id');
+    }
+
+    /**
+     * Relationship with hotel's image.
+     *
+     * @return array
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable', 'target', 'target_id');
+    }
+
+    /**
+     * This is a recommended way to declare event handlers
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($hotel) {
+             $hotel->ratingComments()->delete();
+             $hotel->hotelServices()->delete();
+             $hotel->rooms()->delete();
+             $hotel->images()->delete();
+        });
     }
 }

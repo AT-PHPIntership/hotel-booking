@@ -16,6 +16,28 @@ class StaticPage extends Model
      */
     const CREATED_AT = null;
 
+     /**
+     * Value paginate of row
+     */
+    const ROW_LIMIT = 10;
+    
+    /**
+    * The table associated with the model.
+    *
+    * @var string $table connect categories table
+    */
+    protected $table = 'static_pages';
+
+    /**
+    * Return value of parameter
+    *
+    * @var array $fillable get value from input tag
+    */
+    protected $fillable = [
+        'title',
+        'content'
+    ];
+
     /**
      * Return the sluggable configuration array for this model.
      *

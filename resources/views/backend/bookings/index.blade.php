@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li>
-          <a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a>
+          <a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a>
         </li>
         <li class="active">{{__('Booking Rooms')}}</li>
       </ol>
