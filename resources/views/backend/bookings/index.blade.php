@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li>
-          <a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a>
+          <a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a>
         </li>
         <li class="active">{{__('Booking Rooms')}}</li>
       </ol>
@@ -69,10 +69,8 @@
                     <td align="center">
                       <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
-                      @if($reservation->status_label != __('Canceled'))
-                        <a href="{{ route('reservation.edit', $reservation->id) }}" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
-                        </a>
-                      @endif
+                      <a href="{{ route('reservation.edit', $reservation->id) }}" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
+                      </a>
                       <form action="" method="POST" class="inline">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}

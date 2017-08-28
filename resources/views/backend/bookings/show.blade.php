@@ -3,7 +3,7 @@
 @section('content')
   <div class="content-wrapper">
     <section class="content">
-      <h1 class="title-page">{{__('DETAIL BOOKING ROOM')}}</h1>
+      <h1 class="title-page text-success">{{__('DETAIL BOOKING ROOM')}}</h1>
       <div class="row margin-center">
         <div class="col-md-12">
           <div class="box">
@@ -18,7 +18,9 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->room->hotel->name}}
+                      <a href="{{ route('hotel.show', $reservation->room->hotel_id) }}">
+                        {{$reservation->room->hotel->name or '' }}
+                      </a>
                     </td>
                   </tr>
                   <tr>
@@ -29,7 +31,9 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->room->name}}
+                      <a href="">
+                        {{$reservation->room->name or ''}}
+                      </a>
                     </td>
                   </tr>
                   <tr>
@@ -40,7 +44,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->reservable->full_name}}
+                      {{$reservation->reservable->full_name or ''}}
                     </td>
                   </tr>
                   <tr>
@@ -51,7 +55,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->reservable->email}}
+                      {{$reservation->reservable->email or ''}}
                     </td>
                   </tr>
                   <tr>
@@ -62,7 +66,7 @@
                       </strong>
                     </td>
                     <td>
-                      {{$reservation->reservable->phone}}
+                      {{$reservation->reservable->phone or ''}}
                     </td>
                   </tr>
                   <tr>
@@ -127,11 +131,9 @@
               <a href="{{ URL::previous() }}" class="pull-left btn btn-default">
                 {{__('Back')}}
               </a>
-              @if($reservation->status_label != __('Cancel'))
-                <a href="" class="pull-right btn btn-primary">
-                  {{__('Edit')}}
-                </a>
-              @endif
+              <a href="{{ route('reservation.edit', $reservation->id) }}" class="pull-right btn btn-primary">
+                {{__('Edit')}}
+              </a>
             </div>
           </div>
         </div>

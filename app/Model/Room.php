@@ -36,17 +36,27 @@ class Room extends Model
         'total',
         'bed',
         'direction',
-        'max_guest'
+        'max_guest',
     ];
 
     /**
-     * Return the news configuration array for this model.
+     * Get the room's hotel.
      *
      * @return array
     */
     public function hotel()
     {
         return $this->belongsTo(Hotel::class, 'hotel_id');
+    }
+
+    /**
+     * Get the room's reservation.
+     *
+     * @return array
+    */
+    public function reservations()
+    {
+        return $this->hasMany('App\Model\Reservation');
     }
 
     /**
@@ -57,5 +67,20 @@ class Room extends Model
     public function images()
     {
         return $this->morphMany('App\Model\Image', 'imageable', 'target', 'target_id');
+    }
+
+    /**
+     * This is a recommended way to declare event handlers
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($room) {
+             $room->images()->delete();
+             $room->reservations()->delete();
+        });
     }
 }

@@ -1,11 +1,11 @@
 @extends('backend.layouts.main')
-@section('title','Update Reservation')
+@section('title', __('Update Reservation'))
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title-page text-success">
-      {{__('Update Reservation')}}
-    </h1>
     <section class="content">
+      <h1 class="title-page text-success">
+        {{__('Update Reservation')}}
+      </h1>
       <div class="row margin-center">
         <div class="col-md-12">
           <div class="cls-editnews-msg">
@@ -18,57 +18,120 @@
               <div class="box-body">
                 <div class="form-group">
                   <div class="col-md-6">
-                    <h3>
+                    <h4>
+                      <label>{{__('Hotel Name:')}}</label>
+                    </h4>
+                  </div>
+                  <div class="col-md-6">
+                    <h4>
+                      <label>{{$reservation->room->hotel->name or ''}}</label>
+                    </h4>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <h4>
                       <label>{{__('Room:')}}</label>
-                    </h3>
+                    </h4>
                   </div>
                   <div class="col-md-6">
-                    <h3>
-                      <label>{{$reservation->room->name}}</label>
-                    </h3>
+                    <h4>
+                      <label>{{$reservation->room->name or ''}}</label>
+                    </h4>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-md-6">
-                    <h3>
+                    <h4>
+                      <label>{{__('Target:')}}</label>
+                    </h4>
+                  </div>
+                  <div class="col-md-6">
+                    <h4>
+                      <label>{{$reservation->reservable->full_name or ''}}</label>
+                    </h4>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <h4>
+                      <label>{{__('Phone:')}}</label>
+                    </h4>
+                  </div>
+                  <div class="col-md-6">
+                    <h4>
+                      <label>{{$reservation->reservable->phone or ''}}</label>
+                    </h4>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <h4>
+                      <label>{{__('Email:')}}</label>
+                    </h4>
+                  </div>
+                  <div class="col-md-6">
+                    <h4>
+                      <label>{{$reservation->reservable->email or ''}}</label>
+                    </h4>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <h4>
+                      <label>{{__('Quantity:')}}</label>
+                    </h4>
+                  </div>
+                  <div class="col-md-6">
+                    <h4>
+                      <label>{{$reservation->quantity}}</label>
+                    </h4>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <h4>
                       <label>{{__('Check in:')}}</label>
-                    </h3>
+                    </h4>
                   </div>
                   <div class="col-md-6">
-                    <h3>
+                    <h4>
                       <label>{{$reservation->checkin_date}}</label>
-                    </h3>
+                    </h4>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-md-6">
-                    <h3>
+                    <h4>
                       <label>{{__('Check out:')}}</label>
-                    </h3>
+                    </h4>
                   </div>
                   <div class="col-md-6">
-                    <h3>
+                    <h4>
                       <label>{{$reservation->checkout_date}}</label>
-                    </h3>
+                    </h4>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-md-6">
-                    <h3>
+                    <h4>
                       <label>{{__('Status:')}}</label>
-                    </h3>
+                    </h4>
                   </div>
-                  <div class="col-md-6">
-                    <h3>
+                  <div class="col-md-6" {{ $errors->has('status') ? ' has-error' : '' }}>
+                    <h4>
                       <select name="status">
-                      @foreach($status as $value)
-                        <option value="{{$value->status}}" {{$reservation->status_label == $value->status_label ? 'selected' :''}}
-                        >
-                          {{$value->status_label}}
-                        </option>
-                      @endforeach
-                     </select> 
-                    </h3>
+                        @foreach($status as $value)
+                          <option value="{{$value->status}}" {{$reservation->status_label == $value->status_label ? 'selected' :''}}
+                          >
+                            {{$value->status_label}}
+                          </option>
+                        @endforeach
+                      </select>
+                    </h4>
+                    @if($errors->first('status'))
+                      <span class="help-block">{{$errors->first('status')}}</span>
+                    @endif
                   </div>
                 </div>
               <div class="box-footer">  

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Backend\UpdateReservationRequest;
 use App\Http\Controllers\Controller;
 use App\Model\Reservation;
 use App\Model\User;
@@ -20,7 +21,7 @@ class ReservationController extends Controller
     public function index()
     {
         $columns = [
-            'reservations.id',
+            'id',
             'status',
             'room_id',
             'target',
@@ -47,7 +48,7 @@ class ReservationController extends Controller
     public function show($id)
     {
         $columns = [
-            'reservations.id',
+            'id',
             'status',
             'room_id',
             'target',
@@ -57,11 +58,16 @@ class ReservationController extends Controller
             'quantity',
             'request'
         ];
-        $reservation = Reservation::select($columns)
-            ->with(['room' => function ($query) {
-                $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
-            }, 'reservable', 'room.hotel'])
-            ->findOrFail($id);
+        $with['room'] = function ($query) {
+            $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
+        };
+        $with['reservable'] = function ($query) {
+            $query->select('full_name', 'phone', 'email');
+        };
+        $with['room.hotel'] = function ($query) {
+            $query->select('hotels.id', 'hotels.name');
+        };
+        $reservation = Reservation::select($columns)->with($with) ->findOrFail($id);
         return view('backend.bookings.show', compact('reservation'));
     }
 
@@ -73,36 +79,44 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $columns = [
             'id',
             'status',
             'room_id',
+            'target',
+            'target_id',
             'checkin_date',
-            'checkout_date'
+            'checkout_date',
+            'quantity',
+            'request'
         ];
-        $reservation = Reservation::select($columns)
-                    ->with(['room' => function ($query) {
-                        $query->select('rooms.id', 'name');
-                    }])
-                    ->findOrFail($id);        
+        $with['room'] = function ($query) {
+            $query->select('rooms.id', 'rooms.name', 'rooms.hotel_id');
+        };
+        $with['reservable'] = function ($query) {
+            $query->select('full_name', 'phone', 'email');
+        };
+        $with['room.hotel'] = function ($query) {
+            $query->select('hotels.id', 'hotels.name');
+        };
+        $reservation = Reservation::select($columns)->with($with) ->findOrFail($id);
         $status = Reservation::select('status')
             ->groupby('status')
-            ->having('status', '<>', Reservation::STATUS_CANCELED)
             ->get();
         return view('backend.bookings.edit', compact('reservation', 'status'));
     }
 
     /**
-     * Update information of a News
+     * Update status of a booking room.
      *
-     * @param \App\Http\Requests\ $request of form Edit Booking
-     * @param int                                $id      of News
+     * @param \App\Http\Requests\UpdateReservationRequest $request of form update Booking room
+     * @param int                                         $id      of Reservation
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {   
+    public function update(UpdateReservationRequest $request, $id)
+    {
         $reservationUpdate = Reservation::findOrFail($id)->update($request->all());
         if ($reservationUpdate) {
             flash(__('Edit Booking Room Success!'))->success();
