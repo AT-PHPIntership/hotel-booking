@@ -1,6 +1,6 @@
 @extends('backend.layouts.main')
 
-@section('title', __('Static Page'))
+@section('title', __('Static Pages'))
 
 @section('content')
 
@@ -9,11 +9,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ __('Static Page') }}
+        {{ __('Static Pages') }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
-        <li class="active">{{ __('Static Page') }}</li>
+        <li class="active">{{ __('Static Pages') }}</li>
       </ol>
     </section>
 
@@ -23,7 +23,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title title-header">{{ __('Static Content') }}</h3>
+              <h3 class="box-title title-header">{{ __('List Static Pages') }}</h3>
             </div>
            
             <!-- /.box-header -->
@@ -35,8 +35,8 @@
               <thead>
                 <tr>
                   <th class="col-md-1">{{ __('ID') }}</th>
-                  <th >{{ __('Title') }}</th>
-                  <th class="col-md-1">{{ __('Action') }}</th>
+                  <th >{{ __('Title page') }}</th>
+                  <th class="col-md-1 text-center">{{ __('Option') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -45,8 +45,8 @@
                   <td>{{ $staticPage->id }}</td>
                   <td>{{ $staticPage->title }}
                   </td>
-                  <td align="center">
-                    <a href="{{ route('static-page.edit', $staticPage->id) }}"><i class= "fa fa-pencil-square-o cus_icon"></i></a>
+                  <td class="text-center">
+                    <a href="{{ route('static-page.edit', $staticPage->id) }}"><i class= "btn-edit fa fa-pencil-square-o btn-custom-option "></i></a>
                   </td>
                 </tr>
               @endforeach

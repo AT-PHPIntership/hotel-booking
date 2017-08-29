@@ -36,7 +36,7 @@
                   <th>{{ __('Hotel Name') }}</th>
                   <th>{{ __('Total Rating') }}</th> 
                   <th>{{ __('Created At') }}</th> 
-                  <th>{{ __('Options') }}</th> 
+                  <th class="text-center">{{ __('Options') }}</th> 
                 </tr>
               </thead>
               <tbody>
@@ -50,14 +50,16 @@
                     <td>{{ $ratingComment->total_rating }}</td> 
                     <td>{{ $ratingComment->created_at }}</td> 
                     <td align="center">
-                      <form class="delete-item" method="POST" action="{{ route('comment.destroy', $ratingComment->id) }}">
-                        {!! csrf_field() !!}
-                        {{ method_field('DELETE') }}
-                        <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
-                        data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
-                        data-confirm="{{ __('Are you sure you want to delete?') }}">
-                        </button>
-                      </form>
+                      <div class=" text-center">
+                        <form class="delete-item" method="POST" action="{{ route('comment.destroy', $ratingComment->id) }}">
+                          {!! csrf_field() !!}
+                          {{ method_field('DELETE') }}
+                          <button type="submit" class="btn-custom-option btn btn-delete-item fa fa-trash-o"  
+                          data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
+                          data-confirm="{{ __('Are you sure you want to delete?') }}">
+                          </button>
+                        </form>
+                      </div>  
                     </td>
                   </tr>
                 @endforeach

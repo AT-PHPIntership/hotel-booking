@@ -3,7 +3,7 @@
 @section('content')
   <div class="content-wrapper">
     <section class="content">
-      <h1 class="title-page">{{__('DETAIL BOOKING ROOM')}}</h1>
+      <h1 class="title-page text-success">{{__('DETAIL BOOKING ROOM')}}</h1>
       <div class="row margin-center">
         <div class="col-md-12">
           <div class="box">

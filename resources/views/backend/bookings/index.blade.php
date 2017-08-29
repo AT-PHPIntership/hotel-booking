@@ -67,20 +67,22 @@
                     <td>{{$reservation->checkout_date}}</td>
                     <td>{{$reservation->status_label}}</td>
                     <td align="center">
-                      <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
-                      </a>
-                      @if($reservation->status_label != __('Canceled'))
-                        <a href="" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
+                      <div class="text-center">
+                        <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn btn-custom-option">
                         </a>
-                      @endif
-                      <form action="" method="POST" class="inline">
-                        {{csrf_field()}}
-                        {{method_field('DELETE')}}
-                        <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-right"  
-                         data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
-                            data-confirm="{{ __('Are you sure you want to delete?') }}">
-                        </button>
-                      </form>
+                        @if($reservation->status_label != __('Canceled'))
+                          <a href="" class="btn fa fa-pencil-square-o news-btn center-block btn-custom-option" data-original-title="Edit" data-toggle="tooltip" >
+                          </a>
+                        @endif
+                        <form action="" method="POST" class="inline">
+                          {{csrf_field()}}
+                          {{method_field('DELETE')}}
+                          <button type="submit" class=" btn-custom-option news-btn fa fa-trash-o btn-delete-item pull-right"  
+                           data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
+                              data-confirm="{{ __('Are you sure you want to delete?') }}">
+                          </button>
+                        </form>
+                      </div>
                     </td>
                   </tr>
                   @endforeach
