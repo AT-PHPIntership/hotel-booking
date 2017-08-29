@@ -20,7 +20,7 @@ class ReservationController extends Controller
     public function index()
     {
         $columns = [
-            'reservations.id',
+            'id',
             'status',
             'room_id',
             'target',
@@ -47,7 +47,7 @@ class ReservationController extends Controller
     public function show($id)
     {
         $columns = [
-            'reservations.id',
+            'id',
             'status',
             'room_id',
             'target',
@@ -71,7 +71,7 @@ class ReservationController extends Controller
     }
 
     /**
-     * Delete a booking room.
+     * Delete a booking rooms.
      *
      * @param int $id of reservation
      *

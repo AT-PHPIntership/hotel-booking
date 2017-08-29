@@ -28,22 +28,18 @@ class AdminDeleteBookingTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-            for ($i=1, $j=10; $i <= 10; $i++) { 
-                $browser->visit('/admin/reservation');
-                $status = $browser->text('#table-contain tbody tr:nth-child('.$j. ') td:nth-child(7)');
-                $id = $browser->text('#table-contain tbody tr:nth-child('.$j. ') td:nth-child(1)');
-                if ($status == 'Canceled') {
-                    $browser->click('#table-contain tbody tr:nth-child('.$j. ') td:nth-child(8) .fa-trash-o')
-                            ->waitForText('Confirm deletion!')
-                            ->press('Delete')
-                            ->assertSee('Delete Booking Room Success!')
-                            ->assertPathIs('/admin/reservation');
-                    $browser->assertDontSeeIn('#table-contain tbody tr:nth-child('.$j. ') td:nth-child(1)', $id);
-                    $this->assertSoftDeleted('reservations', [
-                    'id' => $id]); 
-                }
-                $j--;
+            $reservation = Reservation::find(10);
+            $browser->visit('/admin/reservation')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-trash-o')
+                    ->waitForText('Confirm deletion!')
+                    ->press('Delete')
+                    ->assertSee('Delete Booking Room Success!')
+                    ->assertPathIs('/admin/reservation');
+            for ($i=1; $i < 10; $i++) { 
+                $browser->assertDontSeeIn('#table-contain tbody tr:nth-child('.$i.') td:nth-child(1)', $reservation->id);
             }
+            $this->assertSoftDeleted('reservations', [
+            'id' => $reservation->id]); 
         });
     }
 
@@ -56,20 +52,14 @@ class AdminDeleteBookingTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-            for ($i=1, $j=10; $i <= 10; $i++) { 
-                $browser->visit('/admin/reservation');
-                $status = $browser->text('#table-contain tbody tr:nth-child('.$j. ') td:nth-child(7)');
-                $id = $browser->text('#table-contain tbody tr:nth-child('.$j. ') td:nth-child(1)');
-                if ($status == 'Canceled') {
-                    Reservation::find($id)->delete();
-                    $browser->click('#table-contain tbody tr:nth-child('.$j. ') td:nth-child(8) .fa-trash-o')
-                            ->waitForText('Confirm deletion!')
-                            ->press('Delete')
-                            ->assertSee('404 - Page Not found')
-                            ->assertPathIs('/admin/reservation/' .$id);
-                }
-                $j--;
-            }
+            $reservation = Reservation::find(10);
+            $browser->visit('admin/reservation')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-trash-o');
+            $reservation->delete();
+            $browser->waitForText('Confirm deletion!')
+                    ->press('Delete')
+                    ->assertSee('404 - Page Not found')
+                    ->assertPathIs('/admin/reservation/' .$reservation->id);
         });
     }
 
