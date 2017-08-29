@@ -17,6 +17,22 @@ class HotelService extends Model
     const UPDATED_AT = null;
 
     /**
+     * Declare table
+     *
+     * @var string $tabel table name
+     */
+    protected $table = 'hotel_services';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array $fillable
+     */
+    protected $fillable = [
+        'hotel_id', 'service_id'
+    ];
+
+    /**
      * Relationship with service model
      *
      * @return \App\Model

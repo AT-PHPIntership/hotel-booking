@@ -9,6 +9,8 @@ use App\Model\Place;
 use App\Model\Service;
 use App\Model\Image;
 use App\Model\HotelService;
+use App\Http\Requests\Backend\HotelCreateRequest;
+use Illuminate\Http\Response;
 
 class HotelController extends Controller
 {
@@ -19,17 +21,71 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::
-            select('id', 'name', 'address', 'star', 'place_id', 'created_at')
-            ->with(['place' => function ($query) {
-                $query->select('id', 'name');
-            }])
-            ->with(['rooms' => function ($query) {
-                $query->select('hotel_id', 'id');
-            }])
-            ->paginate(Hotel::ROW_LIMIT);
+        $columns = [
+            'hotels.id',
+            'hotels.name',
+            'address',
+            'star',
+            'place_id',
+            'hotels.created_at'
+        ];
 
+        $hotels = Hotel::search()
+            ->select($columns)
+            ->orderby('hotels.id', 'DESC')
+            ->paginate(Hotel::ROW_LIMIT)
+            ->appends(['search' => request('search')]);
+        
         return view('backend.hotels.index', compact('hotels'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $columns = [
+            'id',
+            'name'
+        ];
+        $places = Place::select($columns)->get();
+        $services = Service::select($columns)->get();
+
+        return view('backend.hotels.create', compact('places', 'services'));
+    }
+
+    /**
+     * Save creating hotel
+     *
+     * @param HotelCreateRequest $request Request create
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(HotelCreateRequest $request)
+    {
+        // create hotel.
+        $hotel = new Hotel($request->except(['services', 'images']));
+        $result = $hotel->save();
+
+        //make data hotel services
+        $hotelServices = array();
+        foreach ($request->services as $serviceId) {
+            array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+        }
+        //save hotel services
+        $hotel->hotelServices()->saveMany($hotelServices);
+
+        Image::storeImages($request->images, 'hotel', $hotel->id, config('image.hotels.path_upload'));
+
+        if ($result) {
+            flash(__('Create success'))->success();
+            return redirect()->route('hotel.index');
+        } else {
+            flash(__('Create failure'))->error();
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
