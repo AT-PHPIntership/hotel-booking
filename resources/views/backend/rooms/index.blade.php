@@ -41,7 +41,7 @@
                 </div>
                 <!-- end search -->
                 <div class="contain-btn pull-right">
-                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary" id="btn-add-room">
+                  <a href="{{ route('room.create', $hotel->id) }}" class="btn btn-primary" id="btn-add-room">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 
@@ -69,7 +69,7 @@
                   <td class="text-center col-image">
                     <div class="place-image-show">
                       <img class="img-place" 
-                        src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset('images/default/room.jpg') }}" >
+                        src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset(config('image.no_image')) }}" >
                     </div>
                   </td>
                   <td class="text-center">{{ $room->name }}</td>
@@ -98,7 +98,7 @@
                </tbody>
               </table>
                 <div class="contain-btn second pull-right">
-                  <a href="{{ route('room.create', request()->id) }}" class="btn btn-primary">
+                  <a href="{{ route('room.create', $hotel->id) }}" class="btn btn-primary">
                     <span class="fa fa-plus-circle" aria-hidden="true"></span>
                     {{ __('Add Room') }}
                   </a> 

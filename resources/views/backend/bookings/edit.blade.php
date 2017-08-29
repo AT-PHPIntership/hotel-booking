@@ -121,10 +121,10 @@
                   <div class="col-md-6" {{ $errors->has('status') ? ' has-error' : '' }}>
                     <h4>
                       <select name="status">
-                        @foreach($status as $value)
-                          <option value="{{$value->status}}" {{$reservation->status_label == $value->status_label ? 'selected' :''}}
+                        @foreach(App\Model\Reservation::$availableStatuses as $status => $value)
+                          <option value="{{$value}}" {{$reservation->status_label == $status ? 'selected' :''}}
                           >
-                            {{$value->status_label}}
+                            {{$status}}
                           </option>
                         @endforeach
                       </select>
