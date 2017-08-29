@@ -69,7 +69,7 @@
                   <td class="text-center col-image">
                     <div class="place-image-show">
                       <img class="img-place" 
-                        src="{{ isset($room->images[0]->path)? asset($room->images[0]->path): asset(config('image.no_image')) }}" >
+                        src="{{ isset($room->images[0])? asset($room->images[0]->path): asset(config('image.no_image')) }}" >
                     </div>
                   </td>
                   <td class="text-center">{{ $room->name }}</td>
@@ -79,7 +79,7 @@
                   <td class="text-center">{{ $room->max_guest }}</td>
                   <td class="text-center col-action">
                     <div class="btn-option text-center">
-                      <a href="#" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
+                      <a href="{{ route('room.edit', [$hotel->id, $room->id]) }}" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
                         <i class="" aria-hidden="true"></i>
                       </a>
                       <form  class="form-delete" method="post" action="{{ route('room.destroy', [$hotel->id, $room->id]) }}">
