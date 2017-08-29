@@ -19,16 +19,21 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::
-            select('id', 'name', 'address', 'star', 'place_id', 'created_at')
-            ->with(['place' => function ($query) {
-                $query->select('id', 'name');
-            }])
-            ->with(['rooms' => function ($query) {
-                $query->select('hotel_id', 'id');
-            }])
-            ->paginate(Hotel::ROW_LIMIT);
+        $columns = [
+            'hotels.id',
+            'hotels.name',
+            'address',
+            'star',
+            'place_id',
+            'hotels.created_at'
+        ];
 
+        $hotels = Hotel::search()
+            ->select($columns)
+            ->orderby('hotels.id', 'DESC')
+            ->paginate(Hotel::ROW_LIMIT)
+            ->appends(['search' => request('search')]);
+        
         return view('backend.hotels.index', compact('hotels'));
     }
 

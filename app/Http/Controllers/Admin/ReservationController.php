@@ -31,8 +31,8 @@ class ReservationController extends Controller
         $reservations = Reservation::search()
                     ->select($columns)
                     ->orderby('reservations.id', 'DESC')
-                    ->paginate(Reservation::ROW_LIMIT);
-        $reservations->appends(['search' => request('search')]);
+                    ->paginate(Reservation::ROW_LIMIT)
+                    ->appends(['search' => request('search')]);
         return view('backend.bookings.index', compact('reservations'));
     }
 
