@@ -47,14 +47,14 @@ class Room extends Model
      */
     protected $searchableFields = [
         'columns' => [
-            'rooms.name',
-            'rooms.descript',
-            'rooms.direction',
-            'rooms.bed',
-            'rooms.price',
-            'rooms.max_guest',
-            'rooms.size',
-            'rooms.total',
+            'name',
+            'descript',
+            'direction',
+            'bed',
+            'price',
+            'max_guest',
+            'size',
+            'total',
         ]
     ];
 

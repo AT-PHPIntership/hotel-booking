@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Backend\HotelIdRequest;
 use App\Http\Controllers\Controller;
 use App\Model\Room;
 use App\Model\Hotel;
+use App\Model\Image;
+use App\Http\Requests\Backend\CreateRoomRequest;
 
 class RoomController extends Controller
 {
@@ -37,6 +38,41 @@ class RoomController extends Controller
             ->paginate(Room::ROW_LIMIT)
             ->appends(['search' => request('search')]);
         return view('backend.rooms.index', compact('rooms', 'hotel'));
+    }
+
+    /**
+     * Show the form for creating a new room.
+     *
+     * @param Hotel $hotel hotel of room
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Hotel $hotel)
+    {
+        return view('backend.rooms.create', compact('hotel'));
+    }
+
+    /**
+     * Store a newly created room in storage.
+     *
+     * @param Admin\CreateRoomRequest $request request from view
+     * @param Hotel                   $hotel   hotel of room
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateRoomRequest $request, Hotel $hotel)
+    {
+        $room = new Room($request->all());
+        $room->hotel_id = $hotel->id;
+        if ($room->save()) {
+            flash(__('Creation successful!'))->success();
+        } else {
+            //If fail, back to create page and dont save image
+            flash(__('Creation failure!'))->error();
+            return redirect()->back()->withInput();
+        }
+        Image::storeImages($request->images, 'room', $room->id, config('image.rooms.path_upload'));
+        return redirect()->route('room.index', $hotel->id);
     }
 
     /**
