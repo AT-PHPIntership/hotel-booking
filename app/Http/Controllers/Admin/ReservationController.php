@@ -101,10 +101,7 @@ class ReservationController extends Controller
             $query->select('hotels.id', 'hotels.name');
         };
         $reservation = Reservation::select($columns)->with($with)->findOrFail($id);
-        $status = Reservation::select('status')
-            ->groupby('status')
-            ->get();
-        return view('backend.bookings.edit', compact('reservation', 'status'));
+        return view('backend.bookings.edit', compact('reservation'));
     }
 
     /**

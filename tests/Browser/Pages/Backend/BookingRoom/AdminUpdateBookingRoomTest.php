@@ -12,7 +12,6 @@ use App\Model\Place;
 use App\Model\Guest;
 use App\Model\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
 class AdminUpdateBookingRoomTest extends DuskTestCase
@@ -52,7 +51,7 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
                     ->assertPathIs('/admin/reservation/' .$reservation->id)
                     ->clickLink('Edit')
                     ->assertSee('Update Reservation')
-                    ->assertPathIs('/admin/reservation/'.$reservation->id.'/edit');
+                    ->assertPathIs('/admin/reservation/' .$reservation->id. '/edit');
         });
     }
 
@@ -120,11 +119,10 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
             $reservation = Reservation::find(10);
-                $browser->visit('/admin/reservation')
-                        ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-pencil-square-o');
+            $browser->visit('/admin/reservation')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-pencil-square-o');
             $reservation->delete();
-            $browser->select('status')
-                    ->press('Submit')
+            $browser->press('Submit')
                     ->assertSee('404 - Page Not found')
                     ->assertPathIs('/admin/reservation/' .$reservation->id);
         });
