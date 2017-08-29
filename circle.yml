@@ -24,6 +24,9 @@ test:
     # phpunit
     # - ./vendor/bin/phpunit
     # laravel dusk
-    - php artisan dusk tests/Browser/Pages/Backend/Users/AdminShowUserTest.php
+    - php artisan dusk  
+    
+
     # Copy screenshots
+    - cp -R storage/logs $CIRCLE_ARTIFACTS/logs
     - cp -R tests/Browser/screenshots $CIRCLE_ARTIFACTS/screenshots

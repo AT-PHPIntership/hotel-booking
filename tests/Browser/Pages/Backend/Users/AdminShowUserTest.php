@@ -12,37 +12,6 @@ class AdminShowUserTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * Test Value For Each Input In Show Page.
-     *
-     * @return void
-     */
-    public function testValueShowUser()
-    {
-        factory(User::class, 5)->create();
-        $user = User::find(4);
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit('/admin/user')
-                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a')
-                    ->assertPathIs('/admin/user/'.$user->id)
-                    ->assertSee('User Information')
-                    ->assertInputValue('username', $user->username)
-                    ->assertSee($user->full_name)
-                    ->assertSee($user->email)
-                    ->assertSee($user->phone);
-            if ($user->is_admin == 1) {
-                $browser->assertSee('Admin');
-            } else {
-                $browser->assertSee('User');
-            }
-            if ($user->is_active == 1) {
-                $browser->assertSee('Actived');
-            } else {
-                $browser->assertSee('Disabled');
-            }
-        });
-    }
-
-    /**
      * Test 404 Page Not found when click Show User.
      *
      * @return void
@@ -97,6 +66,37 @@ class AdminShowUserTest extends DuskTestCase
                     ->press('Back')
                     ->assertPathIs('/admin/user')
                     ->assertSee('List Users');
+        });
+    }
+
+    /**
+     * Test Value For Each Input In Show Page.
+     *
+     * @return void
+     */
+    public function testValueShowUser()
+    {
+        factory(User::class, 5)->create();
+        $user = User::find(4);
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->visit('/admin/user')
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a')
+                    ->assertPathIs('/admin/user/'.$user->id)
+                    ->assertSee('User Information')
+                    ->assertInputValue('username', $user->username)
+                    ->assertSee($user->full_name)
+                    ->assertSee($user->email)
+                    ->assertSee($user->phone);
+            if ($user->is_admin == 1) {
+                $browser->assertSee('Admin');
+            } else {
+                $browser->assertSee('User');
+            }
+            if ($user->is_active == 1) {
+                $browser->assertSee('Actived');
+            } else {
+                $browser->assertSee('Disabled');
+            }
         });
     }
 }
