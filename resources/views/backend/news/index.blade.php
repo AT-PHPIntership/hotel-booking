@@ -3,8 +3,7 @@
 @section('content')
   <div class="content-wrapper">
     <section class="content-header">
-      <h1>{{__('List News of Hotel')}}
-        <small>{{__('News')}}</small>
+      <h1>{{__('Management News')}}
       </h1>
       <ol class="breadcrumb">
         <li>
@@ -18,8 +17,8 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <div class="title-news">
-                <h3 class="box-title">{{__('Search News')}}</h3>
+              <div class="title-news mb-10">
+                <h3 class="box-title title-header">{{__('List News ')}}</h3>
               </div>
               <div class="col-md-6">
                 <form  class="container-search cls-search">
@@ -44,9 +43,9 @@
                 <tr>
                   <th>{{__('Id')}}</th>
                   <th>{{__('Title')}}</th>
-                  <th>{{__('Content')}}</th>
+                  <th>{{__('content')}}</th>
                   <th>{{__('Category')}}</th>
-                  <th class="text-center">{{__('Option')}}</th>
+                  <th class=" col-md-1 text-center">{{__('Option')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -56,37 +55,38 @@
                     <td>{{$item->title}}</td>
                     <td>{{$item->content}}</td>
                     <td>{{$item->name}}</td>
-                    <td align="center">
-                      <div class="news-option">
-                        <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left" data-original-title="Edit" data-toggle="tooltip">
+                    <td class="text-center">
+                      <div class="btn-option text-center">
+                        <a href="{{ route('news.edit',$item->slug) }}" class="btn fa fa-pencil-square-o news-btn pull-left btn-custom-option" data-original-title="Edit" data-toggle="tooltip">
                         </a>
-                        <form action="{{ route('news.destroy',$item->id) }}" method="POST" class="inline">
+                        <form action="{{ route('news.destroy',$item->id) }}" 
+                          method="POST" class="inline">
                           {{csrf_field()}}
                           {{method_field('DELETE')}}
-                          <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-left"  
-                           data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
-                              data-confirm="{{ __('Are you sure you want to delete?') }}">
+                          <button type="submit" class="news-btn fa fa-trash-o 
+                            btn-delete-item pull-left btn-custom-option"  
+                            data-original-title="Delete" data-toggle="tooltip"
+                            data-title="{{ __('Confirm deletion!') }}"
+                            data-confirm="{{ __('Are you sure you want to delete?') }}">
                           </button>
                         </form>
-                        <a href="" class="btn fa fa-upload news-btn pull-left" data-original-title="Upload Image" data-toggle="tooltip" >
-                        </a>
                       </div>
                     </td>
                   </tr>
                   @endforeach
                 </tbody>
               </table>
+              <div class="cls-searchnews-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
+              <div class="contain-btn second pull-right">
+                <a href="{{ route('news.create') }}" class="btn btn-primary">
+                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                  {{__('Add News')}}
+                </a> 
+              </div>
               {{$news->render()}}
             </div>
-            <div class="cls-searchnews-not-found" hidden="">
-              <h1 class="text-center">{{__('Data Not Found!')}}</h1>
-            </div>
-          </div>
-          <div>
-            <a href="{{ route('news.create') }}" class="btn btn-primary pull-right">
-              <i class="fa fa-plus-circle"></i>
-              {{__('Add News')}}
-            </a>
           </div>
         </div>
       </div>

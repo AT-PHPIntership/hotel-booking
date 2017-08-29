@@ -1,20 +1,17 @@
 @extends('backend.layouts.main')
 @section('title', __('Update Category'))
 @section('content')
- <div class="content-wrapper">
-      <h1 class="title_page text-success">
+  <div class="content-wrapper">
+    <!-- Main content -->
+     <section class="content">
+      <h1 class="title-page text-success">
         {{ __('Update Category') }}
       </h1>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row margin_center col-md-12">
-        <!-- left column -->
+      <div class="row margin-center">
         <div class="col-md-12">
-          <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title lead">{{ __('Enter Information') }}</h3>
+              <h3 class="box-title lead">{{ __('Enter information') }}</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

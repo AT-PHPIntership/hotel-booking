@@ -26,14 +26,11 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title title-header">
-                {{ __('List place') }}
-              </h3>
-            </div>
-            
-            <!-- /.box-header -->
-            <div class="box-body">
-              @include('flash::message')
+              <div class="title-place mb-10">
+                <h3 class="box-title title-header">
+                  {{ __('List place') }}
+                </h3>
+              </div>  
               <div class="row">
                 <div class="col-md-6 container-search ">
                   <form class="container-search" method="GET" action="{{ route('place.index') }}">
@@ -48,16 +45,21 @@
                   </a> 
                 </div>
               </div>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+              @include('flash::message')
+              
               @include('backend.layouts.partials.modal')
               <table id="table-contain" class="table table-bordered table-striped
                 table-responsive">
                 <thead>
                   <tr>
-                    <th class="text-center">{{ __('ID') }}</th>
-                    <th class="text-center">{{ __('Image') }}</th>
-                    <th class="text-center">{{ __('Name') }}</th>
-                    <th class="text-center">{{ __('Description') }}</th>
-                    <th class="text-center">{{ __('Option') }}</th>
+                    <th class="text-center col-md-1">{{ __('ID') }}</th>
+                    <th class="text-center col-md-2">{{ __('Image') }}</th>
+                    <th>{{ __('Name') }}</th>
+                    <th class="text-center col-md-2">{{ __('Option') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -76,7 +78,6 @@
                           {{ $place->name }}
                         </a>
                       </td>
-                      <td class="col-descript">{{ $place->descript }}</td>
                       <td class="text-center col-action">
                         <div class="btn-option text-center">
                           <a href="{{ route('place.edit', $place->id) }}" class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left">
@@ -85,7 +86,7 @@
                           <form  class="form-delete" method="post" action="{{ route('place.destroy', $place->id) }}">
                             {!! csrf_field() !!}
                             {{ method_field('DELETE') }}
-                            <button class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
+                            <button class="btn-custom-option btn btn-delete-item fa fa-trash-o"
                               data-title="{{ __('Confirm deletion!') }}"
                               data-confirm="{{ __('Are you sure you want to delete?') }}" 
                               type="submit" >

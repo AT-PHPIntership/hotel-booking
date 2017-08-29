@@ -244,9 +244,13 @@
 .btn-search {
     position: absolute;
     top: 0px;
+    margin-left: 3px;
 }
 .cls-searchnews-not-found {
-    color: #ed8910;
+    margin-top: 10px;
+    font-size: 20px;
+    color: red;
+    font-family: cursive;
 }
 /*end search*/
 .btn-on {
@@ -272,6 +276,9 @@
 
 .mt-20 {
     margin-top: 20px;
+}
+.mb-10 {
+    margin-bottom: 10px;
 }
 
 .mlr-0 {
@@ -310,7 +317,11 @@
 /*-- ./Show detail place --*/
 
 .cls-search-not-found {
+    margin-top: 10px;
     font-size: 20px;
     color: red;
     font-family: cursive;
+}
+.cls-image-place { 
+    margin-top: 10px;
 }

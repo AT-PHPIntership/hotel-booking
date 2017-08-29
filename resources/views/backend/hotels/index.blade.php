@@ -4,14 +4,11 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      {{ __('Hotels managment') }}
-      <small>
-        {{ __('List of hotels') }}
-      </small>
+      {{ __('Hotels management') }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home') }}</a></li>
-      <li class="active">{{ __('List of hotels') }}</li>
+      <li class="active">{{ __('Hotels') }}</li>
     </ol>
   </section>
 
@@ -21,7 +18,7 @@
      <div class="col-xs-12">
        <div class="box">
           <div class="box-header">
-            <h3 class="box-title">{{ __('Table hotel detail') }}</h3>
+            <h3 class="box-title title-header">{{ __('List of hotels') }}</h3>
             @include('flash::message')
             @include('backend.layouts.partials.modal')
           </div>
@@ -48,7 +45,7 @@
                   <th>{{ __('Star') }}</th>
                   <th>{{ __('Total Rooms') }}</th>
                   <th>{{ __('Created At') }}</th>
-                  <th>{{ __('Options') }}</th>
+                  <th class="text-center">{{ __('Options') }}</th>
                 </tr>
               </thead>
               <tbody>
