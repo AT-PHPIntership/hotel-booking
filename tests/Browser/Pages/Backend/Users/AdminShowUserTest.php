@@ -43,6 +43,24 @@ class AdminShowUserTest extends DuskTestCase
     }
 
     /**
+     * Test 404 Page Not found when click Show User.
+     *
+     * @return void
+     */
+    public function test404PageForClickShow()
+    {   
+        factory(User::class, 5)->create();
+        $user = User::find(4);
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->visit('/admin/user')
+                    ->assertSee('List Users');
+            $user->delete();
+            $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a');
+            $browser->assertSee('404 - Page Not found');
+        });
+    }
+
+    /**
      * Test Button Edit
      *
      * @return void
@@ -79,24 +97,6 @@ class AdminShowUserTest extends DuskTestCase
                     ->press('Back')
                     ->assertPathIs('/admin/user')
                     ->assertSee('List Users');
-        });
-    }
-
-    /**
-     * Test 404 Page Not found when click Show User.
-     *
-     * @return void
-     */
-    public function test404PageForClickShow()
-    {   
-        factory(User::class, 5)->create();
-        $user = User::find(4);
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit('/admin/user')
-                    ->assertSee('List User');
-            $user->delete();
-            $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a');
-            $browser->assertSee('404 - Page Not found');
         });
     }
 }
