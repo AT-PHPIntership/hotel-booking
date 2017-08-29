@@ -20,35 +20,7 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * Test show link edit reservation in page index.
-     *
-     * @return void
-     */
-    public function testShowLinkEditReservation()
-    {   
-        $this->makeData(10);
-        $this->browse(function (Browser $browser) {
-            for ($i=1; $i <= 10; $i++) {
-                $browser->visit('/admin/reservation');
-                $status = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(7)');
-                $element = $browser->element('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(8) a:nth-child(2)')->getAttribute('class');
-                $value = explode(' ', $element);
-                if ($status != 'Canceled') {
-                    count($value) == 5;
-                    $browser->assertPathIs('/admin/reservation')
-                            ->assertSee('List Booking Rooms');      
-                } 
-                else {
-                    count($value) == 6;
-                    $browser->assertPathIs('/admin/reservation')
-                            ->assertSee('List Booking Rooms');
-                }
-            }
-        });
-    }
-
-    /**
-     * Test route page edit a booking room in page index booking room.
+     * Test route page edit a booking room in page index.
      *
      * @return void
      */
@@ -56,21 +28,16 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-            for ($i=1; $i <= 10; $i++) { 
-                $browser->visit('/admin/reservation');
-                $status = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(7)');
-                $id = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(1)');
-                if ($status != 'Canceled') {
-                    $browser->click('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(8) .fa-pencil-square-o')
-                        ->assertSee('Update Reservation')
-                        ->assertPathIs('/admin/reservation/'.$id.'/edit');
-                }
-            }
+            $reservation = Reservation::find(10);
+            $browser->visit('/admin/reservation')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) a:nth-child(2)')
+                    ->assertSee('Update Reservation')
+                    ->assertPathIs('/admin/reservation/' .$reservation->id. '/edit');
         });
     }
 
     /**
-     * Test route page edit a booking room in page show  a booking room.
+     * Test route page edit a booking room in page show detail booking room.
      *
      * @return void
      */
@@ -78,18 +45,14 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-            
-            for ($i=1; $i <= 10; $i++) { 
-                $browser->visit('/admin/reservation');
-                $status = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(7)');
-                $id = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(1)');
-                if ($status != 'Canceled') {
-                    $browser->click('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(8) .fa-search-plus')
-                            ->clickLink('Edit')
-                            ->assertSee('Update Reservation')
-                            ->assertPathIs('/admin/reservation/'.$id. '/edit');
-                }
-            }
+            $reservation = Reservation::find(10);
+            $browser->visit('/admin/reservation')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) a:nth-child(1)')
+                    ->assertSee('DETAIL BOOKING ROOM')
+                    ->assertPathIs('/admin/reservation/' .$reservation->id)
+                    ->clickLink('Edit')
+                    ->assertSee('Update Reservation')
+                    ->assertPathIs('/admin/reservation/'.$reservation->id.'/edit');
         });
     }
 
@@ -102,18 +65,12 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/reservation');
-            for ($i=1; $i <= 10; $i++) { 
-                $status = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(7)');
-                $id = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(1)');
-                if ($status != 'Canceled') {
-                    $browser->click('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(8) .fa-pencil-square-o')
-                            ->select('status')
-                            ->press('Submit')
-                            ->assertSee('Edit Booking Room Success!')
-                            ->assertPathIs('/admin/reservation');
-                }
-            }
+            $browser->visit('/admin/reservation')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-pencil-square-o')
+                    ->select('status')
+                    ->press('Submit')
+                    ->assertSee('Edit Booking Room Success!')
+                    ->assertPathIs('/admin/reservation');
         });
     }
 
@@ -126,19 +83,13 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-        
-            for ($i=1; $i <= 10; $i++) {
-                $browser->visit('/admin/reservation');
-                $status = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(7)');
-                $id = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(1)');
-                if ($status != 'Canceled') {
-                    $browser->click('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(8) .fa-pencil-square-o')
-                            ->select('status')
-                            ->press('Reset')
-                            ->assertSee($status)
-                            ->assertPathIs('/admin/reservation/' .$id. '/edit');
-                }
-            }
+            $reservation = Reservation::find(10);
+            $browser->visit('/admin/reservation')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-pencil-square-o')
+                    ->select('status')
+                    ->press('Reset')
+                    ->assertSee($reservation->status_label)
+                    ->assertPathIs('/admin/reservation/' .$reservation->id. '/edit');
         });
     }
 
@@ -151,17 +102,11 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/reservation');
-            for ($i=1; $i <= 10; $i++) { 
-                $status = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(7)');
-                $id = $browser->text('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(1)');
-                if ($status != 'Canceled') {
-                    $browser->click('#table-contain tbody tr:nth-child('.$i. ') td:nth-child(8) .fa-pencil-square-o')
-                            ->clickLink('Back')
-                            ->assertSee('List Booking Rooms')
-                            ->assertPathIs('/admin/reservation');
-                }
-            }
+            $browser->visit('/admin/reservation')
+                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-pencil-square-o')
+                    ->clickLink('Back')
+                    ->assertSee('List Booking Rooms')
+                    ->assertPathIs('/admin/reservation');
         });
     }
 
@@ -174,20 +119,14 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-            for ($i=1, $j=10; $i <= 10; $i++) {
-                $browser->visit('/admin/reservation');
-                $status = $browser->text('#table-contain tbody tr:nth-child(' .$j. ') td:nth-child(7)');
-                $id = $browser->text('#table-contain tbody tr:nth-child(' .$j. ') td:nth-child(1)');
-                if ($status != 'Canceled') {
-                    $browser->click('#table-contain tbody tr:nth-child(' .$j. ') td:nth-child(8) .fa-pencil-square-o');
-                    Reservation::find($id)->delete();
-                    $browser->select('status')
-                            ->press('Submit')
-                            ->assertSee('404 - Page Not found')
-                            ->assertPathIs('/admin/reservation/' .$id);
-                }
-                $j--;
-            }
+            $reservation = Reservation::find(10);
+                $browser->visit('/admin/reservation')
+                        ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-pencil-square-o');
+            $reservation->delete();
+            $browser->select('status')
+                    ->press('Submit')
+                    ->assertSee('404 - Page Not found')
+                    ->assertPathIs('/admin/reservation/' .$reservation->id);
         });
     }    
 

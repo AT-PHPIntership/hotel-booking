@@ -21,7 +21,7 @@ class ReservationController extends Controller
     public function index()
     {
         $columns = [
-            'reservations.id',
+            'id',
             'status',
             'room_id',
             'target',
@@ -48,7 +48,7 @@ class ReservationController extends Controller
     public function show($id)
     {
         $columns = [
-            'reservations.id',
+            'id',
             'status',
             'room_id',
             'target',
@@ -72,7 +72,7 @@ class ReservationController extends Controller
     }
 
     /**
-     * Display a page update status booking room.
+     * Display a page update status booking rooms.
      *
      * @param int $id of reservation
      *
@@ -81,7 +81,7 @@ class ReservationController extends Controller
     public function edit($id)
     {
         $columns = [
-            'reservations.id',
+            'id',
             'status',
             'room_id',
             'target',
@@ -101,12 +101,8 @@ class ReservationController extends Controller
             $query->select('hotels.id', 'hotels.name');
         };
         $reservation = Reservation::select($columns)->with($with)->findOrFail($id);
-        if ($reservation->status == Reservation::STATUS_CANCELED) {
-            return redirect()->route('reservation.index');
-        }
         $status = Reservation::select('status')
             ->groupby('status')
-            ->having('status', '<>', Reservation::STATUS_CANCELED)
             ->get();
         return view('backend.bookings.edit', compact('reservation', 'status'));
     }

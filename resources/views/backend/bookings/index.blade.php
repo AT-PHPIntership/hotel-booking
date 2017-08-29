@@ -69,7 +69,7 @@
                     <td align="center">
                       <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
-                      <a href="{{ route('reservation.edit', $reservation->id) }}" class="btn fa fa-pencil-square-o news-btn center-block {{$reservation->status_label != __('Canceled') ? "":"disabled"}}" data-original-title="Edit" data-toggle="tooltip" >
+                      <a href="{{ route('reservation.edit', $reservation->id) }}" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
                       </a>
                       <form action="" method="POST" class="inline">
                         {{csrf_field()}}
