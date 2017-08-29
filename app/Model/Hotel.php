@@ -14,18 +14,10 @@ class Hotel extends Model
     const ROW_LIMIT = 10;
 
     /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-    */
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
-    }
+     * Define Max, Min Value Star of Hotel
+     */
+    const STAR_MAX = 5;
+    const STAR_MIN = 1;
 
     /**
      * Declare table
@@ -40,8 +32,22 @@ class Hotel extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'id', 'name', 'address', 'place_id', 'star'
+        'id', 'name', 'address', 'star', 'introduce', 'place_id'
     ];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+    */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     /**
      * The attributes that can be search.
