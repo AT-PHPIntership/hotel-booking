@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="mt-20 text-center">
-            <button type="button" class="btn btn-link btn-custom btn-lg mt-20">{{ __('History rating comment') }}</button>
+            <a class="btn btn-link btn-custom btn-lg mt-20" href="{{ route('comment.index') }}">{{ __('History rating comment') }}</a>
             <button type="button" class="btn btn-link btn-custom btn-lg mt-20">{{ __('History booking room') }}</button>
           </div>
           </div>

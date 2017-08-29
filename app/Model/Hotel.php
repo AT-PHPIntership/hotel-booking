@@ -5,10 +5,11 @@ namespace App\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Libraries\Traits\SearchTrait;
 
 class Hotel extends Model
 {
-    use Sluggable, SoftDeletes;
+    use Sluggable, SoftDeletes, SearchTrait;
 
     const ROW_LIMIT = 10;
 
@@ -31,9 +32,8 @@ class Hotel extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'name', 'address', 'star', 'introduce', 'place_id'
+        'id', 'name', 'address', 'star', 'introduce', 'place_id'
     ];
-
 
     /**
      * Return the sluggable configuration array for this model.
@@ -48,6 +48,24 @@ class Hotel extends Model
             ]
         ];
     }
+
+    /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'columns' => [
+            'hotels.name',
+            'hotels.address',
+            'places.name',
+            'hotels.star'
+        ],
+        'joins' => [
+            'places' => ['places.id', 'hotels.place_id'],
+            'rooms' => ['hotels.id', 'rooms.hotel_id']
+        ]
+    ];
 
     /**
      * Relationship belongsTo with place
