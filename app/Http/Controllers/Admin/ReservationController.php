@@ -136,10 +136,9 @@ class ReservationController extends Controller
         $reservationDelete = Reservation::findOrFail($id)->delete();
         if ($reservationDelete) {
             flash(__('Delete Booking Room Success!'))->success();
-            return redirect()->route('reservation.index');
         } else {
             flash(__('Delete Booking Room Fail!'))->error();
-            return redirect()->route('reservation.index');
         }
+        return redirect()->route('reservation.index');
     }
 }

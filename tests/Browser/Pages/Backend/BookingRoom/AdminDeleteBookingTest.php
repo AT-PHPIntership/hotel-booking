@@ -35,9 +35,7 @@ class AdminDeleteBookingTest extends DuskTestCase
                     ->press('Delete')
                     ->assertSee('Delete Booking Room Success!')
                     ->assertPathIs('/admin/reservation');
-            for ($i=1; $i < 10; $i++) { 
-                $browser->assertDontSeeIn('#table-contain tbody tr:nth-child('.$i.') td:nth-child(1)', $reservation->id);
-            }
+            $this->assertTrue($browser->text('#table-contain tbody tr:nth-child(1) td:nth-child(1)') != $reservation->id);
             $this->assertSoftDeleted('reservations', [
             'id' => $reservation->id]); 
         });

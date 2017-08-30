@@ -27,4 +27,17 @@ class Feedback extends Model
      * @var string
      */
     const UPDATED_AT = null;
+
+    /**
+     * This is a recommended way to declare event handlers
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($feedback) {
+            $feedback->timestamps = false;
+        });
+    }
 }
