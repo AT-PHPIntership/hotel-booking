@@ -101,11 +101,8 @@
 
         <!-- feedback -->
         <li>
-          <a href="#">
+          <a href="{{ route('feedback.index') }}"">
             <i class="fa fa-envelope"></i> <span>{{ __('Feedbacks') }}</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">102</small>
-            </span>
           </a>
         </li>
 

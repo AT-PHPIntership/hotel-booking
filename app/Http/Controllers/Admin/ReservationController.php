@@ -72,7 +72,7 @@ class ReservationController extends Controller
     }
 
     /**
-     * Display a page update status booking rooms.
+     * Display a page update status booking room.
      *
      * @param int $id of reservation
      *
@@ -122,5 +122,23 @@ class ReservationController extends Controller
             flash(__('Edit Booking Room Fail!'))->error();
             return redirect()->route('reservation.edit');
         }
+    }
+
+    /**
+     * Delete a booking rooms.
+     *
+     * @param int $id of reservation
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $reservationDelete = Reservation::findOrFail($id)->delete();
+        if ($reservationDelete) {
+            flash(__('Delete Booking Room Success!'))->success();
+        } else {
+            flash(__('Delete Booking Room Fail!'))->error();
+        }
+        return redirect()->route('reservation.index');
     }
 }

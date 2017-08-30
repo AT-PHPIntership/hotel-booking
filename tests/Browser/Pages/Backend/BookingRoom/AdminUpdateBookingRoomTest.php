@@ -40,7 +40,7 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
      *
      * @return void
      */
-    public function testEditReservationExample()
+    public function testEditReservationInShowDetail()
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
@@ -64,12 +64,15 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
+            $reservation = Reservation::find(10);
             $browser->visit('/admin/reservation')
                     ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-pencil-square-o')
-                    ->select('status')
+                    ->assertSelected('status', $reservation->status)
+                    ->select('status', '0')
                     ->press('Submit')
                     ->assertSee('Edit Booking Room Success!')
                     ->assertPathIs('/admin/reservation');
+            $this->assertTrue($browser->text('#table-contain tbody tr:nth-child(1) td:nth-child(7)') === 'Pending');
         });
     }
 
@@ -87,7 +90,7 @@ class AdminUpdateBookingRoomTest extends DuskTestCase
                     ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-pencil-square-o')
                     ->select('status')
                     ->press('Reset')
-                    ->assertSee($reservation->status_label)
+                    ->assertSelected('status', $reservation->status)
                     ->assertPathIs('/admin/reservation/' .$reservation->id. '/edit');
         });
     }
