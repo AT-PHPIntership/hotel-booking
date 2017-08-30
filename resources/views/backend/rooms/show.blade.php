@@ -3,9 +3,10 @@
 @section('content')
 <div class="content-wrapper">
   <section class="content-header">
-    <h1 class="text-center text-success">
-      {{ $hotel->name.__(' HOTEL') }}
+    <h1 class="text-center">
+      {{ __('HOTEL NAME: ') }}<a href="{{ route('hotel.show', $hotel->id) }}"> {{ $hotel->name }}</a>
     </h1>
+    </a>
     <h1>
       {{ __('Rooms managment') }}
       <small>
@@ -13,7 +14,7 @@
       </small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home') }}</a></li>
+      <li><a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i>{{ __('Home') }}</a></li>
       <li class="active">{{ __('Room detail') }}</li>
     </ol>
   </section>
@@ -35,7 +36,7 @@
             @else
               {{-- show image --}}
               @foreach ($room->images as $roomImage)
-                <div class="item {{ ($roomImage == $room->images[0])? 'active' : ''}}">
+                <div class="item {{ ($roomImage == $room->images[0]) ? 'active' : ''}}">
                   <img src="{{ asset($roomImage->path) }}" class="img-slide">
                 </div>
               @endforeach
@@ -58,7 +59,7 @@
         <h1>{{ $room->name }}</h1>
         {{-- show room infomation --}}
         {{-- hotel name --}}
-        <h4><a class="bg-faded" href="{{ route('hotel.show' , $hotel->id) }}">{{ __('Hotel: ') . $hotel->name }}</a></h4>
+        <h4>{{ __('Hotel: ') }}<a class="bg-faded" href="{{ route('hotel.show' , $hotel->id) }}">{{ $hotel->name }}</a></h4>
         {{-- Descript --}}
         <h5>{{ __('Descript: ') . $room->descript }}</h5>
         <h5>{{ __('Size: ') . $room->size }}</h5>
