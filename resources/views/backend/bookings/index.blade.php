@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li>
-          <a href="#"><i class="fa fa-dashboard"></i>{{__('Home')}}</a>
+          <a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i>{{__('Home')}}</a>
         </li>
         <li class="active">{{__('Booking Rooms')}}</li>
       </ol>
@@ -30,7 +30,7 @@
             </div>
             <div class="box-body">
               @include('flash::message')
-              {{-- @include('backend.layouts.partials.modal') --}}
+              @include('backend.layouts.partials.modal')
               <table class="table table-bordered table-responsive table-striped" id="table-contain">
                 <thead>
                 <tr>
@@ -69,14 +69,12 @@
                     <td align="center">
                       <a href="{{ route('reservation.show', $reservation->id) }}" data-original-title="Detail" data-toggle="tooltip" class="btn fa fa-search-plus pull-left news-btn">
                       </a>
-                      @if($reservation->status_label != __('Canceled'))
-                        <a href="" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
-                        </a>
-                      @endif
-                      <form action="" method="POST" class="inline">
+                      <a href="{{ route('reservation.edit', $reservation->id) }}" class="btn fa fa-pencil-square-o news-btn center-block" data-original-title="Edit" data-toggle="tooltip" >
+                      </a>
+                      <form action="{{ route('reservation.destroy', $reservation->id) }}" method="POST" class="inline">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
-                        <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-right"  
+                        <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-right"
                          data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
                             data-confirm="{{ __('Are you sure you want to delete?') }}">
                         </button>

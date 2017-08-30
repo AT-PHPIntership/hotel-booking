@@ -72,7 +72,8 @@ class AdminCreateRoomTest extends DuskTestCase
                     ->attach('images[]', $image)
                     ->press('Submit')
                     ->assertPathIs('/admin/hotel/1/room')
-                    ->assertSee('Creation successful!');
+                    ->assertSee('Creation successful!')
+                    ->assertSeeIn('#table-contain tbody tr:nth-child(1) td:nth-child(4)', 'This is descript');
         });
         $this->assertDatabaseHas('rooms', ['name' => 'A']);
     }
@@ -169,7 +170,7 @@ class AdminCreateRoomTest extends DuskTestCase
      */
     public function fakeFile($isImage)
     { 
-        $file = $isImage? UploadedFile::fake()->image('image.jpg'): UploadedFile::fake()->create('file.pdf');
+        $file = $isImage ? UploadedFile::fake()->image('image.jpg') : UploadedFile::fake()->create('file.pdf');
         return $file;
     }
 
