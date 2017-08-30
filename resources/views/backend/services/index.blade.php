@@ -27,13 +27,8 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title title-header">
-                {{ __('List service') }}
+                {{ __('List services') }}
               </h3>
-            </div>
-            
-            <!-- /.box-header -->
-            <div class="box-body">
-              @include('flash::message')
               <div class="row">
                 <div class="col-md-6 container-search ">
                   <form  class="container-search">
@@ -50,6 +45,11 @@
                   </a> 
                 </div>
               </div>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+              @include('flash::message')
               @include('backend.layouts.partials.modal')
               <table id="table-contain" class="table table-bordered table-striped
                 table-responsive">

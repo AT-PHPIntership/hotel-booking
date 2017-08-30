@@ -4,10 +4,10 @@
 
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title-page text-success">
-      {{ __('Update service') }}
-    </h1>
     <section class="content">
+      <h1 class="title-page text-success">
+        {{ __('Update service') }}
+      </h1>
       <div class="row margin-center">
         <div class="col-md-12">
           <div class="box box-primary">
