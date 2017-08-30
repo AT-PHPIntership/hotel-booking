@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +23,7 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::group(['prefix'=>'hotel/{hotel}'], function($hotel) {
         Route::resource('/room', 'RoomController');
     });
+    Route::resource('/image', 'ImageController', ['only' => ['destroy']]);
     Route::resource('/category', 'CategoryController');
     Route::resource('/static-page', 'StaticPageController');
     Route::resource('/service', 'ServiceController', ['except' => ['show']]);
