@@ -101,26 +101,6 @@ class AdminShowDetailBookingTest extends DuskTestCase
     }
 
     /**
-     * Test display button Edit.
-     *
-     * @return void
-     */
-    public function testShowButtonEdit()
-    {
-        $this->makeData(15);
-        $reservation = Reservation::select('status')->find(15);
-        $this->browse(function (Browser $browser) use ($reservation) {
-            $browser->visit('/admin/reservation')
-                    ->click('#table-contain tbody tr:nth-child(1) td:nth-child(8) .fa-search-plus');
-            if($reservation->status_label != 'Canceled') {
-                $browser->assertVisible('.btn-primary');
-            } else {
-                $browser->assertMissing('.btn-primary');
-            }         
-        });
-    }
-
-    /**
      * Test button Back.
      *
      * @return void
