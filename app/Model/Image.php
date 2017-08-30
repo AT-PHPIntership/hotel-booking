@@ -34,6 +34,7 @@ class Image extends Model
     {
         return $this->morphTo();
     }
+    
     /**
      * Insert data into images table and store upload image
      *
