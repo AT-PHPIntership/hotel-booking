@@ -90,6 +90,13 @@ class AdminListFeedbackTest extends DuskTestCase
             $this->assertCount(2, $elements);
             $browser->assertPathIs('/admin/feedback');
             $browser->assertQueryStringHas('page', 2);
+            
+            $paginateActive = $browser->text('.pagination .active span');
+            $this->assertTrue($paginateActive == '2'); 
+
+            $paginateElement = $browser->elements('.pagination li');
+            $numberPage = count($paginateElement) - 2;
+            $this->assertTrue($numberPage == 2);
         });
     }
 }

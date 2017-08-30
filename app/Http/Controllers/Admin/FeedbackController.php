@@ -15,13 +15,13 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        $colum = [
+        $feedbackField = [
             'id',
             'full_name',
             'email',
             'content'
         ];
-        $feedbacks = Feedback::select($colum)
+        $feedbacks = Feedback::select($feedbackField)
             ->orderBy('id', 'DESC')
             ->paginate(Feedback::ROW_LIMIT);
         return view("backend.feedbacks.index", compact('feedbacks'));
