@@ -233,10 +233,7 @@
 
 .container-search {
     position: relative;
-
-    margin-top: 3px;
 }
-
 .cls-search{
     margin-left: -14px;
     margin-top: 3px;
@@ -313,4 +310,7 @@
     font-size: 20px;
     color: red;
     font-family: cursive;
+}
+.cls-update-booking button{
+    margin-left: 2%;
 }
