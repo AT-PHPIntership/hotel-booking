@@ -63,15 +63,17 @@
                   @foreach ($feedbacks as $feedback)
                     <tr>
                       <td class="col-no text-center">{{ $feedback->id }}</td>
-                      <td class="text-center col-image">
-                        <div class="place-image-show">
-                          <img class="img-place" src="{{ $feedback->full_name }}" >
-                        </div>
+                      <td class="text-center col-fullname">
+                        {{ $feedback->full_name }}
                       </td>
-                      <td class="col-name">{{ $feedback->email }}</td>
-                      <td class="col-descript">{{ $feedback->content }}</td>
+                      <td class="col-email">{{ $feedback->email }}</td>
+                      <td class="col-content">{{ contentLimit($feedback->content)}}</td>
                       <td class="text-center col-action">
                         <div class="btn-option text-center">
+                          <a href="{{ route('feedback.show', $feedback->id) }}"
+                            class="btn-edit fa fa-search-plus btn-custom-option pull-left">
+                            <i class="" aria-hidden="true"></i>
+                          </a>
                           <form  class="form-delete" method="post" 
                             action="{{ route('feedback.destroy', $feedback->id) }}">
                             {!! csrf_field() !!}
