@@ -4,7 +4,7 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1 class="text-center">
-      {{ __('HOTEL NAME: ') }}<a href="{{ route('hotel.show', $hotel->id) }}"> {{ $hotel->name }}</a>
+      {{ __('HOTEL NAME: ') }}<a href="{{ route('hotel.show', $hotel->id) }}">{{ $hotel->name }}</a>
     </h1>
     </a>
     <h1>

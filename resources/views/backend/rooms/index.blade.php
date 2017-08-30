@@ -34,8 +34,8 @@
               <div class="row">
               <!-- search -->
                 <div class="col-md-6 container-search ">
-                  <form method="GET" action="#" class="form-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
+                  <form method="GET" action="{{ route('room.index', $hotel->id) }}" class="container-search">
+                    <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{ app('request')->input('search') }}">
                     <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                   </form>
                 </div>
