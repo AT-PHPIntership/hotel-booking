@@ -70,6 +70,11 @@
                 <div class="top-right links">
                     @if (Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            {{csrf_field()}}
+                            <button type="submit">Log out</button>
+                            }
+                        </form>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>
