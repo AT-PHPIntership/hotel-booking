@@ -8,11 +8,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ __('List Users') }}
+        {{ __('Management Users') }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> {{ __('Home Page') }}</a></li>
-        <li class="active">{{ __('List Users') }}</li>
+        <li class="active">{{ __('Users') }}</li>
       </ol>
     </section>
 
@@ -22,11 +22,9 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">{{ __('List Users') }}</h3>
-              @include('flash::message')
-            </div>
-             <!-- /.box-header -->
-            <div class="box-body">
+              <div class="title-user mb-10">
+                <h3 class="box-title title-header">{{ __('List Users') }}</h3>
+              </div>  
               <div class="row">
                 <div class="col-md-6">
                   <form method="GET" action="{{ route('user.index') }}" class="container-search">
@@ -41,6 +39,10 @@
                   </a>
                 </div>
               </div>
+            </div>
+             <!-- /.box-header -->
+            <div class="box-body">
+              @include('flash::message')
               @include('backend.layouts.partials.modal')
               <table id="table-contain" class="table table-bordered table-responsive table-striped">
                 <thead>
@@ -50,9 +52,9 @@
                     <th>{{ __('Full Name') }}</th>
                     <th>{{ __('Email')}}</th>
                     <th>{{ __('Phone') }}</th>
-                    <th>{{ __('Role') }}</th>
-                    <th>{{ __('Status') }}</th>
-                    <th>{{ __('Option') }}</th>
+                    <th class="text-center">{{ __('Role') }}</th>
+                    <th class="text-center">{{ __('Status') }}</th>
+                    <th class="text-center">{{ __('Option') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -90,14 +92,14 @@
                         </form>
                       </td>
                       <td align="center">
-                        <div class="option-btn">
-                          <a href="{{ route('user.edit', $user->id) }}"  class="btn-edit fa fa-pencil-square-o btn-pencil cus-icon-sm" >
+                        <div class="btn-option text-center">
+                          <a href="{{ route('user.edit', $user->id) }}"  class="btn-edit fa fa-pencil-square-o btn-custom-option pull-left" >
                           </a>
                           <form method="POST" action="{{ route('user.destroy', $user->id) }}" class="inline">
                             {!! csrf_field() !!}
                             {{ method_field('DELETE') }}
                             <button type="submit" 
-                              class="fa fa-trash-o cus_icon btn btn-delete-item fz-20"
+                              class="btn-custom-option btn btn-delete-item fa fa-trash-o"
                               data-title="{{ __('Confirm deletion!') }}"
                               data-confirm="{{ __('Are you sure you want to delete?') }}">
                             </button>

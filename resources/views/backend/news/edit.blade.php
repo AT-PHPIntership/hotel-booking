@@ -2,10 +2,10 @@
 @section('title','Edit News')
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title-page text-success">
-      {{__('EDIT NEWS')}}
-    </h1>
     <section class="content">
+      <h1 class="title-page text-success">
+        {{__('EDIT NEWS')}}
+      </h1>
       <div class="row margin-center">
         <div class="col-md-12">
           <div class="cls-editnews-msg">
@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group" {{ $errors->has('content') ? ' has-error' : '' }}>
                   <label>{{__('Content')}}</label>
-                  <textarea class="form-control" name="content">{{$news->content}}</textarea>
+                  <textarea class="ckeditor form-control" name="content">{{$news->content}}</textarea>
                   @if($errors->first('content'))
                       <span class="help-block">{{$errors->first('content')}}</span>
                   @endif
