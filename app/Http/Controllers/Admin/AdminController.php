@@ -10,6 +10,7 @@ use App\Model\Place;
 use App\Model\Category;
 use App\Model\Hotel;
 use App\Model\Reservation;
+
 class AdminController extends Controller
 {
     /**
@@ -27,13 +28,11 @@ class AdminController extends Controller
         $bookRoom = Reservation::where('status', '=', 1)->count();
         return view('backend.home.index', compact(
             'users',
-            'news', 
+            'news',
             'places',
             'categories',
             'hotels',
             'bookRoom'
-            ));
-
+        ));
     }
-
 }

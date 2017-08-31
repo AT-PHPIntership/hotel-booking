@@ -53,13 +53,13 @@ class AdminCreateNewsTest extends DuskTestCase
         factory(Category::class,10)->create();
         $category = Category::find(1);
         $this->browse(function (Browser $browser) use ($category) {
-            $browser->visit('/admin/news/create')
-                    ->type('title','News18')
-                    ->type('content','Hello World!')
-                    ->select('category_id', $category->id)
-                    ->press('Submit')
-                    ->assertPathIs('/admin/news')
-                    ->assertSee('Create News Success!');
+            $page = $browser->visit('/admin/news/create')
+                ->type('title','News18');
+            $this->typeInCKEditor($browser, '#cke_content iframe', 'Hello World!');
+            $page->select('category_id', $category->id)
+                ->press('Submit')
+                ->assertPathIs('/admin/news')
+                ->assertSee('Create News Success!');
         });
         $this->assertDatabaseHas('news', [
             'title' => 'News18'
@@ -88,11 +88,12 @@ class AdminCreateNewsTest extends DuskTestCase
     public function testCreateNewsFail($title, $content, $category_id, $expected)
     {   
         
-        $this->browse(function (Browser $browser) use($title, $content, $category_id, $expected) {
-            $browser->visit('/admin/news/create')
-                ->type('title', $title)
-                ->type('content', $content)
-                ->select('category_id', $category_id)
+        $this->browse(function (Browser $browser) use ($title, $content,
+            $category_id, $expected) {
+            $page = $browser->visit('/admin/news/create')
+                ->type('title', $title);
+            $this->typeInCKEditor($browser, '#cke_1_contents iframe', $content);    
+            $page->select('category_id', $category_id)
                 ->press('Submit')
                 ->assertSee($expected)
                 ->assertPathIs('/admin/news/create');
@@ -107,13 +108,13 @@ class AdminCreateNewsTest extends DuskTestCase
     public function testBtnReset()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/news/create')
-                    ->type('title', 'News10')
-                    ->type('content', 'Hello')
-                    ->select('category_id')
-                    ->press('Reset')
-                    ->assertPathIs('/admin/news/create')
-                    ->assertInputValueIsNot('', '');
+            $page = $browser->visit('/admin/news/create')
+                ->type('title', 'News10');
+            $this->typeInCKEditor($browser, '#cke_1_contents iframe', 'Hello');
+            $page->select('category_id')
+                ->press('Reset')
+                ->assertPathIs('/admin/news/create')
+                ->assertInputValueIsNot('', '');
         });
     }
 
