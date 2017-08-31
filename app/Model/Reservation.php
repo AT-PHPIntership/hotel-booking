@@ -4,10 +4,11 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Libraries\Traits\SearchTrait;
 
 class Reservation extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchTrait;
 
     /**
      * Declare table
@@ -30,6 +31,26 @@ class Reservation extends Model
         'quantity',
         'checkin_date',
         'checkout_date'
+    ];
+
+    /**
+     * The attributes that can be search.
+     *
+     * @var array $searchableFields
+     */
+    protected $searchableFields = [
+        'columns' => [
+            'reservations.checkin_date',
+            'reservations.checkout_date',
+            'rooms.name',
+            'rooms.id',
+            'hotels.name',
+            'hotels.id'
+        ],
+        'joins' => [
+            'rooms' => ['reservations.room_id', 'rooms.id'],
+            'hotels' => ['rooms.hotel_id', 'hotels.id']
+        ]
     ];
 
     /**

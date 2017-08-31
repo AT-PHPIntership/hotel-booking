@@ -24,8 +24,8 @@ class AdminDeleteNewsTest extends DuskTestCase
         $news = News::find(10);
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit('/admin/news')
-                    ->assertSee('List News of Hotel')
-                    ->press('#newstable tbody tr:nth-child(1) td:nth-child(5)  .news-option button')
+                    ->assertSee('List News')
+                    ->press('#newstable tbody tr:nth-child(1) td:nth-child(4) button')
                     ->waitForText('Confirm deletion!')
                     ->press('Delete')
                     ->assertSee('Delete News Success!');
@@ -45,8 +45,8 @@ class AdminDeleteNewsTest extends DuskTestCase
         $news = News::find(10);
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit('/admin/news')
-                    ->assertSee('List News of Hotel')
-                    ->press('#newstable tbody tr:nth-child(1) td:nth-child(5)  .news-option button');
+                    ->assertSee('List News')
+                    ->press('#newstable tbody tr:nth-child(1) td:nth-child(4) button');
             $news->delete();
             $browser->waitForText('Confirm deletion!')
                     ->press('Delete')
