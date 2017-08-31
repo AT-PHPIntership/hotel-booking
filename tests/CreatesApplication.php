@@ -19,4 +19,13 @@ trait CreatesApplication
 
         return $app;
     }
+
+    public function tearDown()
+    {
+        $this->beforeApplicationDestroyed(function () {
+            \DB::disconnect();
+        });
+
+        parent::tearDown();
+    }
 }
