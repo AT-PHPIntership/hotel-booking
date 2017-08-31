@@ -2,27 +2,22 @@
 @section('title', __('Update Static Page'))
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title_page text-success">
-      {{ __('Update Static Page') }}
-    </h1>
-
-    <!-- Main content -->
     <section class="content">
-      <div class="row margin_center col-md-12">
-        <!-- left column -->
+      <h1 class="title-page text-success">
+        {{ __('Update Static Page') }}
+      </h1>
+      <div class="row margin-center">
         <div class="col-md-12">
-          <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title lead">{{ __('Enter Information') }}</h3>
+              <h3 class="box-title lead">{{ __('Enter information') }}</h3>
+              @include('flash::message')
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
             <form method="POST" action="{{ route('static-page.update', $staticPage->id) }}">
-            {{ csrf_field() }}
-            {{ method_field('PUT') }}
+              {{ csrf_field() }}
+              {{ method_field('PUT') }}
               <div class="box-body">
-              	<div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
+                <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
                   <label for="content">{{ __('Title of Static Page') }}</label>
                   <input type="text" class="form-control" id="title" 
                     placeholder="{{ __('Input Static Page Title') }}"
@@ -38,7 +33,7 @@
                   </textarea>
                   <span class="alert-danger">{{ $errors->first('content') }}</span>
                 </div>
-               
+              </div> 
               <!-- /.box-body -->
               <div class="box-footer">
                 <a href="{{ route('static-page.index') }}" id="cancel" name="cancel" class="btn btn-default">{{ __('Back') }}</a>
@@ -49,6 +44,6 @@
           </div>
         </div>
       </div>
-    </section>    
-</div>
+    </section>
+  </div>
 @endsection

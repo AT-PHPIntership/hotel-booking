@@ -22,7 +22,7 @@ class AdminListStaticPageTest extends DuskTestCase
             $browser->visit('/admin')
                 ->clickLink('Static Pages')
                 ->assertPathIs('/admin/static-page')
-                ->assertSee('Static Page');
+                ->assertSee('List Static Pages');
         });
     }
 
@@ -38,7 +38,7 @@ class AdminListStaticPageTest extends DuskTestCase
                 ->elements('#table-contain tbody tr');
             $this->assertCount(0, $element);
             $browser->assertPathIs('/admin/static-page')
-                ->assertSee('Static Page');
+                ->assertSee('List Static Pages');
             $this->assertNull($browser->element('.pagination'));
         });
     }
@@ -56,7 +56,7 @@ class AdminListStaticPageTest extends DuskTestCase
                 ->elements('#table-contain tbody tr');
             $this->assertCount(9, $element);
             $browser->assertPathIs('/admin/static-page')
-                ->assertSee('Static Page');
+                ->assertSee('List Static Pages');
             $this->assertNull($browser->element('.pagination'));
         });
     }
@@ -72,7 +72,7 @@ class AdminListStaticPageTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/static-page')
                 ->resize(1920, 2000)
-                ->assertSee('Static Page');
+                ->assertSee('List Static Pages');
             //Count row number in one page    
             $elements = $browser->elements('#table-contain tbody tr');
             $this->assertCount(10, $elements);
