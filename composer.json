@@ -25,12 +25,18 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files" : [
+            "app/Helpers/common.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files" : [
+            "app/Helpers/common.php"
+        ]
     },
     "scripts": {
         "post-root-package-install": [
