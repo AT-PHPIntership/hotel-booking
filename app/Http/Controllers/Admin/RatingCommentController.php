@@ -17,8 +17,15 @@ class RatingCommentController extends Controller
      */
     public function index()
     {
-        $ratingComments = RatingComment::
-            select('id', 'user_id', 'hotel_id', 'total_rating', 'created_at')
+        $comlumns = [
+            'id',
+            'user_id',
+            'hotel_id',
+            'comment',
+            'total_rating',
+            'created_at'
+        ];
+        $ratingComments = RatingComment::select($comlumns)
             ->with(['user' => function ($query) {
                 $query->select('id', 'username', 'full_name');
             }])
