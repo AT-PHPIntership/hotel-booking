@@ -44,4 +44,17 @@ class FeedbackController extends Controller
         }
         return redirect()->route('feedback.index');
     }
+
+    /**
+     * Show feedback detail
+     *
+     * @param int $id id feedback
+     *
+     * @return void
+     */
+    public function show($id)
+    {
+        $feedback = Feedback::findOrFail($id);
+        return view('backend.feedbacks.show', compact('feedback'));
+    }
 }
