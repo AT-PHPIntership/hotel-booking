@@ -13,7 +13,7 @@
         <small>{{ __('Categories') }}</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
+        <li><a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
         <li class="active">{{ __('Categories') }}</li>
       </ol>
     </section>

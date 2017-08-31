@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Model\User;
+use App\Model\News;
+use App\Model\Place;
+use App\Model\Category;
+use App\Model\Hotel;
+use App\Model\Reservation;
 class AdminController extends Controller
 {
     /**
@@ -14,6 +19,21 @@ class AdminController extends Controller
     */
     public function index()
     {
-        return view('backend.home.index');
+        $users = User::count();
+        $news = News::count();
+        $places = Place::count();
+        $categories = Category::count();
+        $hotels = Hotel::count();
+        $bookRoom = Reservation::where('status', '=', 1)->count();
+        return view('backend.home.index', compact(
+            'users',
+            'news', 
+            'places',
+            'categories',
+            'hotels',
+            'bookRoom'
+            ));
+
     }
+
 }
