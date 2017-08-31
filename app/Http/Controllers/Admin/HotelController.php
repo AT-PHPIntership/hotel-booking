@@ -10,6 +10,7 @@ use App\Model\Service;
 use App\Model\Image;
 use App\Model\HotelService;
 use App\Http\Requests\Backend\HotelCreateRequest;
+use App\Http\Requests\Backend\HotelUpdateRequest;
 use Illuminate\Http\Response;
 
 class HotelController extends Controller
@@ -143,5 +144,88 @@ class HotelController extends Controller
             flash(__('Deletion failed!'))->error();
         }
         return redirect()->route('hotel.index');
+    }
+
+    /**
+     * Display form edit a Hotel.
+     *
+     * @param int $id of Hotel
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $columns = [
+            'id',
+            'name',
+            'address',
+            'star',
+            'introduce',
+            'place_id'
+        ];
+
+        $with['place'] = function ($query) {
+            $query->select('id', 'name');
+        };
+        $with['rooms'] = function ($query) {
+            $query->select('hotel_id', 'id', 'name');
+        };
+        $with['images'] = function ($query) {
+            $query->select();
+        };
+        $with['hotelServices'] = function ($query) {
+            $query->select('id', 'hotel_id', 'service_id');
+        };
+        $with['hotelServices.service'] = function ($query) {
+            $query->select('id', 'name');
+        };
+
+        $hotel = Hotel::select($columns)->with($with)->findOrFail($id);
+        
+        $columns = [
+            'id',
+            'name'
+        ];
+        $places = Place::select($columns)->get();
+        $services = Service::select($columns)->get();
+ 
+        // dd($hotel->hotelServices->contains('id', 182));
+        return view('backend.hotels.edit', compact('hotel', 'places', 'services'));
+    }
+
+    /**
+     * Update information of a Hotel
+     *
+     * @param \App\Http\Requests\HotelUpdateRequest $request of form Edit Hotel
+     * @param int                                   $id      of Hotel
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(HotelUpdateRequest $request, $id)
+    {
+        // update hotel.
+        $hotel = Hotel::findOrFail($id);
+        $result = $hotel->update($request->except(['services', 'images']));
+
+        //delete old hotel's services
+        $hotel->hotelServices()->delete();
+        //make data hotel services
+        $hotelServices = array();
+        foreach ($request->services as $serviceId) {
+            array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+        }
+        //save hotel services
+        $hotel->hotelServices()->saveMany($hotelServices);
+
+        if (isset($request->images)) {
+            Image::storeImages($request->images, 'hotel', $hotel->id, config('image.hotels.path_upload'));
+        }
+
+        if ($result) {
+            return redirect()->route('hotel.show', $id);
+        } else {
+            flash(__('Update failure'))->error();
+            return redirect()->back()->withInput();
+        }
     }
 }

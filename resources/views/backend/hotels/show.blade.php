@@ -69,7 +69,7 @@
           @endforeach
         </ul>
         <div class="clearfix"></div>
-        <h3>{{ __('Rooms') . ' (' . $hotel->rooms->count() . ')' }}</h3>
+        <h3><a href="{{ route('room.index', $hotel->id) }}">{{ __('Rooms') . ' (' . $hotel->rooms->count() . ')' }}</a></h3>
         <ul>
           @foreach ($hotel->rooms as $room)
             <div class="col-md-3 pull-left">
