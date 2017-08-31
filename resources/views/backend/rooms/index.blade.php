@@ -72,7 +72,11 @@
                         src="{{ isset($room->images[0])? asset($room->images[0]->path): asset(config('image.no_image')) }}" >
                     </div>
                   </td>
-                  <td class="text-center">{{ $room->name }}</td>
+                  <td class="text-center">
+                    <a href="{{ route('room.show', [$hotel->id, $room->id]) }}">
+                      {{ $room->name }}
+                    </a>
+                  </td>
                   <td class="text-center">{{ $room->descript }}</td>
                   <td class="text-center">{{ $room->price }}</td>
                   <td class="text-center">{{ $room->total }}</td>
