@@ -20,7 +20,7 @@ class AdminListHotelTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin')
                     ->clickLink('Hotels')
-                    ->assertSee('Hotels managment')
+                    ->assertSee('List of hotels')
                     ->assertPathIs('/admin/hotel');
         });
     }
@@ -34,7 +34,7 @@ class AdminListHotelTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/hotel')
-                ->assertSee('Hotels managment');
+                ->assertSee('List of hotels');
             $elements = $browser->elements('#list-table tbody tr');
             $this->assertCount(0, $elements);
             $this->assertNull($browser->element('.paginate'));
@@ -52,7 +52,7 @@ class AdminListHotelTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/hotel')
                 ->resize(1920, 2000)
-                ->assertSee('Hotels managment');
+                ->assertSee('List of hotels');
             $elements = $browser->elements('#list-table tbody tr');
             $this->assertCount(9, $elements);
             $this->assertNull($browser->element('.pagination'));
@@ -70,7 +70,7 @@ class AdminListHotelTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/hotel')
                 ->resize(1920, 2000)
-                ->assertSee('Hotels managment');
+                ->assertSee('List of hotels');
             //Count row number in one page    
             $elements = $browser->elements('#list-table tbody tr');
             $this->assertCount(10, $elements);
