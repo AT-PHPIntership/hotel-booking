@@ -29,9 +29,8 @@
                     <button type="submit" id="btn-search" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                   </form>
                 </div>
-                 
               </div>
-            </div>
+            </div>  
             <div class="box-body">
               @include('flash::message')
               @include('backend.layouts.partials.modal')

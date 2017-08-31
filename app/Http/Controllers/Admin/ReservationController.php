@@ -21,7 +21,7 @@ class ReservationController extends Controller
     public function index()
     {
         $columns = [
-            'id',
+            'reservations.id',
             'status',
             'room_id',
             'target',
@@ -29,12 +29,11 @@ class ReservationController extends Controller
             'checkin_date',
             'checkout_date'
         ];
-        $reservations = Reservation::select($columns)
-                    ->with(['room' => function ($query) {
-                        $query->select('rooms.id', 'name');
-                    }, 'reservable'])
+        $reservations = Reservation::search()
+                    ->select($columns)
                     ->orderby('reservations.id', 'DESC')
-                    ->paginate(Reservation::ROW_LIMIT);
+                    ->paginate(Reservation::ROW_LIMIT)
+                    ->appends(['search' => request('search')]);
         return view('backend.bookings.index', compact('reservations'));
     }
 
