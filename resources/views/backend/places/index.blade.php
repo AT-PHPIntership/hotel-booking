@@ -28,7 +28,7 @@
             <div class="box-header">
               <div class="title-place mb-10">
                 <h3 class="box-title title-header">
-                  {{ __('List place') }}
+                  {{ __('List places') }}
                 </h3>
               </div>  
               <div class="row">
