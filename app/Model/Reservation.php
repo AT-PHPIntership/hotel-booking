@@ -42,10 +42,14 @@ class Reservation extends Model
         'columns' => [
             'reservations.checkin_date',
             'reservations.checkout_date',
-            'rooms.name'
+            'rooms.name',
+            'rooms.id',
+            'hotels.name',
+            'hotels.id'
         ],
         'joins' => [
-            'rooms' => ['reservations.room_id', 'rooms.id']
+            'rooms' => ['reservations.room_id', 'rooms.id'],
+            'hotels' => ['rooms.hotel_id', 'hotels.id']
         ]
     ];
 

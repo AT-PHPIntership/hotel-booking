@@ -30,6 +30,9 @@ class AdminSearchBookingTest extends DuskTestCase
                     ->press('.btn-search')
                     ->assertPathIs('/admin/reservation')
                     ->assertQueryStringMissing('search');
+            $paginate_element = $browser->elements('.pagination li');
+            $number_page = count($paginate_element) - 2;
+            $this->assertTrue($number_page == 2);
         });
     }
 
@@ -40,16 +43,18 @@ class AdminSearchBookingTest extends DuskTestCase
      */
     public function testSearchHasInputValue()
     {
-        $this->makeData(10);
+        $this->makeData(15);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/reservation')
+                    ->assertVisible('.pagination')
                     ->type('search', 'Room9')
                     ->press('.btn-search');
             $elements = $browser->elements('#table-contain tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 1);
             $browser->assertPathIs('/admin/reservation')
-                    ->assertQueryStringHas('search', 'Room9'); 
+                    ->assertQueryStringHas('search', 'Room9')
+                    ->assertMissing('.pagination'); 
         });
     }
 
@@ -63,14 +68,16 @@ class AdminSearchBookingTest extends DuskTestCase
         $this->makeData(15);
         $this->browse(function (Browser $browser) {     
             $browser->visit('/admin/reservation')
-                    ->type('search', 'Nsdsadasdasdasdsa')
+                    ->assertVisible('.pagination')
+                    ->type('search', 'Hello')
                     ->press('.btn-search');
             $elements = $browser->elements('#table-contain tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 0);
             $browser->assertSee('Data Not Found')
                     ->assertPathIs('/admin/reservation')
-                    ->assertQueryStringHas('search', 'Nsdsadasdasdasdsa');
+                    ->assertQueryStringHas('search', 'Hello')
+                    ->assertMissing('.pagination');
         });
     }
 
@@ -86,20 +93,25 @@ class AdminSearchBookingTest extends DuskTestCase
             $browser->visit('/admin/reservation')
                     ->type('search', 'Room')
                     ->press('.btn-search');
-            $elements = $browser->visit('/admin/reservation?search=Room&page=1')
-                                ->elements('#table-contain tbody tr');
+            $elements = $browser->elements('#table-contain tbody tr');        
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 10);
             $browser->assertPathIs('/admin/reservation')
-                    ->assertQueryStringHas('search', 'Room')
-                    ->assertQueryStringHas('page', '1');
-            $elements = $browser->visit('/admin/reservation?search=Room&page=2')
+                    ->assertQueryStringHas('search', 'Room');
+            $paginate_element = $browser->elements('.pagination li');
+            $number_page = count($paginate_element) - 2;
+            $this->assertTrue($number_page == 2);
+
+            $elements = $browser->click('.pagination li:nth-child(3) a')
                                 ->elements('#table-contain tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 5);
             $browser->assertPathIs('/admin/reservation')
                     ->assertQueryStringHas('search', 'Room')
                     ->assertQueryStringHas('page', '2');
+            $paginate_element = $browser->elements('.pagination li');
+            $number_page = count($paginate_element) - 2;
+            $this->assertTrue($number_page == 2);
         }); 
     }
 
