@@ -25,7 +25,7 @@ class AdminListNewsTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin')
                     ->clickLink('News')
-                    ->assertSee('List News of Hotel')
+                    ->assertSee('List News')
                     ->assertPathIs('/admin/news');
         });
     }

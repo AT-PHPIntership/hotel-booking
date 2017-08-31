@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title> Admin | @yield('title') </title>
+  <title> {{ __('Admin') }} | @yield('title') </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css') }}">
-  <link rel="shortcut icon" href="{{ asset('/image.jpg') }}" id="favicon">
+  <link rel="shortcut icon" href="{{ asset('/favicon.png') }}" id="favicon">
 
   <!-- private stype css -->
   <!-- <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/dist/css/style.css') }}"> -->

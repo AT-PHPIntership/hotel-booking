@@ -8,7 +8,6 @@ use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Http\UploadedFile;
 
-
 class AdminUpdatePlaceTest extends DuskTestCase
 {
     use DatabaseMigrations;
@@ -33,7 +32,7 @@ class AdminUpdatePlaceTest extends DuskTestCase
         $this->browse(function (Browser $browser)  {
             $place = Place::find(1);
             $page = $browser->visit('/admin/place')
-                ->press('#table-contain tbody tr:nth-child(1) td:nth-child(5) a');
+                ->press('#table-contain tbody tr:nth-child(1) td:nth-child(4) a');
             $page->assertPathIs('/admin/place/' . $place->id . '/edit')
                 ->assertSee('Update place')
                 ->assertInputValue('name', $place->name)
@@ -71,12 +70,12 @@ class AdminUpdatePlaceTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($image) {
             $place = Place::find(1);
             $page = $browser->visit('/admin/place')
-                ->press('#table-contain tbody tr:nth-child(1) td:nth-child(5) a');
+                ->press('#table-contain tbody tr:nth-child(1) td:nth-child(4) a');
             $page->assertPathIs('/admin/place/' . $place->id . '/edit')
                 ->assertSee('Update place')
-                ->type('name', 'Ha Noi')
-                ->type('descript', 'Capital of Viet Nam')
-                ->attach('image', $image)
+                ->type('name', 'Ha Noi');
+            $this->typeInCKEditor($browser, '#cke_place-descript iframe', 'Capital of Viet Nam');
+            $page->attach('image', $image)
                 ->press('Submit')
                 ->assertPathIs('/admin/place')
                 ->assertSee('Update success');
@@ -92,6 +91,7 @@ class AdminUpdatePlaceTest extends DuskTestCase
                 'name' => 'Ha Noi',
                 'image' => $image_after_update
             ]);
+            $this->assertTrue(strip_tags($place_after_update->descript) == 'Capital of Viet Nam');
         });
         
     }
@@ -127,14 +127,14 @@ class AdminUpdatePlaceTest extends DuskTestCase
         
         $this->browse(function (Browser $browser) use ($name, $descript, $image, $expected) {
             $place = Place::find(1);
-            $browser->visit('/admin/place')
-                ->press('#table-contain tbody tr:nth-child(1) td:nth-child(5) a')
+            $page = $browser->visit('/admin/place')
+                ->press('#table-contain tbody tr:nth-child(1) td:nth-child(4) a')
                 ->assertPathIs('/admin/place/' . $place->id . '/edit')
                 ->assertSee('Update place')
                 ->type('name', $name)
-                ->type('descript', $descript)
-                ->attach('image',  $image)
-                ->press('Submit')
+                ->attach('image',  $image);
+            $this->typeInCKEditor($browser, '#cke_place-descript iframe', $descript);
+            $page->press('Submit')
                 ->assertSee($expected)
                 ->assertPathIs('/admin/place/' . $place->id . '/edit');
         });
@@ -151,7 +151,7 @@ class AdminUpdatePlaceTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($place) {
             $browser->visit('/admin/place')->assertSee('List place');
             $place->delete();
-            $browser->press('#table-contain tbody tr:nth-child(1) td:nth-child(5) a');
+            $browser->press('#table-contain tbody tr:nth-child(1) td:nth-child(4) a');
             $browser->assertSee('404 - Page Not found');
         });
     }
@@ -167,14 +167,13 @@ class AdminUpdatePlaceTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($place) {
             $browser->visit('/admin/place')
                 ->assertSee('List place')
-                ->press('#table-contain tbody tr:nth-child(1) td:nth-child(5) a')
+                ->press('#table-contain tbody tr:nth-child(1) td:nth-child(4) a')
                 ->assertPathIs('/admin/place/'.$place->id.'/edit')
                 ->assertSee('Update place')
-                ->type('name', 'Ha Long')
-                ->type('descript', 'Quang Ninh');
+                ->type('name', 'Ha Long');
+            $this->typeInCKEditor($browser, '#cke_place-descript iframe', 'Quang Ninh');
             $place->delete();
             $browser->press('Submit')->assertSee('404 - Page Not found');
-                    
         });
     }
 

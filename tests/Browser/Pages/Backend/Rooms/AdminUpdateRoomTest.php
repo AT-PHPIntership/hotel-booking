@@ -64,7 +64,7 @@ class AdminUpdateRoomTest extends DuskTestCase
         $this->browse(function (Browser $browser)  {
             $room = Room::with('images')->find(4);
             $page = $browser->visit('/admin/hotel/1/room')
-                ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a');
+                ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a')
                 ->assertPathIs('/admin/hotel/1/room/' . $room->id . '/edit')
                 ->assertTitle('Admin | UPDATE ROOM')
                 ->assertSee('Update room')
@@ -122,15 +122,15 @@ class AdminUpdateRoomTest extends DuskTestCase
                 ->type('price', '1000')
                 ->type('total', '7')
                 ->type('max_guest', '6')
-                ->attach('images[]', $image)
                 ->press('#old-img-' . $firstOldImage->id . ' button')
                 ->assertSee('Are you sure you want to delete?')
                 ->click('#delete-btn')
                 ->assertPathIs('/admin/hotel/1/room/' . $room->id . '/edit')
-                ->waitFor(null, '5')
+                ->attach('images[]', $image)
                 ->press('Submit')
                 ->assertPathIs('/admin/hotel/1/room')
-                ->assertSee('Update successful!');
+                ->assertSee('Update successful!')
+                ->assertSeeIn('#table-contain tbody tr:nth-child(2) td:nth-child(4)', 'This is descript');
             $roomAfterUpdate = Room::with('images')->find(4); 
             $quatityImage = count($roomAfterUpdate->images);
             if ($image !== '') {
@@ -201,11 +201,11 @@ class AdminUpdateRoomTest extends DuskTestCase
     }
 
     /**
-     * Test 404 Page Not found when click edit room but not found hotel.
+     * Test 404 Page Not found when click edit room but not found hotel of room.
      *
      * @return void
      */
-    public function test404PageForClickEditForHotel()
+    public function test404PageForClickEditNotFoundHotelOfRoom()
     {   
         $this->makeRoomOfHotel(1, 5);
         $this->browse(function (Browser $browser) {
@@ -213,7 +213,7 @@ class AdminUpdateRoomTest extends DuskTestCase
             $room = Room::with('images')->find(4);
             $browser->visit('/admin/hotel/1/room')
                     ->assertTitle('Admin | Room')
-                    ->assertSee('List rooms');
+                    ->assertSee('List Rooms');
             $hotel->delete();
             $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a');
             $browser->assertSee('404 - Page Not found');
@@ -225,7 +225,7 @@ class AdminUpdateRoomTest extends DuskTestCase
      *
      * @return void
      */
-    public function test404PageForClickEditForRoom()
+    public function test404PageForClickEditNotFoundRoom()
     {   
         $this->makeRoomOfHotel(1, 5);
         $this->browse(function (Browser $browser) {
@@ -240,14 +240,14 @@ class AdminUpdateRoomTest extends DuskTestCase
     }
 
     /**
-     * Test 404 Page Not found when click submit edit room but not found hotel.
+     * Test 404 Page Not found when click submit edit room but not found hotel of room.
      *
      * @return void
      */
-    public function test404PageForClickSubmitForHotel()
+    public function test404PageForClickSubmitNotFoundHotelOfRoom()
     {   
         $this->makeRoomOfHotel(1, 5);
-        $this->browse(function (Browser $browser) use ($place) {
+        $this->browse(function (Browser $browser) {
             $hotel = Hotel::find(1);
             $room = Room::with('images')->find(4);
             $browser->visit('/admin/hotel/1/room')
@@ -273,14 +273,14 @@ class AdminUpdateRoomTest extends DuskTestCase
      *
      * @return void
      */
-    public function test404PageForClickSubmitForRoom()
+    public function test404PageForClickSubmitNotFoundRoom()
     {   
         $this->makeRoomOfHotel(1, 5);
-        $this->browse(function (Browser $browser) use ($place) {
+        $this->browse(function (Browser $browser) {
             $room = Room::with('images')->find(4);
             $browser->visit('/admin/hotel/1/room')
                     ->assertTitle('Admin | Room')
-                    ->assertSee('List rooms')
+                    ->assertSee('List Rooms')
                     ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a')
                     ->assertPathIs('/admin/hotel/1/room/' . $room->id . '/edit')
                     ->assertTitle('Admin | UPDATE ROOM')
