@@ -31,12 +31,39 @@ class RoomController extends Controller
             'max_guest',
             'hotel_id'
         ];
-        $rooms = Room::select($columns)
+        $rooms = Room::search()
+            ->select($columns)
             ->with(['images'])
             ->where('hotel_id', $hotel->id)
             ->orderBy('id', 'DESC')
-            ->paginate(Room::ROW_LIMIT);
+            ->paginate(Room::ROW_LIMIT)
+            ->appends(['search' => request('search')]);
         return view('backend.rooms.index', compact('rooms', 'hotel'));
+    }
+
+    /**
+     * Show room of hotel
+     *
+     * @param Hotel $hotel hotel of room
+     * @param int   $id    id of room
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Hotel $hotel, $id)
+    {
+        $columns = [
+            'id',
+            'name',
+            'descript',
+            'price',
+            'size',
+            'total',
+            'max_guest',
+            'hotel_id'
+        ];
+        $room = Room::select($columns)->with('images')->findOrFail($id);
+
+        return view('backend.rooms.show', compact('room', 'hotel'));
     }
 
     /**
