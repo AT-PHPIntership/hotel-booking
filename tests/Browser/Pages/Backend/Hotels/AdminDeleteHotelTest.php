@@ -81,7 +81,6 @@ class AdminDeleteHotelTest extends DuskTestCase
                 'comment' => 'this is comment '.$i
             ]);
         }
-
         $hotel = Hotel::find(1);
         $this->browse(function (Browser $browser) {
             $page = $browser->visit('/admin/hotel');
