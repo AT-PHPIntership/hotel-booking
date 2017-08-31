@@ -4,11 +4,11 @@
 
 @section('content')
   <div class="content-wrapper">
-    <h1 class="text-center text-success">
-      {{ __("Add place") }}
-    </h1>
     <!-- Main content -->
     <section class="content">
+      <h1 class="text-center text-success">
+        {{ __("Add place") }}
+      </h1>
       <div class="row margin-center">
         <!-- left column -->
         <div class="col-md-12">
@@ -34,9 +34,9 @@
                 <div class="form-group has-feedback
                   {{ $errors->has('descript') ? ' has-error' : '' }}">
                   <label for="descript">{{ __('Description') }}</label>
-                  <input type="text" class="form-control" name= "descript" 
+                  <textarea class="form-control ckeditor" name= "descript" 
                     id="descript" placeholder="{{ __('Enter descript') }}"
-                    value="{{ old('descript') }}" >
+                    value="{{ old('descript') }}" ></textarea> 
                   <small class="text-danger">{{ $errors->first('descript') }}</small>
                 </div>
 
@@ -45,7 +45,7 @@
                   <label for="input-file">{{ __("Image") }}</label>
                   <input type="file" class="form-control" name="image" id="preview-image">
                   <small class=" text-danger">{{ $errors->first('image') }}</small>
-                  <div >
+                  <div class="mt-10">
                     <img class="img-place" id="showImage" src="{{ asset('/images/default/no_image.png') }}">
                   </div>
                 </div>

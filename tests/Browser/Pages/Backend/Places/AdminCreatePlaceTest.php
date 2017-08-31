@@ -53,9 +53,9 @@ class AdminCreatePlaceTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $image = $this->fakeImage();
             $page = $browser->visit('/admin/place/create')
-                ->type('name','Ha Noi')
-                ->type('descript','City of Viet Nam')
-                ->attach('image', $image) 
+                ->type('name','Ha Noi');
+            $this->typeInCKEditor($browser, '#cke_descript iframe', 'City of Viet Nam');
+            $page->attach('image', $image) 
                 ->press('Submit')
                 ->assertPathIs('/admin/place')
                 ->assertSee('Create success');
@@ -92,10 +92,10 @@ class AdminCreatePlaceTest extends DuskTestCase
     {   
         
         $this->browse(function (Browser $browser) use ($name, $descript, $image, $expected) {
-            $browser->visit('/admin/place/create')
-                ->type('name', $name)
-                ->type('descript', $descript)
-                ->attach('image',  $image )
+            $page = $browser->visit('/admin/place/create')
+                ->type('name', $name);
+            $this->typeInCKEditor($browser, '#cke_descript iframe', $descript);
+            $page->attach('image',  $image )
                 ->press('Submit')
                 ->assertSee($expected)
                 ->assertPathIs('/admin/place/create');
@@ -111,10 +111,10 @@ class AdminCreatePlaceTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $image = $this->fakeImage();
-            $browser->visit('/admin/place/create')
-                ->type('name', 'Ha Noi')
-                ->type('descript', 'Viet Nam')
-                ->attach('image', $image)
+            $page = $browser->visit('/admin/place/create')
+                ->type('name', 'Ha Noi');
+            $this->typeInCKEditor($browser, '#cke_descript iframe', 'Viet Nam');
+            $page->attach('image', $image)
                 ->press('Reset')
                 ->assertPathIs('/admin/place/create')
                 ->assertInputValue('name', '')

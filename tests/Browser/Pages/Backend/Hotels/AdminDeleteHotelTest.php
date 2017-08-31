@@ -30,13 +30,14 @@ class AdminDeleteHotelTest extends DuskTestCase
             $elements = $page->elements('#list-table tbody tr');
             $this->assertCount(10, $elements);
             $page->press('#list-table tbody tr:nth-child(6) td:nth-child(8) button')
-            ->waitForText("Confirm deletion!")
-            ->press('Delete')
-            ->assertSee("Deletion successful");
+                ->waitForText("Confirm deletion!")
+                ->press('Delete')
+                ->assertSee("Deletion successful");
             $this->assertSoftDeleted('hotels', ['id' => '5']);
             $elements = $page->elements('#list-table tbody tr');   
             $this->assertCount(9, $elements);
-            $page->assertDontSee($hotel->name); 
+            $browser->assertPathIs('/admin/hotel')
+                ->assertDontSee($hotel->name); 
         });
     } 
 
