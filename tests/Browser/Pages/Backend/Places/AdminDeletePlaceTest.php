@@ -40,7 +40,7 @@ class AdminDeletePlaceTest extends DuskTestCase
             $page = $browser->visit('/admin/place');
             $elements = $page->elements('#table-contain tbody tr');
             $this->assertCount(5, $elements);
-            $page->press('#table-contain tbody tr:nth-child(4) td:nth-child(5) button')
+            $page->press('#table-contain tbody tr:nth-child(4) td:nth-child(4) button')
             ->waitForText("Confirm deletion!")
             ->press('Delete')
             ->assertSee("Delete success");
@@ -62,7 +62,7 @@ class AdminDeletePlaceTest extends DuskTestCase
             $page = $browser->visit('/admin/place');
             $place = Place::find(2);
             $place->delete();
-            $page->press('#table-contain tbody tr:nth-child(4) td:nth-child(5) button')
+            $page->press('#table-contain tbody tr:nth-child(4) td:nth-child(4) button')
                 ->waitForText("Confirm deletion!")
                 ->press('Delete')
                 ->assertSee("404 - Page Not found");
@@ -90,7 +90,7 @@ class AdminDeletePlaceTest extends DuskTestCase
         $this->assertCount(5, $hotels);
         $this->browse(function (Browser $browser) {
             $page = $browser->visit('/admin/place');
-            $page->press('#table-contain tbody tr:nth-child(1) td:nth-child(5) button')
+            $page->press('#table-contain tbody tr:nth-child(1) td:nth-child(4) button')
             ->waitForText("Confirm deletion!")
             ->press('Delete')
             ->assertSee("Delete success");

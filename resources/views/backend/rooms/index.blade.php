@@ -34,8 +34,8 @@
               <div class="row">
               <!-- search -->
                 <div class="col-md-6 container-search ">
-                  <form method="GET" action="#" class="form-search">
-                    <input class="input-search form-control" placeholder="Search" name="keyword" type="text" value="{{ app('request')->input('keyword') }}">
+                  <form method="GET" action="{{ route('room.index', $hotel->id) }}" class="container-search">
+                    <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{ app('request')->input('search') }}">
                     <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                   </form>
                 </div>
@@ -72,7 +72,11 @@
                         src="{{ isset($room->images[0])? asset($room->images[0]->path): asset(config('image.no_image')) }}" >
                     </div>
                   </td>
-                  <td class="text-center">{{ $room->name }}</td>
+                  <td class="text-center">
+                    <a href="{{ route('room.show', [$hotel->id, $room->id]) }}">
+                      {{ $room->name }}
+                    </a>
+                  </td>
                   <td class="text-center">{{ $room->descript }}</td>
                   <td class="text-center">{{ $room->price }}</td>
                   <td class="text-center">{{ $room->total }}</td>

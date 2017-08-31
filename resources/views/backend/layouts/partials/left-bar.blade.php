@@ -75,8 +75,8 @@
       </li>
 
       <!-- feedback -->
-      <li>
-        <a href="#">
+      <li class="{{ areActiveRoute(['feedback.index','feedback.show']) }}">
+        <a href="{{ route('feedback.index') }}">
           <i class="fa fa-envelope"></i> <span>{{ __('Feedbacks') }}</span>
         </a>
       </li>
