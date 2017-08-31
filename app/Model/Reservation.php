@@ -63,6 +63,18 @@ class Reservation extends Model
     const STATUS_CANCELED = 3;
 
     /**
+     * Available statuses
+     *
+     * @type array
+     */
+    public static $availableStatuses = [
+        'Pending' => self::STATUS_PENDING,
+        'Accepted' => self::STATUS_ACCEPTED,
+        'Rejected' => self::STATUS_REJECTED,
+        'Canceled' => self::STATUS_CANCELED
+    ];
+
+    /**
      * Booking room belongs to a Room.
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo

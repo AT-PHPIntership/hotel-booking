@@ -20,7 +20,7 @@ class AdminListStaticPageTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin')
-                ->clickLink('Introduction')
+                ->clickLink('Static Pages')
                 ->assertPathIs('/admin/static-page')
                 ->assertSee('Static Page');
         });

@@ -128,8 +128,12 @@
               </table>
             </div>
             <div class="box-footer">
-              <a href="{{ URL::previous() }}" class="pull-left btn btn-default">Back</a>
-              <a href="" class="pull-right btn btn-primary">Edit</a>
+              <a href="{{ URL::previous() }}" class="pull-left btn btn-default">
+                {{__('Back')}}
+              </a>
+              <a href="{{ route('reservation.edit', $reservation->id) }}" class="pull-right btn btn-primary">
+                {{__('Edit')}}
+              </a>
             </div>
           </div>
         </div>
