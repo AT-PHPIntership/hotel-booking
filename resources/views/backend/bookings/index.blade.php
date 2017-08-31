@@ -22,8 +22,8 @@
                 <h3 class="box-title">{{__('Search Booking Rooms')}}</h3>
               </div>
               <div class="col-md-6">
-                <form method="GET" class="container-search cls-search">
-                  <input class="input-search form-control" placeholder="Search" name="search" type="text">
+                <form method="GET" action="{{ route('reservation.index') }}" class="container-search cls-search">
+                  <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
                   <button type="submit" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                 </form>
               </div>
@@ -35,7 +35,7 @@
                 <thead>
                 <tr>
                   <th>{{__('Id')}}</th>
-                  <th>{{__('Rooms Name')}}</th>
+                  <th>{{__('Room Name')}}</th>
                   <th>{{__('Target')}}</th>
                   <th>{{__('Full Name')}}</th>
                   <th>{{__('Check in')}}</th>
@@ -50,17 +50,17 @@
                     <td>{{$reservation->id}}</td>
                     <td>
                       <a href="" id="id-room-detail">
-                        {{$reservation->room->name}}
+                        {{$reservation->room->name or ''}}
                       </a>
                     </td>
                     <td>{{$reservation->target}}</td>
                     <td>
                       @if($reservation->target == __('user'))
                         <a href="{{ route('user.show', $reservation->target_id) }}" id="id-user-detail">
-                          {{$reservation->reservable->full_name}}
+                          {{$reservation->reservable->full_name or ''}}
                         </a>
-                      @else()
-                        {{$reservation->reservable->full_name}}
+                      @else
+                        {{$reservation->reservable->full_name or ''}}
                       @endif
                     </td>
                     <td>{{$reservation->checkin_date}}</td>
@@ -76,7 +76,7 @@
                         {{method_field('DELETE')}}
                         <button type="submit" class="news-btn fa fa-trash-o btn-delete-item pull-right"
                          data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
-                            data-confirm="{{ __('Are you sure you want to delete?') }}">
+                            data-confirm="{{ __('Are you sure you want to delete?') }}" >
                         </button>
                       </form>
                     </td>
