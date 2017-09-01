@@ -28,7 +28,7 @@ class AdminDeleteCommentTest extends DuskTestCase
             $page = $browser->visit('/admin/comment');
             $elements = $page->elements('#list-table tbody tr');
             $this->assertCount(10, $elements);
-            $page->press('#list-table tbody tr:nth-child(6) td:nth-child(8) button')
+            $page->press('#list-table tbody tr:nth-child(6) td:nth-child(7) button')
             ->waitForText("Confirm deletion!")
             ->press('Delete')
             ->assertSee("Deletion successful");
@@ -53,7 +53,7 @@ class AdminDeleteCommentTest extends DuskTestCase
             $page = $browser->visit('/admin/comment');
             $rating_comments = RatingComment::find(2);
             $rating_comments->delete();
-            $page->press('#list-table tbody tr:nth-child(4) td:nth-child(8) button')
+            $page->press('#list-table tbody tr:nth-child(4) td:nth-child(7) button')
                 ->waitForText("Confirm deletion!")
                 ->press('Delete')
                 ->assertSee("404 - Page Not found");

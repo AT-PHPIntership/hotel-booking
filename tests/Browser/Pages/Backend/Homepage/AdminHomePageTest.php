@@ -80,6 +80,33 @@ class AdminHomePageTest extends DuskTestCase
         });
     }
 
+    /**
+    * A Dusk test test connected Page.
+    *
+    * @return void
+    */
+
+    public function testConnectPage() 
+    {
+        $this->linkPage(1,'news','News');
+        $this->linkPage(2,'place','places');
+        $this->linkPage(3,'user','Users');
+        $this->linkPage(4,'category','Categories');
+        $this->linkPage(5,'hotel','of hotels');
+        $this->linkPage(6,'reservation','Booking Rooms');
+
+    }
+
+    public function linkPage($number, $link, $str) 
+    {
+        $this->browse(function (Browser $browser) use ($number, $link, $str) {
+            $browser->visit('/admin')
+                    ->clickLink('Home Page')
+                    ->press('.row .col-lg-3:nth-child('.$number.') .small-box a')
+                    ->assertPathIs('/admin/'.$link)
+                    ->assertSee('List '.$str);
+        });
+    }
 
      /**
      * Make data for test.  
