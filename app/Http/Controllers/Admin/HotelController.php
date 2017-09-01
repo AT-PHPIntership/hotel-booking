@@ -34,9 +34,10 @@ class HotelController extends Controller
         $hotels = Hotel::search()
             ->select($columns)
             ->orderby('hotels.id', 'DESC')
+            ->groupby('hotels.id')
             ->paginate(Hotel::ROW_LIMIT)
             ->appends(['search' => request('search')]);
-        
+
         return view('backend.hotels.index', compact('hotels'));
     }
 

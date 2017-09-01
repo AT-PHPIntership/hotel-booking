@@ -275,3 +275,8 @@
 .mt-10{ 
     margin-top: 10px;
 }
+.content-comment {
+    overflow: auto;
+    max-height:200px;
+    display: block; 
+}

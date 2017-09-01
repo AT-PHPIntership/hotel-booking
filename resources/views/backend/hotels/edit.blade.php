@@ -90,10 +90,10 @@
                     data-confirm="{{ __('Are you sure you want to delete?') }}">
                     @if (isset($hotel->images[0]))
                       @foreach ($hotel->images as $img)
-                        <div id="old-img-{{$img->id}}" class="col-md-3 text-center">
+                        <div id="old-img-{{$img->id}}" class="col-md-3 text-center img-contain">
                           <button
                             data-url="{{ route('image.destroy', $img->id) }}"
-                            class="btn-remove-img btn-primary fa fa-minus-circle fz-20">
+                            class="btn-remove-img btn-link fa fa-times fz-20">
                           </button>
                           <img class="img-place" src="{{ asset($img->path) }}">
                         </div>
