@@ -6,6 +6,7 @@ use Tests\DuskTestCase;
 use App\Model\Feedback;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Carbon\Carbon;
 
 class AdminShowDetailFeedbackTest extends DuskTestCase
 {   
@@ -21,7 +22,7 @@ class AdminShowDetailFeedbackTest extends DuskTestCase
         $feedback->full_name = 'Nhat Trung';
         $feedback->email = 'nhattrung@gmail.com';
         $feedback->content = 'Website is very great !';
-        $feedback->created_at = date_create('now')->format('Y-m-d H:i:s');
+        $feedback->created_at = Carbon::now('Asia/Bangkok');
         $feedback->save(); 
     }
 
@@ -50,7 +51,6 @@ class AdminShowDetailFeedbackTest extends DuskTestCase
         $feedback = Feedback::find(1);
         $this->browse(function (Browser $browser) use ($feedback) {
             $page = $this->visitUrlFeedbackShow($browser, $feedback);
-
             $full_name = $page->text(".mailbox-read-info h3");
             $created_at = $page->text(".mailbox-read-info h5 span");
             $content = $page->text(".mailbox-read-message p");
