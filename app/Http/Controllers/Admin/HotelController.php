@@ -189,7 +189,6 @@ class HotelController extends Controller
         $places = Place::select($columns)->get();
         $services = Service::select($columns)->get();
  
-        // dd($hotel->hotelServices->contains('id', 182));
         return view('backend.hotels.edit', compact('hotel', 'places', 'services'));
     }
 

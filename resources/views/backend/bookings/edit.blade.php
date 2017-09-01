@@ -11,132 +11,136 @@
           <div class="cls-editnews-msg">
             @include('flash::message')
           </div>
-          <div class="box box-primary">
+          <div class="box">
             <form method="POST" action="{{ route('reservation.update', $reservation->id) }}" >
               {{csrf_field()}}
               {{method_field('PUT')}}
               <div class="box-body">
-                <div class="form-group">
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{__('Hotel Name:')}}</label>
-                    </h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{$reservation->room->hotel->name or ''}}</label>
-                    </h4>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{__('Room:')}}</label>
-                    </h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{$reservation->room->name or ''}}</label>
-                    </h4>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{__('Target:')}}</label>
-                    </h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{$reservation->reservable->full_name or ''}}</label>
-                    </h4>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{__('Phone:')}}</label>
-                    </h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{$reservation->reservable->phone or ''}}</label>
-                    </h4>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{__('Email:')}}</label>
-                    </h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{$reservation->reservable->email or ''}}</label>
-                    </h4>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{__('Quantity:')}}</label>
-                    </h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{$reservation->quantity}}</label>
-                    </h4>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{__('Check in:')}}</label>
-                    </h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{$reservation->checkin_date}}</label>
-                    </h4>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{__('Check out:')}}</label>
-                    </h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{$reservation->checkout_date}}</label>
-                    </h4>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-6">
-                    <h4>
-                      <label>{{__('Status:')}}</label>
-                    </h4>
-                  </div>
-                  <div class="col-md-6" {{ $errors->has('status') ? ' has-error' : '' }}>
-                    <h4>
-                      <select name="status">
-                        @foreach(App\Model\Reservation::$availableStatuses as $status => $value)
-                          <option value="{{$value}}" {{$reservation->status_label == $status ? 'selected' :''}}
-                          >
-                            {{$status}}
-                          </option>
-                        @endforeach
-                      </select>
-                    </h4>
-                    @if($errors->first('status'))
-                      <span class="help-block">{{$errors->first('status')}}</span>
-                    @endif
-                  </div>
-                </div>
+                <table class="table table-condensed table-responsive">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-home text-primary"></i>
+                          {{ __('Hotel Name') }}
+                        </strong>
+                      </td>
+                      <td>
+                        {{$reservation->room->hotel->name or '' }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                          {{ __('Room Name') }}
+                        </strong>
+                      </td>
+                      <td>
+                        {{$reservation->room->name or ''}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-user text-primary"></i>
+                          {{ __('Target') }}
+                        </strong>
+                      </td>
+                      <td>
+                        {{$reservation->reservable->full_name or ''}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-cloud text-primary"></i>
+                          {{ __('Email') }}
+                        </strong>
+                      </td>
+                      <td>
+                        {{$reservation->reservable->email or ''}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-phone text-primary"></i>
+                          {{ __('Phone') }}
+                        </strong>
+                      </td>
+                      <td>
+                        {{$reservation->reservable->phone or ''}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-tint text-primary"></i>
+                          {{ __('Quantity') }}
+                        </strong>
+                      </td>
+                      <td>
+                        {{$reservation->quantity}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-calendar text-primary"></i>
+                          {{ __('Check in') }}
+                        </strong>
+                      </td>
+                      <td>
+                        {{$reservation->checkin_date}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-calendar text-primary"></i>
+                          {{ __('Check out') }}
+                        </strong>
+                      </td>
+                      <td>
+                        {{$reservation->checkout_date}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-info-sign text-primary"></i>
+                          {{ __('Request') }}
+                        </strong>
+                      </td>
+                      <td>
+                        {{$reservation->request}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>
+                          <i class="glyphicon glyphicon-exclamation-sign text-primary"></i>
+                          {{ __('Status') }}
+                        </strong> 
+                      </td>
+                      <td>
+                        <select name="status">
+                          @foreach(App\Model\Reservation::$availableStatuses as $status => $value)
+                            <option value="{{$value}}" {{$reservation->status_label == $status ? 'selected' :''}}
+                            >
+                              {{$status}}
+                            </option>
+                          @endforeach
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <div class="box-footer">  
-                <div class="cls-update-booking">
-                  <a href="{{ URL::previous() }}" class="btn btn-default pull-left">
+                <div>
+                  <a href="{{ URL::previous() }}" class="mr-10 btn btn-default pull-left">
                     {{__('Back')}}
                   </a>                
                   <button type="reset" class="btn btn-warning pull-left">

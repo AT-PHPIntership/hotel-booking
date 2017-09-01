@@ -4,10 +4,10 @@
 
 @section('content')
   <div class="content-wrapper">
-    <h1 class="title-page text-success">
-      {{ __('Update place') }}
-    </h1>
     <section class="content">
+      <h1 class="title-page text-success">
+        {{ __('Update place') }}
+      </h1>
       <div class="row margin-center">
         <div class="col-md-12">
           <div class="box box-primary">
@@ -30,7 +30,7 @@
                 <div class="form-group has-feedback 
                   {{ $errors->has('descript') ? ' has-error' : '' }}">
                   <label for="descript">{{ __('Description') }}</label>
-                  <textarea class="form-control place-descript" name= "descript" 
+                  <textarea class="ckeditor form-control place-descript" name= "descript" 
                     id="place-descript">{{ old('descript', $place->descript) }}</textarea>
                   <small class="text-danger">{{ $errors->first('descript') }}</small>
                 </div>
