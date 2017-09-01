@@ -62,12 +62,13 @@ class LoginController extends Controller
     /**
      * Validate the user login request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request of Form Login
+     *
      * @return void
      */
     protected function validateLogin(Request $request)
     {
-        $this->validate($request, [ 
+        $this->validate($request, [
             $this->username() => 'required|string|min:4|max:50|exists:users,username,is_active,1',
             'password' => 'required|string|min:4',
         ]);
@@ -76,11 +77,12 @@ class LoginController extends Controller
     /**
      * Get the failed login response instance.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request of login
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendFailedLoginResponse(Request $request)
-    {   
+    {
         $errors = [
             'password' => __('Password is incorrect!'),
             $this->username() => __('Username is incorrect!'),
