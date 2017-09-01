@@ -4,11 +4,11 @@
 
 @section('content')
   <div class="content-wrapper">
-    <h1 class="text-center text-success">
-      {{ __("Add service") }}
-    </h1>
     <!-- Main content -->
     <section class="content">
+      <h1 class="text-center text-success">
+        {{ __("Add service") }}
+      </h1>
       <div class="row margin-center">
         <!-- left column -->
         <div class="col-md-12">
