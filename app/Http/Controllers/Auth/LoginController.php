@@ -69,31 +69,9 @@ class LoginController extends Controller
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
-            $this->username() => 'required|string|min:4|max:50|exists:users,username,is_active,1',
-            'password' => 'required|string|min:4',
+            $this->username() => 'required|string|exists:users,username,is_active,1',
+            'password' => 'required|string',
         ]);
-    }
-
-    /**
-     * Get the failed login response instance.
-     *
-     * @param \Illuminate\Http\Request $request of login
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        $errors = [
-            'password' => __('Password is incorrect!'),
-            $this->username() => __('Username is incorrect!'),
-            ];
-        if ($request->expectsJson()) {
-            return response()->json($errors, 422);
-        }
-
-        return redirect()->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors($errors);
     }
 
     /**
