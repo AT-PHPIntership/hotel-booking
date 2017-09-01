@@ -27,23 +27,6 @@ class AdminListUserTest extends DuskTestCase
         });
     }
 
-     /**
-     * A Dusk test show record with table empty.
-     *
-     * @return void
-     */
-    public function testShowEmpty()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/user')
-                    ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
-            $elements = $browser->elements('#table-contain tbody tr');
-            $row = count($elements);
-            $this->assertTrue($row == 0);
-            $this->assertNull($browser->element('.pagination'));
-        });
-    }
 
      /**
      * A Dusk test show record with table has data.
@@ -52,7 +35,7 @@ class AdminListUserTest extends DuskTestCase
      */
     public function testShowRecord()
     {
-        factory(User::class, 9)->create();
+        factory(User::class, 8)->create();
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
@@ -71,7 +54,7 @@ class AdminListUserTest extends DuskTestCase
      */
     public function testShowRecordPaginate()
     {
-        factory(User::class, 11)->create();
+        factory(User::class, 10)->create();
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
@@ -91,7 +74,7 @@ class AdminListUserTest extends DuskTestCase
      */
     public function testPathPagination()
     {   
-        factory(User::class, 12)->create();
+        factory(User::class, 11)->create();
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user?page=2');
             $elements = $browser->elements('#table-contain tbody tr');

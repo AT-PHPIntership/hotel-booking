@@ -17,7 +17,7 @@ class AdminEditUserTest extends DuskTestCase
      */
     public function testEditUser()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
@@ -34,7 +34,7 @@ class AdminEditUserTest extends DuskTestCase
      */
     public function testValueEditUser()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
@@ -66,7 +66,7 @@ class AdminEditUserTest extends DuskTestCase
      */
     public function testUpdatesUserSuccess()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
@@ -103,7 +103,7 @@ class AdminEditUserTest extends DuskTestCase
         $phone,
         $expected
     ) {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         
         $this->browse(function (Browser $browser) use(
@@ -132,7 +132,7 @@ class AdminEditUserTest extends DuskTestCase
      */
     public function testBtnReset()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
@@ -167,7 +167,7 @@ class AdminEditUserTest extends DuskTestCase
      */
     public function test404PageForClickEdit()
     {   
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
@@ -185,7 +185,7 @@ class AdminEditUserTest extends DuskTestCase
      */
     public function test404PageForClickSubmit()
     {   
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
