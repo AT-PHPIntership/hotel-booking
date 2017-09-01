@@ -55,7 +55,6 @@
                   <th class="col-md-1">{{ __('ID') }}</th>
                   <th class="text-center">{{ __('Image') }}</th>
                   <th class="text-center">{{ __('Name') }}</th>
-                  <th class="text-center">{{ __('Descript') }}</th>
                   <th class="text-center">{{ __('Price') }}</th>
                   <th class="text-center">{{ __('Total') }}</th>
                   <th class="text-center">{{ __('Max Gest') }}</th>
@@ -77,7 +76,6 @@
                       {{ $room->name }}
                     </a>
                   </td>
-                  <td class="text-center">{{ $room->descript }}</td>
                   <td class="text-center">{{ $room->price }}</td>
                   <td class="text-center">{{ $room->total }}</td>
                   <td class="text-center">{{ $room->max_guest }}</td>
