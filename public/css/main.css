@@ -290,3 +290,8 @@
 .img-contain {
     position: relative;
 }
+.content-comment {
+    overflow: auto;
+    max-height:200px;
+    display: block; 
+}
