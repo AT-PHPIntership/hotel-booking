@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class RatingComment extends Model
 {
@@ -29,5 +30,15 @@ class RatingComment extends Model
     public function hotel()
     {
         return $this->belongsTo('App\Model\Hotel', 'hotel_id');
+    }
+
+    /**
+     * Get created at format date time string
+     *
+     * @return string
+     */
+    public function getCreatedAtAttribute()
+    {   
+       return Carbon::parse($this->attributes['created_at'])->toDayDateTimeString() ;    
     }
 }

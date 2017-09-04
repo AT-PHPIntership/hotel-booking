@@ -9,10 +9,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('frontend.index');
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
@@ -33,4 +30,7 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
 
     Route::put('/user/{id}/status', 'UserController@updateStatus')->name('user.updateStatus');
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
+});
+Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
+    Route::resource('/hotel', 'HotelController');
 });

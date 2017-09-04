@@ -118,6 +118,52 @@ class Hotel extends Model
     }
 
     /**
+     * Value of low rating score
+     */
+    const LOW_SCORE = 4.9;
+
+    /**
+     * Value of normal rating score 
+     */
+    const NOMAL_SCORE = 6.9;
+
+    /**
+     * Value of high rating score
+     */
+    const HIGH_SCORE = 8.9;
+
+    /**
+     * Get Label for rating comment
+     *
+     * @return string
+     */
+    public function getLabelRatingAttribute()
+    {    
+            $rating = $this->ratingComments()->avg('total_rating');
+            if($rating <= self::LOW_SCORE ) {
+                return __('Bad');
+            } elseif (self::LOW_SCORE < $rating && $rating <= self::NOMAL_SCORE ) {
+                return __('Nomal');
+            } elseif (self::NOMAL_SCORE < $rating && $rating <= self::HIGH_SCORE) {
+                return __('Good');
+            } else {
+                return __('Very Good');
+            }
+    }
+
+    const LIMIT_ROUND_FLOAT = 1; 
+
+    /**
+     * Get round avg rating 
+     *
+     * @return float
+     */
+    public function getRoundAvgRatingAttribute()
+    {
+        return round($this->ratingComments->avg('total_rating'), self::LIMIT_ROUND_FLOAT);
+    }
+
+    /**
      * This is a recommended way to declare event handlers
      *
      * @return void

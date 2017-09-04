@@ -56,6 +56,7 @@ $factory->define(App\Model\Hotel::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->company,
         'address' => $faker->address,
+        'introduce' => $faker->address,
         'star' => $faker->numberBetween($min = 1, $max = 5),
     ];
 });
