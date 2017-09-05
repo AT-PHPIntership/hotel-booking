@@ -25,7 +25,7 @@
               </div>  
               <div class="row">
                 <div class="col-md-6 container-search ">
-                  <form class="container-search" method="GET" action="{{ route('place.index') }}">
+                  <form class="container-search" method="GET" action="{{ route('hotel.index') }}">
                     <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{ app('request')->input('search') }}">
                     <button type="submit" id="btn-search" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                   </form>
@@ -89,6 +89,9 @@
                 @endforeach
               </tbody>
             </table>
+              <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
             {!! $hotels->render() !!}
           </div>
          <!-- /.box-body -->
