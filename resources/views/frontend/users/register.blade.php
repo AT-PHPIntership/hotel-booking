@@ -24,7 +24,7 @@
                   @endif
                 </div>
               </div>
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
               <label for="username" class="col-md-4 control-label cls-login">
                 {{__('Username')}}
               </label>
@@ -42,7 +42,7 @@
                 {{__('Email Address')}}
               </label>
               <div class="col-md-6">
-                <input id="email" type="email" class="form-control cls-login" name="email" value="{{ old('email') }}">
+                <input id="email" type="text" class="form-control cls-login" name="email" value="{{ old('email') }}">
                 @if ($errors->has('email'))
                   <span class="help-block">
                     <strong>{{ $errors->first('email') }}</strong>
@@ -87,7 +87,7 @@
             <div class="form-group">
               <div class="col-md-6 col-md-offset-4 cls-register">
                 <button type="submit" class="btn btn-primary pull-right">
-                  {{__('Sumbit')}}
+                  {{__('Submit')}}
                 </button>
                 <a href="{{URL::previous() }}" class="btn btn-default pull-left">{{__('Back')}}</a>
                 <button type="reset" class="btn btn-primary pull-left">
