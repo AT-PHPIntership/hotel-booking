@@ -4,40 +4,45 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      {{ __('Hotels managment') }}
-      <small>
-        {{ __('List of hotels') }}
-      </small>
+      {{ __('Hotels management') }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home') }}</a></li>
-      <li class="active">{{ __('List of hotels') }}</li>
+      <li class="active">{{ __('Hotels') }}</li>
     </ol>
   </section>
 
  <!-- Main content -->
- <section class="content">
-   <div class="row">
-     <div class="col-xs-12">
-       <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">{{ __('Table hotel detail') }}</h3>
-            @include('flash::message')
-            @include('backend.layouts.partials.modal')
-          </div>
-          <div class="col-md-6">
-            <form  class="container-search cls-search">
-              <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{request('search')}}">
-              <button type="submit" class="btn btn-primary btn-search">
-                <i class="glyphicon glyphicon-search"></i>
-              </button>
-            </form>
-          </div>
-          <div class="contain-btn pull-right">
-            <a class="btn btn-primary" href="{{ route('hotel.create') }}">{{ __('Add hotel') }}</a>
-          </div>
+  <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <div class="title-place mb-10">
+                <h3 class="box-title title-header">
+                  {{ __('List of hotels') }}
+                </h3>
+              </div>  
+              <div class="row">
+                <div class="col-md-6 container-search ">
+                  <form class="container-search" method="GET" action="{{ route('hotel.index') }}">
+                    <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{ app('request')->input('search') }}">
+                    <button type="submit" id="btn-search" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
+                  </form>
+                </div>
+                <div class="contain-btn pull-right">
+                  <a href="{{ route('hotel.create') }}" class="btn btn-primary">
+                    <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                    {{ __('Add hotel') }}
+                  </a> 
+                </div>
+              </div>
+            </div>
+
           <!-- /.box-header -->
           <div class="box-body">
+            @include('flash::message')
+            @include('backend.layouts.partials.modal')
             <table id="list-table" class="table table-bordered table-striped">
               <thead>
                 <tr align="center">
@@ -48,7 +53,7 @@
                   <th>{{ __('Star') }}</th>
                   <th>{{ __('Total Rooms') }}</th>
                   <th>{{ __('Created At') }}</th>
-                  <th>{{ __('Options') }}</th>
+                  <th class="text-center">{{ __('Options') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -84,6 +89,9 @@
                 @endforeach
               </tbody>
             </table>
+              <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
             {!! $hotels->render() !!}
           </div>
          <!-- /.box-body -->

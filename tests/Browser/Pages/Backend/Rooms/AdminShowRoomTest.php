@@ -76,10 +76,10 @@ class AdminShowRoomTest extends DuskTestCase
                     ->assertSeeIn('.col-md-7 h4 a', $hotel->name)
                     ->assertSeeIn('.col-md-7 h5:nth-child(3)', $room->descript)
                     ->assertSeeIn('.col-md-7 h5:nth-child(4)', $room->price)
-                    ->assertSeeIn('.col-md-7 h5:nth-child(5)', isset($room->size) ? $room->size : 'Size:')
+                    ->assertSeeIn('.col-md-7 h5:nth-child(5)', 'Size:' . $room->size)
                     ->assertSeeIn('.col-md-7 h5:nth-child(6)', $room->total)
-                    ->assertSeeIn('.col-md-7 h5:nth-child(7)', isset($room->bed) ? $room->bed : 'Bed:')
-                    ->assertSeeIn('.col-md-7 h5:nth-child(8)', isset($room->direction) ? $room->direction : 'Direction:')
+                    ->assertSeeIn('.col-md-7 h5:nth-child(7)', 'Bed:' . $room->bed)
+                    ->assertSeeIn('.col-md-7 h5:nth-child(8)', 'Direction:' . $room->direction)
                     ->assertSeeIn('.col-md-7 h5:nth-child(9)', $room->max_guest);
 
             if (!isset($room->images[0])) {
