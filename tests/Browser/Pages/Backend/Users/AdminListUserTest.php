@@ -23,7 +23,7 @@ class AdminListUserTest extends DuskTestCase
             $browser->visit('/admin')
                     ->clickLink('Users')
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
         });
     }
 
@@ -37,7 +37,7 @@ class AdminListUserTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
             $this->assertTrue($row == 0);
@@ -57,7 +57,7 @@ class AdminListUserTest extends DuskTestCase
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
             $this->assertTrue($row == 9);
@@ -76,7 +76,7 @@ class AdminListUserTest extends DuskTestCase
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
             $this->assertTrue($row == 10);

@@ -93,7 +93,7 @@ class AdminShowUserTest extends DuskTestCase
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
             $user->delete();
             $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a');
             $browser->assertSee('404 - Page Not found');
