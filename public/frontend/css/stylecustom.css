@@ -185,3 +185,6 @@ height: 400px;
 .cls-login {
   color: black;
 }
+.cls-register a {
+  margin-right: 2%;
+}
