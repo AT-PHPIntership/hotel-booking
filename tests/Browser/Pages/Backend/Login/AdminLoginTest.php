@@ -6,8 +6,6 @@ use Tests\DuskTestCaseLogin;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Model\User;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
 
 class AdminLoginTest extends DuskTestCaseLogin
 {   
@@ -29,6 +27,22 @@ class AdminLoginTest extends DuskTestCaseLogin
     // }
 
     /**
+     * Test Validation Admin Create News.
+     *
+     * @return void
+     */
+    public function testValidationLogin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/login')
+                    ->press('LOGIN')
+                    ->assertPathIs('/login')
+                    ->assertSee('The username field is required.')
+                    ->assertSee('The password field is required.');
+        });
+    }
+
+    /**
      * Test Login success.
      *
      * @return void
@@ -44,7 +58,60 @@ class AdminLoginTest extends DuskTestCaseLogin
                     ->assertPathIs('/login')
                     ->type('username', 'admin')
                     ->type('password', 'admin')
-                    ->press('.btn-primary');
+                    ->press('LOGIN')
+                    ->assertSee('Dashboard')
+                    ->assertPathIs('/admin');
+        });
+    }
+
+    /**
+     * List case for Test Validation Login
+     *
+     */
+    public function listCaseForTestLogin()
+    {
+        return [
+            ['user1', '', 'The password field is required.'],
+            ['', 'user1', 'The username field is required.'],
+            ['user1', 'hello', 'These credentials do not match our records.'],
+            ['hello', 'password', 'The selected username is invalid.'],
+
+        ];
+    }
+
+    /**
+     *
+     * @dataProvider listCaseForTestLogin
+     *
+     */ 
+    public function testCreateNewsFail($username, $password, $expected)
+    {   
+        
+        $this->browse(function (Browser $browser) use ($username, $password, $expected)
+        {
+            $browser->visit('/login')
+                ->type('username', $username);
+                ->type('password', $password)
+                ->press('LOGIN')
+                ->assertSee($expected)
+                ->assertPathIs('/login');
+        });
+    }
+
+    /**
+     * Test login if user is unactive.
+     *
+     * @return void
+     */
+    public function testLoginUserUnactive()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/login')
+                    ->type('username', 'user2')
+                    ->type('password', 'user2')
+                    ->press('LOGIN')
+                    ->assertPathIs('/login')
+                    ->assertSee('The selected username is invalid.');
         });
     }
 
@@ -68,6 +135,13 @@ class AdminLoginTest extends DuskTestCaseLogin
             'is_active' => 1,
             'is_admin' => 0,
             'full_name' => 'User1'
+            ]);
+        factory(User::class, 1)->create([
+            'username' => 'user2',
+            'password' => bcrypt('user2'),
+            'is_active' => 0,
+            'is_admin' => 0,
+            'full_name' => 'User2'
             ]);
     }
 }

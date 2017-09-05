@@ -33,8 +33,9 @@ trait CreatesApplication
             'is_admin' => 1,
             'full_name' => 'Admin'
             ]);
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1));
+        $admin = User::find(1);
+        $this->browse(function (Browser $browser) use ($admin) {
+            $browser->loginAs($admin);
         });
     }
 
