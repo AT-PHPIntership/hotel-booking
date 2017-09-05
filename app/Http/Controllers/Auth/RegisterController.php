@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Model\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = redirect()->back();
 
     /**
      * Create a new controller instance.
@@ -40,6 +40,16 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('frontend.users.register');
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param array $data authentication data that need to validate
@@ -49,9 +59,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'full_name' => 'required|max:255',
+            'username' => 'required|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'email' => 'required|email|max:255|unique:users',
+            'phone' => 'required|numeric'
         ]);
     }
 
@@ -65,9 +77,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'full_name' => $data['full_name'],
+            'username' => $data['username'],    
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'phone' => $data['phone']
         ]);
     }
 }

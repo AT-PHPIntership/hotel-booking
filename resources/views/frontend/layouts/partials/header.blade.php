@@ -58,8 +58,17 @@
               <li><a href="blog-post.html">Sale</a></li>
             </ul>
           </li>
-          <li> <a href="{{ route('login') }}">Login</a></li>
-          <li> <a href="{{ route('register') }}">Register</a>
+          @if(Auth::check())
+            <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{Auth::user()->username}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="blog.html">{{__('Profile')}}</a></li>
+                <li><a href="{{ route('logout') }}" id ="log-out">{{__('Log out')}}</a></li>
+              </ul>
+            </li>
+          @else
+            <li> <a href="{{ route('login') }}">Login</a></li>
+            <li> <a href="{{ route('register') }}">Register</a>
+          @endif
           </li>
         </ul>
       </div>
