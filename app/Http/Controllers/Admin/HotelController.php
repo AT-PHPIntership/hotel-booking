@@ -71,8 +71,10 @@ class HotelController extends Controller
 
         //make data hotel services
         $hotelServices = array();
-        foreach ($request->services as $serviceId) {
-            array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+        if (isset($request->services)) {
+            foreach ($request->services as $serviceId) {
+                array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+            }
         }
         //save hotel services
         $hotel->hotelServices()->saveMany($hotelServices);
