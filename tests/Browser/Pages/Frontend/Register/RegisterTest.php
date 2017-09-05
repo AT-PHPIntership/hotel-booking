@@ -7,7 +7,9 @@ use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class RegisterTest extends DuskTestCase
-{
+{   
+    use DatabaseMigrations;
+    
     /**
      * Test route page register.
      *
