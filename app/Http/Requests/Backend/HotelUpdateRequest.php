@@ -24,6 +24,10 @@ class HotelUpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'address' => 'required',
+            'place_id' => 'required',
+            'star' => 'required',
+            'introduce' => 'required',
             'name' => 'min:8|unique:hotels,name,' . $this->id . ',id',
             'images.*' => 'image|max:' . config('image.max_upload_size')
         ];

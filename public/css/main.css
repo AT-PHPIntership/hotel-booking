@@ -280,3 +280,6 @@
     max-height:200px;
     display: block; 
 }
+.font-weight-bold {
+    font-weight: bold;
+}

@@ -63,7 +63,7 @@ class AdminDeleteUserTest extends DuskTestCase
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
-                    ->assertSee('List User')
+                    ->assertSee('List Users')
                     ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) button');
             $user->delete();
             $browser->waitFor(null, '1')

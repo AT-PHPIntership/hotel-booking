@@ -73,8 +73,10 @@ class HotelController extends Controller
 
         //make data hotel services
         $hotelServices = array();
-        foreach ($request->services as $serviceId) {
-            array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+        if (isset($request->services)) {
+            foreach ($request->services as $serviceId) {
+                array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+            }
         }
         //save hotel services
         $hotel->hotelServices()->saveMany($hotelServices);
@@ -168,17 +170,11 @@ class HotelController extends Controller
         $with['place'] = function ($query) {
             $query->select('id', 'name');
         };
-        $with['rooms'] = function ($query) {
-            $query->select('hotel_id', 'id', 'name');
-        };
         $with['images'] = function ($query) {
             $query->select();
         };
         $with['hotelServices'] = function ($query) {
             $query->select('id', 'hotel_id', 'service_id');
-        };
-        $with['hotelServices.service'] = function ($query) {
-            $query->select('id', 'name');
         };
 
         $hotel = Hotel::select($columns)->with($with)->findOrFail($id);
@@ -211,8 +207,10 @@ class HotelController extends Controller
         $hotel->hotelServices()->delete();
         //make data hotel services
         $hotelServices = array();
-        foreach ($request->services as $serviceId) {
-            array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+        if (isset($request->services)) {
+            foreach ($request->services as $serviceId) {
+                array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+            }
         }
         //save hotel services
         $hotel->hotelServices()->saveMany($hotelServices);

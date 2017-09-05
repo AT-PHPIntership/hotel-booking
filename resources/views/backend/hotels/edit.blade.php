@@ -35,7 +35,7 @@
                 <div class="form-inline">
                   {{-- place select --}}
                   <div class="form-group" {{ $errors->has('place') ? ' has-error' : '' }}>
-                    <label>{{ __('Place') }}</label>
+                    <p class="font-weight-bold">{{ __('Place') }}</p>
                     <select class="form-control" name="place_id">
                       <option value="">{{ __('Choose Place') }}</option>
                       @foreach($places as $place)
@@ -47,8 +47,8 @@
                     @endif
                   </div>
                    {{-- select star --}}
-                  <div class="form-group" {{ $errors->has('star') ? ' has-error' : '' }}>
-                    <label>{{ __('Star') }}</label>
+                  <div class="form-group ml-5per" {{ $errors->has('star') ? ' has-error' : '' }}>
+                    <p class="font-weight-bold">{{ __('Star') }}</p>
                     <select class="form-control" name="star">
                       <option value="">{{ __('Star') }}</option>
                       @for($i = App\Model\Hotel::STAR_MIN; $i <= App\Model\Hotel::STAR_MAX; $i++ )
