@@ -23,11 +23,14 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
+     * Where to redirect users after registration success.
      *
      * @var string
      */
-    protected $redirectTo = redirect()->back();
+    protected function redirectTo()
+    {
+        return url()->previous();
+    }
 
     /**
      * Create a new controller instance.
@@ -78,10 +81,11 @@ class RegisterController extends Controller
     {
         return User::create([
             'full_name' => $data['full_name'],
-            'username' => $data['username'],    
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'phone' => $data['phone']
+            'phone' => $data['phone'],
+            'is_active' => 1
         ]);
     }
 }
