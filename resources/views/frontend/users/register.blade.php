@@ -85,10 +85,11 @@
               </div>
             </div>
             <div class="form-group">
-              <div class="col-md-6 col-md-offset-4">
+              <div class="col-md-6 col-md-offset-4 cls-register">
                 <button type="submit" class="btn btn-primary pull-right">
-                  {{__('Sumbit')}}
+                  {{__('Submit')}}
                 </button>
+                <a href="{{URL::previous() }}" class="btn btn-default pull-left">{{__('Back')}}</a>
                 <button type="reset" class="btn btn-primary pull-left">
                   {{__('Reset')}}
                 </button>
