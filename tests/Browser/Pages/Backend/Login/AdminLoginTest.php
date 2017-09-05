@@ -16,15 +16,15 @@ class AdminLoginTest extends DuskTestCaseLogin
      *
      * @return void
      */
-    // public function testLogin()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/')
-    //                 ->clickLink('Login')
-    //                 ->assertSee('Login')
-    //                 ->assertPathIs('/login');
-    //     });
-    // }
+    public function testLogin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->clickLink('Login')
+                    ->assertSee('Login')
+                    ->assertPathIs('/login');
+        });
+    }
 
     /**
      * Test Validation Admin Create News.
@@ -73,9 +73,8 @@ class AdminLoginTest extends DuskTestCaseLogin
         return [
             ['user1', '', 'The password field is required.'],
             ['', 'user1', 'The username field is required.'],
-            ['user1', 'hello', 'These credentials do not match our records.'],
             ['hello', 'password', 'The selected username is invalid.'],
-
+            ['user2', 'user2', 'The selected username is invalid.'],
         ];
     }
 
@@ -90,28 +89,11 @@ class AdminLoginTest extends DuskTestCaseLogin
         $this->browse(function (Browser $browser) use ($username, $password, $expected)
         {
             $browser->visit('/login')
-                ->type('username', $username);
+                ->type('username', $username)
                 ->type('password', $password)
                 ->press('LOGIN')
                 ->assertSee($expected)
                 ->assertPathIs('/login');
-        });
-    }
-
-    /**
-     * Test login if user is unactive.
-     *
-     * @return void
-     */
-    public function testLoginUserUnactive()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/login')
-                    ->type('username', 'user2')
-                    ->type('password', 'user2')
-                    ->press('LOGIN')
-                    ->assertPathIs('/login')
-                    ->assertSee('The selected username is invalid.');
         });
     }
 
