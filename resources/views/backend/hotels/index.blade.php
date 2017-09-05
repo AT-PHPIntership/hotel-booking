@@ -89,6 +89,9 @@
                 @endforeach
               </tbody>
             </table>
+              <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
             {!! $hotels->render() !!}
           </div>
          <!-- /.box-body -->

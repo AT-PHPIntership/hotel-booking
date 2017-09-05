@@ -101,12 +101,15 @@
               @endforeach
                </tbody>
               </table>
-                <div class="contain-btn second pull-right">
-                  <a href="{{ route('room.create', $hotel->id) }}" class="btn btn-primary">
-                    <span class="fa fa-plus-circle" aria-hidden="true"></span>
-                    {{ __('Add Room') }}
-                  </a> 
-                </div>
+               <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
+              <div class="contain-btn second pull-right">
+                <a href="{{ route('room.create', $hotel->id) }}" class="btn btn-primary">
+                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                  {{ __('Add Room') }}
+                </a> 
+              </div>
             {{ $rooms->render() }}
             </div>
             <!-- /.box-body -->
