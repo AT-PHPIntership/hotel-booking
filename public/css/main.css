@@ -246,6 +246,15 @@
 .ml-5per {
     margin-left: 5%;
 }
+.ml-2per {
+    margin-left: 2%;
+}
+.mt-10{ 
+    margin-top: 10px;
+}
+.pd-0 {
+    padding: 0;
+}
 .cus-icon-sm {
     font-size: 20px;
     transform: translateY(20%);
@@ -272,11 +281,31 @@
     color: red;
     font-family: cursive;
 }
-.mt-10{ 
-    margin-top: 10px;
+.btn-remove-img {
+    position: absolute;
+    color: #3e3d3d;
+    background: white;
+    border-radius: 6px;
+}
+.img-contain {
+    position: relative;
 }
 .content-comment {
     overflow: auto;
     max-height:200px;
     display: block; 
+}
+.container::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.logo-header {
+    height: 45px;
+    transform: translateY(-30%);
+}
+.img-presentive {
+    display: inline-block;
+    width: 100%;
+    height: 81%;
 }

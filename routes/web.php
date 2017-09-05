@@ -10,9 +10,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
@@ -34,3 +31,12 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::put('/user/{id}/status', 'UserController@updateStatus')->name('user.updateStatus');
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
 });
+
+Route::group(['namespace'=>'User'], function() {
+    Route::get('/', function () {
+        return view('frontend.home.index');
+    });
+
+    Route::resource('/hotel', 'HotelController');
+});
+
