@@ -35,7 +35,7 @@ trait CreatesApplication
             ]);
         $admin = User::find(1);
         $this->browse(function (Browser $browser) use ($admin) {
-            $browser->loginAs($admin);
+            $browser->resize(1920, 2000)->loginAs($admin);
         });
     }
 

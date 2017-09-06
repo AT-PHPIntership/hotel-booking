@@ -22,15 +22,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration success.
-     *
-     * @return url
-     */
-    protected function redirectTo()
-    {
-        return url()->previous();
-    }
+    protected $redirectTo = '/registerSuccess';
 
     /**
      * Create a new controller instance.
@@ -79,13 +71,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'full_name' => $data['full_name'],
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'phone' => $data['phone'],
-            'is_active' => 1
-        ]);
+        return User::create(array_merge($data, ['is_active' => 1]));
     }
 }
