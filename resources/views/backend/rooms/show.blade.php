@@ -62,6 +62,7 @@
         <h4>{{ __('Hotel: ') }}<a class="bg-faded" href="{{ route('hotel.show' , $hotel->id) }}">{{ $hotel->name }}</a></h4>
         {{-- Descript --}}
         <h5>{{ __('Descript: ') . $room->descript }}</h5>
+        <h5>{{ __('Price: ') . $room->price }}</h5>
         <h5>{{ __('Size: ') . $room->size }}</h5>
         <h5>{{ __('Total: ') . $room->total }}</h5>
         <h5>{{ __('Bed: ') . $room->bed }}</h5>

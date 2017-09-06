@@ -7,7 +7,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+        <div class="col-xs-12 col-sm-12 col-md-10 toppad cls-tb-user" >
           <div class="panel panel-info">
             <div class="panel-heading">
               <h3 class="panel-title text-center">{{$user->username}}</h3>
@@ -94,9 +94,9 @@
     </div>
   </section>
   <section class="content" hidden="" id="table-comment">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="box">
+    <div class="container">
+      <div class="row">
+        <div class="box col-xs-12 col-sm-12 col-md-10 toppad cls-tb-user">
           <div class="box-header">
             <h3 class="box-title text-center">{{ __('List comment & rating') }}</h3>
           </div>
@@ -129,15 +129,17 @@
                 @endforeach
               </tbody>
             </table>
+            {!! $comments->render() !!}
           </div>
         </div>
       </div>
     </div>          
   </section>
+
   <section class="content" hidden="" id="table-reservation">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="box">
+    <div class="container">
+      <div class="row">
+        <div class="box col-xs-12 col-sm-12 col-md-10 toppad cls-tb-user">
           <div class="box-header">
             <h3 class="box-title text-center">{{ __('List Reservations') }}</h3>
           </div>
@@ -174,6 +176,6 @@
           </div>
         </div>
       </div>
-    </div>          
+    </div>        
   </section>
 @endsection
