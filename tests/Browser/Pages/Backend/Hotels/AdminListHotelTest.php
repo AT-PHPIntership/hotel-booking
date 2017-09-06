@@ -35,7 +35,7 @@ class AdminListHotelTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/hotel')
                 ->assertSee('List of hotels');
-            $elements = $browser->elements('#list-table tbody tr');
+            $elements = $browser->elements('#table-contain tbody tr');
             $this->assertCount(0, $elements);
             $this->assertNull($browser->element('.paginate'));
         });
@@ -53,7 +53,7 @@ class AdminListHotelTest extends DuskTestCase
             $browser->visit('/admin/hotel')
                 ->resize(1920, 2000)
                 ->assertSee('List of hotels');
-            $elements = $browser->elements('#list-table tbody tr');
+            $elements = $browser->elements('#table-contain tbody tr');
             $this->assertCount(9, $elements);
             $this->assertNull($browser->element('.pagination'));
         });
@@ -72,7 +72,7 @@ class AdminListHotelTest extends DuskTestCase
                 ->resize(1920, 2000)
                 ->assertSee('List of hotels');
             //Count row number in one page    
-            $elements = $browser->elements('#list-table tbody tr');
+            $elements = $browser->elements('#table-contain tbody tr');
             $this->assertCount(10, $elements);
             $this->assertNotNull($browser->element('.pagination'));
             //Count page number of pagination
@@ -92,7 +92,7 @@ class AdminListHotelTest extends DuskTestCase
         $this->makeData(12);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/hotel?page=2');
-            $elements = $browser->elements('#list-table tbody tr');
+            $elements = $browser->elements('#table-contain tbody tr');
             $this->assertCount(2, $elements);
             $browser->assertPathIs('/admin/hotel');
             $browser->assertQueryStringHas('page', 2);
