@@ -7,7 +7,7 @@
       {{ __('Hotels management') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home') }}</a></li>
+      <li><a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i>{{ __('Home') }}</a></li>
       <li class="active">{{ __('Hotels') }}</li>
     </ol>
   </section>
@@ -25,7 +25,7 @@
               </div>  
               <div class="row">
                 <div class="col-md-6 container-search ">
-                  <form class="container-search" method="GET" action="{{ route('place.index') }}">
+                  <form class="container-search" method="GET" action="{{ route('hotel.index') }}">
                     <input class="input-search form-control" placeholder="Search" name="search" type="text" value="{{ app('request')->input('search') }}">
                     <button type="submit" id="btn-search" class="btn btn-primary btn-search"><i class="glyphicon glyphicon-search"></i></button>
                   </form>
@@ -43,7 +43,7 @@
           <div class="box-body">
             @include('flash::message')
             @include('backend.layouts.partials.modal')
-            <table id="list-table" class="table table-bordered table-striped">
+            <table id="table-contain" class="table table-bordered table-striped">
               <thead>
                 <tr align="center">
                   <th>{{ __('ID') }}</th>
@@ -91,6 +91,12 @@
             </table>
               <div class="cls-search-not-found text-center" hidden="">
                 {{__('Data Not Found')}}
+              </div>
+              <div class="contain-btn second">
+                <a class="btn btn-primary" href="{{ route('hotel.create')}}">
+                  <span class="fa fa-plus-circle"></span>
+                  {{ __('Add hotel') }}
+                </a>
               </div>
             {!! $hotels->render() !!}
           </div>

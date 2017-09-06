@@ -34,7 +34,7 @@ class AdminShowHotelTest extends DuskTestCase
         $totalRooms = $hotel->rooms->count();
         $this->browse(function (Browser $browser) use ($hotel, $place, $totalRooms) {
             $browser->visit('/admin/hotel')
-                    ->press('#list-table tbody tr:nth-child(2) td:nth-child(2) a')
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a')
                     ->assertPathIs('/admin/hotel/'.$hotel->id)
                     ->assertSee('Hotel detail')
                     ->assertSee('Service')
@@ -56,7 +56,7 @@ class AdminShowHotelTest extends DuskTestCase
         $hotel = Hotel::find(4);
         $this->browse(function (Browser $browser) use ($hotel) {
             $browser->visit('/admin/hotel')
-                    ->press('#list-table tbody tr:nth-child(2) td:nth-child(2) a')
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a')
                     ->assertPathIs('/admin/hotel/'.$hotel->id)
                     ->assertSee('Hotel detail')
                     ->clickLink('Edit hotel')
@@ -75,7 +75,7 @@ class AdminShowHotelTest extends DuskTestCase
         $hotel = Hotel::find(4);
         $this->browse(function (Browser $browser) use ($hotel) {
             $browser->visit('/admin/hotel')
-                    ->press('#list-table tbody tr:nth-child(2) td:nth-child(2) a')
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a')
                     ->assertPathIs('/admin/hotel/'.$hotel->id)
                     ->assertSee('Hotel detail')
                     ->clickLink('Back')
@@ -97,7 +97,7 @@ class AdminShowHotelTest extends DuskTestCase
             $browser->visit('/admin/hotel')
                     ->assertSee('List of hotels');
             $hotel->delete();
-            $browser->press('#list-table tbody tr:nth-child(2) td:nth-child(2) a');
+            $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a');
             $browser->assertSee('404 - Page Not found');
         });
     }

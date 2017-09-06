@@ -27,14 +27,14 @@ class AdminDeleteHotelTest extends DuskTestCase
         $hotel = Hotel::find(5);
         $this->browse(function (Browser $browser) use ($hotel){
             $page = $browser->visit('/admin/hotel');
-            $elements = $page->elements('#list-table tbody tr');
+            $elements = $page->elements('#table-contain tbody tr');
             $this->assertCount(10, $elements);
-            $page->press('#list-table tbody tr:nth-child(6) td:nth-child(8) button')
+            $page->press('#table-contain tbody tr:nth-child(6) td:nth-child(8) button')
                 ->waitForText("Confirm deletion!")
                 ->press('Delete')
                 ->assertSee("Deletion successful");
             $this->assertSoftDeleted('hotels', ['id' => '5']);
-            $elements = $page->elements('#list-table tbody tr');   
+            $elements = $page->elements('#table-contain tbody tr');   
             $this->assertCount(9, $elements);
             $browser->assertPathIs('/admin/hotel')
                 ->assertDontSee($hotel->name); 
@@ -42,7 +42,7 @@ class AdminDeleteHotelTest extends DuskTestCase
     } 
 
     /**
-     * Test not found when delete
+     * Test not found when delete hotel
      *
      * @return void
      */
@@ -53,7 +53,7 @@ class AdminDeleteHotelTest extends DuskTestCase
             $page = $browser->visit('/admin/hotel');
             $hotel = Hotel::find(2);
             $hotel->delete();
-            $page->press('#list-table tbody tr:nth-child(4) td:nth-child(8) button')
+            $page->press('#table-contain tbody tr:nth-child(4) td:nth-child(8) button')
                 ->waitForText("Confirm deletion!")
                 ->press('Delete')
                 ->assertSee("404 - Page Not found");
@@ -85,7 +85,7 @@ class AdminDeleteHotelTest extends DuskTestCase
         $hotel = Hotel::find(1);
         $this->browse(function (Browser $browser) {
             $page = $browser->visit('/admin/hotel');
-            $page->press('#list-table tbody tr:nth-child(1) td:nth-child(8) button')
+            $page->press('#table-contain tbody tr:nth-child(1) td:nth-child(8) button')
             ->waitForText("Confirm deletion!")
             ->press('Delete')
             ->assertSee("Deletion successful!");
