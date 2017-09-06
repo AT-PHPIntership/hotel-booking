@@ -2,12 +2,12 @@
 
 namespace Tests\Browser\Pages\Frontend\Register;
 
-use Tests\DuskTestCaseLogin;
+use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Model\User;
 
-class RegisterTest extends DuskTestCaseLogin
+class RegisterTest extends DuskTestCase
 {   
     use DatabaseMigrations;
     
@@ -19,6 +19,7 @@ class RegisterTest extends DuskTestCaseLogin
     public function testRegister()
     {
         $this->browse(function (Browser $browser) {
+            $browser->logout();
             $browser->visit('/')
                     ->clickLink('Register')
                     ->assertSee('Register')
@@ -38,6 +39,7 @@ class RegisterTest extends DuskTestCaseLogin
     public function testValidationRegister()
     {
         $this->browse(function (Browser $browser) {
+            $browser->logout();
             $browser->visit('/register')
                     ->press('SUBMIT')
                     ->assertSee('The full name field is required.')
@@ -57,6 +59,7 @@ class RegisterTest extends DuskTestCaseLogin
     public function testRegisterSuccess()
     {
         $this->browse(function (Browser $browser) {
+            $browser->logout();
             $browser->visit('/')
                     ->assertVisible('#login')
                     ->assertVisible('#register')
@@ -71,7 +74,8 @@ class RegisterTest extends DuskTestCaseLogin
                     ->assertPathIs('/')
                     ->assertMissing('#login')
                     ->assertMissing('#register')
-                    ->assertSee('duocduoc');          
+                    ->assertSee('duocduoc')
+                    ->assertSee('Outstanding Places');           
         });
     }
 
@@ -119,6 +123,37 @@ class RegisterTest extends DuskTestCaseLogin
                 ->assertPathIs('/register')
                 ->assertVisible('#login')
                 ->assertVisible('#register');
+        });
+    }
+
+    /**
+     * Test Route page of Admin when login success with account user.
+     *
+     * @return void
+     */
+    public function testUserRoutePageAdmin()
+    {   
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $browser->visit('/')
+                    ->assertVisible('#login')
+                    ->assertVisible('#register')
+                    ->clickLink('Register')
+                    ->type('full_name', 'Duoc Nguyen C.')
+                    ->type('username', 'duocduoc')
+                    ->type('email','duoc.nguyen@gmail.com')
+                    ->type('phone', '01206223029')
+                    ->type('password', 'duoc123')
+                    ->type('password_confirmation', 'duoc123')
+                    ->press('SUBMIT')
+                    ->assertPathIs('/')
+                    ->assertMissing('#login')
+                    ->assertMissing('#register')
+                    ->assertSee('duocduoc');
+            $browser->visit('/admin/news')
+                    ->assertSee('Outstanding Places')
+                    ->assertSee('duocduoc')
+                    ->assertPathIs('/');      
         });
     }
 
