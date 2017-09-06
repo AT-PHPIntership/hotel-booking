@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\RatingComment;
 use App\Model\User;
 
 class UserController extends Controller
 {
+
     /**
      * Display page show profile user.
      *
@@ -18,6 +20,20 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return view('frontend.users.showProfile', compact('user'));
+        $columns = [
+            'id',
+            'hotel_id',
+            'comment',
+            'total_rating',
+            'created_at'
+        ];
+        $comments = RatingComment::select($columns)
+            ->with(['hotel' => function ($query) {
+                $query->select('id', 'name');
+            }])
+            ->where('user_id', $id)
+            ->orderby('id', 'DESC')
+            ->paginate(USER::ROW_LIMIT);
+        return view('frontend.users.showProfile', compact('user', 'comments'));
     }
 }

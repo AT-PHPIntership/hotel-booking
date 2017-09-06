@@ -15,7 +15,10 @@ Route::get('/', function () {
 });
 
 Route::group(['namespace'=>'Frontend'], function() {
-    Route::get('/user/{id}', 'UserController@show')->name('user.profile');
+    Route::group(['prefix'=>'user', 'middleware'=>'auth'], function() {
+        Route::get('/{id}', 'UserController@show')->name('user.profile');
+        Route::get('/{id}/comment', 'UserController@comment')->name('user.comment');
+    });
 });
 
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
