@@ -13,6 +13,11 @@
 Route::get('/', function () {
     return view('frontend.home.index');
 });
+
+Route::group(['namespace'=>'Frontend'], function() {
+    Route::get('/user/{id}', 'UserController@show')->name('user.profile');
+});
+
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
