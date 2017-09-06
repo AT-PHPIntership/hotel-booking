@@ -48,7 +48,7 @@ class AdminSearchHotelTest extends DuskTestCase
                 ->assertPathIs('/admin/hotel')
                 ->assertQueryStringHas('search', 'Hotel 1')
                 ->assertMissing('.pagination');
-            $elements = $browser->elements('#list-table tbody tr');
+            $elements = $browser->elements('#table-contain tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 1);
         });
@@ -68,7 +68,7 @@ class AdminSearchHotelTest extends DuskTestCase
                 ->press('.btn-search')
                 ->assertPathIs('/admin/hotel')
                 ->assertSee('Data Not Found');
-            $elements = $browser->elements('#list-table tbody tr');
+            $elements = $browser->elements('#table-contain tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 0);
         });
@@ -88,7 +88,7 @@ class AdminSearchHotelTest extends DuskTestCase
                 ->press('.btn-search')
                 ->assertPathIs('/admin/hotel');
 
-            $elements = $browser->elements('#list-table tbody tr');
+            $elements = $browser->elements('#table-contain tbody tr');
             $totalRow = count($elements);
             $this->assertTrue($totalRow == 10);
 
@@ -101,7 +101,7 @@ class AdminSearchHotelTest extends DuskTestCase
                 ->assertQueryStringHas('search', 'Hotel')
                 ->assertQueryStringHas('page', 2);
                 
-            $elements = $page->elements('#list-table tbody tr');
+            $elements = $page->elements('#table-contain tbody tr');
             $totalRow = count($elements);
             $this->assertTrue($totalRow == 5);
 

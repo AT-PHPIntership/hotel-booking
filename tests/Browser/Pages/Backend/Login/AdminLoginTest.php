@@ -2,12 +2,12 @@
 
 namespace Tests\Browser\Pages\Backend\Login;
 
-use Tests\DuskTestCaseLogin;
+use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Model\User;
 
-class AdminLoginTest extends DuskTestCaseLogin
+class AdminLoginTest extends DuskTestCase
 {   
     use DatabaseMigrations;
 
@@ -19,6 +19,7 @@ class AdminLoginTest extends DuskTestCaseLogin
     public function testLogin()
     {
         $this->browse(function (Browser $browser) {
+            $browser->logout();
             $browser->visit('/')
                     ->clickLink('Login')
                     ->assertSee('Login')
@@ -34,6 +35,7 @@ class AdminLoginTest extends DuskTestCaseLogin
     public function testValidationLogin()
     {
         $this->browse(function (Browser $browser) {
+            $browser->logout();
             $browser->visit('/login')
                     ->press('LOGIN')
                     ->assertPathIs('/login')
@@ -51,6 +53,7 @@ class AdminLoginTest extends DuskTestCaseLogin
     {   
         $this->makeData();
         $this->browse(function (Browser $browser)  {
+            $browser->logout();
             $browser->visit('/')
                     ->clickLink('Login')
                     ->assertSee('Login')
@@ -106,11 +109,12 @@ class AdminLoginTest extends DuskTestCaseLogin
      * @dataProvider listCaseForTestLogin
      *
      */ 
-    public function testCreateNewsFail($username, $password, $expected)
+    public function testLoginFail($username, $password, $expected)
     {   
             
         $this->browse(function (Browser $browser) use ($username, $password, $expected)
-        {
+        {   
+            $browser->logout();
             $browser->visit('/login')
                 ->type('username', $username)
                 ->type('password', $password)
