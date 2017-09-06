@@ -58,7 +58,7 @@
         @endfor
         {{-- show hotel infomation --}}
         <h4><a class="bg-faded" href="{{ route('place.show' , $hotel->place->id) }}">{{ __('Place: ') . $hotel->place->name }}</a></h4>
-        <h5>{{ __('Adress: ') . $hotel->address }}</h5>
+        <h5>{{ __('Address: ') . $hotel->address }}</h5>
         <p>{{ __('Introduce: ' . $hotel->introduce) }}</p>
         <h3>{{ __('Service') . ' (' . $hotel->hotelServices->count() . ')' }}</h3>
         <ul>
