@@ -43,24 +43,47 @@ class AdminLoginTest extends DuskTestCaseLogin
     }
 
     /**
-     * Test Login success.
+     * Test Login success if account admin.
      *
      * @return void
      */
-    public function testLoginSuccess()
+    public function testAdminLoginSuccess()
     {   
         $this->makeData();
         $this->browse(function (Browser $browser)  {
-            $user = User::find(1);
             $browser->visit('/')
                     ->clickLink('Login')
                     ->assertSee('Login')
                     ->assertPathIs('/login')
                     ->type('username', 'admin')
-                    ->type('password', 'admin')
+                    ->type('password', 'admin') 
                     ->press('LOGIN')
-                    ->assertSee('Dashboard')
+                    ->assertSee('Home Page')
                     ->assertPathIs('/admin');
+        });
+    }
+
+    /**
+     * Test Login success if account user.
+     *
+     * @return void
+     */
+    public function testUserLoginSuccess()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser)  {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->visit('/')
+                    ->clickLink('Login')
+                    ->assertSee('Login')
+                    ->assertPathIs('/login')
+                    ->type('username', 'user1')
+                    ->type('password', 'user1')
+                    ->press('LOGIN')
+                    ->assertSee('Outstanding Places')
+                    ->assertSee($user->username)
+                    ->assertPathIs('/');
         });
     }
 
@@ -85,7 +108,7 @@ class AdminLoginTest extends DuskTestCaseLogin
      */ 
     public function testCreateNewsFail($username, $password, $expected)
     {   
-        
+            
         $this->browse(function (Browser $browser) use ($username, $password, $expected)
         {
             $browser->visit('/login')
