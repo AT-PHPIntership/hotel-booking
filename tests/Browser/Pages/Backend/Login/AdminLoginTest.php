@@ -76,7 +76,6 @@ class AdminLoginTest extends DuskTestCase
         $this->makeData();
         $this->browse(function (Browser $browser)  {
             $browser->logout();
-            $user = User::find(2);
             $browser->visit('/')
                     ->clickLink('Login')
                     ->assertSee('Login')
@@ -85,7 +84,7 @@ class AdminLoginTest extends DuskTestCase
                     ->type('password', 'user1')
                     ->press('LOGIN')
                     ->assertSee('Outstanding Places')
-                    ->assertSee($user->username)
+                    ->assertSee('user1')
                     ->assertPathIs('/');
         });
     }
@@ -105,13 +104,13 @@ class AdminLoginTest extends DuskTestCase
     }
 
     /**
-     *
+     * 
      * @dataProvider listCaseForTestLogin
      *
      */ 
     public function testLoginFail($username, $password, $expected)
     {   
-            
+        $this->makeData();
         $this->browse(function (Browser $browser) use ($username, $password, $expected)
         {   
             $browser->logout();
@@ -121,6 +120,33 @@ class AdminLoginTest extends DuskTestCase
                 ->press('LOGIN')
                 ->assertSee($expected)
                 ->assertPathIs('/login');
+        });
+    }
+
+    /**
+     * Test Route page of Admin when login success with account user.
+     *
+     * @return void
+     */
+    public function testUserLoginRoutePageAdmin()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser)  {
+            $browser->logout();
+            $browser->visit('/')
+                    ->clickLink('Login')
+                    ->assertSee('Login')
+                    ->assertPathIs('/login')
+                    ->type('username', 'user1')
+                    ->type('password', 'user1')
+                    ->press('LOGIN')
+                    ->assertSee('Outstanding Places')
+                    ->assertSee('user1')
+                    ->assertPathIs('/');
+            $browser->visit('/admin/reservation')
+                    ->assertSee('Outstanding Places')
+                    ->assertSee('user1')
+                    ->assertPathIs('/');
         });
     }
 
