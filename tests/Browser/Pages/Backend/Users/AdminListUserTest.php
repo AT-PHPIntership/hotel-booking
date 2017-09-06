@@ -13,7 +13,7 @@ class AdminListUserTest extends DuskTestCase
     use DatabaseMigrations;
 
      /**
-     * A Dusk test route to page.
+     * A Dusk test route to page list users.
      *
      * @return void
      */
@@ -23,10 +23,9 @@ class AdminListUserTest extends DuskTestCase
             $browser->visit('/admin')
                     ->clickLink('Users')
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
         });
     }
-
 
      /**
      * A Dusk test show record with table has data.
@@ -40,7 +39,7 @@ class AdminListUserTest extends DuskTestCase
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
             $this->assertTrue($row == 9);
@@ -59,7 +58,7 @@ class AdminListUserTest extends DuskTestCase
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
             $this->assertTrue($row == 10);

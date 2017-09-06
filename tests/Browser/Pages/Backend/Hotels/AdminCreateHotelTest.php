@@ -73,8 +73,8 @@ class AdminCreateHotelTest extends DuskTestCase
                     ->press('Submit')
                     ->assertPathIs('/admin/hotel')
                     ->assertSee('Create success')
-                    ->assertSeeIn('#list-table tbody tr:nth-child(1) td:nth-child(2)', 'Dophin Hotel')
-                    ->assertSeeIn('#list-table tbody tr:nth-child(1) td:nth-child(3)', '142 HaHuyTap');
+                    ->assertSeeIn('#table-contain tbody tr:nth-child(1) td:nth-child(2)', 'Dophin Hotel')
+                    ->assertSeeIn('#table-contain tbody tr:nth-child(1) td:nth-child(3)', '142 HaHuyTap');
         });
         $this->assertDatabaseHas('hotels', ['name' => 'Dophin Hotel']);
     }
