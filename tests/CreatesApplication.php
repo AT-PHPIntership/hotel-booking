@@ -4,6 +4,8 @@ namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Facebook\WebDriver\WebDriverBy;
+use App\Model\User;
+use Laravel\Dusk\Browser;
 
 trait CreatesApplication
 {
@@ -19,6 +21,22 @@ trait CreatesApplication
         $app->make(Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+        factory(User::class, 1)->create([
+            'username' => 'admin',
+            'password' => bcrypt('admin'),
+            'is_active' => 1,
+            'is_admin' => 1,
+            'full_name' => 'Admin'
+            ]);
+        $admin = User::find(1);
+        $this->browse(function (Browser $browser) use ($admin) {
+            $browser->resize(1920, 2000)->loginAs($admin);
+        });
     }
 
     public function tearDown()

@@ -36,7 +36,7 @@ class AdminDeleteUserTest extends DuskTestCase
      */
     public function testDeleteSuccess()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $this->browse(function (Browser $browser) {           
             $page = $browser->visit('/admin/user');
             $elements = $page->elements('#table-contain tbody tr');
@@ -59,7 +59,7 @@ class AdminDeleteUserTest extends DuskTestCase
      */
     public function test404Page()
     {   
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')

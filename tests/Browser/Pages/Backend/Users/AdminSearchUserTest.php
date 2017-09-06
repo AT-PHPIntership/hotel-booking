@@ -18,7 +18,7 @@ class AdminSearchUserTest extends DuskTestCase
      */
     public function testSearchNotInputValue()
     {
-        $this->makeData(10);        
+        $this->makeData(9);        
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->press('.btn-search')
@@ -37,7 +37,7 @@ class AdminSearchUserTest extends DuskTestCase
     public function testSearchHasInputValue()
     {
  
-        $this->makeData(10);
+        $this->makeData(9);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->type('search', 'username2')
@@ -58,7 +58,7 @@ class AdminSearchUserTest extends DuskTestCase
     public function testSearchHasInputValuePaginate()
     {
  
-        $this->makeData(20);
+        $this->makeData(19);
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->type('search', 'username1')
@@ -79,7 +79,7 @@ class AdminSearchUserTest extends DuskTestCase
      */
     public function testSearchNotResult()
     {
-        $this->makeData(10);
+        $this->makeData(9);
         $this->browse(function (Browser $browser) {
             
             $browser->visit('/admin/user')
