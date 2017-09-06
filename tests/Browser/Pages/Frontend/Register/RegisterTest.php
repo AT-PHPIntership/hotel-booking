@@ -16,64 +16,64 @@ class RegisterTest extends DuskTestCaseLogin
      *
      * @return void
      */
-    // public function testRegister()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/')
-    //                 ->clickLink('Register')
-    //                 ->assertSee('Register')
-    //                 ->assertPathIs('/register')
-    //                 ->assertMissing('#user-profile')
-    //                 ->assertMissing('#logout')
-    //                 ->assertVisible('#login')
-    //                 ->assertVisible('#register');
-    //     });
-    // }   
+    public function testRegister()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->clickLink('Register')
+                    ->assertSee('Register')
+                    ->assertPathIs('/register')
+                    ->assertMissing('#user-profile')
+                    ->assertMissing('#logout')
+                    ->assertVisible('#login')
+                    ->assertVisible('#register');
+        });
+    }   
 
     /**
      * Test validation register.
      *
      * @return void
      */
-    // public function testValidationRegister()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/register')
-    //                 ->press('SUBMIT')
-    //                 ->assertSee('The full name field is required.')
-    //                 ->assertSee('The username field is required.')
-    //                 ->assertSee('The email field is required.')
-    //                 ->assertSee('The phone field is required.')
-    //                 ->assertSee('The password field is required.')
-    //                 ->assertPathIs('/register');
-    //     });
-    // }
+    public function testValidationRegister()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/register')
+                    ->press('SUBMIT')
+                    ->assertSee('The full name field is required.')
+                    ->assertSee('The username field is required.')
+                    ->assertSee('The email field is required.')
+                    ->assertSee('The phone field is required.')
+                    ->assertSee('The password field is required.')
+                    ->assertPathIs('/register');
+        });
+    }
 
     /**
      * Test Register success.
      *
      * @return void
      */
-    // public function testRegisterSuccess()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/')
-    //                 ->assertVisible('#login')
-    //                 ->assertVisible('#register')
-    //                 ->clickLink('Register')
-    //                 ->type('full_name', 'Duoc Nguyen C.')
-    //                 ->type('username', 'duocduoc')
-    //                 ->type('email','duoc.nguyen@gmail.com')
-    //                 ->type('phone', '01206223029')
-    //                 ->type('password', 'duoc123')
-    //                 ->type('password_confirmation', 'duoc123')
-    //                 ->press('SUBMIT')
-    //                 ->assertPathIs('/')
-    //                 ->assertMissing('#login')
-    //                 ->assertMissing('#register')
-    //                 ->assertSee('duocduoc');          
-    //     });
-    // }
+    public function testRegisterSuccess()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->assertVisible('#login')
+                    ->assertVisible('#register')
+                    ->clickLink('Register')
+                    ->type('full_name', 'Duoc Nguyen C.')
+                    ->type('username', 'duocduoc')
+                    ->type('email','duoc.nguyen@gmail.com')
+                    ->type('phone', '01206223029')
+                    ->type('password', 'duoc123')
+                    ->type('password_confirmation', 'duoc123')
+                    ->press('SUBMIT')
+                    ->assertPathIs('/')
+                    ->assertMissing('#login')
+                    ->assertMissing('#register')
+                    ->assertSee('duocduoc');          
+        });
+    }
 
     /**
      *  List case for Test Validation Register.
@@ -106,6 +106,7 @@ class RegisterTest extends DuskTestCaseLogin
     {   
         $this->makeData();
         $this->browse(function (Browser $browser) use ($name, $username, $email, $phone, $password, $confirm_password, $expected) {
+            $browser->logout();
             $browser->visit('/register')
                 ->type('full_name', $name)
                 ->type('username', $username)

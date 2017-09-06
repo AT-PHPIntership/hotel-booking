@@ -90,7 +90,7 @@
                   {{__('Submit')}}
                 </button>
                 <a href="{{URL::previous() }}" class="btn btn-default pull-left">{{__('Back')}}</a>
-                <button type="reset" class="btn btn-primary pull-left">
+                <button type="reset" class="btn btn-warning pull-left">
                   {{__('Reset')}}
                 </button>
               </div>
