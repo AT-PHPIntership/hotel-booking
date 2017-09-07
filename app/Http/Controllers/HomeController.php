@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Hotel;
 use App\Model\Room;
+use App\Model\Place;
 
 class HomeController extends Controller
 {
@@ -28,35 +29,23 @@ class HomeController extends Controller
         $columns = [
             'id',
             'name',
-            'address',
-            'star',
-            'introduce',
-            'place_id',
         ];
 
-        $with['place'] = function ($query) {
-            $query->select('id', 'name');
+        $with['hotels'] = function ($query) {
+            $query->select('id', 'name', 'place_id', 'address', 'introduce');
         };
-        $with['rooms'] = function ($query) {
-            $query->select('hotel_id', 'id', 'name')->with('reservations');
-        };
-        $with['images'] = function ($query) {
-            $query->select();
-        };
-        $with['hotelServices'] = function ($query) {
-            $query->select('id', 'hotel_id', 'service_id');
-        };
-        $with['hotelServices.service'] = function ($query) {
-            $query->select('id', 'name');
-        };
-
-        $hotels = Hotel::select($columns)->with($with)->limit(4)->orderby('id', 'DESC')->get();
+        // $with['hotels.rooms'] = function ($query) {
+        //     $query->selectRaw('id', 'name', 'hotel_id', 'count(id) as count')->groupby();
+        // };
+        
+        $places = Place::select($columns)->with($with)->findOrFail(8);
+        // dd($places->hotels);
         // dd($hotels);
         // $countRoom = Room::withCount('reservations')->get();
-        foreach ($hotels as $key) {
-            echo($key->rooms->count('reservations'));
-        }
+        // foreach ($hotels as $key) {
+        //     echo($key->rooms->count('reservations'));
+        // }
         
-        // return view('frontend.home.index');
+        return view('frontend.home.index');
     }
 }
