@@ -158,7 +158,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($user->reservations as $reservation)
+                @foreach($reservations as $reservation)
                   <tr>
                     <td>{{$reservation->id}}</td>
                     <td>{{$reservation->status_label}}</td>
@@ -173,6 +173,7 @@
                 @endforeach
               </tbody>
             </table>
+            {!! $reservations->render() !!}
           </div>
         </div>
       </div>
