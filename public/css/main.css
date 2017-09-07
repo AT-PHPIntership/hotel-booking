@@ -280,6 +280,7 @@
     max-height:200px;
     display: block; 
 }
-.font-weight-bold {
-    font-weight: bold;
+.cls-introduce-hotel {
+    max-height: 200px;
+    overflow: auto;
 }

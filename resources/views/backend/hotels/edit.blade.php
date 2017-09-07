@@ -14,7 +14,8 @@
               {{csrf_field()}}
               {{method_field('PUT')}}
               <input type="hidden" value="{{ $hotel->id }}" name="id">
-              <div class="box-body"> 
+              <div class="box-body">
+                @include('flash::message') 
                 {{-- input hotel name --}}
                 <div class="form-group" {{ $errors->has('name') ? ' has-error' : '' }}>
                   <label>{{ __('Name') }}</label>
@@ -35,11 +36,11 @@
                 <div class="form-inline">
                   {{-- place select --}}
                   <div class="form-group" {{ $errors->has('place') ? ' has-error' : '' }}>
-                    <p class="font-weight-bold">{{ __('Place') }}</p>
+                    <p><strong>{{ __('Place') }}</strong></p>
                     <select class="form-control" name="place_id">
                       <option value="">{{ __('Choose Place') }}</option>
                       @foreach($places as $place)
-                        <option value="{{ $place->id }}" {{$hotel->place_id == $place->id ? 'selected' :''}}>{{ $place->name }}</option>
+                        <option value="{{ $place->id }}" {{ $hotel->place_id == $place->id ? 'selected' : '' }}>{{ $place->name }}</option>
                       @endforeach
                     </select>
                     @if($errors->first('place_id'))
@@ -48,15 +49,15 @@
                   </div>
                    {{-- select star --}}
                   <div class="form-group ml-5per" {{ $errors->has('star') ? ' has-error' : '' }}>
-                    <p class="font-weight-bold">{{ __('Star') }}</p>
+                    <p><strong>{{ __('Star') }}</strong></p>
                     <select class="form-control" name="star">
                       <option value="">{{ __('Star') }}</option>
                       @for($i = App\Model\Hotel::STAR_MIN; $i <= App\Model\Hotel::STAR_MAX; $i++ )
-                        <option value="{{ $i }}" {{$hotel->star == $i ? 'selected' :''}}>{{ $i }}</option>
+                        <option value="{{ $i }}" {{ $hotel->star == $i ? 'selected' : '' }}>{{ $i }}</option>
                       @endfor
                     </select>
                     @if($errors->first('star'))
-                      <span class="text-danger">{{$errors->first('star')}}</span>
+                      <span class="text-danger">{{ $errors->first('star') }}</span>
                     @endif
                   </div>
                 </div>
@@ -64,9 +65,9 @@
                 <label></label>
                 <div class="form-group" {{ $errors->has('introduce') ? ' has-error' : '' }}>
                   <label>{{ __('Introduce') }}</label>
-                  <textarea class="form-control" name="introduce">{{ $hotel->introduce }}</textarea>
+                  <textarea class="ckeditor" name="introduce">{{ $hotel->introduce }}</textarea>
                   @if($errors->first('introduce'))
-                    <span class="text-danger">{{$errors->first('introduce')}}</span>
+                    <span class="text-danger">{{ $errors->first('introduce') }}</span>
                   @endif
                 </div>
                 {{-- Services --}}
@@ -90,7 +91,7 @@
                     data-confirm="{{ __('Are you sure you want to delete?') }}">
                     @if (isset($hotel->images[0]))
                       @foreach ($hotel->images as $img)
-                        <div id="old-img-{{$img->id}}" class="col-md-3 text-center img-contain">
+                        <div id="old-img-{{ $img->id }}" class="col-md-3 text-center img-contain">
                           <button
                             data-url="{{ route('image.destroy', $img->id) }}"
                             class="btn-remove-img btn-link fa fa-times fz-20">

@@ -11,9 +11,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.home.index');
 });
-Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
+Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('/user', 'UserController');
@@ -34,3 +34,5 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::put('/user/{id}/status', 'UserController@updateStatus')->name('user.updateStatus');
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
 });
+
+Auth::routes();

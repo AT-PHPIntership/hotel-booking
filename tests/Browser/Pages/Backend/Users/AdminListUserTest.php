@@ -13,7 +13,7 @@ class AdminListUserTest extends DuskTestCase
     use DatabaseMigrations;
 
      /**
-     * A Dusk test route to page.
+     * A Dusk test route to page list users.
      *
      * @return void
      */
@@ -23,25 +23,7 @@ class AdminListUserTest extends DuskTestCase
             $browser->visit('/admin')
                     ->clickLink('Users')
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
-        });
-    }
-
-     /**
-     * A Dusk test show record with table empty.
-     *
-     * @return void
-     */
-    public function testShowEmpty()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/user')
-                    ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
-            $elements = $browser->elements('#table-contain tbody tr');
-            $row = count($elements);
-            $this->assertTrue($row == 0);
-            $this->assertNull($browser->element('.pagination'));
+                    ->assertSee('List Users');
         });
     }
 
@@ -52,12 +34,12 @@ class AdminListUserTest extends DuskTestCase
      */
     public function testShowRecord()
     {
-        factory(User::class, 9)->create();
+        factory(User::class, 8)->create();
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
             $this->assertTrue($row == 9);
@@ -71,12 +53,12 @@ class AdminListUserTest extends DuskTestCase
      */
     public function testShowRecordPaginate()
     {
-        factory(User::class, 11)->create();
+        factory(User::class, 10)->create();
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user')
                     ->resize(1920, 2000)
                     ->assertPathIs('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
             $elements = $browser->elements('#table-contain tbody tr');
             $row = count($elements);
             $this->assertTrue($row == 10);
@@ -91,7 +73,7 @@ class AdminListUserTest extends DuskTestCase
      */
     public function testPathPagination()
     {   
-        factory(User::class, 12)->create();
+        factory(User::class, 11)->create();
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/user?page=2');
             $elements = $browser->elements('#table-contain tbody tr');

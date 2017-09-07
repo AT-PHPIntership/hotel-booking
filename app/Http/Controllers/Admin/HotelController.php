@@ -12,6 +12,7 @@ use App\Model\HotelService;
 use App\Http\Requests\Backend\HotelCreateRequest;
 use App\Http\Requests\Backend\HotelUpdateRequest;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
 {
@@ -34,7 +35,7 @@ class HotelController extends Controller
         $hotels = Hotel::search()
             ->select($columns)
             ->orderby('hotels.id', 'DESC')
-            ->groupby('hotels.id')
+            ->distinct()
             ->paginate(Hotel::ROW_LIMIT)
             ->appends(['search' => request('search')]);
 
@@ -113,9 +114,6 @@ class HotelController extends Controller
         $with['place'] = function ($query) {
             $query->select('id', 'name');
         };
-        $with['rooms'] = function ($query) {
-            $query->select('hotel_id', 'id', 'name');
-        };
         $with['images'] = function ($query) {
             $query->select();
         };
@@ -127,8 +125,9 @@ class HotelController extends Controller
         };
 
         $hotel = Hotel::select($columns)->with($with)->findOrFail($id);
+        $totalRooms = $hotel->rooms()->count();
 
-        return view('backend.hotels.show', compact('hotel'));
+        return view('backend.hotels.show', compact('hotel', 'totalRooms'));
     }
 
     /**
@@ -199,29 +198,32 @@ class HotelController extends Controller
      */
     public function update(HotelUpdateRequest $request, $id)
     {
-        // update hotel.
         $hotel = Hotel::findOrFail($id);
-        $result = $hotel->update($request->except(['services', 'images']));
 
-        //delete old hotel's services
-        $hotel->hotelServices()->delete();
-        //make data hotel services
-        $hotelServices = array();
-        if (isset($request->services)) {
-            foreach ($request->services as $serviceId) {
-                array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+        DB::beginTransaction();
+        try {
+            $hotel->update($request->except(['services', 'images']));
+            //delete old hotel's services
+            $hotel->hotelServices()->delete();
+            
+            //make data hotel services
+            $hotelServices = array();
+            if (isset($request->services)) {
+                foreach ($request->services as $serviceId) {
+                    array_push($hotelServices, new HotelService(['service_id' => $serviceId]));
+                }
             }
-        }
-        //save hotel services
-        $hotel->hotelServices()->saveMany($hotelServices);
+            //save hotel services
+            $hotel->hotelServices()->saveMany($hotelServices);
 
-        if (isset($request->images)) {
-            Image::storeImages($request->images, 'hotel', $hotel->id, config('image.hotels.path_upload'));
-        }
-
-        if ($result) {
+            if (isset($request->images)) {
+                Image::storeImages($request->images, 'hotel', $hotel->id, config('image.hotels.path_upload'));
+            }
+            DB::commit();
+            flash(__('Update successful!'))->success();
             return redirect()->route('hotel.show', $id);
-        } else {
+        } catch (Exception $e) {
+            DB::rollback();
             flash(__('Update failure'))->error();
             return redirect()->back()->withInput();
         }
