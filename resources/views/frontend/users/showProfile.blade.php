@@ -110,7 +110,7 @@
                   <th>{{ __('Comment') }}</th>
                   <th>{{ __('Hotel Name') }}</th>
                   <th>{{ __('Total Rating') }}</th> 
-                  <th>{{ __('Created') }}</th> 
+                  <th>{{ __('Commented At') }}</th> 
                   <th class="text-center">{{ __('Option') }}</th> 
                 </tr>
               </thead>
@@ -129,7 +129,7 @@
                 @endforeach
               </tbody>
             </table>
-            {!! $comments->render() !!}
+            {!! $comments->links() !!}
           </div>
         </div>
       </div>
@@ -158,7 +158,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($user->reservations as $reservation)
+                @foreach($reservations as $reservation)
                   <tr>
                     <td>{{$reservation->id}}</td>
                     <td>{{$reservation->status_label}}</td>
@@ -173,6 +173,7 @@
                 @endforeach
               </tbody>
             </table>
+            {!! $reservations->links() !!}
           </div>
         </div>
       </div>

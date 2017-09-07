@@ -23,7 +23,7 @@ class AdminLoginMiddleware
             if ($user->is_admin == 1) {
                 return $next($request);
             } else {
-                return redirect('/');
+                return redirect()->back();
             }
         } else {
             return redirect('/login');
