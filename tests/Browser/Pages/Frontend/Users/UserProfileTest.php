@@ -22,11 +22,8 @@ class UserProfileTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->logout();
             $user = User::find(2);
-            $browser->visit('/')
-                    ->clickLink('Login')
-                    ->type('username', 'user1')
-                    ->type('password', 'user1')
-                    ->press('LOGIN')
+            $browser->loginAs($user)
+                    ->visit('/')
                     ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
                     ->clickLink('Profile')
                     ->assertSee('User Profile')
@@ -45,25 +42,40 @@ class UserProfileTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->logout();
             $user = User::find(2);
-            $browser->visit('/')
-                    ->clickLink('Login')
-                    ->type('username', 'user1')
-                    ->type('password', 'user1')
-                    ->press('LOGIN')
+            $browser->loginAs($user)
+                    ->visit('/')
                     ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
                     ->clickLink('Profile')
                     ->assertSee('User Profile')
                     ->assertPathIs('/user/'.$user->id)
                     ->assertMissing('#table-comment')
                     ->assertMissing('#table-reservation');
-            $this->assertTrue($browser->text('.table-user-information tbody tr:nth-child(1) td:nth-child(2)') === $user->full_name);
-            $this->assertTrue($browser->text('.table-user-information tbody tr:nth-child(2) td:nth-child(2)') === $user->phone);
-            $this->assertTrue($browser->text('.table-user-information tbody tr:nth-child(3) td:nth-child(2)') === $user->email);
-            $this->assertTrue($browser->text('.table-user-information tbody tr:nth-child(4) td:nth-child(2)') === $user->role);
-            $this->assertTrue($browser->text('.table-user-information tbody tr:nth-child(5) td:nth-child(2)') === (string)$user->reservations->count());
-            $this->assertTrue($browser->text('.table-user-information tbody tr:nth-child(6) td:nth-child(2)') === (string)$user->ratingComments->count());
-            $this->assertTrue($browser->text('.panel-title') === $user->username);
-            $browser->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
+            $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(4) td:nth-child(2)', $user->role)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(5) td:nth-child(2)', (string)$user->reservations->count())
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(6) td:nth-child(2)', (string)$user->ratingComments->count())
+                    ->assertSeeIn('.panel-title', $user->username);
+        });
+    }
+
+    /**
+     * Test  show list history reservation and  comment.
+     *
+     * @return void
+     */
+    public function testShowList()
+    {
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
+                    ->clickLink('Profile')
+                    ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation')
                     ->assertSee('List Reservations')
                     ->click('.table-user-information tbody tr:nth-child(6) td:nth-child(2) a')
@@ -73,17 +85,19 @@ class UserProfileTest extends DuskTestCase
         });
     }
 
+    /**
+     * Test  button Back.
+     *
+     * @return void
+     */
     public function testBtnBack()
     {   
         $this->makeData();
         $this->browse(function (Browser $browser) {
             $browser->logout();
             $user = User::find(2);
-            $browser->visit('/')
-                    ->clickLink('Login')
-                    ->type('username', 'user1')
-                    ->type('password', 'user1')
-                    ->press('LOGIN')
+            $browser->loginAs($user)
+                    ->visit('/')
                     ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
                     ->clickLink('Profile')
                     ->assertSee('User Profile')
