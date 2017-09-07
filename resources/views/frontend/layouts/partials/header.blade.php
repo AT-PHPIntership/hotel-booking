@@ -51,15 +51,28 @@
                   <li><a href="room-detail.html">Slector1</a></li>
                 </ul>
               </li>
-        <!-- news -->
           <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">News<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="blog.html">Sports</a></li>
               <li><a href="blog-post.html">Sale</a></li>
             </ul>
           </li>
-          <li> <a href="{{ route('login') }}">Login</a></li>
-          <li> <a href="{{ route('register') }}">Register</a>
+          @if(Auth::check())
+            <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{Auth::user()->username}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="blog.html" id="user-profile">{{__('Profile')}}</a></li>
+                <li>
+                  <a href="{{ route('logout') }}" id ="logout">{{__('Log out')}}</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden="">
+                    {{ csrf_field() }}
+                  </form>
+                </li>
+              </ul>
+            </li>
+          @else
+            <li> <a href="{{ route('login') }}" id="login">{{__('Login')}}</a></li>
+            <li> <a href="{{ route('register') }}" id="register">{{__('Register')}}</a>
+          @endif
           </li>
         </ul>
       </div>
