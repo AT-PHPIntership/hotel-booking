@@ -89,6 +89,16 @@ class User extends Model implements Authenticatable
         return $this->morphMany('App\Model\Reservation', 'reservable', 'target', 'target_id');
     }
 
+     /**
+     * Get all of the user's image.
+     *
+     * @return array
+     */
+    public function images()
+    {
+        return $this->morphMany('App\Model\Image', 'imageable', 'target', 'target_id');
+    }
+
     /**
      * This is a recommended way to declare event handlers
      *

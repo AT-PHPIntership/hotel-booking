@@ -2,8 +2,12 @@
 @section('title', __('User Profile'))
 @section('content')
   <section class ='user-profile'>
+    
     <div class="user-head text-center">
       <h1>{{__('User Profile')}}</h1>
+    </div>
+    <div class="text-center">
+      @include('flash::message')
     </div>
     <div class="container">
       <div class="row">
@@ -14,8 +18,14 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Picture" src="{{asset('images/default/profile.png')}}" class="img-circle img-responsive">
-                </div>
+                @if(isset($user->images[0]))
+                  <div class="col-md-3 col-lg-3 " align="center">
+                    <img alt="User Picture" src="{{ asset('/images/users/'.$user->images[0]->path) }}" class="img-circle img-responsive">
+                  </div>
+                @else
+                  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Picture" src="{{asset('images/default/profile.png')}}" class="img-circle img-responsive">
+                  </div>
+                @endif
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
@@ -83,7 +93,7 @@
                 <a href="{{ URL::previous() }}" class="btn btn-default pull-left">
                   {{__('Back')}}
                 </a>
-                <a data-original-title="Edit Profile" data-toggle="tooltip" href="/edit" class="btn btn-success  col-md-1 pull-right">
+                <a data-original-title="Edit Profile" data-toggle="tooltip" href="{{ route('userprofile.edit', $user->id) }}" class="btn btn-success  col-md-1 pull-right">
                   <span class="fa fa-edit"></span>
                 </a>
               </div>

@@ -17,7 +17,8 @@ Route::get('/', function () {
 Route::group(['namespace'=>'Frontend'], function() {
     Route::group(['prefix'=>'user', 'middleware'=>'auth'], function() {
         Route::get('/{id}', 'UserController@show')->name('user.profile');
-        Route::get('/{id}/comment', 'UserController@comment')->name('user.comment');
+        Route::get('/{id}/edit', 'UserController@edit')->name('userprofile.edit');
+        Route::put('/{id}', 'UserController@update')->name('userprofile.update');
     });
 });
 

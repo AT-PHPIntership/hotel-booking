@@ -14,4 +14,7 @@ return [
     'rooms' => [
         'path_upload' => 'images/rooms/',
     ],
+    'users' => [
+        'path_upload' => 'images/users/',
+    ],
 ];
