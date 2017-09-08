@@ -10,7 +10,8 @@
 |
 */
 
-Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
+Route::get('/', 'HomeController@index')->name('frontend.index');;
+Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('/user', 'UserController');
@@ -32,11 +33,7 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
 });
 
-Route::group(['namespace'=>'User'], function() {
-    Route::get('/', function () {
-        return view('frontend.home.index');
-    });
-
+Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
     Route::resource('/hotel', 'HotelController');
 });
-
+Auth::routes();

@@ -1,14 +1,16 @@
 @extends('frontend.layouts.master')
 @section('customcss')
+<link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/searchHotel.css')}}">
 @endsection
+@section('title', __('LIST HOTELS'))
 @section('content')
   <main class="main">
     <div class="row mt-20">    
         <div class="col-xs-8 col-xs-offset-2">
           <div class="input-group">
             <div class="input-group-btn search-panel">
-              <select name = "category_id" class="btn btn-primary">
+              <select name = "place_id" class="btn btn-primary">
               <option>{{ __('All hotel') }}</option>
               @foreach($topPlaces as $place)
                 <option value="{{$place->place->id}}">{{$place->place->name}}</option>

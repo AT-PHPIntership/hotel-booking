@@ -18,7 +18,7 @@ class AdminShowUserTest extends DuskTestCase
      */
     public function testValueShowUser()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
@@ -49,7 +49,7 @@ class AdminShowUserTest extends DuskTestCase
      */
     public function testBtnEdit()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
@@ -69,7 +69,7 @@ class AdminShowUserTest extends DuskTestCase
      */
     public function testBtnBack()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
@@ -89,11 +89,11 @@ class AdminShowUserTest extends DuskTestCase
      */
     public function test404PageForClickShow()
     {   
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
-                    ->assertSee('List User');
+                    ->assertSee('List Users');
             $user->delete();
             $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a');
             $browser->assertSee('404 - Page Not found');

@@ -8,7 +8,7 @@
        class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Nguyễn Quốc Ân</p>
+        <p>{{Auth::user()->username}}</p>
       </div>
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->

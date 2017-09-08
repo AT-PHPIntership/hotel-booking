@@ -26,7 +26,7 @@ class AdminDeleteRoomTest extends DuskTestCase
             $page = $browser->visit('/admin/hotel/1/room');
             $elements = $page->elements('#table-contain tbody tr');
             $this->assertCount(5, $elements);
-            $page->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) button')
+            $page->press('#table-contain tbody tr:nth-child(2) td:nth-child(7) button')
                  ->waitForText('Confirm deletion!')
                  ->click('#delete-btn')
                  ->assertSee("Deletion successful!");
@@ -50,7 +50,7 @@ class AdminDeleteRoomTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($room) {
             $browser->visit('/admin/hotel/1/room')
                     ->assertSee('List Rooms')
-                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) button');
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(7) button');
             $room->delete();
             $browser->waitForText('Confirm deletion!')
                     ->click('#delete-btn')
@@ -70,7 +70,7 @@ class AdminDeleteRoomTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($hotel) {
             $browser->visit('/admin/hotel/1/room')
                     ->assertSee('List Rooms')
-                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) button');
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(7) button');
             $hotel->delete();
             $browser->waitForText('Confirm deletion!')
                     ->click('#delete-btn')

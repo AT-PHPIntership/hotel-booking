@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,7 +9,6 @@ use App\Model\Place;
 use App\Model\Service;
 use App\Model\Image;
 use App\Model\HotelService;
-use App\Http\Requests\Backend\HotelCreateRequest;
 use Illuminate\Http\Response;
 
 class HotelController extends Controller
@@ -41,7 +40,7 @@ class HotelController extends Controller
         $topPlaces = Hotel::select(['place_id'])
                         ->groupBy('place_id')
                         ->orderby(\DB::raw('count(*)'), 'DESC')
-                        ->limit(5)->get();    
+                        ->limit(5)->get();
         return view('frontend.hotels.index', compact('hotels', 'topPlaces'));
     }
 }
