@@ -10,9 +10,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.home.index');
-});
+Route::get('/', 'HomeController@index')->name('home.index');
+Route::get('/registerSuccess', function() {
+    return view('frontend.notice');
+})->name('notice')->middleware('auth');
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 

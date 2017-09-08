@@ -71,11 +71,13 @@ class RegisterTest extends DuskTestCase
                     ->type('password', 'duoc123')
                     ->type('password_confirmation', 'duoc123')
                     ->press('SUBMIT')
-                    ->assertPathIs('/')
+                    ->assertPathIs('/notice')
+                    ->pause('5000')
                     ->assertMissing('#login')
                     ->assertMissing('#register')
                     ->assertSee('duocduoc')
-                    ->assertSee('Outstanding Places');           
+                    ->assertSee('Outstanding Places')
+                    ->assertPathIs('/');           
         });
     }
 
@@ -146,10 +148,9 @@ class RegisterTest extends DuskTestCase
                     ->type('password', 'duoc123')
                     ->type('password_confirmation', 'duoc123')
                     ->press('SUBMIT')
-                    ->assertPathIs('/')
-                    ->assertMissing('#login')
-                    ->assertMissing('#register')
-                    ->assertSee('duocduoc');
+                    ->assertPathIs('/notice')
+                    ->pause('5000')
+                    ->assertPathIs('/');
             $browser->visit('/admin/news')
                     ->assertSee('Outstanding Places')
                     ->assertSee('duocduoc')
