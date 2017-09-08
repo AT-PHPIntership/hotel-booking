@@ -17,6 +17,9 @@
  <!-- Main content -->
   <section class="content">
     <div class="row">
+      <div class="col-md-12">
+        @include('flash::message')
+      </div>
       <div class="col-md-5">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
           <!-- slides images hotel-->
@@ -59,8 +62,10 @@
         {{-- show hotel infomation --}}
         <h4><a class="bg-faded" href="{{ route('place.show' , $hotel->place->id) }}">{{ __('Place: ') . $hotel->place->name }}</a></h4>
         <h5>{{ __('Address: ') . $hotel->address }}</h5>
-        <p>{{ __('Introduce: ' . $hotel->introduce) }}</p>
-        <h3>{{ __('Service') . ' (' . $hotel->hotelServices->count() . ')' }}</h3>
+        <div class="cls-introduce-hotel">
+          {{ __('Introduce: ' . strip_tags($hotel->introduce)) }}
+        </div>
+        <h3>{{ __('Services: :totalServices.', ['totalServices' => $hotel->hotelServices->count() ]) }}</h3>
         <ul>
           @foreach ($hotel->hotelServices as $hotelService)
             <div class="col-md-3 pull-left">
@@ -69,14 +74,7 @@
           @endforeach
         </ul>
         <div class="clearfix"></div>
-        <h3>{{ __('Rooms') . ' (' . $hotel->rooms->count() . ')' }}</h3>
-        <ul>
-          @foreach ($hotel->rooms as $room)
-            <div class="col-md-3 pull-left">
-              <li><a href="">{{ $room->name }}</a></li>
-            </div>
-          @endforeach
-        </ul>
+        <h3><a href="{{ route('room.index', $hotel->id) }}">{{ __('Total rooms: :total.', ['total' => $totalRooms]) }}</a></h3>
       </div>
       <div class="box-footer">
         <a class="btn btn-primary btn-custom pull-right" href="{{ route('hotel.edit', $hotel->id) }}">
