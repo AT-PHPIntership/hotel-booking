@@ -295,6 +295,7 @@
     max-height:200px;
     display: block; 
 }
+<<<<<<< HEAD
 .container::after {
     content: "";
     display: block;
@@ -308,4 +309,8 @@
     display: inline-block;
     width: 100%;
     height: 81%;
+}
+.cls-introduce-hotel {
+    max-height: 200px;
+    overflow: auto;
 }

@@ -37,11 +37,11 @@ class AdminShowHotelTest extends DuskTestCase
                     ->press('#table-contain tbody tr:nth-child(2) td:nth-child(2) a')
                     ->assertPathIs('/admin/hotel/'.$hotel->id)
                     ->assertSee('Hotel detail')
-                    ->assertSee('Service')
+                    ->assertSee('Services')
                     ->assertSee('Address: '.$hotel->address)
                     ->assertSee('Introduce:'.$hotel->introduce)
                     ->assertSee('Place: '.$place->name)
-                    ->assertSee('Rooms ('.$totalRooms.')');
+                    ->assertSee('Total rooms: '.$totalRooms.'.');
         });
     }
 
