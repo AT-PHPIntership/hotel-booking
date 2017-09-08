@@ -8,8 +8,11 @@ use App\Model\Hotel;
 use App\Model\Place;
 use App\Model\Service;
 use App\Model\Image;
+use App\Model\Room;
 use App\Model\HotelService;
+use App\Model\Reservation;
 use Illuminate\Http\Response;
+use Carbon\Carbon;
 
 class HotelController extends Controller
 {
@@ -37,10 +40,6 @@ class HotelController extends Controller
             ->orderby('hotels.id', 'DESC')
             ->paginate(Hotel::ITEM_LIMIT)
             ->appends(['search' => request('search')]);
-        $topPlaces = Hotel::select(['place_id'])
-                        ->groupBy('place_id')
-                        ->orderby(\DB::raw('count(*)'), 'DESC')
-                        ->limit(5)->get();
-        return view('frontend.hotels.index', compact('hotels', 'topPlaces'));
+        return view('frontend.hotels.index', compact('hotels'));
     }
 }

@@ -10,7 +10,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('frontend.index');;
+Route::get('/', 'HomeController@index')->name('frontend.index');
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
