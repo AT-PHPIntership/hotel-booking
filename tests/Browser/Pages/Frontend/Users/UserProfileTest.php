@@ -61,11 +61,11 @@ class UserProfileTest extends DuskTestCase
     }
 
     /**
-     * Test  show list history reservation and  comment.
+     * Test  show list history reservation.
      *
      * @return void
      */
-    public function testShowList()
+    public function testShowListReservation()
     {
         $this->makeData();
         $this->browse(function (Browser $browser) {
@@ -78,6 +78,25 @@ class UserProfileTest extends DuskTestCase
                     ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation')
                     ->assertSee('List Reservations')
+                    ->assertPathIs('/user/'.$user->id);
+        });
+    }
+
+    /**
+     * Test  show list history comment.
+     *
+     * @return void
+     */
+    public function testShowListComment()
+    {
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
+                    ->clickLink('Profile')
                     ->click('.table-user-information tbody tr:nth-child(6) td:nth-child(2) a')
                     ->assertVisible('#table-comment')
                     ->assertSee('List comment & rating')
