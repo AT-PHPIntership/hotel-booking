@@ -7,23 +7,30 @@
 @section('content')
   <main class="main">
     <div class="row mt-20">    
+      <form method="GET" action="{{ route('frontend.hotel.index') }}" id="form-search">
         <div class="col-xs-8 col-xs-offset-2">
           <div class="input-group">
             <div class="input-group-btn search-panel">
-              <select name = "category_id" class="btn btn-primary">
-              <option>{{ __('All hotel') }}</option>
-              @foreach($topPlaces as $place)
-                <option value="{{$place->place->id}}">{{$place->place->name}}</option>
-              @endforeach
-            </select>
+                <select name = "place_id" id="user-change-place-id" class="btn btn-primary">
+                  <option>{{ __('All hotel') }}</option>
+                  @foreach($topPlaces as $place)
+                    @if ($place->place->id == app('request')->input('place_id'))
+                      <option value="{{$place->place->id}}" selected>{{$place->place->name}}</option>
+                    @else
+                      <option value="{{$place->place->id}}">{{$place->place->name}}</option>
+                    @endif
+                  @endforeach
+                </select>
+              
             </div>
             <input type="hidden" name="search_param" value="all" id="search_param">         
-            <input type="text" class="form-control" name="x" placeholder="Search term...">
+            <input class="form-control" name="search" placeholder="Search" type="text" value="{{ app('request')->input('search') }}">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             </span>
           </div>
         </div>
+      </form>
     </div>
     <section class="rooms mt50">
       <div class="container">

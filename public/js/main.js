@@ -102,4 +102,10 @@ $(document).ready(function(){
             $('#confirm').modal('hide');
         })
     });
+
+    /*Filter hotel by place of user*/
+    $('#user-change-place-id').on('change', function(event) {
+        $('#form-search').submit();      
+        event.preventDefault();
+    });
 });

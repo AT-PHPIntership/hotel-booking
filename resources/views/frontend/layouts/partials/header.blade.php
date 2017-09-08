@@ -45,7 +45,7 @@
           <li class="dropdown {{ isActiveRoute('frontend.index') }}"> <a href="/">Home</a>
           </li>
         <!-- hotels -->
-          <li class="{{ areActiveRoute(['hotel.index', 'hotel.show']) }}"> <a href="{{ route('hotel.index') }}">Hotels</b></a>
+          <li class="{{ areActiveRoute(['frontend.hotel.index', 'frontend.hotel.show']) }}"> <a href="{{ route('frontend.hotel.index') }}">Hotels</b></a>
           </li>
         <!-- news -->
           <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">News<b class="caret"></b></a>

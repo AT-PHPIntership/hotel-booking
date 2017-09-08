@@ -16,9 +16,11 @@ class HotelController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request request to display
+     *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $columns = [
             'hotels.id',
@@ -29,14 +31,26 @@ class HotelController extends Controller
             'hotels.created_at'
         ];
 
-        $hotels = Hotel::search()
-            ->select($columns)
-            ->with(['hotelServices' => function ($query) {
-                $query->join('services', 'hotel_services.service_id', '=', 'services.id');
-            }])
-            ->orderby('hotels.id', 'DESC')
-            ->paginate(Hotel::ITEM_LIMIT)
-            ->appends(['search' => request('search')]);
+        if ($request->has('place_id') && $request->place_id != 0) {
+            $hotels = Hotel::search()
+                ->select($columns)
+                ->with(['hotelServices' => function ($query) {
+                    $query->join('services', 'hotel_services.service_id', '=', 'services.id');
+                }])
+                ->where('place_id', $request->place_id)
+                ->orderby('hotels.id', 'DESC')
+                ->paginate(Hotel::ITEM_LIMIT)
+                ->appends(['search' => request('search')]);
+        } else {
+            $hotels = Hotel::search()
+                ->select($columns)
+                ->with(['hotelServices' => function ($query) {
+                    $query->join('services', 'hotel_services.service_id', '=', 'services.id');
+                }])
+                ->orderby('hotels.id', 'DESC')
+                ->paginate(Hotel::ITEM_LIMIT)
+                ->appends(['search' => request('search')]);
+        }
         $topPlaces = Hotel::select(['place_id'])
                         ->groupBy('place_id')
                         ->orderby(\DB::raw('count(*)'), 'DESC')
