@@ -4,15 +4,15 @@
 
 @section('content')
   <div class="content-wrapper">
-    <h1 class="text-center text-success">
-      {{ $hotel->name.__(' HOTEL') }}
-    </h1>
-    <h1 class="text-center text-success">
-      @include('flash::message')
-      {{ __("Update room") }}
-    </h1>
     <!-- Main content -->
     <section class="content">
+      <h1 class="text-center text-success">
+        {{ __('HOTEL NAME: :name', ['name' => $hotel->name]) }}
+      </h1>
+      <h1 class="text-center text-success">
+        @include('flash::message')
+        {{ __("Update room") }}
+      </h1>
       <div class="row margin-center">
         <!-- left column -->
         <div class="col-md-12">
@@ -85,26 +85,26 @@
                   <small class="text-danger">{{ $errors->first('max_guest') }}</small>
                 </div>
                  @include('backend.layouts.partials.modal')
-                <div class="form-group">
+                <div class="form-group pd-0">
                   <label for="old-images">{{ __('Old Images') }}</label>
                   <div
                     id="old-images"
-                    class="col-md-12"
+                    class="col-md-12 pd-0"
                     data-token="{{ csrf_token() }}"
                     data-title="{{ __('Confirm deletion!') }}"
                     data-confirm="{{ __('Are you sure you want to delete?') }}">
                     @if (isset($room->images[0]))
                       @foreach ($room->images as $img)
-                        <div id="old-img-{{$img->id}}" class="col-md-3 text-center">
+                        <div id="old-img-{{$img->id}}" class="col-md-3 text-center pd-0 mt-20 img-contain">
                           <button
                             data-url="{{ route('image.destroy', $img->id) }}"
-                            class="btn-remove-img btn-primary fa fa-minus-circle fz-20">
+                            class="btn-remove-img btn-link fa fa-times fz-20">
                           </button>
                           <img class="img-place" src="{{ asset($img->path) }}">
                         </div>
                       @endforeach
                     @else
-                      <div id="old-images" class="text-info">{{ __('No old image') }}</div>
+                      <div id="old-images" class="text-info pd-0">{{ __('No old image') }}</div>
                     @endif
                   </div>
                 </div>
@@ -113,8 +113,8 @@
                   <label for="input-file">{{ __("Images") }}</label>
                   <input type="file" class="form-control" name="images[]" id="multiple-image" multiple>
                   <small class=" text-danger">{{ $errors->first('images.*') . $errors->first('images') }}</small>
-                  <div id="showImage">
-                    <img class="img-place" id="default-image" src="{{ asset(config('image.no_image')) }}">
+                  <div id="showImage" class="mt-20 ml-2per">
+                    <img class="img-place pd-0" id="default-image" src="{{ asset(config('image.no_image')) }}">
                   </div>
                 </div>
                 
