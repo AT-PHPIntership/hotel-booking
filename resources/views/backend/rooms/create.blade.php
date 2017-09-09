@@ -4,15 +4,15 @@
 
 @section('content')
   <div class="content-wrapper">
-    <h1 class="text-center text-success">
-      {{ $hotel->name.__(' HOTEL') }}
-    </h1>
-    <h1 class="text-center text-success">
-      @include('flash::message')
-      {{ __("Create room") }}
-    </h1>
     <!-- Main content -->
     <section class="content">
+      <h1 class="text-center text-success">
+        {{ __('HOTEL NAME: :name', ['name' => $hotel->name]) }}
+      </h1>
+      <h1 class="text-center text-success">
+        @include('flash::message')
+        {{ __("Create room") }}
+      </h1>
       <div class="row margin-center">
         <!-- left column -->
         <div class="col-md-12">
@@ -88,7 +88,7 @@
                   <label for="input-file">{{ __("Images") }}</label>
                   <input type="file" class="form-control" name="images[]" id="multiple-image" multiple>
                   <small class=" text-danger">{{ $errors->first('images.*') . $errors->first('images') }}</small>
-                  <div id="showImage">
+                  <div id="showImage" class="mt-20">
                     <img class="img-place" id="default-image" src="{{ asset(config('image.no_image')) }}">
                   </div>
                 </div>
