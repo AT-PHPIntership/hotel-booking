@@ -10,7 +10,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('frontend.index');;
+Route::get('/', 'HomeController@index')->name('frontend.index');
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
@@ -35,5 +35,6 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin
 
 Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
     Route::resource('/hotel', 'HotelController');
+    Route::get('/place/hintPlaces', 'PlaceController@hintPlaces')->name('place.hintPlaces');
 });
 Auth::routes();

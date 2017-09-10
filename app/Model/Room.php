@@ -102,4 +102,25 @@ class Room extends Model
              $room->reservations()->delete();
         });
     }
+
+    /**
+     * Get number blank room of the room with checkin, checkout.
+     *
+     * @return array
+     */
+    public function getNumberBlankRoom($checkin, $checkout)
+    {
+        $numberBlankRoom = $this->total;
+        foreach ($this->reservations as $reservation) {
+            if ($checkin > $reservation->checkout_date
+                ||
+                $checkout < $reservation->checkin_date
+            ) {
+
+            } else {
+                $numberBlankRoom -= $reservation->quantity;
+            }
+        }
+        return $numberBlankRoom;
+    }
 }

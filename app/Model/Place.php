@@ -88,4 +88,16 @@ class Place extends Model
             $place->hotels()->delete();
         });
     }
+    
+    /**
+     * Get top place booked most
+     */
+    public static function topPlaces() {
+            return \DB::table('places')->select('places.id', 'places.name', 'places.slug', \DB::raw("SUM(quantityReservations) AS totalQuantity"))
+                                ->leftJoin('hotels', 'hotels.place_id', '=', 'places.id')
+                                ->leftJoin('rooms', 'rooms.hotel_id', '=', 'hotels.id')
+                                ->leftJoin(\DB::raw('(SELECT reservations.room_id , SUM(quantity) as quantityReservations FROM reservations where reservations.created_at <= DATE_SUB(NOW(),INTERVAL -30 DAY) GROUP BY reservations.room_id) AS reservation_of_rooms'), 'rooms.id', '=', 'reservation_of_rooms.room_id')->groupBy('places.id')->orderby('totalQuantity', 'DESC')
+                                ->limit(5)
+                                ->get();
+    }
 }

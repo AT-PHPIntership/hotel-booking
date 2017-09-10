@@ -103,9 +103,40 @@ $(document).ready(function(){
         })
     });
 
-    /*Filter hotel by place of user*/
-    $('#user-change-place-id').on('change', function(event) {
-        $('#form-search').submit();      
-        event.preventDefault();
+    /**
+     * Show hinted place when focus place_slug field
+     */
+    $('#hotelSourceArea').focus(function(event) {
+        $('.widgetAcResult').show();
+    });
+
+    /**
+     * Show hinted place when key up place_slug field
+     */
+    $('#hotelSourceArea').keyup(function(event) {
+        var url = $(this).data('url');
+        var key = $(this).val();
+        $.ajax({
+                url: url,
+                type: 'GET',
+                data: {key :key},
+                success: function( msg ) {
+                    $('.widgetAcResult').html(msg);
+                }
+            });
+    });
+
+    /**
+     * Hide hinted place when blur place_slug field
+     */
+    $('#hotelSourceArea').blur(function(event) {
+        $('.widgetAcResult').fadeOut();
+    });
+
+    /**
+     * Fill value for place_slug field when choose hinted place
+     */
+    $(".widgetAcResult").on('click', 'div li.place-selected', function(event) {
+        $('#hotelSourceArea').val($(this)[0].innerHTML);
     });
 });
