@@ -51,7 +51,6 @@
                   <li><a href="room-detail.html">Slector1</a></li>
                 </ul>
               </li>
-        <!-- news -->
           <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">News<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="blog.html">Sports</a></li>
