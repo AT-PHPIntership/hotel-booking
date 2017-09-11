@@ -64,7 +64,7 @@ class AdminUpdateRoomTest extends DuskTestCase
         $this->browse(function (Browser $browser)  {
             $room = Room::with('images')->find(4);
             $page = $browser->visit('/admin/hotel/1/room')
-                ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a')
+                ->press('#table-contain tbody tr:nth-child(2) td:nth-child(7) a')
                 ->assertPathIs('/admin/hotel/1/room/' . $room->id . '/edit')
                 ->assertTitle('Admin | UPDATE ROOM')
                 ->assertSee('Update room')
@@ -113,7 +113,7 @@ class AdminUpdateRoomTest extends DuskTestCase
             $room = Room::with('images')->find(4);
             $firstOldImage = $room->images[0];
             $page = $browser->visit('/admin/hotel/1/room')
-                ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a')
+                ->press('#table-contain tbody tr:nth-child(2) td:nth-child(7) a')
                 ->assertPathIs('/admin/hotel/1/room/' . $room->id . '/edit')
                 ->assertTitle('Admin | UPDATE ROOM')
                 ->assertSee('Update room')
@@ -129,8 +129,7 @@ class AdminUpdateRoomTest extends DuskTestCase
                 ->attach('images[]', $image)
                 ->press('Submit')
                 ->assertPathIs('/admin/hotel/1/room')
-                ->assertSee('Update successful!')
-                ->assertSeeIn('#table-contain tbody tr:nth-child(2) td:nth-child(4)', 'This is descript');
+                ->assertSee('Update successful!');
             $roomAfterUpdate = Room::with('images')->find(4); 
             $quatityImage = count($roomAfterUpdate->images);
             if ($image !== '') {
@@ -215,7 +214,7 @@ class AdminUpdateRoomTest extends DuskTestCase
                     ->assertTitle('Admin | Room')
                     ->assertSee('List Rooms');
             $hotel->delete();
-            $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a');
+            $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(7) a');
             $browser->assertSee('404 - Page Not found');
         });
     }
@@ -234,7 +233,7 @@ class AdminUpdateRoomTest extends DuskTestCase
                     ->assertTitle('Admin | Room')
                     ->assertSee('List Rooms');
             $room->delete();
-            $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a');
+            $browser->press('#table-contain tbody tr:nth-child(2) td:nth-child(7) a');
             $browser->assertSee('404 - Page Not found');
         });
     }
@@ -253,7 +252,7 @@ class AdminUpdateRoomTest extends DuskTestCase
             $browser->visit('/admin/hotel/1/room')
                     ->assertTitle('Admin | Room')
                     ->assertSee('List Rooms')
-                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a')
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(7) a')
                     ->assertPathIs('/admin/hotel/1/room/' . $room->id . '/edit')
                     ->assertTitle('Admin | UPDATE ROOM')
                     ->assertSee('Update room')
@@ -281,7 +280,7 @@ class AdminUpdateRoomTest extends DuskTestCase
             $browser->visit('/admin/hotel/1/room')
                     ->assertTitle('Admin | Room')
                     ->assertSee('List Rooms')
-                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) a')
+                    ->press('#table-contain tbody tr:nth-child(2) td:nth-child(7) a')
                     ->assertPathIs('/admin/hotel/1/room/' . $room->id . '/edit')
                     ->assertTitle('Admin | UPDATE ROOM')
                     ->assertSee('Update room')
