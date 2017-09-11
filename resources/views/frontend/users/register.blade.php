@@ -42,7 +42,7 @@
                 {{__('Email Address')}}
               </label>
               <div class="col-md-6">
-                <input id="email" type="email" class="form-control cls-login" name="email" value="{{ old('email') }}">
+                <input id="email" type="text" class="form-control cls-login" name="email" value="{{ old('email') }}">
                 @if ($errors->has('email'))
                   <span class="help-block">
                     <strong>{{ $errors->first('email') }}</strong>
