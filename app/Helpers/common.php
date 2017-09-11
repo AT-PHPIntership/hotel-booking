@@ -77,3 +77,37 @@ if (!function_exists('contentLimit')) {
         return ($contentLength > LIMIT_LENGTH) ? $shortencontent : $content;
     }
 }
+
+if (!function_exists('getRoundFloat')) {
+
+    /**
+     * Get round number float
+     *
+     * @param float $attribute attribute of object
+     *
+     * @return float
+     */
+    function getRoundFloat($attribute)
+    {
+        return sprintf("%.1f", $attribute);
+    }
+}
+
+/**
+ * Value of factor to convert rating to percent 
+ */
+const RATING_FACTOR = 10;
+
+if (!function_exists('getProgressPercent')) {
+    
+    /**
+     * Get percent progress of rating attribute
+     *
+     * @param float $avgRating average rating
+     *
+     * @return float
+     */
+    function getProgressPercent($avgRating) {
+        return $avgRating * RATING_FACTOR;
+    }
+}

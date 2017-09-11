@@ -9,7 +9,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{ $hotel->name.__(' HOTEL') }}
+        {{ __('HOTEL NAME: ') }}<a href="{{ route('hotel.show', $hotel->id) }}">{{ $hotel->name }}</a>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('Home Page') }}</a></li>
@@ -55,7 +55,6 @@
                   <th class="col-md-1">{{ __('ID') }}</th>
                   <th class="text-center">{{ __('Image') }}</th>
                   <th class="text-center">{{ __('Name') }}</th>
-                  <th class="text-center">{{ __('Descript') }}</th>
                   <th class="text-center">{{ __('Price') }}</th>
                   <th class="text-center">{{ __('Total') }}</th>
                   <th class="text-center">{{ __('Max Gest') }}</th>
@@ -77,7 +76,6 @@
                       {{ $room->name }}
                     </a>
                   </td>
-                  <td class="text-center">{{ $room->descript }}</td>
                   <td class="text-center">{{ $room->price }}</td>
                   <td class="text-center">{{ $room->total }}</td>
                   <td class="text-center">{{ $room->max_guest }}</td>
@@ -101,12 +99,15 @@
               @endforeach
                </tbody>
               </table>
-                <div class="contain-btn second pull-right">
-                  <a href="{{ route('room.create', $hotel->id) }}" class="btn btn-primary">
-                    <span class="fa fa-plus-circle" aria-hidden="true"></span>
-                    {{ __('Add Room') }}
-                  </a> 
-                </div>
+               <div class="cls-search-not-found text-center" hidden="">
+                {{__('Data Not Found')}}
+              </div>
+              <div class="contain-btn second pull-right">
+                <a href="{{ route('room.create', $hotel->id) }}" class="btn btn-primary">
+                  <span class="fa fa-plus-circle" aria-hidden="true"></span>
+                  {{ __('Add Room') }}
+                </a> 
+              </div>
             {{ $rooms->render() }}
             </div>
             <!-- /.box-body -->

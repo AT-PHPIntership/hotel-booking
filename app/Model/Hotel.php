@@ -20,6 +20,26 @@ class Hotel extends Model
     const STAR_MIN = 1;
 
     /**
+     * Value of low rating score
+     */
+    const LOW_SCORE = 4.9;
+
+    /**
+     * Value of normal rating score 
+     */
+    const NOMAL_SCORE = 6.9;
+
+    /**
+     * Value of high rating score
+     */
+    const HIGH_SCORE = 8.9;
+
+    /**
+     * Value of limit round float number
+     */
+    const LIMIT_ROUND_FLOAT = 1; 
+    
+    /**
      * Declare table
      *
      * @var string $tabel table name
@@ -118,21 +138,6 @@ class Hotel extends Model
     }
 
     /**
-     * Value of low rating score
-     */
-    const LOW_SCORE = 4.9;
-
-    /**
-     * Value of normal rating score 
-     */
-    const NOMAL_SCORE = 6.9;
-
-    /**
-     * Value of high rating score
-     */
-    const HIGH_SCORE = 8.9;
-
-    /**
      * Get Label for rating comment
      *
      * @return string
@@ -150,8 +155,6 @@ class Hotel extends Model
                 return __('Very Good');
             }
     }
-
-    const LIMIT_ROUND_FLOAT = 1; 
 
     /**
      * Get round avg rating 

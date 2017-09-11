@@ -181,9 +181,6 @@
 .comment-old button {
     margin-top: 5px;
 }
-.right-rating {
-    height: 400px;
-}
 .left-rating {
     height: 400px;
 }
@@ -193,8 +190,11 @@
 .link-rating a {
     padding-top: 40px;
 }
+.cls-login {
+    color: black;
+} 
 .cls-star-hotel {
-    color: #dfdf23;
+    color: #dfa523;
     font-size: 18px;
 }
 .cls-breadcrumb {
@@ -202,7 +202,7 @@
 }
 .cls-breadcrumb li {
     display: inline;
-    font-size: 18px;
+    font-size: 14px;
 }
 .cls-breadcrumb li+li:before {
     padding: 8px;
@@ -213,6 +213,7 @@
     cursor: pointer;
     text-decoration: none;
     color: #0c81da;
+    font-size: 14px;
 }
 .cls-breadcrumb > .active {
     color: #595959;
@@ -261,7 +262,7 @@
     border-bottom: 1px solid #d6d6d6;
 }
 .cls-body-introduce-hotel {
-    padding: 10px 0;
+    padding: 30px 0;
 }
 .room-item-price {
     height: 100%;
@@ -326,4 +327,102 @@
 }
 .room-dialog-modal{
     margin-top: 100px;
+    width: 911px;
 }
+ 
+.cls-list-room-info {
+    max-height: 250px;
+    overflow: auto;
+}
+.cls-list-room-info li {
+    list-style-type: disc!important;
+    padding: 5px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.cls-comment-content {
+    margin-top: 10px;
+}
+.total-rating-circle {
+    background: #1ba0e2;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 23px;
+    font-weight: 500;
+    height: 56px;
+    left: 20px;
+    line-height: 56px;
+    position: absolute;
+    text-align: center;
+    top: 20px;
+    width: 56px;
+}
+.cls-username-comment {
+    margin-left: 70px;
+}
+.cls-value-rating { 
+    width: 55px;
+    text-align: center;
+    padding-left: 3px !important; 
+}
+.clearfix:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+.cls-breadcrumb-effect {
+    border-bottom: 1px solid #e2e2e2;
+}
+
+/*slider*/
+
+.contain-slider-img-room {
+    margin-top: 10px;
+}
+#carousel li {margin-right: 5px;}
+#carousel img {display: block; opacity: .5; cursor: pointer;}
+#carousel img:hover {opacity: 1;}
+#carousel .flex-active-slide img {opacity: 1; cursor: default;}
+
+.button {
+  display: inline-block;
+  margin: 0;
+  padding: .461em 1.563em .41em;
+  color: #fff!important;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+  text-transform: uppercase;
+  line-height: 1;
+  font-size: .9em;
+  cursor: pointer;
+  font-family: "proxima-nova", sans-serif;
+  border: 1px solid #1a4064;
+  background: #255a8c;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(255, 255, 255, 0.15);
+  -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+.button:active  {
+  -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.button.green  {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  border: 1px solid #578824;
+  background: #71b02f;
+}
+.button.green:hover  {
+  background: #79bc32;
+}
+
+ 
+.loading #container {opacity: 0;}
+.loading:before  { content: 'LOADING'; display: block; margin: 100px 0 0; text-align: center; color: #fff; font-weight: bold; font-size: 60px; opacity: 0.3; }
+ 
+/*end slider*/

@@ -9,8 +9,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+ 
 Route::get('/', 'HomeController@index')->name('frontend.index');
-Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
+ 
+Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('/user', 'UserController');
@@ -34,3 +36,5 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
 Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
     Route::resource('/hotel', 'HotelController');
 });
+
+Auth::routes();

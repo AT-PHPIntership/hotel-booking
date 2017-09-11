@@ -390,12 +390,33 @@ jQuery(document).ready(function () {
             total = +opt1.val() + +opt2.val();
             jQuery(".guests-select .total").html(total);
         });
+    
+    $('.link-room-info').click(function() {
+        var room_id;
+        room_id = $(this).attr('data-id'); 
+        $('#room-detail-modal-' + room_id).on('shown.bs.modal', function (e) {
+             
+            $('#carousel-' + room_id).flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                itemWidth: 210,
+                itemMargin: 5,
+                asNavFor: '#slider-' + room_id
+            });
 
-
-});
-
-$(document).ready(function(){
-
-
-
+            $('#slider-' + room_id).flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                sync: "#carousel-" + room_id,
+                start: function(slider){
+                  $('body').removeClass('loading');
+                }
+            });
+   
+        })
+    });
 });

@@ -25,7 +25,7 @@ class AdminDeleteUserTest extends DuskTestCase
                 ->clickLink('Users')
                 ->assertPathIs('/admin/user')
                 ->assertTitleContains('User')
-                ->assertSee('List User');
+                ->assertSee('List Users');
         });
     }
 
@@ -36,7 +36,7 @@ class AdminDeleteUserTest extends DuskTestCase
      */
     public function testDeleteSuccess()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $this->browse(function (Browser $browser) {           
             $page = $browser->visit('/admin/user');
             $elements = $page->elements('#table-contain tbody tr');
@@ -59,11 +59,11 @@ class AdminDeleteUserTest extends DuskTestCase
      */
     public function test404Page()
     {   
-        factory(User::class, 5)->create();
+        factory(User::class, 4)->create();
         $user = User::find(4);
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/admin/user')
-                    ->assertSee('List User')
+                    ->assertSee('List Users')
                     ->press('#table-contain tbody tr:nth-child(2) td:nth-child(8) button');
             $user->delete();
             $browser->waitFor(null, '1')
