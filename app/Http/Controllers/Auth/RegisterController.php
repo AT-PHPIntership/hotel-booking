@@ -6,6 +6,8 @@ use App\Model\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\Frontend\RegisterRequest;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -45,21 +47,20 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Handle a registration request for the application.
      *
-     * @param array $data authentication data that need to validate
+     * @param App\Http\Requests\Frontend\RegiserterRequest $request of form register
      *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function register(RegisterRequest $request)
     {
-        return Validator::make($data, [
-            'full_name' => 'required|max:255',
-            'username' => 'required|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'email' => 'required|email|max:255|unique:users',
-            'phone' => 'required|numeric'
-        ]);
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 
     /**
@@ -71,6 +72,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create(array_merge($data, ['is_active' => 1]));
+        return User::create(array_merge($data, ['is_active' => User::STATUS_ACTIVED]));
     }
 }
