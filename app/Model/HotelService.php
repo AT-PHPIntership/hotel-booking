@@ -29,7 +29,7 @@ class HotelService extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'hotel_id', 'service_id'
+        'id', 'hotel_id', 'service_id'
     ];
 
     /**

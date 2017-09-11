@@ -61,7 +61,7 @@ class UserProfileTest extends DuskTestCase
     }
 
     /**
-     * Test  show list history reservation.
+     * Test show list history reservation of user.
      *
      * @return void
      */
@@ -83,7 +83,7 @@ class UserProfileTest extends DuskTestCase
     }
 
     /**
-     * Test  show list history comment.
+     * Test show list history comment of user.
      *
      * @return void
      */

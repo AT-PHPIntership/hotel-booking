@@ -295,3 +295,7 @@
     max-height:200px;
     display: block; 
 }
+.cls-introduce-hotel {
+    max-height: 200px;
+    overflow: auto;
+}

@@ -24,7 +24,7 @@
                   @endif
                 </div>
               </div>
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
               <label for="username" class="col-md-4 control-label cls-login">
                 {{__('Username')}}
               </label>
