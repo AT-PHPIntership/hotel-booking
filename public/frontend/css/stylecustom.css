@@ -1,190 +1,202 @@
 .second-place{
-  width: 100%;
-  background: lightgray;
-  height: 200px;
-  box-sizing: border-box;
-  border-left: solid 1px lightgray; 
-  border-right: solid 1px lightgray; 
-  border-bottom: solid 1px lightgray; 
-  position: relative;
-  float: left;
+    width: 100%;
+    background: lightgray;
+    height: 200px;
+    box-sizing: border-box;
+    border-left: solid 1px lightgray; 
+    border-right: solid 1px lightgray; 
+    border-bottom: solid 1px lightgray; 
+    position: relative;
+    float: left;
 }
 .second-place-bottom{
-  background: white;
-  height: 40px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
+    background: white;
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 .second-place-bottom h5{
-  font-family: arial;
-  margin-left: 10px;
+    font-family: arial;
+    margin-left: 10px;
 }
 .second-place-bottom i{
-  position: absolute;
-  top: 0px;
+    position: absolute;
+    top: 0px;
 }
 .formSearch {
-margin-top: 8%;
+    margin-top: 8%;
 }
 .filterHotel {
-margin-top: 10%;
-width: 100%;
-margin-left: 0.1%;
+    margin-top: 10%;
+    width: 100%;
+    margin-left: 0.1%;
 }
 .filter-group {
-float: left;
-width: 25%;
-text-align: left;
-font-size: 20px;
-
+    float: left;
+    width: 25%;
+    text-align: left;
+    font-size: 20px;
 }
 .filter-group a {
-color: blue;
+    color: blue;
 }
 .filter-group ul,li {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 .listHotel {
-margin-top: 3%;
-width: 100%;
-height: 150px;
-box-shadow: 0 3px 0 0 rgba(103, 183, 202, 0.45);
+    margin-top: 3%;
+    width: 100%;
+    height: 150px;
+    box-shadow: 0 3px 0 0 rgba(103, 183, 202, 0.45);
 }
 .listHotel:hover {
-border: 1px solid rgba(103, 183, 202, 0.45);
-box-shadow: 0 5px 15px rgba(103, 183, 202, 0.45) ;
+    border: 1px solid rgba(103, 183, 202, 0.45);
+    box-shadow: 0 5px 15px rgba(103, 183, 202, 0.45) ;
 }
 .listHotel:after {
-clear: both;
-content: "";
-display: block;
+    clear: both;
+    content: "";
+    display: block;
 }
 .roomService {
-width: 100%;
+    width: 100%;
 }
 .room-image {
-width: 25%;
-height: 100%;
-float: left;
-box-sizing: border-box;
-padding-right: 30px;
+    width: 25%;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    padding-right: 30px;
 }
 .room-image img {
-height: 100%;
-width: 100%;
+    height: 100%;
+    width: 100%;
 }
 .room-item{ 
-height: 100%;
-border: 1px solid transparent;
-width: 32%;
-float: left;
-margin-left: 1%; 
-box-sizing: border-box;
-
+    height: 100%;
+    border: 1px solid transparent;
+    width: 32%;
+    float: left;
+    margin-left: 1%; 
+    box-sizing: border-box;
 }
 .main{ 
-width: 1140px;
-margin: 0 auto;
+    width: 1140px;
+    margin: 0 auto;
 }
 .main:after{ 
-clear: both;
-content: "";
-display: block;
+    clear: both;
+    content: "";
+    display: block;
 }
 .list-rooms{
-text-align: center;
+    text-align: center;
 }
 /* http://www.jquery2dotnet.com/ */
-.glyphicon { margin-right:5px;}
-.rating .glyphicon {font-size: 22px;}
-.rating-num { margin-top:0px;font-size: 54px; }
-.progress { margin-bottom: 5px;}
-.progress-bar { text-align: left; }
-.rating-desc .col-md-3 {padding-right: 0px;}
-.sr-only { margin-left: 5px;overflow: visible;clip: auto; }
+.glyphicon {
+    margin-right:5px;
+}
+.rating .glyphicon {
+    font-size: 22px;
+}
+.rating-num {
+    margin-top:0px;font-size: 54px;
+}
+.progress {
+    margin-bottom: 5px;
+}
+.progress-bar {
+    text-align: left;
+}
+.rating-desc .col-md-3 {
+    padding-right: 0px;
+}
+.sr-only {
+    margin-left: 5px;overflow: visible;clip: auto;
+}
 
 
 .h1-rating {
-text-align: center;
-margin-top: 40px;
+    text-align: center;
+    margin-top: 40px;
 }
 
 .username {
-display: inline;  
+    display: inline;  
 }
 #avatar {
-  width: 50px;
-  height: 50px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
 }
 .other-rooms {
-margin-bottom: 100px;
+    margin-bottom: 100px;
 }
 .panel .panel-heading {
-  text-align: center; 
-  font-size: 25px;
+    text-align: center; 
+    font-size: 25px;
 }
 .forgot-pass {
-  color: #4f4c4c;
+    color: #4f4c4c;
 }
 .contain-row{
-  margin-top: 50px;   
+    margin-top: 50px;   
 }
 .room-item a {
-color: white;
+    color: white;
 }
 .comment-old img {
-float: left;
+    float: left;
 }
 .comment-old h3 {
-margin-left: 10px;
+    margin-left: 10px;
 }
 .comment-old p {
-padding-left: 70px;
-font-size: 13px;
+    padding-left: 70px;
+    font-size: 13px;
 }
 .comment-old span {
-padding-left: 70px;
-float: left;
+    padding-left: 70px;
+    float: left;
 }
 .comment-old {
-margin-top: 20px;
+    margin-top: 20px;
 }
 .rating-comment:after {
-clear: both;
-content: "";
-display: block;
+    clear: both;
+    content: "";
+    display: block;
 }
 .your-comment {
-width: 100%;
-height: 100px;
+    width: 100%;
+    height: 100px;
 }
 .comment-old p:last-child {
-font-size: 10px;
+    font-size: 10px;
 }
 .comment-old button {
-margin-top: 5px;
+    margin-top: 5px;
 }
 .right-rating {
-height: 400px;
+    height: 400px;
 }
 .left-rating {
-height: 400px;
+    height: 400px;
 }
 .link-rating {
- margin-left: 25px;
+    margin-left: 25px;
 }
 .link-rating a {
- padding-top: 40px;
+    padding-top: 40px;
 }
 .cls-login {
-  color: black;
+    color: black;
 }
 .cls-register a {
-  margin-right: 2%;
+    margin-right: 2%;
 }
