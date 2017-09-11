@@ -71,7 +71,7 @@ class RegisterTest extends DuskTestCase
                     ->type('password', 'duoc123')
                     ->type('password_confirmation', 'duoc123')
                     ->press('SUBMIT')
-                    ->assertPathIs('/notice')
+                    ->assertPathIs('/registerSuccess')
                     ->pause('5000')
                     ->assertMissing('#login')
                     ->assertMissing('#register')
@@ -125,36 +125,6 @@ class RegisterTest extends DuskTestCase
                 ->assertPathIs('/register')
                 ->assertVisible('#login')
                 ->assertVisible('#register');
-        });
-    }
-
-    /**
-     * Test Route page of Admin when login success with account user.
-     *
-     * @return void
-     */
-    public function testUserRoutePageAdmin()
-    {   
-        $this->browse(function (Browser $browser) {
-            $browser->logout();
-            $browser->visit('/')
-                    ->assertVisible('#login')
-                    ->assertVisible('#register')
-                    ->clickLink('Register')
-                    ->type('full_name', 'Duoc Nguyen C.')
-                    ->type('username', 'duocduoc')
-                    ->type('email','duoc.nguyen@gmail.com')
-                    ->type('phone', '01206223029')
-                    ->type('password', 'duoc123')
-                    ->type('password_confirmation', 'duoc123')
-                    ->press('SUBMIT')
-                    ->assertPathIs('/notice')
-                    ->pause('5000')
-                    ->assertPathIs('/');
-            $browser->visit('/admin/news')
-                    ->assertSee('Outstanding Places')
-                    ->assertSee('duocduoc')
-                    ->assertPathIs('/');      
         });
     }
 
