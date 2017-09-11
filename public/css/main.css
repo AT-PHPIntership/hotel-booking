@@ -341,7 +341,15 @@ label.star:hover {
     transform: rotate(-30deg) scale(1.3);
 }
 .coltest.add-one-col {
-    width: 18%;
+    width: 22%;
+    margin-left: 1%;
+}
+.coltest.small-col {
+    width: 11%;
+    margin-left: 1%;
+}
+.coltest.big-col {
+    width: 22%;
     margin-left: 1%;
 }
 .widgetAcResult {
@@ -355,4 +363,7 @@ label.star:hover {
 .place-selected {
     width: 100%;
     height: 44px;
+}
+select[name = "arange_id"] {
+    width: 108%;
 }

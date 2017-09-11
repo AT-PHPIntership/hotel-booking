@@ -59,7 +59,7 @@ class Reservation extends Model
     const ROW_LIMIT = 10;
 
     /**
-     * Define a value maximum duratiom
+     * Define a value maximum duration
      */
     const MAX_DURATIONS = 15;
 

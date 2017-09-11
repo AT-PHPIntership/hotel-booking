@@ -42,13 +42,13 @@
         </div>
       <div id="navbar-collapse-grid" class="navbar-collapse collapse fz-16">
         <ul class="nav navbar-nav">
-          <li class="dropdown {{ isActiveRoute('frontend.index') }}"> <a href="/">Home</a>
+          <li class="dropdown {{ isActiveRoute('frontend.index') }}"> <a href="/">{{ __('Home') }}</a>
           </li>
         <!-- hotels -->
-          <li class="{{ areActiveRoute(['frontend.hotel.index', 'frontend.hotel.show']) }}"> <a href="{{ route('frontend.hotel.index') }}">Hotels</b></a>
+          <li class="{{ areActiveRoute(['frontend.hotel.index', 'frontend.hotel.show']) }}"> <a href="{{ route('frontend.hotel.index') }}">{{ __('Hotels') }}</b></a>
           </li>
         <!-- news -->
-          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">News<b class="caret"></b></a>
+          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{ __('News') }}<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="blog.html">Sports</a></li>
               <li><a href="blog-post.html">Sale</a></li>

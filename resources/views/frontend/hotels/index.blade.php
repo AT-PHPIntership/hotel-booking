@@ -10,13 +10,13 @@
       <div>
         <div class="row">
           <div class="col-md-12">           
-            <form class="reservation-horizontal clearfix container-search" action="/search" name="reservationform" >
+            <form class="reservation-horizontal clearfix container-search" name="reservationform" method="GET"  action="{{ route('frontend.hotel.index') }}">
             <div id="message"></div><!-- Error message display -->
               <div class="row">
                
                 <div class="coltest add-one-col"> <label for="room">{{ __('Place') }}</label>
-                    <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                    <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control" value="" placeholder="Place to go">
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default all places') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control" value="" placeholder="{{ __('Place to go') }}">
                     <div class="widgetAcResult" hidden>
                       
                     </div>
@@ -24,14 +24,14 @@
                 <div class="coltest add-one-col">
                   <div class="form-group">
                     <label for="checkin">{{ __('Check-in') }}</label>
-                    <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-In is from 11:00"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Check-In is from 14:00') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
                     <input name="checkin" type="text" id="checkin" value="" class="form-control" placeholder="Check-in"/>
                   </div>
                 </div>
-                <div class="coltest add-one-col">
+                <div class="coltest small-col">
                   <div class="form-group">
-                    <label for="checkout">{{ __('Duration') }}</label>
-                    <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-out is from 12:00"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <label for="duration">{{ __('Duration') }}</label>
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Duration booking room') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
                     
                     <select name = "duration" class="btn btn-default">
                       @for($i = 1; $i <= App\Model\Reservation::MAX_DURATIONS; $i++)
@@ -40,10 +40,10 @@
                     </select>
                   </div>
                 </div>
-                <div class="coltest add-one-col">
+                <div class="coltest big-col">
                   <div class="form-group">
                     <label for="checkin">{{ __('Arangement') }}</label>
-                    <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-In is from 11:00"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default not arange') }}" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
                     <select name = "arange_id" class="btn btn-default">
                       <option value="0">{{ __('--') }}</option>
                       <option value="1">{{ __('Price cheap to expensive') }}</option>
@@ -72,7 +72,7 @@
           <!-- 3 place top -->
           @foreach($hotels as $hotel)
             <div class="col-sm-4">
-              <div class="room-thumb"> <img src="{{ isset($hotel->images[0])? asset($hotel->images[0]->path): asset(config('image.no_image')) }}" alt="hotel" class="img-presentive" />
+              <div class="room-thumb"> <img src="{{ isset($hotel->images[0]) ? asset($hotel->images[0]->path) : asset(config('image.no_image')) }}" alt="hotel" class="img-presentive" />
                 <div class="mask">
                   <div class="main">
                     <h5>{{ $hotel->name }}</h5>
@@ -115,7 +115,7 @@
                         @endif
                       @endforeach
                     </div>
-                    <a href="/detailHotel" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
+                    <a href="/detailHotel" class="btn btn-primary btn-block">{{ __('See Room') }}</a>
                   </div>
                 </div>
               </div>

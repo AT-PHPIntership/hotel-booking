@@ -32,14 +32,12 @@ class HotelController extends Controller
             'hotels.created_at'
         ];
 
-        $hotels = Hotel::search()
-            ->select($columns)
+        $hotels = Hotel::select($columns)
             ->with(['hotelServices' => function ($query) {
                 $query->join('services', 'hotel_services.service_id', '=', 'services.id');
             }])
             ->orderby('hotels.id', 'DESC')
-            ->paginate(Hotel::ITEM_LIMIT)
-            ->appends(['search' => request('search')]);
+            ->paginate(Hotel::ITEM_LIMIT);
         return view('frontend.hotels.index', compact('hotels'));
     }
 }
