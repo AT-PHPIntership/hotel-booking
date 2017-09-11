@@ -4,7 +4,7 @@ namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SearchHotelRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,12 @@ class SearchHotelRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->exists('checkin')) {
-            return [
-                'checkin' => 'required',
-            ];
-        }
         return [
-                'checkin' => 'nullable',
+            'full_name' => 'required|max:255',
+            'username' => 'required|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'email' => 'required|email|max:255|unique:users',
+            'phone' => 'required|numeric'
         ];
     }
 }

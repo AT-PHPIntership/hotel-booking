@@ -17,8 +17,8 @@
                 <div class="coltest add-one-col">
                   <div class="form-group">
                     <label for="room">{{ __('Place') }}</label>
-                    <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                    <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control" value="{{ app('request')->input('hotelSourceArea') }}" placeholder="Place to go" data-url="{{ route('frontend.place.hintPlaces') }}">
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default all places') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control" value="{{ app('request')->input('hotelSourceArea') }}" placeholder="{{ __('Place to go') }}" data-url="{{ route('frontend.place.hintPlaces') }}">
                     <div class="widgetAcResult" hidden>
                       @include('frontend.layouts.partials.widgetAcResult')
                     </div>
@@ -27,15 +27,15 @@
                 <div class="coltest add-one-col">
                   <div class="form-group">
                     <label for="checkin">{{ __('Check-in') }}</label>
-                    <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-In is from 11:00"> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                    <input name="checkin" type="text" id="checkin" class="form-control{{ $errors->has('checkin') ? ' has-error' : '' }}" placeholder="Check-in" value="{{ app('request')->input('checkin') }}" />
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Check-In is from 14:00') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <input name="checkin" type="text" id="checkin" class="form-control{{ $errors->has('checkin') ? ' has-error' : '' }}" placeholder="{{ __('Check-in') }}" value="{{ app('request')->input('checkin') }}" />
                      <small class="text-danger">{{ $errors->first('checkin') }}</small>
                   </div>
                 </div>
                 <div class="coltest small-col">
                   <div class="form-group">
-                    <label for="checkout">{{ __('Duration') }}</label>
-                    <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-out is from 12:00"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <label for="duration">{{ __('Duration') }}</label>
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Duration booking room') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
                     
                     <select name = "duration" class="btn btn-default">
                       @for($i = 1; $i <= App\Model\Reservation::MAX_DURATIONS; $i++)
@@ -50,8 +50,8 @@
                 </div>
                 <div class="coltest big-col">
                   <div class="form-group">
-                    <label for="checkin">{{ __('Arangement') }}</label>
-                    <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-In is from 11:00"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <label for="arange_id">{{ __('Order By') }}</label>
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default is none') }}" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
                     <select name = "arange_id" class="btn btn-default">
                       <option value="0">{{ __('--') }}</option>
                       @if (app('request')->input('arange_id')== 1)

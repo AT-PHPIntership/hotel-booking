@@ -15,7 +15,7 @@ use Illuminate\Http\Response;
 
 class PlaceController extends Controller
 {
-	/**
+    /**
      * Display hinted place after type field place-slug
      *
      * @param Request $request request to get hinted place
@@ -24,7 +24,7 @@ class PlaceController extends Controller
      */
     public function hintPlaces(Request $request)
     {
-		$hintedPlaces = $request->key == "" ? Place::topPlaces() : Place::select(['name', 'slug'])->where("name", "LIKE", "%$request->key%")->limit(5)->get();
+        $hintedPlaces = $request->key == "" ? Place::topPlaces() : Place::select(['name', 'slug'])->where("name", "LIKE", "%$request->key%")->limit(5)->get();
         
         return view('frontend.layouts.partials.widgetAcResult', compact('hintedPlaces'));
     }
