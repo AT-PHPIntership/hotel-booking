@@ -19,7 +19,7 @@ class TestListHistoryBooking extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * A Dusk test example.
+     * A Test list history booking of user.
      *
      * @return void
      */
@@ -51,7 +51,7 @@ class TestListHistoryBooking extends DuskTestCase
      */
     public function testHasZeroRecordListBooking()
     {   
-        $this->makeData();
+        $this->makeData(10);
         DB::table('reservations')->truncate();
         $this->browse(function (Browser $browser) {
             $browser->logout();
@@ -66,13 +66,13 @@ class TestListHistoryBooking extends DuskTestCase
                     ->assertPathIs('/user/'.$user->id);
             $elements = $browser->elements('#table-reservation tbody tr');
             $numAccounts = count($elements);
-            $this->assertTrue($numAccounts == 0 && $$browser->text('.table-user-information tbody tr:nth-child(5) td:nth-child(2)') == $user->reservations->count());
+            $this->assertTrue($numAccounts == 0 && $browser->text('.table-user-information tbody tr:nth-child(5) td:nth-child(2)') == $user->reservations->count());
             $browser->assertMissing('.pagination');         
         });
     }
 
     /**
-     * A Dusk test example.
+     * Test if database has > 10 record.
      *
      * @return void
      */
@@ -90,10 +90,17 @@ class TestListHistoryBooking extends DuskTestCase
                     ->assertVisible('#table-reservation')
                     ->assertSee('List Reservations')
                     ->assertPathIs('/user/'.$user->id);
-            $this->assertTrue($browser->text('.table-user-information tbody tr:nth-child(5) td:nth-child(2)') == $user->reservations->count())
+            $this->assertTrue($browser->text('.table-user-information tbody tr:nth-child(5) td:nth-child(2)') == $user->reservations->count());
             $elements = $browser->elements('#table-reservation tbody tr');
             $numAccounts = count($elements);
-            $this->assertTrue($numAccounts == 10);         
+            $this->assertTrue($numAccounts == 10);
+            $elements = $browser->click('.pagination li:nth-child(3) a')
+                                ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
+                                ->elements('#table-reservation tbody tr');
+            $numAccounts = count($elements);
+            $this->assertTrue($numAccounts == 5);
+            $browser->assertPathIs('/user/'.$user->id)
+                    ->assertQueryStringHas('page', '2');    
         });
     }
 
