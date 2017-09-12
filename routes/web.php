@@ -10,10 +10,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.home.index');
-});
-
+Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
     Route::group(['prefix'=>'user', 'middleware'=>'auth'], function() {
         Route::get('/{id}', 'UserController@show')->name('user.profile');
@@ -21,7 +18,9 @@ Route::group(['namespace'=>'Frontend'], function() {
         Route::put('/{id}', 'UserController@update')->name('userprofile.update');
     });
 });
-
+Route::get('/registerSuccess', function() {
+    return view('frontend.notice');
+})->name('notice')->middleware('auth');
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 

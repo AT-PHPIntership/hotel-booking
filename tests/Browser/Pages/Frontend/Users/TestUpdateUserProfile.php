@@ -18,171 +18,176 @@ class TestUpdateUserProfile extends DuskTestCase
      *
      * @return void
      */
-    // public function testUpdateUserProfile()
-    // {   
-    //     $this->makeData();
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->logout();
-    //         $user = User::find(2);
-    //         $browser->loginAs($user)
-    //                 ->visit('/user/'.$user->id)
-    //                 ->click('.fa-edit')
-    //                 ->assertSee('Update Profile')
-    //                 ->assertPathIs('/user/' .$user->id. '/edit');
-    //     });
-    // }
+    public function testUpdateUserProfile()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/user/'.$user->id)
+                    ->click('.fa-edit')
+                    ->assertSee('Update Profile')
+                    ->assertPathIs('/user/' .$user->id. '/edit');
+        });
+    }
 
     /**
      * Test each value for form update user profile.
      *
      * @return void
      */
-    // public function testValueFormUserProfile()
-    // {   
-    //     $this->makeData();
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->logout();
-    //         $user = User::find(2);
-    //         $browser->loginAs($user)
-    //                 ->visit('/user/'.$user->id. '/edit')
-    //                 ->assertInputValue('full_name', $user->full_name)
-    //                 ->assertInputValue('email', $user->email)
-    //                 ->assertInputValue('phone', $user->phone)
-    //                 ->assertInputValue('password', '');
-    //     });
-    // }
+    public function testValueFormUserProfile()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/user/'.$user->id. '/edit')
+                    ->assertInputValue('full_name', $user->full_name)
+                    ->assertInputValue('email', $user->email)
+                    ->assertInputValue('phone', $user->phone)
+                    ->assertInputValue('password', '');
+        });
+    }
 
     /**
      * Test update user profile success.
      *
      * @return void
      */
-    // public function testUpdateUserProfileSuccess()
-    // {   
-    //     $this->makeData();
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->logout();
-    //         $user = User::find(2);
-    //         $browser->loginAs($user)
-    //                 ->visit('/user/'.$user->id. '/edit')
-    //                 ->type('full_name', 'Duoc Nguyen')
-    //                 ->type('email', 'duocnguyen@example.com')
-    //                 ->type('phone', '01206223029')
-    //                 ->press('SUBMIT')
-    //                 ->assertSee('Update Profile Success!');
-    //         $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', 'Duoc Nguyen')
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', '01206223029')
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', 'duocnguyen@example.com');
-    //     });
-    // }
+    public function testUpdateUserProfileSuccess()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/user/'.$user->id. '/edit')
+                    ->type('full_name', 'Duoc Nguyen')
+                    ->type('email', 'duocnguyen@example.com')
+                    ->type('phone', '01206223029')
+                    ->press('SUBMIT')
+                    ->assertSee('Update Profile Success!');
+            $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', 'Duoc Nguyen')
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', '01206223029')
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', 'duocnguyen@example.com');
+        });
+    }
 
     /**
      * Test update user profile if no change password.
      *
      * @return void
      */
-    // public function testNoChangePassword()
-    // {   
-    //     $this->makeData();
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->logout();
-    //         $user = User::find(2);
-    //         $browser->loginAs($user)
-    //                 ->visit('/user/'.$user->id. '/edit')
-    //                 ->press('SUBMIT')
-    //                 ->assertSee('Update Profile Success!');
-    //         $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email);
-    //         $browser->logout()
-    //                 ->visit('/login')
-    //                 ->type('username', 'user1')
-    //                 ->type('password', 'user1')
-    //                 ->press('LOGIN')
-    //                 ->assertSee($user->username)
-    //                 ->assertPathIs('/');
-    //     });
-    // }
+    public function testNoChangePassword()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/user/'.$user->id. '/edit')
+                    ->press('SUBMIT')
+                    ->assertSee('Update Profile Success!');
+            $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email);
+            $browser->logout()
+                    ->visit('/login')
+                    ->type('username', 'user1')
+                    ->type('password', 'user1')
+                    ->press('LOGIN')
+                    ->assertSee($user->username)
+                    ->assertPathIs('/');
+        });
+    }
 
     /**
      * Test update user profile if change password.
      *
      * @return void
      */
-    // public function testChangePassword()
-    // {   
-    //     $this->makeData();
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->logout();
-    //         $user = User::find(2);
-    //         $browser->loginAs($user)
-    //                 ->visit('/user/'.$user->id. '/edit')
-    //                 ->type('password', 'userpassword')
-    //                 ->press('SUBMIT')
-    //                 ->assertSee('Update Profile Success!');
-    //         $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email);
-    //         $browser->logout()
-    //                 ->visit('/login')
-    //                 ->type('username', 'user1')
-    //                 ->type('password', 'userpassword')
-    //                 ->press('LOGIN')
-    //                 ->assertSee($user->username)
-    //                 ->assertPathIs('/');
-    //     });
-    // }
+    public function testChangePassword()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/user/'.$user->id. '/edit')
+                    ->type('password', 'userpassword')
+                    ->press('SUBMIT')
+                    ->assertSee('Update Profile Success!');
+            $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email);
+            $browser->logout()
+                    ->visit('/login')
+                    ->type('username', 'user1')
+                    ->type('password', 'userpassword')
+                    ->press('LOGIN')
+                    ->assertSee($user->username)
+                    ->assertPathIs('/');
+        });
+    }
 
     /**
      * Test update user profile if change image.
      *
      * @return void
      */
-    // public function testChangeImage()
-    // {   
-    //     $this->makeData();
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->logout();
-    //         $user = User::find(2);
-    //         $browser->loginAs($user)
-    //                 ->visit('/user/'.$user->id. '/edit')
-    //                 ->attach('image', $this->fakeImage())
-    //                 ->press('SUBMIT')
-    //                 ->assertSee('Update Profile Success!');
-    //         $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email)
-    //                 ->assertPathIs('/user/'.$user->id);
-    //         $imageSrc = $browser->element('.img-circle')->getAttribute('src');
-    //         $imageName = explode('/', $imageSrc);
-    //         $this->assertTrue($imageName[5] ===  $user->images[0]->path);
-    //     });
-    // }
+    public function testChangeImage()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/user/'.$user->id. '/edit')
+                    ->attach('image', $this->fakeImage())
+                    ->press('SUBMIT')
+                    ->assertSee('Update Profile Success!');
+            $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email)
+                    ->assertPathIs('/user/'.$user->id);
+            $imageSrc = $browser->element('.img-circle')->getAttribute('src');
+            $imageName = explode('/', $imageSrc);
+            $this->assertTrue($imageName[5] ===  $user->images[0]->path);
+        });
+    }
 
     /**
-     * Test update user profile if change image.
+     * Test update user profile if no change image.
      *
      * @return void
      */
-    // public function testNoChangeImage()
-    // {   
-    //     $this->makeData();
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->logout();
-    //         $user = User::find(2);
-    //         $browser->loginAs($user)
-    //                 ->visit('/user/'.$user->id. '/edit')
-    //                 ->press('SUBMIT')
-    //                 ->assertSee('Update Profile Success!');
-    //         $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
-    //                 ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email)
-    //                 ->assertPathIs('/user/'.$user->id);
-    //         $imageSrc = $browser->element('.img-circle')->getAttribute('src');
-    //         $imageName = explode('/', $imageSrc);
-    //         $this->assertTrue($imageName[5] ===  'profile.png');
-    //     });
-    // }
+    public function testNoChangeImage()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/user/'.$user->id. '/edit')
+                    ->press('SUBMIT')
+                    ->assertSee('Update Profile Success!');
+            $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email)
+                    ->assertPathIs('/user/'.$user->id);
+            $imageSrc = $browser->element('.img-circle')->getAttribute('src');
+            $imageName = explode('/', $imageSrc);
+            if (isset($user->images[0])) {
+                $this->assertTrue($imageName[5] ===  $user->images[0]);
+            } else {
+                $this->assertTrue($imageName[5] ===  'profile.png');
+            }
+            
+        });
+    }
 
     /**
      * Cases of test update profile fail
