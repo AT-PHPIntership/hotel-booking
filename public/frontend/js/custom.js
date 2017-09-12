@@ -380,21 +380,21 @@ jQuery(document).ready(function () {
         jQuery(".guests-select .total").html(total);
         });
 
-        $('#logout').on('click', function(e) {
-            e.preventDefault();
-            $('#logout-form').submit();
-        });
-        
-        $('[data-toggle="tooltip"]').tooltip();
+    $('#logout').on('click', function(e) {
+        e.preventDefault();
+        $('#logout-form').submit();
+    });
+    
+    $('[data-toggle="tooltip"]').tooltip();
 
-        $('#user-comment').on('click', function(e) {
-            e.preventDefault();
-            $('#table-comment').show();
-            $('#table-reservation').hide();
-        });
-        $('#user-reservation').on('click', function(e) {
-            e.preventDefault();
-            $('#table-reservation').show();
-            $('#table-comment').hide();
-        }); 
+    $('#user-comment').on('click', function(e) {
+        e.preventDefault();
+        $('#table-comment').show();
+        $('#table-reservation').hide();
+    });
+    $('#user-reservation').on('click', function(e) {
+        e.preventDefault();
+        $('#table-reservation').show();
+        $('#table-comment').hide();
+    });
 });

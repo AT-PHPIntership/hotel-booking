@@ -13,8 +13,8 @@
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
     Route::group(['prefix'=>'user', 'middleware'=>'auth'], function() {
-        Route::get('/{id}', 'UserController@show')->name('user.profile');
-        Route::get('/{id}/edit', 'UserController@edit')->name('userprofile.edit');
+        Route::get('/{id}', 'UserController@show')->name('user.profile')->middleware('checkUser');
+        Route::get('/{id}/edit', 'UserController@edit')->name('userprofile.edit')->middleware('checkUser');
         Route::put('/{id}', 'UserController@update')->name('userprofile.update');
     });
 });
