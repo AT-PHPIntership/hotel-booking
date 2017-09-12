@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Libraries\Traits\SearchTrait;
+use Illuminate\Support\Facades\DB;
 
 class Hotel extends Model
 {
@@ -18,6 +19,8 @@ class Hotel extends Model
      */
     const STAR_MAX = 5;
     const STAR_MIN = 1;
+
+    const SHOW_LIMIT = 6;
 
     /**
      * Declare table
@@ -105,6 +108,17 @@ class Hotel extends Model
     public function ratingComments()
     {
         return $this->hasMany(RatingComment::class, 'hotel_id');
+    }
+
+    /**
+     * Relationship hasMany with rating comment
+     *
+     * @return array
+    */
+    public function ratingCommentsAVG()
+    {
+        $result = $this->ratingComments()->selectRaw('hotel_id, avg(total_rating) as total')->groupBy('hotel_id');
+        return $result;
     }
 
     /**

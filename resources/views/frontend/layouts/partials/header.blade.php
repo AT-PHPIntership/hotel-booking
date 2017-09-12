@@ -36,13 +36,13 @@
     <div class="container">
       <div class="navbar-header">
         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a href="/home" class="navbar-brand">         
+        <a href="{{ route('home.index') }}" class="navbar-brand">         
         <!-- Logo -->
         <div id="logo"> <img id="default-logo" src="{{ asset('frontend/images/logo1.png')}}" alt="Snorlax" style="height:44px;"> <img id="retina-logo" src="images/logo-retina.png" alt="Starhotel" style="height:44px;"> </div>
         </a> </div>
       <div id="navbar-collapse-grid" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li class="dropdown active"> <a href="/home">Home</a>
+          <li class="dropdown active"> <a href="{{ route('home.index') }}">{{ __('Home') }}</a>
           </li>
         <!-- hotels -->
           <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">Hotels<b class="caret"></b></a>
