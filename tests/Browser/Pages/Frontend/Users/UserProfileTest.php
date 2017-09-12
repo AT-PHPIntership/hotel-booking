@@ -127,6 +127,28 @@ class UserProfileTest extends DuskTestCase
         });
     }
 
+     /**
+     * Test if user route page show profile of other user.
+     *
+     * @return void
+     */
+    public function testMiddleware()
+    {   
+        $this->makeData();
+        $this->browse(function (Browser $browser) {
+            $browser->logout();
+            $user = User::find(2);
+            $browser->loginAs($user)
+                    ->visit('/')
+                    ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
+                    ->clickLink('Profile')
+                    ->assertSee('User Profile')
+                    ->assertPathIs('/user/'.$user->id);
+            $browser->visit('/user/1')
+                    ->assertSee('403 - Forbidden')
+                    ->assertSee("Sorry...You don't have access to this request");
+        });
+    }
     /**
      * Make data for test
      *

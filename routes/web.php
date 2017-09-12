@@ -13,10 +13,9 @@
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
     Route::group(['prefix'=>'user', 'middleware'=>'auth'], function() {
-        Route::get('/{id}', 'UserController@show')->name('user.profile');
+        Route::get('/{id}', 'UserController@show')->name('user.profile')->middleware('checkUser');
     });
 });
-
 Route::get('/registerSuccess', function() {
     return view('frontend.notice');
 })->name('notice')->middleware('auth');
