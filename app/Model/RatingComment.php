@@ -38,7 +38,7 @@ class RatingComment extends Model
      * @return string
      */
     public function getCreatedAtAttribute()
-    {   
-       return Carbon::parse($this->attributes['created_at'])->toDayDateTimeString() ;    
+    {
+        return Carbon::parse($this->attributes['created_at'])->toDayDateTimeString();
     }
 }

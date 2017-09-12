@@ -11,7 +11,15 @@ class Hotel extends Model
 {
     use Sluggable, SoftDeletes, SearchTrait;
 
+    /**
+     * Hotel row limit
+     */
     const ROW_LIMIT = 10;
+
+    /**
+     * Comment row limit
+     */
+    const COMMENT_ROW_LIMIT = 5;
 
     /**
      * Define Max, Min Value Star of Hotel
@@ -25,7 +33,7 @@ class Hotel extends Model
     const LOW_SCORE = 4.9;
 
     /**
-     * Value of normal rating score 
+     * Value of normal rating score
      */
     const NOMAL_SCORE = 6.9;
 
@@ -37,8 +45,28 @@ class Hotel extends Model
     /**
      * Value of limit round float number
      */
-    const LIMIT_ROUND_FLOAT = 1; 
+    const LIMIT_ROUND_FLOAT = 1;
     
+    /**
+     * Value of week number to add week
+     */
+    const WEEK_NUMBER = 1;
+
+    /**
+     * Value of checkin time
+     */
+    const CHECKIN_TIME = ' 14:00:00';
+
+    /**
+     * Value of checkout time
+     */
+    const CHECKOUT_TIME = ' 11:00:00';
+
+    /**
+     * Value of format date time day/month/year hour:minute:second
+     */
+    const DATETIME_FORMAT = 'd/m/Y H:i:s';
+
     /**
      * Declare table
      *
@@ -143,21 +171,21 @@ class Hotel extends Model
      * @return string
      */
     public function getLabelRatingAttribute()
-    {    
-            $rating = $this->ratingComments()->avg('total_rating');
-            if($rating <= self::LOW_SCORE ) {
-                return __('Bad');
-            } elseif (self::LOW_SCORE < $rating && $rating <= self::NOMAL_SCORE ) {
-                return __('Nomal');
-            } elseif (self::NOMAL_SCORE < $rating && $rating <= self::HIGH_SCORE) {
-                return __('Good');
-            } else {
-                return __('Very Good');
-            }
+    {
+        $rating = $this->ratingComments()->avg('total_rating');
+        if ($rating <= self::LOW_SCORE) {
+            return __('Bad');
+        } elseif (self::LOW_SCORE < $rating && $rating <= self::NOMAL_SCORE) {
+            return __('Nomal');
+        } elseif (self::NOMAL_SCORE < $rating && $rating <= self::HIGH_SCORE) {
+            return __('Good');
+        } else {
+            return __('Very Good');
+        }
     }
 
     /**
-     * Get round avg rating 
+     * Get round avg rating
      *
      * @return float
      */

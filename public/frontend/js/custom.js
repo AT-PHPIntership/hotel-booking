@@ -2,7 +2,6 @@
 jQuery(document).ready(function () {
     "use strict";
 
-	
     //Gmap
     if (jQuery().gMap) {
         jQuery('#map').gMap({
@@ -10,7 +9,7 @@ jQuery(document).ready(function () {
             markers: [{
                 address: "Calle Hamburgo, Las Palmas, Spanje", //Address of the company
                 html: "<h4>Our hotel</h4><p>This is our hotel</p>", //Quicktip
-                popup: false, //Boolean	
+                popup: false, //Boolean 
                 scrollwheel: false, //Boolean
                 maptype: 'TERRAIN', //Choose between: 'HYBRID', 'TERRAIN', 'SATELLITE' or 'ROADMAP'.
                 icon: {
@@ -30,7 +29,6 @@ jQuery(document).ready(function () {
             }]
         });
     }
-
 
     // Owl sliders
     if (jQuery().owlCarousel) {
@@ -79,7 +77,6 @@ jQuery(document).ready(function () {
         });
     }
 
-
     // Revolution slider
     if (jQuery().revolution) {
         jQuery('.banner').revolution({
@@ -87,7 +84,7 @@ jQuery(document).ready(function () {
             startwidth: 1170,
             startheight: 449,
             autoHeight:"off",
-			fullScreenAlignForce:"off",
+            fullScreenAlignForce:"off",
             
             onHoverStop: "on",
 
@@ -99,12 +96,12 @@ jQuery(document).ready(function () {
             hideBulletsOnMobile: "on",
             hideArrowsOnMobile: "on",
             hideThumbsUnderResoluition: 0,
-			
-			hideThumbs:0,
-			hideTimerBar:"on",
+            
+            hideThumbs:0,
+            hideTimerBar:"on",
 
-			keyboardNavigation:"on",
-			
+            keyboardNavigation:"on",
+            
             navigationType: "none",
             navigationArrows: "solo",
             navigationStyle: "round",
@@ -125,10 +122,10 @@ jQuery(document).ready(function () {
             soloArrowRightVOffset: 0,
 
             touchenabled: "on",
-			swipe_velocity:"0.7",
-			swipe_max_touches:"1",
-			swipe_min_touches:"1",
-			drag_block_vertical:"false",
+            swipe_velocity:"0.7",
+            swipe_max_touches:"1",
+            swipe_min_touches:"1",
+            drag_block_vertical:"false",
 
             stopAtSlide: -1,
             stopAfterLoops: -1,
@@ -138,8 +135,8 @@ jQuery(document).ready(function () {
 
             dottedOverlay: "none",
 
-			fullWidth:"off",
-			forceFullWidth:"off",
+            fullWidth:"off",
+            forceFullWidth:"off",
             fullScreen: "off",
             fullScreenOffsetContainer: "#topheader-to-offset",
 
@@ -147,7 +144,6 @@ jQuery(document).ready(function () {
 
         });
     }
-
 
     //PrettyPhoto
     if (jQuery().prettyPhoto) {
@@ -162,7 +158,7 @@ jQuery(document).ready(function () {
             autoplay_slideshow: false, // true/false
             opacity: 0.80, // Value between 0 and 1 
             show_title: true, // true/false            
-			allow_resize: true, // Resize the photos bigger than viewport. true/false
+            allow_resize: true, // Resize the photos bigger than viewport. true/false
             default_width: 500,
             default_height: 344,
             counter_separator_label: '/', // The separator for the gallery counter 1 "of" 2
@@ -179,7 +175,6 @@ jQuery(document).ready(function () {
             callback: function () {}, // Called when prettyPhoto is closed
         });
     }
-
 
     //Waypoints
     if (jQuery().waypoint) {
@@ -201,7 +196,6 @@ jQuery(document).ready(function () {
         });
     }
 
-
     // GO TOP
     //Show or hide "#go-top"
     jQuery(window).scroll(function () {
@@ -213,6 +207,7 @@ jQuery(document).ready(function () {
             jQuery('#go-top').fadeOut(800);
         }
     });
+
     // Animate "#go-top"
     jQuery('#go-top').click(function (event) {
         event.preventDefault();
@@ -221,85 +216,84 @@ jQuery(document).ready(function () {
         }, '2000', 'swing');
     })
 
-	
     //niceScroll
     if (jQuery().niceScroll) {
          $(".parallax-effect").niceScroll();
-		 };
-		 
-
+         };
+         
     // Isotope
- window.onload = function () {	
-    if (jQuery().isotope) {
-        // cache container
-        var jQuerycontainer1 = jQuery('.room-list');
-        // initialize isotope
-        jQuerycontainer1.isotope({
-            filter: '*',
-            masonry: {
-                columnWidth: 1
-            }
-        });
-
-        // filter items when filter link is clicked
-        jQuery('#filters a').click(function () {
-            var selector = jQuery(this).attr('data-filter');
+    window.onload = function () {   
+        if (jQuery().isotope) {
+            // cache container
+            var jQuerycontainer1 = jQuery('.room-list');
+            // initialize isotope
             jQuerycontainer1.isotope({
-                filter: selector
+                filter: '*',
+                masonry: {
+                    columnWidth: 1
+                }
             });
-            return false;
-        });
-        // set selected menu items
-        var jQueryfilters = jQuery('#filters'),
-            jQueryfiltersLinks = jQueryfilters.find('a');
 
-        jQueryfiltersLinks.click(function () {
-            console.log(this);
-            var jQuerythis = jQuery(this).parent(this);
-            // don't proceed if already selected
-            if (jQuerythis.hasClass('active')) {
+            // filter items when filter link is clicked
+            jQuery('#filters a').click(function () {
+                var selector = jQuery(this).attr('data-filter');
+                jQuerycontainer1.isotope({
+                    filter: selector
+                });
                 return false;
-            }
-            var jQueryfilterLink = jQuerythis.parents('#filters');
-            jQueryfilterLink.find('.active').removeClass('active');
-            jQuerythis.addClass('active');
-        });
+            });
+            // set selected menu items
+            var jQueryfilters = jQuery('#filters'),
+                jQueryfiltersLinks = jQueryfilters.find('a');
 
-        var jQuerycontainer2 = jQuery('.gallery');
-        // initialize isotope
-        jQuerycontainer2.isotope({
-            filter: '*',
-            masonry: {
-                columnWidth: 1,
-                gutterWidth: 0
-            }
-        });
+            jQueryfiltersLinks.click(function () {
+                console.log(this);
+                var jQuerythis = jQuery(this).parent(this);
+                // don't proceed if already selected
+                if (jQuerythis.hasClass('active')) {
+                    return false;
+                }
+                var jQueryfilterLink = jQuerythis.parents('#filters');
+                jQueryfilterLink.find('.active').removeClass('active');
+                jQuerythis.addClass('active');
+            });
 
-        // filter items when filter link is clicked
-        jQuery('#filters a').click(function () {
-            var selector = jQuery(this).attr('data-filter');
+            var jQuerycontainer2 = jQuery('.gallery');
+            // initialize isotope
             jQuerycontainer2.isotope({
-                filter: selector
+                filter: '*',
+                masonry: {
+                    columnWidth: 1,
+                    gutterWidth: 0
+                }
             });
-            return false;
-        });
-        // set selected menu items
-        var jQueryfilters = jQuery('#filters'),
-            jQueryfiltersLinks = jQueryfilters.find('a');
 
-        jQueryfiltersLinks.click(function () {
-            console.log(this);
-            var jQuerythis = jQuery(this).parent(this);
-            // don't proceed if already selected
-            if (jQuerythis.hasClass('active')) {
+            // filter items when filter link is clicked
+            jQuery('#filters a').click(function () {
+                var selector = jQuery(this).attr('data-filter');
+                jQuerycontainer2.isotope({
+                    filter: selector
+                });
                 return false;
-            }
-            var jQueryfilterLink = jQuerythis.parents('#filters');
-            jQueryfilterLink.find('.active').removeClass('active');
-            jQuerythis.addClass('active');
-        });
+            });
+
+            // set selected menu items
+            var jQueryfilters = jQuery('#filters'),
+                jQueryfiltersLinks = jQueryfilters.find('a');
+
+            jQueryfiltersLinks.click(function () {
+                console.log(this);
+                var jQuerythis = jQuery(this).parent(this);
+                // don't proceed if already selected
+                if (jQuerythis.hasClass('active')) {
+                    return false;
+                }
+                var jQueryfilterLink = jQuerythis.parents('#filters');
+                jQueryfilterLink.find('.active').removeClass('active');
+                jQuerythis.addClass('active');
+            });
+        }
     }
-}
 
     // Sticky Navigation
     if (jQuery().sticky) {
@@ -330,8 +324,7 @@ jQuery(document).ready(function () {
         })
     }
 
-
-    // Reservation Form	
+    // Reservation Form 
     //jQueryUI - Datepicker
     if (jQuery().datepicker) {
         jQuery('#checkin').datepicker({
@@ -351,15 +344,14 @@ jQuery(document).ready(function () {
                 }
             }
         });
+
         jQuery('#checkin, #checkout').on('focus', function () {
             jQuery(this).blur();
         }); // Remove virtual keyboard on touch devices
     }
 
-
     //Popover
     jQuery('[data-toggle="popover"]').popover();
-
 
     // Guests
     // Show guestsblock onClick
@@ -376,47 +368,20 @@ jQuery(document).ready(function () {
         guestsblock.fadeOut(120);
     });
 
-
     // Count guests script
     var opt1;
     var opt2;
     var total;
-    jQuery('.adults select, .children select').change(
+    jQuery('.adults select, .children select').change(function() {
+        opt1 = jQuery('.adults').find('option:selected');
+        opt2 = jQuery('.children').find('option:selected');
 
-        function () {
-            opt1 = jQuery('.adults').find('option:selected');
-            opt2 = jQuery('.children').find('option:selected');
-
-            total = +opt1.val() + +opt2.val();
-            jQuery(".guests-select .total").html(total);
-        });
-    
-    $('.link-room-info').click(function() {
-        var room_id;
-        room_id = $(this).attr('data-id'); 
-        $('#room-detail-modal-' + room_id).on('shown.bs.modal', function (e) {
-             
-            $('#carousel-' + room_id).flexslider({
-                animation: "slide",
-                controlNav: false,
-                animationLoop: false,
-                slideshow: false,
-                itemWidth: 210,
-                itemMargin: 5,
-                asNavFor: '#slider-' + room_id
-            });
-
-            $('#slider-' + room_id).flexslider({
-                animation: "slide",
-                controlNav: false,
-                animationLoop: false,
-                slideshow: false,
-                sync: "#carousel-" + room_id,
-                start: function(slider){
-                  $('body').removeClass('loading');
-                }
-            });
-   
-        })
+        total = +opt1.val() + +opt2.val();
+        jQuery(".guests-select .total").html(total);
     });
+
+    $('#logout').on('click', function(e) {
+        e.preventDefault();
+        $('#logout-form').submit();
+    }); 
 });

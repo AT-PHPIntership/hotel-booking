@@ -90,6 +90,7 @@ class Room extends Model
 
     /**
      * Get price format with grouped thousands
+     *
      * @return float
      */
     public function getPriceFormatAttribute()

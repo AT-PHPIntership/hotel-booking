@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col-sm-12">
             <ol class="breadcrumb cls-breadcrumb">
-              <li><a href="{{ route('frontend.index') }}">{{ __('Home') }}</a></li>
+              <li><a href="{{ route('home.index') }}">{{ __('Home') }}</a></li>
               <li><a href="#">{{ $hotel->place->name }}</a></li>
               <li class="active">{{ $hotel->name }}</li>        
             </ol>
@@ -84,10 +84,10 @@
       <section class="cls-list-room">
         @if ($hotel->rooms->count() == 0)
           <div class = "list-room">
-            {{ __('Hotel not has room any ! Admin updating !') }}
+            {{ __('Hotel not has room any ! Admin is updating !') }}
           </div>
         @else
-          @foreach ($hotel->rooms as $room)   
+          @foreach ($roomEmpty as $room)  
             <div class = "list-room">
               <div class = "room-image" >
                 <img src="{{asset('frontend/images/roomdemo.jpg')}}">
@@ -101,6 +101,9 @@
                 <h3 class="cls-room-price">{{ __(':price VND', ['price' => $room->price_format]) }} </h3>
               </div>
               <div class="room-item-booking">
+              <p class="cls-room-empty"> 
+                {{ __('Only :number_room_empty room(s)', ['number_room_empty' => ($room->total - $room->quantity_busy_reservation)] ) }} 
+              </p>
                 <a href="/room"  class="btn cls-btn-booking">
                   {{ __('Book Now') }}</a> 
               </div>

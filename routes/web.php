@@ -9,9 +9,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
-Route::get('/', 'HomeController@index')->name('frontend.index');
- 
+
+Route::get('/', 'HomeController@index')->name('home.index');
+Route::get('/registerSuccess', function() {
+    return view('frontend.notice');
+})->name('notice')->middleware('auth');
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
@@ -34,6 +36,7 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
 });
 Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
+    Route::get('hotel/{slug}', 'HotelController@show')->name('hotel.show');
     Route::resource('/hotel', 'HotelController');
 });
 

@@ -94,7 +94,7 @@ if (!function_exists('getRoundFloat')) {
 }
 
 /**
- * Value of factor to convert rating to percent 
+ * Value of factor to convert rating to percent
  */
 const RATING_FACTOR = 10;
 
@@ -107,7 +107,8 @@ if (!function_exists('getProgressPercent')) {
      *
      * @return float
      */
-    function getProgressPercent($avgRating) {
+    function getProgressPercent($avgRating)
+    {
         return $avgRating * RATING_FACTOR;
     }
 }
