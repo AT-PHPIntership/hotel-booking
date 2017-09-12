@@ -80,7 +80,7 @@ class UserController extends Controller
     /**
      * Update user profile.
      *
-     * @param \Illuminate\Http\UpdateRequest $request request to update
+     * @param \Illuminate\Http\UpdateRequest $request request of form update profile
      * @param int                            $id      id of user
      *
      * @return \Illuminate\Http\Response
