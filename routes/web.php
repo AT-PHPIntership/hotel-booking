@@ -36,4 +36,7 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
 });
 
+Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
+    Route::resource('/hotel', 'HotelController');
+});
 Auth::routes();
