@@ -54,9 +54,8 @@ class HomeController extends Controller
             ->limit(Hotel::SHOW_LIMIT)
             ->get();
 
-        $topPlaces = $this->topPlaces();
         $advertiseHotel = $topHotels->random();
-        // dd($topPlaces);
+        $topPlaces = $this->topPlaces();
 
         return view('frontend.home.index', compact('topPlaces', 'topHotels', 'advertiseHotel'));
     }
@@ -86,6 +85,6 @@ class HomeController extends Controller
                     GROUP BY reservations.room_id) AS reservation_of_rooms'), 'rooms.id', '=', 'reservation_of_rooms.room_id')
             ->groupBy('places.id')
             ->orderby('totalQuantity', 'DESC')
-            ->limit(7)->get();
+            ->limit(Place::SHOW_HOME_LIMIT)->get();
     }
 }

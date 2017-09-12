@@ -41,6 +41,12 @@ class Place extends Model
      * Value paginate of row
      */
     const ROW_LIMIT = 10;
+    
+    /**
+     * Value row's show of home page
+     */
+    const SHOW_HOME_LIMIT = 7 ;
+
 
     /**
      * Return the sluggable configuration array for this model.

@@ -111,17 +111,6 @@ class Hotel extends Model
     }
 
     /**
-     * Relationship hasMany with rating comment
-     *
-     * @return array
-    */
-    public function ratingCommentsAVG()
-    {
-        $result = $this->ratingComments()->selectRaw('hotel_id, avg(total_rating) as total')->groupBy('hotel_id');
-        return $result;
-    }
-
-    /**
      * Relationship with hotel's image.
      *
      * @return array
