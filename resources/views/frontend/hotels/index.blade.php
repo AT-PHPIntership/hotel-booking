@@ -14,12 +14,13 @@
             <div id="message"></div><!-- Error message display -->
               <div class="row">
                
-                <div class="coltest add-one-col"> <label for="room">{{ __('Place') }}</label>
-                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default all places') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                    <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control" value="" placeholder="{{ __('Place to go') }}">
-                    <div class="widgetAcResult" hidden>
-                      
-                    </div>
+                <div class="coltest add-one-col">
+                  <label for="hotelSourceArea">{{ __('Place') }}</label>
+                  <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default all places') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                  <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control" value="" placeholder="{{ __('Place to go') }}">
+                  <div class="widgetAcResult" hidden>
+                    
+                  </div>
                 </div>
                 <div class="coltest add-one-col">
                   <div class="form-group">
@@ -42,8 +43,8 @@
                 </div>
                 <div class="coltest big-col">
                   <div class="form-group">
-                    <label for="checkin">{{ __('Arangement') }}</label>
-                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default not arange') }}" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <label for="arange_id">{{ __('Order By') }}</label>
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default is none') }}" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
                     <select name = "arange_id" class="btn btn-default">
                       <option value="0">{{ __('--') }}</option>
                       <option value="1">{{ __('Price cheap to expensive') }}</option>
