@@ -21,39 +21,35 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if (Auth::user()->id == $id) {
-            $user = User::findOrFail($id);
-            $colComment = [
-                'id',
-                'hotel_id',
-                'comment',
-                'total_rating',
-                'created_at'
-            ];
-            $colReservation = [
-                'id',
-                'room_id',
-                'checkin_date',
-                'checkout_date',
-                'status'
-            ];
-            $comments = RatingComment::select($colComment)
-                ->with(['hotel' => function ($query) {
-                    $query->select('id', 'name');
-                }])
-                ->where('user_id', $id)
-                ->orderby('id', 'DESC')
-                ->paginate(USER::ROW_LIMIT);
-            $reservations = Reservation::select($colReservation)->with(['room' => function ($query) {
+        $user = User::findOrFail($id);
+        $colComment = [
+            'id',
+            'hotel_id',
+            'comment',
+            'total_rating',
+            'created_at'
+        ];
+        $colReservation = [
+            'id',
+            'room_id',
+            'checkin_date',
+            'checkout_date',
+            'status'
+        ];
+        $comments = RatingComment::select($colComment)
+            ->with(['hotel' => function ($query) {
                 $query->select('id', 'name');
-            }])->where([
-                ['target', 'user'],
-                ['target_id', $id],
-            ])
-            ->orderby('id', 'DESC')->paginate(User::ROW_LIMIT);
-            return view('frontend.users.showProfile', compact('user', 'comments', 'reservations'));
-        } else {
-            return redirect()->back();
-        }
+            }])
+            ->where('user_id', $id)
+            ->orderby('id', 'DESC')
+            ->paginate(USER::ROW_LIMIT);
+        $reservations = Reservation::select($colReservation)->with(['room' => function ($query) {
+            $query->select('id', 'name');
+        }])->where([
+            ['target', 'user'],
+            ['target_id', $id],
+        ])
+        ->orderby('id', 'DESC')->paginate(User::ROW_LIMIT);
+        return view('frontend.users.show', compact('user', 'comments', 'reservations'));
     }
 }
