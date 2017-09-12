@@ -60,7 +60,7 @@
           @if(Auth::check())
             <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{Auth::user()->username}}<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="{{ route('userprofile.show', Auth::user()->id) }}" id="user-profile">{{__('Profile')}}</a></li>
+                <li><a href="{{ route('profile.show', Auth::user()->id) }}" id="user-profile">{{__('Profile')}}</a></li>
                 <li>
                   <a href="{{ route('logout') }}" id ="logout">{{__('Log out')}}</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden="">

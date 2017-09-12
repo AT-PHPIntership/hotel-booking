@@ -27,7 +27,7 @@ class UserProfileTest extends DuskTestCase
                     ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
                     ->clickLink('Profile')
                     ->assertSee('User Profile')
-                    ->assertPathIs('/user/'.$user->id);
+                    ->assertPathIs('/profile/'.$user->id);
         });
     }
 
@@ -47,7 +47,7 @@ class UserProfileTest extends DuskTestCase
                     ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
                     ->clickLink('Profile')
                     ->assertSee('User Profile')
-                    ->assertPathIs('/user/'.$user->id)
+                    ->assertPathIs('/profile/'.$user->id)
                     ->assertMissing('#table-comment')
                     ->assertMissing('#table-reservation');
             $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
@@ -78,7 +78,7 @@ class UserProfileTest extends DuskTestCase
                     ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation')
                     ->assertSee('List Reservations')
-                    ->assertPathIs('/user/'.$user->id);
+                    ->assertPathIs('/profile/'.$user->id);
         });
     }
 
@@ -100,7 +100,7 @@ class UserProfileTest extends DuskTestCase
                     ->click('.table-user-information tbody tr:nth-child(6) td:nth-child(2) a')
                     ->assertVisible('#table-comment')
                     ->assertSee('List comment & rating')
-                    ->assertPathIs('/user/'.$user->id);
+                    ->assertPathIs('/profile/'.$user->id);
         });
     }
 
@@ -120,7 +120,7 @@ class UserProfileTest extends DuskTestCase
                     ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
                     ->clickLink('Profile')
                     ->assertSee('User Profile')
-                    ->assertPathIs('/user/'.$user->id)
+                    ->assertPathIs('/profile/'.$user->id)
                     ->clickLink('Back')
                     ->assertSee('Outstanding Places')
                     ->assertPathIs('/');
@@ -143,8 +143,8 @@ class UserProfileTest extends DuskTestCase
                     ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
                     ->clickLink('Profile')
                     ->assertSee('User Profile')
-                    ->assertPathIs('/user/'.$user->id);
-            $browser->visit('/user/1')
+                    ->assertPathIs('/profile/'.$user->id);
+            $browser->visit('/profile/1')
                     ->assertSee('403 - Forbidden')
                     ->assertSee("Sorry...You don't have access to this request");
         });
