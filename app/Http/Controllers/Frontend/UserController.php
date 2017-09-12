@@ -10,7 +10,6 @@ use App\Model\Reservation;
 
 class UserController extends Controller
 {
-
     /**
      * Display page show profile user.
      *

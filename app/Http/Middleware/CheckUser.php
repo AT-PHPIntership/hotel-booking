@@ -18,10 +18,10 @@ class CheckUser
      */
     public function handle($request, Closure $next)
     {
-        $id = $request->route('id');
+        $id = $request->route('userprofile');
         if (!is_null($id) && ($id != auth()->user()->id)) {
             $response = [
-                'message' => 'Forbidden'
+                'message' => __('auth.403-errors')
             ];
             return response()->view('frontend.errors.403', $response);
         }
