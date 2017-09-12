@@ -121,6 +121,11 @@ $(document).ready(function(){
                 type: 'GET',
                 data: {key :key},
                 success: function( msg ) {
+                    if (msg == '') {
+                        $('#submit').attr("disabled", true);
+                    } else {
+                        $('#submit').removeAttr("disabled");
+                    }
                     $('.widgetAcResult').html(msg);
                 }
             });
@@ -130,6 +135,7 @@ $(document).ready(function(){
      * Hide hinted place when blur place_slug field
      */
     $('#hotelSourceArea').blur(function(event) {
+        $(this).val($('.widgetAcResult div li.place-selected')[0].innerHTML);
         $('.widgetAcResult').fadeOut();
     });
 

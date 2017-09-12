@@ -26,10 +26,12 @@ class SearchHotelRequest extends FormRequest
         if ($this->exists('checkin')) {
             return [
                 'checkin' => 'required',
+                'hotelSourceArea' => 'required',
             ];
         }
         return [
                 'checkin' => 'nullable',
+                'hotelSourceArea' => 'nullable',
         ];
     }
 }

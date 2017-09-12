@@ -14,6 +14,7 @@ use App\Model\Reservation;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
 use App\Http\Requests\Frontend\SearchHotelRequest;
+use DB;
 
 class HotelController extends Controller
 {
@@ -34,80 +35,107 @@ class HotelController extends Controller
             'place_id',
             'hotels.created_at'
         ];
-        $hotels = Hotel::select($columns)
+        $query = Hotel::select($columns)
             ->with(['hotelServices' => function ($query) {
                 $query->join('services', 'hotel_services.service_id', '=', 'services.id');
             }]);
+        $query = $this->placeCondition($request, $query);
+        $query = $this->orderCondition($request, $query);
+        $query = $this->checkinCondition($request, $query, $columns);
+        $hotels = $query->orderby('hotels.id', 'DESC')
+            ->paginate(Hotel::ITEM_LIMIT);
+        // Top 7 place booked most within the last month
+        $hintedPlaces = Place::topPlaces();
+        return view('frontend.hotels.index', compact('hotels', 'hintedPlaces'));
+    }
 
+    /**
+     * Get query after check place of hotels
+     *
+     * @param SearchHotelRequest $request request to display
+     * @param queryBuilder       $query   query to change
+     *
+     * @return queryBuilder
+     */
+    private function placeCondition($request, $query)
+    {
         if ($request->has('hotelSourceArea')) {
-            /**
-             * Hotel belong to searched place
-             */
-            $hotels = $hotels->whereIn("hotels.place_id", function ($query) use ($request) {
-                $query->select('id')
-                    ->from('places')
-                    ->Where("name", "LIKE", "%$request->hotelSourceArea%");
-            });
+            // Hotel belong to searched place
+            $place = Place::where("name", "$request->hotelSourceArea")->first();
+            return $query->where("hotels.place_id", $place->id);
         }
+        return $query;
+    }
 
-        if ($request->has('arange_id') && $request->arange_id != 0) {
-            /**
-             * Arange hotel
-             */
-            if ($request->arange_id <= 2) {
-                /**
-                 * Arange hotel by price rooms in hotel
-                 */
-                if ($request->arange_id % 2 == 0) {
-                    /**
-                     * Arange hotel by most expensive room in hotels order by decrease
-                     */
-                    $hotels = $hotels->join(\DB::raw("(SELECT hotel_id, max(price) AS max_price_room FROM rooms group by hotel_id) AS most_expensive_rooms"), 'most_expensive_rooms.hotel_id', '=', 'hotels.id')
-                    ->orderby('max_price_room', 'DESC');
-                } else {
-                    /**
-                     * Arange hotel by most cheap room in hotels order by increase
-                     */
-                    $hotels = $hotels->join(\DB::raw("(SELECT hotel_id, min(price) AS min_price_room FROM rooms group by hotel_id) AS most_cheap_rooms"), 'most_cheap_rooms.hotel_id', '=', 'hotels.id')
-                    ->orderby('min_price_room', 'ASC');
-                }
-            } elseif ($request->arange_id <= 4) {
-                /**
-                 * Arange hotel by star of hotel
-                 */
-                $hotels = $hotels->orderby('star', ($request->arange_id % 2) == 0 ? 'DESC' : 'ASC');
-            } else {
-                /**
-                 * Arange hotel by average rating of hotel order by decrease
-                 */
-                $hotels = $hotels->join(\DB::raw("(SELECT hotel_id, avg(total_rating) AS avg_rating FROM rating_comments group by hotel_id) AS summary_ratings"), 'summary_ratings.hotel_id', '=', 'hotels.id')
-                    ->orderby('avg_rating', 'DESC');
+    /**
+     * Get query after check arrange of hotels
+     *
+     * @param SearchHotelRequest $request request to display
+     * @param queryBuilder       $query   query to change
+     *
+     * @return queryBuilder
+     */
+    private function orderCondition($request, $query)
+    {
+        if ($request->has('arrange_id')) {
+            // Arrange hotel
+            switch ($request->arrange_id) {
+                case Hotel::PRICE_ASC:
+                    // Arrange hotel by most cheap room in hotels order by increase
+                    return $query->join(DB::raw("(SELECT hotel_id, min(price) AS min_price_room FROM rooms group by hotel_id) AS most_cheap_rooms"), 'most_cheap_rooms.hotel_id', '=', 'hotels.id')
+                                ->orderby('min_price_room', 'ASC');
+                case Hotel::PRICE_DESC:
+                   // Arrange hotel by most expensive room in hotels order by decrease
+                    return $query->join(DB::raw("(SELECT hotel_id, max(price) AS max_price_room FROM rooms group by hotel_id) AS most_expensive_rooms"), 'most_expensive_rooms.hotel_id', '=', 'hotels.id')
+                                ->orderby('max_price_room', 'DESC');
+                case Hotel::STAR_ASC:
+                    // Arrange hotel by star of hotel order by increase
+                    return $query->orderby('star', 'ASC');
+                case Hotel::STAR_DESC:
+                    // Arrange hotel by star of hotel order by increase
+                    return $query->orderby('star', 'DESC');
+                case Hotel::RATING_DESC:
+                    // Arrange hotel by average rating of hotel order by decrease
+                    return $query->join(DB::raw("(SELECT hotel_id, avg(total_rating) AS avg_rating FROM rating_comments group by hotel_id) AS summary_ratings"), 'summary_ratings.hotel_id', '=', 'hotels.id')
+                                ->orderby('avg_rating', 'DESC');
             }
         }
+        return $query;
+    }
+
+    /**
+     * Get query after check checkin rooms of hotels
+     *
+     * @param SearchHotelRequest $request request to display
+     * @param queryBuilder       $query   query to change
+     * @param array              $columns array of columns
+     *
+     * @return queryBuilder
+     */
+    private function checkinCondition($request, $query, $columns)
+    {
         if ($request->has('checkin')) {
-            $checkout = Carbon::createFromFormat('d/m/Y H:i:s', $request->checkin." 00:00:00");
+            $checkin = Carbon::createFromFormat(config('showitem.format_datetime'), $request->checkin . " " . config('showitem.checkin_time'))
+                        ->toDateTimeString();
 
-            $checkin = $checkout->toDateTimeString();
-
-            $checkout->addDay($request->duration)->toDateTimeString();
-
-            /**
-             * Hotel have blank room from checkin day to checkout day
-             */
-            $hotels= $hotels->join('rooms', 'rooms.hotel_id', '=', 'hotels.id')
-                ->leftJoin(\DB::raw("(SELECT busy_reservations.room_id as room_id, SUM(busy_reservations.quantity) as quantity_busy_reservation FROM (SELECT * FROM reservations WHERE (checkin_date < '$checkin' AND checkout_date > '$checkin') OR (checkin_date < '$checkout' AND checkout_date > '$checkout')) AS busy_reservations GROUP BY busy_reservations.room_id)  AS busy_rooms"), 'busy_rooms.room_id', '=', 'rooms.id')
-                ->where(\DB::raw('COALESCE(quantity_busy_reservation,0)'), '<', \DB::raw('CONVERT(total, CHAR(5))'))
-                ->select(array_merge($columns, [\DB::raw("COUNT(rooms.id) AS quantity_kind_blank_room")]))
-                ->groupBy('hotels.id');
+            $checkout = Carbon::createFromFormat(config('showitem.format_datetime'), $request->checkin . " " . config('showitem.checkout_time'))
+                        ->addDay($request->duration)
+                        ->toDateTimeString();
+            // Hotel have blank room from checkin day to checkout day
+            return $query->join('rooms', 'rooms.hotel_id', '=', 'hotels.id')
+                        ->leftJoin(DB::raw("(SELECT room_id, SUM(quantity) as quantity_busy_reservation FROM reservations WHERE (status = ? OR status = ?) AND ((checkin_date < ? AND checkout_date > ?) OR (checkin_date < ? AND checkout_date > ?)) GROUP BY room_id)  AS busy_rooms"), 'busy_rooms.room_id', '=', 'rooms.id')
+                        ->addBinding([
+                            Reservation::STATUS_ACCEPTED,
+                            Reservation::STATUS_PENDING,
+                            $checkin,
+                            $checkin,
+                            $checkout,
+                            $checkout
+                        ], 'join')
+                        ->where(DB::raw('COALESCE(quantity_busy_reservation, 0)'), '<', DB::raw('CONVERT(total, CHAR(5))'))
+                        ->select(array_merge($columns, [DB::raw("COUNT(rooms.id) AS quantity_kind_blank_room")]))
+                        ->groupBy('hotels.id');
         }
-
-        /**
-         * Top 7 place booked most within the last month
-         */
-        $hintedPlaces = Place::topPlaces();
-
-        $hotels = $hotels->orderby('hotels.id', 'DESC')
-            ->paginate(Hotel::ITEM_LIMIT);
-        return view('frontend.hotels.index', compact('hotels', 'hintedPlaces'));
+        return $query;
     }
 }

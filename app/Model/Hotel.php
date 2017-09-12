@@ -21,6 +21,17 @@ class Hotel extends Model
     const STAR_MIN = 1;
 
     /**
+     * Define kind arrange_id
+     *
+     * @type int
+     */
+    const PRICE_ASC = 1;
+    const PRICE_DESC = 2;
+    const STAR_ASC = 3;
+    const STAR_DESC = 4;
+    const RATING_DESC = 5;
+
+    /**
      * Declare table
      *
      * @var string $tabel table name

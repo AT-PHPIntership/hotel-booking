@@ -9,16 +9,16 @@
     <section id="reservation-form" class="mt-0">
       <div>
         <div class="row">
-          <div class="col-md-12">           
+          <div class="col-md-12"> 
             <form class="reservation-horizontal clearfix container-search" name="reservationform" method="GET" action="{{ route('frontend.hotel.index') }}" id="form-search" >
             <div id="message"></div><!-- Error message display -->
-              <div class="row">
-               
+              <div class="row">        
                 <div class="coltest add-one-col">
                   <div class="form-group">
                     <label for="room">{{ __('Place') }}</label>
                     <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default all places') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                    <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control" value="{{ app('request')->input('hotelSourceArea') }}" placeholder="{{ __('Place to go') }}" data-url="{{ route('frontend.place.hintPlaces') }}">
+                    <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control{{ $errors->has('hotelSourceArea') ? ' has-error' : '' }}" value="{{ old('hotelSourceArea', request('hotelSourceArea')) }}" placeholder="{{ __('Place to go') }}" data-url="{{ route('frontend.place.hintPlaces') }}">
+                    <small class="text-danger">{{ $errors->first('hotelSourceArea') }}</small>
                     <div class="widgetAcResult" hidden>
                       @include('frontend.layouts.partials.widgetAcResult')
                     </div>
@@ -28,7 +28,7 @@
                   <div class="form-group">
                     <label for="checkin">{{ __('Check-in') }}</label>
                     <div class="popover-icon" data-toggle="tooltip" title="{{ __('Check-In is from 14:00') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                    <input name="checkin" type="text" id="checkin" class="form-control{{ $errors->has('checkin') ? ' has-error' : '' }}" placeholder="{{ __('Check-in') }}" value="{{ app('request')->input('checkin') }}" />
+                    <input name="checkin" type="text" id="checkin" class="form-control{{ $errors->has('checkin') ? ' has-error' : '' }}" placeholder="{{ __('Check-in') }}" value="{{ old('checkin', request('checkin')) }}" />
                      <small class="text-danger">{{ $errors->first('checkin') }}</small>
                   </div>
                 </div>
@@ -39,51 +39,48 @@
                     
                     <select name = "duration" class="btn btn-default">
                       @for($i = 1; $i <= App\Model\Reservation::MAX_DURATIONS; $i++)
-                        @if ($i == app('request')->input('duration'))
-                          <option value="{{ $i }}" selected>{{ __(':duration nights', ['duration' => $i]) }}</option>
-                        @else
-                          <option value="{{ $i }}">{{ __(':duration nights', ['duration' => $i]) }}</option>
-                        @endif
+                        <?php $selected = ($i == request('duration')) ? 'selected' : ''; ?>
+                        <option value="{{ $i }}" {{ $selected }}>{{ $i == 1 ? __('1 night') : __(':duration nights', ['duration' => $i]) }}</option>
                       @endfor
                     </select>
                   </div>
                 </div>
                 <div class="coltest big-col">
                   <div class="form-group">
-                    <label for="arange_id">{{ __('Order By') }}</label>
+                    <label for="arrange_id">{{ __('Order By') }}</label>
                     <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default is none') }}" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                    <select name = "arange_id" class="btn btn-default">
-                      <option value="0">{{ __('--') }}</option>
-                      @if (app('request')->input('arange_id')== 1)
-                        <option value="1" selected>{{ __('Price cheap to expensive') }}</option>
+                    <select name = "arrange_id" class="btn btn-default">
+                      <option value="">{{ __('--') }}</option>
+                      @if (request('arrange_id') == App\Model\Hotel::PRICE_ASC)
+                        <option value="{{ App\Model\Hotel::PRICE_ASC }}" selected>{{ __('Price cheap to expensive') }}</option>
                       @else
-                        <option value="1">{{ __('Price cheap to expensive') }}</option>
+                        <option value="{{ App\Model\Hotel::PRICE_ASC }}">{{ __('Price cheap to expensive') }}</option>
                       @endif
-                      @if (app('request')->input('arange_id')== 2)
-                        <option value="2" selected>{{ __('Price expensive to cheap') }}</option>
+                      @if (request('arrange_id') == App\Model\Hotel::PRICE_DESC)
+                        <option value="{{ App\Model\Hotel::PRICE_DESC }}" selected>{{ __('Price expensive to cheap') }}</option>
                       @else
-                        <option value="2">{{ __('Price expensive to cheap') }}</option>
+                        <option value="{{ App\Model\Hotel::PRICE_DESC }}">{{ __('Price expensive to cheap') }}</option>
                       @endif
-                      @if (app('request')->input('arange_id')== 3)
-                        <option value="3" selected>{{ __('Star low to high') }}</option>
+                      @if (request('arrange_id') == App\Model\Hotel::STAR_ASC)
+                        <option value="{{ App\Model\Hotel::STAR_ASC }}" selected>{{ __('Star low to high') }}</option>
                       @else
-                        <option value="3">{{ __('Star low to high') }}</option>
+                        <option value="{{ App\Model\Hotel::STAR_ASC }}">{{ __('Star low to high') }}</option>
                       @endif
-                      @if (app('request')->input('arange_id')== 4)
-                        <option value="4" selected>{{ __('Star high to low') }}</option>
+                      @if (request('arrange_id') == App\Model\Hotel::STAR_DESC)
+                        <option value="{{ App\Model\Hotel::STAR_DESC }}" selected>{{ __('Star high to low') }}</option>
                       @else
-                        <option value="4">{{ __('Star high to low') }}</option>
+                        <option value="{{ App\Model\Hotel::STAR_DESC }}">{{ __('Star high to low') }}</option>
                       @endif
-                      @if (app('request')->input('arange_id')== 5)
-                        <option value="5" selected>{{ __('Rating high to low') }}</option>
+                      @if (request('arrange_id') == App\Model\Hotel::RATING_DESC)
+                        <option value="{{ App\Model\Hotel::RATING_DESC }}" selected>{{ __('Rating high to low') }}</option>
                       @else
-                        <option value="5">{{ __('Rating high to low') }}</option>
+                        <option value="{{ App\Model\Hotel::RATING_DESC }}">{{ __('Rating high to low') }}</option>
                       @endif
                   </select>
                   </div>
                 </div>
                 <div class="btnSubmit">
-                  <button type="submit" class="btn btn-primary btn-block">{{ __('Search') }}</button>
+                  <button type="submit" class="btn btn-primary btn-block" id="submit">{{ __('Search') }}</button>
                 </div>
               </div>
             </form>
@@ -100,7 +97,7 @@
           <!-- 3 place top -->
           @foreach($hotels as $hotel)
             <div class="col-sm-4">
-              <div class="room-thumb"> <img src="{{ isset($hotel->images[0])? asset($hotel->images[0]->path): asset(config('image.no_image')) }}" alt="hotel" class="img-presentive" />
+              <div class="room-thumb"> <img src="{{ isset($hotel->images[0]) ? asset($hotel->images[0]->path) : asset(config('image.no_image')) }}" alt="hotel" class="img-presentive" />
                 <div class="mask">
                   <div class="main">
                     <h5>{{ $hotel->name }}</h5>
@@ -143,7 +140,7 @@
                         @endif
                       @endforeach
                     </div>
-                    <a href="/detailHotel" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
+                    <a href="/detailHotel" class="btn btn-primary btn-block">{{ __('See Room') }}</a>
                   </div>
                 </div>
               </div>
