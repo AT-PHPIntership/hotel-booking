@@ -1,76 +1,77 @@
 @extends('frontend.layouts.master')
 @section('title', 'Edit History Booking Room')
-@section('customcss')
-  <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/editHistoryBooking.css') }}">
-@endsection
 @section('content')
-  <section class ='historyBooking'>
+  <section class="user-profile">
+    <div class="user-head text-center">
+      <h1>{{__('Update Profile')}}</h1>
+    </div>
+    <div class="text-center">
+      @include('flash::message')
+    </div>
     <div class="container">
       <div class="row">
-        <div class="panel panel-info">
+        <div class="col-xs-12 col-sm-12 col-md-10 toppad cls-tb-user" >
+          <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">History Booking Room</h3>
+              <h3 class="panel-title text-center">{{__('Update History Booking')}}</h3>
             </div>
-            <div class="panel-body">
-              <form class="reservation-vertical clearfix" role="form" method="post" action="" name="reservationform">
-
-                <div id="mesage">
-                  
-                </div>
-                <!-- Error mesage display -->
-                <div class="form-group1">
-                  <label for="name" accesskey="E">Tên người liên hệ</label>
-                  <input name="name" type="text" id="name"  class="form-control" placeholder="Please enter your name"/>
-                </div>
-
-                <div class="form-group1">
-                  <label for="phone" accesskey="E">Số điện thoại</label>
-                  <input name="phone" type="text" id="phone" class="form-control" placeholder="Please enter your phone"/>
-               </div>
-
-                <div class="form-group1">
-                  <label for="email" accesskey="E">Email</label>
-                  <input name="email" type="text" id="email" class="form-control" placeholder="Please enter your email"/>
-                </div>
-
-                <div class="form-group1">
-                  <label for="checkout">Check-In</label>
-                  <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-out is from 12:00">  </div>
-                  <i class="fa fa-calendar infield"></i>
-                  <input name="checkout" type="text" id="checkin" value="" class="form-control" placeholder="Check-In"/>
-                </div>
-
-                <div class="form-group1">
-                  <label for="checkout">Check-out</label>
-                  <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-out is from 12:00">
+            <form  action="" method="POST" class="form-horizontal">
+              <div class="panel-body">
+                {{ csrf_field() }}
+                {{ method_field('PUT') }}
+                <div class="form-group">
+                  <label class="control-label col-md-3 pull-left">{{__('Full name')}}</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control cls-login" value="{{$reservation->reservable->full_name}}" readonly="true">
                   </div>
-                  <input name="checkout" type="text" id="checkout" value="" class="form-control" placeholder="Check-out"/>
                 </div>
-
-                <div class="form-group1">
-                  <label for="email" accesskey="E">Yêu cầu đặc biệt (Nếu có)</label>
-                  <textarea class="form-control" name="textarea" id="textarea"></textarea>
+                <div class="form-group">
+                  <label class="control-label col-md-3 pull-left">{{__('Phone')}}</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control cls-login" value="{{$reservation->reservable->phone}}" readonly="true">
+                  </div>
                 </div>
-
-                <div class="btn-submit-booking">
-                  <button type="submit" class="btn btn-primary" data-original-title="Submit" data-toggle="tooltip">
-                    <span class="fa fa-check-circle-o"></span>
-                  </button>
-                  <a href="/show" class="btn btn-danger" data-original-title="Cancer" data-toggle="tooltip">
-                    <span class="fa fa-times"></span>
-                  </a>
+                <div class="form-group">
+                  <label class="control-label col-md-3 pull-left">{{__('Email')}}</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control cls-login" value="{{$reservation->reservable->email}}" readonly="true">
+                  </div>
                 </div>
-
-
-            
+                <div class="form-group {{ $errors->has('checkin_date') ? ' has-error' : '' }}">
+                  <label class="control-label col-md-3 pull-left">{{__('Check in')}}</label>
+                  <div class="col-md-8">
+                    <input type="date" name="checkin_date" class="form-control cls-login" value="{{ \Carbon\Carbon::parse($reservation->checkin_date)->format('m-d-Y')}}">
+                    @if($errors->first('checkin_date'))
+                      <span class="help-block">{{$errors->first('checkin_date')}}</span>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group {{ $errors->has('checkout_date') ? ' has-error' : '' }}">
+                  <label class="control-label col-md-3 pull-left">{{__('Check out')}}</label>
+                  <div class="col-md-8">
+                    <input type="date" name="checkout_date" class="form-control cls-login" value="{{$reservation->checkout_date}}">
+                    @if($errors->first('checkout_date'))
+                      <span class="help-block">{{$errors->first('checkout_date')}}</span>
+                    @endif
+                  </div>
+                </div>
+              </div>
+              <div class ="panel-footer clearfix cls-register">
+                <button type ="submit" class="btn btn-success pull-right">
+                  {{__('Submit')}}
+                </button>
+                <a href="{{ URL::previous() }}" class="btn btn-default pull-left">
+                  {{__('Back')}}
+                </a>
+                <button class="btn btn-warning pull-left" type="reset">
+                  {{__('Reset')}}
+                </button>
+              </div>
             </form>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 @endsection
-@section('customjs')
-<script type="text/javascript" src ="{{asset('frontend/js/userProfile.js')}}"></script>
-@endsection
+

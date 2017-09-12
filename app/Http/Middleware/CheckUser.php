@@ -18,7 +18,7 @@ class CheckUser
      */
     public function handle($request, Closure $next)
     {
-        $id = $request->route('userprofile');
+        $id = $request->route('profile');
         if (!is_null($id) && ($id != auth()->user()->id)) {
             $response = [
                 'message' => __('auth.403-errors')
