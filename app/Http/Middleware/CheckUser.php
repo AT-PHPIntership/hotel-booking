@@ -25,19 +25,7 @@ class CheckUser
             ];
             return response()->view('frontend.errors.403', $response);
         }
-        return $next($request);
-    }
 
-    /**
-     * Handle an incoming request.
-     *
-     * @param \Illuminate\Http\Request $request of user
-     * @param \Closure                 $next    request
-     *
-     * @return mixed
-     */
-    public function checkReservationUser($request, Closure $next)
-    {
         $reservationId = $request->route('reservation');
         if (!is_null($reservationId)) {
             $reservationIds = auth()->user()->reservations()->pluck('id')->toarray();
@@ -48,6 +36,7 @@ class CheckUser
                 return response()->view('frontend.errors.403', $response);
             }
         }
+        
         return $next($request);
     }
 }
