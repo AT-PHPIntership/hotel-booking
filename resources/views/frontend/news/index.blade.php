@@ -1,0 +1,106 @@
+@extends('frontend.layouts.master')
+@section('customcss')
+<link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
+<link rel="stylesheet" type="text/css" href="{{asset('frontend/css/searchHotel.css')}}">
+@endsection
+@section('title', __('LIST NEWS'))
+@section('content')
+  <main class="main">
+ <!-- Main content -->
+  <section class="content mt-20">
+    <div class="row">
+      @if (isset($news))
+        <div class="col-md-6">
+          <a href="#">
+            <div class="image-news-show">
+              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- slides images room-->
+                <div class="carousel-inner">
+                {{-- show default image when has no image --}}
+                  @if (!isset($news[0]->images[0]))
+                      <div class="item active">
+                        <img src="{{ asset(config('image.default_thumbnail')) }}">
+                        <div class="carousel-caption">
+                          <h3>{{ __("Room's images") }}</h3>
+                        </div>
+                      </div>
+                  @else
+                    {{-- show image --}}
+                    @foreach ($news[0]->images as $image)
+                      <div class="item {{ ($image == $room->images[0]) ? 'active' : ''}}">
+                        <img src="{{ asset($image->path) }}" class="img-slide">
+                      </div>
+                    @endforeach
+                  @endif
+                </div>
+                <!-- slider controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+              </div>
+            </div>
+          </a>
+          <div class="summary-content-news-show">
+            <h2 class="text-center text-success"><a href="#">{{ contentLimit($news[0]->title) }}</a></h2>
+            <p>{{ contentLimit($news[0]->content, 195) }}</p>
+          </div>
+        </div>
+      @endif
+      {{-- content right --}}
+      <div class="col-md-6 border-left border-top">
+        <h2 class="text-danger text-center mt-0">{{ __('TOP NEWS') }}</h2>
+        @foreach ($news as $key => $item)
+          @if ($key != 0)
+            <div class="mt-20">
+              <div class="col-md-5">
+                <a href="#"><img src="{{ isset($item->images[0]) ? asset($item->images[0]) : asset(config('image.no_image')) }}" class="img-news"></a>
+              </div>
+              <div col-md-8>
+                <div class="img-news">
+                  <h4><a href="#"> {{ contentLimit($item->title) }}</a></h4>
+                  <p>{{ contentLimit($item->content) }}</p>
+                </div>
+              </div>
+            </div>
+          @endif
+        @endforeach
+      </div>
+    </div>
+     <!-- /.row -->
+    <h2 class="lined-heading"></h2>
+  </section>
+
+  @foreach ($categories as $category)
+    <section class="rooms mt50 border-left">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 class="lined-heading"><a href="#"><span class="pull-left tranY-50">{{ $category->name }}</span></a></h2>
+          </div> 
+        </div>
+        @foreach ($category->news as $key => $itemNews)
+          <div class="col-md-3">
+            <a href="#">
+              <div class="second-place news">
+                <img src="{{ isset($itemNews->images[0]) ? asset($itemNews->images[0]) : asset(config('image.no_image')) }}" alt="topPlace" class="img-news news"/>  
+                <div class="second-place-bottom news"> 
+                  <h5>{{ contentLimit($itemNews->title) }}</h5>
+                </div>
+              </div>
+            </a>
+          </div>
+        @endforeach
+        @if($category->news->count() == App\Model\News::ITEM_LIMIT)
+          <a href="">
+            <button class="btn btn-primary pull-right mr-10 mt-10">{{ __('Read more') }}</button>
+          </a>
+        @endif
+        </div>
+    </section>
+  @endforeach
+  <div class="text-center">{{ $categories->render() }}</div>
+  </main>
+@endsection

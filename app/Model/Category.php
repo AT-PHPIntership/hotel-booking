@@ -43,6 +43,11 @@ class Category extends Model
      * Value paginate of row
      */
     const ROW_LIMIT = 10;
+
+    /**
+     * Define a value show item
+     */
+    const ITEM_LIMIT = 3;
     
     /**
      * Return the sluggable configuration array for this model.

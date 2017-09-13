@@ -38,5 +38,6 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin
 
 Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
     Route::resource('/hotel', 'HotelController');
+    Route::resource('/news', 'NewsController');
 });
 Auth::routes();

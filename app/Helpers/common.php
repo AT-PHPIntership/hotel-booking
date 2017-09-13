@@ -61,19 +61,20 @@ if (!function_exists('contentLimit')) {
     /**
      * Limit length of content
      *
-     * @param string $content string content
+     * @param string $content     string content
+     * @param int    $limitLenght length content
      *
      * @return string
      */
-    function contentLimit($content = '')
+    function contentLimit($content = '', $limitLenght = LIMIT_LENGTH)
     {
         $contentLength = strlen($content);
         $shortencontent = mb_substr(
             $content,
             START_POSITION,
-            LIMIT_LENGTH,
+            $limitLenght,
             UNICODE_FORMAT
         ) . SUFFIX;
-        return ($contentLength > LIMIT_LENGTH) ? $shortencontent : $content;
+        return ($contentLength > $limitLenght) ? $shortencontent : $content;
     }
 }

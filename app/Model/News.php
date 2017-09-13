@@ -50,6 +50,11 @@ class News extends Model
     const ROW_LIMIT = 10;
 
     /**
+     * Define a value show item
+     */
+    const ITEM_LIMIT = 4;
+
+    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
