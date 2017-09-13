@@ -20,10 +20,10 @@
               <div class="row">
                 @if(isset($user->images[0]))
                   <div class="col-md-3 col-lg-3 " align="center">
-                    <img alt="User Picture" src="{{ asset('/images/users/'.$user->images[0]->path) }}" class="img-circle img-responsive">
+                    <img alt="User Picture" src="{{ asset($user->images[0]->path) }}" class="img-circle img-responsive">
                   </div>
                 @else
-                  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Picture" src="{{asset('images/default/profile.png')}}" class="img-circle img-responsive">
+                  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Picture" src="{{asset(config('image.no_user_image'))}}" class="img-circle img-responsive">
                   </div>
                 @endif
                 <div class=" col-md-9 col-lg-9 "> 

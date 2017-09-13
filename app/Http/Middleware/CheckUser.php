@@ -18,7 +18,6 @@ class CheckUser
      */
     public function handle($request, Closure $next)
     {
-
         $id = $request->route('profile');
         if (!is_null($id) && ($id != auth()->user()->id)) {
             $response = [

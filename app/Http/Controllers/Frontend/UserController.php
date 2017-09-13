@@ -83,24 +83,18 @@ class UserController extends Controller
         }
         $user = User::findOrFail($id);
         $input = $request->all();
-        if ($request->hasFile('image')) {
-            foreach ($user->images as $value) {
-                $value->delete();
+        try {
+            if ($request->hasFile('image')) {
+                foreach ($user->images as $value) {
+                    $value->delete();
+                }
+                Image::storeImages(array($request->image), 'user', $user->id, config('image.users.path_upload'));
             }
-            $imageName = config('image.name_prefix') . "-" . $request->image->hashName();
-            $request->file('image')
-                ->move(config('image.users.path_upload'), $imageName);
-            Image::create([
-                'target' => 'user',
-                'target_id' => $user->id,
-                'path' => $imageName
-                ]);
-        }
-        if ($user->update($input)) {
+            $user->update($input);
             DB::commit();
             flash(__('Update Profile Success!'))->success();
-            return redirect()->route('user.profile', $id);
-        } else {
+            return redirect()->route('profile.show', $id);
+        } catch (Exception $e) {
             DB::rollback();
             flash(__('Update Profile Failure!'))->error();
             return redirect()->back()->withInput();
