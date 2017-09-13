@@ -30,13 +30,11 @@ class TestListHistoryBooking extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/')
-                    ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
-                    ->clickLink('Profile')
+                    ->visit('/profile/2')
                     ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation')
                     ->assertSee('List Reservations')
-                    ->assertPathIs('/user/'.$user->id);
+                    ->assertPathIs('/profile/'.$user->id);
             $elements = $browser->elements('#table-reservation tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 10 && $browser->text('.table-user-information tbody tr:nth-child(5) td:nth-child(2)') == $user->reservations->count());
@@ -57,13 +55,11 @@ class TestListHistoryBooking extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/')
-                    ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
-                    ->clickLink('Profile')
+                    ->visit('/profile/2')
                     ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation')
                     ->assertSee('List Reservations')
-                    ->assertPathIs('/user/'.$user->id);
+                    ->assertPathIs('/profile/'.$user->id);
             $elements = $browser->elements('#table-reservation tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 0 && $browser->text('.table-user-information tbody tr:nth-child(5) td:nth-child(2)') == $user->reservations->count());
@@ -83,13 +79,11 @@ class TestListHistoryBooking extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/')
-                    ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
-                    ->clickLink('Profile')
+                    ->visit('/profile/2')
                     ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation')
                     ->assertSee('List Reservations')
-                    ->assertPathIs('/user/'.$user->id);
+                    ->assertPathIs('/profile/'.$user->id);
             $this->assertTrue($browser->text('.table-user-information tbody tr:nth-child(5) td:nth-child(2)') == $user->reservations->count());
             $elements = $browser->elements('#table-reservation tbody tr');
             $numAccounts = count($elements);
@@ -99,7 +93,7 @@ class TestListHistoryBooking extends DuskTestCase
                                 ->elements('#table-reservation tbody tr');
             $numAccounts = count($elements);
             $this->assertTrue($numAccounts == 5);
-            $browser->assertPathIs('/user/'.$user->id)
+            $browser->assertPathIs('/profile/'.$user->id)
                     ->assertQueryStringHas('page', '2');    
         });
     }
