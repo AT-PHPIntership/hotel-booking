@@ -41,4 +41,14 @@ class RatingComment extends Model
     {
         return Carbon::parse($this->attributes['created_at'])->toDayDateTimeString();
     }
+
+    /**
+     * Get round of total rating
+     *
+     * @return float
+     */
+    public function getRoundTotalRatingAttribute()
+    {
+        return sprintf("%.1f", $this->total_rating);
+    }
 }

@@ -335,7 +335,6 @@
     margin-top: 100px;
     width: 911px;
 }
- 
 .cls-list-room-info {
     max-height: 250px;
     overflow: auto;
@@ -382,4 +381,14 @@
 }
 .cls-register a {
     margin-right: 2%;
+}
+.cls-tb-user {
+    margin-left: 9%;
+}
+.cls-room-empty {
+    margin-top: 10px;
+}
+.cls-no-img-hotel {
+    width: 750px;
+    height: 423px;  
 }

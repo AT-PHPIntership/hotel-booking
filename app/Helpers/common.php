@@ -78,21 +78,6 @@ if (!function_exists('contentLimit')) {
     }
 }
 
-if (!function_exists('getRoundFloat')) {
-
-    /**
-     * Get round number float
-     *
-     * @param float $attribute attribute of object
-     *
-     * @return float
-     */
-    function getRoundFloat($attribute)
-    {
-        return sprintf("%.1f", $attribute);
-    }
-}
-
 /**
  * Value of factor to convert rating to percent
  */
