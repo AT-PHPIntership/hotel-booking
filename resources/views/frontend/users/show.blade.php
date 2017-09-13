@@ -166,10 +166,10 @@
                     <td>{{$reservation->checkin_date}}</td>
                     <td>{{$reservation->checkout_date}}</td>
                     <td>
-                      <a href="{{ route(['user.updateBooking', $user->id, $reservation->id]) }}" class="fa fa-edit"></a>
+                      <a href="{{ route('user.updateBooking', [$user->id, $reservation->id]) }}" class="fa fa-edit"></a>
                       <a href="" class="fa fa-calendar-times-o"></a>
                     </td>
-                  </tr>
+                  </tr> 
                 @endforeach
               </tbody>
             </table>
