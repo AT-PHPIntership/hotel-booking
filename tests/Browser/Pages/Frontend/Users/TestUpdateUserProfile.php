@@ -48,7 +48,8 @@ class TestUpdateUserProfile extends DuskTestCase
                     ->assertInputValue('full_name', $user->full_name)
                     ->assertInputValue('email', $user->email)
                     ->assertInputValue('phone', $user->phone)
-                    ->assertInputValue('password', '');
+                    ->assertInputValue('password', '')
+                    ->assertPathIs('/profile/'.$user->id.'/edit');
         });
     }
 
@@ -72,7 +73,8 @@ class TestUpdateUserProfile extends DuskTestCase
                     ->assertSee('Update Profile Success!');
             $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', 'Duoc Nguyen')
                     ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', '01206223029')
-                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', 'duocnguyen@example.com');
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', 'duocnguyen@example.com')
+                    ->assertPathIs('/profile/'.$user->id);
         });
     }
 
@@ -93,7 +95,8 @@ class TestUpdateUserProfile extends DuskTestCase
                     ->assertSee('Update Profile Success!');
             $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
                     ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
-                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email);
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email)
+                    ->assertPathIs('/profile/'.$user->id);
             $browser->logout()
                     ->visit('/login')
                     ->type('username', 'user1')
@@ -122,7 +125,8 @@ class TestUpdateUserProfile extends DuskTestCase
                     ->assertSee('Update Profile Success!');
             $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
                     ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
-                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email);
+                    ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email)
+                    ->assertPathIs('/profile/'.$user->id);
             $browser->logout()
                     ->visit('/login')
                     ->type('username', 'user1')
