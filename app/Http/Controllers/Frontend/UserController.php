@@ -9,12 +9,10 @@ use App\Model\User;
 use App\Model\Image;
 use App\Model\Reservation;
 use App\Http\Requests\Frontend\UpdateProfileRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-
     /**
      * Display page show profile user.
      *
@@ -24,40 +22,36 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if (Auth::user()->id == $id) {
-            $user = User::findOrFail($id);
-            $colComment = [
-                'id',
-                'hotel_id',
-                'comment',
-                'total_rating',
-                'created_at'
-            ];
-            $colReservation = [
-                'id',
-                'room_id',
-                'checkin_date',
-                'checkout_date',
-                'status'
-            ];
-            $comments = RatingComment::select($colComment)
-                ->with(['hotel' => function ($query) {
-                    $query->select('id', 'name');
-                }])
-                ->where('user_id', $id)
-                ->orderby('id', 'DESC')
-                ->paginate(USER::ROW_LIMIT);
-            $reservations = Reservation::select($colReservation)->with(['room' => function ($query) {
+        $user = User::findOrFail($id);
+        $colComment = [
+            'id',
+            'hotel_id',
+            'comment',
+            'total_rating',
+            'created_at'
+        ];
+        $colReservation = [
+            'id',
+            'room_id',
+            'checkin_date',
+            'checkout_date',
+            'status'
+        ];
+        $comments = RatingComment::select($colComment)
+            ->with(['hotel' => function ($query) {
                 $query->select('id', 'name');
-            }])->where([
-                ['target', 'user'],
-                ['target_id', $id],
-            ])
-            ->orderby('id', 'DESC')->paginate(User::ROW_LIMIT);
-            return view('frontend.users.showProfile', compact('user', 'comments', 'reservations'));
-        } else {
-            return redirect()->back();
-        }
+            }])
+            ->where('user_id', $id)
+            ->orderby('id', 'DESC')
+            ->paginate(USER::ROW_LIMIT);
+        $reservations = Reservation::select($colReservation)->with(['room' => function ($query) {
+            $query->select('id', 'name');
+        }])->where([
+            ['target', 'user'],
+            ['target_id', $id],
+        ])
+        ->orderby('id', 'DESC')->paginate(User::ROW_LIMIT);
+        return view('frontend.users.show', compact('user', 'comments', 'reservations'));
     }
 
     /**
@@ -69,18 +63,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::user()->id == $id) {
-            $user = User::findOrFail($id);
-            return view('frontend.users.updateProfile', compact('user'));
-        } else {
-            return redirect()->back();
-        }
+        $user = User::findOrFail($id);
+        return view('frontend.users.updateProfile', compact('user'));
     }
 
     /**
      * Update user profile.
      *
-     * @param \Illuminate\Http\UpdateRequest $request request to update
+     * @param \Illuminate\Http\UpdateRequest $request request of form update profile
      * @param int                            $id      id of user
      *
      * @return \Illuminate\Http\Response
@@ -109,7 +99,7 @@ class UserController extends Controller
         if ($user->update($input)) {
             DB::commit();
             flash(__('Update Profile Success!'))->success();
-            return redirect()->route('user.profile', $id);
+            return redirect()->route('profile.show', $id);
         } else {
             DB::rollback();
             flash(__('Update Profile Failure!'))->error();

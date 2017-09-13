@@ -25,10 +25,10 @@ class TestUpdateUserProfile extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/user/'.$user->id)
+                    ->visit('/profile/'.$user->id)
                     ->click('.fa-edit')
                     ->assertSee('Update Profile')
-                    ->assertPathIs('/user/' .$user->id. '/edit');
+                    ->assertPathIs('/profile/' .$user->id. '/edit');
         });
     }
 
@@ -44,7 +44,7 @@ class TestUpdateUserProfile extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/user/'.$user->id. '/edit')
+                    ->visit('/profile/'.$user->id. '/edit')
                     ->assertInputValue('full_name', $user->full_name)
                     ->assertInputValue('email', $user->email)
                     ->assertInputValue('phone', $user->phone)
@@ -64,7 +64,7 @@ class TestUpdateUserProfile extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/user/'.$user->id. '/edit')
+                    ->visit('/profile/'.$user->id. '/edit')
                     ->type('full_name', 'Duoc Nguyen')
                     ->type('email', 'duocnguyen@example.com')
                     ->type('phone', '01206223029')
@@ -88,7 +88,7 @@ class TestUpdateUserProfile extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/user/'.$user->id. '/edit')
+                    ->visit('/profile/'.$user->id. '/edit')
                     ->press('SUBMIT')
                     ->assertSee('Update Profile Success!');
             $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
@@ -116,7 +116,7 @@ class TestUpdateUserProfile extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/user/'.$user->id. '/edit')
+                    ->visit('/profile/'.$user->id. '/edit')
                     ->type('password', 'userpassword')
                     ->press('SUBMIT')
                     ->assertSee('Update Profile Success!');
@@ -145,14 +145,14 @@ class TestUpdateUserProfile extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/user/'.$user->id. '/edit')
+                    ->visit('/profile/'.$user->id. '/edit')
                     ->attach('image', $this->fakeImage())
                     ->press('SUBMIT')
                     ->assertSee('Update Profile Success!');
             $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
                     ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
                     ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email)
-                    ->assertPathIs('/user/'.$user->id);
+                    ->assertPathIs('/profile/'.$user->id);
             $imageSrc = $browser->element('.img-circle')->getAttribute('src');
             $imageName = explode('/', $imageSrc);
             $this->assertTrue($imageName[5] ===  $user->images[0]->path);
@@ -171,13 +171,13 @@ class TestUpdateUserProfile extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/user/'.$user->id. '/edit')
+                    ->visit('/profile/'.$user->id. '/edit')
                     ->press('SUBMIT')
                     ->assertSee('Update Profile Success!');
             $browser->assertSeeIn('.table-user-information tbody tr:nth-child(1) td:nth-child(2)', $user->full_name)
                     ->assertSeeIn('.table-user-information tbody tr:nth-child(2) td:nth-child(2)', $user->phone)
                     ->assertSeeIn('.table-user-information tbody tr:nth-child(3) td:nth-child(2)', $user->email)
-                    ->assertPathIs('/user/'.$user->id);
+                    ->assertPathIs('/profile/'.$user->id);
             $imageSrc = $browser->element('.img-circle')->getAttribute('src');
             $imageName = explode('/', $imageSrc);
             if (isset($user->images[0])) {
@@ -220,14 +220,14 @@ class TestUpdateUserProfile extends DuskTestCase
             $browser->logout();
             $user = User::find(2);
             $browser->loginAs($user)
-                    ->visit('/user/'.$user->id. '/edit')
+                    ->visit('/profile/'.$user->id. '/edit')
                     ->type('full_name', $name)
                     ->type('phone', $phone)
                     ->type('email', $email)
                     ->type('password', $password)
                     ->press('SUBMIT')
                     ->assertSee($expect)
-                    ->assertPathIs('/user/'.$user->id. '/edit');
+                    ->assertPathIs('/profile/'.$user->id. '/edit');
         });
         
     }

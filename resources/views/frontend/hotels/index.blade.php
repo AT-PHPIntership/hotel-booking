@@ -1,167 +1,130 @@
 @extends('frontend.layouts.master')
 @section('customcss')
 <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
+<link rel="stylesheet" type="text/css" href="{{asset('frontend/css/searchHotel.css')}}">
 @endsection
+@section('title', __('LIST HOTELS'))
 @section('content')
- <section class="parallax-effect">
-    <div id="parallax-pagetitle" >
-      <div class="color-overlay"> 
-      <!-- Page title -->
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <h1>Hotel detail</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</section>
-  <div class="container mt50">
-    <div class="row"> 
-      <!-- Slider -->
-      <section class="standard-slider room-slider">
-        <div class="col-sm-12 col-md-8">
-          <div id="owl-standard" class="owl-carousel">
-            <div class="item"> <a href="" data-rel="prettyPhoto[gallery1]">
-            <img src="{{ asset('frontend/images/hotel3.jpg') }}" alt="Image 2" class="img-responsive"></a> </div>
-            <div class="item"> <a href="images/rooms/slider/750x481.gif" data-rel="prettyPhoto[gallery1]">
-            <img src="{{ asset('frontend/images/hotel3.jpg') }}" alt="Image 2" class="img-responsive"></a> </div>
-          </div>
-        </div>
-      </section>
-    
-      <!-- Room Information -->
-      <section id="reservation-form" class="mt50 clearfix">
-        <div class="col-sm-12 col-md-4">
-          <h1>Hotel Name</h1>
-          <p>Star: ® ® ® ®</p>
-          <p><span>Address: @yield('address')</span></p>
-          <span>Location <br>
-            Located in central London, this hotel is steps from Russell Square and the British Museum. St. George, Bloomsbury and University of London are also within a 10 minute walk. <br>
-            Residence characteristics
-            In addition to a restaurant, this hotel offers self-parking and a garden. <br>
-            Room amenities
-            All 58 rooms are equipped with many amenities such as refrigerator or coffee / tea facilities, beside the minibar and TV. Hairdryers, safes, and showers are among the services and amenities available to guests.
-           </span>
-          <table class="table table-striped mt30">
-            <caption> <h3>Services</h3></caption>
-            <tbody>
-                <tr>
-                  <td><i class="fa fa-check-circle"></i>Tivi</td>
-                   <td><i class="fa fa-check-circle"></i>Massage</td>
-                </tr>
-                <tr>
-                  <td><i class="fa fa-check-circle"></i>Live massage</td>
-                   <td><i class="fa fa-check-circle"></i>Tivi</td>
-                </tr>
-                <tr>
-                  <td><i class="fa fa-check-circle"></i>Aaaaaa</td>
-                   <td><i class="fa fa-check-circle"></i>Tivi</td>
-                </tr>
-            </tbody>
-          </table>     
-        </div>
-      </section>
-     </div>
-     {{-- list-rooms --}}
-    <div class="list-rooms">
-      <h1>List Rooms</h1>
-    </div>``
-    @for($i = 0; $i<4 ;$i++)
-      <div class = "listHotel">
-          <div class = "room-image" >
-          <img src="{{asset('frontend/images/roomdemo.jpg')}}">
-          </div>
-          <div class = "room-item">
-            <h1 class = 'hotel-name'>Single room</h1>
-            <p>Max guest: 2</p>
-            <p>Room information</p>
-          </div>
-          <div class="room-item">
-            <h2 class= 'room-price'>Price</h2>
-            <h3>$ 100.5</h3>
-            <button name = 'btnBookRoom' class="btn btn-primary"><a href="/room">Book Now</a></button>
-          </div>
-      </div>
-    @endfor
-
-    {{-- rating --}}
-
-    </div>
-  </div>  
-</div>
-
-</section>
-<section class="rating-comment">
-    <div class="container">
-      <h1 class="h1-rating">Rating</h1>
+  <main class="main">
+    <section id="reservation-form" class="mt-0">
+      <div>
         <div class="row">
-            <div class="col-xs-12 col-md-6 left-rating">
-                <div class="well well-sm" style="margin-top: 20px;">
-                    <div class="row" >
-                        <div class="col-xs-12 col-md-6 text-center rating-box">
-                            <h1 class="rating-num">
-                                4.0</h1>
-                            <div class="rating">
-                                <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                                </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                                </span><span class="glyphicon glyphicon-star-empty"></span>
-                            </div>
-                            <div>
-                                <span class="glyphicon glyphicon-user"></span>1,050,008 total
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="row rating-desc">
-                                {{-- 5 rating --}}
-                                @for($i =0; $i<5; $i++)
-                                 <div class="col-xs-3 col-md-3 text-right">
-                                    <span class="glyphicon glyphicon-star"></span>Comfor
-                                </div>
-                                  <div class="col-xs-8 col-md-9">
-                                      <div class="progress progress-striped">
-                                          <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
-                                              aria-valuemin="0" aria-valuemax="100" style="width: {{ ($i*2)*10 }}%">
-                                              <span class="sr-only">{{ ($i*2)*10 }}%</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                                @endfor
-                                <div class="link-rating">
-                                   <a href="">Rating for this hotel</a><br>
-                                </div>
-                                {{-- end ratin --}}
-                            </div>
-                        </div>
+          <div class="col-md-12">           
+            <form class="reservation-horizontal clearfix container-search" name="reservationform" method="GET"  action="{{ route('frontend.hotel.index') }}">
+            <div id="message"></div><!-- Error message display -->
+              <div class="row">
+               
+                <div class="coltest add-one-col">
+                  <label for="hotelSourceArea">{{ __('Place') }}</label>
+                  <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default all places') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                  <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control" value="" placeholder="{{ __('Place to go') }}">
+                  <div class="widgetAcResult" hidden>
+                    
+                  </div>
+                </div>
+                <div class="coltest add-one-col">
+                  <div class="form-group">
+                    <label for="checkin">{{ __('Check-in') }}</label>
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Check-In is from 14:00') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <input name="checkin" type="text" id="checkin" value="" class="form-control" placeholder="Check-in"/>
+                  </div>
+                </div>
+                <div class="coltest small-col">
+                  <div class="form-group">
+                    <label for="duration">{{ __('Duration') }}</label>
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Duration booking room') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    
+                    <select name = "duration" class="btn btn-default">
+                      @for($i = 1; $i <= App\Model\Reservation::MAX_DURATIONS; $i++)
+                        <option value="{{ $i }}">{{ $i == 1 ? __('1 night') : __(':duration nights', ['duration' => $i]) }}</option>
+                      @endfor
+                    </select>
+                  </div>
+                </div>
+                <div class="coltest big-col">
+                  <div class="form-group">
+                    <label for="arange_id">{{ __('Order By') }}</label>
+                    <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default is none') }}" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
+                    <select name = "arange_id" class="btn btn-default">
+                      <option value="0">{{ __('--') }}</option>
+                      <option value="1">{{ __('Price cheap to expensive') }}</option>
+                      <option value="2">{{ __('Price expensive to cheap') }}</option>
+                      <option value="3">{{ __('Star low to high') }}</option>
+                      <option value="4">{{ __('Star high to low') }}</option>
+                      <option value="5">{{ __('Rating high to low') }}</option>
+                  </select>
+                  </div>
+                </div>
+                <div class="btnSubmit">
+                  <button type="submit" class="btn btn-primary btn-block">{{ __('Search') }}</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="rooms mt50">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 class="lined-heading"><span>{{ __('List Hotels') }}</span></h2>
+          </div> 
+          <!-- 3 place top -->
+          @foreach($hotels as $hotel)
+            <div class="col-sm-4">
+              <div class="room-thumb"> <img src="{{ isset($hotel->images[0]) ? asset($hotel->images[0]->path) : asset(config('image.no_image')) }}" alt="hotel" class="img-presentive" />
+                <div class="mask">
+                  <div class="main">
+                    <h5>{{ $hotel->name }}</h5>
+                    <div class="ml-5per">
+                      <div class="stars">
+                        @for ($i = 0; $i < $hotel->star; $i++)
+                          <label class="star bg-yellow"></label>
+                        @endfor
+                      </div>
                     </div>
-                  <div class="comment-old">
-                      <form action="">
-                        <textarea class="your-comment" placeholder="Write your comment....."></textarea>
-                        <button class="btn btn-primary" type="submit">Submit</button>
-
-                      </form>
+                  </div>
+                  <div class="content mt-10">
+                    <p><span>{{ $hotel->place->name }}</p>
+                    <div class="row">                        
+                      @foreach($hotel->hotelServices as $key => $hotelService)
+                        @if ($key < config('showitem.service_per_item'))
+                          @if ($key == 0 || $key == (config('showitem.service_per_item') / 2))
+                            <div class="col-xs-6">
+                              <ul class="list-unstyled">
+                          @endif
+                          @if (
+                            $key == (config('showitem.service_per_item') -1)
+                              &&
+                            $hotel->hotelServices->count() > config('showitem.service_per_item')
+                          )
+                            <li><i class="fa fa-check-circle"></i> .......</li>
+                          @else
+                            <li><i class="fa fa-check-circle"></i> {{ $hotelService->name }}</li>
+                          @endif
+                          @if (
+                            $key == (config('showitem.service_per_item') / 2 -1)
+                            ||
+                            $key == (config('showitem.service_per_item') - 1)
+                            ||
+                            $key == ($hotel->hotelServices->count() - 1)
+                          )
+                              </ul>
+                            </div>
+                          @endif
+                        @endif
+                      @endforeach
+                    </div>
+                    <a href="/detailHotel" class="btn btn-primary btn-block">{{ __('See Room') }}</a>
                   </div>
                 </div>
               </div>
-            <div class="right-rating">
-                <h3 style="margin-top: 20px; display: block;">Comment</h3>
-                @for($i =0; $i < 4; $i++)
-                <div class="col-md-6 comment-old">
-                  <img src="{{asset('frontend/images/iconuser.png')}}" alt="usrs avatar" id="avatar">
-                  <h4 class="username">user name</h4>
-                  <p>It's very good. ahihi It's very good. ahihiIt's very good. ahihiIt's very good. ahihi
-                      ahihi
-                  </p>
-                  <p>11:31 AM, Monday, July 2017</p>
-                </div>
-              @endfor
-            </div>
-          </div>
-        {{-- end row --}}
+            </div> 
+          @endforeach
+        </div>
       </div>
-</section>
-
-  </div>
-</div>
+    </section>
+    <div class="text-center">{{$hotels->render()}}</div>
+  </main>
 @endsection
