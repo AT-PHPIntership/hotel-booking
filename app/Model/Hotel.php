@@ -12,6 +12,7 @@ class Hotel extends Model
     use Sluggable, SoftDeletes, SearchTrait;
 
     const ROW_LIMIT = 10;
+    const ITEM_LIMIT = 12;
 
     /**
      * Define Max, Min Value Star of Hotel
