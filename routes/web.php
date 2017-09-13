@@ -13,7 +13,8 @@
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
     Route::group(['middleware'=> 'auth'], function() {
-        Route::resource('/profile', 'UserController', ['middleware'=>'checkUser']);
+        Route::resource('/profile', 'UserController',['middleware'=>'checkUser']);
+        
     });
 });
 Route::get('/registerSuccess', function() {
