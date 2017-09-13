@@ -21,7 +21,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         $user = User::findOrFail($id);
         $colComment = [
             'id',
@@ -104,6 +104,6 @@ class UserController extends Controller
             DB::rollback();
             flash(__('Update Profile Failure!'))->error();
             return redirect()->back()->withInput();
-        } 
+        }
     }
 }
