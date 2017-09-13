@@ -99,7 +99,7 @@ class UserController extends Controller
         if ($user->update($input)) {
             DB::commit();
             flash(__('Update Profile Success!'))->success();
-            return redirect()->route('user.profile', $id);
+            return redirect()->route('profile.show', $id);
         } else {
             DB::rollback();
             flash(__('Update Profile Failure!'))->error();
