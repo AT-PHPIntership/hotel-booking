@@ -11,13 +11,13 @@ class ReservationController extends Controller
     /**
      * Display a page update a booking room.
      *
-     * @param int $idUser        id of user.
-     * @param int $reservationId id of reservation.
+     * @param \Illuminate\Http\Request $request request of user.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($idUser, $reservationId)
+    public function show(Request $request)
     {
+        $reservationId = $request->route('reservation');
         $columns = [
             'id',
             'status',
@@ -45,12 +45,12 @@ class ReservationController extends Controller
     /**
      * Cancel a reservation of user.
      *
-     * @param int $idUser        id of user.
+     * @param int $id            id of user.
      * @param int $reservationId id of reservation.
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($idUser, $reservationId)
+    public function update($id, $reservationId)
     {
         $reservation = Reservation::findOrFail($reservationId)->update(['status' => Reservation::STATUS_CANCELED]);
         if ($reservation) {
@@ -58,6 +58,6 @@ class ReservationController extends Controller
         } else {
             flash(__('Error when cancel this booking room!'))->error();
         }
-        return redirect()->route('user.showBooking', [$idUser, $reservationId]);
+        return redirect()->route('user.showBooking', [$id, $reservationId]);
     }
 }
