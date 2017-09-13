@@ -93,7 +93,7 @@
                 <a href="{{ URL::previous() }}" class="btn btn-default pull-left">
                   {{__('Back')}}
                 </a>
-                <a data-original-title="Edit Profile" data-toggle="tooltip" href="{{ route('userprofile.edit', $user->id) }}" class="btn btn-success  col-md-1 pull-right">
+                <a data-original-title="Edit Profile" data-toggle="tooltip" href="{{ route('profile.edit', $user->id) }}" class="btn btn-success  col-md-1 pull-right">
                   <span class="fa fa-edit"></span>
                 </a>
               </div>

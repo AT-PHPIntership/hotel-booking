@@ -15,7 +15,7 @@
             <div class="panel-heading">
               <h3 class="panel-title text-center">{{$user->username}}</h3>
             </div>
-            <form  action="{{ route('userprofile.update', $user->id) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+            <form  action="{{ route('profile.update', $user->id) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
               <div class="panel-body">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
