@@ -62,7 +62,6 @@
 .main{ 
   width: 1140px;
   margin: 0 auto;
-  margin-bottom: 100px;
 }
 .main:after{ 
   clear: both;

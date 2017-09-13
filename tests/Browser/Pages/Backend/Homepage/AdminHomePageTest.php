@@ -29,86 +29,90 @@ class AdminHomePageTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin')
-                    ->clickLink('Home Page')
-                    ->assertPathIs('/admin')
-                    ->assertSee('Home Page');
+                ->clickLink('Home Page')
+                ->assertPathIs('/admin')
+                ->assertSee('Home Page');
         });
     }
-        /**
+ 
+    /**
      * A Dusk test empty data.
      *
      * @return void
      */
     public function testEmptyData()
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser){
             $browser->visit('/admin')
-                    ->clickLink('Home Page')
-                    ->assertSee('Categories')
-                    ->assertSee('Places')
-                    ->assertSee('News')
-                    ->assertSee('Booking Rooms')
-                    ->assertSee('Hotels')
-                    ->assertSee('Users')
-                    ->assertSeeIn('.small-box .inner h3', '0');
+                ->clickLink('Home Page')
+                ->assertSee('Categories')
+                ->assertSee('Places')
+                ->assertSee('News')
+                ->assertSee('Booking Rooms')
+                ->assertSee('Hotels')
+                ->assertSee('Users')
+                ->assertSeeIn('.small-box .inner h3', '0');
         });
     }
-
+     
     /**
      * A Dusk test value.
      *
      * @return void
      */
-    public function testValueAll()
+    public function testValueOnPage()
     {
         $this->makeData(10);
-        $this->check('Categories');
-        $this->check('Places');
-        $this->check('Users');
-        $this->check('News');
-        $this->check('Hotels');
-        $this->check('Booking Rooms');
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/admin')
+                ->clickLink('Home Page')
+                ->assertSee('Categories')
+                ->assertSee('Places')
+                ->assertSee('News')
+                ->assertSee('Booking Rooms')
+                ->assertSee('Hotels')
+                ->assertSee('Users')
+                ->assertSeeIn('.small-box .inner h3', '10');
+        });
     }
 
-    public function check($value) 
+    /**
+     * Case test fot test connect page
+     *
+     * @return array
+     */
+    public function caseTestConnectPage()
     {
-        $this->browse(function (Browser $browser) use ($value) {
-            $browser->visit('/admin')
-                    ->clickLink('Home Page')
-                    ->assertSee($value)
-                    ->assertSee('10');
-        });
+        return [
+            [1, 'news',  'News'],
+            [2, 'place', 'places'],
+            [3, 'user', 'Users'],
+            [4, 'category', 'Categories'],
+            [5, 'hotel', 'of hotels'],
+            [6, 'reservation', 'Booking Rooms']
+        ];
     }
 
     /**
     * A Dusk test test connected Page.
     *
+    * @dataProvider caseTestConnectPage
+    *
     * @return void
     */
-
-    public function testConnectPage() 
+    public function testConnectPage($number, $link, $str) 
     {
-        $this->linkPage(1,'news','News');
-        $this->linkPage(2,'place','places');
-        $this->linkPage(3,'user','Users');
-        $this->linkPage(4,'category','Categories');
-        $this->linkPage(5,'hotel','of hotels');
-        $this->linkPage(6,'reservation','Booking Rooms');
-
-    }
-
-    public function linkPage($number, $link, $str) 
-    {
+        $this->makeData(10);
         $this->browse(function (Browser $browser) use ($number, $link, $str) {
             $browser->visit('/admin')
-                    ->clickLink('Home Page')
-                    ->press('.row .col-lg-3:nth-child('.$number.') .small-box a')
-                    ->assertPathIs('/admin/'.$link)
-                    ->assertSee('List '.$str);
+                ->clickLink('Home Page')
+                ->press('.row .col-lg-3:nth-child('.$number.') .small-box a')
+                ->assertPathIs('/admin/'.$link)
+                ->assertSee('List '.$str);
         });
     }
 
-     /**
+    /**
      * Make data for test.  
      *
      * @return void

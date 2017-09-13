@@ -2,7 +2,6 @@
 jQuery(document).ready(function () {
     "use strict";
 
-	
     //Gmap
     if (jQuery().gMap) {
         jQuery('#map').gMap({
@@ -30,7 +29,6 @@ jQuery(document).ready(function () {
             }]
         });
     }
-
 
     // Owl sliders
     if (jQuery().owlCarousel) {
@@ -78,7 +76,6 @@ jQuery(document).ready(function () {
             // itemsMobile : false
         });
     }
-
 
     // Revolution slider
     if (jQuery().revolution) {
@@ -148,7 +145,6 @@ jQuery(document).ready(function () {
         });
     }
 
-
     //PrettyPhoto
     if (jQuery().prettyPhoto) {
         jQuery('a[data-rel]').each(function () {
@@ -180,7 +176,6 @@ jQuery(document).ready(function () {
         });
     }
 
-
     //Waypoints
     if (jQuery().waypoint) {
         jQuery('.bounce,.flash,.pulse,.shake,.swing,.tada,.wobble,.bounceIn,.bounceInDown,.bounceInLeft,.bounceInRight,.bounceInUp,.bounceOut,.bounceOutDown,.bounceOutLeft,.bounceOutRight,.bounceOutUp,.fadeIn,.fadeInDown,.fadeInDownBig,.fadeInLeft,.fadeInLeftBig,.fadeInRight,.fadeInRightBig,.fadeInUp,.fadeInUpBig,.fadeOut,.fadeOutDown,.fadeOutDownBig,.fadeOutLeft,.fadeOutLeftBig,.fadeOutRight,.fadeOutRightBig,.fadeOutUp,.fadeOutUpBig,.flip,.flipInX,.flipInY,.flipOutX,.flipOutY,.lightSpeedIn,.lightSpeedOut,.rotateIn,.rotateInDownLeft,.rotateInDownRight,.rotateInUpLeft,.rotateInUpRight,.rotateOut,.rotateOutDownLeft,.rotateOutDownRight,.rotateOutUpLeft,.rotateOutUpRight,.slideInDown,.slideInLeft,.slideInRight,.slideOutLeft,.slideOutRight,.slideOutUp,.hinge,.rollIn,.rollOut').waypoint(function () {
@@ -201,7 +196,6 @@ jQuery(document).ready(function () {
         });
     }
 
-
     // GO TOP
     //Show or hide "#go-top"
     jQuery(window).scroll(function () {
@@ -213,6 +207,7 @@ jQuery(document).ready(function () {
             jQuery('#go-top').fadeOut(800);
         }
     });
+
     // Animate "#go-top"
     jQuery('#go-top').click(function (event) {
         event.preventDefault();
@@ -221,85 +216,84 @@ jQuery(document).ready(function () {
         }, '2000', 'swing');
     })
 
-	
     //niceScroll
     if (jQuery().niceScroll) {
          $(".parallax-effect").niceScroll();
 		 };
 		 
-
     // Isotope
- window.onload = function () {	
-    if (jQuery().isotope) {
-        // cache container
-        var jQuerycontainer1 = jQuery('.room-list');
-        // initialize isotope
-        jQuerycontainer1.isotope({
-            filter: '*',
-            masonry: {
-                columnWidth: 1
-            }
-        });
-
-        // filter items when filter link is clicked
-        jQuery('#filters a').click(function () {
-            var selector = jQuery(this).attr('data-filter');
+    window.onload = function () {	
+        if (jQuery().isotope) {
+            // cache container
+            var jQuerycontainer1 = jQuery('.room-list');
+            // initialize isotope
             jQuerycontainer1.isotope({
-                filter: selector
+                filter: '*',
+                masonry: {
+                    columnWidth: 1
+                }
             });
-            return false;
-        });
-        // set selected menu items
-        var jQueryfilters = jQuery('#filters'),
-            jQueryfiltersLinks = jQueryfilters.find('a');
 
-        jQueryfiltersLinks.click(function () {
-            console.log(this);
-            var jQuerythis = jQuery(this).parent(this);
-            // don't proceed if already selected
-            if (jQuerythis.hasClass('active')) {
+            // filter items when filter link is clicked
+            jQuery('#filters a').click(function () {
+                var selector = jQuery(this).attr('data-filter');
+                jQuerycontainer1.isotope({
+                    filter: selector
+                });
                 return false;
-            }
-            var jQueryfilterLink = jQuerythis.parents('#filters');
-            jQueryfilterLink.find('.active').removeClass('active');
-            jQuerythis.addClass('active');
-        });
+            });
+            // set selected menu items
+            var jQueryfilters = jQuery('#filters'),
+                jQueryfiltersLinks = jQueryfilters.find('a');
 
-        var jQuerycontainer2 = jQuery('.gallery');
-        // initialize isotope
-        jQuerycontainer2.isotope({
-            filter: '*',
-            masonry: {
-                columnWidth: 1,
-                gutterWidth: 0
-            }
-        });
+            jQueryfiltersLinks.click(function () {
+                console.log(this);
+                var jQuerythis = jQuery(this).parent(this);
+                // don't proceed if already selected
+                if (jQuerythis.hasClass('active')) {
+                    return false;
+                }
+                var jQueryfilterLink = jQuerythis.parents('#filters');
+                jQueryfilterLink.find('.active').removeClass('active');
+                jQuerythis.addClass('active');
+            });
 
-        // filter items when filter link is clicked
-        jQuery('#filters a').click(function () {
-            var selector = jQuery(this).attr('data-filter');
+            var jQuerycontainer2 = jQuery('.gallery');
+            // initialize isotope
             jQuerycontainer2.isotope({
-                filter: selector
+                filter: '*',
+                masonry: {
+                    columnWidth: 1,
+                    gutterWidth: 0
+                }
             });
-            return false;
-        });
-        // set selected menu items
-        var jQueryfilters = jQuery('#filters'),
-            jQueryfiltersLinks = jQueryfilters.find('a');
 
-        jQueryfiltersLinks.click(function () {
-            console.log(this);
-            var jQuerythis = jQuery(this).parent(this);
-            // don't proceed if already selected
-            if (jQuerythis.hasClass('active')) {
+            // filter items when filter link is clicked
+            jQuery('#filters a').click(function () {
+                var selector = jQuery(this).attr('data-filter');
+                jQuerycontainer2.isotope({
+                    filter: selector
+                });
                 return false;
-            }
-            var jQueryfilterLink = jQuerythis.parents('#filters');
-            jQueryfilterLink.find('.active').removeClass('active');
-            jQuerythis.addClass('active');
-        });
+            });
+
+            // set selected menu items
+            var jQueryfilters = jQuery('#filters'),
+                jQueryfiltersLinks = jQueryfilters.find('a');
+
+            jQueryfiltersLinks.click(function () {
+                console.log(this);
+                var jQuerythis = jQuery(this).parent(this);
+                // don't proceed if already selected
+                if (jQuerythis.hasClass('active')) {
+                    return false;
+                }
+                var jQueryfilterLink = jQuerythis.parents('#filters');
+                jQueryfilterLink.find('.active').removeClass('active');
+                jQuerythis.addClass('active');
+            });
+        }
     }
-}
 
     // Sticky Navigation
     if (jQuery().sticky) {
@@ -330,7 +324,6 @@ jQuery(document).ready(function () {
         })
     }
 
-
     // Reservation Form	
     //jQueryUI - Datepicker
     if (jQuery().datepicker) {
@@ -351,15 +344,14 @@ jQuery(document).ready(function () {
                 }
             }
         });
+
         jQuery('#checkin, #checkout').on('focus', function () {
             jQuery(this).blur();
         }); // Remove virtual keyboard on touch devices
     }
 
-
     //Popover
     jQuery('[data-toggle="popover"]').popover();
-
 
     // Guests
     // Show guestsblock onClick
@@ -376,20 +368,33 @@ jQuery(document).ready(function () {
         guestsblock.fadeOut(120);
     });
 
-
     // Count guests script
     var opt1;
     var opt2;
     var total;
-    jQuery('.adults select, .children select').change(
+    jQuery('.adults select, .children select').change(function() {
+        opt1 = jQuery('.adults').find('option:selected');
+        opt2 = jQuery('.children').find('option:selected');
 
-        function () {
-            opt1 = jQuery('.adults').find('option:selected');
-            opt2 = jQuery('.children').find('option:selected');
+        total = +opt1.val() + +opt2.val();
+        jQuery(".guests-select .total").html(total);
+    });
 
-            total = +opt1.val() + +opt2.val();
-            jQuery(".guests-select .total").html(total);
-        });
+    $('#logout').on('click', function(e) {
+        e.preventDefault();
+        $('#logout-form').submit();
+    });
+    
+    $('[data-toggle="tooltip"]').tooltip();
 
-
+    $('#user-comment').on('click', function(e) {
+        e.preventDefault();
+        $('#table-comment').show();
+        $('#table-reservation').hide();
+    });
+    $('#user-reservation').on('click', function(e) {
+        e.preventDefault();
+        $('#table-reservation').show();
+        $('#table-comment').hide();
+    });
 });

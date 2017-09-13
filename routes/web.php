@@ -10,10 +10,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@index')->name('home.index');
+Route::group(['namespace'=>'Frontend'], function() {
+    Route::group(['middleware'=> 'auth'], function() {
+        Route::resource('/profile', 'UserController', ['middleware'=>'checkUser']);
+    });
 });
-Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
+Route::get('/registerSuccess', function() {
+    return view('frontend.notice');
+})->name('notice')->middleware('auth');
+Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('/user', 'UserController');
@@ -34,3 +40,8 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
     Route::put('/user/{id}/status', 'UserController@updateStatus')->name('user.updateStatus');
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
 });
+
+Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
+    Route::resource('/hotel', 'HotelController');
+});
+Auth::routes();

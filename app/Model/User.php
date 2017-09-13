@@ -4,14 +4,15 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
 use App\Libraries\Traits\SearchTrait;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
-class User extends Model
+class User extends Model implements Authenticatable
 {
-    use SoftDeletes, SearchTrait;
+    use SoftDeletes, SearchTrait, AuthenticableTrait;
 
     /**
      * The attributes that should be hidden for arrays.

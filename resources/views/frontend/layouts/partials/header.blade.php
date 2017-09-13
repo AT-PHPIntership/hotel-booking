@@ -1,4 +1,3 @@
-
 <!-- Top header -->
 <div id="top-header">
   <div class="container">
@@ -36,30 +35,41 @@
     <div class="container">
       <div class="navbar-header">
         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a href="/home" class="navbar-brand">         
+        <a href="/" class="navbar-brand">         
         <!-- Logo -->
-        <div id="logo"> <img id="default-logo" src="{{ asset('frontend/images/logo1.png')}}" alt="Snorlax" style="height:44px;"> <img id="retina-logo" src="images/logo-retina.png" alt="Starhotel" style="height:44px;"> </div>
-        </a> </div>
-      <div id="navbar-collapse-grid" class="navbar-collapse collapse">
+          <img class="logo-header" src="{{ asset('frontend/images/logo1.png')}}" alt="Snorlax" class="logo-header">
+        </a>
+        </div>
+      <div id="navbar-collapse-grid" class="navbar-collapse collapse fz-16">
         <ul class="nav navbar-nav">
-          <li class="dropdown active"> <a href="/home">Home</a>
+          <li class="dropdown {{ isActiveRoute('frontend.index') }}"> <a href="/">{{ __('Home') }}</a>
           </li>
         <!-- hotels -->
-          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">Hotels<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="room-list.html">Slector1</a></li>
-                  <li><a href="room-detail.html">Slector1</a></li>
-                </ul>
-              </li>
+          <li class="{{ areActiveRoute(['frontend.hotel.index', 'frontend.hotel.show']) }}"> <a href="{{ route('frontend.hotel.index') }}">{{ __('Hotels') }}</b></a>
+          </li>
         <!-- news -->
-          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">News<b class="caret"></b></a>
+          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{ __('News') }}<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="blog.html">Sports</a></li>
               <li><a href="blog-post.html">Sale</a></li>
             </ul>
           </li>
-          <li> <a href="/login">Login</a></li>
-          <li> <a href="/register">Register</a>
+          @if(Auth::check())
+            <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{Auth::user()->username}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ route('profile.show', Auth::user()->id) }}" id="user-profile">{{__('Profile')}}</a></li>
+                <li>
+                  <a href="{{ route('logout') }}" id ="logout">{{__('Log out')}}</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden="">
+                    {{ csrf_field() }}
+                  </form>
+                </li>
+              </ul>
+            </li>
+          @else
+            <li> <a href="{{ route('login') }}" id="login">{{__('Login')}}</a></li>
+            <li> <a href="{{ route('register') }}" id="register">{{__('Register')}}</a>
+          @endif
           </li>
         </ul>
       </div>

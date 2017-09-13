@@ -55,14 +55,11 @@
                 <div class="form-control text-center fz-16 mt-20 col-md-offset-2">{{ $user->status }}</div>
               </div>
             </div>
-            <div class="mt-20 text-center">
-            <button type="button" class="btn btn-link btn-custom btn-lg mt-20">{{ __('History rating comment') }}</button>
-            <button type="button" class="btn btn-link btn-custom btn-lg mt-20">{{ __('History booking room') }}</button>
-          </div>
+            <i class="mt-20 fz-20 col-md-5 ml-5per" >{{ __(' Times rating comments: ') . $user->ratingComments->count() }}</i>
+            <i class="mt-20 fz-20 col-md-5" >{{ __(' Times reservations: ') . $user->reservations->count() }}</i>
           </div>
         </div>
       </section>
-      <section id="extra-information" hidden></section>
     @else
         <h1 class="text-center title-page">{{ __('Nothing to show!') }}</h1>
     @endif

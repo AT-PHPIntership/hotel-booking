@@ -73,7 +73,7 @@ class AdminCreateRoomTest extends DuskTestCase
                     ->press('Submit')
                     ->assertPathIs('/admin/hotel/1/room')
                     ->assertSee('Creation successful!')
-                    ->assertSeeIn('#table-contain tbody tr:nth-child(1) td:nth-child(4)', 'This is descript');
+                    ->assertSeeIn('#table-contain tbody tr:nth-child(1) td:nth-child(3)', 'A');
         });
         $this->assertDatabaseHas('rooms', ['name' => 'A']);
     }
