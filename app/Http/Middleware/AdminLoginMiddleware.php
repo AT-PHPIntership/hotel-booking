@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Model\User;
 
 class AdminLoginMiddleware
 {
@@ -20,10 +21,10 @@ class AdminLoginMiddleware
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->is_admin == 1) {
+            if ($user->is_admin == User::ROLE_ADMIN) {
                 return $next($request);
             } else {
-                return redirect('/');
+                return redirect()->back();
             }
         } else {
             return redirect('/login');

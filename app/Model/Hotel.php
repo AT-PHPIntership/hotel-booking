@@ -6,13 +6,13 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Libraries\Traits\SearchTrait;
-use Illuminate\Support\Facades\DB;
 
 class Hotel extends Model
 {
     use Sluggable, SoftDeletes, SearchTrait;
 
     const ROW_LIMIT = 10;
+    const ITEM_LIMIT = 12;
 
     /**
      * Define Max, Min Value Star of Hotel
@@ -20,7 +20,15 @@ class Hotel extends Model
     const STAR_MAX = 5;
     const STAR_MIN = 1;
 
+    /**
+     * Define limit value Hotel for show in homepage
+     */
     const SHOW_LIMIT = 6;
+
+    /**
+     * Define timout cache for query
+     */
+    const TIMEOUT_CACHE = 5;
 
     /**
      * Declare table
