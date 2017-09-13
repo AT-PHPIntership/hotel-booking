@@ -13,8 +13,11 @@
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
     Route::group(['middleware'=> 'auth'], function() {
-        Route::resource('/profile', 'UserController',['middleware'=>'checkUser']);
-        Route::get('/profile/{profile}/reservation/{id}/edit', 'ReservationController@edit')->name('user.updateBooking');
+        Route::group(['middleware'=> 'checkUser'], function() {
+            Route::resource('/profile', 'UserController');
+            Route::get('/profile/{profile}/reservation/{reservation}/show', 'ReservationController@show')->name('user.showBooking');
+            Route::put('/profile/{profile}/reservation/{reservation}', 'ReservationController@update')->name('user.cancelBooking');
+        });
     });
 });
 Route::get('/registerSuccess', function() {
