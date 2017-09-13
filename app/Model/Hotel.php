@@ -15,6 +15,7 @@ class Hotel extends Model
      * Hotel row limit
      */
     const ROW_LIMIT = 10;
+    const ITEM_LIMIT = 12;
 
     /**
      * Comment row limit

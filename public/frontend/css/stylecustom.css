@@ -383,3 +383,9 @@
 .cls-register a {
     margin-right: 2%;
 }
+.cls-tb-user {
+    margin-left: 9%;
+}
+.cls-room-empty {
+    margin-top: 10px;
+}

@@ -25,13 +25,13 @@
       <section class="standard-slider hotel-slider">
         <div class="col-sm-12 col-md-8">
           <div id="owl-standard" class="owl-carousel">
-          @foreach ($hotel->images as $hotelImage)
-            <div class="item">
-              <a href="" data-rel="prettyPhoto[gallery1]">
-                <img src="{{ asset($hotelImage->path) }}" class="img-responsive">
-              </a> 
-            </div>
-          @endforeach    
+            @foreach ($hotel->images as $hotelImage)
+              <div class="item">
+                <a href="" data-rel="prettyPhoto[gallery1]">
+                  <img src="{{ asset($hotelImage->path) }}" class="img-responsive">
+                </a> 
+              </div>
+            @endforeach    
           </div>
         </div>
       </section>
@@ -101,11 +101,11 @@
                 <h3 class="cls-room-price">{{ __(':price VND', ['price' => $room->price_format]) }} </h3>
               </div>
               <div class="room-item-booking">
-              <p class="cls-room-empty"> 
-                {{ __('Only :number_room_empty room(s)', ['number_room_empty' => ($room->total - $room->quantity_busy_reservation)] ) }} 
-              </p>
                 <a href="/room"  class="btn cls-btn-booking">
                   {{ __('Book Now') }}</a> 
+                <p class="cls-room-empty"> 
+                  {{ __('Only :number_room_empty room(s) left', ['number_room_empty' => ($room->total - $room->quantity_busy_reservation)] ) }} 
+                </p>
               </div>
             </div>
           @endforeach 
@@ -119,7 +119,7 @@
                 <div class="row" >
                   @if($hotel->ratingComments->count() != 0)
                     <div class="col-xs-12 col-md-6 text-center rating-box">
-                      <h1 class="rating-num">{{ $hotel->round_avg_rating }}</h1>
+                      <h1 class="rating-num">{{ getRoundFloat($hotel->round_avg_rating) }}</h1>
                       <div class="count-rating-guest">
                         <span>{{ __('According to ') }}<strong>{{ $hotel->ratingComments->count() }}</strong> {{ __(' guests') }}</span>
                       </div>
