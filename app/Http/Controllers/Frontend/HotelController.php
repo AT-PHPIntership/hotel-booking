@@ -14,6 +14,7 @@ use App\Model\Reservation;
 use App\Model\RatingComment;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
+use DB;
 
 class HotelController extends Controller
 {
@@ -27,14 +28,14 @@ class HotelController extends Controller
      */
     public function show($slug, Request $request)
     {
-        $checkoutDateDefaut = Carbon::tomorrow('Asia/Bangkok')->addWeeks(Hotel::WEEK_NUMBER);
+        $checkoutDateDefaut = Carbon::tomorrow()->addWeeks(Hotel::WEEK_NUMBER);
         $checkinDateDefaut = $checkoutDateDefaut->toDateTimeString();
         $checkoutDateDefaut->addDay();
 
         if ($request->has('checkin')) {
-            $checkinDateDefaut = Carbon::createFromFormat(Hotel::DATETIME_FORMAT, $request->checkin . Hotel::CHECKIN_TIME)
+            $checkinDateDefaut = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkin_time'))
                 ->toDateTimeString();
-            $checkoutDateDefaut = Carbon::createFromFormat(Hotel::DATETIME_FORMAT, $request->checkin . Hotel::CHECKOUT_TIME)
+            $checkoutDateDefaut = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkout_time'))
                 ->addDay($request->duration)
                 ->toDateTimeString();
         }
@@ -75,9 +76,9 @@ class HotelController extends Controller
             $query->select('id', 'name');
         };
         $roomEmpty = Room::where('hotel_id', $hotelId)
-            ->leftJoin(\DB::raw("(SELECT busy_reservations.room_id as room_id, SUM(busy_reservations.quantity) as quantity_busy_reservation FROM (SELECT * FROM reservations WHERE (checkin_date < ? AND checkout_date > ?) OR (checkin_date < ? AND checkout_date > ?)) AS busy_reservations GROUP BY busy_reservations.room_id) AS busy_rooms"), 'busy_rooms.room_id', '=', 'rooms.id')
+            ->leftJoin(DB::raw("(SELECT busy_reservations.room_id as room_id, SUM(busy_reservations.quantity) as quantity_busy_reservation FROM (SELECT * FROM reservations WHERE (checkin_date < ? AND checkout_date > ?) OR (checkin_date < ? AND checkout_date > ?)) AS busy_reservations GROUP BY busy_reservations.room_id) AS busy_rooms"), 'busy_rooms.room_id', '=', 'rooms.id')
             ->addBinding([$checkinDateDefaut, $checkinDateDefaut, $checkoutDateDefaut,  $checkoutDateDefaut], 'join')
-            ->where(\DB::raw('COALESCE(quantity_busy_reservation, 0)'), '<', \DB::raw('CONVERT(total, CHAR(5))'))->orderBy('price', 'ASC')
+            ->where(DB::raw('COALESCE(quantity_busy_reservation, 0)'), '<', DB::raw('CONVERT(total, CHAR(5))'))->orderBy('price', 'ASC')
             ->get();
         $ratingComments = RatingComment::select($commentColumns)
             ->where('hotel_id', $hotelId)->orderBy('created_at', 'DESC')

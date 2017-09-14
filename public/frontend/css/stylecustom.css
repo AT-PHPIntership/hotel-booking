@@ -332,11 +332,9 @@
     display: block;
 }
 .room-dialog-modal{
-    margin-top: 25px;
-    /*width: 911px;*/
+    margin-top: 70px;
     width: 1136px;
 }
- 
 .cls-list-room-info {
     max-height: 306px;
     overflow: auto;
@@ -390,6 +388,7 @@
 .cls-room-empty {
     margin-top: 10px;
 }
+<<<<<<< HEAD
 /*slider*/
 .contain-slider-img-room {
     margin-top: 10px;
@@ -462,4 +461,8 @@
 .cls-room-empty-title {
     font-size: 16px;
     color: #e8841d;
+}
+.cls-no-img-hotel {
+    width: 750px;
+    height: 423px;  
 }

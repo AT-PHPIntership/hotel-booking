@@ -54,21 +54,6 @@ class Hotel extends Model
     const WEEK_NUMBER = 1;
 
     /**
-     * Value of checkin time
-     */
-    const CHECKIN_TIME = ' 14:00:00';
-
-    /**
-     * Value of checkout time
-     */
-    const CHECKOUT_TIME = ' 11:00:00';
-
-    /**
-     * Value of format date time day/month/year hour:minute:second
-     */
-    const DATETIME_FORMAT = 'd/m/Y H:i:s';
-
-    /**
      * Declare table
      *
      * @var string $tabel table name
@@ -157,7 +142,7 @@ class Hotel extends Model
     }
 
     /**
-     * Relationship with hotel's image.
+     * Relationship with hotel's image
      *
      * @return array
      */
@@ -167,18 +152,35 @@ class Hotel extends Model
     }
 
     /**
+     * This is a recommended way to declare event handlers
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($hotel) {
+            $hotel->ratingComments()->delete();
+            $hotel->hotelServices()->delete();
+            $hotel->rooms()->delete();
+            $hotel->images()->delete();
+        });
+    }
+
+    /**
      * Get Label for rating comment
      *
      * @return string
      */
     public function getLabelRatingAttribute()
     {
-        $rating = $this->ratingComments()->avg('total_rating');
+        $rating = $this->ratingComments->avg('total_rating');
         if ($rating <= self::LOW_SCORE) {
             return __('Bad');
-        } elseif (self::LOW_SCORE < $rating && $rating <= self::NOMAL_SCORE) {
+        } elseif ($rating <= self::NOMAL_SCORE) {
             return __('Nomal');
-        } elseif (self::NOMAL_SCORE < $rating && $rating <= self::HIGH_SCORE) {
+        } elseif ($rating <= self::HIGH_SCORE) {
             return __('Good');
         } else {
             return __('Very Good');
@@ -192,23 +194,58 @@ class Hotel extends Model
      */
     public function getRoundAvgRatingAttribute()
     {
-        return round($this->ratingComments->avg('total_rating'), self::LIMIT_ROUND_FLOAT);
+        $avgRating = $this->ratingComments->avg('total_rating');
+        $roundAvgRating = round($avgRating, self::LIMIT_ROUND_FLOAT);
+        return sprintf(config('hotel.float_fixed_point'), $roundAvgRating);
     }
 
     /**
-     * This is a recommended way to declare event handlers
+     * Get AVG of rating for food
      *
-     * @return void
+     * @return float
      */
-    protected static function boot()
+    public function getfoodRatingAvgAttribute()
     {
-        parent::boot();
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('food'));
+    }
 
-        static::deleting(function ($hotel) {
-             $hotel->ratingComments()->delete();
-             $hotel->hotelServices()->delete();
-             $hotel->rooms()->delete();
-             $hotel->images()->delete();
-        });
+    /**
+     * Get AVG of rating for cleanliness
+     *
+     * @return float
+     */
+    public function getCleanlinessRatingAvgAttribute()
+    {
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('cleanliness'));
+    }
+
+    /**
+     * Get AVG of rating for location
+     *
+     * @return float
+     */
+    public function getLocationRatingAvgAttribute()
+    {
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('location'));
+    }
+
+    /**
+     * Get AVG of rating for service
+     *
+     * @return float
+     */
+    public function getServiceRatingAvgAttribute()
+    {
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('service'));
+    }
+
+    /**
+     * Get AVG of rating for confort
+     *
+     * @return float
+     */
+    public function getComfortRatingAvgAttribute()
+    {
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('comfort'));
     }
 }
