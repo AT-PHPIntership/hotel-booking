@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\RatingComment;
 use App\Model\User;
 use App\Model\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {

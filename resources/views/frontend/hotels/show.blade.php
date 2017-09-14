@@ -70,11 +70,11 @@
 
           <caption> <h3>{{ __('Services') }}</h3></caption>
           <div class="cls-list-service">
-            <ul class="list-group row">
-              @foreach ($hotel->hotelServices as $hotelService)
+            <ul class="list-group row"> 
+              @foreach ($services as $service)
                 <li class="list-group-item col-xs-6">
                   <i class="fa fa-check-circle cls-color-primary"></i>
-                  <span class="ml-5">{{ $hotelService->service->name }}</span>
+                  <span class="ml-5">{{ $service->name }}</span>
                 </li>
               @endforeach
             </ul> 
