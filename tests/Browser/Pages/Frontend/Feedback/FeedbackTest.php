@@ -36,7 +36,8 @@ class FeedbackTest extends DuskTestCase
     public function testValuePageFeedBack()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/feedback')
+            $browser->logout()
+                    ->visit('/feedback')
                     ->assertSee('Feedback');
             if (Auth::user()) {
                 $browser->assertInputValue('full_name', Auth::user()->full_name)
@@ -60,7 +61,8 @@ class FeedbackTest extends DuskTestCase
     public function testFeedBackSuccess()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/feedback')
+            $browser->logout()
+                    ->visit('/feedback')
                     ->assertSee('Feedback');
             if (Auth::user()) {
                 $browser->type('content', 'Very good')
@@ -85,7 +87,6 @@ class FeedbackTest extends DuskTestCase
                     'content' => 'Very good. I like your website'
                 ]);
             }
-
         });
     }
 
@@ -97,7 +98,8 @@ class FeedbackTest extends DuskTestCase
     public function testValidationFeedBack()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/feedback')
+            $browser->logout()
+                    ->visit('/feedback')
                     ->assertSee('Feedback');
             if (Auth::user()) {
                 $browser->press('SUBMIT')
@@ -154,7 +156,8 @@ class FeedbackTest extends DuskTestCase
     public function testButtonReset()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/feedback')
+            $browser->logout()
+                    ->visit('/feedback')
                     ->assertSee('Feedback');
             if (Auth::user()) {
                 $browser->type('content', 'Very good. I like it')

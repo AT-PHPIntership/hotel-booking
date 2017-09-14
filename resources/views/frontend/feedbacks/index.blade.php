@@ -1,8 +1,8 @@
 @extends('frontend.layouts.master')
 @section('content')
-  <section >
+  <section>
     <div class=" text-center">
-      <h1>{{__('Feedback')}}</h1>
+      <h1>{{ __('Feedback') }}</h1>
     </div>
     @include('flash::message')
     <div class="container">
@@ -17,45 +17,45 @@
                     <input name="full_name" type="text" id="full_name"  class="form-control cls-login"
                     value="{{Auth::user()->full_name}}" />
                     @if($errors->first('full_name'))
-                      <span class="help-block">{{$errors->first('full_name')}}</span>
+                      <span class="help-block">{{ $errors->first('full_name') }}</span>
                     @endif
                   </div>
                   <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                     <input name="email" type="text" id="email"  class="form-control cls-login" value="{{Auth::user()->email}}"/>
                     @if($errors->first('email'))
-                      <span class="help-block">{{$errors->first('email')}}</span>
+                      <span class="help-block">{{ $errors->first('email') }}</span>
                     @endif
                   </div>
                 @else
                   <div class="form-group {{ $errors->has('full_name') ? ' has-error' : '' }}">
                     <input name="full_name" type="text" id="full_name"  class="form-control cls-login" placeholder="Please enter your full_name"/>
                     @if($errors->first('full_name'))
-                      <span class="help-block">{{$errors->first('full_name')}}</span>
+                      <span class="help-block">{{ $errors->first('full_name') }}</span>
                     @endif
                   </div>
                   <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                     <input name="email" type="text" id="email"  class="form-control cls-login" placeholder="Please enter your email"/>
                     @if($errors->first('email'))
-                      <span class="help-block">{{$errors->first('email')}}</span>
+                      <span class="help-block">{{ $errors->first('email') }}</span>
                     @endif
                   </div>
                 @endif
                 <div class="form-group {{ $errors->has('content') ? ' has-error' : '' }}">
                   <textarea class="form-control cls-login" name="content"></textarea>
                   @if($errors->first('content'))
-                      <span class="help-block">{{$errors->first('content')}}</span>
+                      <span class="help-block">{{ $errors->first('content') }}</span>
                     @endif
                 </div>
               </div>
               <div class ="panel-footer clearfix cls-register">
                 <button type ="submit" class="btn btn-success pull-right">
-                  {{__('Submit')}}
+                  {{ __('Submit') }}
                 </button>
                 <a href="{{ route('home.index') }}" class="btn btn-default pull-left">
-                  {{__('Back')}}
+                  {{ __('Back') }}
                 </a>
                 <button class="btn btn-warning pull-left" type="reset">
-                  {{__('Reset')}}
+                  {{ __('Reset') }}
                 </button>
               </div>
               </form>
