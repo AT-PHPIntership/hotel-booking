@@ -55,6 +55,11 @@ class News extends Model
     const ITEM_LIMIT = 4;
 
     /**
+     * Define a value number top news
+     */
+    const TOP_NEWS = 5;
+
+    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array

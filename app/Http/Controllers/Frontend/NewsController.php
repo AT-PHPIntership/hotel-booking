@@ -34,7 +34,7 @@ class NewsController extends Controller
             ->paginate(Category::ITEM_LIMIT);
         $news = News::select($newsColumns)
             ->orderby('created_at', 'DESC')
-            ->limit(5)
+            ->limit(News::TOP_NEWS)
             ->get();
         return view('frontend.news.index', compact('news', 'categories'));
     }
