@@ -31,10 +31,9 @@ class FeedBackController extends Controller
         $result = $feedback->save();
         if ($result) {
             flash(__('Sent Feedback!'))->success();
-            return redirect()->route('feedback');
         } else {
             flash(__('Error when send feedback!'))->error();
-            return redirect()->route('feedback');
         }
+        return redirect()->route('feedback');
     }
 }
