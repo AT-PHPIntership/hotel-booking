@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/colors/turquoise.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600,700">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css') }}">
