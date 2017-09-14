@@ -5,6 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Libraries\Traits\SearchTrait;
+use App\Model\Hotel;
 
 class Service extends Model
 {
@@ -23,6 +24,16 @@ class Service extends Model
     public function hotelServices()
     {
         return $this->hasMany(HotelService::class);
+    }
+
+    /**
+     * Relationship with hotels
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function services()
+    {
+        return $this->belongsToMany(Hotel::class, 'hotel_services');
     }
 
     /**

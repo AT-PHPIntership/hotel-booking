@@ -119,6 +119,16 @@ class Hotel extends Model
     }
 
     /**
+     * Relationship with services
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'hotel_services');
+    }
+
+    /**
      * This is a recommended way to declare event handlers
      *
      * @return void
