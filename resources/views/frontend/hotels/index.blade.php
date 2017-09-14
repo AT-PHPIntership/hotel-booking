@@ -10,14 +10,14 @@
       <div>
         <div class="row">
           <div class="col-md-12"> 
-            <form class="reservation-horizontal clearfix container-search" name="reservationform" method="GET" action="{{ route('frontend.hotel.index') }}" id="form-search" >
+            <form class="reservation-horizontal clearfix container-search" name="reservationform" method="GET" action="{{ route('hotels.index') }}" id="form-search" >
             <div id="message"></div><!-- Error message display -->
               <div class="row">        
                 <div class="coltest add-one-col">
                   <div class="form-group">
                     <label for="room">{{ __('Place') }}</label>
                     <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default all places') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                    <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control{{ $errors->has('hotelSourceArea') ? ' has-error' : '' }}" value="{{ old('hotelSourceArea', request('hotelSourceArea')) }}" placeholder="{{ __('Place to go') }}" data-url="{{ route('frontend.place.hintPlaces') }}">
+                    <input type="text" name="hotelSourceArea" id="hotelSourceArea" class="form-control{{ $errors->has('hotelSourceArea') ? ' has-error' : '' }}" value="{{ old('hotelSourceArea', request('hotelSourceArea')) }}" placeholder="{{ __('Place to go') }}" data-url="{{ route('places.hintPlaces') }}">
                     <small class="text-danger">{{ $errors->first('hotelSourceArea') }}</small>
                     <div class="widgetAcResult" hidden>
                       @include('frontend.layouts.partials.widgetAcResult')

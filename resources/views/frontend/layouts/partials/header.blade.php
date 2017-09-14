@@ -42,10 +42,10 @@
         </div>
       <div id="navbar-collapse-grid" class="navbar-collapse collapse fz-16">
         <ul class="nav navbar-nav">
-          <li class="dropdown {{ isActiveRoute('frontend.index') }}"> <a href="/">{{ __('Home') }}</a>
+          <li class="dropdown {{ isActiveRoute('home.index') }}"> <a href="/">{{ __('Home') }}</a>
           </li>
         <!-- hotels -->
-          <li class="{{ areActiveRoute(['frontend.hotel.index', 'frontend.hotel.show']) }}"> <a href="{{ route('frontend.hotel.index') }}">{{ __('Hotels') }}</b></a>
+          <li class="{{ areActiveRoute(['hotels.index', 'hotels.show']) }}"> <a href="{{ route('hotels.index') }}">{{ __('Hotels') }}</b></a>
           </li>
         <!-- news -->
           <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{ __('News') }}<b class="caret"></b></a>
@@ -57,7 +57,7 @@
           @if(Auth::check())
             <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{Auth::user()->username}}<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="blog.html" id="user-profile">{{__('Profile')}}</a></li>
+                <li><a href="{{ route('profile.show', Auth::user()->id) }}" id="user-profile">{{__('Profile')}}</a></li>
                 <li>
                   <a href="{{ route('logout') }}" id ="logout">{{__('Log out')}}</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden="">
