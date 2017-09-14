@@ -88,6 +88,7 @@ class UserController extends Controller
                 foreach ($user->images as $value) {
                     $value->delete();
                 }
+<<<<<<< HEAD
                 $imageName = config('image.name_prefix') . "-" . $request->image->hashName();
                 $request->file('image')
                     ->move(config('image.users.path_upload'), $imageName);
@@ -96,6 +97,9 @@ class UserController extends Controller
                     'target_id' => $user->id,
                     'path' => $imageName
                     ]);
+=======
+                Image::storeImages(array($request->image), 'user', $user->id, config('image.users.path_upload'));
+>>>>>>> update_userprofile
             }
             $user->update($input);
             DB::commit();
