@@ -49,6 +49,6 @@ class RatingComment extends Model
      */
     public function getRoundTotalRatingAttribute()
     {
-        return sprintf("%.1f", $this->total_rating);
+        return sprintf(config('hotel.float_fixed_point'), $this->total_rating);
     }
 }

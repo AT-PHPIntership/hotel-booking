@@ -142,6 +142,16 @@ class Hotel extends Model
     }
 
     /**
+     * Relationship with services
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'hotel_services');
+    }
+
+    /**
      * Relationship with hotel's image
      *
      * @return array
