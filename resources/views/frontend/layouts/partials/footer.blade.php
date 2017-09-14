@@ -37,7 +37,7 @@
         <div class="col-xs-6"> &copy; 2014 Starhotel All Rights Reserved </div>
         <div class="col-xs-6 text-right">
           <ul>
-            <li><a href="contact-01.html">Contact</a></li>
+            <li><a href="{{ route('feedback') }}" class="cls-feedback">{{__('Feedback')}}</a></li>
           </ul>
         </div>
       </div>
