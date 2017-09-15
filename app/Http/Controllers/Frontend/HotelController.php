@@ -28,17 +28,18 @@ class HotelController extends Controller
      */
     public function show($slug, Request $request)
     {
-        $checkoutDateDefaut = Carbon::tomorrow()->addWeeks(Hotel::WEEK_NUMBER);
-        $checkinDateDefaut = $checkoutDateDefaut->toDateTimeString();
-        $checkoutDateDefaut->addDay();
+        $checkoutDateDefault = Carbon::tomorrow()->addWeeks(Hotel::WEEK_NUMBER);
+        $checkinDateDefault = $checkoutDateDefault->toDateTimeString();
+        $checkoutDateDefault->addDay()->toDateTimeString();
 
         if ($request->has('checkin')) {
-            $checkinDateDefaut = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkin_time'))
+            $checkinDateDefault = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkin_time'))
                 ->toDateTimeString();
-            $checkoutDateDefaut = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkout_time'))
+            $checkoutDateDefault = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkout_time'))
                 ->addDay($request->duration)
                 ->toDateTimeString();
         }
+
         $columns = [
             'hotels.id',
             'name',
@@ -73,10 +74,10 @@ class HotelController extends Controller
             ->leftJoin(DB::raw("(SELECT busy_reservations.room_id as room_id, SUM(busy_reservations.quantity) as quantity_busy_reservation FROM (SELECT * FROM reservations WHERE (status = ?) AND(checkin_date < ? AND checkout_date > ?) OR (checkin_date < ? AND checkout_date > ?)) AS busy_reservations GROUP BY busy_reservations.room_id) AS busy_rooms"), 'busy_rooms.room_id', '=', 'rooms.id')
             ->addBinding([
                 Reservation::STATUS_ACCEPTED,
-                $checkinDateDefaut,
-                $checkinDateDefaut,
-                $checkoutDateDefaut,
-                $checkoutDateDefaut
+                $checkinDateDefault,
+                $checkinDateDefault,
+                $checkoutDateDefault,
+                $checkoutDateDefault
             ], 'join')
             ->where(DB::raw('COALESCE(quantity_busy_reservation, 0)'), '<', DB::raw('CONVERT(total, CHAR(5))'))->orderBy('price', 'ASC')
             ->get();
@@ -87,7 +88,8 @@ class HotelController extends Controller
         $hotel = Hotel::select($columns)->with($with)->where('slug', $slug)
             ->firstOrFail();
         $services = $hotel->services()->get();
-        return view('frontend.hotels.show', compact('hotel', 'ratingComments', 'roomEmpty', 'services'));
+       
+        return view('frontend.hotels.show', compact('hotel', 'ratingComments', 'roomEmpty', 'services', 'checkinDateDefault', 'checkoutDateDefault'));
     }
 
     /**

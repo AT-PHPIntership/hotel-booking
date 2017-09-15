@@ -1,4 +1,7 @@
 <section class="cls-list-room">
+  <div class="cls-info-arrange-time">
+   {{ __('List vacancies from :checkin to :checkout .', ['checkin' => formatDateTimeToDate($checkinDateDefault), 'checkout' => formatDateTimeToDate($checkinDateDefault)]) }}
+  </div>
   @if ($hotel->rooms->count() == 0)
     <div class = "list-room">
       {{ __('Hotel not has room any ! Admin is updating !') }}

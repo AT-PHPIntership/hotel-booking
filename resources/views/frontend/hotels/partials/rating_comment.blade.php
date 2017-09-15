@@ -33,7 +33,7 @@
               <div class="col-xs-12 col-md-6">
                 <div class="row rating-desc">
                   <div class="col-xs-3 col-md-3 text-right">
-                    {{ __('Cleanliness') }}
+                    {{ __('Clean') }}
                   </div>
                   <div class="col-xs-8 col-md-9">
                     <div class="progress progress-striped">

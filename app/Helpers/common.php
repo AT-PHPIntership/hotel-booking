@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 if (!function_exists('isActiveRoute')) {
     
     /**
@@ -95,5 +97,20 @@ if (!function_exists('getProgressPercent')) {
     function getProgressPercent($avgRating)
     {
         return $avgRating * RATING_FACTOR;
+    }
+}
+
+if (!function_exists('formatDateTimeToDate')) {
+
+    /**
+     * Format date time string to date string
+     *
+     * @param string $strDateTime string date time
+     *
+     * @return Carbon
+     */
+    function formatDateTimeToDate($strDateTime)
+    {
+        return Carbon::parse($strDateTime)->format(config('hotel.date_format'));
     }
 }
