@@ -10,7 +10,7 @@
       <div>
         <div class="row">
           <div class="col-md-12">           
-            <form class="reservation-horizontal clearfix container-search" name="reservationform" method="GET"  action="{{ route('frontend.hotel.index') }}">
+            <form class="reservation-horizontal clearfix container-search" name="reservationform" method="GET"  action="{{ route('hotels.index') }}">
             <div id="message"></div><!-- Error message display -->
               <div class="row">
                
@@ -116,7 +116,7 @@
                         @endif
                       @endforeach
                     </div>
-                    <a href="/detailHotel" class="btn btn-primary btn-block">{{ __('See Room') }}</a>
+                    <a href="{{ route('hotels.show', $hotel->slug) }}" class="btn btn-primary btn-block">{{ __('See Room') }}</a>
                   </div>
                 </div>
               </div>
