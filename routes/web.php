@@ -14,7 +14,9 @@ Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
     Route::group(['middleware'=> 'auth'], function() {
         Route::resource('/profile', 'UserController', ['middleware'=>'checkUser']);
-    });
+    }); 
+    Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
+    Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
 });
 Route::get('/registerSuccess', function() {
     return view('frontend.notice');
@@ -41,7 +43,4 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
 });
 
-Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
-    Route::resource('/hotel', 'HotelController');
-});
 Auth::routes();

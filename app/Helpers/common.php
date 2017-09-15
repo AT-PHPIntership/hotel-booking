@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 if (!function_exists('isActiveRoute')) {
     
     /**
@@ -75,5 +77,40 @@ if (!function_exists('contentLimit')) {
             UNICODE_FORMAT
         ) . SUFFIX;
         return ($contentLength > LIMIT_LENGTH) ? $shortencontent : $content;
+    }
+}
+
+/**
+ * Value of factor to convert rating to percent
+ */
+const RATING_FACTOR = 10;
+
+if (!function_exists('getProgressPercent')) {
+    
+    /**
+     * Get percent progress of rating attribute
+     *
+     * @param float $avgRating average rating
+     *
+     * @return float
+     */
+    function getProgressPercent($avgRating)
+    {
+        return $avgRating * RATING_FACTOR;
+    }
+}
+
+if (!function_exists('formatDateTimeToDate')) {
+
+    /**
+     * Format date time string to date string
+     *
+     * @param string $strDateTime string date time
+     *
+     * @return Carbon
+     */
+    function formatDateTimeToDate($strDateTime)
+    {
+        return Carbon::parse($strDateTime)->format(config('hotel.date_format'));
     }
 }
