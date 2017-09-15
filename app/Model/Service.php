@@ -16,15 +16,15 @@ class Service extends Model
     const ROW_LIMIT = 10;
 
     /**
-     * Get hotel service for service
+     * Relationship with hotels
      *
-     * @return array
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function hotelServices()
+    public function hotels()
     {
-        return $this->hasMany(HotelService::class);
+        return $this->belongsToMany(Hotel::class, 'hotel_services');
     }
-
+    
     /**
      * The "booting" method of the model.
      *

@@ -66,18 +66,18 @@ class HotelController extends Controller
         $with['images'] = function ($query) {
             $query->select();
         };
-        $with['hotelServices'] = function ($query) {
-            $query->select('id', 'hotel_id', 'service_id');
-        };
         $with['ratingComments.user'] = function ($query) {
             $query->select('id', 'username');
         };
-        $with['hotelServices.service'] = function ($query) {
-            $query->select('id', 'name');
-        };
         $roomEmpty = Room::where('hotel_id', $hotelId)
-            ->leftJoin(DB::raw("(SELECT busy_reservations.room_id as room_id, SUM(busy_reservations.quantity) as quantity_busy_reservation FROM (SELECT * FROM reservations WHERE (checkin_date < ? AND checkout_date > ?) OR (checkin_date < ? AND checkout_date > ?)) AS busy_reservations GROUP BY busy_reservations.room_id) AS busy_rooms"), 'busy_rooms.room_id', '=', 'rooms.id')
-            ->addBinding([$checkinDateDefaut, $checkinDateDefaut, $checkoutDateDefaut,  $checkoutDateDefaut], 'join')
+            ->leftJoin(DB::raw("(SELECT busy_reservations.room_id as room_id, SUM(busy_reservations.quantity) as quantity_busy_reservation FROM (SELECT * FROM reservations WHERE (status = ?) AND(checkin_date < ? AND checkout_date > ?) OR (checkin_date < ? AND checkout_date > ?)) AS busy_reservations GROUP BY busy_reservations.room_id) AS busy_rooms"), 'busy_rooms.room_id', '=', 'rooms.id')
+            ->addBinding([
+                Reservation::STATUS_ACCEPTED,
+                $checkinDateDefaut,
+                $checkinDateDefaut,
+                $checkoutDateDefaut,
+                $checkoutDateDefaut
+            ], 'join')
             ->where(DB::raw('COALESCE(quantity_busy_reservation, 0)'), '<', DB::raw('CONVERT(total, CHAR(5))'))->orderBy('price', 'ASC')
             ->get();
         $ratingComments = RatingComment::select($commentColumns)
@@ -86,8 +86,8 @@ class HotelController extends Controller
    
         $hotel = Hotel::select($columns)->with($with)->where('slug', $slug)
             ->firstOrFail();
-        
-        return view('frontend.hotels.show', compact('hotel', 'ratingComments', 'roomEmpty'));
+        $services = $hotel->services()->get();
+        return view('frontend.hotels.show', compact('hotel', 'ratingComments', 'roomEmpty', 'services'));
     }
 
     /**
