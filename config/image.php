@@ -5,6 +5,7 @@ return [
     'name_prefix' => date("Ymd"),
     'default_thumbnail' => '/images/default/default-thumbnail.jpg',
     'no_image' => 'images/default/no_image.png',
+    'bg_news' => 'images/default/news.jpg',
     'places' => [
         'path_upload' => 'images/places/',
     ],

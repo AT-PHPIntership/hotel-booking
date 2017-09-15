@@ -11,7 +11,7 @@
     <div class="row">
       @if (isset($news))
         <div class="col-md-6">
-          <a href="#">
+          <a href="{{ route('frontend.news.show', $news[0]->slug) }}">
             <div class="image-news-show">
               <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- slides images room-->
@@ -44,7 +44,7 @@
             </div>
           </a>
           <div class="summary-content-news-show">
-            <h2 class="text-center text-success"><a href="#">{{ contentLimit($news[0]->title) }}</a></h2>
+            <h2 class="text-center text-success"><a href="{{ route('frontend.news.show', $news[0]->slug) }}">{{ contentLimit($news[0]->title) }}</a></h2>
             <p>{{ contentLimit($news[0]->content, 195) }}</p>
           </div>
         </div>
@@ -56,11 +56,11 @@
           @if ($key != 0)
             <div class="mt-20">
               <div class="col-md-5">
-                <a href="#"><img src="{{ isset($item->images[0]) ? asset($item->images[0]) : asset(config('image.no_image')) }}" class="img-news"></a>
+                <a href="{{ route('frontend.news.show', $item->slug) }}"><img src="{{ isset($item->images[0]) ? asset($item->images[0]) : asset(config('image.no_image')) }}" class="img-news"></a>
               </div>
               <div col-md-8>
                 <div class="img-news">
-                  <h4><a href="#"> {{ contentLimit($item->title) }}</a></h4>
+                  <h4><a href="{{ route('frontend.news.show', $item->slug) }}"> {{ contentLimit($item->title) }}</a></h4>
                   <p>{{ contentLimit($item->content) }}</p>
                 </div>
               </div>
@@ -83,7 +83,7 @@
         </div>
         @foreach ($category->news as $key => $itemNews)
           <div class="col-md-3">
-            <a href="#">
+            <a href="{{ route('frontend.news.show', $itemNews->slug) }}">
               <div class="second-place news">
                 <img src="{{ isset($itemNews->images[0]) ? asset($itemNews->images[0]) : asset(config('image.no_image')) }}" alt="topPlace" class="img-news news"/>  
                 <div class="second-place-bottom news"> 

@@ -239,6 +239,9 @@
 .mb-10 {
     margin-bottom: 10px;
 }
+.mb-50 {
+    margin-bottom: 50px;
+}
 .mlr-0 {
     margin-left: 0;
     margin-right: 0;
@@ -392,4 +395,11 @@ select[name = "arange_id"] {
 }
 .img-news.news {
     height: 80%;
+}
+.content-news {
+    z-index: 7000!important;
+}
+.img-inner {
+      position: absolute;
+      top: 10px;
 }

@@ -21,10 +21,12 @@ class NewsController extends Controller
             'id',
             'title',
             'content',
+            'slug'
         ];
         $categoryColumns = [
             'categories.id',
             'name',
+            'slug'
         ];
         $categories = Category::select($categoryColumns)
             ->whereHas('news', function ($query) {
@@ -34,8 +36,28 @@ class NewsController extends Controller
             ->paginate(Category::ITEM_LIMIT);
         $news = News::select($newsColumns)
             ->orderby('created_at', 'DESC')
-            ->limit(5)
+            ->limit(News::TOP_NEWS)
             ->get();
         return view('frontend.news.index', compact('news', 'categories'));
+    }
+
+    /**
+     * Show detail news.
+     *
+     * @param string $slug id of news
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($slug)
+    {
+        $news = News::where('slug', $slug)->firstOrFail();
+        $category = Category::where('id', $news->category_id)
+                        ->with(['news' => function ($query) use ($news) {
+                            $query->where('id', '!=', $news->id)
+                                ->limit(News::ITEM_LIMIT)
+                                ->orderby('created_at', 'DESC');
+                        }])
+                        ->firstOrFail();
+        return view('frontend.news.show', compact('news', 'category'));
     }
 }
