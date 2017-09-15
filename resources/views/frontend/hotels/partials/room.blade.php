@@ -1,4 +1,8 @@
 <section class="cls-list-room">
+  <div class="cls-info-arrange-time">
+   {{ __('List vacancies from :checkin to :checkout .', ['checkin' => formatDateTimeToDate($checkinDateDefault),
+    'checkout' => formatDateTimeToDate($checkoutDateDefault)]) }}
+  </div>
   @if ($hotel->rooms->count() == 0)
     <div class = "list-room">
       {{ __('Hotel not has room any ! Admin is updating !') }}
@@ -15,7 +19,7 @@
           <p><a href="" class="cls-room-info link-room-info" data-toggle="modal" data-target="#room-detail-modal-{{ $room->id }}" data-id='{{ $room->id }}'>{{ __('Room information') }}</a></p>
         </div>
         <div class="room-item-price">
-          <h3 class="cls-room-price">{{ __(':price VND', ['price' => $room->price_format]) }} </h3>
+          <h3 class="cls-room-price">{{ __(':price $', ['price' => $room->price_format]) }} </h3>
         </div>
         <div class="room-item-booking">
           <a href="/room"  class="btn cls-btn-booking">

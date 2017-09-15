@@ -5,16 +5,12 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Hotel;
-use App\Model\Place;
-use App\Model\Service;
 use App\Model\Image;
 use App\Model\Room;
-use App\Model\HotelService;
 use App\Model\Reservation;
 use App\Model\RatingComment;
-use Illuminate\Http\Response;
-use Carbon\Carbon;
 use DB;
+use Carbon\Carbon;
 
 class HotelController extends Controller
 {
@@ -28,17 +24,18 @@ class HotelController extends Controller
      */
     public function show($slug, Request $request)
     {
-        $checkoutDateDefaut = Carbon::tomorrow()->addWeeks(Hotel::WEEK_NUMBER);
-        $checkinDateDefaut = $checkoutDateDefaut->toDateTimeString();
-        $checkoutDateDefaut->addDay();
+        $checkoutDateDefault = Carbon::tomorrow()->addWeeks(Hotel::WEEK_NUMBER);
+        $checkinDateDefault = $checkoutDateDefault->toDateTimeString();
+        $checkoutDateDefault->addDay()->toDateTimeString();
 
         if ($request->has('checkin')) {
-            $checkinDateDefaut = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkin_time'))
+            $checkinDateDefault = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkin_time'))
                 ->toDateTimeString();
-            $checkoutDateDefaut = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkout_time'))
+            $checkoutDateDefault = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkout_time'))
                 ->addDay($request->duration)
                 ->toDateTimeString();
         }
+
         $columns = [
             'hotels.id',
             'name',
@@ -60,34 +57,44 @@ class HotelController extends Controller
             'created_at',
         ];
         $hotelId = Hotel::where('slug', $slug)->firstOrFail()->id;
-        $with['place'] = function ($query) {
-            $query->select('id', 'name');
-        };
         $with['images'] = function ($query) {
             $query->select();
         };
-        $with['ratingComments.user'] = function ($query) {
-            $query->select('id', 'username');
-        };
+
+        $joinQuery = <<<EOD
+            (
+                SELECT busy_reservations.room_id as room_id, SUM(busy_reservations.quantity) as quantity_busy_reservation
+                FROM (
+                    SELECT * FROM reservations 
+                    WHERE (status = ?) AND (checkin_date < ? AND checkout_date > ?) 
+                        OR (checkin_date < ? AND checkout_date > ?)
+                ) AS busy_reservations 
+                GROUP BY busy_reservations.room_id
+            ) AS busy_rooms
+EOD;
+
         $roomEmpty = Room::where('hotel_id', $hotelId)
-            ->leftJoin(DB::raw("(SELECT busy_reservations.room_id as room_id, SUM(busy_reservations.quantity) as quantity_busy_reservation FROM (SELECT * FROM reservations WHERE (status = ?) AND(checkin_date < ? AND checkout_date > ?) OR (checkin_date < ? AND checkout_date > ?)) AS busy_reservations GROUP BY busy_reservations.room_id) AS busy_rooms"), 'busy_rooms.room_id', '=', 'rooms.id')
+            ->leftJoin(DB::raw($joinQuery), 'busy_rooms.room_id', '=', 'rooms.id')
             ->addBinding([
                 Reservation::STATUS_ACCEPTED,
-                $checkinDateDefaut,
-                $checkinDateDefaut,
-                $checkoutDateDefaut,
-                $checkoutDateDefaut
+                $checkinDateDefault,
+                $checkinDateDefault,
+                $checkoutDateDefault,
+                $checkoutDateDefault
             ], 'join')
             ->where(DB::raw('COALESCE(quantity_busy_reservation, 0)'), '<', DB::raw('CONVERT(total, CHAR(5))'))->orderBy('price', 'ASC')
             ->get();
         $ratingComments = RatingComment::select($commentColumns)
+            ->with('user')
             ->where('hotel_id', $hotelId)->orderBy('created_at', 'DESC')
             ->paginate(Hotel::COMMENT_ROW_LIMIT);
    
-        $hotel = Hotel::select($columns)->with($with)->where('slug', $slug)
+        $hotel = Hotel::select($columns)->with($with)
+            ->where('slug', $slug)
             ->firstOrFail();
         $services = $hotel->services()->get();
-        return view('frontend.hotels.show', compact('hotel', 'ratingComments', 'roomEmpty', 'services'));
+       
+        return view('frontend.hotels.show', compact('hotel', 'ratingComments', 'roomEmpty', 'services', 'checkinDateDefault', 'checkoutDateDefault'));
     }
 
     /**

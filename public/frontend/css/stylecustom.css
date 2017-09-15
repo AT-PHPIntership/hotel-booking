@@ -235,6 +235,9 @@
     clear: both;
     display: block;
 }
+.cls-box-info-hotel {
+    margin-top: -70px;
+}
 .cls-list-service {
     width: 100%;
     margin-left: 10px;
@@ -391,4 +394,12 @@
 .cls-no-img-hotel {
     width: 750px;
     height: 423px;  
+}
+.cls-info-arrange-time {
+    background: #f7f7f7;
+    padding: 16px;
+    margin-bottom: 5px;
+}
+.count-rating-guest{
+    margin-top: 10px;
 }

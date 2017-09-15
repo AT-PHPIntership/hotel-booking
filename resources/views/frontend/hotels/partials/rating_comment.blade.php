@@ -33,7 +33,7 @@
               <div class="col-xs-12 col-md-6">
                 <div class="row rating-desc">
                   <div class="col-xs-3 col-md-3 text-right">
-                    {{ __('Cleanliness') }}
+                    {{ __('Clean') }}
                   </div>
                   <div class="col-xs-8 col-md-9">
                     <div class="progress progress-striped">
@@ -127,6 +127,7 @@
         <div class="cls-contain-comment">
           <h3>{{ __('Comment ( :count_comment )', ['count_comment' => $countComment] ) }}</h3>
           @if($countComment != 0)
+
             @foreach ($ratingComments as $comment) 
               <div class="col-md-12 comment-old">
                 <div class="total-rating-circle">
