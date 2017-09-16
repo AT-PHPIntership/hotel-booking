@@ -27,13 +27,12 @@ class FeedBackController extends Controller
      */
     public function store(FeedbackRequest $request)
     {
-        $feedback = new Feedback($request->all());
-        $result = $feedback->save();
+        $result = Feedback::create($request->all());
         if ($result) {
             flash(__('Sent Feedback!'))->success();
         } else {
             flash(__('Error when send feedback!'))->error();
         }
-        return redirect()->route('feedback');
+        return redirect()->route('sendfeedback.create');
     }
 }

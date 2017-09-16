@@ -4,12 +4,14 @@
     <div class=" text-center">
       <h1>{{ __('Feedback') }}</h1>
     </div>
-    @include('flash::message')
+    <div class=" text-center">
+      @include('flash::message')
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-10 toppad cls-tb-user" >
           <div class="panel panel-info">
-            <form method="POST" action="{{ route('sendfeedback') }}">
+            <form method="POST" action="{{ route('sendfeedback.store') }}">
               <div class="panel-body">
                 {{ csrf_field() }}
                 @if(Auth::user())

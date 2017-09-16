@@ -12,8 +12,7 @@
 
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
-    Route::get('/feedback', 'FeedBackController@create')->name('feedback');
-    Route::post('/sendfeedback', 'FeedBackController@store')->name('sendfeedback');
+    Route::resource('/sendfeedback', 'FeedBackController', ['only' => ['create', 'store']]);
     Route::group(['middleware'=> 'auth'], function() {
         Route::resource('/profile', 'UserController', ['middleware'=>'checkUser']);
     });
