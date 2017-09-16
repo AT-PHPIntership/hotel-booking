@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
             markers: [{
                 address: "Calle Hamburgo, Las Palmas, Spanje", //Address of the company
                 html: "<h4>Our hotel</h4><p>This is our hotel</p>", //Quicktip
-                popup: false, //Boolean	
+                popup: false, //Boolean 
                 scrollwheel: false, //Boolean
                 maptype: 'TERRAIN', //Choose between: 'HYBRID', 'TERRAIN', 'SATELLITE' or 'ROADMAP'.
                 icon: {
@@ -84,7 +84,7 @@ jQuery(document).ready(function () {
             startwidth: 1170,
             startheight: 449,
             autoHeight:"off",
-			fullScreenAlignForce:"off",
+            fullScreenAlignForce:"off",
             
             onHoverStop: "on",
 
@@ -96,12 +96,12 @@ jQuery(document).ready(function () {
             hideBulletsOnMobile: "on",
             hideArrowsOnMobile: "on",
             hideThumbsUnderResoluition: 0,
-			
-			hideThumbs:0,
-			hideTimerBar:"on",
+            
+            hideThumbs:0,
+            hideTimerBar:"on",
 
-			keyboardNavigation:"on",
-			
+            keyboardNavigation:"on",
+            
             navigationType: "none",
             navigationArrows: "solo",
             navigationStyle: "round",
@@ -122,10 +122,10 @@ jQuery(document).ready(function () {
             soloArrowRightVOffset: 0,
 
             touchenabled: "on",
-			swipe_velocity:"0.7",
-			swipe_max_touches:"1",
-			swipe_min_touches:"1",
-			drag_block_vertical:"false",
+            swipe_velocity:"0.7",
+            swipe_max_touches:"1",
+            swipe_min_touches:"1",
+            drag_block_vertical:"false",
 
             stopAtSlide: -1,
             stopAfterLoops: -1,
@@ -135,8 +135,8 @@ jQuery(document).ready(function () {
 
             dottedOverlay: "none",
 
-			fullWidth:"off",
-			forceFullWidth:"off",
+            fullWidth:"off",
+            forceFullWidth:"off",
             fullScreen: "off",
             fullScreenOffsetContainer: "#topheader-to-offset",
 
@@ -158,7 +158,7 @@ jQuery(document).ready(function () {
             autoplay_slideshow: false, // true/false
             opacity: 0.80, // Value between 0 and 1 
             show_title: true, // true/false            
-			allow_resize: true, // Resize the photos bigger than viewport. true/false
+            allow_resize: true, // Resize the photos bigger than viewport. true/false
             default_width: 500,
             default_height: 344,
             counter_separator_label: '/', // The separator for the gallery counter 1 "of" 2
@@ -219,10 +219,10 @@ jQuery(document).ready(function () {
     //niceScroll
     if (jQuery().niceScroll) {
          $(".parallax-effect").niceScroll();
-		 };
-		 
+         };
+         
     // Isotope
-    window.onload = function () {	
+    window.onload = function () {   
         if (jQuery().isotope) {
             // cache container
             var jQuerycontainer1 = jQuery('.room-list');
@@ -324,7 +324,7 @@ jQuery(document).ready(function () {
         })
     }
 
-    // Reservation Form	
+    // Reservation Form 
     //jQueryUI - Datepicker
     if (jQuery().datepicker) {
         jQuery('#checkin').datepicker({
@@ -379,7 +379,7 @@ jQuery(document).ready(function () {
         total = +opt1.val() + +opt2.val();
         jQuery(".guests-select .total").html(total);
     });
-
+    
     $('#logout').on('click', function(e) {
         e.preventDefault();
         $('#logout-form').submit();

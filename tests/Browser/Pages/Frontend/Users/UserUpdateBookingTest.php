@@ -71,7 +71,7 @@ class UserUpdateBookingTest extends DuskTestCase
                             ->press('OK')
                             ->assertSee('This booking room was canceled!')
                             ->assertPathIs('/profile/'.$user->id.'/reservation/'.$reservationId.'/show');
-                    $this->assertTrue(Reservation::find($reservationId)->status_label == Reservation::STATUS_CANCELED);
+                    $this->assertTrue(Reservation::find($reservationId)->status == Reservation::STATUS_CANCELED);
                 }
             } else {
                 $browser->assertMissing('#table-reservation tbody');
