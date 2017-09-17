@@ -397,4 +397,70 @@ jQuery(document).ready(function () {
         $('#table-reservation').show();
         $('#table-comment').hide();
     });
+
+    /*
+     * Slider range rating   
+     */
+    var $slider = $('.slider');
+    var total = 0;
+    var numAttributeRating = $slider.length;
+
+    $('#avg-rating').val('5.0');
+    $slider.each(
+        function(i) {
+            let idInput = '#' + $(this).attr('id');
+            let idValue = '#' + $(this).next().attr('id');
+            $(idValue).text('5');
+            $(idInput).on('change', function (e) {
+                $(idValue).text($(this).val());
+                let sum = addAll();
+                let avg = sum / numAttributeRating ;
+                $('#avg-rating').val(avg.toFixed(1));
+            })
+        } 
+    );
+
+    /*
+     * Add value rating
+     *
+     * @return float
+     */
+    function addAll() {
+        var sum = 0;
+        $('.slider').each(function (){        
+            sum += isNaN(this.value) || $.trim(this.value) === '' ? 0 : parseFloat(this.value);        
+        });
+        return sum;    
+    }   
+
+    /*
+     * Color slider change upper and lower 
+     */
+    $('input[type="range"]').change(function () {
+    var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+    
+    $(this).css('background-image',
+        '-webkit-gradient(linear, left top, right top, '
+        + 'color-stop(' + val + ', #1da0e2), '
+        + 'color-stop(' + val + ', #C5C5C5)'
+        + ')'
+        );
+    });
+
+    /**
+     * Show delete confimation when click button delete
+     */
+    $('.btn-delete-item').bind('click',function(e){
+        e.preventDefault();
+        var form = $(this.form);
+        var title = $(this).attr('data-title');
+        var body = '<i>' + $(this).attr('data-confirm') + '</i>';
+        $('#title-content').html(title);
+        $('#body-content').html(body);
+        $('#confirm').modal('show');
+        $('#delete-btn').one('click', function(){
+            form.submit();
+            $('#confirm').modal('hide');
+        })
+    });
 });
