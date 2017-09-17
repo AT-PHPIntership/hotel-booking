@@ -61,9 +61,10 @@
             <div class="cls-item-border pull-right">
                 <img class="cls-image-rooms" src="{{ asset(config('image.default_thumbnail')) }}" alt="">
                 <div class="cls-ml-20">
-                  <h4>{{ __('Rooms name') }}</h4>
-                  <h4>{{ __('Quanlity') }}</h4>
-                  <h4>{{ __('Rooms name') }}</h4>
+                  <h4>{{ __('Hotel name:') }}</h4>
+                  <h4>{{ __('Rooms name:') }}</h4>
+                  <h4>{{ __('Quanlity:') }}</h4>
+                  <h4>{{ __('Rooms name:') }}</h4>
                 </div>
               </div>
             </div>
