@@ -102,4 +102,47 @@ $(document).ready(function(){
             $('#confirm').modal('hide');
         })
     });
+
+    /**
+     * Show hinted place when focus place_slug field
+     */
+    $('#hotelSourceArea').focus(function(event) {
+        $('.widgetAcResult').show();
+    });
+
+    /**
+     * Show hinted place when key up place_slug field
+     */
+    $('#hotelSourceArea').keyup(function(event) {
+        var url = $(this).data('url');
+        var key = $(this).val();
+        $.ajax({
+                url: url,
+                type: 'GET',
+                data: {key :key},
+                success: function( msg ) {
+                    if (msg == '') {
+                        $('#submit').attr("disabled", true);
+                    } else {
+                        $('#submit').removeAttr("disabled");
+                    }
+                    $('.widgetAcResult').html(msg);
+                }
+            });
+    });
+
+    /**
+     * Hide hinted place when blur place_slug field
+     */
+    $('#hotelSourceArea').blur(function(event) {
+        $(this).val($('.widgetAcResult div li.place-selected')[0].innerHTML);
+        $('.widgetAcResult').fadeOut();
+    });
+
+    /**
+     * Fill value for place_slug field when choose hinted place
+     */
+    $(".widgetAcResult").on('click', 'div li.place-selected', function(event) {
+        $('#hotelSourceArea').val($(this)[0].innerHTML);
+    });
 });
