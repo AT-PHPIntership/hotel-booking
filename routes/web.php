@@ -17,6 +17,7 @@ Route::group(['namespace'=>'Frontend'], function() {
     }); 
     Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
     Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
+    Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
 });
 Route::get('/registerSuccess', function() {
     return view('frontend.notice');
