@@ -9,8 +9,8 @@
     <section id="reservation-form" class="mt-0">
       <div>
         <div class="row">
-          <div class="col-md-12"> 
-            <form class="reservation-horizontal clearfix container-search" name="reservationform" method="GET" action="{{ route('hotels.index') }}" id="form-search" >
+          <div class="col-md-12">           
+            <form class="reservation-horizontal clearfix container-search" name="reservationform" method="GET"  action="{{ route('hotels.index') }}">
             <div id="message"></div><!-- Error message display -->
               <div class="row">        
                 <div class="coltest add-one-col">
