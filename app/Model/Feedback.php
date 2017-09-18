@@ -17,6 +17,15 @@ class Feedback extends Model
     protected $table = 'feedbacks';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'full_name', 'email', 'content'
+    ];
+
+    /**
      * Value paginate of row
      */
     const ROW_LIMIT = 10;

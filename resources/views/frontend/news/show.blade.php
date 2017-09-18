@@ -6,36 +6,15 @@
 @section('content')
 
 <!-- Introduce Slider -->
+<div style="background:#F2EDED;">
 <section class="revolution-slider">
   <div class="bannercontainer">
     <div class="banner">
       <div>
           <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" > 
           <!-- Default Image --> 
-            <img src="{{ asset(config('image.bg_news')) }}" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat" class="bg-img-slide-news"> 
+            <img src="{{ asset(config('image.bginner_news1')) }}" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat" class="bg-img-slide-news"> 
           </li>
-          <div class="col-md-6 col-md-offset-3 img-inner">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-              <!-- slides images hotel-->
-              <div class="carousel-inner">
-                <div class="item active">
-                  <img src="{{ asset(config('image.bg_news')) }}" class="bg-img-slide-news">
-                </div>
-                <div class="item">
-                  <img src="{{ asset(config('image.bginner_news')) }}" class="bg-img-slide-news">
-                </div>
-              </div>
-              <!-- slider controls -->
-              <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only"></span>
-              </a>
-              <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only"></span>
-              </a>
-            </div>
-          </div>
         </div>
     </div>
   </div>
@@ -60,7 +39,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <h2 class="lined-heading"><a href="#"><span>{{ __('Relative news') }}</span></a></h2>
+          <h2 class="lined-heading"><a href="#"><span  class="relative-header pull-left tranY-50">{{ __('Relative news') }}</span></a></h2>
         </div> 
       </div>
       @foreach ($category->news as $key => $itemNews)
@@ -78,4 +57,5 @@
     </div>
   @endif
 </section>
+</div>
 @endsection
