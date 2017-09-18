@@ -379,7 +379,7 @@ jQuery(document).ready(function () {
         total = +opt1.val() + +opt2.val();
         jQuery(".guests-select .total").html(total);
     });
-
+    
     $('#logout').on('click', function(e) {
         e.preventDefault();
         $('#logout-form').submit();
