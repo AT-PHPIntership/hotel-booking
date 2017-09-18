@@ -9,7 +9,7 @@
  <!-- Main content -->
   <section class="content mt-20">
     <div class="row">
-      @if (isset($news))
+      @if (isset($news[0]))
         <div class="col-md-6">
           <a href="#">
             <div class="image-news-show">
