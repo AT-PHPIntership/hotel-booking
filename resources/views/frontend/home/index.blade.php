@@ -37,7 +37,7 @@
                         data-speed="1000" 
                         data-start="1900" 
                         data-easing="easeOutBack">
-            <a href="/detailHotel" class="button btn btn-purple btn-lg">See more</a> 
+            <a href="{{ route('reservations.create' , ['room-id' => 5]) }}" class="button btn btn-purple btn-lg">See more</a> 
                   </div>
         </li>
     <!-- Slide 2 -->

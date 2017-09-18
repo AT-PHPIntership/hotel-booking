@@ -25,6 +25,7 @@ class HotelController extends Controller
      */
     public function index(SearchHotelRequest $request)
     {
+        \Cache::put('test', $request->all(), 5);
         $columns = [
             'hotels.id',
             'hotels.name',
