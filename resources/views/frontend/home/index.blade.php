@@ -193,7 +193,6 @@
     </div>
   </section>
 <!-- top hotel -->
-@if($topHotels->count() != null)
   <section class="rooms mt50">
     <div class="container">
       <div class="row">
@@ -201,6 +200,7 @@
           <h2 class="lined-heading"><span>{{ __('Representative Hotels') }}</span></h2>
         </div> 
         <!-- 6 hotel top -->
+        @if($topHotels->count() != null)
         @foreach($topHotels as $hotel)
           <div class="col-sm-4 mt50">
             <div class="room-thumb">
