@@ -12,6 +12,7 @@
 
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
+    Route::resource('/sendfeedback', 'FeedBackController', ['only' => ['create', 'store']]);
     Route::group(['middleware'=> 'auth'], function() {
         Route::put('/profile/{profile}/reservation/{reservation}', 'ReservationController@update')->name('user.cancelBooking');
         Route::group(['middleware'=> 'checkUser'], function() {
