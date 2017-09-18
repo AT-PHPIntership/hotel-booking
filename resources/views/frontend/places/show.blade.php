@@ -20,7 +20,7 @@
           <img class="cls-image" src="{{ isset($place->image) ? $place->image_url : asset(config('image.no_image')) }}" alt="">
           <div class="cls-transbox">
             <h1>{{ $place->name }}</h1>
-            <h2><i class="fa fa-arrow-right" aria-hidden="true"></i>{{ __('There are :totalHolels hotels in :place.', ['totalHolels' => $place->hotels_count, 'place' => $place->name]) }}</h2>
+            <h2><i class="fa fa-arrow-right" aria-hidden="true"></i>{{ __('There are :totalHolels hotels in :place', ['totalHolels' => $place->hotels_count, 'place' => $place->name]) }}</h2>
           </div>
         </div>
     </div>
