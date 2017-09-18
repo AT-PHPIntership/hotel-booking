@@ -26,6 +26,16 @@ class Service extends Model
     }
 
     /**
+     * Relationship with hotels
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function hotels()
+    {
+        return $this->belongsToMany(Hotel::class, 'hotel_services');
+    }
+    
+    /**
      * The "booting" method of the model.
      *
      * @return void

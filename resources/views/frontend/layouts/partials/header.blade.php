@@ -4,18 +4,16 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="th-text pull-left">
-          <div class="th-item"> <a href="#"><i class="fa fa-phone"></i> 05-460789986</a> </div>
-          <div class="th-item"> <a href="#"><i class="fa fa-envelope"></i> MAIL@STARHOTEL.COM </a></div>
         </div>
       </div>
       <div class="col-xs-6">
         <div class="th-text pull-right">
           <div class="th-item">
             <div class="btn-group">
-              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> English <span class="caret"></span> </button>
+              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> {{ __('ENGLISH') }} <span class="caret"></span> </button>
               <ul class="dropdown-menu">
-                <li> <a href="#">ENGLISH</a> </li>
-                <li> <a href="#">VIETNAMESE</a> </li>
+                <li> <a href="#">{{ __('ENGLISH') }}</a> </li>
+                <li> <a href="#">{{ __('VIETNAMESE') }}</a> </li>
               </ul>
             </div>
           </div>

@@ -14,7 +14,7 @@ Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
     Route::group(['middleware'=> 'auth'], function() {
         Route::resource('/profile', 'UserController', ['middleware'=>'checkUser']);
-    });
+    }); 
     Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
     Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
     Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
