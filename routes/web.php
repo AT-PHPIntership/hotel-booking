@@ -14,10 +14,11 @@ Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
     Route::group(['middleware'=> 'auth'], function() {
         Route::resource('/profile', 'UserController', ['middleware'=>'checkUser']);
-        Route::resource('/comments', 'RatingCommentController', ['only' => ['create', 'store', 'destroy']], ['middleware'=>'checkUser']);
+        Route::resource('/comments', 'RatingCommentController', ['only' => ['create', 'store', 'destroy']]);
     }); 
     Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
     Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
+    Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
 });
 Route::get('/registerSuccess', function() {
     return view('frontend.notice');

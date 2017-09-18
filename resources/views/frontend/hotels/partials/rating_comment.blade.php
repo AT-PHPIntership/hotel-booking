@@ -117,7 +117,7 @@
             @endif 
           </div> 
         </div>
-        <div class="comment-old">
+        <div class="cls-user-comment-rating">
           @if(Auth::check())
             <form action="{{ route('comments.store') }}" method="POST" id="comment-rating">
               {!! csrf_field() !!}
