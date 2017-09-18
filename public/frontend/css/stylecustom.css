@@ -339,7 +339,7 @@
     width: 1136px;
 }
 .cls-list-room-info {
-    max-height: 306px;
+    max-height: 300px;
     overflow: auto;
 }
 .cls-list-room-info li {

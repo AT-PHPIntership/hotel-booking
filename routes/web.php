@@ -12,6 +12,7 @@
 
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
+    Route::resource('/sendfeedback', 'FeedBackController', ['only' => ['create', 'store']]);
     Route::group(['middleware'=> 'auth'], function() {
         Route::put('/profile/{profile}/reservation/{reservation}', 'ReservationController@update')->name('user.cancelBooking');
         Route::group(['middleware'=> 'checkUser'], function() {
@@ -21,6 +22,7 @@ Route::group(['namespace'=>'Frontend'], function() {
     });
     Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
     Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
+    Route::resource('/news', 'NewsController', ['as' => 'frontend']);
     Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
 });
 Route::get('/registerSuccess', function() {
