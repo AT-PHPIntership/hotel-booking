@@ -9,7 +9,7 @@
  <!-- Main content -->
   <section class="content mt-20">
     <div class="row">
-      @if (isset($news))
+      @if (isset($news[0]))
         <div class="col-md-6">
           <a href="{{ route('frontend.news.show', $news[0]->slug) }}">
             <div class="image-news-show">
@@ -45,7 +45,7 @@
           </a>
           <div class="summary-content-news-show">
             <h2 class="text-center text-success"><a href="{{ route('frontend.news.show', $news[0]->slug) }}">{{ contentLimit($news[0]->title) }}</a></h2>
-            <p>{{ contentLimit($news[0]->content, 195) }}</p>
+            <p>{!! contentLimit(strip_tags($news[0]->content), 195) !!}</p>
           </div>
         </div>
       @endif
@@ -61,7 +61,7 @@
               <div col-md-8>
                 <div class="img-news">
                   <h4><a href="{{ route('frontend.news.show', $item->slug) }}"> {{ contentLimit($item->title) }}</a></h4>
-                  <p>{{ contentLimit($item->content) }}</p>
+                  <p>{!! contentLimit(strip_tags($item->content)) !!}</p>
                 </div>
               </div>
             </div>

@@ -6,6 +6,7 @@ return [
     'default_thumbnail' => '/images/default/default-thumbnail.jpg',
     'no_image' => 'images/default/no_image.png',
     'bg_news' => 'images/default/news.jpg',
+    'bginner_news' => 'images/default/news1.png',
     'no_user_image' => 'images/default/profile.png',
     'places' => [
         'path_upload' => 'images/places/',

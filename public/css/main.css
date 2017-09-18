@@ -400,6 +400,11 @@ select[name = "arange_id"] {
     z-index: 7000!important;
 }
 .img-inner {
-      position: absolute;
+      position: absolute!important;
       top: 10px;
+}
+.bg-img-slide-news {
+    background-size: cover;
+    width: 100%;
+    height: 450px;
 }

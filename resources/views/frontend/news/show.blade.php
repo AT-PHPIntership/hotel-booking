@@ -9,34 +9,34 @@
 <section class="revolution-slider">
   <div class="bannercontainer">
     <div class="banner">
+      <div>
           <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" > 
           <!-- Default Image --> 
-            <img src="{{ asset(config('image.bg_news')) }}" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat" width="100%" height="450px"> 
+            <img src="{{ asset(config('image.bg_news')) }}" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat" class="bg-img-slide-news"> 
           </li>
-        
-        @if (isset($news->images))
           <div class="col-md-6 col-md-offset-3 img-inner">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
               <!-- slides images hotel-->
               <div class="carousel-inner">
-                @foreach ($news->images as $image)
-                  <div class="item {{ ($image == $news->images[0])? 'active' : ''}}">
-                    <img src="{{ asset($image->path) }}">
-                  </div>
-                @endforeach
+                <div class="item active">
+                  <img src="{{ asset(config('image.bg_news')) }}" class="bg-img-slide-news">
+                </div>
+                <div class="item">
+                  <img src="{{ asset(config('image.bginner_news')) }}" class="bg-img-slide-news">
+                </div>
               </div>
               <!-- slider controls -->
               <a class="left carousel-control" href="#myCarousel" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">{{ __('Previous') }}</span>
+                <span class="sr-only"></span>
               </a>
               <a class="right carousel-control" href="#myCarousel" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">{{ __('Next') }}</span>
+                <span class="sr-only"></span>
               </a>
             </div>
           </div>
-        @endif
+        </div>
     </div>
   </div>
 </section>
@@ -48,8 +48,8 @@
       <h2 class="col-md-12 reservation-horizontal clearfix container-search text-center text-success">           
         {{ $news->title }}
       </h2>
-      <div class="col-md-12 reservation-horizontal clearfix container-search mt-20 content">           
-        {{ $news->content }}
+      <div class="col-md-12 reservation-horizontal clearfix container-search mt-20 content text-center">           
+        {!! $news->content !!}
       </div>
     </div>
   </div>
