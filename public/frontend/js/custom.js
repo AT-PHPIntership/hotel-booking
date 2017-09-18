@@ -406,7 +406,7 @@ jQuery(document).ready(function () {
     /**
      * Show confimation when click button cancel booking
      */
-    $('.btn-delete-item').bind('click',function(e){
+    $('.btn-update-booking').bind('click',function(e){
         e.preventDefault();
         var form = $(this.form);
         var title = $(this).attr('data-title');
