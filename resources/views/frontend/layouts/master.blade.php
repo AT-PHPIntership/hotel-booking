@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.theme.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/prettyPhoto.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/smoothness/jquery-ui-1.10.4.custom.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/rs-plugin/css/settings.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/colors/turquoise.css') }}">
@@ -50,6 +49,7 @@
     <script type="text/javascript" src="{{ asset('frontend/rs-plugin/js/jquery.themepunch.plugins.min.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('frontend/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     @yield('customjs')
   </body>
 </html>

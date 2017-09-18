@@ -285,7 +285,7 @@
 .room-item-booking {
     height: 100%;
     border: 1px solid transparent;
-    width: 16%;
+    width: 20%;
     float: left;
     margin-left: 1%;
     padding: 52px 0;
@@ -388,18 +388,24 @@
 .cls-tb-user {
     margin-left: 9%;
 }
-.cls-room-empty {
+.cls-has-vacancies {
     margin-top: 10px;
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 3px 10px;
+    background-color: #dff0d8;
+    border-radius: 6px;
+    color: #3c763d;
+}
+.cls-no-vacancies {
+    margin-top: 10px;
+    color:red;
 }
 .cls-no-img-hotel {
     width: 750px;
     height: 423px;  
 }
-.cls-info-arrange-time {
-    background: #f7f7f7;
-    padding: 16px;
-    margin-bottom: 5px;
-}
+ 
 .count-rating-guest{
     margin-top: 10px;
 }

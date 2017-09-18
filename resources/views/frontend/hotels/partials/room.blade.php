@@ -1,6 +1,10 @@
 <section class="cls-list-room">
-  <div class="cls-info-arrange-time">
-   {{ __('List vacancies from :checkin to :checkout .', ['checkin' => formatDateTimeToDate($checkinDateDefault), 'checkout' => formatDateTimeToDate($checkinDateDefault)]) }}
+  <div class="cls-info-arrange-time alert alert-info">
+    <p class="cls-checkin-checkout-date">
+      {{ __('List vacancies from :checkin to :checkout .',
+       ['checkin' => formatDateTimeToDate($checkinDateDefault),
+        'checkout' => formatDateTimeToDate($checkoutDateDefault)]) }}
+    </p>
   </div>
   @if ($hotel->rooms->count() == 0)
     <div class = "list-room">
@@ -8,6 +12,7 @@
     </div>
   @else
     @foreach ($roomEmpty as $room)  
+      @php($totalRoomEmpty = $room->total - $room->quantity_busy_reservation)
       <div class = "list-room">
         <div class = "room-image" >
           <img src="{{ isset($room->images[0])? asset($room->images[0]->path): asset(config('image.no_image')) }}">
@@ -100,9 +105,15 @@
         <div class="room-item-booking">
           <a href="/room"  class="btn cls-btn-booking">
             {{ __('Book Now') }}</a> 
-          <p class="cls-room-empty"> 
-            {{ __('Only :number_room_empty room(s) left', ['number_room_empty' => ($room->total - $room->quantity_busy_reservation)] ) }} 
-          </p>
+            @if($totalRoomEmpty == 0)
+              <p class="cls-no-vacancies">
+                {{ __('We have no vacancies left.') }}
+              </p>
+            @else
+              <p class="cls-has-vacancies"> 
+                {{ __('Only :number_room_empty room(s) left', ['number_room_empty' => $totalRoomEmpty]) }} 
+              </p>
+            @endif
         </div>
       </div>
     @endforeach 
