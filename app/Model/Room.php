@@ -89,6 +89,16 @@ class Room extends Model
     }
 
     /**
+     * Get price format with grouped thousands
+     *
+     * @return float
+     */
+    public function getPriceFormatAttribute()
+    {
+        return number_format($this->price);
+    }
+    
+    /**
      * This is a recommended way to declare event handlers
      *
      * @return void

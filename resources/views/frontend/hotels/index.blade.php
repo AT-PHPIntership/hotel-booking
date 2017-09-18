@@ -140,7 +140,7 @@
                         @endif
                       @endforeach
                     </div>
-                    <a href="/detailHotel" class="btn btn-primary btn-block">{{ __('See Room') }}</a>
+                    <a href="{{ route('hotels.show', $hotel->slug) }}" class="btn btn-primary btn-block">{{ __('See Room') }}</a>
                   </div>
                 </div>
               </div>
