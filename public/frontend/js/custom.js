@@ -385,6 +385,11 @@ jQuery(document).ready(function () {
         $('#logout-form').submit();
     });
     
+    $('#logout').on('click', function(e) {
+        e.preventDefault();
+        $('#logout-form').submit();
+    });
+    
     $('[data-toggle="tooltip"]').tooltip();
 
     $('#user-comment').on('click', function(e) {
@@ -448,9 +453,9 @@ jQuery(document).ready(function () {
     });
 
     /**
-     * Show delete confimation when click button delete
+     * Show confimation when click button 
      */
-    $('.btn-delete-item').bind('click',function(e){
+    $('.btn-confirm').bind('click',function(e){
         e.preventDefault();
         var form = $(this.form);
         var title = $(this).attr('data-title');

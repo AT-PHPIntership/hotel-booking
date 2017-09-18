@@ -25,6 +25,18 @@ class CheckUser
             ];
             return response()->view('frontend.errors.403', $response);
         }
+
+        $reservationId = $request->route('reservation');
+        if (!is_null($reservationId)) {
+            $reservationIds = auth()->user()->reservations()->pluck('id')->toarray();
+            if (!in_array($reservationId, $reservationIds)) {
+                $response = [
+                    'message' => __('auth.403-errors')
+                ];
+                return response()->view('frontend.errors.403', $response);
+            }
+        }
+
         return $next($request);
     }
 }

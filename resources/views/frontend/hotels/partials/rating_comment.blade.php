@@ -197,7 +197,7 @@
                     <form method="POST"  action="{{ route('comments.destroy', $comment->id) }}">
                       {!! csrf_field() !!}
                       {{ method_field('DELETE') }}
-                      <button class="btn btn-delete-item pull-right"
+                      <button class="btn btn-confirm pull-right"
                         data-title="{{ __('Confirm deletion!') }}"
                         data-confirm="{{ __('Are you sure you want to delete?') }}" 
                         type="submit" >{{ __('Delete') }}

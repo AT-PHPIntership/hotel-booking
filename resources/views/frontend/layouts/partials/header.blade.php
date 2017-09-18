@@ -46,12 +46,7 @@
           <li class="{{ areActiveRoute(['hotels.index', 'hotels.show']) }}"> <a href="{{ route('hotels.index') }}">{{ __('Hotels') }}</b></a>
           </li>
         <!-- news -->
-          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{ __('News') }}<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="blog.html">Sports</a></li>
-              <li><a href="blog-post.html">Sale</a></li>
-            </ul>
-          </li>
+          <li class="{{ areActiveRoute(['frontend.news.index', 'frontend.news.show']) }}"> <a href="{{ route('frontend.news.index') }}">{{ __('News') }}</a>
           @if(Auth::check())
             <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{Auth::user()->username}}<b class="caret"></b></a>
               <ul class="dropdown-menu">
