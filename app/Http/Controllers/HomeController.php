@@ -17,42 +17,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $columns = [
-            'hotels.id',
-            'hotels.name',
-            'hotels.address',
-            'hotels.star',
-            'hotels.introduce',
-            'hotels.place_id',
-            DB::raw('AVG(rating_comments.total_rating) as total')
-        ];
-
-        $with['place'] = function ($query) {
-            $query->select('id', 'name');
-        };
-        $with['rooms'] = function ($query) {
-            $query->select('id', 'name', 'hotel_id', 'price');
-        };
-        $with['rooms.images'] = function ($query) {
-            $query->select();
-        };
-        $with['images'] = function ($query) {
-            $query->select();
-        };
-        $with['hotelServices'] = function ($query) {
-            $query->select('id', 'hotel_id', 'service_id')->limit(Hotel::SHOW_LIMIT);
-        };
-        $with['hotelServices.service'] = function ($query) {
-            $query->select('id', 'name');
-        };
-
-        $topHotels = \Cache::remember('topHotels', Hotel::TIMEOUT_CACHE, function () use ($with, $columns) {
-            return Hotel::with($with)
-                ->leftJoin('rating_comments', 'hotels.id', '=', 'rating_comments.hotel_id')
-                ->select($columns)
-                ->groupBy('hotels.id', 'hotels.name')
-                ->orderBy('total', 'DESC')
-                ->limit(Hotel::SHOW_LIMIT)->get();
+        $topHotels = \Cache::remember('topHotels', Hotel::TIMEOUT_CACHE, function () {
+            return $this->topHotels();
         });
 
         $topPlaces = \Cache::remember('topPlaces', Hotel::TIMEOUT_CACHE, function () {
@@ -85,5 +51,48 @@ class HomeController extends Controller
                 ->groupBy('places.id')
                 ->orderby('totalQuantity', 'DESC')
                 ->limit(Place::SHOW_HOME_LIMIT)->get();
+    }
+
+    /**
+     * Get top hotel follow rating.
+     *
+     * @return App\Model\Place
+     */
+    public static function topHotels()
+    {
+        $columns = [
+            'hotels.id',
+            'hotels.name',
+            'hotels.address',
+            'hotels.star',
+            'hotels.introduce',
+            'hotels.place_id',
+            DB::raw('AVG(rating_comments.total_rating) as total')
+        ];
+
+        $with['place'] = function ($query) {
+            $query->select('id', 'name');
+        };
+        $with['rooms'] = function ($query) {
+            $query->select('id', 'name', 'hotel_id', 'price');
+        };
+        $with['rooms.images'] = function ($query) {
+            $query->select();
+        };
+        $with['images'] = function ($query) {
+            $query->select();
+        };
+        $with['hotelServices'] = function ($query) {
+            $query->select('id', 'hotel_id', 'service_id')->limit(Hotel::SHOW_LIMIT);
+        };
+        $with['hotelServices.service'] = function ($query) {
+            $query->select('id', 'name');
+        };
+        return Hotel::with($with)
+                ->leftJoin('rating_comments', 'hotels.id', '=', 'rating_comments.hotel_id')
+                ->select($columns)
+                ->groupBy('hotels.id', 'hotels.name')
+                ->orderBy('total', 'DESC')
+                ->limit(Hotel::SHOW_LIMIT)->get();
     }
 }

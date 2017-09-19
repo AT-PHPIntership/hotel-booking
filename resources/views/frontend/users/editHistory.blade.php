@@ -1,69 +1,117 @@
 @extends('frontend.layouts.master')
 @section('title', 'Edit History Booking Room')
-@section('customcss')
-  <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/editHistoryBooking.css') }}">
-@endsection
 @section('content')
-  <section class ='historyBooking'>
+  <section class="user-profile">
+    <div class="user-head text-center">
+      <h1>{{__('Show History Booking')}}</h1>
+    </div>
+    <div class="text-center">
+      @include('flash::message')
+      @include('frontend.layouts.partials.modal')
+    </div>
     <div class="container">
       <div class="row">
-        <div class="panel panel-info">
+        <div class="col-xs-12 col-sm-12 col-md-10 toppad cls-tb-user" >
+          <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">History Booking Room</h3>
+              <h3 class="panel-title text-center">{{__('Infomation')}}</h3>
             </div>
-            <div class="panel-body">
-              <form class="reservation-vertical clearfix" role="form" method="post" action="" name="reservationform">
-
-                <div id="mesage">
-                  
-                </div>
-                <!-- Error mesage display -->
-                <div class="form-group1">
-                  <label for="name" accesskey="E">Tên người liên hệ</label>
-                  <input name="name" type="text" id="name"  class="form-control" placeholder="Please enter your name"/>
-                </div>
-
-                <div class="form-group1">
-                  <label for="phone" accesskey="E">Số điện thoại</label>
-                  <input name="phone" type="text" id="phone" class="form-control" placeholder="Please enter your phone"/>
-               </div>
-
-                <div class="form-group1">
-                  <label for="email" accesskey="E">Email</label>
-                  <input name="email" type="text" id="email" class="form-control" placeholder="Please enter your email"/>
-                </div>
-
-                <div class="form-group1">
-                  <label for="checkout">Check-In</label>
-                  <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-out is from 12:00">  </div>
-                  <i class="fa fa-calendar infield"></i>
-                  <input name="checkout" type="text" id="checkin" value="" class="form-control" placeholder="Check-In"/>
-                </div>
-
-                <div class="form-group1">
-                  <label for="checkout">Check-out</label>
-                  <div class="popover-icon" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Check-out is from 12:00">
+            <div class="panel-body form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-md-3">{{__('Hotel')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{$reservation->room->hotel->name}}
                   </div>
-                  <input name="checkout" type="text" id="checkout" value="" class="form-control" placeholder="Check-out"/>
                 </div>
-
-                <div class="form-group1">
-                  <label for="email" accesskey="E">Yêu cầu đặc biệt (Nếu có)</label>
-                  <textarea class="form-control" name="textarea" id="textarea"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">{{__('Room')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{$reservation->room->name}}
+                  </div>
                 </div>
-
-                <div class="btn-submit-booking">
-                  <button type="submit" class="btn btn-primary" data-original-title="Submit" data-toggle="tooltip">
-                    <span class="fa fa-check-circle-o"></span>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">{{__('Full name')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{$reservation->reservable->full_name}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">{{__('Phone')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{$reservation->reservable->phone}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 cls-label">{{__('Email')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{$reservation->reservable->email}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 pull-left">{{__('Check in')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{ \Carbon\Carbon::parse($reservation->checkin_date)->format('m/d/Y')}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 pull-left">{{__('Check out')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{ \Carbon\Carbon::parse($reservation->checkout_date)->format('m/d/Y')}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">{{__('Quantity')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{$reservation->quantity}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">{{__('Request')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{$reservation->request}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">{{__('Status')}}</label>
+                <div class="col-md-8">
+                  <div class="form-control cls-login">
+                    {{$reservation->status_label}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class ="panel-footer clearfix cls-register">
+              @if($reservation->status_label == __('Pending'))
+                <form method="POST" action="{{ route('user.cancelBooking', [$reservation->reservable->id, $reservation->id]) }}">
+                  {{csrf_field()}}
+                  {{method_field('PUT')}}
+                  <button type ="submit" class="btn btn-danger pull-right btn-update-booking" data-title="{{ __('Confirm deletion!') }}"
+                    data-confirm="{{ __('Are you sure you want to cancel this booking?') }}">
+                    {{__('Cancel this')}}
                   </button>
-                  <a href="/show" class="btn btn-danger" data-original-title="Cancer" data-toggle="tooltip">
-                    <span class="fa fa-times"></span>
-                  </a>
-                </div>
-
-
-            
-            </form>
+                </form>
+              @endif
+              <a href="{{ URL::previous() }}" class="btn btn-default pull-left">
+                {{__('Back')}}
+              </a>
             </div>
           </div>
         </div>
@@ -71,6 +119,4 @@
     </div>
   </section>
 @endsection
-@section('customjs')
-<script type="text/javascript" src ="{{asset('frontend/js/userProfile.js')}}"></script>
-@endsection
+

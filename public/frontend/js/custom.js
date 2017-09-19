@@ -385,6 +385,11 @@ jQuery(document).ready(function () {
         $('#logout-form').submit();
     });
     
+    $('#logout').on('click', function(e) {
+        e.preventDefault();
+        $('#logout-form').submit();
+    });
+    
     $('[data-toggle="tooltip"]').tooltip();
 
     $('#user-comment').on('click', function(e) {
@@ -396,5 +401,22 @@ jQuery(document).ready(function () {
         e.preventDefault();
         $('#table-reservation').show();
         $('#table-comment').hide();
+    });
+
+    /**
+     * Show confimation when click button cancel booking
+     */
+    $('.btn-update-booking').bind('click',function(e){
+        e.preventDefault();
+        var form = $(this.form);
+        var title = $(this).attr('data-title');
+        var body = '<i>' + $(this).attr('data-confirm') + '</i>';
+        $('#title-content').html(title);
+        $('#body-content').html(body);
+        $('#confirm').modal('show');
+        $('#delete-btn').one('click', function(){
+            form.submit();
+            $('#confirm').modal('hide');
+        })
     });
 });

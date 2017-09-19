@@ -127,7 +127,7 @@
         @php($count = 0)
         @foreach($topPlaces as $place)
           @php($count++)
-          @if($count > 3)
+          @if($count > (config('hotel.top-3-places')))
             @break
           @endif
           <div class="col-sm-4">
@@ -167,7 +167,7 @@
         @php($count = 0)
         @foreach($topPlaces as $place)
           @php($count++)
-          @if($count < 4)
+          @if($count < (config('hotel.top-4-places')))
             @continue
           @endif
             <div class="col-sm-3">
@@ -226,7 +226,7 @@
                       <ul class="list-unstyled">
                       @php($count = 0)
                         @foreach($hotel->hotelServices as $hotelService)
-                          @if($count == 3)
+                          @if($count == (config('hotel.limit-services')))
                                 </ul>
                               </div>
                             <div class="col-xs-6">
