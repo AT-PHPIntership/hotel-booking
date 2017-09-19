@@ -31,11 +31,11 @@ class Service extends Model
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function services()
+    public function hotels()
     {
         return $this->belongsToMany(Hotel::class, 'hotel_services');
     }
-
+    
     /**
      * The "booting" method of the model.
      *
