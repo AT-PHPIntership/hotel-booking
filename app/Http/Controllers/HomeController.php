@@ -58,7 +58,8 @@ class HomeController extends Controller
         $topPlaces = \Cache::remember('topPlaces', Hotel::TIMEOUT_CACHE, function () {
             return $this->topPlaces();
         });
-        return view('frontend.home.index', compact('topPlaces', 'topHotels'));
+        $hintedPlaces = Place::topPlaces();
+        return view('frontend.home.index', compact('topPlaces', 'topHotels', 'hintedPlaces'));
     }
 
     /**

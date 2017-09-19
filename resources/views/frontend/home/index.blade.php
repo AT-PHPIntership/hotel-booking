@@ -4,7 +4,6 @@
 @endsection
 @section('title', __('Home page'))
 @section('content')
-
 <!-- Introduce Slider -->
 <section class="revolution-slider">
   <div class="bannercontainer">

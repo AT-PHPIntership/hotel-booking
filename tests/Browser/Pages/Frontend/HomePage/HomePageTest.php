@@ -54,24 +54,6 @@ class HomePageTest extends DuskTestCase
     }
 
     /**
-     * Test show top place if has data.
-     *
-     * @return void
-     */
-    // public function testShowTopPlaceIfHasData()
-    // {   
-    //     $this->makeData(10);
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/')
-    //                 ->assertTitle('Home page')
-    //                 ->assertSee('Outstanding Places')
-    //                 ->assertPathIs('/');
-    //         $count = count($browser->elements('#top-3-places .container .row .col-sm-4')) + count($browser->elements('#top-4-places .container .row .col-sm-3'));
-    //         $this->assertTrue($count == 7);
-    //     }); 
-    // }
-
-     /**
      * Test show top hotel if not has data or data of hotel < 6.
      *
      * @return void
@@ -87,6 +69,25 @@ class HomePageTest extends DuskTestCase
                     ->assertPathIs('/');
         }); 
     }
+    /**
+     * Test show top place if has data.
+     *
+     * @return void
+     */
+    public function testShowTopPlaceIfHasData()
+    {   
+        $this->makeData(10);
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->assertTitle('Home page')
+                    ->assertSee('Outstanding Places')
+                    ->assertPathIs('/');
+            $count = count($browser->elements('#top-3-places .container .row .col-sm-4')) + count($browser->elements('#top-4-places .container .row .col-sm-3'));
+            $this->assertTrue($count == 7);
+        }); 
+    }
+
+   
 
 
     /**
@@ -94,19 +95,18 @@ class HomePageTest extends DuskTestCase
      *
      * @return void
      */
-    // public function testShowTopHotelIfHasData()
-    // {   
-    //     $this->makeData(10);
-    //     // dd(Place::find(1));
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/')
-    //                 ->assertTitle('Home page')
-    //                 ->assertSee('Representative Hotels')
-    //                 ->assertPathIs('/');
-    //         $count = count($browser->elements('#top-hotels .container .row .col-sm-4'));
-    //         $this->assertTrue($count == 6);
-    //     }); 
-    // }
+    public function testShowTopHotelIfHasData()
+    {   
+        $this->makeData(10);
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->assertTitle('Home page')
+                    ->assertSee('Representative Hotels')
+                    ->assertPathIs('/');
+            $count = count($browser->elements('#top-hotels .container .row .col-sm-4'));
+            $this->assertTrue($count == 6);
+        }); 
+    }
 
     /**
      * Test link Home.
@@ -120,6 +120,13 @@ class HomePageTest extends DuskTestCase
                     ->assertTitle('User Profile')
                     ->assertSee('User Profile')
                     ->clickLink('Home')
+                    ->assertTitle('Home page')
+                    ->assertSee('Representative Hotels')
+                    ->assertPathIs('/');
+            $browser->visit('/profile/1')
+                    ->assertTitle('User Profile')
+                    ->assertSee('User Profile')
+                    ->click('.logo-header')
                     ->assertTitle('Home page')
                     ->assertSee('Representative Hotels')
                     ->assertPathIs('/');
@@ -170,10 +177,11 @@ class HomePageTest extends DuskTestCase
     public function testLinkLogin()
     {
         $this->browse(function (Browser $browser) {
+            $browser->logout();
             $browser->visit('/')
                     ->assertTitle('Home page')
                     ->assertSee('Representative Hotels')
-                    ->clickLink('Home')
+                    ->clickLink('Login')
                     ->assertTitle('Login')
                     ->assertSee('Login')
                     ->assertPathIs('/login');
@@ -181,13 +189,14 @@ class HomePageTest extends DuskTestCase
     }
 
     /**
-     * Test link login.
+     * Test link register.
      *
      * @return void
      */
     public function testLinkRegister()
     {
         $this->browse(function (Browser $browser) {
+            $browser->logout();
             $browser->visit('/')
                     ->assertTitle('Home page')
                     ->assertSee('Representative Hotels')
@@ -197,6 +206,25 @@ class HomePageTest extends DuskTestCase
                     ->assertPathIs('/register');
         }); 
     }
+
+    /**
+     * Test link feedback
+     *
+     * @return void 
+     */
+    public function testLinkFeedback()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->assertTitle('Home page')
+                    ->assertSee('Representative Hotels')
+                    ->clickLink('Feedback')
+                    ->assertTitle('Feedback')
+                    ->assertSee('Feedback')
+                    ->assertPathIs('/sendfeedback/create');
+        });
+    }
+
     /**
      * Make data for test.
      *
