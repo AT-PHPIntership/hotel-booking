@@ -19,7 +19,8 @@ class RatingCommentController extends Controller
      */
     public function store(RatingCommentRequest $request)
     {
-        if (RatingComment::create($request->all())) {
+        $comment = new RatingComment($request->all());
+        if ($comment->save()) {
             flash(__('You have commented successfully!'))->success();
             return redirect(URL::previous() . config('hotel.section_rating_comment'));
         } else {
