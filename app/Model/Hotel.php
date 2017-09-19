@@ -13,14 +13,47 @@ class Hotel extends Model
 {
     use Sluggable, SoftDeletes, SearchTrait;
 
+    /**
+     * Hotel row limit
+     */
     const ROW_LIMIT = 10;
     const ITEM_LIMIT = 12;
+
+    /**
+     * Comment row limit
+     */
+    const COMMENT_ROW_LIMIT = 5;
 
     /**
      * Define Max, Min Value Star of Hotel
      */
     const STAR_MAX = 5;
     const STAR_MIN = 1;
+
+    /**
+     * Value of low rating score
+     */
+    const LOW_SCORE = 4.9;
+
+    /**
+     * Value of normal rating score
+     */
+    const NOMAL_SCORE = 6.9;
+
+    /**
+     * Value of high rating score
+     */
+    const HIGH_SCORE = 8.9;
+
+    /**
+     * Value of limit round float number
+     */
+    const LIMIT_ROUND_FLOAT = 1;
+    
+    /**
+     * Value of week number to add week
+     */
+    const WEEK_NUMBER = 1;
 
     /**
      * Define kind arrange_id
@@ -122,16 +155,6 @@ class Hotel extends Model
     }
 
     /**
-     * Relationship with hotel's image.
-     *
-     * @return array
-     */
-    public function images()
-    {
-        return $this->morphMany(Image::class, 'imageable', 'target', 'target_id');
-    }
-
-    /**
      * Relationship with services
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -139,6 +162,16 @@ class Hotel extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class, 'hotel_services');
+    }
+
+    /**
+     * Relationship with hotel's image
+     *
+     * @return array
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable', 'target', 'target_id');
     }
 
     /**
@@ -151,11 +184,92 @@ class Hotel extends Model
         parent::boot();
 
         static::deleting(function ($hotel) {
-             $hotel->ratingComments()->delete();
-             $hotel->hotelServices()->delete();
-             $hotel->rooms()->delete();
-             $hotel->images()->delete();
+            $hotel->ratingComments()->delete();
+            $hotel->hotelServices()->delete();
+            $hotel->rooms()->delete();
+            $hotel->images()->delete();
         });
+    }
+
+    /**
+     * Get Label for rating comment
+     *
+     * @return string
+     */
+    public function getLabelRatingAttribute()
+    {
+        $rating = $this->ratingComments->avg('total_rating');
+        if ($rating <= self::LOW_SCORE) {
+            return __('Bad');
+        } elseif ($rating <= self::NOMAL_SCORE) {
+            return __('Nomal');
+        } elseif ($rating <= self::HIGH_SCORE) {
+            return __('Good');
+        } else {
+            return __('Very Good');
+        }
+    }
+
+    /**
+     * Get round avg rating
+     *
+     * @return float
+     */
+    public function getRoundAvgRatingAttribute()
+    {
+        $avgRating = $this->ratingComments->avg('total_rating');
+        $roundAvgRating = round($avgRating, self::LIMIT_ROUND_FLOAT);
+        return sprintf(config('hotel.float_fixed_point'), $roundAvgRating);
+    }
+
+    /**
+     * Get AVG of rating for food
+     *
+     * @return float
+     */
+    public function getfoodRatingAvgAttribute()
+    {
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('food'));
+    }
+
+    /**
+     * Get AVG of rating for cleanliness
+     *
+     * @return float
+     */
+    public function getCleanlinessRatingAvgAttribute()
+    {
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('cleanliness'));
+    }
+
+    /**
+     * Get AVG of rating for location
+     *
+     * @return float
+     */
+    public function getLocationRatingAvgAttribute()
+    {
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('location'));
+    }
+
+    /**
+     * Get AVG of rating for service
+     *
+     * @return float
+     */
+    public function getServiceRatingAvgAttribute()
+    {
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('service'));
+    }
+
+    /**
+     * Get AVG of rating for confort
+     *
+     * @return float
+     */
+    public function getComfortRatingAvgAttribute()
+    {
+        return sprintf(config('hotel.float_fixed_point'), $this->ratingComments->avg('comfort'));
     }
 
     /**
