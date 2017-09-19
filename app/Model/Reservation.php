@@ -64,6 +64,16 @@ class Reservation extends Model
     const MAX_DURATIONS = 15;
 
     /**
+     * Define value target when that user
+     */
+    const TARGET_USER = 'user';
+    
+    /**
+     * Define value target when that guest
+     */
+    const TARGET_GUEST= 'guest';
+
+    /**
      * Define  value status of reservation
      */
     const STATUS_PENDING = 0;

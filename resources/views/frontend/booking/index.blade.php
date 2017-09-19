@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/searchHotel.css')}}">
 @endsection
+@section('customjs')
+  <script type="text/javascript" src="{{ asset('frontend/js/reservation.js') }}"></script> 
+@endsection
 @section('title', __('Booking rooms'))
 @section('content')
   <main class="main">
@@ -11,67 +14,111 @@
         <div class="col-md-1"></div>
         <div class="col-md-10">
           <h2 class="mt50">{{ __('Hotel booking') }}</h2>
-          <div class="alert alert-info" role="alert">
-            <a href="#" class="alert-link">{{ __('Log in') }}</a>
-            <span>{{ __('to your account for easy access and other advantages.') }}</span>
-          </div>
+            <div class="alert alert-info" role="alert">
+              @if(Auth::user())
+                <p>{{ __('Welcome to booking rooms') }}</p>
+              @else
+                <a href="{{ route('login') }}" class="alert-link">{{ __('Log in') }}</a>
+                <span>{{ __('to your account for easy access and other advantages.') }}</span>
+              @endif
+            </div>
           <h2 class="mt50">{{ __('Fill your infomation') }}</h2>
           <div class="cls-form-border-parent">
           {{-- input form --}}
-            <form role="form" method="POST" class="cls-form-border col-md-8 form-group" action="">
+            <form  id="booking-form" method="POST" class="cls-form-border col-md-8 form-group" action="{{ route('reservations.store') }}" enctype="multipart/form-data">
               {!! csrf_field() !!}
               {{-- name --}}
               <div class="col-md-12 nopadding">
-                <label for="name">{{ __("Contact's name") }}<i class="text-danger"> *</i></label>
-                <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' has-error' : '' }}" placeholder="{{ __('Ex: Nguyen Van A') }}">
-                <small class="text-danger">{{ $errors->first('username') }}</small>
+                <label for="full_name">{{ __("Contact's name") }}<i class="text-danger"> *</i></label>
+                <input type="text" name="full_name" class="form-control{{ $errors->has('name') ? ' has-error' : '' }}" placeholder="{{ __('Ex: Nguyen Van A') }}" value="{{ (Auth::user()) ? Auth::user()->full_name : ''}}">
+                <span class="text-danger">{{ ($errors->first('full_name')) ? $errors->first('full_name') : '' }}</span>
               </div>
               {{-- phone --}}
               <div class="col-sm-4 nopadding mt20">
                 <label for="phone">{{ __('Phone number') }}<i class="text-danger"> *</i></label>
-                <input type="numberic" name="phone" class="form-control" placeholder="{{ __('Ex: +84 978 965 426') }}">
-                <small class="text-danger">{{ $errors->first('phone') }}</small>
+                <input type="numberic" name="phone" class="form-control" placeholder="{{ __('Ex: +84 978 965 426') }}" value="{{ (Auth::user()) ? Auth::user()->phone : ''}}">
+                <span class="text-danger">{{ ($errors->first('phone')) ? $errors->first('phone') : '' }}</span>
               </div>
               <div class="col-sm-7 pull-right nopadding mt20">
-                <label for="email">{{ __("Contact's email address") }}<i class="text-danger"> *</i></label>
-                <input type="email" name="email" class="form-control" placeholder="{{ __('Ex: nnnam@gmail.com') }}">
-                <small class="text-danger">{{ $errors->first('email') }}</small>
+                <label for="email">{{ __("Contact's email address") }}<i class="text-danger">*</i></label>
+                <input type="email" name="email" class="form-control" placeholder="{{ __('Ex: nnnam@gmail.com') }}" value="{{ (Auth::user()) ? Auth::user()->email : '' }}">
+                <span class="text-danger">{{ ($errors->first('email')) ? $errors->first('email') : '' }}</span>
               </div>
               {{-- checkin --}}
+              {{-- {{ dd( }} --}}
               <div class="col-sm-5 nopadding mt20">
-                <label for="checkin">{{ __('Check in') }}<i class="text-danger"> *</i></label>
-                <input type="date" name="checkin" class="form-control">
-                <small class="text-danger">{{ $errors->first('checkin') }}</small>
+                <label for="checkin_date">{{ __('Check in') }}<i class="text-danger"> *</i></label>
+                <input type="date" name="checkin_date" class="form-control" value="{{ isset($bookingInfomation['checkin']) ? (Carbon\Carbon::createFromFormat('d/m/Y', $bookingInfomation['checkin']))->toDateString() : ''}}">
+                <span class="text-danger">{{ ($errors->first('checkin_date')) ? $errors->first('checkin_date') : '' }}</span>
               </div>
+              {{-- duration --}}
               <div class="col-sm-5 nopadding mt20 cls-ml-20">
-                <label for="checkout">{{ __('Check out') }}<i class="text-danger"> *</i></label>
-                <input type="date" name="checkout" class="form-control">
+                <label for="duration">{{ __('No. of night') }}<i class="text-danger">*</i></label>
+                <select name = "duration" class="form-control">
+                  @for($i = 1; $i <= App\Model\Reservation::MAX_DURATIONS; $i++)
+                      <option value="{{ $i }}" {{ ($i == $bookingInfomation['duration']) ? 'selected' : '' }}>{{ __(':duration nights', ['duration' => $i]) }}</option>
+                  @endfor
+                </select>
                 <small class="text-danger"></small>
               </div>
-              <div class="col-sm-2 nopadding mt20">
-                <label for="rooms">{{ __('No. of rooms') }}</label>
-                <input type="number" class="form-control">
+              <div class="col-sm-4 nopadding mt20">
+                <label for="quantity">{{ __('No. of rooms') }}</label>
+                <select name = "quantity" class="form-control">
+                  @for($i = 1; $i <= $room->total; $i++)
+                      <option value="{{ $i }}">{{ __(':quantity rooms', ['quantity' => $i]) }}</option>
+                  @endfor
+                </select>
               </div>
               <div class="col-sm-12 nopadding mt20">
-                <label for="special-request">{{ __('Special requests') }}</label>
-                <textarea name="special-request" class="form-control"></textarea>
+                <label for="request">{{ __('Special requests') }}</label>
+                <textarea name="request" class="form-control"></textarea>
                 <small class="text-info">{{ __("Special requests are subject to availability and may incur charges. For further details, you can contact the property directly.") }}</small>
               </div>
+              {{-- hidden infor --}}
+              <input type="hidden" name="status" value="{{ App\Model\Reservation::STATUS_PENDING }}">
+              <input type="hidden" name="checkout_date">
+              <input type="hidden" name="target" value="{{ (Auth::user()) ? 'user' : 'guest' }}">
+              <input type="hidden" name="target_id" value="{{ (Auth::user()) ? Auth::user()->id : '' }}">
+              <input type="hidden" name="checkout_date">
             </form>
             <div class="cls-item-border pull-right">
-                <img class="cls-image-rooms" src="{{ asset(config('image.default_thumbnail')) }}" alt="">
-                <div class="cls-ml-20">
-                  <h4>{{ __('Hotel name:') }}</h4>
-                  <h4>{{ __('Rooms name:') }}</h4>
-                  <h4>{{ __('Quanlity:') }}</h4>
-                  <h4>{{ __('Rooms name:') }}</h4>
+              <div class="head-booking-detail cls-ml-20">
+                <h5><strong>{{ __('Rooms infomation') }}</strong></h5>
+              </div>
+                <img class="cls-image-rooms" src="{{ ($room->images->count() != 0) ? asset($room->images->random()->path) : asset(config('image.default_thumbnail')) }}" alt="">
+                <div class ="content-detail cls-ml-5-percent">
+                  <h3>{{ $room->hotel->name }}</h3>
+                  <span>
+                    @for($i = App\Model\Hotel::STAR_MIN; $i <= App\Model\Hotel::STAR_MAX; $i++)
+                      @if($i <= $room->hotel->star)
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                      @else
+                          <i class="fa fa-star-o"></i>
+                      @endif
+                    @endfor
+                  </span> 
                 </div>
+                <div class="service-detail cls-ml-5-percent">  
+                {{-- {{ dd($room) }} --}}
+                  @foreach($room->hotel->services as $service)
+                    {{-- {{ dd($service) --}}
+                    <span><i class="fa fa-check-circle cls-service"></i>{{ $service->name }}</span>
+                  @endforeach
+                </div>
+                <div class= 'room-info cls-ml-5-percent mt20'>
+                  <p>{{ __('Name: :name', ['name' => $room->name]) }}</p>
+                  <p>{{ __('Size: :size', ['size' => $room->size]) }}</p>
+                  <p>{{ __('Max guest: :max_guest', ['max_guest' => $room->max_guest]) }}</p>
+                </div>   
               </div>
             </div>
             <div class="clearfix"></div>
             <h2 class="mt50">{{ __('Price details') }}</h2>
             <div class="cls-form-border col-md-8 form-group">
               
+            </div>
+            <div class="col-md-8 nopadding cls-mb-50">
+              <button id="submit" class="btn btn-primary pull-right">{{ __('Submit') }} </button>
             </div>
           </div>
         </div>

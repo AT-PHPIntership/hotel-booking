@@ -4,18 +4,16 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="th-text pull-left">
-          <div class="th-item"> <a href="#"><i class="fa fa-phone"></i> 05-460789986</a> </div>
-          <div class="th-item"> <a href="#"><i class="fa fa-envelope"></i> MAIL@STARHOTEL.COM </a></div>
         </div>
       </div>
       <div class="col-xs-6">
         <div class="th-text pull-right">
           <div class="th-item">
             <div class="btn-group">
-              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> English <span class="caret"></span> </button>
+              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> {{ __('ENGLISH') }} <span class="caret"></span> </button>
               <ul class="dropdown-menu">
-                <li> <a href="#">ENGLISH</a> </li>
-                <li> <a href="#">VIETNAMESE</a> </li>
+                <li> <a href="#">{{ __('ENGLISH') }}</a> </li>
+                <li> <a href="#">{{ __('VIETNAMESE') }}</a> </li>
               </ul>
             </div>
           </div>
@@ -48,12 +46,7 @@
           <li class="{{ areActiveRoute(['hotels.index', 'hotels.show']) }}"> <a href="{{ route('hotels.index') }}">{{ __('Hotels') }}</b></a>
           </li>
         <!-- news -->
-          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{ __('News') }}<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="blog.html">Sports</a></li>
-              <li><a href="blog-post.html">Sale</a></li>
-            </ul>
-          </li>
+          <li class="{{ areActiveRoute(['frontend.news.index', 'frontend.news.show']) }}"> <a href="{{ route('frontend.news.index') }}">{{ __('News') }}</a>
           @if(Auth::check())
             <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{Auth::user()->username}}<b class="caret"></b></a>
               <ul class="dropdown-menu">
