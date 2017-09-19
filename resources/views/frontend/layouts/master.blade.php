@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600,700">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css') }}">
-    @stack('scripts')
+    @stack('css')
     @yield('customcss')
 </head>
 
@@ -49,5 +49,6 @@
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     @yield('customjs')
+    @stack('scripts')
   </body>
 </html>
