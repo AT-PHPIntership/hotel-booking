@@ -116,7 +116,7 @@
 @include('frontend.layouts.partials.search')
 
 <!-- Outstanding Places -->
-  <section class="rooms mt50">
+  <section class="rooms mt50" id="top-3-places">
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
@@ -160,7 +160,7 @@
   </section>
 
    <!-- 4 place top -->
-  <section class="rooms mt50">
+  <section class="rooms mt50" id="top-4-places">
     <div class="container">
       <div class="row">
         <div class="col-sm-12"></div>
@@ -193,7 +193,8 @@
     </div>
   </section>
 <!-- top hotel -->
-  <section class="rooms mt50">
+
+  <section class="rooms mt50" id="top-hotels">
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
