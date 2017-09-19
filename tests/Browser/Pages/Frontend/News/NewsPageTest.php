@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser\Pages\Frontend\Hotels;
+namespace Tests\Browser\Pages\Frontend\News;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
@@ -9,7 +9,7 @@ use App\Model\Category;
 use App\Model\News;
 use Faker\Factory as Faker;
 
-class UserListNewsTest extends DuskTestCase
+class NewsPageTest extends DuskTestCase
 {
     use DatabaseMigrations;
     
