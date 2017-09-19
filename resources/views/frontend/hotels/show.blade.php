@@ -2,8 +2,10 @@
 @section('customcss')
   <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 @endsection
-@push('scripts')
+@push('css')
   <link rel="stylesheet" href="{{ asset('frontend/css/flexslider.css') }}" type="text/css" media="screen" />
+@endpush
+@push('scripts')
   <script defer src="{{ asset('frontend/js/jquery.flexslider.js') }}"></script>
 @endpush
 @section('content')
