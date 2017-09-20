@@ -51,6 +51,11 @@
             <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated">{{Auth::user()->username}}<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="{{ route('profile.show', Auth::user()->id) }}" id="user-profile">{{__('Profile')}}</a></li>
+                @if(Auth::user()->is_admin == App\Model\User::ROLE_ADMIN)
+                  <li><a href="{{ route('admin.index') }}">
+                    {{__('Admin Management')}}</a>
+                  </li>
+                @endif
                 <li>
                   <a href="{{ route('logout') }}" id ="logout">{{__('Log out')}}</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden="">
