@@ -23,7 +23,7 @@ class SeeListNewsFollowCategory extends DuskTestCase
         $this->makeData(1, 0);
         $this->browse(function (Browser $browser) {
             $category = Category::find(1);
-            $browser->visit('/category/' . $category->slug . '/news')
+            $browser->visit('/categories/' . $category->slug . '/news')
                     ->assertSee('List news of '. $category->name)
                     ->assertTitle('NEWS FOR CATEGORY');
             $element = $browser->elements('.main .rooms.mt50 .container .row .col-md-3:nth-child(2)');
@@ -42,7 +42,7 @@ class SeeListNewsFollowCategory extends DuskTestCase
        $this->makeData(1, 11);
         $this->browse(function (Browser $browser) {
             $category = Category::find(1);
-            $browser->visit('/category/' . $category->slug . '/news')
+            $browser->visit('/categories/' . $category->slug . '/news')
                     ->assertSee('List news of '. $category->name)
                     ->assertTitle('NEWS FOR CATEGORY');
             $element = $browser->elements('.main .rooms.mt50 .container .row .col-md-3');
@@ -61,7 +61,7 @@ class SeeListNewsFollowCategory extends DuskTestCase
         $this->makeData(1, 13);
         $this->browse(function (Browser $browser) {
             $category = Category::find(1);
-            $browser->visit('/category/' . $category->slug . '/news')
+            $browser->visit('/categories/' . $category->slug . '/news')
                     ->assertSee('List news of '. $category->name)
                     ->assertTitle('NEWS FOR CATEGORY');
             $element = $browser->elements('.main .rooms.mt50 .container .row .col-md-3');
@@ -83,12 +83,12 @@ class SeeListNewsFollowCategory extends DuskTestCase
         $this->makeData(1, 13);
         $this->browse(function (Browser $browser) {
             $category = Category::find(1);
-            $browser->visit('/category/' . $category->slug . '/news?page=2')
+            $browser->visit('/categories/' . $category->slug . '/news?page=2')
                     ->assertSee('List news of '. $category->name)
                     ->assertTitle('NEWS FOR CATEGORY');
             $element = $browser->elements('.main .rooms.mt50 .container .row .col-md-3');
             $this->assertCount(1, $element);
-            $browser->assertPathIs('/category/' . $category->slug . '/news');
+            $browser->assertPathIs('/categories/' . $category->slug . '/news');
             $browser->assertQueryStringHas('page', 2);
         });
     }

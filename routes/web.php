@@ -25,7 +25,7 @@ Route::group(['namespace'=>'Frontend'], function() {
     Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
     Route::resource('/news', 'NewsController', ['as' => 'frontend']);
     Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
-    Route::get('/category/{slug}/news', 'CategoryController@show')->name('category.news');
+    Route::get('/categories/{slug}/news', 'CategoryController@show')->name('categories.news');
 });
 Route::get('/registerSuccess', function() {
     return view('frontend.notice');

@@ -21,7 +21,7 @@ class CategoryController extends Controller
     {
         $category = Category::where('slug', $slug)->firstOrFail();
         $news = News::where('category_id', $category->id)
-                    ->orderby('created_at', 'DESC')->paginate(3 * News::ITEM_LIMIT);
+                    ->orderby('created_at', 'DESC')->paginate(News::ITEM_PER_PAGE);
         return view('frontend.categories.show', compact('news', 'category'));
     }
 }

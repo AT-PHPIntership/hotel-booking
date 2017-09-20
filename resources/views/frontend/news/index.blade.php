@@ -78,7 +78,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <h2 class="lined-heading"><a href="{{ route('category.news', $category->slug) }}"><span class="pull-left tranY-50">{{ $category->name }}</span></a></h2>
+            <h2 class="lined-heading"><a href="{{ route('categories.news', $category->slug) }}"><span class="pull-left tranY-50">{{ $category->name }}</span></a></h2>
           </div> 
         </div>
         @foreach ($category->news as $key => $itemNews)

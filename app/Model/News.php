@@ -60,6 +60,11 @@ class News extends Model
     const TOP_NEWS = 5;
 
     /**
+     * Define a value paginate rows follow category
+     */
+    const ITEM_PER_PAGE = 12;
+
+    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
