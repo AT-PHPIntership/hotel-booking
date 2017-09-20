@@ -1,4 +1,4 @@
-// StarHotel Javascripts
+    // StarHotel Javascripts
 jQuery(document).ready(function () {
     "use strict";
 
@@ -402,7 +402,33 @@ jQuery(document).ready(function () {
         $('#table-reservation').show();
         $('#table-comment').hide();
     });
+    $('.link-room-info').click(function() {
+        var room_id;
+        room_id = $(this).attr('data-id'); 
+        $('#room-detail-modal-' + room_id).on('shown.bs.modal', function (e) {
+            $('#carousel-' + room_id).flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                itemWidth: 210,
+                itemMargin: 5,
+                asNavFor: '#slider-' + room_id
+            });
 
+            $('#slider-' + room_id).flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                sync: "#carousel-" + room_id,
+                start: function(slider){
+                  $('body').removeClass('loading');
+                }
+            });
+        });
+    });
+     
     /*
      * Slider range rating   
      */
