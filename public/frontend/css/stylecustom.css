@@ -388,6 +388,15 @@
 .cls-register a {
     margin-right: 2%;
 }
+.cls-with-max {
+    width: 100%;
+}
+.cls-text-color-primary {
+    color: #75c5cf;
+}
+.cls-mr-20 {
+    margin-right: 20px;
+}
 .cls-tb-user {
     margin-left: 9%;
 }
