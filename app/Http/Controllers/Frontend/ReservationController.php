@@ -8,6 +8,7 @@ use App\Model\Reservation;
 use App\Model\User;
 use App\Model\Room;
 use App\Model\Guest;
+use Carbon\Carbon;
 use App\Http\Requests\Frontend\AddReservationRequest;
 
 class ReservationController extends Controller
@@ -21,7 +22,7 @@ class ReservationController extends Controller
      */
     public function create(Request $request)
     {
-    	$bookingInfomation = \Cache::get(User::KEY_CACHE, User::DEFAULT_VALUE);
+        $bookingInfomation = \Cache::get(User::KEY_CACHE, User::DEFAULT_VALUE);
         $columns = [
             'id',
             'name',
@@ -33,8 +34,15 @@ class ReservationController extends Controller
             'hotel_id'
         ];
         $room = Room::select($columns)->findOrFail($request->id);
-        // dd($bookingInfomation);
-        return view('frontend.booking.index', compact('bookingInfomation', 'room'));
+        $emptyRooms = $room->total;
+
+        if (isset($bookingInfomation)) {
+            $checkinDate = Carbon::createFromFormat(config('hotel.datetime_format'), $bookingInfomation['checkin'] . config('hotel.checkin_time'))
+                ->toDateTimeString();
+            $emptyRooms = $this->totalEmptyRoom($room->id, $checkinDate);
+        }
+
+        return view('frontend.booking.index', compact('bookingInfomation', 'room', 'emptyRooms'));
     }
 
     /**
@@ -48,21 +56,63 @@ class ReservationController extends Controller
     {
         $reservation = new Reservation($request->all());
 
-        if($reservation->target == Reservation::TARGET_USER) {
-            $result = $reservation->save();
+        $checkinDate = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkin_time'))
+                ->toDateTimeString();
+        $checkoutDate = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkout_time'))
+                ->addDay($request->duration)
+                ->toDateTimeString();
+        // set date for reservation
+        $reservation->checkin_date = $checkinDate;
+        $reservation->checkout_date = $checkoutDate;
+        // get quanlity empty room
+        $emptyRooms = $this->totalEmptyRoom($request->room_id, $checkinDate);
+        // return fail when room not enough
+        if ($reservation->quantity > $emptyRooms) {
+            flash(__('Sorry! The room is not enough!'))->error();
+            return redirect()->back()->withInput();
         }
-        else {
-            $guest = new Guest($request->all());
-            $guest->save();
+        // save booking infomation
+        if ($reservation->target == Reservation::TARGET_USER) {
+            $result = $reservation->save();
+        } else {
+            $guest = Guest::where('email', $request->email)->first();
+            if (!$guest) {
+                $guest = new Guest($request->all());
+                $guest->save();
+            }
             $reservation->target_id = $guest->id;
             $result = $reservation->save();
         }
 
         if ($result) {
-            return redirect()->route('home.index');
+            flash(__('Booking success! Thank you!'))->success();
+            return redirect()->back();
         } else {
+            flash(__('Booking failure! Sorry'))->error();
             return redirect()->back()->withInput();
         }
+    }
+
+    /**
+     * Save creating reservation
+     *
+     * @param int      $roomId  id       of room
+     * @param datetime $checkin datetime checkin
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function totalEmptyRoom($roomId, $checkin)
+    {
+        $room = Room::findOrFail($roomId);
+        $roomBusy = $room->reservations()
+            ->where([
+                ['status', '1'],
+                ['checkin_date', '<=', $checkin],
+                ['checkout_date', '>=', $checkin]
+                ])
+            ->get();
+            $totalBusy = $roomBusy->sum('quantity');
+        return $room->total - $totalBusy;
     }
 
     /**

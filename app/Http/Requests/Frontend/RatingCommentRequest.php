@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\URL;
 
-class AddReservationRequest extends FormRequest
+class RatingCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +24,10 @@ class AddReservationRequest extends FormRequest
      */
     public function rules()
     {
+        $this->redirect = URL::previous() . config('hotel.section_rating_comment') ;
+        
         return [
-            'full_name' => 'required',
-            'quantity' => 'required|numeric',
-            'phone' => 'required',
-            'email' => 'required|email',
-            'duration' => 'required',
-            'checkin' => 'required',
+            'comment' => 'required|min:10|max:1000',
         ];
     }
 }

@@ -23,6 +23,9 @@
               @endif
             </div>
           <h2 class="mt50">{{ __('Fill your infomation') }}</h2>
+          <div class="col-md-8 nopadding">
+            @include('flash::message')
+          </div>
           <div class="cls-form-border-parent">
           {{-- input form --}}
             <form  id="booking-form" method="POST" class="cls-form-border col-md-8 form-group" action="{{ route('reservations.store') }}" enctype="multipart/form-data">
@@ -45,11 +48,11 @@
                 <span class="text-danger">{{ ($errors->first('email')) ? $errors->first('email') : '' }}</span>
               </div>
               {{-- checkin --}}
-              {{-- {{ dd( }} --}}
               <div class="col-sm-5 nopadding mt20">
-                <label for="checkin_date">{{ __('Check in') }}<i class="text-danger"> *</i></label>
-                <input type="date" name="checkin_date" class="form-control" value="{{ isset($bookingInfomation['checkin']) ? (Carbon\Carbon::createFromFormat('d/m/Y', $bookingInfomation['checkin']))->toDateString() : ''}}">
-                <span class="text-danger">{{ ($errors->first('checkin_date')) ? $errors->first('checkin_date') : '' }}</span>
+                <label for="checkin">{{ __('Check-in') }}</label>
+                <div class="popover-icon" data-toggle="tooltip" title="{{ __('Check-In is from 14:00') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"></i></div>
+                <input name="checkin" type="text" id="checkin" class="form-control{{ $errors->has('checkin') ? ' has-error' : '' }}" placeholder="{{ __('Check-in') }}" value="{{ isset($bookingInfomation) ? $bookingInfomation['checkin'] : '' }}" />
+                 <small class="text-danger">{{ $errors->first('checkin') }}</small>
               </div>
               {{-- duration --}}
               <div class="col-sm-5 nopadding mt20 cls-ml-20">
@@ -64,7 +67,7 @@
               <div class="col-sm-4 nopadding mt20">
                 <label for="quantity">{{ __('No. of rooms') }}</label>
                 <select name = "quantity" class="form-control">
-                  @for($i = 1; $i <= $room->total; $i++)
+                  @for($i = 1; $i <= $emptyRooms; $i++)
                       <option value="{{ $i }}">{{ __(':quantity rooms', ['quantity' => $i]) }}</option>
                   @endfor
                 </select>
@@ -77,6 +80,7 @@
               {{-- hidden infor --}}
               <input type="hidden" name="status" value="{{ App\Model\Reservation::STATUS_PENDING }}">
               <input type="hidden" name="checkout_date">
+              <input type="hidden" name="room_id" value="{{ $room->id }}">
               <input type="hidden" name="target" value="{{ (Auth::user()) ? 'user' : 'guest' }}">
               <input type="hidden" name="target_id" value="{{ (Auth::user()) ? Auth::user()->id : '' }}">
               <input type="hidden" name="checkout_date">
@@ -109,13 +113,18 @@
                   <p>{{ __('Name: :name', ['name' => $room->name]) }}</p>
                   <p>{{ __('Size: :size', ['size' => $room->size]) }}</p>
                   <p>{{ __('Max guest: :max_guest', ['max_guest' => $room->max_guest]) }}</p>
+                  <p id="js-price-room">{{ __('Price: :price', ['price' => $room->price]) }}</p>
+                  <small class="text-danger">{{ __('(Has :emptyRooms empty rooms)', ['emptyRooms' => $emptyRooms]) }}</small>
                 </div>   
               </div>
             </div>
             <div class="clearfix"></div>
             <h2 class="mt50">{{ __('Price details') }}</h2>
             <div class="cls-form-border col-md-8 form-group">
-              
+              <h3>{{ __('Price:') }}<span id="js-price" class="pull-right"></span></h3>
+              <h3>{{ __('Quantity:') }}<span id="js-quantity" class="pull-right"></span></h3>
+              <h3>{{ __('Duration:') }}<span id="js-duration" class="pull-right"></span></h3>
+              <h3>{{ __('Total Price:') }}<span id="js-price-total" class="pull-right"></span></h3>
             </div>
             <div class="col-md-8 nopadding cls-mb-50">
               <button id="submit" class="btn btn-primary pull-right">{{ __('Submit') }} </button>

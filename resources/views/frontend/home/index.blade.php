@@ -2,6 +2,7 @@
 @section('customcss')
 <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 @endsection
+@section('title', __('Home page'))
 @section('content')
 
 <!-- Introduce Slider -->
@@ -10,67 +11,102 @@
     <div class="banner">
       <ul>
         <!-- Slide 1 -->
-        <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" > 
-          <!-- Main Image --> 
-          <img src="{{ asset('frontend/images/slide2.jpg') }}"" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat"> 
+        @if($topHotels->count() != null)
+          <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" > 
+          <!-- Main Image -->
+            @php($advertiseHotel = $topHotels->random())
+            @if($advertiseHotel->images->count() != null) 
+            <img src="{{ $advertiseHotel->images->random()->path }}" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
+            @endif
           <!-- Layers -->           
           <!-- Layer 1 -->
-          <div class="caption sft revolution-starhotel bigtext"  
-                  data-x="505" 
-                        data-y="30" 
-                        data-speed="700" 
-                        data-start="1700" 
-                        data-easing="easeOutBack"> 
-            <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span> A Five Star Hotel <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></div>
+            <div class="caption sft revolution-starhotel bigtext"  
+                          data-x="505" 
+                          data-y="30" 
+                          data-speed="700" 
+                          data-start="1700" 
+                          data-easing="easeOutBack"> 
+              <span>
+                @for($i = App\Model\Hotel::STAR_MIN; $i <= App\Model\Hotel::STAR_MAX; $i++)
+                  @if($i <= $advertiseHotel->star)
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                  @else
+                      <i class="fa fa-star-o"></i>
+                  @endif
+                @endfor
+              </span> 
+              {{ $advertiseHotel->name }} 
+              <span>
+                @for($i = App\Model\Hotel::STAR_MIN; $i <= App\Model\Hotel::STAR_MAX; $i++ )
+                  @if($i <= $advertiseHotel->star)
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                  @else
+                      <i class="fa fa-star-o"></i>
+                  @endif
+                @endfor
+              </span>
+            </div>
           <!-- Layer 2 -->
-          <div class="caption sft revolution-starhotel smalltext"  
-                  data-x="605" 
-                        data-y="105" 
-                        data-speed="800" 
-                        data-start="1700" 
-                        data-easing="easeOutBack">
-            <span>And we like to keep it that way!</span></div>
-          <!-- Layer 3 -->
-                  <div class="caption sft"  
+            <div class="caption sft revolution-starhotel smalltext"  
+                      data-x="682" 
+                      data-y="105" 
+                      data-speed="800" 
+                      data-start="1700" 
+                      data-easing="easeOutBack">
+              <span>{{ __('Place: ') . $advertiseHotel->place->name }}</span>
+            </div>
+              <!-- Layer 3 -->
+            <div class="caption sft"  
                   data-x="775" 
-                        data-y="175" 
-                        data-speed="1000" 
-                        data-start="1900" 
-                        data-easing="easeOutBack">
-            <a href="{{ route('reservations.create' , ['room-id' => 5]) }}" class="button btn btn-purple btn-lg">See more</a> 
-                  </div>
-        </li>
-    <!-- Slide 2 -->
-        <li data-transition="boxfade" data-slotamount="7" data-masterspeed="1000" > 
-          <!-- Main Image --> 
-          <img src="{{ asset('frontend/images/slide1.jpg') }}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat"> 
-          <!-- Layers -->           
-          <!-- Layer 1 -->
+                  data-y="175" 
+                  data-speed="1000" 
+                  data-start="1900" 
+                  data-easing="easeOutBack">
+              <a href="/detailHotel" class="button btn btn-purple btn-lg">{{ __('See More') }}</a> 
+            </div>
+          </li>
+          <!-- Slide 2 -->
+          <li data-transition="boxfade" data-slotamount="7" data-masterspeed="1000" > 
+            <!-- Main Image -->
+            @if($advertiseHotel->images->count() != null) 
+            <img src="{{ $advertiseHotel->images->random()->path }}" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
+            @endif 
+            <!-- Layers -->           
+            <!-- Layer 1 -->
           <div class="caption sft revolution-starhotel bigtext"  
-                  data-x="585" 
-                        data-y="30" 
-                        data-speed="700" 
-                        data-start="1700" 
-                        data-easing="easeOutBack"> 
-            <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span> Double room <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></div>
+                data-x="585" 
+                data-y="30" 
+                data-speed="700" 
+                data-start="1700" 
+                data-easing="easeOutBack"> 
+          {{ __('Room Diversity') }}
+          </div>
           <!-- Layer 2 -->
-          <div class="caption sft revolution-starhotel smalltext"  
+            <div class="caption sft revolution-starhotel smalltext"  
                   data-x="682" 
-                        data-y="105" 
-                        data-speed="800" 
-                        data-start="1700" 
-                        data-easing="easeOutBack">
-            <span>€ 99,- a night this summer</span></div>
+                  data-y="105" 
+                  data-speed="800" 
+                  data-start="1700" 
+                  data-easing="easeOutBack">
+              <span>
+                @if($advertiseHotel->rooms->count() != null)
+                  {{ __('From $:min to $:max', ['min' => $advertiseHotel->rooms->min('price'), 'max' => $advertiseHotel->rooms->max('price')]) }}
+                @endif
+            </span>
+            </div>
         <!-- Layer 3 -->
-                  <div class="caption sft"  
-                  data-x="785" 
-                        data-y="175" 
-                        data-speed="1000" 
-                        data-start="1900" 
-                        data-easing="easeOutBack">
-            <a href="room-detail.html" class="button btn btn-purple btn-lg">Book this room</a> 
-                  </div>
-        </li>
+            <div class="caption sft"  
+                data-x="785" 
+                data-y="175" 
+                data-speed="1000" 
+                data-start="1900" 
+                data-easing="easeOutBack">
+              <a href="room-detail.html" class="button btn btn-purple btn-lg">{{ __('Booking room') }}</a> 
+            </div>
+          </li>
+        @else
+          <p>{{ __('Sorry! The system is updating') }}</p>
+        @endif
       </ul>
     </div>
   </div>
@@ -80,122 +116,148 @@
 @include('frontend.layouts.partials.search')
 
 <!-- Outstanding Places -->
-<section class="rooms mt50">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h2 class="lined-heading"><span>Outstanding Places</span></h2>
-      </div> 
-      <!-- 3 place top -->
-      @for ($i = 0; $i < 3; $i++)
-        <div class="col-sm-4">
-          <div class="room-thumb"> <img src="{{ asset('frontend/images/place1.jpg') }}" alt="topPlace" class="img-responsive" />
-            <div class="mask">
-              <div class="main">
-                <h5>Ha Noi</h5>
-                <div class="price">More 100 hotels</div>
-              </div>
-              <div class="content">
-                <p><span>A modern hotel room in Star Hotel</span> Nunc tempor erat in magna pulvinar fermentum. Pellentesque scelerisque at leo nec vestibulum. 
-                  malesuada metus.</p>
-                <div class="row">
-                  <div class="col-xs-6">
-                    <ul class="list-unstyled">
-                      <li><i class="fa fa-check-circle"></i> Incl. breakfast</li>
-                      <li><i class="fa fa-check-circle"></i> Private balcony</li>
-                      <li><i class="fa fa-check-circle"></i> Sea view</li>
-                    </ul>
+  <section class="rooms mt50" id="top-3-places">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="lined-heading"><span>{{ __('Outstanding Places') }}</span></h2>
+        </div> 
+        @if($topPlaces->count() != null)
+        <!-- 3 place top -->
+        @php($count = 0)
+        @foreach($topPlaces as $place)
+          @php($count++)
+          @if($count > (config('hotel.top-3-places')))
+            @break
+          @endif
+          <div class="col-sm-4">
+            <div class="room-thumb">
+              <img src="{{ (isset($place->image)) ? $place->image_url : asset(config('image.default_thumbnail')) }}" alt="topPlace" class="img-responsive"/>
+              <div class="mask">
+                <div class="main cls-with-max">
+                  <div class="pull-left">
+                    <a href=""><h5>{{ $place->name . ' |' }}</h5></a>
                   </div>
-                  <div class="col-xs-6">
-                    <ul class="list-unstyled">
-                      <li><i class="fa fa-check-circle"></i> Free Wi-Fi</li>
-                      <li><i class="fa fa-check-circle"></i> Incl. breakfast</li>
-                      <li><i class="fa fa-check-circle"></i> Bathroom</li>
-                    </ul>
+                  <div>
+                    <a href="">
+                      <h5 class="cls-text-color-primary">{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</h5>
+                    </a>
                   </div>
                 </div>
-                <a href="room-detail.html" class="btn btn-primary btn-block">Read More</a>
+                <div class="content">
+                  <p>
+                  <span>{{ __('Descript') }}</span>
+                  {{ contentLimit(strip_tags($place->descript)) }}
+                  </p>
+                  <a href="" class="btn btn-primary btn-block mt50">{{ __('See More') }}</a>
+                </div>
               </div>
             </div>
-          </div>
-        </div> 
-      @endfor
-    </div>
-  </div>
-</section>
-
- <!-- 4 place top -->
-<section class="rooms mt50">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
+          </div> 
+        @endforeach
       </div>
-      <!-- place 1-->
-       @for ($i = 0; $i < 4; $i++)
-          <div class="col-sm-3">
-            <div class="second-place">
-            <img src="{{ asset('frontend/images/place2.jpg') }}" alt="topPlace" class="img-responsive" />  
-              <div class="second-place-bottom"> 
-              <h5>Da Nang</h5>
-              </div>
-            </div>
-          </div>
-       @endfor
     </div>
-  </div>
-</section>
-<!-- top hotel -->
-<section class="rooms mt50">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h2 class="lined-heading"><span>Representative Hotels</span></h2>
-      </div> 
-      <!-- 3 place top -->
-      @for ($i = 0; $i < 6; $i++)
-        <div class="col-sm-4">
-          <div class="room-thumb"> <img src="{{ asset('frontend/images/hotel2.jpg') }}" alt="hotel" class="img-responsive" />
-            <div class="mask">
-              <div class="main">
-                <h5>Muong thanh</h5>
-                <div class="price">® ® ® ® </div>
-              </div>
-              <div class="content">
-                <p><span>A modern hotel room in Star Hotel</span> Nunc tempor erat in magna pulvinar fermentum. Pellentesque scelerisque at leo nec vestibulum. 
-                  malesuada metus.</p>
-                <div class="row">
-                  <div class="col-xs-6">
-                    <ul class="list-unstyled">
-                      <li><i class="fa fa-check-circle"></i> Incl. breakfast</li>
-                      <li><i class="fa fa-check-circle"></i> Private balcony</li>
-                      <li><i class="fa fa-check-circle"></i> Sea view</li>
-                    </ul>
+  </section>
+
+   <!-- 4 place top -->
+  <section class="rooms mt50" id="top-4-places">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12"></div>
+        @php($count = 0)
+        @foreach($topPlaces as $place)
+          @php($count++)
+          @if($count < (config('hotel.top-4-places')))
+            @continue
+          @endif
+            <div class="col-sm-3">
+              <div class="second-place">
+                <img src="{{ (isset($place->image)) ? $place->image_url : asset(config('image.default_thumbnail')) }}" alt="topPlace" class="img-responsive"/>
+                <div class="second-place-bottom"> 
+                  <div class="pull-left">
+                    <a href=""><h5><strong>{{ $place->name }}</strong></h5></a>
                   </div>
-                  <div class="col-xs-6">
-                    <ul class="list-unstyled">
-                      <li><i class="fa fa-check-circle"></i> Free Wi-Fi</li>
-                      <li><i class="fa fa-check-circle"></i> Incl. breakfast</li>
-                      <li><i class="fa fa-check-circle"></i> Bathroom</li>
-                    </ul>
+                  <div class="pull-right">
+                    <a href="">
+                      <h5 class="cls-text-color-primary cls-mr-20"><strong>{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</strong></h5>
+                    </a>
                   </div>
                 </div>
-                <a href="/detailHotel" class="btn btn-primary btn-block">Read More</a>
               </div>
             </div>
-          </div>
-        </div> 
-      @endfor
+         @endforeach
+      </div>
+      @else
+        <p class="text-center">{{ __('Sorry! The system is updating') }}</p>
+      @endif
     </div>
-  </div>
-</section>
-<!-- end top hotel -->
+  </section>
+<!-- top hotel -->
+  <section class="rooms mt50" id="top-hotels">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="lined-heading"><span>{{ __('Representative Hotels') }}</span></h2>
+        </div> 
+        <!-- 6 hotel top -->
+        @if($topHotels->count() != null)
+        @foreach($topHotels as $hotel)
+          <div class="col-sm-4 mt50">
+            <div class="room-thumb">
+              <img src="{{ ($hotel->images->count() != 0) ? $hotel->images->random()->path : asset(config('image.default_thumbnail')) }}" alt="hotel" class="img-responsive"/>
+              <div class="mask">
+                <div class="main cls-with-max">
+                  <div class="pull-left">
+                    <a href=""><h5>{{ $hotel->name }}</h5></a>
+                  </div>
+                  <div class="pull-right cls-mr-20">
+                    <a href="">
+                      <h5 class="cls-text-color-primary">{{ round($hotel->total, 1) }}</h5>
+                    </a>
+                  </div>
+                </div>
+                <div class="content">
+                 <p>
+                    <span>{{ __('Introduce') }}</span>
+                    {{ contentLimit(strip_tags($hotel->introduce)) }}
+                  </p>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <ul class="list-unstyled">
+                      @php($count = 0)
+                        @foreach($hotel->hotelServices as $hotelService)
+                          @if($count == (config('hotel.limit-services')))
+                                </ul>
+                              </div>
+                            <div class="col-xs-6">
+                              <ul class="list-unstyled">
+                          @endif
+                          <li><i class="fa fa-check-circle"></i>{{ $hotelService->service->name }}</li>
+                          @php($count++)
+                        @endforeach
+                      </ul>
+                    </div>
+                  </div>
+                  <a href="" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
+                </div>
+              </div>
+            </div>
+          </div> 
+        @endforeach
+      </div>
+    </div>
+  </section>
+@else
+  <p class="text-center">{{ __('Sorry! The system is updating') }}</p>
+@endif
+  <!-- end top hotel -->
 
 <!-- Why should you choose us? -->
 <section class="usp mt100">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2 class="lined-heading"><span>Why should you choose us?</span></h2>
+        <h2 class="lined-heading"><span>{{ __('Why should you choose us?') }}</span></h2>
       </div>
       <div class="col-sm-3 bounceIn appear" data-start="0">
       <div class="box-icon">

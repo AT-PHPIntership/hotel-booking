@@ -31,6 +31,16 @@ class Hotel extends Model
     const STAR_MIN = 1;
 
     /**
+     * Define limit value Hotel for show in homepage
+     */
+    const SHOW_LIMIT = 6;
+
+    /**
+     * Define timout cache for query
+     */
+    const TIMEOUT_CACHE = 5;
+
+    /*
      * Value of low rating score
      */
     const LOW_SCORE = 4.9;
