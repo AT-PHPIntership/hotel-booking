@@ -8,5 +8,6 @@ return [
     'float_fixed_point' => '%.1f',
     'top-3-places' => 3,
     'top-4-places' => 4,
-    'limit-services' => 3
+    'limit-services' => 3,
+    'section_rating_comment' => '#section-rating-comment'
 ];

@@ -29,7 +29,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Get top place follow reservations
+     * Get top place follow reservations.
      *
      * @return App\Model\Place
      */
@@ -82,10 +82,7 @@ class HomeController extends Controller
         $with['images'] = function ($query) {
             $query->select();
         };
-        $with['hotelServices'] = function ($query) {
-            $query->select('id', 'hotel_id', 'service_id')->limit(Hotel::SHOW_LIMIT);
-        };
-        $with['hotelServices.service'] = function ($query) {
+        $with['services'] = function ($query) {
             $query->select('id', 'name');
         };
         return Hotel::with($with)

@@ -48,6 +48,7 @@ class HotelController extends Controller
             'place_id'
         ];
         $commentColumns = [
+            'id',
             'food',
             'cleanliness',
             'comfort',
