@@ -61,6 +61,8 @@ class AdminLoginTest extends DuskTestCase
                     ->type('username', 'admin')
                     ->type('password', 'admin') 
                     ->press('LOGIN')
+                    ->mouseover('#navbar-collapse-grid ul li:nth-child(4)')
+                    ->clickLink('Admin Management')
                     ->assertSee('Home Page')
                     ->assertPathIs('/admin');
         });
