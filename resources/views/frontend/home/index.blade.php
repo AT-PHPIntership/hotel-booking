@@ -126,7 +126,7 @@
         @php($count = 0)
         @foreach($topPlaces as $place)
           @php($count++)
-          @if($count > 3)
+          @if($count > (config('hotel.top-3-places')))
             @break
           @endif
           <div class="col-sm-4">
@@ -166,7 +166,7 @@
         @php($count = 0)
         @foreach($topPlaces as $place)
           @php($count++)
-          @if($count < 4)
+          @if($count < (config('hotel.top-4-places')))
             @continue
           @endif
             <div class="col-sm-3">
@@ -192,7 +192,6 @@
     </div>
   </section>
 <!-- top hotel -->
-
   <section class="rooms mt50" id="top-hotels">
     <div class="container">
       <div class="row">
@@ -208,7 +207,7 @@
               <div class="mask">
                 <div class="main cls-with-max">
                   <div class="pull-left">
-                    <a href=""><h5>{{ $hotel->name }}</h5></a>
+                    <a href="{{ route('hotels.show', $hotel->slug) }}"><h5>{{ $hotel->name }}</h5></a>
                   </div>
                   <div class="pull-right cls-mr-20">
                     <a href="">
@@ -226,7 +225,7 @@
                       <ul class="list-unstyled">
                       @php($count = 0)
                         @foreach($hotel->hotelServices as $hotelService)
-                          @if($count == 3)
+                          @if($count == (config('hotel.limit-services')))
                                 </ul>
                               </div>
                             <div class="col-xs-6">
