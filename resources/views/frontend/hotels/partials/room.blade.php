@@ -36,28 +36,34 @@
                     {{-- slider --}}
                     <div id="container-{{ $room->id }}" class="contain-slider-img-room">
                       <div id="main-{{ $room->id }}" role="main">
-                        <section class="slider">
-                          <div id="slider-{{ $room ->id }}"
-                            class="flexslider">
-                            <ul class="slides">
-                              @foreach ($room->images as $roomImage)
-                                <li>
-                                  <img class="cls-img-room-show" src="{{ asset($roomImage->path) }}" />
-                                </li>
-                              @endforeach
-                            </ul>
+                        @if ($room->images->count() == 0)
+                          <div class="cls-show-room-no-img">
+                            <img class="img-room-show" src="{{ asset(config('image.no_image')) }}">
                           </div>
-                          <div id="carousel-{{ $room ->id }}"
-                            class="flexslider cls-slider-thumbnail">
-                            <ul class="slides">
-                              @foreach ($room->images as $roomImage)
-                                <li>
-                                  <img class="cls-img-room-thumbnail" src="{{ asset($roomImage->path) }}" />
-                                </li>
-                              @endforeach
-                            </ul>
-                          </div> 
-                        </section>
+                        @else
+                          <section class="slider">
+                            <div id="slider-{{ $room ->id }}"
+                              class="flexslider">
+                              <ul class="slides">
+                                @foreach ($room->images as $roomImage)
+                                  <li>
+                                    <img class="cls-img-room-show" src="{{ asset($roomImage->path) }}" />
+                                  </li>
+                                @endforeach
+                              </ul>
+                            </div>
+                            <div id="carousel-{{ $room ->id }}"
+                              class="flexslider cls-slider-thumbnail">
+                              <ul class="slides">
+                                @foreach ($room->images as $roomImage)
+                                  <li>
+                                    <img class="cls-img-room-thumbnail" src="{{ asset($roomImage->path) }}" />
+                                  </li>
+                                @endforeach
+                              </ul>
+                            </div> 
+                          </section>
+                        @endif
                       </div>
                     </div>
                     {{-- end slider --}}

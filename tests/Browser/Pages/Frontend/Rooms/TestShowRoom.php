@@ -24,11 +24,11 @@ class TestShowRoom extends DuskTestCase
      */
     public function testShowRoom()
     {
-        $this->makeData(20);
+        $this->makeData(5);
         $this->browse(function (Browser $browser) {
-            $hotel = Hotel::find(20);
+            $hotel = Hotel::find(1);
             $selector = 'main section:nth-child(2) .container .row div:nth-child(2) .room-thumb .mask .content';
-            $browser->visit('/')
+            $page = $browser->visit('/')
                     ->clickLink('Hotels')
                     ->mouseover($selector)
                     ->whenAvailable($selector, function ($selectorAvailable) {
@@ -37,7 +37,78 @@ class TestShowRoom extends DuskTestCase
                     ->assertSee($hotel->name)
                     ->assertPathIs('/hotels/'.$hotel->slug);
             if ($hotel->rooms->count() != 0) {
-                $browser->assertVisible('room-item');
+                $browser->clickLink('Room information')
+                        ->pause(3000)
+                        ->assertVisible('#room-detail-modal-'.$hotel->rooms[0]->id);
+            } else {
+                $browser->assertSee('Hotel not has room any ! Admin is updating !');
+            }
+            
+        });
+    }
+
+    /**
+     * Test Value of page show detail room.
+     *
+     * @return void
+     */
+    public function testShowValueOfDetailRoom()
+    {
+        $this->makeData(20);
+        $this->browse(function (Browser $browser) {
+            $hotel = Hotel::find(1);
+            $selector = 'main section:nth-child(2) .container .row div:nth-child(2) .room-thumb .mask .content';
+            $page = $browser->visit('/')
+                    ->clickLink('Hotels')
+                    ->mouseover($selector)
+                    ->whenAvailable($selector, function ($selectorAvailable) {
+                        $selectorAvailable->click('.btn');
+                    })
+                    ->assertSee($hotel->name)
+                    ->assertPathIs('/hotels/'.$hotel->slug);
+            if ($hotel->rooms->count() != 0) {
+                $browser->clickLink('Room information')
+                        ->pause(2000);
+                $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(1)') === 'Room name: '.$hotel->rooms[0]->name);
+                $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(2)') === 'Quantity: '.(string)($hotel->rooms[0]->total-$hotel->rooms[0]->quantity_busy_reservation));
+                $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(3)') === 'Bed: '.$hotel->rooms[0]->bed);
+                $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(4)') === 'Direction: '.$hotel->rooms[0]->direction);
+                $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(5)') === 'Max guest: '.$hotel->rooms[0]->max_guest);
+                $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(6)') === 'Descript: '.$hotel->rooms[0]->descript);
+                $this->assertTrue($browser->text('.cls-room-price') === $hotel->rooms[0]->price.' $');
+
+            } else {
+                $browser->assertSee('Hotel not has room any ! Admin is updating !');
+            }
+            
+        });
+    }
+
+    /**
+     * Test modal show room.
+     *
+     * @return void
+     */
+    public function testCloseModalShowRoom()
+    {
+        $this->makeData(10);
+        $this->browse(function (Browser $browser) {
+            $hotel = Hotel::find(1);
+            $selector = 'main section:nth-child(2) .container .row div:nth-child(2) .room-thumb .mask .content';
+            $page = $browser->visit('/')
+                    ->clickLink('Hotels')
+                    ->mouseover($selector)
+                    ->whenAvailable($selector, function ($selectorAvailable) {
+                        $selectorAvailable->click('.btn');
+                    })
+                    ->assertSee($hotel->name)
+                    ->assertPathIs('/hotels/'.$hotel->slug);
+            if ($hotel->rooms->count() != 0) {
+                $browser->clickLink('Room information')
+                        ->pause(3000)
+                        ->press('BACK')
+                        ->assertDontSee('.modal-body')
+                        ->assertPathIs('/hotels/'.$hotel->slug);
             } else {
                 $browser->assertSee('Hotel not has room any ! Admin is updating !');
             }
@@ -63,6 +134,8 @@ class TestShowRoom extends DuskTestCase
         $hotelIds = Hotel::all('id')->pluck('id')->toArray();
             factory(Room::class, 1)->create([
                 'hotel_id' => $faker->randomElement($hotelIds),
+                'bed' => 'single',
+                'direction' => 'Floor Two',
             ]);
         $roomIds = Room::all('id')->pluck('id')->toArray();
         for ($i = 0; $i < $row; $i++) {
