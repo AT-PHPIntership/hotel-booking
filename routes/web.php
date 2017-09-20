@@ -12,13 +12,19 @@
 
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
+    Route::resource('/sendfeedback', 'FeedBackController', ['only' => ['create', 'store']]);
     Route::group(['middleware'=> 'auth'], function() {
+        Route::resource('/comments', 'RatingCommentController', ['only' => ['store', 'destroy']]);
         Route::put('/profile/{profile}/reservation/{reservation}', 'ReservationController@update')->name('user.cancelBooking');
         Route::group(['middleware'=> 'checkUser'], function() {
             Route::resource('/profile', 'UserController');
             Route::get('/profile/{profile}/reservation/{reservation}/show', 'ReservationController@show')->name('user.showBooking');
         });
     });
+    Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
+    Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
+    Route::resource('/news', 'NewsController', ['as' => 'frontend']);
+    Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
 });
 Route::get('/registerSuccess', function() {
     return view('frontend.notice');
@@ -45,7 +51,4 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin
     Route::put('/user/{id}/role', 'UserController@updateRole')->name('user.updateRole');
 });
 
-Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function() {
-    Route::resource('/hotel', 'HotelController');
-});
 Auth::routes();

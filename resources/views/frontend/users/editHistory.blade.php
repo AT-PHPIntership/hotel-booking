@@ -103,7 +103,7 @@
                 <form method="POST" action="{{ route('user.cancelBooking', [$reservation->reservable->id, $reservation->id]) }}">
                   {{csrf_field()}}
                   {{method_field('PUT')}}
-                  <button type ="submit" class="btn btn-danger pull-right btn-delete-item" data-title="{{ __('Confirm deletion!') }}"
+                  <button type ="submit" class="btn btn-danger pull-right btn-confirm" data-title="{{ __('Confirm deletion!') }}"
                     data-confirm="{{ __('Are you sure you want to cancel this booking?') }}">
                     {{__('Cancel this')}}
                   </button>

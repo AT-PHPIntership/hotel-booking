@@ -11,8 +11,6 @@ use App\Model\Hotel;
 use App\Model\Place;
 use App\Model\Guest;
 use App\Model\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Faker\Factory as Faker;
 
 class UserUpdateBookingTest extends DuskTestCase
@@ -20,11 +18,11 @@ class UserUpdateBookingTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * Test route page show history booking of user.
+     * Test route page show history booking of user if has data.
      *
      * @return void
      */
-    public function testUserUpdateBooking()
+    public function testUserUpdateBookingIfHasData()
     {   
         $this->makeData(5);
         $this->browse(function (Browser $browser) {
@@ -34,14 +32,27 @@ class UserUpdateBookingTest extends DuskTestCase
                     ->visit('/profile/'.$user->id)
                     ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation');
-            if ($user->reservations->count() != 0) {
                 $reservationId = $browser->text('#table-reservation tbody tr:nth-child(1) td:nth-child(1)');
                 $browser->click('#table-reservation tbody tr:nth-child(1) td:nth-child(6) .fa-edit')
                     ->assertSee('Show History Booking')
                     ->assertPathIs('/profile/'.$user->id.'/reservation/'.$reservationId.'/show');
-            } else {
-                $browser->assertMissing('#table-reservation tbody');
-            }
+        });
+    }
+
+    /**
+     * Test route page show history booking of user if has data.
+     *
+     * @return void
+     */
+    public function testUserUpdateBookingIfNotData()
+    {   
+        $this->browse(function (Browser $browser) {
+            $user = User::find(1);
+            $browser->visit('/profile/'.$user->id)
+                    ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
+                    ->assertVisible('#table-reservation')
+                    ->assertMissing('#table tbody')
+                    ->assertPathIs('/profile/'.$user->id);
         });
     }
 
@@ -55,27 +66,20 @@ class UserUpdateBookingTest extends DuskTestCase
         $this->makeData(5);
         $this->browse(function (Browser $browser) {
             $user = User::find(2);
-            $browser->logout()
-                    ->loginAs($user)
+            $browser->loginAs($user)
                     ->visit('/profile/'.$user->id)
                     ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation');
-            if ($user->reservations->count() != 0) {
                 $reservationId = $browser->text('#table-reservation tbody tr:nth-child(1) td:nth-child(1)');
                 $browser->click('#table-reservation tbody tr:nth-child(1) td:nth-child(6) .fa-edit')
                     ->assertSee('Show History Booking')
                     ->assertPathIs('/profile/'.$user->id.'/reservation/'.$reservationId.'/show');
-                if ($browser->assertVisible('.btn-danger')) {
-                    $browser->press('CANCEL THIS')
-                            ->waitForText('Confirm deletion!')
-                            ->press('OK')
-                            ->assertSee('This booking room was canceled!')
-                            ->assertPathIs('/profile/'.$user->id.'/reservation/'.$reservationId.'/show');
-                    $this->assertTrue(Reservation::find($reservationId)->status == Reservation::STATUS_CANCELED);
-                }
-            } else {
-                $browser->assertMissing('#table-reservation tbody');
-            }
+                $browser->press('CANCEL THIS')
+                        ->waitForText('Confirm deletion!')
+                        ->press('OK')
+                        ->assertSee('This booking room was canceled!')
+                        ->assertPathIs('/profile/'.$user->id.'/reservation/'.$reservationId.'/show');
+                $this->assertTrue(Reservation::find($reservationId)->status == Reservation::STATUS_CANCELED);
         });
     }
 
@@ -94,15 +98,9 @@ class UserUpdateBookingTest extends DuskTestCase
                     ->visit('/profile/'.$user->id)
                     ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation');
-            $browser->visit('/profile/'.$user->id.'/reservation/4/show');   
-            $reservationIds = $user->reservations()->pluck('id')->toarray();
-            if (!in_array(4, $reservationIds)) {
-                $browser->assertSee('403 - Forbidden')
-                        ->assertPathIs('/profile/'.$user->id.'/reservation/4/show');
-            } else {
-                $browser->assertSee('Show History Booking')
-                        ->assertPathIs('/profile/'.$user->id.'/reservation/4/show');
-            }
+            $browser->visit('/profile/'.$user->id.'/reservation/6/show') 
+                    ->assertSee('403 - Forbidden')
+                    ->assertPathIs('/profile/'.$user->id.'/reservation/6/show');
         });
     }
 
@@ -121,22 +119,16 @@ class UserUpdateBookingTest extends DuskTestCase
                     ->visit('/profile/'.$user->id)
                     ->click('.table-user-information tbody tr:nth-child(5) td:nth-child(2) a')
                     ->assertVisible('#table-reservation');
-            if ($user->reservations->count() != 0) {
                 $reservationId = $browser->text('#table-reservation tbody tr:nth-child(1) td:nth-child(1)');
                 $browser->click('#table-reservation tbody tr:nth-child(1) td:nth-child(6) .fa-edit')
                     ->assertSee('Show History Booking')
                     ->assertPathIs('/profile/'.$user->id.'/reservation/'.$reservationId.'/show');
-                if ($browser->assertVisible('.btn-danger')) {
-                    $browser->press('CANCEL THIS')
-                            ->waitForText('Confirm deletion!');
-                    Reservation::find($reservationId)->delete();
-                    $browser->press('OK')
-                            ->assertSee('404 - Page Not found')
-                            ->assertPathIs('/profile/'.$user->id.'/reservation/'.$reservationId);
-                }
-            } else {
-                $browser->assertMissing('#table-reservation tbody');
-            }
+                $browser->press('CANCEL THIS')
+                        ->waitForText('Confirm deletion!');
+                Reservation::find($reservationId)->delete();
+                $browser->press('OK')
+                        ->assertSee('404 - Page Not found')
+                        ->assertPathIs('/profile/'.$user->id.'/reservation/'.$reservationId);
         });
     }
 

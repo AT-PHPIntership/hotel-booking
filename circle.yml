@@ -6,9 +6,10 @@ machine:
     - sudo apt-get update
     - sudo apt-get install google-chrome-stable
 dependencies:
+  cache_directories:
+    - ~/.composer/cache
   pre:
-    # - cp .env.example .env
-
+    - echo "memory_limit = 256M" > /opt/circleci/php/$(phpenv global)/etc/conf.d/memory.ini
 test:
   pre:
     - "bower install"
