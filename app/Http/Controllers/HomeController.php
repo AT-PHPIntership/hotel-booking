@@ -21,6 +21,7 @@ class HomeController extends Controller
             'hotels.id',
             'hotels.name',
             'hotels.address',
+            'hotels.slug',
             'hotels.star',
             'hotels.introduce',
             'hotels.place_id',
@@ -39,11 +40,8 @@ class HomeController extends Controller
         $with['images'] = function ($query) {
             $query->select();
         };
-        $with['hotelServices'] = function ($query) {
-            $query->select('id', 'hotel_id', 'service_id')->limit(Hotel::SHOW_LIMIT);
-        };
-        $with['hotelServices.service'] = function ($query) {
-            $query->select('id', 'name');
+        $with['services'] = function ($query) {
+            $query->select('services.id', 'name');
         };
 
         $topHotels = \Cache::remember('topHotels', Hotel::TIMEOUT_CACHE, function () use ($with, $columns) {

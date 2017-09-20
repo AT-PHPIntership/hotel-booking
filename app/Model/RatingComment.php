@@ -13,6 +13,23 @@ class RatingComment extends Model
     const ROW_LIMIT = 10;
     
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'hotel_id',
+        'user_id',
+        'comment',
+        'food',
+        'cleanliness',
+        'comfort',
+        'location',
+        'service',
+        'total_rating'
+    ];
+
+    /**
      * Relationship with users model
      *
      * @return \App\Model

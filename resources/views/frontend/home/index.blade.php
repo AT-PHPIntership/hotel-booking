@@ -61,7 +61,7 @@
                   data-speed="1000" 
                   data-start="1900" 
                   data-easing="easeOutBack">
-              <a href="/detailHotel" class="button btn btn-purple btn-lg">{{ __('See More') }}</a> 
+              <a href="{{ route('hotels.show', $advertiseHotel->slug) }}" class="button btn btn-purple btn-lg">{{ __('See More') }}</a> 
             </div>
           </li>
           <!-- Slide 2 -->
@@ -198,7 +198,7 @@
       <div class="row">
         <div class="col-sm-12">
           <h2 class="lined-heading"><span>{{ __('Representative Hotels') }}</span></h2>
-        </div> 
+        </div>
         <!-- 6 hotel top -->
         @if($topHotels->count() != null)
         @foreach($topHotels as $hotel)
@@ -238,7 +238,7 @@
                       </ul>
                     </div>
                   </div>
-                  <a href="" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
+                  <a href="{{ route('hotels.show', $hotel->slug) }}" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
                 </div>
               </div>
             </div>

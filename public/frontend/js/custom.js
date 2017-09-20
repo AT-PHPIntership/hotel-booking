@@ -1,4 +1,4 @@
-// StarHotel Javascripts
+    // StarHotel Javascripts
 jQuery(document).ready(function () {
     "use strict";
 
@@ -402,11 +402,86 @@ jQuery(document).ready(function () {
         $('#table-reservation').show();
         $('#table-comment').hide();
     });
+    $('.link-room-info').click(function() {
+        var room_id;
+        room_id = $(this).attr('data-id'); 
+        $('#room-detail-modal-' + room_id).on('shown.bs.modal', function (e) {
+            $('#carousel-' + room_id).flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                itemWidth: 210,
+                itemMargin: 5,
+                asNavFor: '#slider-' + room_id
+            });
+
+            $('#slider-' + room_id).flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                sync: "#carousel-" + room_id,
+                start: function(slider){
+                  $('body').removeClass('loading');
+                }
+            });
+        });
+    });
+     
+    /*
+     * Slider range rating   
+     */
+    var $slider = $('.slider');
+    var total = 0;
+    var numAttributeRating = $slider.length;
+
+    $('#avg-rating').val('5.0');
+    $slider.each(
+        function(i) {
+            let idInput = '#' + $(this).attr('id');
+            let idValue = '#' + $(this).next().attr('id');
+            $(idValue).text('5');
+            $(idInput).on('change', function (e) {
+                $(idValue).text($(this).val());
+                let sum = addAll();
+                let avg = sum / numAttributeRating ;
+                $('#avg-rating').val(avg.toFixed(1));
+            })
+        } 
+    );
+
+    /*
+     * Add value rating
+     *
+     * @return float
+     */
+    function addAll() {
+        var sum = 0;
+        $('.slider').each(function (){        
+            sum += isNaN(this.value) || $.trim(this.value) === '' ? 0 : parseFloat(this.value);        
+        });
+        return sum;    
+    }   
+
+    /*
+     * Color slider change upper and lower 
+     */
+    $('input[type="range"]').change(function () {
+    var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+    
+    $(this).css('background-image',
+        '-webkit-gradient(linear, left top, right top, '
+        + 'color-stop(' + val + ', #1da0e2), '
+        + 'color-stop(' + val + ', #C5C5C5)'
+        + ')'
+        );
+    });
 
     /**
-     * Show confimation when click button cancel booking
+     * Show confimation when click button 
      */
-    $('.btn-update-booking').bind('click',function(e){
+    $('.btn-confirm').bind('click',function(e){
         e.preventDefault();
         var form = $(this.form);
         var title = $(this).attr('data-title');

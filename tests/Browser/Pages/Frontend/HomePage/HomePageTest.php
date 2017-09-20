@@ -43,7 +43,8 @@ class HomePageTest extends DuskTestCase
     public function testShowTopPlaceIfNotData()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser->pause(360000)
+                    ->visit('/')
                     ->assertTitle('Home page')
                     ->assertSee('Outstanding Places')
                     ->assertSee('Sorry! The system is updating')
@@ -78,7 +79,8 @@ class HomePageTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser->pause(360000)
+                    ->visit('/')
                     ->assertTitle('Home page')
                     ->assertSee('Outstanding Places')
                     ->assertPathIs('/');
