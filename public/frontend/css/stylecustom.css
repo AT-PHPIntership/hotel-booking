@@ -313,7 +313,7 @@
     color: #FFF;
 }
 .cls-room-info {
-    color: blue !important;
+    color: #1b7cb5 !important;
 }
 .list-group-item {
     border: none;   
@@ -336,11 +336,11 @@
     display: block;
 }
 .room-dialog-modal{
-    margin-top: 100px;
-    width: 911px;
+    margin-top: 70px;
+    width: 1136px;
 }
 .cls-list-room-info {
-    max-height: 250px;
+    max-height: 300px;
     overflow: auto;
 }
 .cls-list-room-info li {
@@ -424,6 +424,82 @@
 }
 .count-rating-guest{
     margin-top: 10px;
+}
+/*slider*/
+.contain-slider-img-room {
+    margin-top: 10px;
+    width: 500px;
+}
+#carousel li {margin-right: 5px;}
+#carousel img {display: block; opacity: .5; cursor: pointer;}
+#carousel img:hover {opacity: 1;}
+#carousel .flex-active-slide img {opacity: 1; cursor: default;}
+
+.button {
+  display: inline-block;
+  margin: 0;
+  padding: .461em 1.563em .41em;
+  color: #fff!important;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+  text-transform: uppercase;
+  line-height: 1;
+  font-size: .9em;
+  cursor: pointer;
+  font-family: "proxima-nova", sans-serif;
+  border: 1px solid #1a4064;
+  background: #255a8c;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(255, 255, 255, 0.15);
+  -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+.button:active  {
+  -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), inset 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.button.green  {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  border: 1px solid #578824;
+  background: #71b02f;
+}
+.button.green:hover  {
+  background: #79bc32;
+}
+
+ 
+.loading #container {opacity: 0;}
+.loading:before  { content: 'LOADING'; display: block; margin: 100px 0 0; text-align: center; color: #fff; font-weight: bold; font-size: 60px; opacity: 0.3; }
+.cls-img-room-show {
+    width: 486px !important;
+    height: 311px !important;
+}
+.cls-img-room-thumbnail {
+    width: 210px !important;
+    height: 135px !important;
+}
+/*end slider*/
+.cls-room-title {
+    font-size: 25px;
+    color: #1b7cb5 !important;
+}
+.cls-list-room-info li{
+    font-size: 22px;
+    color: #7b7474;
+}
+.cls-slider-thumbnail {
+    width: 495px;
+}
+.cls-room-empty-title {
+    font-size: 16px;
+    color: #e8841d;
+}
+.img-room-show {
+    width: 100%;
 }
 .cls-rating-comment {
     margin-bottom: 75px;

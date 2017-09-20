@@ -54,7 +54,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Get top hotel follow rating.
+     * Get top hotels follow rating of customer.
      *
      * @return App\Model\Place
      */
@@ -83,7 +83,7 @@ class HomeController extends Controller
             $query->select();
         };
         $with['services'] = function ($query) {
-            $query->select('id', 'name');
+            $query->select('services.id', 'name');
         };
         return Hotel::with($with)
                 ->leftJoin('rating_comments', 'hotels.id', '=', 'rating_comments.hotel_id')
