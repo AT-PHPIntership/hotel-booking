@@ -84,11 +84,11 @@ class UserUpdateBookingTest extends DuskTestCase
     }
 
     /**
-     * Test if user route page show a booking room of another user.
+     * Test middleware if user route page show a booking room of another user.
      *
      * @return void
      */
-    public function testMiddleware()
+    public function testIfReservationIsNotOfUserLogin()
     {   
         $this->makeData(5);
         $this->browse(function (Browser $browser) {

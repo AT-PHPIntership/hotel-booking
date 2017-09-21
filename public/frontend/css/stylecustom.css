@@ -388,8 +388,54 @@
 .cls-register a {
     margin-right: 2%;
 }
+.cls-with-max {
+    width: 100%;
+}
+.cls-text-color-primary {
+    color: #75c5cf;
+}
+.cls-mr-20 {
+    margin-right: 20px;
+}
 .cls-tb-user {
     margin-left: 9%;
+}
+
+.cls-image-contain {
+    max-width: 100%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+.cls-image-contain h1 {
+    z-index: 1;
+    font-size: 80px;
+    color: white;
+    text-shadow: 0px 1px 2px #c11414;
+    font-weight: bold;
+}
+.cls-transbox {
+    max-width: 100%;
+    background-color: black;
+    margin-top: 80px;
+    opacity: 0.9;
+    padding: 0px 0px 5px 0px;
+}
+.cls-image-contain h2 {
+    font-size: 25px;
+    color: white;
+    text-shadow: 10px 1px 2px black;
+    font-weight: bold;
+}
+.cls-image {
+    position: absolute;
+    width: 100%;
+    right: 0;
+    margin-top: -100px;
+    z-index: -1;
+}
+.cls-text-color-primary {
+    color: #75c5cf;
 }
 .cls-has-vacancies {
     margin-top: 10px;
