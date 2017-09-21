@@ -103,9 +103,7 @@
                   </span> 
                 </div>
                 <div class="service-detail cls-ml-5-percent">  
-                {{-- {{ dd($room) }} --}}
                   @foreach($room->hotel->services as $service)
-                    {{-- {{ dd($service) --}}
                     <span><i class="fa fa-check-circle cls-service"></i>{{ $service->name }}</span>
                   @endforeach
                 </div>

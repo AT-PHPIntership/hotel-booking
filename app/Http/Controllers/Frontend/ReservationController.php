@@ -23,6 +23,7 @@ class ReservationController extends Controller
     public function create(Request $request)
     {
         $bookingInfomation = \Cache::get(User::KEY_CACHE, User::DEFAULT_VALUE);
+
         $columns = [
             'id',
             'name',
@@ -33,6 +34,7 @@ class ReservationController extends Controller
             'max_guest',
             'hotel_id'
         ];
+
         $room = Room::select($columns)->findOrFail($request->id);
         $emptyRooms = $room->total;
 
@@ -61,6 +63,7 @@ class ReservationController extends Controller
         $checkoutDate = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkout_time'))
                 ->addDay($request->duration)
                 ->toDateTimeString();
+
         // set date for reservation
         $reservation->checkin_date = $checkinDate;
         $reservation->checkout_date = $checkoutDate;
@@ -106,7 +109,7 @@ class ReservationController extends Controller
         $room = Room::findOrFail($roomId);
         $roomBusy = $room->reservations()
             ->where([
-                ['status', '1'],
+                ['status', Reservation::STATUS_ACCEPTED],
                 ['checkin_date', '<=', $checkin],
                 ['checkout_date', '>=', $checkin]
                 ])
