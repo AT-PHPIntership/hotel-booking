@@ -17,6 +17,11 @@ class HotelService extends Model
     const UPDATED_AT = null;
 
     /**
+     * Define limit services of Hotel for show
+     */
+    const SHOW_LIMIT = 6;
+
+    /**
      * Declare table
      *
      * @var string $tabel table name

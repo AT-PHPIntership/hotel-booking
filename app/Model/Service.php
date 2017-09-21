@@ -5,6 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Libraries\Traits\SearchTrait;
+use App\Model\Hotel;
 
 class Service extends Model
 {
