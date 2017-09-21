@@ -90,7 +90,8 @@ EOD;
         $ratingComments = RatingComment::select($commentColumns)
             ->with('user')
             ->where('hotel_id', $hotelId)->orderBy('created_at', 'DESC')
-            ->paginate(Hotel::COMMENT_ROW_LIMIT);
+            ->paginate(Hotel::COMMENT_ROW_LIMIT)
+            ->fragment(config('hotel.fragment_section_rating_comment'));
    
         $hotel = Hotel::select($columns)->with($with)
             ->where('slug', $slug)

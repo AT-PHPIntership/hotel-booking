@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Requests\Frontend\RatingCommentRequest;
 use App\Http\Controllers\Controller;
-use App\Model\RatingComment;
+use App\Http\Requests\Frontend\RatingCommentRequest;
 use App\Model\Hotel;
+use App\Model\RatingComment;
 use Illuminate\Support\Facades\URL;
 
 class RatingCommentController extends Controller
@@ -19,8 +19,12 @@ class RatingCommentController extends Controller
      */
     public function store(RatingCommentRequest $request)
     {
-        $comment = new RatingComment($request->all());
-        if ($comment->save()) {
+        $id = $request->comment_id;
+        $comment = RatingComment::updateOrCreate(['id' => $id], $request->all());
+        if ($id && $comment->save()) {
+            flash(__('You was edit comment successfully !'))->success();
+            return redirect(URL::previous() . config('hotel.section_rating_comment'));
+        } elseif (!$id && $comment->save()) {
             flash(__('You have commented successfully!'))->success();
             return redirect(URL::previous() . config('hotel.section_rating_comment'));
         } else {
@@ -47,5 +51,18 @@ class RatingCommentController extends Controller
         }
 
         return redirect(URL::previous() . config('hotel.section_rating_comment'));
+    }
+
+    /**
+     * Get data rating comment and response to json
+     *
+     * @param int $id id of rating comment
+     *
+     * @return json
+     */
+    public function show($id)
+    {
+        $comment = RatingComment::findOrFail($id);
+        return response()->json(['data' => $comment], 200);
     }
 }
