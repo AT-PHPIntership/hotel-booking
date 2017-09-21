@@ -136,12 +136,10 @@
               <div class="mask">
                 <div class="main cls-with-max">
                   <div class="pull-left">
-                    <a href=""><h5>{{ $place->name . ' |' }}</h5></a>
+                    <a href="{{ route('places.show', $place->slug) }}"><h5>{{ $place->name . ' |' }}</h5></a>
                   </div>
                   <div>
-                    <a href="">
-                      <h5 class="cls-text-color-primary">{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</h5>
-                    </a>
+                    <h5 class="cls-text-color-primary">{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</h5>
                   </div>
                 </div>
                 <div class="content">
@@ -149,7 +147,7 @@
                   <span>{{ __('Descript') }}</span>
                   {{ contentLimit(strip_tags($place->descript)) }}
                   </p>
-                  <a href="" class="btn btn-primary btn-block mt50">{{ __('See More') }}</a>
+                  <a href="{{ route('places.show', $place->slug) }}" class="btn btn-primary btn-block mt50">{{ __('See More') }}</a>
                 </div>
               </div>
             </div>

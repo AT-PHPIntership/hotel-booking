@@ -55,6 +55,7 @@ class PlaceController extends Controller
             'hotels.id',
             'hotels.name',
             'hotels.address',
+            'hotels.slug',
             'hotels.star',
             'hotels.introduce',
             'hotels.place_id',
