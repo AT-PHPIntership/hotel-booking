@@ -12,6 +12,7 @@ use App\Model\User;
 use App\Model\Guest;
 use App\Model\Reservation;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Cache;
 
 class HomePageTest extends DuskTestCase
 {
@@ -25,6 +26,7 @@ class HomePageTest extends DuskTestCase
     public function testRouteHomePage()
     {
         $this->browse(function (Browser $browser) {
+            Cache::flush();
             $browser->visit('/')
                     ->assertTitle('Home page')
                     ->assertVisible('#reservation-form')
@@ -43,8 +45,8 @@ class HomePageTest extends DuskTestCase
     public function testShowTopPlaceIfNotData()
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(360000)
-                    ->visit('/')
+            Cache::flush();
+            $browser->visit('/')
                     ->assertTitle('Home page')
                     ->assertSee('Outstanding Places')
                     ->assertSee('Sorry! The system is updating')
@@ -62,6 +64,7 @@ class HomePageTest extends DuskTestCase
     public function testShowTopHotelIfNotData()
     {   
         $this->browse(function (Browser $browser) {
+            Cache::flush();
             $browser->visit('/')
                     ->assertTitle('Home page')
                     ->assertSee('Representative Hotels')
@@ -79,8 +82,8 @@ class HomePageTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
-            $browser->pause(360000)
-                    ->visit('/')
+            Cache::flush();
+            $browser->visit('/')
                     ->assertTitle('Home page')
                     ->assertSee('Outstanding Places')
                     ->assertPathIs('/');
@@ -101,6 +104,7 @@ class HomePageTest extends DuskTestCase
     {   
         $this->makeData(10);
         $this->browse(function (Browser $browser) {
+            Cache::flush();
             $browser->visit('/')
                     ->assertTitle('Home page')
                     ->assertSee('Representative Hotels')
@@ -233,7 +237,7 @@ class HomePageTest extends DuskTestCase
      * @return void
      */
     public function makeData($row)
-    {
+    {   
         factory(Place::class, $row)->create();
         factory(User::class, $row)->create();
         factory(Guest::class, $row)->create();
