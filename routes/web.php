@@ -23,7 +23,7 @@ Route::group(['namespace'=>'Frontend'], function() {
     });
     Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
     Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
-    Route::get('places/{slug}', 'PlaceController@show')->name('place.show');
+    Route::get('places/{slug}', 'PlaceController@show')->name('places.show');
     Route::resource('/news', 'NewsController', ['as' => 'frontend']);
     Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
 });
