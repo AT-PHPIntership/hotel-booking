@@ -148,7 +148,7 @@
                   <span>{{ __('Descript') }}</span>
                   {{ contentLimit(strip_tags($place->descript)) }}
                   </p>
-                  <a href="" class="btn btn-primary btn-block mt50">{{ __('See More') }}</a>
+                  <a href="{{ route('place.show', $place->slug) }}" class="btn btn-primary btn-block mt50">{{ __('See More') }}</a>
                 </div>
               </div>
             </div>
@@ -174,7 +174,7 @@
                 <img src="{{ (isset($place->image)) ? $place->image_url : asset(config('image.default_thumbnail')) }}" alt="topPlace" class="img-responsive"/>
                 <div class="second-place-bottom"> 
                   <div class="pull-left">
-                    <a href=""><h5><strong>{{ $place->name }}</strong></h5></a>
+                    <a href="{{ route('place.show', $place->slug) }}"><h5><strong>{{ $place->name }}</strong></h5></a>
                   </div>
                   <div class="pull-right">
                     <a href="">
