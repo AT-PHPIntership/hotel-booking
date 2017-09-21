@@ -194,7 +194,7 @@
         <div class="col-sm-12">
           <h2 class="lined-heading"><span>{{ __('Representative Hotels') }}</span></h2>
         </div>
-        <!-- 6 hotel top -->
+        <!-- 6 hotels top -->
         @if($topHotels->count() != null)
         @foreach($topHotels as $hotel)
           <div class="col-sm-4 mt50">
