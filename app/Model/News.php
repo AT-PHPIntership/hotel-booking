@@ -82,4 +82,14 @@ class News extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    /**
+     * Relationship with news's image
+     *
+     * @return array
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable', 'target', 'target_id');
+    }
 }

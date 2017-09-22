@@ -12,7 +12,7 @@
             @include('flash::message')
           </div>
           <div class="box box-primary">
-            <form method="POST" action="{{ route('news.update',$news->id) }}" >
+            <form method="POST" action="{{ route('news.update',$news->id) }}" enctype="multipart/form-data">
               {{csrf_field()}}
               {{method_field('PUT')}}
               <div class="box-body">
@@ -34,6 +34,39 @@
                 <div class="form-group">
                   <label>{{__('Category')}}</label>
                   <input type="text" class="form-control" readonly="true" value="{{$news->category->name}}">
+                </div>
+                {{-- old images --}}
+                @include('backend.layouts.partials.modal')
+                <div class="form-group">
+                  <label for="old-images">{{ __('Old Images') }}</label>
+                  <div
+                    id="old-images"
+                    class="col-md-12"
+                    data-token="{{ csrf_token() }}"
+                    data-title="{{ __('Confirm deletion!') }}"
+                    data-confirm="{{ __('Are you sure you want to delete?') }}">
+                    @if (isset($news->images[0]))
+                      @foreach ($news->images as $img)
+                        <div id="old-img-{{ $img->id }}" class="col-md-3 text-center img-contain">
+                          <button
+                            data-url="{{ route('image.destroy', $img->id) }}"
+                            class="btn-remove-img btn-link fa fa-times fz-20">
+                          </button>
+                          <img class="img-place" src="{{ asset($img->path) }}">
+                        </div>
+                      @endforeach
+                    @else
+                      <div id="old-images" class="text-info">{{ __('No old image') }}</div>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group {{ $errors->has('images') || $errors->has('images.*') ? ' has-error' : '' }}"> 
+                  <label for="input-file">{{ __("Images") }}</label>
+                  <input type="file" class="form-control" name="images[]" id="multiple-image" multiple>
+                  <small class=" text-danger">{{ $errors->first('images.*') . $errors->first('images') }}</small>
+                  <div id="showImage" class="mt-20 ml-2per">
+                    <img class="img-place pd-0" id="default-image" src="{{ asset(config('image.no_image')) }}">
+                  </div>
                 </div>
               </div>
               <div class="box-footer">
