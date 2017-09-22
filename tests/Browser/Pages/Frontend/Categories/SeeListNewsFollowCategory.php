@@ -98,16 +98,14 @@ class SeeListNewsFollowCategory extends DuskTestCase
      *
      * @return void
      */
-    public function makeData($idCategory, $rowNews)
+    public function makeData($rowCategory, $rowNews)
     {   
-        factory(Category::class, $idCategory)->create();
+        $categories = factory(Category::class, $rowCategory)->create();
         $faker = Faker::create();
-        for ($i = 1; $i <= $idCategory; $i++) {
-            for ($j = 0; $j < $rowNews; $j++) {
-                factory(News::class, 1)->create([
-                    'category_id' => $i
-                ]);
-            };
+        foreach($categories as $category) {
+            factory(News::class, $rowNews)->create([
+                'category_id' => $category->id
+            ]);
         };
     }
 }
