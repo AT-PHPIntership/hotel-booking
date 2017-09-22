@@ -90,7 +90,6 @@ class TestShowRoom extends DuskTestCase
             $browser->clickLink('Room information')
                     ->pause(2000);
             $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(1)') === 'Room name: '.$hotel->rooms[0]->name);
-            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(2)') === 'Quantity: '.(string)($hotel->rooms[0]->total-$hotel->rooms[0]->quantity_busy_reservation));
             $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(3)') === 'Bed: '.$hotel->rooms[0]->bed);
             $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(4)') === 'Direction: '.$hotel->rooms[0]->direction);
             $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(5)') === 'Max guest: '.$hotel->rooms[0]->max_guest);
