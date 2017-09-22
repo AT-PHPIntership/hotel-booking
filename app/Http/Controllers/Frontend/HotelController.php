@@ -15,6 +15,7 @@ use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 use App\Http\Requests\Frontend\SearchHotelRequest;
+use Illuminate\Support\Facades\Cache;
 
 class HotelController extends Controller
 {
@@ -110,10 +111,10 @@ EOD;
      */
     public function index(SearchHotelRequest $request)
     {
-        if (\Cache::has(User::KEY_CACHE)) {
-            \Cache::forget(User::KEY_CACHE);
+        if (Cache::has(User::KEY_CACHE)) {
+            Cache::forget(User::KEY_CACHE);
         }
-        \Cache::put(User::KEY_CACHE, $request->all(), User::TIMEOUT_CACHE);
+        Cache::put(User::KEY_CACHE, $request->all(), User::TIMEOUT_CACHE);
         
         $columns = [
             'hotels.id',

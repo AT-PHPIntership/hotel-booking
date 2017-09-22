@@ -8,6 +8,7 @@ use App\Model\Reservation;
 use App\Model\User;
 use App\Model\Room;
 use App\Model\Guest;
+use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 use App\Http\Requests\Frontend\AddReservationRequest;
 
@@ -22,7 +23,7 @@ class ReservationController extends Controller
      */
     public function create(Request $request)
     {
-        $bookingInfomation = \Cache::get(User::KEY_CACHE, User::DEFAULT_VALUE);
+        $bookingInfomation = Cache::get(User::KEY_CACHE, User::DEFAULT_VALUE);
 
         $columns = [
             'id',

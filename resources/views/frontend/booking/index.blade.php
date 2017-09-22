@@ -74,14 +74,14 @@
               </div>
               <div class="col-sm-12 nopadding mt20">
                 <label for="request">{{ __('Special requests') }}</label>
-                <textarea name="request" class="form-control"></textarea>
+                <textarea name="request" class="form-control" id="request"></textarea>
                 <small class="text-info">{{ __("Special requests are subject to availability and may incur charges. For further details, you can contact the property directly.") }}</small>
               </div>
               {{-- hidden infor --}}
               <input type="hidden" name="status" value="{{ App\Model\Reservation::STATUS_PENDING }}">
               <input type="hidden" name="checkout_date">
               <input type="hidden" name="room_id" value="{{ $room->id }}">
-              <input type="hidden" name="target" value="{{ (Auth::user()) ? 'user' : 'guest' }}">
+              <input type="hidden" name="target" value="{{ (Auth::user()) ? App\Model\Reservation::TARGET_USER : App\Model\Reservation::TARGET_GUEST }}">
               <input type="hidden" name="target_id" value="{{ (Auth::user()) ? Auth::user()->id : '' }}">
               <input type="hidden" name="checkout_date">
             </form>
@@ -122,7 +122,8 @@
               <h3>{{ __('Price:') }}<span id="js-price" class="pull-right"></span></h3>
               <h3>{{ __('Quantity:') }}<span id="js-quantity" class="pull-right"></span></h3>
               <h3>{{ __('Duration:') }}<span id="js-duration" class="pull-right"></span></h3>
-              <h3>{{ __('Total Price:') }}<span id="js-price-total" class="pull-right"></span></h3>
+              <h3><strong>{{ __('Total Price:') }}<span id="js-price-total" class="pull-right"></span></strong></h3>
+              <small id="js-note-request" class="text-danger" hidden>{{ __("Special requests are subject to availability and may incur charges. For further details, you can contact the property directly.") }}</small>
             </div>
             <div class="col-md-8 nopadding cls-mb-50">
               <button id="submit" class="btn btn-primary pull-right">{{ __('Submit') }} </button>

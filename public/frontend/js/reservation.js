@@ -8,7 +8,7 @@ function loadTotalPrice() {
     $('#js-price').text('$' + price);
     $('#js-quantity').text('x' + quantity);
     $('#js-duration').text(duration + ((duration == 1) ? ' night' : ' nights'));
-    $('#js-price-total').text('$' + price*quantity*duration);
+    $('#js-price-total').text('$ ' + price*quantity*duration);
 }
 $(document).ready(function() {
     $('#submit').on('click',function(){
@@ -18,5 +18,14 @@ $(document).ready(function() {
 
     $('#booking-form').change(function(){
         loadTotalPrice();
+    });
+    $('#request').keyup(function(){
+        var request = ($('#request').val());
+        console.log(request);
+        if (request.length > 0) {
+            $('#js-note-request').show();
+        } else {
+            $('#js-note-request').hide(); 
+        }
     });
 });
