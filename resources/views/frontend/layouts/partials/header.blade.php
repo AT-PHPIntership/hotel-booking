@@ -10,10 +10,10 @@
         <div class="th-text pull-right">
           <div class="th-item">
             <div class="btn-group">
-              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> {{ __('ENGLISH') }} <span class="caret"></span> </button>
+              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> {{ Session::get('locale') == 'vi' ? __('VIETNAMESE') :__('ENGLISH') }} <span class="caret"></span> </button>
               <ul class="dropdown-menu">
-                <li> <a href="#">{{ __('ENGLISH') }}</a> </li>
-                <li> <a href="#">{{ __('VIETNAMESE') }}</a> </li>
+                <li> <a href="{{ route('language', ['lang' => 'en']) }}">{{ __('ENGLISH') }}</a> </li>
+                <li class="active"> <a href="{{ route('language', ['lang' => 'vi']) }}">{{ __('VIETNAMESE') }}</a> </li>
               </ul>
             </div>
           </div>
@@ -53,11 +53,11 @@
                 <li><a href="{{ route('profile.show', Auth::user()->id) }}" id="user-profile">{{__('Profile')}}</a></li>
                 @if(Auth::user()->is_admin == App\Model\User::ROLE_ADMIN)
                   <li><a href="{{ route('admin.index') }}">
-                    {{__('Admin Management')}}</a>
+                    {{ __('Admin Management') }}</a>
                   </li>
                 @endif
                 <li>
-                  <a href="{{ route('logout') }}" id ="logout">{{__('Log out')}}</a>
+                  <a href="{{ route('logout') }}" id ="logout">{{ __('Log out') }}</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden="">
                     {{ csrf_field() }}
                   </form>
@@ -65,8 +65,8 @@
               </ul>
             </li>
           @else
-            <li> <a href="{{ route('login') }}" id="login">{{__('Login')}}</a></li>
-            <li> <a href="{{ route('register') }}" id="register">{{__('Register')}}</a>
+            <li> <a href="{{ route('login') }}" id="login">{{ __('Login') }}</a></li>
+            <li> <a href="{{ route('register') }}" id="register">{{ __('Register') }}</a>
           @endif
           </li>
         </ul>

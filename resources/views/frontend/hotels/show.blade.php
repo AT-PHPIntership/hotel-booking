@@ -1,4 +1,5 @@
 @extends('frontend.layouts.master')
+@section('title', __('About :hotel hotel', ['hotel' => $hotel->name]))
 @section('customcss')
   <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 @endsection

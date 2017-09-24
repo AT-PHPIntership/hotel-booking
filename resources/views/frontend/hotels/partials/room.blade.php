@@ -19,7 +19,7 @@
         </div>
         <div class = "room-item">
           <h2 class = 'cls-room-name'>{{ $room->name }}</h2>
-          <p>{{ __('Max guest: :max_guest', ['max_guest' => $room->max_guest]) }}</p>
+          <p>{{ __('Max guest: :max_guest people', ['max_guest' => $room->max_guest]) }}</p>
           <p><a href="" class="cls-room-info link-room-info" data-toggle="modal" data-target="#room-detail-modal-{{ $room->id }}" data-id='{{ $room->id }}'>{{ __('Room information') }}</a></p>
           <div id="room-detail-modal-{{ $room->id }}"
             class="modal fade" role="dialog">
@@ -70,19 +70,18 @@
                   </div>
                   <div class="col-xs-12 col-md-6">
                     <h3 class="cls-room-info">
-                      {{ __('Room Information') }}
+                      {{ __('Room information') }}
                       <span class="cls-room-empty-title">
-                      {{ __('(Only :number_room_empty room(s) left)', ['number_room_empty' => ($room->total - $room->quantity_busy_reservation)] ) }} 
+                      ({{ __('Only :number_room_empty room(s) left', ['number_room_empty' => ($room->total - $room->quantity_busy_reservation)] ) }}) 
                     </span>
                     </h3>
                     
                     <div class="room-detail-info">
                       <ul class="cls-list-room-info">
                         <li>{{ __('Room name: :room_name', ['room_name' => $room->name ])}}</li>
-                        <li>{{ __('Quantity: :room_total', ['room_total' => $room->total ])}}</li>
                         <li>{{ __('Bed: :room_bed', ['room_bed' => $room->bed ])}}</li>
                         <li>{{ __('Direction: :room_direction', ['room_direction' => $room->direction ])}}</li>
-                        <li>{{ __('Max guest: :max_guest', ['max_guest' => $room->max_guest ])}}</li>
+                        <li>{{ __('Max guest: :max_guest people', ['max_guest' => $room->max_guest ])}}</li>
                         <li>{{ __('Descript: :room_descript', ['room_descript' => $room->descript ])}}</li>
                       </ul>
                       <p class="cls-room-price text-center mt-20">

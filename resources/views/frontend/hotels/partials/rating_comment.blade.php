@@ -168,7 +168,7 @@
             </form>
           @else 
             <div class="cls-login-now">
-              {{ __('Please') }} <a href="{{ route('login') }}">{{(' login')}}</a> {{ __('to post comment') }} !
+              {{ __('Please') }} <a href="{{ route('login') }}">{{ __(' login')}}</a> {{ __('to post comment') }} !
             </div>
           @endif
         </div>
