@@ -11,7 +11,7 @@ class ReservationController extends Controller
     /**
      * Display a page update a booking room.
      *
-     * @param \Illuminate\Http\Request $request request of user.
+     * @param \Illuminate\Http\Request $request of user.
      *
      * @return \Illuminate\Http\Response
      */

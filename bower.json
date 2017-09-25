@@ -9,6 +9,10 @@
     "tests"
   ],
   "dependencies": {
-    "AdminLTE": "admin-lte#^2.3.11"
-  }
+    "AdminLTE": "admin-lte#^2.3.11",
+    "foundation": "~5.4.7"
+  },
+  "resolutions": { 
+  "jquery": "3.2.1"
+  } 
 }
