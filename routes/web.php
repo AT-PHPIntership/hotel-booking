@@ -15,6 +15,7 @@ Route::group(['namespace'=>'Frontend'], function() {
     Route::resource('/sendfeedback', 'FeedBackController', ['only' => ['create', 'store']]);
     Route::group(['middleware'=> 'auth'], function() {
         Route::resource('/comments', 'RatingCommentController', ['only' => ['store', 'destroy']]);
+        Route::put('/hotels/{hotel}/comments/{comment}', 'RatingCommentController@update')->name('user.comment.update');
         Route::put('/profile/{profile}/reservation/{reservation}', 'ReservationController@update')->name('user.cancelBooking');
         Route::group(['middleware'=> 'checkUser'], function() {
             Route::resource('/profile', 'UserController');
