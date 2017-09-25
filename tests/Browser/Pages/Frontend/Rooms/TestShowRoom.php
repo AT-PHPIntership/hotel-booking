@@ -147,12 +147,10 @@ class TestShowRoom extends DuskTestCase
      * Make room of hotel
      */
     public function makeRoom($hotelId) {
-        
-        $hotelIds = Hotel::all('id')->pluck('id')->toArray();
-            factory(Room::class, 1)->create([
-                'hotel_id' => $hotelId,
-                'bed' => 'single',
-                'direction' => 'Floor Two',
-            ]);
+        factory(Room::class, 1)->create([
+            'hotel_id' => $hotelId,
+            'bed' => 'single',
+            'direction' => 'Floor Two',
+        ]);
     }
 }
