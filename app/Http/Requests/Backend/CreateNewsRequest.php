@@ -26,7 +26,9 @@ class CreateNewsRequest extends FormRequest
         return [
             'title' => 'required',
             'content' => 'required',
-            'category_id' => 'required|integer'
+            'category_id' => 'required|integer',
+            'images' => 'required|array',
+            'images.*' => 'image|max:' . config('image.max_upload_size')
         ];
     }
 }

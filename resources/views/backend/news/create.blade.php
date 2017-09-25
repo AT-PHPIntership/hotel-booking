@@ -13,7 +13,7 @@
             <div class="box-header with-border">
               <h3 class="box-title lead">{{__('Enter information')}}</h3>
             </div>
-            <form role="form" method="POST" action="{{ route('news.store') }}" >
+            <form role="form" method="POST" action="{{ route('news.store') }}" enctype="multipart/form-data">
             {{csrf_field()}}
               <div class="box-body">
                 <div class="form-group" {{ $errors->has('title') ? ' has-error' : '' }}>
@@ -41,6 +41,14 @@
                   @if($errors->first('category_id'))
                     <span class="help-block">{{$errors->first('category_id')}}</span>
                   @endif
+                </div>
+                <div class="form-group {{ $errors->has('images.*') || $errors->has('images') ? ' has-error' : '' }}"> 
+                  <label for="input-file">{{ __("Images") }}</label>
+                  <input type="file" class="form-control" name="images[]" id="multiple-image" multiple>
+                  <small class=" text-danger">{{ $errors->first('images.*') . $errors->first('images') }}</small>
+                  <div id="showImage" class="mt-20">
+                    <img class="img-place" id="default-image" src="{{ asset(config('image.default_thumbnail')) }}">
+                  </div>
                 </div>
               </div>
               <div class="box-footer">
