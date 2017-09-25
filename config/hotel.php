@@ -9,5 +9,6 @@ return [
     'top-3-places' => 3,
     'top-4-places' => 4,
     'limit-services' => 3,
+    'limit-services-row' => 4,
     'section_rating_comment' => '#section-rating-comment'
 ];

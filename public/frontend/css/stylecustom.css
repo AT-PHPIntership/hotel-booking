@@ -1,7 +1,7 @@
 .second-place{
     width: 100%;
     background: lightgray;
-    height: 200px;
+    height: 180px;
     box-sizing: border-box;
     border-left: solid 1px lightgray; 
     border-right: solid 1px lightgray; 
@@ -10,6 +10,7 @@
     float: left;
 }
 .second-place-bottom{
+    font-size: 10px !important;
     background: white;
     height: 40px;
     width: 100%;
@@ -416,9 +417,8 @@
 }
 .cls-transbox {
     max-width: 100%;
-    background-color: black;
     margin-top: 80px;
-    opacity: 0.9;
+    background: rgba(16, 17, 16, 0.43);
     padding: 0px 0px 5px 0px;
 }
 .cls-image-contain h2 {
@@ -598,4 +598,7 @@ input[type='range']::-webkit-slider-thumb {
 .btn-confirm {
     color: red;
     border: unset;
+}
+footer {
+    margin-top: 50px;
 }

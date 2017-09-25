@@ -65,6 +65,7 @@ class HomeController extends Controller
             'hotels.name',
             'hotels.address',
             'hotels.star',
+            'hotels.slug',
             'hotels.introduce',
             'hotels.place_id',
             DB::raw('AVG(rating_comments.total_rating) as total')

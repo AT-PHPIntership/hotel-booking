@@ -68,8 +68,8 @@
           <!-- Slide 2 -->
           <li data-transition="boxfade" data-slotamount="7" data-masterspeed="1000" > 
             <!-- Main Image -->
-            @if($advertiseHotel->images->count() != null) 
-            <img src="{{ $advertiseHotel->images->random()->path }}" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
+            @if($advertiseHotel->rooms->random()->images->count() != null) 
+            <img src="{{ $advertiseHotel->rooms->random()->images->random()->path }}" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
             @endif 
             <!-- Layers -->           
             <!-- Layer 1 -->
@@ -132,15 +132,15 @@
           @endif
           <div class="col-sm-4">
             <div class="room-thumb">
-              <img src="{{ (isset($place->image)) ? $place->image_url : asset(config('image.default_thumbnail')) }}" alt="topPlace" class="img-responsive"/>
+              <img src="{{ (isset($place->image)) ? $place->image_url : asset(config('image.default_thumbnail')) }}" alt="topPlace" class="img-presentive"/>
               <div class="mask">
                 <div class="main cls-with-max">
                   <div class="pull-left">
-                    <a href=""><h5>{{ $place->name . ' |' }}</h5></a>
+                    <a href="{{ route('places.show', $place->slug) }}"><h5>{{ $place->name . ' |' }}</h5></a>
                   </div>
                   <div>
                     <a href="">
-                      <h5 class="cls-text-color-primary">{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</h5>
+                      <h5 class="cls-text-color-primary">{{ __('More :totalHotels hotels', ['totalHotels' => $place->hotels->count()]) }}</h5>
                     </a>
                   </div>
                 </div>
@@ -149,7 +149,7 @@
                   <span>{{ __('Descript') }}</span>
                   {{ contentLimit(strip_tags($place->descript)) }}
                   </p>
-                  <a href="" class="btn btn-primary btn-block mt50">{{ __('See More') }}</a>
+                  <a href="{{ route('places.show', $place->slug) }}" class="btn btn-primary btn-block mt50">{{ __('See More') }}</a>
                 </div>
               </div>
             </div>
@@ -175,11 +175,11 @@
                 <img src="{{ (isset($place->image)) ? $place->image_url : asset(config('image.default_thumbnail')) }}" alt="topPlace" class="img-responsive"/>
                 <div class="second-place-bottom"> 
                   <div class="pull-left">
-                    <a href=""><h5><strong>{{ $place->name }}</strong></h5></a>
+                    <a href="{{ route('places.show', $place->slug) }}"><h5><strong>{{ $place->name }}</strong></h5></a>
                   </div>
                   <div class="pull-right">
                     <a href="">
-                      <h5 class="cls-text-color-primary cls-mr-20"><strong>{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</strong></h5>
+                      <h5 class="cls-text-color-primary cls-mr-20"><strong>{{ __('More :totalHotels hotels', ['totalHotels' => $place->hotels->count()]) }}</strong></h5>
                     </a>
                   </div>
                 </div>
@@ -204,11 +204,11 @@
         @foreach($topHotels as $hotel)
           <div class="col-sm-4 mt50">
             <div class="room-thumb">
-              <img src="{{ ($hotel->images->count() != 0) ? $hotel->images->random()->path : asset(config('image.default_thumbnail')) }}" alt="hotel" class="img-responsive"/>
+              <img src="{{ ($hotel->images->count() != 0) ? $hotel->images->random()->path : asset(config('image.default_thumbnail')) }}" alt="hotel" class="img-presentive"/>
               <div class="mask">
                 <div class="main cls-with-max">
                   <div class="pull-left">
-                    <a href=""><h5>{{ $hotel->name }}</h5></a>
+                    <a href="{{ route('hotels.show', $hotel->slug) }}"><h5>{{ $hotel->name }}</h5></a>
                   </div>
                   <div class="pull-right cls-mr-20">
                     <a href="">
@@ -221,24 +221,36 @@
                     <span>{{ __('Introduce') }}</span>
                     {{ contentLimit(strip_tags($hotel->introduce)) }}
                   </p>
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <ul class="list-unstyled">
-                      @php($count = 0)
-                        @foreach($hotel->hotelServices as $hotelService)
-                          @if($count == (config('hotel.limit-services')))
-                                </ul>
-                              </div>
+                  <div class="row">                        
+                      @foreach($hotel->hotelServices as $key => $hotelService)
+                        @if ($key < config('showitem.service_per_item'))
+                          @if ($key == 0 || $key == (config('showitem.service_per_item') / 2))
                             <div class="col-xs-6">
                               <ul class="list-unstyled">
                           @endif
-                          <li><i class="fa fa-check-circle"></i>{{ $hotelService->service->name }}</li>
-                          @php($count++)
-                        @endforeach
-                      </ul>
+                          @if (
+                            $key == (config('showitem.service_per_item') -1)
+                              &&
+                            $hotel->hotelServices->count() > config('showitem.service_per_item')
+                          )
+                            <li><i class="fa fa-check-circle"></i> .......</li>
+                          @else
+                            <li><i class="fa fa-check-circle"></i> {{ $hotelService->service->name }}</li>
+                          @endif
+                          @if (
+                            $key == (config('showitem.service_per_item') / 2 -1)
+                            ||
+                            $key == (config('showitem.service_per_item') - 1)
+                            ||
+                            $key == ($hotel->hotelServices->count() - 1)
+                          )
+                              </ul>
+                            </div>
+                          @endif
+                        @endif
+                      @endforeach
                     </div>
-                  </div>
-                  <a href="" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
+                  <a href="{{ route('hotels.show', $hotel->slug) }}" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
                 </div>
               </div>
             </div>
