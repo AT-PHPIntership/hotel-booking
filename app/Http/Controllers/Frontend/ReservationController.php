@@ -57,7 +57,12 @@ class ReservationController extends Controller
      */
     public function store(AddReservationRequest $request)
     {
-        $reservation = new Reservation($request->all());
+        try {
+            $reservation = new Reservation($request->all());
+        } catch (Exception $e) {
+            flash(__('Sorry! Has error!'))->error();
+            return redirect()->back()->withInput();
+        }
 
         $checkinDate = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkin_time'))
                 ->toDateTimeString();
