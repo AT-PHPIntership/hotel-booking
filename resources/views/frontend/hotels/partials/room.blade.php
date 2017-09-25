@@ -88,7 +88,7 @@
                        {{ __(':price $', ['price' => $room->price_format]) }}
                       </p>
                       <p class="text-center">
-                        <a href="/room"  class="btn cls-btn-booking">
+                        <a href="{{ route('reservations.create', ['room'=> $room->id]) }}"  class="btn cls-btn-booking">
                           {{ __('Book Now') }}</a> 
                       </p>
                    </div>                           
@@ -108,7 +108,7 @@
           <h3 class="cls-room-price">{{ __(':price $', ['price' => $room->price_format]) }} </h3>
         </div>
         <div class="room-item-booking">
-          <a href="/room"  class="btn cls-btn-booking">
+          <a href="{{ route('reservations.create', ['room'=> $room->id]) }}"  class="btn cls-btn-booking">
             {{ __('Book Now') }}</a> 
             @if($totalRoomEmpty == 0)
               <p class="cls-no-vacancies">

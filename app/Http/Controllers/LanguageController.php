@@ -12,10 +12,11 @@ class LanguageController extends Controller
         $session = $request->session();
         if ($session->has('locale')) {
             session()->put('locale', Route::input('lang'));
-        } else {
-            session(['locale' => Route::input('lang')]);
-        }  
-
+        } 
+        // else {
+        //     session(['locale' => Route::input('lang')]);
+        // }  
+        app()->setLocale(Route::input('lang'));
         return redirect()->back();
     }
 }

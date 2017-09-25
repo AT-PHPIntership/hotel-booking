@@ -3,11 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Session\Middleware\StartSession as BaseSession;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 
-class LanguageSwicher
+class LanguageSwicher 
 {
     /**
      * Handle an incoming request.
@@ -17,9 +18,14 @@ class LanguageSwicher
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {  
-        app()->setLocale(Session::get('locale')) ? Session::get('locale') : Config::get('app.locale');
-        
+    {
+        if(!Session::has('locale'))
+        {
+           Session::put('locale', Config::get('app.locale'));
+        }
+
+        app()->setLocale(Session::get('locale'));
+
         return $next($request);
-    }
+    }   
 }

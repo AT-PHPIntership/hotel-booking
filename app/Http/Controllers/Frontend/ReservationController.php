@@ -17,31 +17,19 @@ class ReservationController extends Controller
     /**
      * Display form for fill in booking.
      *
-     * @param Request $request of rooms id
+     * @param Room $room of rooms
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Room $room)
     {
         $bookingInfomation = Cache::get(User::KEY_CACHE, User::DEFAULT_VALUE);
 
-        $columns = [
-            'id',
-            'name',
-            'descript',
-            'price',
-            'size',
-            'total',
-            'max_guest',
-            'hotel_id'
-        ];
-
-        $room = Room::select($columns)->findOrFail($request->id);
         $emptyRooms = $room->total;
 
         if (isset($bookingInfomation)) {
             $checkinDate = Carbon::createFromFormat(config('hotel.datetime_format'), $bookingInfomation['checkin'] . config('hotel.checkin_time'))
-                ->toDateTimeString();
+                    ->toDateTimeString();
             $emptyRooms = $this->totalEmptyRoom($room->id, $checkinDate);
         }
 
@@ -59,44 +47,39 @@ class ReservationController extends Controller
     {
         try {
             $reservation = new Reservation($request->all());
-        } catch (Exception $e) {
-            flash(__('Sorry! Has error!'))->error();
-            return redirect()->back()->withInput();
-        }
 
-        $checkinDate = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkin_time'))
-                ->toDateTimeString();
-        $checkoutDate = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkout_time'))
-                ->addDay($request->duration)
-                ->toDateTimeString();
+            $checkinDate = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkin_time'))
+                    ->toDateTimeString();
+            $checkoutDate = Carbon::createFromFormat(config('hotel.datetime_format'), $request->checkin . config('hotel.checkout_time'))
+                    ->addDay($request->duration)
+                    ->toDateTimeString();
 
-        // set date for reservation
-        $reservation->checkin_date = $checkinDate;
-        $reservation->checkout_date = $checkoutDate;
-        // get quanlity empty room
-        $emptyRooms = $this->totalEmptyRoom($request->room_id, $checkinDate);
-        // return fail when room not enough
-        if ($reservation->quantity > $emptyRooms) {
-            flash(__('Sorry! The room is not enough!'))->error();
-            return redirect()->back()->withInput();
-        }
-        // save booking infomation
-        if ($reservation->target == Reservation::TARGET_USER) {
-            $result = $reservation->save();
-        } else {
-            $guest = Guest::where('email', $request->email)->first();
-            if (!$guest) {
-                $guest = new Guest($request->all());
-                $guest->save();
+            // set date for reservation
+            $reservation->checkin_date = $checkinDate;
+            $reservation->checkout_date = $checkoutDate;
+            // get quanlity empty room
+            $emptyRooms = $this->totalEmptyRoom($request->room_id, $checkinDate);
+            // return fail when room not enough
+            if ($reservation->quantity > $emptyRooms) {
+                flash(__('Sorry! The room is not enough!'))->error();
+                return redirect()->back()->withInput();
             }
-            $reservation->target_id = $guest->id;
-            $result = $reservation->save();
-        }
+            // save booking infomation
+            if ($reservation->target == Reservation::TARGET_USER) {
+                $reservation->save();
+            } else {
+                $guest = Guest::where('email', $request->email)->first();
+                if (!$guest) {
+                    $guest = new Guest($request->all());
+                    $guest->save();
+                }
+                $reservation->target_id = $guest->id;
+                $reservation->save();
+            }
 
-        if ($result) {
             flash(__('Booking success! Thank you!'))->success();
             return redirect()->back();
-        } else {
+        } catch (\Exception $e) {
             flash(__('Booking failure! Sorry'))->error();
             return redirect()->back()->withInput();
         }

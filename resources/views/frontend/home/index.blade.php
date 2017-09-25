@@ -138,10 +138,8 @@
                   <div class="pull-left">
                     <a href="{{ route('places.show', $place->slug) }}"><h5>{{ $place->name . ' |' }}</h5></a>
                   </div>
-                  <div>
-                    <a href="">
-                      <h5 class="cls-text-color-primary">{{ __('More :totalHotels hotels', ['totalHotels' => $place->hotels->count()]) }}</h5>
-                    </a>
+                  <div> 
+                    <h5 class="cls-text-color-primary">{{ __('More :totalHotels hotels', ['totalHotels' => $place->hotels->count()]) }}</h5>
                   </div>
                 </div>
                 <div class="content">

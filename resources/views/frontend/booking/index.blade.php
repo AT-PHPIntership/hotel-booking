@@ -25,10 +25,11 @@
           <h2 class="mt50">{{ __('Fill your infomation') }}</h2>
           <div class="col-md-8 nopadding">
             @include('flash::message')
+            
           </div>
           <div class="cls-form-border-parent">
           {{-- input form --}}
-            <form  id="booking-form" method="POST" class="cls-form-border col-md-8 form-group" action="{{ route('reservations.store') }}" enctype="multipart/form-data">
+            <form  id="booking-form" method="POST" class="cls-form-border col-md-8 form-group" action="{{ route('reservations.store', ['room_id' => $room->id]) }}" enctype="multipart/form-data">
               {!! csrf_field() !!}
               {{-- name --}}
               <div class="col-md-12 nopadding">
@@ -50,8 +51,11 @@
               {{-- checkin --}}
               <div class="col-sm-5 nopadding mt20">
                 <label for="checkin">{{ __('Check-in') }}</label>
-                <div class="popover-icon" data-toggle="tooltip" title="{{ __('Check-In is from 14:00') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"></i></div>
-                <input name="checkin" type="text" id="checkin" class="form-control{{ $errors->has('checkin') ? ' has-error' : '' }}" placeholder="{{ __('Check-in') }}" value="{{ isset($bookingInfomation) ? $bookingInfomation['checkin'] : '' }}" />
+                <div class="popover-icon" data-toggle="tooltip" 
+                 title="{{ __('Check-In is from 14:00') }}"
+                 data-trigger="hover" data-placement="right">
+                 <i class="fa fa-info-circle fa-lg"></i></div>
+                <input name="checkin" type="text" id="checkin" class="form-control{{ $errors->has('checkin') ? ' has-error' : '' }}" placeholder="{{ __('Check-in') }}" value="{{ $bookingInfomation != [] ? $bookingInfomation['checkin'] : '' }}" />
                  <small class="text-danger">{{ $errors->first('checkin') }}</small>
               </div>
               {{-- duration --}}
@@ -59,7 +63,8 @@
                 <label for="duration">{{ __('No. of night') }}<i class="text-danger">*</i></label>
                 <select name = "duration" class="form-control">
                   @for($i = 1; $i <= App\Model\Reservation::MAX_DURATIONS; $i++)
-                      <option value="{{ $i }}" {{ ($i == $bookingInfomation['duration']) ? 'selected' : '' }}>{{ __(':duration nights', ['duration' => $i]) }}</option>
+                      <option value="{{ $i }}" >
+                      {{ __(':duration nights', ['duration' => $i]) }}</option>
                   @endfor
                 </select>
                 <small class="text-danger"></small>

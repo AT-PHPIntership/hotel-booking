@@ -114,7 +114,9 @@ EOD;
         if (Cache::has(User::KEY_CACHE)) {
             Cache::forget(User::KEY_CACHE);
         }
-        Cache::put(User::KEY_CACHE, $request->all(), User::TIMEOUT_CACHE);
+        if ($request->all() != []) {
+            Cache::put(User::KEY_CACHE, $request->all(), User::TIMEOUT_CACHE);
+        }
         
         $columns = [
             'hotels.id',
