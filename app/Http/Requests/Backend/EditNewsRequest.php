@@ -25,7 +25,9 @@ class EditNewsRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'images' => 'nullable|array',
+            'images.*' => 'image|max:' . config('image.max_upload_size')
         ];
     }
 }

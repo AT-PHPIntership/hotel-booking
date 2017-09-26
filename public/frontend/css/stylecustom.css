@@ -104,6 +104,7 @@
     margin-top: 10px;
     font-size: 54px;
     margin-bottom: 30px;
+    color: #bf4b07;
 }
 .progress {
     margin-bottom: 5px;
@@ -454,11 +455,6 @@
     width: 750px;
     height: 423px;  
 }
-.cls-info-arrange-time {
-    background: #f7f7f7;
-    padding: 16px;
-    margin-bottom: 5px;
-}
 .count-rating-guest{
     margin-top: 10px;
 }
@@ -507,8 +503,6 @@
 .button.green:hover  {
   background: #79bc32;
 }
-
- 
 .loading #container {opacity: 0;}
 .loading:before  { content: 'LOADING'; display: block; margin: 100px 0 0; text-align: center; color: #fff; font-weight: bold; font-size: 60px; opacity: 0.3; }
 .cls-img-room-show {
@@ -565,6 +559,7 @@
 }
 .total-rating {
     border: none;
+    font-weight: bold;
 }
 .hotel-user-comment {
     width: 100%;
@@ -598,4 +593,10 @@ input[type='range']::-webkit-slider-thumb {
 .btn-confirm {
     color: red;
     border: unset;
+}
+.fz-20 {
+    font-size: 20px;
+}
+.update-rating {
+    margin-top: 11px;
 }

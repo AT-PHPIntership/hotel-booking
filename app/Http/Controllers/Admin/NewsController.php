@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Image;
 use App\Model\News;
 use App\Http\Requests\Backend\EditNewsRequest;
 use App\Model\Category;
@@ -57,11 +58,12 @@ class NewsController extends Controller
         $result = $news->save();
         if ($result) {
             flash(__('Create News Success!'))->success();
-            return redirect()->route('news.index');
         } else {
             flash(__('Create News Fail!'))->error();
-            return redirect()->route('news.create');
+            return redirect()->back()->withInput();
         }
+        Image::storeImages($request->images, 'news', $news->id, config('image.news.path_upload'));
+        return redirect()->route('news.index');
     }
 
     /**
@@ -95,14 +97,17 @@ class NewsController extends Controller
      */
     public function update(EditNewsRequest $request, $id)
     {
-        $newsUpdate = News::findOrFail($id)->update($request->all());
-        if ($newsUpdate) {
+        $newsUpdate = News::findOrFail($id);
+        if ($newsUpdate->update($request->all())) {
             flash(__('Edit News Success!'))->success();
-            return redirect()->route('news.index');
         } else {
             flash(__('Edit News Fail!'))->error();
-            return redirect()->route('news.edit');
+            return redirect()->back()->withInput();
         }
+        if (isset($request->images)) {
+            Image::storeImages($request->images, 'news', $newsUpdate->id, config('image.news.path_upload'));
+        }
+        return redirect()->route('news.index');
     }
 
     /**

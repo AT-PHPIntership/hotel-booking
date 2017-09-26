@@ -12,6 +12,7 @@ dependencies:
     - echo "memory_limit = 256M" > /opt/circleci/php/$(phpenv global)/etc/conf.d/memory.ini
 test:
   pre:
+    - "bower cache clean"
     - "bower install"
     - "./vendor/laravel/dusk/bin/chromedriver-linux":
         background: true

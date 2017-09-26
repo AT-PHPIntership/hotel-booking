@@ -27,7 +27,7 @@
                   @else
                     {{-- show image --}}
                     @foreach ($news[0]->images as $image)
-                      <div class="item {{ ($image == $room->images[0]) ? 'active' : ''}}">
+                      <div class="item {{ ($image == $news[0]->images[0]) ? 'active' : ''}}">
                         <img src="{{ asset($image->path) }}" class="img-slide">
                       </div>
                     @endforeach
@@ -56,7 +56,7 @@
           @if ($key != 0)
             <div class="mt-20">
               <div class="col-md-5">
-                <a href="{{ route('frontend.news.show', $item->slug) }}"><img src="{{ isset($item->images[0]) ? asset($item->images[0]) : asset(config('image.no_image')) }}" class="img-news"></a>
+                <a href="{{ route('frontend.news.show', $item->slug) }}"><img src="{{ isset($item->images[0]) ? asset($item->images[0]->path) : asset(config('image.no_image')) }}" class="img-news"></a>
               </div>
               <div col-md-8>
                 <div class="img-news">
@@ -85,7 +85,7 @@
           <div class="col-md-3">
             <a href="{{ route('frontend.news.show', $itemNews->slug) }}">
               <div class="second-place news">
-                <img src="{{ isset($itemNews->images[0]) ? asset($itemNews->images[0]) : asset(config('image.no_image')) }}" alt="topPlace" class="img-news news"/>  
+                <img src="{{ isset($itemNews->images[0]) ? asset($itemNews->images[0]->path) : asset(config('image.no_image')) }}" alt="topPlace" class="img-news news"/>  
                 <div class="second-place-bottom news"> 
                   <h5>{{ contentLimit($itemNews->title) }}</h5>
                 </div>

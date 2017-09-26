@@ -28,6 +28,7 @@ class TestShowRoom extends DuskTestCase
         $hotel = Hotel::find(1);
         $this->makeRoom($hotel->id);
         $this->browse(function (Browser $browser) use ($hotel){
+            $room = Room::orderby('price', 'ASC')->first();
             $selector = 'main section:nth-child(2) .container .row div:nth-child(2) .room-thumb .mask .content';
             $page = $browser->visit('/')
                     ->clickLink('Hotels')
@@ -38,8 +39,8 @@ class TestShowRoom extends DuskTestCase
                     ->assertSee($hotel->name)
                     ->assertPathIs('/hotels/'.$hotel->slug);
                 $browser->clickLink('Room information')
-                        ->pause(3000)
-                        ->assertVisible('#room-detail-modal-'.$hotel->rooms[0]->id);
+                        ->pause(5000)
+                        ->assertSee('Room '.$room->name.' detail');
         });
     }
 
@@ -78,6 +79,7 @@ class TestShowRoom extends DuskTestCase
         $hotel = Hotel::find(1);
         $this->makeRoom($hotel->id);
         $this->browse(function (Browser $browser) use ($hotel) {
+            $room = Room::orderby('price', 'ASC')->first();
             $selector = 'main section:nth-child(2) .container .row div:nth-child(2) .room-thumb .mask .content';
             $page = $browser->visit('/')
                     ->clickLink('Hotels')
@@ -89,12 +91,12 @@ class TestShowRoom extends DuskTestCase
                     ->assertPathIs('/hotels/'.$hotel->slug);
             $browser->clickLink('Room information')
                     ->pause(2000);
-            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(1)') === 'Room name: '.$hotel->rooms[0]->name);
-            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(3)') === 'Bed: '.$hotel->rooms[0]->bed);
-            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(4)') === 'Direction: '.$hotel->rooms[0]->direction);
-            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(5)') === 'Max guest: '.$hotel->rooms[0]->max_guest);
-            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(6)') === 'Descript: '.$hotel->rooms[0]->descript);
-            $this->assertTrue($browser->text('.cls-room-price') === $hotel->rooms[0]->price.' $');
+            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(1)') === 'Room name: '.$room->name);
+            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(3)') === 'Bed: '.$room->bed);
+            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(4)') === 'Direction: '.$room->direction);
+            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(5)') === 'Max guest: '.$room->max_guest);
+            $this->assertTrue($browser->text('.room-detail-info ul li:nth-child(6)') === 'Descript: '.$room->descript);
+            $this->assertTrue($browser->text('.cls-room-price') === $room->price.' $');
         });
     }
 
@@ -147,10 +149,13 @@ class TestShowRoom extends DuskTestCase
      * Make room of hotel
      */
     public function makeRoom($hotelId) {
-        factory(Room::class, 1)->create([
-            'hotel_id' => $hotelId,
-            'bed' => 'single',
-            'direction' => 'Floor Two',
-        ]);
+        $faker = Faker::create();
+        for ($i=0; $i < 6; $i++) { 
+            factory(Room::class, 1)->create([
+                'hotel_id' => $hotelId,
+                'bed' => $faker->randomElement(['single','double']),
+                'direction' => $faker->randomElement(['Floor Two', 'Floor Three', 'Floor five'])
+            ]);
+        }
     }
 }
