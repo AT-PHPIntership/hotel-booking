@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
+use Cookie;
+use Illuminate\Support\Facades\App;
+use URL;
 
 class LanguageController extends Controller
 {
     /**
-     * Index of multiple language
+     * Show language when user choose
      *
-     * @param Request $request http request
+     * @param string $language language in website
      *
-     * @return redirect
+     * @return void
      */
-    public function index(Request $request)
+    public function show($language = 'en')
     {
-        $session = $request->session();
-        if ($session->has('locale')) {
-            session()->put('locale', Route::input('lang'));
-        } else {
-            session(['locale' => Route::input('lang')]);
-        }
+        App::setLocale($language);
+        Cookie::queue('locale', $language, config('cookie.lifetime'));
 
-        return redirect()->back();
+        return redirect(url(URL::previous()));
     }
 }

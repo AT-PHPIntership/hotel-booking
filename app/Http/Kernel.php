@@ -18,7 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\LanguageSwicher::class,
+        \App\Http\Middleware\LanguageSwitcher::class,
     ];
 
     /**
@@ -35,7 +35,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-             \App\Http\Middleware\LanguageSwicher::class,
+             \App\Http\Middleware\LanguageSwitcher::class,
         ],
 
         'api' => [
@@ -60,6 +60,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'adminLogin' => \App\Http\Middleware\AdminLoginMiddleware::class,
         'checkUser' => \App\Http\Middleware\CheckUser::class,
-        'language' => \App\Http\Middleware\LanguageSwicher::class,
+        'language' => \App\Http\Middleware\LanguageSwitcher::class,
     ];
 }

@@ -10,7 +10,7 @@
         <div class="th-text pull-right">
           <div class="th-item">
             <div class="btn-group">
-              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> {{ Session::get('locale') == 'vi' ? __('VIETNAMESE') : __('ENGLISH') }} <span class="caret"></span> </button> 
+              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> {{ Cookie::get('locale') == 'vi' ? __('VIETNAMESE') : __('ENGLISH') }} <span class="caret"></span> </button> 
               <ul class="dropdown-menu">
                 <li>
                   <a href="{{ route('language', ['lang' => 'en']) }}">
@@ -39,6 +39,7 @@
   <!-- Navigation -->
   <div class="navbar yamm navbar-default" id="sticky">
     <div class="container">
+      {{-- @php (dd(session()->all())) --}}
       <div class="navbar-header">
         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
         <a href="/" class="navbar-brand">         
