@@ -80,7 +80,7 @@ class HomePageTest extends DuskTestCase
      */
     public function testShowTopPlaceIfHasData()
     {   
-        $this->makeData(10);
+        $this->makeData(7);
         $this->browse(function (Browser $browser) {
             Cache::flush();
             $browser->visit('/')
@@ -102,7 +102,7 @@ class HomePageTest extends DuskTestCase
      */
     public function testShowTopHotelIfHasData()
     {   
-        $this->makeData(10);
+        $this->makeData(7);
         $this->browse(function (Browser $browser) {
             Cache::flush();
             $browser->visit('/')
@@ -243,22 +243,23 @@ class HomePageTest extends DuskTestCase
         factory(Guest::class, $row)->create();
         $placeIds = Place::all('id')->pluck('id')->toArray();
         $faker = Faker::create();
-        for ($i = 0; $i < $row; $i++) {
+        foreach ($placeIds as $placeId) {
             factory(Hotel::class, 1)->create([
-                'place_id' => $faker->randomElement($placeIds)
+                'place_id' => $placeId
             ]);
         }
         $hotelIds = Hotel::all('id')->pluck('id')->toArray();
-        for ($i = 0; $i < $row; $i++) {
-            factory(Room::class, 1)->create([
-                'hotel_id' => $faker->randomElement($hotelIds),
+        foreach ($hotelIds as $hotelId) {
+            factory(Hotel::class, 1)->create([
+                'place_id' => $hotelId
             ]);
         }
         $roomIds = Room::all('id')->pluck('id')->toArray();
-        for ($i = 0; $i < $row; $i++) {
+
+        foreach ($roomIds as $roomId) {
             factory(Reservation::class, 1)->create([
-                'room_id' => $faker->randomElement($roomIds),
-            ]);
-        }
+                'room_id' => $roomId
+            ]); 
+        }      
     }     
 }
