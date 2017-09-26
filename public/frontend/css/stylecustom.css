@@ -401,7 +401,36 @@
 .cls-tb-user {
     margin-left: 9%;
 }
-
+.cls-form-border-parent {
+    max-width: 100%;
+}
+.cls-form-border {
+    border-radius: 3px;
+    border: 1px solid #dedede;
+    border-left-width: 2px;
+    box-sizing: border-box;
+    border-left-color: rgb(27, 160, 226);
+    padding: 27px 25px 34px;
+}
+.cls-item-border {
+    border-radius: 3px;
+    box-sizing: border-box;
+    border: 1px solid #dedede;
+    width: 30%;
+}
+.nopadding {
+   padding: 0 !important;
+}
+.cls-ml-20 {
+    margin-left: 20px;
+}
+.cls-ml-5-percent {
+    margin-left: 5%;
+}
+.cls-image-rooms {
+    max-width: 90%;
+    margin-left: 5%;
+}
 .cls-image-contain {
     max-width: 100%;
     height: 300px;
@@ -458,7 +487,10 @@
 .count-rating-guest{
     margin-top: 10px;
 }
+.cls-mb-50 {
+    margin-bottom: 50px;
 /*slider*/
+}
 .contain-slider-img-room {
     margin-top: 10px;
     width: 500px;
