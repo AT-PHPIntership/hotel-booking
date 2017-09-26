@@ -21,7 +21,6 @@ $(document).ready(function() {
     });
     $('#request').keyup(function(){
         var request = ($('#request').val());
-        console.log(request);
         if (request.length > 0) {
             $('#js-note-request').show();
         } else {

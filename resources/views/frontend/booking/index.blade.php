@@ -28,7 +28,7 @@
           </div>
           <div class="cls-form-border-parent">
           {{-- input form --}}
-            <form  id="booking-form" method="POST" class="cls-form-border col-md-8 form-group" action="{{ route('reservations.store') }}" enctype="multipart/form-data">
+            <form  id="booking-form" method="POST" class="cls-form-border col-md-8 form-group" action="{{ route('reservations.store', $room->id) }}" enctype="multipart/form-data">
               {!! csrf_field() !!}
               {{-- name --}}
               <div class="col-md-12 nopadding">
