@@ -10,10 +10,18 @@
         <div class="th-text pull-right">
           <div class="th-item">
             <div class="btn-group">
-              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> {{ __('ENGLISH') }} <span class="caret"></span> </button>
+              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> {{ Session::get('locale') == 'vi' ? __('VIETNAMESE') : __('ENGLISH') }} <span class="caret"></span> </button> 
               <ul class="dropdown-menu">
-                <li> <a href="#">{{ __('ENGLISH') }}</a> </li>
-                <li> <a href="#">{{ __('VIETNAMESE') }}</a> </li>
+                <li>
+                  <a href="{{ route('language', ['lang' => 'en']) }}">
+                    {{ __('ENGLISH') }}
+                  </a>
+                </li>
+                <li class="active">
+                  <a href="{{ route('language', ['lang' => 'vi']) }}">
+                    {{ __('VIETNAMESE') }}
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

@@ -10,6 +10,7 @@
 |
 */
 
+Route::get('/language/{lang}', 'LanguageController@index')->middleware('language')->name('language');
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::group(['namespace'=>'Frontend'], function() {
     Route::resource('/sendfeedback', 'FeedBackController', ['only' => ['create', 'store']]);
