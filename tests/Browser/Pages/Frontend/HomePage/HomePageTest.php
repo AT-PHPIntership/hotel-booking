@@ -250,12 +250,11 @@ class HomePageTest extends DuskTestCase
         }
         $hotelIds = Hotel::all('id')->pluck('id')->toArray();
         foreach ($hotelIds as $hotelId) {
-            factory(Hotel::class, 1)->create([
-                'place_id' => $hotelId
+            factory(Room::class, 1)->create([
+                'hotel_id' => $hotelId
             ]);
         }
         $roomIds = Room::all('id')->pluck('id')->toArray();
-
         foreach ($roomIds as $roomId) {
             factory(Reservation::class, 1)->create([
                 'room_id' => $roomId
