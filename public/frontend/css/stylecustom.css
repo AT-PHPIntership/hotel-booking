@@ -104,6 +104,7 @@
     margin-top: 10px;
     font-size: 54px;
     margin-bottom: 30px;
+    color: #bf4b07;
 }
 .progress {
     margin-bottom: 5px;
@@ -400,7 +401,36 @@
 .cls-tb-user {
     margin-left: 9%;
 }
-
+.cls-form-border-parent {
+    max-width: 100%;
+}
+.cls-form-border {
+    border-radius: 3px;
+    border: 1px solid #dedede;
+    border-left-width: 2px;
+    box-sizing: border-box;
+    border-left-color: rgb(27, 160, 226);
+    padding: 27px 25px 34px;
+}
+.cls-item-border {
+    border-radius: 3px;
+    box-sizing: border-box;
+    border: 1px solid #dedede;
+    width: 30%;
+}
+.nopadding {
+   padding: 0 !important;
+}
+.cls-ml-20 {
+    margin-left: 20px;
+}
+.cls-ml-5-percent {
+    margin-left: 5%;
+}
+.cls-image-rooms {
+    max-width: 90%;
+    margin-left: 5%;
+}
 .cls-image-contain {
     max-width: 100%;
     height: 300px;
@@ -454,15 +484,13 @@
     width: 750px;
     height: 423px;  
 }
-.cls-info-arrange-time {
-    background: #f7f7f7;
-    padding: 16px;
-    margin-bottom: 5px;
-}
 .count-rating-guest{
     margin-top: 10px;
 }
+.cls-mb-50 {
+    margin-bottom: 50px;
 /*slider*/
+}
 .contain-slider-img-room {
     margin-top: 10px;
     width: 500px;
@@ -507,8 +535,6 @@
 .button.green:hover  {
   background: #79bc32;
 }
-
- 
 .loading #container {opacity: 0;}
 .loading:before  { content: 'LOADING'; display: block; margin: 100px 0 0; text-align: center; color: #fff; font-weight: bold; font-size: 60px; opacity: 0.3; }
 .cls-img-room-show {
@@ -565,6 +591,7 @@
 }
 .total-rating {
     border: none;
+    font-weight: bold;
 }
 .hotel-user-comment {
     width: 100%;
@@ -598,4 +625,10 @@ input[type='range']::-webkit-slider-thumb {
 .btn-confirm {
     color: red;
     border: unset;
+}
+.fz-20 {
+    font-size: 20px;
+}
+.update-rating {
+    margin-top: 11px;
 }

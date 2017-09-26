@@ -247,7 +247,6 @@ jQuery(document).ready(function () {
                 jQueryfiltersLinks = jQueryfilters.find('a');
 
             jQueryfiltersLinks.click(function () {
-                console.log(this);
                 var jQuerythis = jQuery(this).parent(this);
                 // don't proceed if already selected
                 if (jQuerythis.hasClass('active')) {
@@ -282,7 +281,6 @@ jQuery(document).ready(function () {
                 jQueryfiltersLinks = jQueryfilters.find('a');
 
             jQueryfiltersLinks.click(function () {
-                console.log(this);
                 var jQuerythis = jQuery(this).parent(this);
                 // don't proceed if already selected
                 if (jQuerythis.hasClass('active')) {
@@ -314,7 +312,6 @@ jQuery(document).ready(function () {
     function getCurrentScroll() {
         return window.pageYOffset || document.documentElement.scrollTop;
     }
-
 
     // Dropdown hover
     if (jQuery().dropdownHover) {
@@ -432,20 +429,27 @@ jQuery(document).ready(function () {
     /*
      * Slider range rating   
      */
-    var $slider = $('.slider');
-    var total = 0;
-    var numAttributeRating = $slider.length;
-
+    var $slider = $('.slider-rating');
+    var NUM_ELEMENT_INPUT_RATING = 5;
     $('#avg-rating').val('5.0');
     $slider.each(
         function(i) {
             let idInput = '#' + $(this).attr('id');
             let idValue = '#' + $(this).next().attr('id');
             $(idValue).text('5');
-            $(idInput).on('change', function (e) {
+              
+             $(document).on('change', idInput,  function (e) {
+                var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+    
+                $(this).css('background-image',
+                    '-webkit-gradient(linear, left top, right top, '
+                    + 'color-stop(' + val + ', #1da0e2), '
+                    + 'color-stop(' + val + ', #C5C5C5)'
+                    + ')'
+                );
                 $(idValue).text($(this).val());
                 let sum = addAll();
-                let avg = sum / numAttributeRating ;
+                let avg = sum / NUM_ELEMENT_INPUT_RATING ;
                 $('#avg-rating').val(avg.toFixed(1));
             })
         } 
@@ -458,25 +462,11 @@ jQuery(document).ready(function () {
      */
     function addAll() {
         var sum = 0;
-        $('.slider').each(function (){        
+        $('.slider-rating').each(function (){        
             sum += isNaN(this.value) || $.trim(this.value) === '' ? 0 : parseFloat(this.value);        
         });
         return sum;    
     }   
-
-    /*
-     * Color slider change upper and lower 
-     */
-    $('input[type="range"]').change(function () {
-    var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
-    
-    $(this).css('background-image',
-        '-webkit-gradient(linear, left top, right top, '
-        + 'color-stop(' + val + ', #1da0e2), '
-        + 'color-stop(' + val + ', #C5C5C5)'
-        + ')'
-        );
-    });
 
     /**
      * Show confimation when click button 
@@ -494,4 +484,45 @@ jQuery(document).ready(function () {
             $('#confirm').modal('hide');
         })
     });
+    $('#cancel-btn').hide();
+    $('.cls-link-update-rating').click(function(e) {
+        e.preventDefault();
+        $('#cancel-btn').show();
+        $('#cancel-btn').on('click', function(event) {
+            location.reload();
+        });
+        $('#message-update-comment').removeAttr('hidden');
+        var hotel_id = $(this).attr('data-hotel-id');
+        var comment_id = $(this).attr('data-comment-id');
+        $('#comment-rating').append('<input type="hidden" name="comment_id" value="' + comment_id + '">');
+
+        $.get('comments/' + comment_id, function(response) {
+            var $ratings = [
+                response.data.food,
+                response.data.cleanliness,
+                response.data.location,
+                response.data.service,
+                response.data.comfort,
+            ];
+            $('#comment-content').html(response.data.comment);
+            $slider.each(
+                function(i) {
+                    let idInput = '#' + $(this).attr('id');
+                    let idValue = '#' + $(this).next().attr('id');
+                    var val = ($ratings[i] - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+                    $(idInput).css('background-image',
+                        '-webkit-gradient(linear, left top, right top, '
+                        + 'color-stop(' + val + ', #1da0e2), '
+                        + 'color-stop(' + val + ', #C5C5C5)'
+                        + ')'
+                    );
+                    
+                    $(idInput).val($ratings[i]);
+                    $(idValue).text($(this).val());
+                    let sum = addAll();
+                    let avg = sum / NUM_ELEMENT_INPUT_RATING ;
+                    $('#avg-rating').val(avg.toFixed(1));             
+            });   
+        });
+    })
 });

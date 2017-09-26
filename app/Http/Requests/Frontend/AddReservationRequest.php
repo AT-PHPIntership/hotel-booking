@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Backend;
+namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditNewsRequest extends FormRequest
+class AddReservationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,12 @@ class EditNewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'content' => 'required',
-            'images' => 'nullable|array',
-            'images.*' => 'image|max:' . config('image.max_upload_size')
+            'full_name' => 'required',
+            'quantity' => 'required|numeric',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'duration' => 'required',
+            'checkin' => 'required',
         ];
     }
 }

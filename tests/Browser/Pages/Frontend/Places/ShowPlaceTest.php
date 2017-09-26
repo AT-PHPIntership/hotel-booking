@@ -143,7 +143,7 @@ class ShowPlaceTest extends DuskTestCase
     }
 
     /**
-     * Make data of place for test
+     * Make hotels of place for test
      *
      * @param int $id id of place
      *
@@ -151,10 +151,8 @@ class ShowPlaceTest extends DuskTestCase
      */
     public function makeHotelOfPlace($id)
     {
-        for ($i = 0; $i < 5; $i++) {
-            factory(Hotel::class, 1)->create([
-                'place_id' => $id
-            ]);
-        }
+        factory(Hotel::class, 6)->create([
+            'place_id' => $id
+        ]);
     }
 }

@@ -36,7 +36,7 @@ class CheckUser
                 return response()->view('frontend.errors.403', $response);
             }
         }
-
+        
         return $next($request);
     }
 }

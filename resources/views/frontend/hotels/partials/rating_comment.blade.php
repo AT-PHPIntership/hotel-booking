@@ -117,47 +117,52 @@
             @endif 
           </div> 
         </div>
-        <div class="cls-user-comment-rating">
+         
+        <div class="cls-user-comment-rating" id="content-comment-rating">
           @if(Auth::check())
             <form action="{{ route('comments.store') }}" method="POST" id="comment-rating">
               {!! csrf_field() !!}
               <div class="cls-contain-rating-input">
                 <div class="clearfix " >
-                  <label class="cls-label-rating pull-left mr-10">{{ __('Food') }}</label><input type="range" min="1" max="10" name="food" class="slider cls-slider-rating" id="food-input" value="5">
+                  <label class="cls-label-rating pull-left mr-10">{{ __('Food') }}</label><input type="range" min="1" max="10" name="food" class="slider-rating cls-slider-rating" id="food-input" value="5">
                    <i id="food-value" class="ml-5 cls-rating-point"></i> 
                 </div>
                 
                 <div class="clearfix">
                   <label class="cls-label-rating pull-left mr-10">{{ __('Clean') }}</label>
-                  <input type="range" min="1" max="10"  name="cleanliness" class="slider cls-slider-rating" id="cleanliness-input" value="5">
+                  <input type="range" min="1" max="10"  name="cleanliness" class="slider-rating cls-slider-rating" id="cleanliness-input" value="5">
                    <i id="cleanliness-value" class="ml-5 cls-rating-point"></i> 
                 </div>
                 <div class="clearfix">
                   <label class="cls-label-rating pull-left mr-10">{{ __('Location') }}</label> 
-                  <input type="range" min="1" max="10"  name="location" class="slider cls-slider-rating" id="location-input" value="5">
+                  <input type="range" min="1" max="10"  name="location" class="slider-rating cls-slider-rating" id="location-input" value="5">
                    <i id="location-value" class="ml-5 cls-rating-point"></i> 
                 </div>
                 <div class="clearfix">
                   <label class="cls-label-rating pull-left mr-10 ">{{ __('Service') }}</label> 
-                  <input type="range" min="1" max="10"  name="service" class="slider cls-slider-rating" id="service-input" value="5">
+                  <input type="range" min="1" max="10"  name="service" class="slider-rating cls-slider-rating" id="service-input" value="5">
                    <i id="service-value" class="ml-5 cls-rating-point"></i> 
                 </div>
                 <div class="clearfix">
                   <label class="cls-label-rating pull-left mr-10">{{ __('Comfort') }}</label> 
-                  <input type="range" min="1" max="10"  name="comfort" class="slider cls-slider-rating" id="comfort-input" value="5">
+                  <input type="range" min="1" max="10"  name="comfort" class="slider-rating cls-slider-rating" id="comfort-input" value="5">
                    <i id="comfort-value" class="ml-5 cls-rating-point"></i> 
                 </div>
-                <div class="cls-contain-total-rating"> {{ __('Total rating:') }} 
+                <div class="cls-contain-total-rating"> {{ __('Total rating you choosed:') }} 
                   <input id="avg-rating" name="total_rating" class="text-danger total-rating" readonly = "readonly" >
                 </div>
+                <div class="alert alert-warning" id="message-update-comment" hidden="false">
+                  <p>{{ __('Do you want to update comment?') }}</p>
+                </div>
               </div>
-              <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
-              <input type="hidden" name="user_id" value="{{ $user->id }}">
-              <textarea class="hotel-user-comment" placeholder="{{ __('Write your comment.....') }}" name="comment">
-                {{ old('comment') }}
-              </textarea>
-
+             
+              <input type="hidden" name="hotel_id" 
+                value="{{ Request::has('hotel_id') ? Request::all()['hotel_id'] : $hotel->id }}">
+              <input type="hidden" name="user_id" value=" {{ \Auth::user()->id }}">
+              <textarea id='comment-content' class="hotel-user-comment" 
+                placeholder="{{ old('comment') ? '' : __('Write your comment.....') }}" name="comment">{{ old('comment') }}</textarea>
               <button class="btn btn-primary pull-right" type="submit">{{ __('Submit') }}</button>
+              <a id="cancel-btn" class="btn btn-default pull-right  mr-10" >{{ __('Cancel') }}</a>
               <div class="error-message">
                 @if ($errors->has('comment'))
                   <div class="help-block">
@@ -194,15 +199,26 @@
                 {{ $comment->created_at }}
                 @if(Auth::check())
                   @if($user->id == $comment->user->id)
-                    <form method="POST"  action="{{ route('comments.destroy', $comment->id) }}">
-                      {!! csrf_field() !!}
-                      {{ method_field('DELETE') }}
-                      <button class="btn btn-confirm pull-right"
-                        data-title="{{ __('Confirm deletion!') }}"
-                        data-confirm="{{ __('Are you sure you want to delete?') }}" 
-                        type="submit" >{{ __('Delete') }}
-                      </button>
-                    </form> 
+                     
+                    <div class="cls-update-delete-rating clearfix pull-right">
+                      <span class="update-rating">
+                        
+                        <a href="#" class="cls-link-update-rating" data-hotel-id='{{ $hotel->id }}' data-comment-id= {{ $comment->id }}
+                          data-comment='{{ $comment->comment }}' title="{{ _('Update comment ') }}">
+                        <i class="fa fa-pencil-square fz-20" aria-hidden="true"></i>
+                      </a>
+                      </span>
+                      <form method="POST" action="{{ route('comments.destroy', $comment->id) }}" class="cls-form-delete-rating inline">
+                        {!! csrf_field() !!}
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-confirm"
+                          data-title="{{ __('Confirm deletion!') }}"
+                          data-confirm="{{ __('Are you sure you want to delete?') }}" 
+                          type="submit" title="Delete comment" >
+                          <i class="fa fa-times fz-20" aria-hidden="true"></i>
+                        </button>
+                      </form> 
+                    </div>
                   @endif 
                 @endif 
                 </p>

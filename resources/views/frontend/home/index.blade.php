@@ -4,7 +4,6 @@
 @endsection
 @section('title', __('Home page'))
 @section('content')
-
 <!-- Introduce Slider -->
 <section class="revolution-slider">
   <div class="bannercontainer">
@@ -62,7 +61,7 @@
                   data-speed="1000" 
                   data-start="1900" 
                   data-easing="easeOutBack">
-              <a href="/detailHotel" class="button btn btn-purple btn-lg">{{ __('See More') }}</a> 
+              <a href="{{ route('hotels.show', $advertiseHotel->slug) }}" class="button btn btn-purple btn-lg">{{ __('See More') }}</a> 
             </div>
           </li>
           <!-- Slide 2 -->
@@ -173,12 +172,10 @@
                 <img src="{{ (isset($place->image)) ? $place->image_url : asset(config('image.default_thumbnail')) }}" alt="topPlace" class="img-responsive"/>
                 <div class="second-place-bottom"> 
                   <div class="pull-left">
-                    <a href=""><h5><strong>{{ $place->name }}</strong></h5></a>
+                    <a href="{{ route('places.show', $place->slug) }}"><h5><strong>{{ $place->name }}</strong></h5></a>
                   </div>
                   <div class="pull-right">
-                    <a href="">
-                      <h5 class="cls-text-color-primary cls-mr-20"><strong>{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</strong></h5>
-                    </a>
+                    <h5 class="cls-text-color-primary cls-mr-20"><strong>{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</strong></h5>
                   </div>
                 </div>
               </div>
@@ -196,8 +193,8 @@
       <div class="row">
         <div class="col-sm-12">
           <h2 class="lined-heading"><span>{{ __('Representative Hotels') }}</span></h2>
-        </div> 
-        <!-- 6 hotel top -->
+        </div>
+        <!-- 6 hotels top -->
         @if($topHotels->count() != null)
         @foreach($topHotels as $hotel)
           <div class="col-sm-4 mt50">
@@ -206,7 +203,7 @@
               <div class="mask">
                 <div class="main cls-with-max">
                   <div class="pull-left">
-                    <a href=""><h5>{{ $hotel->name }}</h5></a>
+                    <a href="{{ route('hotels.show', $hotel->slug) }}"><h5>{{ $hotel->name }}</h5></a>
                   </div>
                   <div class="pull-right cls-mr-20">
                     <a href="">
@@ -236,7 +233,7 @@
                       </ul>
                     </div>
                   </div>
-                  <a href="" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
+                  <a href="{{ route('hotels.show', $hotel->slug) }}" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
                 </div>
               </div>
             </div>
@@ -260,29 +257,29 @@
       <div class="col-sm-3 bounceIn appear" data-start="0">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-glass fa-lg"></i></div>
-        <h3>Beverages included</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
+        <h3>{{ __('Beverages included') }}</h3>
+        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum.') }}</p>
         </div>
         </div>
       <div class="col-sm-3 bounceIn appear" data-start="400">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-credit-card fa-lg"></i></div>
-        <h3>Stay First, Pay After!</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
+        <h3>{{ __('Stay First, Pay After!') }}</h3>
+        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum.') }}</p>
         </div>
         </div>
       <div class="col-sm-3 bounceIn appear" data-start="800">
       <div class="box-icon">      
         <div class="circle"><i class="fa fa-cutlery fa-lg"></i></div>
-        <h3>24 Hour Restaurant</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
+        <h3>{{ __('24 Hour Restaurant') }}</h3>
+        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum.') }}</p>
         </div>
         </div>
       <div class="col-sm-3 bounceIn appear" data-start="1200">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-tint fa-lg"></i></div>
-        <h3>Spa Included!</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
+        <h3>{{ __('Spa Included!') }}</h3>
+        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum.') }}</p>
         </div>
     </div>
     </div>
@@ -297,8 +294,8 @@
     <div class="color-overlay fadeIn appear" data-start="600">
       <div class="container">
         <div class="content">
-          <h3 class="text-center"><i class="fa fa fa-star-o"></i> Snolax N., Inc.</h3>
-          <p class="text-center">A product of the Snorlax N. company
+          <h3 class="text-center"><i class="fa fa fa-star-o"></i> {{ __('Snolax N., Inc.') }}</h3>
+          <p class="text-center">{{ __('A product of the Snorlax N. company') }}
       <br></p>
         </div>
       </div>

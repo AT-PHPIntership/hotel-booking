@@ -19,4 +19,7 @@ return [
     'users' => [
         'path_upload' => 'images/users/',
     ],
+    'news' => [
+        'path_upload' => 'images/news/',
+    ],
 ];

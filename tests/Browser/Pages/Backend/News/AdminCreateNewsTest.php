@@ -3,6 +3,7 @@
 namespace Tests\Browser\Pages\Backend\News;
 
 use Tests\DuskTestCase;
+use Illuminate\Http\UploadedFile;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Model\Category;
@@ -39,7 +40,8 @@ class AdminCreateNewsTest extends DuskTestCase
                     ->assertPathIs('/admin/news/create')
                     ->assertSee('The title field is required.')
                     ->assertSee('The content field is required.')
-                    ->assertSee('The category id field is required.');
+                    ->assertSee('The category id field is required.')
+                    ->assertSee('The images field is required.');
         });
     }
 
@@ -53,8 +55,10 @@ class AdminCreateNewsTest extends DuskTestCase
         factory(Category::class,10)->create();
         $category = Category::find(1);
         $this->browse(function (Browser $browser) use ($category) {
+            $image = $this->fakeFile(true);
             $page = $browser->visit('/admin/news/create')
-                ->type('title','News18');
+                ->type('title','News18')
+                ->attach('images[]', $image);
             $this->typeInCKEditor($browser, '#cke_content iframe', 'Hello World!');
             $page->select('category_id', $category->id)
                 ->press('Submit')
@@ -73,9 +77,11 @@ class AdminCreateNewsTest extends DuskTestCase
     public function listCaseTestForCreateNews()
     {
         return [
-            ['', 'Hello World!', '5', 'The title field is required.'],
-            ['News55', '', '5', 'The content field is required.'],
-            ['News55', 'Hello World!', '', 'The category id field is required.'],
+            ['', 'Hello World!', '5', $this->fakeFile(true), 'The title field is required.'],
+            ['News55', '', '5', $this->fakeFile(true), 'The content field is required.'],
+            ['News55', 'Hello World!', '', $this->fakeFile(true), 'The category id field is required.'],
+            ['News55', 'Hello World!', '5', '', 'The images field is required.'],
+            ['News55', 'Hello World!', '5', $this->fakeFile(false), 'The images.0 must be an image.'],
         ];
     }
 
@@ -85,13 +91,14 @@ class AdminCreateNewsTest extends DuskTestCase
      *
      */
      
-    public function testCreateNewsFail($title, $content, $category_id, $expected)
+    public function testCreateNewsFail($title, $content, $category_id, $image, $expected)
     {   
         
         $this->browse(function (Browser $browser) use ($title, $content,
-            $category_id, $expected) {
+            $category_id, $image, $expected) {
             $page = $browser->visit('/admin/news/create')
-                ->type('title', $title);
+                ->type('title', $title)
+                ->attach('images[]', $image);
             $this->typeInCKEditor($browser, '#cke_1_contents iframe', $content);    
             $page->select('category_id', $category_id)
                 ->press('Submit')
@@ -108,8 +115,10 @@ class AdminCreateNewsTest extends DuskTestCase
     public function testBtnReset()
     {
         $this->browse(function (Browser $browser) {
+            $image = $this->fakeFile(true);
             $page = $browser->visit('/admin/news/create')
-                ->type('title', 'News10');
+                ->type('title', 'News10')
+                ->attach('images[]', $image);
             $this->typeInCKEditor($browser, '#cke_1_contents iframe', 'Hello');
             $page->select('category_id')
                 ->press('Reset')
@@ -130,6 +139,19 @@ class AdminCreateNewsTest extends DuskTestCase
                     ->clickLink('Back')
                     ->assertPathIs('/admin/news');
         });
+    }
+
+    /**
+     * Fake image 
+     * 
+     * @param boolean $isImage check file is image
+     * 
+     * @return string
+     */
+    public function fakeFile($isImage)
+    { 
+        $file = $isImage ? UploadedFile::fake()->image('image.jpg') : UploadedFile::fake()->create('file.pdf');
+        return $file;
     }
 
 }
