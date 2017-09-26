@@ -1,4 +1,5 @@
 @extends('frontend.layouts.master')
+@section('title', __('Feedback'))
 @section('content')
   <section>
     <div class=" text-center">
