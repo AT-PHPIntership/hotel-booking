@@ -46,7 +46,8 @@
               <div class="mask">
                 <div class="main cls-with-max">
                   <div class="pull-left">
-                    <a href=""><h5>{{ $hotel->name }}</h5></a>
+
+                    <a href="{{ route('hotels.show', $hotel->slug) }}"><h5>{{ $hotel->name }}</h5></a>
                   </div>
                   <div class="cls-mr-20">
                     <a href="">
@@ -76,7 +77,7 @@
                       </ul>
                     </div>
                   </div>
-                  <a href="" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
+                  <a href="{{ route('hotels.show', $hotel->slug) }}" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
                 </div>
               </div>
             </div>

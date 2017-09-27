@@ -20,12 +20,9 @@ class UserUpdateRatingComment  extends DuskTestCase
      */
     public function testUpdateRatingComment()
     {
-        $this->makeData();
-        $this->makeUser();
-        $this->makeComment(1, 1);
-        $hotel = Hotel::find(1);
-        $user = User::find(1);
-        $comment = RatingComment::find(1);
+        $hotel = $this->makeData();
+        $user = $this->makeUser();
+        $comment = $this->makeComment(1, 1);
         $this->browse(function (Browser $browser) use ($hotel, $user, $comment) {
             $browser->logout();
             $browser->loginAs($user)
@@ -46,12 +43,9 @@ class UserUpdateRatingComment  extends DuskTestCase
      */
     public function testUpdateRatingCommentSuccess()
     {
-        $this->makeData();
-        $this->makeUser();
-        $this->makeComment(1, 1);
-        $hotel = Hotel::find(1);
-        $user = User::find(1);
-        $comment = RatingComment::find(1);
+        $hotel = $this->makeData();
+        $user = $this->makeUser();
+        $comment = $this->makeComment(1, 1);
         $this->browse(function (Browser $browser) use ($hotel, $user, $comment) {
             $browser->logout();
             $browser->loginAs($user)
@@ -80,12 +74,9 @@ class UserUpdateRatingComment  extends DuskTestCase
      */
     public function testBtnCancel()
     {
-        $this->makeData();
-        $this->makeUser();
-        $this->makeComment(1, 1);
-        $hotel = Hotel::find(1);
-        $user = User::find(1);
-        $comment = RatingComment::find(1);
+        $hotel = $this->makeData();
+        $user = $this->makeUser();
+        $comment = $this->makeComment(1, 1);
         $this->browse(function (Browser $browser) use ($hotel, $user, $comment) {
             $browser->logout();
             $browser->loginAs($user)
@@ -110,12 +101,9 @@ class UserUpdateRatingComment  extends DuskTestCase
      */
     public function testValidationUpdateRatingComment()
     {
-        $this->makeData();
-        $this->makeUser();
-        $this->makeComment(1, 1);
-        $hotel = Hotel::find(1);
-        $user = User::find(1);
-        $comment = RatingComment::find(1);
+        $hotel = $this->makeData();
+        $user = $this->makeUser();
+        $comment = $this->makeComment(1, 1);
         $this->browse(function (Browser $browser) use ($hotel, $user, $comment) {
             $browser->logout();
             $browser->loginAs($user)
@@ -138,12 +126,9 @@ class UserUpdateRatingComment  extends DuskTestCase
      */
     public function testNotFoundComment()
     {
-        $this->makeData();
-        $this->makeUser();
-        $this->makeComment(1, 1);
-        $hotel = Hotel::find(1);
-        $user = User::find(1);
-        $comment = RatingComment::find(1);
+        $hotel = $this->makeData();
+        $user = $this->makeUser();
+        $comment = $this->makeComment(1, 1);
         $this->browse(function (Browser $browser) use ($hotel, $user, $comment) {
             $browser->logout();
             $browser->loginAs($user)
@@ -169,6 +154,7 @@ class UserUpdateRatingComment  extends DuskTestCase
         factory(Hotel::class, 1)->create([
             'place_id' => 1
         ]);
+        return Hotel::find(1);
     }
 
     /**
@@ -188,6 +174,7 @@ class UserUpdateRatingComment  extends DuskTestCase
             'is_admin' => 0
             ])
         );
+        return User::find(1);
     }
 
     /**
@@ -197,7 +184,7 @@ class UserUpdateRatingComment  extends DuskTestCase
      */
     public function makeComment($idUser, $idHotel)
     {   
-        factory(RatingComment::class, 1)->create([
+        factory(RatingComment::class)->create([
             'hotel_id' => $idHotel,
             'user_id' => $idUser,
             'food' => 4,
@@ -208,5 +195,6 @@ class UserUpdateRatingComment  extends DuskTestCase
             'total_rating' => 4,
             'comment' => 'bad for me!'
         ]);
+        return RatingComment::find(1);
     }
 }
