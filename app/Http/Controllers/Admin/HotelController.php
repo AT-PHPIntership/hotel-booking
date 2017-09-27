@@ -204,7 +204,7 @@ class HotelController extends Controller
         try {
             $hotel->update($request->except(['services', 'images']));
             //delete old hotel's services
-            $hotel->hotelServices()->delete();
+            $hotel->services()->detach();
             
             //make data hotel services
             $hotelServices = array();
