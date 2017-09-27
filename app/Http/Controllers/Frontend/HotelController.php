@@ -10,10 +10,12 @@ use App\Model\Room;
 use App\Model\Place;
 use App\Model\Reservation;
 use App\Model\RatingComment;
+use App\Model\User;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 use App\Http\Requests\Frontend\SearchHotelRequest;
+use Illuminate\Support\Facades\Cache;
 
 class HotelController extends Controller
 {
@@ -110,6 +112,13 @@ EOD;
      */
     public function index(SearchHotelRequest $request)
     {
+        if (Cache::has(User::KEY_CACHE)) {
+            Cache::forget(User::KEY_CACHE);
+        }
+        if ($request->all() != []) {
+            Cache::put(User::KEY_CACHE, $request->all(), User::TIMEOUT_CACHE);
+        }
+        
         $columns = [
             'hotels.id',
             'hotels.slug',

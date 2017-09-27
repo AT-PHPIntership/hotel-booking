@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Cookie;
@@ -16,10 +16,10 @@ class LanguageController extends Controller
      *
      * @return void
      */
-    public function show($language = 'en')
+    public function show($language)
     {
         App::setLocale($language);
-        Cookie::queue('locale', $language, config('cookie.lifetime'));
+        Cookie::queue('frontend_locale', $language, config('cookie.lifetime'));
 
         return redirect(url(URL::previous()));
     }

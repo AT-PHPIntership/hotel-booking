@@ -70,6 +70,17 @@ class User extends Model implements Authenticatable
     const STATUS_DISABLED = 0;
 
     /**
+     * Value of timeout & key cache bookingInfomation
+     */
+    const TIMEOUT_CACHE = 60;
+    const KEY_CACHE = 'bookingInfomation';
+
+    /**
+     * Default value cache bookingInfomation
+     */
+    const DEFAULT_VALUE = null;
+
+    /**
      * Get all of the user's ratingcomment.
      *
      * @return array
