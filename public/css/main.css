@@ -412,3 +412,6 @@ select[name = "arange_id"] {
     border-radius: 5px 5px 5px 5px;
     border: 1px solid #ebebeb;
 }
+.cls-admin-language {
+    margin-top: 15px;
+}

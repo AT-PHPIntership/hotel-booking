@@ -281,7 +281,7 @@
       <div class="col-sm-3 bounceIn appear" data-start="400">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-credit-card fa-lg"></i></div>
-        <h3>{{ __('Book First, Pay After') }}!</h3>
+        <h3>{{ __('Book First, Pay After!') }}</h3>
         <p>{{ __('With the top safety criteria, we offer you a variety of safe, fast and convenient payment options') }}</p>
         </div>
         </div>
@@ -302,9 +302,6 @@
     </div>
   </div>
 </section>
-
-<!-- Parallax Effect-->
-<script type="text/javascript">$(document).ready(function(){$('#parallax-image').parallax("50%", -0.25);});</script>
 
 <section class="parallax-effect mt100">
   <div id="parallax-image" style="background-image: url({{ asset('frontend/images/imglast.jpg') }};">

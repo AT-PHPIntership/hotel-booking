@@ -10,32 +10,38 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home.index');
-Route::group(['namespace'=>'Frontend'], function() {
-    Route::resource('/sendfeedback', 'FeedBackController', ['only' => ['create', 'store']]);
-    Route::group(['middleware'=> 'auth'], function() {
-        Route::resource('/comments', 'RatingCommentController', ['only' => ['store', 'destroy']]);
-        Route::put('/hotels/{hotel}/comments/{comment}', 'RatingCommentController@update')->name('user.comment.update');
-        Route::put('/profile/{profile}/reservation/{reservation}', 'ReservationController@update')->name('user.cancelBooking');
-        Route::group(['middleware'=> 'checkUser'], function() {
-            Route::resource('/profile', 'UserController');
-            Route::get('/profile/{profile}/reservation/{reservation}/show', 'ReservationController@show')->name('user.showBooking');
+Route::get('/', 'HomeController@index')->name('home.index')->middleware('frontend.language');
+Route::group(['middleware' => 'frontend.language', 'namespace'=>'Frontend'],
+    function() {
+        Route::get('/language/{lang}', 'LanguageController@show')
+            ->middleware('frontend.language')->name('frontend.language')
+            ->where('lang', 'vi|en');
+        Route::resource('/sendfeedback', 'FeedBackController', ['only' => ['create', 'store']]);
+        Route::group(['middleware'=> 'auth'], function() {
+            Route::resource('/comments', 'RatingCommentController', ['only' => ['store', 'destroy']]);
+            Route::put('/hotels/{hotel}/comments/{comment}', 'RatingCommentController@update')->name('user.comment.update');
+            Route::put('/profile/{profile}/reservation/{reservation}', 'ReservationController@update')->name('user.cancelBooking');
+            Route::group(['middleware'=> 'checkUser'], function() {
+                Route::resource('/profile', 'UserController');
+                Route::get('/profile/{profile}/reservation/{reservation}/show', 'ReservationController@show')->name('user.showBooking');
+            });
         });
-    });
-    Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
-    Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
-    Route::resource('/room/{room}/reservations', 'ReservationController', ['only' => ['create', 'store']]);
-    Route::get('places/{slug}', 'PlaceController@show')->name('places.show');
-    Route::resource('/news', 'NewsController', ['as' => 'frontend']);
-    Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
-    Route::get('/categories/{slug}/news', 'CategoryController@show')->name('categories.news');
+        Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
+        Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
+        Route::resource('/room/{room}/reservations', 'ReservationController', ['only' => ['create', 'store']]);
+        Route::get('places/{slug}', 'PlaceController@show')->name('places.show');
+        Route::resource('/news', 'NewsController', ['as' => 'frontend']);
+        Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
+        Route::get('/categories/{slug}/news', 'CategoryController@show')->name('categories.news');
 });
 Route::get('/registerSuccess', function() {
     return view('frontend.notice');
 })->name('notice')->middleware('auth');
-Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
+Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>['adminLogin', 'admin.language']], function() {
+    Route::get('/language/{lang}', 'LanguageController@show')
+        ->middleware('admin.language')->name('admin.language')
+        ->where('lang', 'vi|en');
     Route::get('/', 'AdminController@index')->name('admin.index');
-
     Route::resource('/user', 'UserController');
     Route::resource('/place', 'PlaceController');
     Route::resource('/comment', 'RatingCommentController');
