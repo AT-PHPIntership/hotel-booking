@@ -137,7 +137,7 @@ class UserBookingRoomTest extends DuskTestCase
                     ->visit('/')
                     ->type('hotelSourceArea', 'Da Nang')
                     ->type('checkin', '30/09/2017')
-                    ->select('duration', '2')
+                    ->select('duration', 2)
                     ->press('SEARCH')
                     ->mouseover($selector)
                     ->whenAvailable($selector, function ($selectorAvailable) {
@@ -160,7 +160,7 @@ class UserBookingRoomTest extends DuskTestCase
     }
 
     /**
-     * Test route page booking room if user visit and has cache search
+     * Test value page booking room if user visit and has cache search
      *
      * @return void
      */
@@ -178,7 +178,7 @@ class UserBookingRoomTest extends DuskTestCase
                     ->visit('/')
                     ->type('hotelSourceArea', 'Da Nang')
                     ->type('checkin', '30/09/2017')
-                    ->select('duration', '2')
+                    ->select('duration', 2)
                     ->press('SEARCH')
                     ->mouseover($selector)
                     ->whenAvailable($selector, function ($selectorAvailable) {
@@ -365,7 +365,7 @@ class UserBookingRoomTest extends DuskTestCase
         Cache:flush();
         $this->makeData(10);
         $hotel = Hotel::find(10);
-        $this->makeRoom($hotel->id);    
+        $this->makeRoom($hotel->id);
         $this->browse(function (Browser $browser) use ($full_name, $phone, $email, $checkin, $expected, $hotel) {
             $selector = 'main section:nth-child(2) .container .row div:nth-child(2) .room-thumb .mask .content';
             $room = Room::orderby('price', 'ASC')->first();
@@ -406,7 +406,7 @@ class UserBookingRoomTest extends DuskTestCase
     }
 
     /**
-     * Make data for test cach search.
+     * Make data for test cache search.
      */
     public function makePlaceAndHotel()
     {   
@@ -421,7 +421,7 @@ class UserBookingRoomTest extends DuskTestCase
             'place_id' => 2
         ]);
     }
-    
+
     /**
      * Make room of hotel for test.
      * 
