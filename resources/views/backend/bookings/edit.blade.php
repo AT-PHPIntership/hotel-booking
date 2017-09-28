@@ -8,11 +8,11 @@
       </h1>
       <div class="row margin-center">
         <div class="col-md-12">
-          <div class="cls-editnews-msg">
-            @include('flash::message')
-          </div>
+          <div>
+              @include('flash::message')
+            </div>
           <div class="box">
-            <form method="POST" action="{{ route('reservation.update', $reservation->id) }}" >
+            <form method="POST" action="{{ route('reservation.update', $reservation->id) }}" class="mt-20">
               {{csrf_field()}}
               {{method_field('PUT')}}
               <div class="box-body">
