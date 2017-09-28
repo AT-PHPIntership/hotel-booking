@@ -4,6 +4,7 @@
 @endsection
 @section('title', __('Home page'))
 @section('content')
+
 <!-- Introduce Slider -->
 <section class="revolution-slider">
   <div class="bannercontainer">
@@ -61,14 +62,14 @@
                   data-speed="1000" 
                   data-start="1900" 
                   data-easing="easeOutBack">
-              <a href="{{ route('hotels.show', $advertiseHotel->slug) }}" class="button btn btn-purple btn-lg">{{ __('See More') }}</a> 
+              <a href="/detailHotel" class="button btn btn-purple btn-lg">{{ __('See More') }}</a> 
             </div>
           </li>
           <!-- Slide 2 -->
           <li data-transition="boxfade" data-slotamount="7" data-masterspeed="1000" > 
             <!-- Main Image -->
-            @if($advertiseHotel->images->count() != null) 
-            <img src="{{ $advertiseHotel->images->random()->path }}" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
+            @if($advertiseHotel->rooms->random()->images->count() != null) 
+            <img src="{{ $advertiseHotel->rooms->random()->images->random()->path }}" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
             @endif 
             <!-- Layers -->           
             <!-- Layer 1 -->
@@ -131,14 +132,14 @@
           @endif
           <div class="col-sm-4">
             <div class="room-thumb">
-              <img src="{{ (isset($place->image)) ? $place->image_url : asset(config('image.default_thumbnail')) }}" alt="topPlace" class="img-responsive"/>
+              <img src="{{ (isset($place->image)) ? $place->image_url : asset(config('image.default_thumbnail')) }}" alt="topPlace" class="img-presentive"/>
               <div class="mask">
                 <div class="main cls-with-max">
                   <div class="pull-left">
                     <a href="{{ route('places.show', $place->slug) }}"><h5>{{ $place->name . ' |' }}</h5></a>
                   </div>
-                  <div>
-                    <h5 class="cls-text-color-primary">{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</h5>
+                  <div> 
+                    <h5 class="cls-text-color-primary">{{ __('More :totalHotels hotels', ['totalHotels' => $place->hotels->count()]) }}</h5>
                   </div>
                 </div>
                 <div class="content">
@@ -175,7 +176,9 @@
                     <a href="{{ route('places.show', $place->slug) }}"><h5><strong>{{ $place->name }}</strong></h5></a>
                   </div>
                   <div class="pull-right">
-                    <h5 class="cls-text-color-primary cls-mr-20"><strong>{{ __('More :totalHotels hotels', ['totalHotels' => $place->totalHotels]) }}</strong></h5>
+                    <a href="">
+                      <h5 class="cls-text-color-primary cls-mr-20"><strong>{{ __('More :totalHotels hotels', ['totalHotels' => $place->hotels->count()]) }}</strong></h5>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -193,13 +196,13 @@
       <div class="row">
         <div class="col-sm-12">
           <h2 class="lined-heading"><span>{{ __('Representative Hotels') }}</span></h2>
-        </div>
-        <!-- 6 hotels top -->
+        </div> 
+        <!-- 6 hotel top -->
         @if($topHotels->count() != null)
         @foreach($topHotels as $hotel)
           <div class="col-sm-4 mt50">
             <div class="room-thumb">
-              <img src="{{ ($hotel->images->count() != 0) ? $hotel->images->random()->path : asset(config('image.default_thumbnail')) }}" alt="hotel" class="img-responsive"/>
+              <img src="{{ ($hotel->images->count() != 0) ? $hotel->images->random()->path : asset(config('image.default_thumbnail')) }}" alt="hotel" class="img-presentive"/>
               <div class="mask">
                 <div class="main cls-with-max">
                   <div class="pull-left">
@@ -216,23 +219,35 @@
                     <span>{{ __('Introduce') }}</span>
                     {{ contentLimit(strip_tags($hotel->introduce)) }}
                   </p>
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <ul class="list-unstyled">
-                      @php($count = 0)
-                        @foreach($hotel->hotelServices as $hotelService)
-                          @if($count == (config('hotel.limit-services')))
-                                </ul>
-                              </div>
+                  <div class="row">                        
+                      @foreach($hotel->hotelServices as $key => $hotelService)
+                        @if ($key < config('showitem.service_per_item'))
+                          @if ($key == 0 || $key == (config('showitem.service_per_item') / 2))
                             <div class="col-xs-6">
                               <ul class="list-unstyled">
                           @endif
-                          <li><i class="fa fa-check-circle"></i>{{ $hotelService->service->name }}</li>
-                          @php($count++)
-                        @endforeach
-                      </ul>
+                          @if (
+                            $key == (config('showitem.service_per_item') -1)
+                              &&
+                            $hotel->hotelServices->count() > config('showitem.service_per_item')
+                          )
+                            <li><i class="fa fa-check-circle"></i> .......</li>
+                          @else
+                            <li><i class="fa fa-check-circle"></i> {{ $hotelService->service->name }}</li>
+                          @endif
+                          @if (
+                            $key == (config('showitem.service_per_item') / 2 -1)
+                            ||
+                            $key == (config('showitem.service_per_item') - 1)
+                            ||
+                            $key == ($hotel->hotelServices->count() - 1)
+                          )
+                              </ul>
+                            </div>
+                          @endif
+                        @endif
+                      @endforeach
                     </div>
-                  </div>
                   <a href="{{ route('hotels.show', $hotel->slug) }}" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
                 </div>
               </div>
@@ -257,29 +272,29 @@
       <div class="col-sm-3 bounceIn appear" data-start="0">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-glass fa-lg"></i></div>
-        <h3>{{ __('Beverages included') }}</h3>
-        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum.') }}</p>
+        <h3>Beverages included</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
         </div>
         </div>
       <div class="col-sm-3 bounceIn appear" data-start="400">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-credit-card fa-lg"></i></div>
-        <h3>{{ __('Stay First, Pay After!') }}</h3>
-        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum.') }}</p>
+        <h3>Stay First, Pay After!</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
         </div>
         </div>
       <div class="col-sm-3 bounceIn appear" data-start="800">
       <div class="box-icon">      
         <div class="circle"><i class="fa fa-cutlery fa-lg"></i></div>
-        <h3>{{ __('24 Hour Restaurant') }}</h3>
-        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum.') }}</p>
+        <h3>24 Hour Restaurant</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
         </div>
         </div>
       <div class="col-sm-3 bounceIn appear" data-start="1200">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-tint fa-lg"></i></div>
-        <h3>{{ __('Spa Included!') }}</h3>
-        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum.') }}</p>
+        <h3>Spa Included!</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
         </div>
     </div>
     </div>
@@ -294,8 +309,8 @@
     <div class="color-overlay fadeIn appear" data-start="600">
       <div class="container">
         <div class="content">
-          <h3 class="text-center"><i class="fa fa fa-star-o"></i> {{ __('Snolax N., Inc.') }}</h3>
-          <p class="text-center">{{ __('A product of the Snorlax N. company') }}
+          <h3 class="text-center"><i class="fa fa fa-star-o"></i> Snolax N., Inc.</h3>
+          <p class="text-center">A product of the Snorlax N. company
       <br></p>
         </div>
       </div>
