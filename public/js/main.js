@@ -135,7 +135,9 @@ $(document).ready(function(){
      * Hide hinted place when blur place_slug field
      */
     $('#hotelSourceArea').blur(function(event) {
-        $(this).val($('.widgetAcResult div li.place-selected')[0].innerHTML);
+        if ($('.widgetAcResult div li.place-selected')[0]) {
+            $(this).val($('.widgetAcResult div li.place-selected')[0].innerHTML);
+        }
         $('.widgetAcResult').fadeOut();
     });
 
