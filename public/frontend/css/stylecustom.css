@@ -1,7 +1,7 @@
 .second-place{
     width: 100%;
     background: lightgray;
-    height: 200px;
+    height: 180px;
     box-sizing: border-box;
     border-left: solid 1px lightgray; 
     border-right: solid 1px lightgray; 
@@ -446,7 +446,7 @@
 }
 .cls-transbox {
     max-width: 100%;
-    background-color: black;
+    background: rgba(16, 17, 16, 0.43); 
     margin-top: 80px;
     opacity: 0.9;
     padding: 0px 0px 5px 0px;
@@ -631,4 +631,7 @@ input[type='range']::-webkit-slider-thumb {
 }
 .update-rating {
     margin-top: 11px;
+}
+footer {
+    margin-top: 50px;
 }

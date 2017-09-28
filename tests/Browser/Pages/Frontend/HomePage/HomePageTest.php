@@ -169,7 +169,7 @@ class HomePageTest extends DuskTestCase
                     ->assertTitle('Home page')
                     ->assertSee('Representative Hotels')
                     ->clickLink('News')
-                    ->assertTitle('LIST NEWS')
+                    ->assertTitle('News')
                     ->assertSee('TOP NEWS')
                     ->assertPathIs('/news');
         }); 

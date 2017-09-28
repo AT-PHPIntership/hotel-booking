@@ -25,7 +25,7 @@ class NewsPageTest extends DuskTestCase
                     ->clickLink('News')
                     ->assertSee('TOP NEWS')
                     ->assertPathIs('/news')
-                    ->assertTitle('LIST NEWS');
+                    ->assertTitle('News');
         });
     }
 
@@ -39,7 +39,7 @@ class NewsPageTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/news')
                     ->assertSee('TOP NEWS')
-                    ->assertTitle('LIST NEWS');
+                    ->assertTitle('News');
             $elementNews = $browser->elements('.main .content.mt-20 .row .col-md-6');
             $elementCategory = $browser->elements('.main .rooms.mt50.border-left');
             $this->assertCount(1, $elementNews);
@@ -59,12 +59,12 @@ class NewsPageTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/news')
                     ->assertSee('TOP NEWS')
-                    ->assertTitle('LIST NEWS');
+                    ->assertTitle('News');
             $elementNews = $browser->elements('.main .content.mt-20 .row .col-md-6');
             $elementCategory = $browser->elements('.main .rooms.mt50.border-left');
             $this->assertCount(2, $elementNews);
             $this->assertCount(3, $elementCategory);
-            $elementNewsInTopNews = $browser->elements('.main .content.mt-20 .row .col-md-6 .mt-20');
+            $elementNewsInTopNews = $browser->elements('.main .content.mt-20 .row .col-md-6 .col-md-5');
             $elementNewsInCategory = $browser->elements('.main .rooms.mt50.border-left:nth-child(2) .container .col-md-3');
             $this->assertCount(4, $elementNewsInTopNews);
             $this->assertCount(4, $elementNewsInCategory);
@@ -83,12 +83,12 @@ class NewsPageTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/news')
                     ->assertSee('TOP NEWS')
-                    ->assertTitle('LIST NEWS');
+                    ->assertTitle('News');
             $elementNews = $browser->elements('.main .content.mt-20 .row .col-md-6');
             $elementCategory = $browser->elements('.main .rooms.mt50.border-left');
             $this->assertCount(2, $elementNews);
             $this->assertCount(3, $elementCategory);
-            $elementNewsInTopNews = $browser->elements('.main .content.mt-20 .row .col-md-6 .mt-20');
+            $elementNewsInTopNews = $browser->elements('.main .content.mt-20 .row .col-md-6 .col-md-5');
             $elementNewsInCategory = $browser->elements('.main .rooms.mt50.border-left:nth-child(2) .container .col-md-3');
             $this->assertCount(4, $elementNewsInTopNews);
             $this->assertCount(4, $elementNewsInCategory);
@@ -110,12 +110,12 @@ class NewsPageTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/news?page=2')
                     ->assertSee('TOP NEWS')
-                    ->assertTitle('LIST NEWS');
+                    ->assertTitle('News');
             $elementNews = $browser->elements('.main .content.mt-20 .row .col-md-6');
             $elementCategory = $browser->elements('.main .rooms.mt50.border-left');
             $this->assertCount(2, $elementNews);
             $this->assertCount(2, $elementCategory);
-            $elementNewsInTopNews = $browser->elements('.main .content.mt-20 .row .col-md-6 .mt-20');
+            $elementNewsInTopNews = $browser->elements('.main .content.mt-20 .row .col-md-6 .col-md-5');
             $elementNewsInCategory = $browser->elements('.main .rooms.mt50.border-left:nth-child(2) .container .col-md-3');
             $this->assertCount(4, $elementNewsInTopNews);
             $this->assertCount(4, $elementNewsInCategory);

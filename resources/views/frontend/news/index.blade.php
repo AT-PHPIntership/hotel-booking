@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/searchHotel.css')}}">
 @endsection
-@section('title', __('LIST NEWS'))
+@section('title', __('News'))
 @section('content')
   <main class="main">
  <!-- Main content -->
@@ -14,14 +14,14 @@
           <a href="{{ route('frontend.news.show', $news[0]->slug) }}">
             <div class="image-news-show">
               <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- slides images room-->
+                <!-- slides images news-->
                 <div class="carousel-inner">
                 {{-- show default image when has no image --}}
                   @if (!isset($news[0]->images[0]))
                       <div class="item active">
                         <img src="{{ asset(config('image.default_thumbnail')) }}">
                         <div class="carousel-caption">
-                          <h3>{{ __("Room's images") }}</h3>
+                          <h3>{{ __("News's images") }}</h3>
                         </div>
                       </div>
                   @else
@@ -51,7 +51,7 @@
       @endif
       {{-- content right --}}
       <div class="col-md-6 border-left border-top">
-        <h2 class="text-danger text-center mt-0">{{ __('TOP NEWS') }}</h2>
+        <h2 class="text-danger text-center mt-20">{{ __('TOP NEWS') }}</h2>
         @foreach ($news as $key => $item)
           @if ($key != 0)
             <div class="mt-20">
