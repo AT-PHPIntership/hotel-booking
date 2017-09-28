@@ -33,18 +33,30 @@
               {{-- name --}}
               <div class="col-md-12 nopadding">
                 <label for="full_name">{{ __("Contact's name") }}<i class="text-danger"> *</i></label>
-                <input type="text" name="full_name" class="form-control{{ $errors->has('name') ? ' has-error' : '' }}" placeholder="{{ __('Ex: Nguyen Van A') }}" value="{{ (Auth::user()) ? Auth::user()->full_name : ''}}">
+                @if(Auth::user())
+                  <input type="text" name="full_name" class="form-control{{ $errors->has('name') ? ' has-error' : '' }}" value="{{ Auth::user()->full_name }}" readonly>
+                @else
+                  <input type="text" name="full_name" class="form-control{{ $errors->has('name') ? ' has-error' : '' }}" placeholder="{{ __('Ex: Nguyen Van A') }}">
+                @endif
                 <span class="text-danger">{{ ($errors->first('full_name')) ? $errors->first('full_name') : '' }}</span>
               </div>
               {{-- phone --}}
               <div class="col-sm-4 nopadding mt20">
                 <label for="phone">{{ __('Phone number') }}<i class="text-danger"> *</i></label>
-                <input type="numberic" name="phone" class="form-control" placeholder="{{ __('Ex: +84 978 965 426') }}" value="{{ (Auth::user()) ? Auth::user()->phone : ''}}">
+                @if(Auth::user())
+                  <input type="numberic" name="phone" class="form-control" " value="{{ Auth::user()->phone }}" readonly>
+                @else
+                  <input type="numberic" name="phone" class="form-control" placeholder="{{ __('Ex: +84 978 965 426') }}">
+                @endif
                 <span class="text-danger">{{ ($errors->first('phone')) ? $errors->first('phone') : '' }}</span>
               </div>
               <div class="col-sm-7 pull-right nopadding mt20">
                 <label for="email">{{ __("Contact's email address") }}<i class="text-danger">*</i></label>
-                <input type="email" name="email" class="form-control" placeholder="{{ __('Ex: nnnam@gmail.com') }}" value="{{ (Auth::user()) ? Auth::user()->email : '' }}">
+                @if(Auth::user())
+                  <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
+                @else
+                  <input type="email" name="email" class="form-control" placeholder="{{ __('Ex: nnnam@gmail.com') }}"> 
+                @endif
                 <span class="text-danger">{{ ($errors->first('email')) ? $errors->first('email') : '' }}</span>
               </div>
               {{-- checkin --}}
@@ -59,7 +71,7 @@
                 <label for="duration">{{ __('No. of night') }}<i class="text-danger">*</i></label>
                 <select name = "duration" class="form-control">
                   @for($i = 1; $i <= App\Model\Reservation::MAX_DURATIONS; $i++)
-                      <option value="{{ $i }}" {{ ($i == $bookingInfomation['duration']) ? 'selected' : '' }}>{{ __(':duration nights', ['duration' => $i]) }}</option>
+                      <option value="{{ $i }}" {{ ($i == $bookingInfomation['duration']) ? 'selected' : '' }}>{{ $i == 1 ? __(':duration night', ['duration' => $i]) : __(':duration nights', ['duration' => $i]) }}</option>
                   @endfor
                 </select>
                 <small class="text-danger"></small>
@@ -68,7 +80,7 @@
                 <label for="quantity">{{ __('No. of rooms') }}</label>
                 <select name = "quantity" class="form-control">
                   @for($i = 1; $i <= $emptyRooms; $i++)
-                      <option value="{{ $i }}">{{ __(':quantity rooms', ['quantity' => $i]) }}</option>
+                      <option value="{{ $i }}">{{ $i == 1 ? __(':quantity room', ['quantity' => $i]) : __(':quantity rooms', ['quantity' => $i]) }}</option>
                   @endfor
                 </select>
               </div>

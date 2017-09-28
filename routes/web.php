@@ -26,7 +26,7 @@ Route::group(['middleware' => 'frontend.language', 'namespace'=>'Frontend'],
                 Route::get('/profile/{profile}/reservation/{reservation}/show', 'ReservationController@show')->name('user.showBooking');
             });
         });
- 
+        
         Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
         Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
         Route::resource('/room/{room}/reservations', 'ReservationController', ['only' => ['create', 'store']]);
