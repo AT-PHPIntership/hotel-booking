@@ -62,15 +62,17 @@
                   data-speed="1000" 
                   data-start="1900" 
                   data-easing="easeOutBack">
-              <a href="/detailHotel" class="button btn btn-purple btn-lg">{{ __('See More') }}</a> 
+              <a href="{{ route('hotels.show', $advertiseHotel->slug) }}" class="button btn btn-purple btn-lg">{{ __('See More') }}</a> 
             </div>
           </li>
           <!-- Slide 2 -->
           <li data-transition="boxfade" data-slotamount="7" data-masterspeed="1000" > 
             <!-- Main Image -->
-            @if($advertiseHotel->rooms->random()->images->count() != null) 
-            <img src="{{ $advertiseHotel->rooms->random()->images->random()->path }}" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
-            @endif 
+            @if($advertiseHotel->rooms->count() != null)
+              @if($advertiseHotel->rooms->random()->images->count() != null) 
+              <img src="{{ $advertiseHotel->rooms->random()->images->random()->path }}" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
+              @endif 
+            @endif
             <!-- Layers -->           
             <!-- Layer 1 -->
           <div class="caption sft revolution-starhotel bigtext"  
@@ -101,7 +103,7 @@
                 data-speed="1000" 
                 data-start="1900" 
                 data-easing="easeOutBack">
-              <a href="room-detail.html" class="button btn btn-purple btn-lg">{{ __('Booking room') }}</a> 
+              <a href="{{ route('hotels.show', $advertiseHotel->slug) }}" class="button btn btn-purple btn-lg">{{ __('Booking room') }}</a> 
             </div>
           </li>
         @else
@@ -197,7 +199,7 @@
         <div class="col-sm-12">
           <h2 class="lined-heading"><span>{{ __('Representative Hotels') }}</span></h2>
         </div> 
-        <!-- 6 hotel top -->
+        <!-- 6 hotels top -->
         @if($topHotels->count() != null)
         @foreach($topHotels as $hotel)
           <div class="col-sm-4 mt50">
@@ -272,29 +274,29 @@
       <div class="col-sm-3 bounceIn appear" data-start="0">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-glass fa-lg"></i></div>
-        <h3>Beverages included</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
+        <h3>{{ __('Safe and Reputation') }}</h3>
+        <p>{{ __('As a large reservation system, we always bring you the highest level of security and reliability') }}</p>
         </div>
         </div>
       <div class="col-sm-3 bounceIn appear" data-start="400">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-credit-card fa-lg"></i></div>
-        <h3>Stay First, Pay After!</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
+        <h3>{{ __('Book First, Pay After') }}!</h3>
+        <p>{{ __('With the top safety criteria, we offer you a variety of safe, fast and convenient payment options') }}</p>
         </div>
         </div>
       <div class="col-sm-3 bounceIn appear" data-start="800">
       <div class="box-icon">      
         <div class="circle"><i class="fa fa-cutlery fa-lg"></i></div>
-        <h3>24 Hour Restaurant</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
+        <h3>{{ __('Fast and Convenient') }}</h3>
+        <p>{{ __('We always try to improve the booking system to bring you the fastest and most convenient') }}</p>
         </div>
         </div>
       <div class="col-sm-3 bounceIn appear" data-start="1200">
       <div class="box-icon">
         <div class="circle"><i class="fa fa-tint fa-lg"></i></div>
-        <h3>Spa Included!</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
+        <h3>{{ __('Diversity') }}</h3>
+        <p>{{ __('Variety of rooms, hotels, venues bring you many choices, the best in price and pragmatic') }}</p>
         </div>
     </div>
     </div>
@@ -309,8 +311,8 @@
     <div class="color-overlay fadeIn appear" data-start="600">
       <div class="container">
         <div class="content">
-          <h3 class="text-center"><i class="fa fa fa-star-o"></i> Snolax N., Inc.</h3>
-          <p class="text-center">A product of the Snorlax N. company
+          <h3 class="text-center"><i class="fa fa fa-star-o"></i>{{ __('Hotel team .Inc') }}</h3>
+          <p class="text-center">{{ __('A product of the AsianTech') }}
       <br></p>
         </div>
       </div>
