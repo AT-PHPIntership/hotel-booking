@@ -10,11 +10,24 @@
         <div class="th-text pull-right">
           <div class="th-item">
             <div class="btn-group">
-              <button class="btn btn-default btn-xs dropdown-toggle js-activated" type="button" data-toggle="dropdown"> {{ __('ENGLISH') }} <span class="caret"></span> </button>
+              <button class="btn btn-default btn-xs dropdown-toggle js-activated"
+                type="button" data-toggle="dropdown">
+                {{ Cookie::get('frontend_locale') == 'vi' ? __('Tiếng Việt') : __('English') }}
+                <span class="caret"></span>
+              </button> 
               <ul class="dropdown-menu">
-                <li> <a href="#">{{ __('ENGLISH') }}</a> </li>
-                <li> <a href="#">{{ __('VIETNAMESE') }}</a> </li>
+                <li>
+                  <a href="{{ route('frontend.language', ['lang' => 'en']) }}">
+                    {{ __('English') }}
+                  </a>
+                </li>
+                <li class="active">
+                  <a href="{{ route('frontend.language', ['lang' => 'vi']) }}">
+                    {{ __('Tiếng Việt') }}
+                  </a>
+                </li>
               </ul>
+
             </div>
           </div>
           <div class="th-item">

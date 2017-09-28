@@ -3,9 +3,27 @@
     <span class="logo-lg"><b>{{__('Admin ')}}</b> {{__('Management')}}</span>
   </a>
   <nav class="navbar navbar-static-top">
-    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-      <span class="sr-only"></span>
-    </a>
+    <div class="btn-group cls-admin-language pull-right mr-10">
+      <button class="btn btn-default btn-xs dropdown-toggle js-activated"
+        type="button" data-toggle="dropdown">
+        @php($locale = Cookie::get('admin_locale'))
+        {{ $locale == 'vi' ? __('Tiếng Việt') : __('English') }}
+        <span class="caret"></span>
+      </button> 
+      <ul class="dropdown-menu">
+        <li class="{{ $locale == 'en' ? 'active' : '' }}">
+          <a href="{{ route('admin.language', ['lang' => 'en']) }}">
+            {{ __('English') }}
+          </a>
+        </li>
+        <li class="{{ $locale == 'vi' ? 'active' : '' }}">
+          <a href="{{ route('admin.language', ['lang' => 'vi']) }}">
+            {{ __('Tiếng Việt') }}
+          </a>
+        </li>
+      </ul>
+
+    </div>
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
@@ -35,9 +53,6 @@
               </div>
             </li>
           </ul>
-        </li>
-        <li>
-          <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
         </li>
       </ul>
     </div>
