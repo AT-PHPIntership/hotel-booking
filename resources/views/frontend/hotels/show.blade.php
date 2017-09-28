@@ -2,6 +2,7 @@
 @section('customcss')
   <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 @endsection
+@section('title', __(':hotel Hotel', ['hotel' => $hotel->name]))
 @push('css')
   <link rel="stylesheet" href="{{ asset('frontend/css/flexslider.css') }}" type="text/css" media="screen" />
 @endpush

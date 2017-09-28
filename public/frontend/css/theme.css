@@ -1869,6 +1869,7 @@ border: 1px solid;
 	border-bottom: 1px solid;
 	width: 100%;
 	position: relative;
+	margin-bottom: -50px;
 }
 .parallax-effect h1, .parallax-effect h2, .parallax-effect h3, .parallax-effect h4, .parallax-effect h5, .parallax-effect h6 {
 	color: #fff;

@@ -29,12 +29,13 @@ Route::group(['middleware' => 'frontend.language', 'namespace'=>'Frontend'],
                 return view('frontend.notice');
             })->name('notice');
         });
+        
         Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
         Route::resource('/hotels', 'HotelController', ['only' => ['index']]);
         Route::resource('/room/{room}/reservations', 'ReservationController', ['only' => ['create', 'store']]);
         Route::get('places/{slug}', 'PlaceController@show')->name('places.show');
         Route::resource('/news', 'NewsController', ['as' => 'frontend']);
-        Route::get('/places/hintPlaces', 'PlaceController@hintPlaces')->name('places.hintPlaces');
+        Route::get('/hint/places', 'PlaceController@hintPlaces')->name('places.hintPlaces');
         Route::get('/categories/{slug}/news', 'CategoryController@show')->name('categories.news');
 });
 

@@ -2,7 +2,7 @@
 @section('customcss')
 <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 @endsection
-@section('title', __('DETAIL NEWS'))
+@section('title', $news->title)
 @section('content')
 
 <!-- Introduce Slider -->

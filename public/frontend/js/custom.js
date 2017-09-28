@@ -341,10 +341,6 @@ jQuery(document).ready(function () {
                 }
             }
         });
-
-        jQuery('#checkin, #checkout').on('focus', function () {
-            jQuery(this).blur();
-        }); // Remove virtual keyboard on touch devices
     }
 
     //Popover

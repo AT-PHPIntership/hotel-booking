@@ -46,7 +46,6 @@
               <div class="mask">
                 <div class="main cls-with-max">
                   <div class="pull-left">
-
                     <a href="{{ route('hotels.show', $hotel->slug) }}"><h5>{{ $hotel->name }}</h5></a>
                   </div>
                   <div class="cls-mr-20">
@@ -60,23 +59,35 @@
                     <span>{{ __('Introduce') }}</span>
                     {{ contentLimit(strip_tags($hotel->introduce)) }}
                   </p>
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <ul class="list-unstyled">
-                      @php($count = 0)
-                        @foreach($hotel->hotelServices as $hotelService)
-                          @if($count == 3)
-                                </ul>
-                              </div>
+                  <div class="row">                        
+                      @foreach($hotel->hotelServices as $key => $hotelService)
+                        @if ($key < config('showitem.service_per_item'))
+                          @if ($key == 0 || $key == (config('showitem.service_per_item') / 2))
                             <div class="col-xs-6">
                               <ul class="list-unstyled">
                           @endif
-                          <li><i class="fa fa-check-circle"></i>{{ $hotelService->service->name }}</li>
-                          @php($count++)
-                        @endforeach
-                      </ul>
+                          @if (
+                            $key == (config('showitem.service_per_item') -1)
+                              &&
+                            $hotel->hotelServices->count() > config('showitem.service_per_item')
+                          )
+                            <li><i class="fa fa-check-circle"></i> .......</li>
+                          @else
+                            <li><i class="fa fa-check-circle"></i> {{ $hotelService->service->name }}</li>
+                          @endif
+                          @if (
+                            $key == (config('showitem.service_per_item') / 2 -1)
+                            ||
+                            $key == (config('showitem.service_per_item') - 1)
+                            ||
+                            $key == ($hotel->hotelServices->count() - 1)
+                          )
+                              </ul>
+                            </div>
+                          @endif
+                        @endif
+                      @endforeach
                     </div>
-                  </div>
                   <a href="{{ route('hotels.show', $hotel->slug) }}" class="btn btn-primary btn-block">{{ __('Read More') }}</a>
                 </div>
               </div>
