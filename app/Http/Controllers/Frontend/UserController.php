@@ -39,7 +39,7 @@ class UserController extends Controller
         ];
         $comments = RatingComment::select($colComment)
             ->with(['hotel' => function ($query) {
-                $query->select('id', 'name');
+                $query->select('id', 'name', 'slug');
             }])
             ->where('user_id', $id)
             ->orderby('id', 'DESC')

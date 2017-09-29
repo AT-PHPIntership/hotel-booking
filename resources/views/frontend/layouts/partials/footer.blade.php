@@ -22,11 +22,11 @@
       <div class="col-md-4 col-sm-4">
         <h4>{{ __('Address') }}</h4>
         <address>
-        <strong>{{ __('Asian Tech Co., Ltd.') }} </strong><br>
+        <strong>{{ __('Star Hotel Co., Ltd.') }} </strong><br>
         {{ __('06 Block 03 St, Da Nang') }}<br>
         <a href="#">P: (123) 456-7890</a><br>
-        <a href="#">E: hotelteam@asiantech.vn</a><br>
-        <a href="#">W: www.asiantech.vn </a><br>
+        <a href="#">E: hotelteam@starhotel.vn</a><br>
+        <a href="#">W: www.starhotel.vn </a><br>
         </address>
       </div>
     </div>
@@ -34,7 +34,7 @@
   <div class="footer-bottom">
     <div class="container">
       <div class="row">
-        <div class="col-xs-6"> &copy; {{ __('Copyright Hotel Team Asian Tech Co., Ltd. 2015') }} </div>
+        <div class="col-xs-6"> &copy; {{ __('Copyright Star Hotel Co., Ltd. 2015') }} </div>
         <div class="col-xs-6 text-right">
           <ul>
             <li><a href="{{ route('sendfeedback.create') }}" class="cls-feedback">{{__('Feedback')}}</a>
