@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\User;
 use App\Http\Requests\Backend\UpdateUserRequest;
 use App\Http\Requests\Backend\CreateUserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -105,12 +106,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        if ($user->delete()) {
-            flash(__('Deletion successful!'))->success();
+        if (Auth::user()->id == $id) {
+            flash(__('User is logging! Can\'t delete this user!'))->warning();
         } else {
-            flash(__('Deletion failed!'))->error();
+            $user = User::findOrFail($id);
+            if ($user->delete()) {
+                flash(__('Deletion successful!'))->success();
+            } else {
+                flash(__('Deletion failed!'))->error();
+            }
         }
+        
         return redirect()->route('user.index');
     }
 

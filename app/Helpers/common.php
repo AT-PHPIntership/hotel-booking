@@ -1,5 +1,7 @@
 <?php
 
+use App\Model\Reservation;
+use App\Model\Room;
 use Carbon\Carbon;
 
 if (!function_exists('isActiveRoute')) {
@@ -113,5 +115,30 @@ if (!function_exists('formatDateTimeToDate')) {
     function formatDateTimeToDate($strDateTime)
     {
         return Carbon::parse($strDateTime)->format(config('hotel.date_format'));
+    }
+}
+
+if (!function_exists('totalEmptyRoom')) {
+
+    /**
+     * Save creating reservation
+     *
+     * @param int      $roomId  id       of room
+     * @param datetime $checkin datetime checkin
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function totalEmptyRoom($roomId, $checkin)
+    {
+        $room = Room::findOrFail($roomId);
+        $roomBusy = $room->reservations()
+            ->where([
+                ['status', Reservation::STATUS_ACCEPTED],
+                ['checkin_date', '<=', $checkin],
+                ['checkout_date', '>=', $checkin]
+                ])
+            ->get();
+            $totalBusy = $roomBusy->sum('quantity');
+        return $room->total - $totalBusy;
     }
 }
