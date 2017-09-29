@@ -1,4 +1,4 @@
-<div class="modal" id="confirm">
+<div class="modal cls-modal-booking" id="confirm">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

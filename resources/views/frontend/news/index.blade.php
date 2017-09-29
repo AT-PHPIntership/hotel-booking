@@ -8,7 +8,7 @@
   <main class="main">
  <!-- Main content -->
   <section class="content mt-20">
-    <div class="row">
+    <div class="row cls-mb-5">
       @if (isset($news[0]))
         <div class="col-md-6">
           <a href="{{ route('frontend.news.show', $news[0]->slug) }}">
@@ -70,7 +70,6 @@
       </div>
     </div>
      <!-- /.row -->
-    <h2 class="lined-heading"></h2>
   </section>
 
   @foreach ($categories as $category)
@@ -82,7 +81,7 @@
           </div> 
         </div>
         @foreach ($category->news as $key => $itemNews)
-          <div class="col-md-3">
+          <div class="col-md-3 cls-mb-20">
             <a href="{{ route('frontend.news.show', $itemNews->slug) }}">
               <div class="second-place news">
                 <img src="{{ isset($itemNews->images[0]) ? asset($itemNews->images[0]->path) : asset(config('image.no_image')) }}" alt="topPlace" class="img-news news"/>  

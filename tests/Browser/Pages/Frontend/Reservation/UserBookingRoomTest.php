@@ -234,7 +234,10 @@ class UserBookingRoomTest extends DuskTestCase
                     ->type('checkin', '1/10/2017')
                     ->type('request', 'I would like to have a room overlooking the beach')
                     ->press('SUBMIT')
-                    ->assertSee('Booking success! Thank you!');
+                    ->waitFor('#booking-modal', 10)
+                    ->whenAvailable('#booking-modal', function($modal) {
+                        $modal->assertSee('You have successfully booked!');
+                    });
             $guest = Guest::where('email', 'duocnguyen@gmail.com')->first();
             $this->assertDatabaseHas('guests', [
                 'full_name' => $guest->full_name,
@@ -289,7 +292,10 @@ class UserBookingRoomTest extends DuskTestCase
                     ->type('checkin', '1/10/2017')
                     ->type('request', 'I would like to have a room overlooking the beach')
                     ->press('SUBMIT')
-                    ->assertSee('Booking success! Thank you!');
+                    ->waitFor('#booking-modal', 10)
+                    ->whenAvailable('#booking-modal', function($modal) {
+                        $modal->assertSee('You have successfully booked!');
+                    });
             $this->assertDatabaseHas('reservations', [
                 'room_id' => $room->id,
                 'target' => 'user',

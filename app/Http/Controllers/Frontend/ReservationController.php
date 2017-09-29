@@ -76,9 +76,7 @@ class ReservationController extends Controller
                 $reservation->target_id = $guest->id;
                 $reservation->save();
             }
-
-            flash(__('Booking success! Thank you!'))->success();
-            return redirect()->back();
+            return redirect()->back()->with('msg', __('Booking success! Thank you!'));
         } catch (\Exception $e) {
             flash(__('Booking failure! Sorry'))->error();
             return redirect()->back()->withInput();

@@ -269,7 +269,8 @@ class FeedbackTest extends DuskTestCase
     public function testButtonBack()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/sendfeedback/create')
+            $browser->visit('/')
+                    ->clickLink('Feedback')
                     ->assertSee('Feedback')
                     ->clickLink('Back')
                     ->assertSee('Outstanding Places')

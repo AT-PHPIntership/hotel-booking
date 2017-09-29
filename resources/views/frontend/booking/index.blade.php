@@ -5,10 +5,16 @@
 @endsection
 @section('customjs')
   <script type="text/javascript" src="{{ asset('frontend/js/reservation.js') }}"></script> 
+  <script type="text/javascript" src="{{ asset('frontend/js/app.trans.js') }}"></script> 
+  <script type="text/javascript" src="{{ asset('frontend/js/app.lang_vi.js') }}"></script> 
 @endsection
-@section('title', __('Booking rooms'))
+@section('title', __('Booking Rooms - :hotelName', ['hotelName' => $room->hotel->name]))
 @section('content')
   <main class="main">
+  @if (session('msg'))
+    <div id="msg-booking" hidden="">{{ session('msg') }}</div>
+    @include('frontend.booking.modal')
+  @endif
     <div class="container">
       <div class="row">
         <div class="col-md-1"></div>

@@ -520,5 +520,7 @@ jQuery(document).ready(function () {
                     $('#avg-rating').val(avg.toFixed(1));             
             });   
         });
-    })
+    });
+    $('.ui-datepicker').hide();
+    $('#ui-datepicker-div').hide();
 });

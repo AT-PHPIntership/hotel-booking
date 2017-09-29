@@ -72,18 +72,18 @@
                       <td align="center">
                         <div class="text-center">
                           <a href="{{ route('reservation.show', $reservation->id) }}"
-                            data-original-title="Detail" data-toggle="tooltip"
+                            data-original-title="{{ __('Detail') }}" data-toggle="tooltip"
                             class="btn fa fa-search-plus pull-left news-btn btn-custom-option">
                           </a>
                           <a href="{{ route('reservation.edit', $reservation->id) }}"
                             class="btn fa fa-pencil-square-o news-btn center-block btn-custom-option" 
-                            data-original-title="Edit" data-toggle="tooltip" >
+                            data-original-title="{{ __('Edit') }}" data-toggle="tooltip" >
                           </a>
                           <form action="{{ route('reservation.destroy', $reservation->id) }}" method="POST" class="inline">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
                             <button type="submit" class="btn-custom-option news-btn fa fa-trash-o btn-delete-item pull-right"  
-                              data-original-title="Delete" data-toggle="tooltip"
+                              data-original-title="{{ __('Delete') }}" data-toggle="tooltip"
                               data-title="{{ __('Confirm deletion!') }}"
                               data-confirm="{{ __('Are you sure you want to delete?') }}">
                             </button>

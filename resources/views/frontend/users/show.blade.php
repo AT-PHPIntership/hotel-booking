@@ -133,7 +133,7 @@
                     <td>{{$comment->total_rating}}</td>
                     <td>{{$comment->created_at}}</td>
                     <td class="text-center">
-                      <a href="" class="fa fa-trash-o"></a>
+                      <a href="{{ route('hotels.show', $comment->hotel->slug)}}" class="fa fa-search"></a>
                     </td>
                   </tr>
                 @endforeach
