@@ -635,3 +635,22 @@ input[type='range']::-webkit-slider-thumb {
 footer {
     margin-top: 50px;
 }
+.cls-mt-100 {
+    margin-top: 100px;
+}
+.cls-mb-5 {
+    margin-bottom: 5px;
+}
+.cls-mb-20 {
+    margin-bottom: 20px;
+}
+.cls-modal-booking {
+    margin: 20vh auto 0px auto;
+}
+.cls-modal-booking-text {
+    font-size: 21px;
+    margin-top: 14%;
+}
+.cls-modal-booking-footer a {
+    margin-top: 5%;
+}
