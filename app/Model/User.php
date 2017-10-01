@@ -70,10 +70,10 @@ class User extends Model implements Authenticatable
     const STATUS_DISABLED = 0;
 
     /**
-     * Value of timeout & key cache bookingInfomation
+     * Value of timeout(minute) & key cookie bookingInfomation
      */
-    const TIMEOUT_CACHE = 60;
-    const KEY_CACHE = 'bookingInfomation';
+    const COOKIE_LIFETIME = 1440;
+    const COOKIE_KEY = 'booking_information';
 
     /**
      * Default value cache bookingInfomation

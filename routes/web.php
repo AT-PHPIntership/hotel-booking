@@ -26,6 +26,9 @@ Route::group(['middleware' => 'frontend.language', 'namespace'=>'Frontend'],
                 Route::resource('/profile', 'UserController');
                 Route::get('/profile/{profile}/reservation/{reservation}/show', 'ReservationController@show')->name('user.showBooking');
             });
+            Route::get('/registerSuccess', function() {
+                return view('frontend.notice');
+            })->name('notice');
         });
         
         Route::get('hotels/{slug}', 'HotelController@show')->name('hotels.show');
@@ -35,11 +38,8 @@ Route::group(['middleware' => 'frontend.language', 'namespace'=>'Frontend'],
         Route::resource('/news', 'NewsController', ['as' => 'frontend']);
         Route::get('/hint/places', 'PlaceController@hintPlaces')->name('places.hintPlaces');
         Route::get('/categories/{slug}/news', 'CategoryController@show')->name('categories.news');
-    }
-);
-Route::get('/registerSuccess', function() {
-    return view('frontend.notice');
-})->name('notice')->middleware('auth');
+});
+
 Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>['adminLogin', 'admin.language']], function() {
     Route::get('/language/{lang}', 'LanguageController@show')
         ->middleware('admin.language')->name('admin.language')

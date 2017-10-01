@@ -113,8 +113,15 @@ class ReservationController extends Controller
      */
     public function update(UpdateReservationRequest $request, $id)
     {
-        $reservationUpdate = Reservation::findOrFail($id)->update($request->all());
-        if ($reservationUpdate) {
+        $reservationUpdate = Reservation::findOrFail($id);
+        $emptyRooms = totalEmptyRoom($reservationUpdate->room_id, $reservationUpdate->checkin_date);
+        if ($emptyRooms < $reservationUpdate->quantity && $request->status == Reservation::STATUS_ACCEPTED) {
+            flash(__('Sorry! The room is not enough!'))->error();
+            return redirect()->back();
+        }
+
+        $result = $reservationUpdate->update($request->all());
+        if ($result) {
             flash(__('Edit Booking Room Success!'))->success();
             return redirect()->route('reservation.index');
         } else {

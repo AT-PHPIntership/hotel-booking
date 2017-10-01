@@ -13,6 +13,7 @@ use App\Model\Guest;
 use App\Model\User;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 
 class UserBookingRoomTest extends DuskTestCase
 {
@@ -25,7 +26,7 @@ class UserBookingRoomTest extends DuskTestCase
      */
     public function testBookingRoom()
     {
-        Cache:flush();
+        Cache::flush();
         $this->makeData(10);
         $hotel = Hotel::find(10);
         $this->makeRoom($hotel->id);
@@ -53,7 +54,7 @@ class UserBookingRoomTest extends DuskTestCase
      */
     public function testValuePageBookingOfGuestAndNoCache()
     {
-        Cache:flush();
+        Cache::flush();
         $this->makeData(10);
         $hotel = Hotel::find(10);
         $this->makeRoom($hotel->id);
@@ -89,7 +90,7 @@ class UserBookingRoomTest extends DuskTestCase
      */
     public function testValuePageBookingOfUserAndNoCache()
     {
-        Cache:flush();
+        Cache::flush();
         $this->makeData(10);
         $hotel = Hotel::find(10);
         $this->makeRoom($hotel->id);
@@ -126,7 +127,7 @@ class UserBookingRoomTest extends DuskTestCase
      */
     public function testValuePageBookingOfGuestAndHasCacheSearch()
     {
-        Cache:flush();
+        Cache::flush();
         $this->makePlaceAndHotel();
         $hotel = Hotel::find(10);
         $this->makeRoom($hotel->id);
@@ -148,7 +149,7 @@ class UserBookingRoomTest extends DuskTestCase
                     ->click('.room-item-booking a')   
                     ->assertSee('Hotel booking')
                     ->assertPathIs('/room/'.$room->id.'/reservations/create');
-            $bookingInfomation = Cache::get(User::KEY_CACHE);
+            $bookingInfomation = $browser->cookie(User::COOKIE_KEY);
             $browser->assertInputValue('full_name', '')
                     ->assertInputValue('phone', '')
                     ->assertInputValue('email', '')
@@ -166,7 +167,7 @@ class UserBookingRoomTest extends DuskTestCase
      */
     public function testValuePageBookingOfUserAndHasCacheSearch()
     {
-        Cache:flush();
+        Cache::flush();
         $this->makePlaceAndHotel();
         $hotel = Hotel::find(10);
         $this->makeRoom($hotel->id);
@@ -189,7 +190,7 @@ class UserBookingRoomTest extends DuskTestCase
                     ->click('.room-item-booking a')   
                     ->assertSee('Hotel booking')
                     ->assertPathIs('/room/'.$room->id.'/reservations/create');
-            $bookingInfomation = Cache::get(User::KEY_CACHE);
+            $bookingInfomation = $browser->cookie(User::COOKIE_KEY);
             $browser->assertInputValue('full_name', $user->full_name)
                     ->assertInputValue('phone', $user->phone)
                     ->assertInputValue('email', $user->email)
@@ -207,7 +208,7 @@ class UserBookingRoomTest extends DuskTestCase
      */
     public function testBookingRoomSuccessOfGuest()
     {
-        Cache:flush();
+        Cache::flush();
         $this->makeData(10);
         $hotel = Hotel::find(10);
         $this->makeRoom($hotel->id);
@@ -264,7 +265,7 @@ class UserBookingRoomTest extends DuskTestCase
      */
     public function testBookingRoomSuccessOfUser()
     {
-        Cache:flush();
+        Cache::flush();
         $this->makeData(10);
         $hotel = Hotel::find(10);
         $this->makeRoom($hotel->id);
@@ -316,7 +317,7 @@ class UserBookingRoomTest extends DuskTestCase
      */
     public function testBookingRoomFail()
     {
-        Cache:flush();
+        Cache::flush();
         $this->makeData(10);
         $hotel = Hotel::find(10);
         $this->makeRoom($hotel->id);
@@ -368,7 +369,7 @@ class UserBookingRoomTest extends DuskTestCase
      */  
     public function testValidateBookingRoom($full_name, $phone, $email, $checkin, $expected)
     {   
-        Cache:flush();
+        Cache::flush();
         $this->makeData(10);
         $hotel = Hotel::find(10);
         $this->makeRoom($hotel->id);
