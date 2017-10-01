@@ -57,10 +57,13 @@
                     @endif
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}">
                   <label class="control-label col-md-3">{{__('Images')}}</label>
                   <div class="col-md-8">
                     <input type="file" name="image" class="control-label">
+		    @if($errors->first('image'))
+                      <span class="help-block">{{$errors->first('image')}}</span>
+                    @endif
                   </div>
                 </div>
               </div>
