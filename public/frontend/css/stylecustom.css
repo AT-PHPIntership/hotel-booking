@@ -262,7 +262,7 @@
     content: "";
     display: block;
 } 
-.cls-introduce-hotel {
+.introduce-hotel {
     padding: 0 15px;
 }
 .cls-list-room {
@@ -670,7 +670,7 @@ footer {
 }
 .cls-title-category {
     margin-left: -15px;
-    padding: 4px;
+    padding: 5px 15px 5px 15px;;
     background: #15a1b1;
     color: white;
 }

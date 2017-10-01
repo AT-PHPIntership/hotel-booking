@@ -415,3 +415,7 @@ select[name = "arange_id"] {
 .cls-admin-language {
     margin-top: 15px;
 }
+.cls-admin-img-profile-user {
+    width: 223px;
+    height: 225px;
+}
