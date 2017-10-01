@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Reservation;
-use App\Model\User;
-use App\Model\Room;
-use App\Model\Guest;
-use Illuminate\Support\Facades\Cache;
-use Carbon\Carbon;
 use App\Http\Requests\Frontend\AddReservationRequest;
+use App\Model\Guest;
+use App\Model\Reservation;
+use App\Model\Room;
+use App\Model\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class ReservationController extends Controller
 {
@@ -23,14 +23,13 @@ class ReservationController extends Controller
      */
     public function create(Room $room)
     {
-        $bookingInfomation = Cache::get(User::KEY_CACHE, User::DEFAULT_VALUE);
-
+        $bookingInfomation = Cookie::get(User::COOKIE_KEY, User::DEFAULT_VALUE);
         $emptyRooms = $room->total;
 
         if (isset($bookingInfomation)) {
             $checkinDate = Carbon::createFromFormat(config('hotel.datetime_format'), $bookingInfomation['checkin'] . config('hotel.checkin_time'))
                     ->toDateTimeString();
-            $emptyRooms = $this->totalEmptyRoom($room->id, $checkinDate);
+            $emptyRooms = totalEmptyRoom($room->id, $checkinDate);
         }
 
         return view('frontend.booking.index', compact('bookingInfomation', 'room', 'emptyRooms'));
@@ -58,7 +57,7 @@ class ReservationController extends Controller
             $reservation->checkin_date = $checkinDate;
             $reservation->checkout_date = $checkoutDate;
             // get quanlity empty room
-            $emptyRooms = $this->totalEmptyRoom($request->room_id, $checkinDate);
+            $emptyRooms = totalEmptyRoom($request->room_id, $checkinDate);
             // return fail when room not enough
             if ($reservation->quantity > $emptyRooms) {
                 flash(__('Sorry! The room is not enough!'))->error();
@@ -81,28 +80,6 @@ class ReservationController extends Controller
             flash(__('Booking failure! Sorry'))->error();
             return redirect()->back()->withInput();
         }
-    }
-
-    /**
-     * Save creating reservation
-     *
-     * @param int      $roomId  id       of room
-     * @param datetime $checkin datetime checkin
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function totalEmptyRoom($roomId, $checkin)
-    {
-        $room = Room::findOrFail($roomId);
-        $roomBusy = $room->reservations()
-            ->where([
-                ['status', Reservation::STATUS_ACCEPTED],
-                ['checkin_date', '<=', $checkin],
-                ['checkout_date', '>=', $checkin]
-                ])
-            ->get();
-            $totalBusy = $roomBusy->sum('quantity');
-        return $room->total - $totalBusy;
     }
 
     /**
