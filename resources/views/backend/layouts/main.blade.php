@@ -40,6 +40,10 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
+    <?php 
+      $userIsLogging = Auth::user();
+      $userImagePath = $userIsLogging->images()->count() == 0 ? asset('images/default/profile.png') : asset($userIsLogging->images->first()->path);
+    ?> 
   <!-- start header -->
   @include('backend.layouts.partials.header')
   <!-- end content -->
