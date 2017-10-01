@@ -27,7 +27,7 @@
       <h2 class="col-md-12 reservation-horizontal clearfix container-search text-center text-success">           
         {{ $news->title }}
       </h2>
-      <div class="col-md-12 reservation-horizontal clearfix container-search mt-20 content text-center">           
+      <div class="col-md-12 reservation-horizontal clearfix container-search mt-20 content">           
         {!! $news->content !!}
       </div>
     </div>
@@ -38,14 +38,14 @@
   @if (isset($category->news[0]))
     <div class="container">
       <div class="row">
-        <div class="col-sm-12">
-          <h2 class="lined-heading"><a href="#"><span  class="relative-header pull-left tranY-50">{{ __('Relative news') }}</span></a></h2>
+        <div class="col-sm-12 nopadding">
+          <h2 class="lined-heading"><a href="#"><span  class="relative-header align-center">{{ __('Relative news') }}</span></a></h2>
         </div> 
       </div>
       @foreach ($category->news as $key => $itemNews)
         <div class="col-md-3">
           <a href="{{ route('frontend.news.show', $itemNews->slug) }}">
-            <div class="second-place news">
+            <div class="second-place news cls-mb-20">
               <img src="{{ isset($itemNews->images[0]) ? asset($itemNews->images[0]) : asset(config('image.no_image')) }}" alt="topPlace" class="img-news news"/>  
               <div class="second-place-bottom news"> 
                 <h5>{{ contentLimit($itemNews->title) }}</h5>
