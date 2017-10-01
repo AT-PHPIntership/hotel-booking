@@ -7,6 +7,7 @@ return [
     'no_image' => 'images/default/no_image.png',
     'bginner_news1' => 'images/default/news1.png',
     'no_user_image' => 'images/default/profile.png',
+    'static_page_img' => 'frontend/images/booking.jpg',
     'places' => [
         'path_upload' => 'images/places/',
     ],
