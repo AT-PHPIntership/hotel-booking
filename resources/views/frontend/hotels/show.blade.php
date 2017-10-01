@@ -89,7 +89,7 @@
         </div>
       </section>
      {{-- Hotel introduce --}}
-      <section class="cls-introduce-hotel">
+      <section class="introduce-hotel">
         <div class="cls-title-introduce-hotel"> <h2 class="introduce-hotel-label">{{ __('Introduce') }}</h2> </div>
         <div class="cls-body-introduce-hotel">{!! $hotel->introduce !!}</div>
       </section>

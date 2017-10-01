@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/stylecustom.css') }}">
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/searchHotel.css')}}">
 @endsection
-@section('title', __('NEWS FOR CATEGORY'))
+@section('title', __('NEWS FOR CATEGORY :name', ['name' => $category->name]))
 @section('content')
   <main class="main">
     <section class="rooms mt50">

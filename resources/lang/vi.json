@@ -441,7 +441,7 @@
     "Hotels management": "Quản lý khách sạn",
     "Belong to TYND Group": " Thuộc về Tập đoàn TYND Group",
     "List Booking Rooms": "Danh sách đơn đặt phòng",
-    "Detail": "Xem chi tiết"
-
-
+    "Detail": "Xem chi tiết",
+    "List news of :name": "Tin tức của danh mục :name",
+    "NEWS FOR CATEGORY :name": "Tin thức của danh mục :name"
 }

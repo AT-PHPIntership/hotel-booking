@@ -24,24 +24,25 @@
       </ul>
 
     </div>
+
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ asset('bower_components/AdminLTE/dist/img/user3-128x128.jpg') }}" class="user-image" alt="User Image">
-            <span class="hidden-xs">{{Auth::user()->full_name}}</span>
+            {{-- $userImagePath from main --}}
+            <img src="{{ $userImagePath }}" class="user-image" alt="User Image">
+            <span class="hidden-xs">{{$userIsLogging->full_name}}</span>
           </a>
           <ul class="dropdown-menu">
             <li class="user-header">
-              <img src="{{ asset('bower_components/AdminLTE/dist/img/user3-128x128.jpg') }}" class="img-circle" alt="User Image">
+              <img src="{{ $userImagePath }}" class="img-circle" alt="User Image">
               <p>
-                {{Auth::user()->full_name}} - {{__('Web Developer')}}
-                <small>{{__('Member since Jun. 2017')}}</small>
+                {{$userIsLogging->full_name}}
               </p>
             </li>
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">{{__('Profile')}}</a>
+                <a href="{{ route('user.show', $userIsLogging->id) }}" class="btn btn-default btn-flat">{{__('Profile')}}</a>
               </div>
               <div class="pull-right">
                 <form action="{{ route('logout') }}" method="POST">
