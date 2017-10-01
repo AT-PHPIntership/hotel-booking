@@ -1,4 +1,4 @@
-<header class="main-header">
+  <header class="main-header">
   <a href="{{ route('admin.index') }}" class="logo">
     <span class="logo-lg"><b>{{__('Admin ')}}</b> {{__('Management')}}</span>
   </a>
@@ -24,20 +24,22 @@
       </ul>
 
     </div>
-
+    <?php 
+      $userIsLogging = Auth::user();
+      $userImagePath = $userIsLogging->images()->count() == 0 ? asset('images/default/profile.png') : asset($userIsLogging->images->first()->path);
+    ?> 
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            {{-- $userImagePath from main --}}
             <img src="{{ $userImagePath }}" class="user-image" alt="User Image">
-            <span class="hidden-xs">{{$userIsLogging->full_name}}</span>
+            <span class="hidden-xs">{{$userIsLogging->username}}</span>
           </a>
           <ul class="dropdown-menu">
             <li class="user-header">
               <img src="{{ $userImagePath }}" class="img-circle" alt="User Image">
               <p>
-                {{$userIsLogging->full_name}}
+                {{$userIsLogging->username}}
               </p>
             </li>
             <li class="user-footer">
