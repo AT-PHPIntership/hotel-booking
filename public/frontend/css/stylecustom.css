@@ -635,3 +635,10 @@ input[type='range']::-webkit-slider-thumb {
 footer {
     margin-top: 50px;
 }
+.content-static-page {
+    font-size: 20px;
+}
+.cls-img-static-page {
+    width: 435px;
+    margin: 0 20px 18px 0px;
+}
