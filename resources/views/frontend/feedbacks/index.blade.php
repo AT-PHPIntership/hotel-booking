@@ -31,13 +31,13 @@
                   </div>
                 @else
                   <div class="form-group {{ $errors->has('full_name') ? ' has-error' : '' }}">
-                    <input name="full_name" type="text" id="full_name"  class="form-control cls-login" placeholder="Please enter your full_name"/>
+                    <input name="full_name" type="text" id="full_name"  class="form-control cls-login" placeholder="{{ __('Please enter your full name') }}"/>
                     @if($errors->first('full_name'))
                       <span class="help-block">{{ $errors->first('full_name') }}</span>
                     @endif
                   </div>
                   <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input name="email" type="text" id="email"  class="form-control cls-login" placeholder="Please enter your email"/>
+                    <input name="email" type="text" id="email"  class="form-control cls-login" placeholder="{{ __('Please enter your email') }}"/>
                     @if($errors->first('email'))
                       <span class="help-block">{{ $errors->first('email') }}</span>
                     @endif
@@ -54,7 +54,7 @@
                 <button type ="submit" class="btn btn-success pull-right">
                   {{ __('Submit') }}
                 </button>
-                <a href="{{ route('home.index') }}" class="btn btn-default pull-left">
+                <a href="{{ URL::previous() }}" class="btn btn-default pull-left">
                   {{ __('Back') }}
                 </a>
                 <button class="btn btn-warning pull-left" type="reset">
