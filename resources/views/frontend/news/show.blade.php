@@ -27,7 +27,7 @@
       <h2 class="col-md-12 reservation-horizontal clearfix container-search text-center text-success">           
         {{ $news->title }}
       </h2>
-      <div class="col-md-12 reservation-horizontal clearfix container-search mt-20 content text-center">           
+      <div class="col-md-12 reservation-horizontal clearfix container-search mt-20 content">           
         {!! $news->content !!}
       </div>
     </div>

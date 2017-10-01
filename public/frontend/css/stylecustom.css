@@ -654,3 +654,19 @@ footer {
 .cls-modal-booking-footer a {
     margin-top: 5%;
 }
+.cls-top-news {
+    border-left: 1px solid #e9e0e0;
+}
+.cls-header-category {
+    border-bottom: 2px solid #15a1b1;
+    margin-bottom: 20px;
+}
+.cls-title-category {
+    margin-left: -15px;
+    padding: 4px;
+    background: #15a1b1;
+    color: white;
+}
+.cls-box-content-news {
+    margin-left: -30px;
+}
