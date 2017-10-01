@@ -8,8 +8,8 @@
         <div class="modal-body" id="body-content">
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-primary" id="delete-btn">Delete</button>
-            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-sm btn-primary" id="delete-btn">{{ __('Delete') }}</button>
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{ __('Close') }}</button>
         </div>
     </div>
   </div>

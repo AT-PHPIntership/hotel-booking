@@ -30,7 +30,7 @@
                   <label for="duration">{{ __('Duration') }}</label>
                   <div class="popover-icon" data-toggle="tooltip" title="{{ __('Duration booking room') }}" data-trigger="hover" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
                   
-                  <select name = "duration" class="btn btn-default">
+                  <select name = "duration" class="form-control">
                     @for($i = 1; $i <= App\Model\Reservation::MAX_DURATIONS; $i++)
                       <?php $selected = ($i == request('duration')) ? 'selected' : ''; ?>
                       <option value="{{ $i }}" {{ $selected }}>{{ $i == 1 ? __('1 night') : __(':duration nights', ['duration' => $i]) }}</option>
@@ -42,7 +42,7 @@
                 <div class="form-group">
                   <label for="arrange_id">{{ __('Order By') }}</label>
                   <div class="popover-icon" data-toggle="tooltip" title="{{ __('Default is none') }}" data-placement="right"> <i class="fa fa-info-circle fa-lg"> </i> </div>
-                  <select name = "arrange_id" class="btn btn-default">
+                  <select name = "arrange_id" class="form-control">
                     <option value="">{{ __('--') }}</option>
                     @if (request('arrange_id') == App\Model\Hotel::PRICE_ASC)
                       <option value="{{ App\Model\Hotel::PRICE_ASC }}" selected>{{ __('Price cheap to expensive') }}</option>

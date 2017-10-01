@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-@section('title', 'Hotels managment')
+@section('title', __('Hotels managment'))
 @section('content')
 <div class="content-wrapper">
   <section class="content-header">
@@ -79,7 +79,7 @@
                           {!! csrf_field() !!}
                           {{ method_field('DELETE') }}
                           <button type="submit" class=" btn-custom-option btn btn-delete-item fa fa-trash-o"
-                          data-original-title="Delete" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
+                          data-original-title="{{ __('Delete') }}" data-toggle="tooltip"  data-title="{{ __('Confirm deletion!') }}"
                           data-confirm="{{ __('Are you sure you want to delete?') }}">
                           </button>
                         </form> 

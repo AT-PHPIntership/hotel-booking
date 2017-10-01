@@ -43,7 +43,6 @@
     <script type="text/javascript" src="{{ asset('frontend/js/waypoints.min.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('frontend/js/jquery.isotope.min.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('frontend/js/jquery.gmap.min.js') }}"></script> 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="{{ asset('frontend/rs-plugin/js/jquery.themepunch.plugins.min.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('frontend/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js') }}"></script>
