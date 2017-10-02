@@ -55,8 +55,9 @@
                 <div class="form-control text-center fz-16 mt-20 col-md-offset-2">{{ $user->status }}</div>
               </div>
             </div>
-            <i class="mt-20 fz-20 col-md-5 ml-5per" >{{ __(' Times rating comments: ') . $user->ratingComments->count() }}</i>
-            <i class="mt-20 fz-20 col-md-5" >{{ __(' Times reservations: ') . $user->reservations->count() }}</i>
+            <i class="mt-20 fz-20 col-md-5 ml-5per" >{{ __('Times rating comments: :count_comment', ['count_comment' => $user->ratingComments->count()]) }}</i>
+            <i class="mt-20 fz-20 col-md-5" >
+            {{ __('Times reservations: :count_reservations', ['count_reservations' => $user->reservations->count()]) }}</i>
           </div>
         </div>
       </section>
