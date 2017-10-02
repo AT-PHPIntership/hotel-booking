@@ -4,8 +4,12 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-      <img src="{{ asset('bower_components/AdminLTE/dist/img/user3-128x128.jpg') }}"
-       class="img-circle" alt="User Image">
+        <?php 
+          $userIsLogging = Auth::user();
+          $userImagePath = $userIsLogging->images()->count() == 0 ? asset('images/default/profile.png') : asset($userIsLogging->images->first()->path);
+        ?> 
+        <img src="{{ asset($userImagePath) }}"
+         class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
         <p>{{Auth::user()->username}}</p>

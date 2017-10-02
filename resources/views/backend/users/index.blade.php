@@ -74,7 +74,7 @@
                           {!! csrf_field() !!}
                           {{ method_field('PUT') }}
                           @if ($user->is_admin == App\Model\User::ROLE_ADMIN)
-                            <button type="submit" class="btn btn-default btn-on btn-sm">{{ __('Admin') }}</button>
+                            <button type="submit" class="btn btn-default btn-on btn-sm" {{ Auth::user()->id == $user->id ? 'disabled' : ''}}>{{ __('Admin') }}</button>
                           @else
                             <button type="submit" class="btn btn-default btn-off btn-sm">{{ __('User') }}</button>
                           @endif
@@ -85,7 +85,7 @@
                           {!! csrf_field() !!}
                           {{ method_field('PUT') }}
                           @if ($user->is_active == App\Model\User::STATUS_ACTIVED)
-                            <button type="submit" class="btn btn-default btn-on btn-sm">{{ __('Active') }}</button>
+                            <button type="submit" class="btn btn-default btn-on btn-sm" {{ Auth::user()->id == $user->id ? 'disabled' : ''}}>{{ __('Active') }}</button>
                           @else
                             <button type="submit" class="btn btn-default btn-off btn-sm">{{ __('Disabled') }}</button>
                           @endif

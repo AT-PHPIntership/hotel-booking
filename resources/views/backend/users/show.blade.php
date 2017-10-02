@@ -9,8 +9,8 @@
       <section id="content">
         <div class="col-md-12 profile">
           <div class="col-md-4 text-center">
-            <img alt="user-profile" class="img-circle"
-               src="{{ asset('images/default/profile.png') }}">
+            <img alt="user-profile" class="img-circle cls-admin-img-profile-user"
+               src="{{$user->images()->count() == 0 ? asset('images/default/profile.png') : asset($user->images->first()->path) }}">
             <input type="text" class="form-control text-center fz-20 mt-20" name="username" value="{{ $user->username }}" readonly>
             <div class="mt-20">
               <a href="{{ URL::previous() }}">

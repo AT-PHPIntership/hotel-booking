@@ -13,7 +13,7 @@
       <div>
           <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" > 
           <!-- Default Image --> 
-            <img src="{{ asset(config('image.bginner_news1')) }}" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat" class="bg-img-slide-news"> 
+            <img src="{{ $news->images->count() != 0 ? asset($news->images->random()->path) : asset(config('image.bginner_news1') ) }}" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat" class="bg-img-slide-news"> 
           </li>
         </div>
     </div>
@@ -27,7 +27,7 @@
       <h2 class="col-md-12 reservation-horizontal clearfix container-search text-center text-success">           
         {{ $news->title }}
       </h2>
-      <div class="col-md-12 reservation-horizontal clearfix container-search mt-20 content text-center">           
+      <div class="col-md-12 reservation-horizontal clearfix container-search mt-20 content">           
         {!! $news->content !!}
       </div>
     </div>

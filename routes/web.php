@@ -13,6 +13,7 @@
 Route::get('/', 'HomeController@index')->name('home.index')->middleware('frontend.language');
 Route::group(['middleware' => 'frontend.language', 'namespace'=>'Frontend'],
     function() {
+        Route::get('/pages/{page}',  'StaticpageController@show')->name('staticPage');
         Route::get('/language/{lang}', 'LanguageController@show')
             ->middleware('frontend.language')->name('frontend.language')
             ->where('lang', 'vi|en');
