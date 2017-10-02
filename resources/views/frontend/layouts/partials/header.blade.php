@@ -10,7 +10,7 @@
         <div class="th-text pull-right">
           <div class="th-item">
             <div class="btn-group">
-              <button class="btn btn-default btn-xs dropdown-toggle js-activated"
+              <button id="js-language" class="btn btn-default btn-xs dropdown-toggle js-activated"
                 type="button" data-toggle="dropdown">
                 {{ Cookie::get('frontend_locale') == 'vi' ? __('Tiếng Việt') : __('English') }}
                 <span class="caret"></span>
@@ -48,7 +48,7 @@
         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
         <a href="/" class="navbar-brand">         
         <!-- Logo -->
-          <img class="logo-header" src="{{ asset('frontend/images/logo1.png')}}" alt="Snorlax" class="logo-header">
+          <img class="logo-header" src="{{asset('frontend/images/logo.png')}}" alt="Snorlax" class="logo-header">
         </a>
         </div>
       <div id="navbar-collapse-grid" class="navbar-collapse collapse fz-16">

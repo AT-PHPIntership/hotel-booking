@@ -53,7 +53,7 @@ class AdminShowRoomTest extends DuskTestCase
     }
 
     /**
-     * Test admin show detail room.
+     * Test admin show detail room
      *
      * @return void
      */

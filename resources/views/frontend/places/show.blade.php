@@ -39,9 +39,9 @@
           <div class="col-sm-4 mt50">
             <div class="room-thumb">
             @if($hotel->images->count() != 0)
-              <img src="{{ asset($hotel->images->random()->path) }}" alt="hotel" class="img-responsive"/>
+              <img src="{{ asset($hotel->images->random()->path) }}" alt="hotel" class="img-presentive"/>
             @else
-              <img src="{{ asset(config('image.default_thumbnail')) }}" alt="hotel" class="img-responsive"/>
+              <img src="{{ asset(config('image.default_thumbnail')) }}" alt="hotel" class="img-presentive"/>
             @endif
               <div class="mask">
                 <div class="main cls-with-max">

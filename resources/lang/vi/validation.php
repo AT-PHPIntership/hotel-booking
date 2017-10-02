@@ -112,6 +112,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'full_name' => 'Tên',
+        'username' => 'Tên người dùng',
+        'phone' => 'Số điện thoại',
+        'password' => 'Mật khẩu',
+        'content' => 'Nội dung',
+        'hotelSourceArea' => 'Địa điểm',
+        'checkin' => 'Ngày nhận phòng'
+    ],
 
 ];

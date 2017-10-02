@@ -4,8 +4,8 @@
   </div>
   <strong>{{ __('Copyright ') }} &copy;
     <a href="https://asiantech.vn">
-      {{ __('Hotel Reservation Management Team') }}  
+      {{ __('StarHotel') }}  
     </a>.
   </strong>
-  {{__('Belong to Asian Tech Company')}}
+  {{__('Belong to TYND Group')}}
 </footer>
