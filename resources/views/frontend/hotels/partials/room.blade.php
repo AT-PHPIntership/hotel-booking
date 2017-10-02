@@ -86,7 +86,7 @@
                         <li>{{ __('Descript: :room_descript', ['room_descript' => $room->descript ])}}</li>
                       </ul>
                       <p class="cls-room-price text-center mt-20">
-                       {{ __(':price $', ['price' => $room->price_format]) }}
+                       {{ __(' $ :price', ['price' => $room->price_format]) }}
                       </p>
                       <p class="text-center">
                         <a href="{{ route('reservations.create', $room->id) }}"  class="btn cls-btn-booking">
@@ -106,7 +106,7 @@
           {{-- end  room  modal--}}
         </div>
         <div class="room-item-price">
-          <h3 class="cls-room-price">{{ __(':price $', ['price' => $room->price_format]) }} </h3>
+          <h3 class="cls-room-price">{{ __('$ :price', ['price' => $room->price_format]) }} </h3>
         </div>
         <div class="room-item-booking">
             @if($totalRoomEmpty == 0)

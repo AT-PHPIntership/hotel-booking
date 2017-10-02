@@ -46,7 +46,7 @@
         <div class="col-md-3">
           <a href="{{ route('frontend.news.show', $itemNews->slug) }}">
             <div class="second-place news cls-mb-20">
-              <img src="{{ isset($itemNews->images[0]) ? asset($itemNews->images[0]) : asset(config('image.no_image')) }}" alt="topPlace" class="img-news news"/>  
+              <img src="{{ isset($itemNews->images[0]) ? asset($itemNews->images[0]->path) : asset(config('image.no_image')) }}" alt="topPlace" class="img-news news"/>  
               <div class="second-place-bottom news"> 
                 <h5>{{ contentLimit($itemNews->title) }}</h5>
               </div>

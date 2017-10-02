@@ -51,7 +51,8 @@
                 <div class="form-group col-md-6 pull-center">
                   <label for="is_active">{{ __('Is Active') }}</label>
                   @if (old('is_active', $user->is_active) == App\Model\User::STATUS_ACTIVED)
-                    <input type="checkbox" name="is_active" value="{{ App\Model\User::STATUS_ACTIVED }}" checked>
+                    <input type="checkbox" name="is_active" value="{{ App\Model\User::STATUS_ACTIVED }}" checked
+		    {{ Auth::user()->id == $user->id ? 'disabled' : ''}} >
                   @else
                     <input type="checkbox" name="is_active" value="{{ App\Model\User::STATUS_ACTIVED }}">
                   @endif

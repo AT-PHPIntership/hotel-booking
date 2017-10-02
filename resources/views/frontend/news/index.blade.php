@@ -24,7 +24,7 @@
               <div class="image-news-show">
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                   <!-- slides images news-->
-                  <div class="carousel-inner">
+                  <div class="carousel-inner content-img-news">
                   {{-- show default image when has no image --}}
                     @if (!isset($news[0]->images[0]))
                         <div class="item active">
@@ -59,25 +59,25 @@
           </div>
         @endif
         {{-- content right --}}
-        <div class="col-md-6 cls-top-news">
-          <h2 class="text-danger text-center">{{ __('TOP NEWS') }}</h2>
-          @foreach ($news as $key => $item)
-            @if ($key != 0)
-              <div class="mt-20">
-                <div class="col-md-5">
-                  <a href="{{ route('frontend.news.show', $item->slug) }}"><img src="{{ isset($item->images[0]) ? asset($item->images[0]->path) : asset(config('image.no_image')) }}" class="img-news"></a>
-                </div>
-                <div col-md-8>
-                  <div class="img-news">
-                    <h4><a href="{{ route('frontend.news.show', $item->slug) }}"> {{ contentLimit($item->title) }}</a></h4>
-                    <p>{!! contentLimit($item->content) !!}</p>
-                  </div>
+      	  <div class="col-md-6 border-left border-top">
+        <h2 class="text-danger text-center mt-20">{{ __('TOP NEWS') }}</h2>
+        @foreach ($news as $key => $item)
+          @if ($key != 0)
+            <div class="mt-20">
+              <div class="col-md-5">
+                <a href="{{ route('frontend.news.show', $item->slug) }}"><img src="{{ isset($item->images[0]) ? asset($item->images[0]->path) : asset(config('image.no_image')) }}" class="img-news"></a>
+              </div>
+              <div col-md-8>
+                <div class="img-news">
+                  <h4><a href="{{ route('frontend.news.show', $item->slug) }}"> {{ contentLimit($item->title) }}</a></h4>
+                  <p>{!! contentLimit(strip_tags($item->content)) !!}</p>
                 </div>
               </div>
-            @endif
-          @endforeach
-        </div>
-      </div>
+            </div>
+          @endif
+        @endforeach
+         </div>	
+	</div>
        <!-- /.row -->
     </section>
 
@@ -96,7 +96,7 @@
                   <div class="second-place news">
                     <img src="{{ isset($itemNews->images[0]) ? asset($itemNews->images[0]->path) : asset(config('image.no_image')) }}" alt="topPlace" class="img-news news"/>  
                     <div class="second-place-bottom news"> 
-                      <h5>{{ contentLimit($itemNews->title) }}</h5>
+                      <h5 class="title-news-index">{{ contentLimit($itemNews->title) }}</h5>
                     </div>
                   </div>
                 </a>
