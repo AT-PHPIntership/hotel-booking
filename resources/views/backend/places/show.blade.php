@@ -62,7 +62,7 @@
                       <dl>
                         <dd class="cls-descript-box">
                           <p class="cls-descript-text" id="place-detail-descript">
-                            {{ $place->descript }}
+                            {!! $place->descript !!}
                           </p>
                         </dd>
                       </dl>

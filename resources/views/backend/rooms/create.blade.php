@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group col-md-4 has-feedback
                   {{ $errors->has('price') ? ' has-error' : '' }}">
-                  <label for="price">{{ __('Price(Vnd)') }}</label>
+                  <label for="price">{{ __('Price($)') }}</label>
                   <input type="text" class="form-control" name= "price" 
                     id="price" placeholder="{{ __('Enter price') }}"
                     value="{{ old('price') }}" >
