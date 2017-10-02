@@ -26,7 +26,7 @@
     "Address:": "Địa chỉ",
     "Connect": "Kết nối",
     "Feedback": "Ý kiến phản hồi",
-    "Contacts": "Liên hệ với chúng tôi",
+    "Contact": "Liên hệ với chúng tôi",
     "Copyright Star Hotel Co., Ltd. 2015": "Bản quyền thuộc về công ty Star Hotel",
     "Provision": "Điều khoản",
     "About Us": "Về chúng tôi",
@@ -443,5 +443,10 @@
     "List Booking Rooms": "Danh sách đơn đặt phòng",
     "Detail": "Xem chi tiết",
     "List news of :name": "Tin tức của danh mục :name",
-    "NEWS FOR CATEGORY :name": "Tin thức của danh mục :name"
+    "NEWS FOR CATEGORY :name": "Tin thức của danh mục :name",
+    "User Information": "Thông tin cá nhân",
+    "Actived": "Đã kích hoạt",
+    "Disabled": "Chưa kích hoạt",
+    "Times rating comments: :count_comment": "Số bình luận: :count_comment",
+    "Times reservations: :count_reservations": "Số đơn đặt phòng: :count_reservations"
 }
