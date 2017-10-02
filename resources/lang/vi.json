@@ -26,7 +26,7 @@
     "Address:": "Địa chỉ",
     "Connect": "Kết nối",
     "Feedback": "Ý kiến phản hồi",
-    "Contacts": "Liên hệ với chúng tôi",
+    "Contact": "Liên hệ với chúng tôi",
     "Copyright Star Hotel Co., Ltd. 2015": "Bản quyền thuộc về công ty Star Hotel",
     "Provision": "Điều khoản",
     "About Us": "Về chúng tôi",
@@ -449,5 +449,5 @@
     "Disabled": "Chưa kích hoạt",
     "Times rating comments: :count_comment": "Số bình luận: :count_comment",
     "Times reservations: :count_reservations": "Số đơn đặt phòng: :count_reservations",
-    "": ""
+    "Has no rating": "Không có đánh giá nào"	
 }
